@@ -1,3 +1,4 @@
+using API.Ingredients;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<NutrifoodsDbContext>(options => options.UseNpgsql());
+builder.Services.AddDbContext<NutrifoodsDbContext>(options =>
+    options.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$"));
+
+builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 
 var app = builder.Build();
 
