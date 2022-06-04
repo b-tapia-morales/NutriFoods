@@ -19,41 +19,59 @@ public class IngredientController
     [Route("")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> GetAllIngredients()
     {
-        try
-        {
-            return (await _repository.FindAll()).ToList();
-        }
-        catch (Exception)
-        {
-            return new StatusCodeResult(StatusCodes.Status503ServiceUnavailable);
-        }
+        return await _repository.FindAll();
     }
 
     [HttpGet]
     [Route("name/{name}")]
     public async Task<ActionResult<Ingredient>> FindByName(string name)
     {
-        return await _repository.FindByName(name.ToLower());
+        try
+        {
+            return await _repository.FindByName(name.ToLower());
+        }
+        catch (InvalidOperationException)
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
     }
 
     [HttpGet]
     [Route("primaryGroup/{name}")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(string name)
     {
-        return await _repository.FindByPrimaryGroup(name.ToLower());
+        var list = await _repository.FindByPrimaryGroup(name.ToLower());
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
     }
 
     [HttpGet]
     [Route("secondaryGroup/{name}")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(string name)
     {
-        return await _repository.FindBySecondaryGroup(name.ToLower());
+        var list = await _repository.FindBySecondaryGroup(name.ToLower());
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
     }
 
     [HttpGet]
     [Route("tertiaryGroup/{name}")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(string name)
     {
-        return await _repository.FindByTertiaryGroup(name.ToLower());
+        var list = await _repository.FindByTertiaryGroup(name.ToLower());
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
     }
 }

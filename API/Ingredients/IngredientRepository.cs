@@ -17,14 +17,14 @@ public class IngredientRepository : IIngredientRepository
         return _context.Ingredients.FirstAsync(e => e.Name.ToLower().Equals(name));
     }
 
-    public async Task<Ingredient> FindById(int id)
+    public Task<Ingredient> FindById(int id)
     {
-        return await _context.Ingredients.FirstAsync(e => e.Id == id);
+        return _context.Ingredients.FirstAsync(e => e.Id == id);
     }
 
-    public async Task<List<Ingredient>> FindByPrimaryGroup(string name)
+    public Task<List<Ingredient>> FindByPrimaryGroup(string name)
     {
-        return await _context
+        return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Name.ToLower().Equals(name))
             .ToListAsync();
@@ -46,8 +46,8 @@ public class IngredientRepository : IIngredientRepository
             .ToListAsync();
     }
 
-    public async Task<List<Ingredient>> FindAll()
+    public Task<List<Ingredient>> FindAll()
     {
-        return await _context.Ingredients.ToListAsync();
+        return _context.Ingredients.ToListAsync();
     }
 }
