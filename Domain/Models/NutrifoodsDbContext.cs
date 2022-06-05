@@ -264,9 +264,6 @@ namespace Domain.Models
             {
                 entity.ToTable("nutrient", "nutrifoods");
 
-                entity.HasIndex(e => e.AlsoCalled, "nutrient_also_called_key")
-                    .IsUnique();
-
                 entity.HasIndex(e => e.Name, "nutrient_name_key")
                     .IsUnique();
 
