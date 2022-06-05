@@ -40,6 +40,8 @@ VALUES
     ('Lactosa', '', false, 2, 4),
     ('Maltosa', '', false, 2, 4),
     ('Sucrosa', 'Sacarosa', false, 2, 4),
+    --Ácidos grasos--
+    ('Ácidos grasos, total', '', true, 2, 5),
     -- Ácidos grasos saturados --
     ('Ácidos grasos saturados, total', '', true, 2, 6),
     ('Ácido butanoico', 'Ácido butírico', false, 2, 6),                      -- SFA 4:0
@@ -92,8 +94,6 @@ VALUES
     ('Ácidos grasos trans, total', '', true, 2, 9),
     ('Ácido trans-monoenoico', '', false, 2, 9),                             -- TFA 16:1
     ('Ácido polinoico', '', false, 2, 9),                                    -- TFA 18:2
-
-
     -- Proteínas -
     ('Ácido aspártico', '', false, 2, 10),
     ('Ácido glutámico', '', false, 2, 10),
@@ -126,9 +126,19 @@ VALUES
     ('Vitamina A', '', false, 2, 11),
     ('Vitamina D', '', false, 2, 11),
     ('Vitamina E', '', false, 2, 11),
-    ('Vitamina K', '', false, 2, 11)
+    ('Vitamina K', '', false, 2, 11),
     -- Minerales --
-
+    ('Calcio', 'Ca', false, 2, 12),
+    ('Hierro', 'Fe', false, 2, 12),
+    ('Magnesio', 'Mg', false, 2, 12),
+    ('Fósforo', 'P', false, 2, 12),
+    ('Potasio', 'K', false, 2, 12),
+    ('Sodio', 'Na', false, 2, 12),
+    ('Zinc', 'Zn', false, 2, 12),
+    ('Cobre', 'Cu', false, 2, 12),
+    ('Manganeso', 'Mn', false, 2, 12),
+    ('Selenio', 'Se', false, 2, 12),
+    ('Fluoruro', 'F', false, 2, 12)
     -- Esteroles --
 
     -- Alcohol --
