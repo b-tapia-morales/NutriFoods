@@ -14,12 +14,18 @@ public class IngredientRepository : IIngredientRepository
 
     public Task<Ingredient> FindByName(string name)
     {
-        return _context.Ingredients.FirstAsync(e => e.Name.ToLower().Equals(name));
+        return _context.Ingredients
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
+            .FirstAsync(e => e.Name.ToLower().Equals(name));
     }
 
     public Task<Ingredient> FindById(int id)
     {
-        return _context.Ingredients.FirstAsync(e => e.Id == id);
+        return _context.Ingredients
+            .Include(e => e.Measures)
+            .Include(e => e.TertiaryGroup)
+            .FirstAsync(e => e.Id == id);
     }
 
     public Task<List<Ingredient>> FindByPrimaryGroup(string name)
@@ -27,14 +33,18 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Name.ToLower().Equals(name))
+            .Include(e => e.Measures)
+            .Include(e => e.TertiaryGroup)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindByPrimaryGroup(int id)
     {
-       return _context
+        return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Id == id)
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
             .ToListAsync();
     }
 
@@ -43,6 +53,8 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.Name.ToLower().Equals(name))
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
             .ToListAsync();
     }
 
@@ -51,6 +63,8 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.Id == id)
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
             .ToListAsync();
     }
 
@@ -59,6 +73,8 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.Name.ToLower().Equals(name))
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
             .ToListAsync();
     }
 
@@ -67,11 +83,16 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.Id == id)
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindAll()
     {
-        return _context.Ingredients.ToListAsync();
+        return _context.Ingredients
+            .Include(e => e.TertiaryGroup)
+            .Include(e => e.Measures)
+            .ToListAsync();
     }
 }
