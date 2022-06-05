@@ -7,8 +7,8 @@ namespace Domain.Models
     {
         public RecipeSection()
         {
-            IngredientMeasures = new HashSet<IngredientMeasure>();
-            IngredientQuantities = new HashSet<IngredientQuantity>();
+            RecipeMeasures = new HashSet<RecipeMeasure>();
+            RecipeQuantities = new HashSet<RecipeQuantity>();
             RecipeSteps = new HashSet<RecipeStep>();
         }
 
@@ -16,8 +16,8 @@ namespace Domain.Models
         public string Name { get; set; } = null!;
 
         public virtual Recipe IdNavigation { get; set; } = null!;
-        public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; }
-        public virtual ICollection<IngredientQuantity> IngredientQuantities { get; set; }
+        public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; }
+        public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; }
         public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
     }
 }

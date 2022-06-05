@@ -20,8 +20,9 @@ public class RecipeRepository : IRecipeRepository
     public Task<List<Recipe>> GetVegetarianRecipes()
     {
         return _context.Recipes
-            .Where(r => r.RecipeSection.IngredientQuantities.Any(e => !e.Ingredient.IsAnimal) ||
-                        r.RecipeSection.IngredientMeasures.Any(e => !e.Measure.Ingredient.IsAnimal)).ToListAsync();
+            .Where(r => r.RecipeSection.RecipeQuantities.Any(e => !e.Ingredient.IsAnimal) ||
+                        r.RecipeSection.RecipeMeasures.Any(e => !e.IngredientMeasure.Ingredient.IsAnimal))
+            .ToListAsync();
     }
 
     public Task<Recipe> FindRecipe(string name)

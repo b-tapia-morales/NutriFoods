@@ -5,6 +5,11 @@ namespace Domain.Models
 {
     public partial class Nutrient
     {
+        public Nutrient()
+        {
+            IngredientNutrients = new HashSet<IngredientNutrient>();
+        }
+
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? AlsoCalled { get; set; }
@@ -13,5 +18,6 @@ namespace Domain.Models
         public int SubtypeId { get; set; }
 
         public virtual NutrientSubtype Subtype { get; set; } = null!;
+        public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; }
     }
 }

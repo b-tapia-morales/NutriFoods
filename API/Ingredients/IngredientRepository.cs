@@ -16,14 +16,14 @@ public class IngredientRepository : IIngredientRepository
     {
         return _context.Ingredients
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .FirstAsync(e => e.Name.ToLower().Equals(name));
     }
 
     public Task<Ingredient> FindById(int id)
     {
         return _context.Ingredients
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .Include(e => e.TertiaryGroup)
             .FirstAsync(e => e.Id == id);
     }
@@ -33,7 +33,7 @@ public class IngredientRepository : IIngredientRepository
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Name.ToLower().Equals(name))
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .Include(e => e.TertiaryGroup)
             .ToListAsync();
     }
@@ -44,7 +44,7 @@ public class IngredientRepository : IIngredientRepository
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Id == id)
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
@@ -54,7 +54,7 @@ public class IngredientRepository : IIngredientRepository
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.Name.ToLower().Equals(name))
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
@@ -64,7 +64,7 @@ public class IngredientRepository : IIngredientRepository
             .Ingredients
             .Where(e => e.TertiaryGroup.SecondaryGroup.Id == id)
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
@@ -74,7 +74,7 @@ public class IngredientRepository : IIngredientRepository
             .Ingredients
             .Where(e => e.TertiaryGroup.Name.ToLower().Equals(name))
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
@@ -84,7 +84,7 @@ public class IngredientRepository : IIngredientRepository
             .Ingredients
             .Where(e => e.TertiaryGroup.Id == id)
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
@@ -92,7 +92,7 @@ public class IngredientRepository : IIngredientRepository
     {
         return _context.Ingredients
             .Include(e => e.TertiaryGroup)
-            .Include(e => e.Measures)
+            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 }
