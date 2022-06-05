@@ -55,10 +55,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(string name)
     {
         var list = await _repository.FindByPrimaryGroup(name.ToLower());
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }
@@ -68,10 +65,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(int id)
     {
         var list = await _repository.FindByPrimaryGroup(id);
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }
@@ -81,10 +75,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(string name)
     {
         var list = await _repository.FindBySecondaryGroup(name.ToLower());
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }
@@ -94,10 +85,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(int id)
     {
         var list = await _repository.FindBySecondaryGroup(id);
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }
@@ -107,10 +95,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(string name)
     {
         var list = await _repository.FindByTertiaryGroup(name.ToLower());
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }
@@ -120,10 +105,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(int id)
     {
         var list = await _repository.FindByTertiaryGroup(id);
-        if (!list.Any())
-        {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
-        }
+        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
 
         return list;
     }

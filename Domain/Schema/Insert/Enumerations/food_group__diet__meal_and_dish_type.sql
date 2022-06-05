@@ -26,7 +26,7 @@ VALUES ('Fruta entera', 1),
        ('Azúcar', 6),
        ('Condimento', 6),
        ('Otros', 6),
-       ('Alcohol',6),
+       ('Alcohol', 6),
        ('Algas', 6)
 ON CONFLICT DO NOTHING;
 
@@ -55,7 +55,7 @@ VALUES ('Fruta entera', 1),
        ('Azúcar', 16),
        ('Condimento', 17),
        ('Otros', 18),
-       ('Alcohol',6),
+       ('Alcohol', 6),
        ('Algas', 6)
 ON CONFLICT DO NOTHING;
 

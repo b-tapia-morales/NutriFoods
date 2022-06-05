@@ -36,9 +36,9 @@ VALUES
     (6, 'Medio', 44),
     (6, 'Pequeño', 38),
     -- Tomate --
-    (7,'Grande', 182),
-    (7,'Medio', 123),
-    (7,'Pequeño', 91), 
+    (7, 'Grande', 182),
+    (7, 'Medio', 123),
+    (7, 'Pequeño', 91),
     -- Mantequilla --
     (8, 'Cucharada', 14.2),
     (8, 'Taza', 127),
@@ -81,7 +81,7 @@ VALUES
     (19, 'Taza, en trozos', 149),
     (19, 'Taza, juliana', 92),
     (19, 'Cucharada', 9.3),
-    (19, 'Grande', 164 ),
+    (19, 'Grande', 164),
     (19, 'Mediano', 119),
     (19, 'Pequeño', 74),
     -- Crema --
@@ -126,7 +126,7 @@ VALUES
     (31, 'Taza', 70),
     (31, 'Grande', 23),
     (31, 'Mediano', 18),
-    (31, 'Pequeño', 10),    
+    (31, 'Pequeño', 10),
     -- Azúcar --
     (32, 'Cucharadita', 4.2),
     (32, 'Taza', 200),
@@ -138,8 +138,8 @@ VALUES
     (34, 'Taza', 249)
     -- Queso --
     -- (35, '', ),
-    
+
     -- Berenjena --
-    
+
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
