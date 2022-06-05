@@ -37,10 +37,37 @@ public class IngredientController
     }
 
     [HttpGet]
+    [Route("id/{id:int}")]
+    public async Task<ActionResult<Ingredient>> FindById(int id)
+    {
+        try
+        {
+            return await _repository.FindById(id);
+        }
+        catch (InvalidOperationException)
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+    }
+
+    [HttpGet]
     [Route("primaryGroup/{name}")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(string name)
     {
         var list = await _repository.FindByPrimaryGroup(name.ToLower());
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
+    }
+
+    [HttpGet]
+    [Route("primaryGroup/{id:int}")]
+    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(int id)
+    {
+        var list = await _repository.FindByPrimaryGroup(id);
         if (!list.Any())
         {
             return new StatusCodeResult(StatusCodes.Status404NotFound);
@@ -63,10 +90,36 @@ public class IngredientController
     }
 
     [HttpGet]
+    [Route("secondaryGroup/{id:int}")]
+    public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(int id)
+    {
+        var list = await _repository.FindBySecondaryGroup(id);
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
+    }
+
+    [HttpGet]
     [Route("tertiaryGroup/{name}")]
     public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(string name)
     {
         var list = await _repository.FindByTertiaryGroup(name.ToLower());
+        if (!list.Any())
+        {
+            return new StatusCodeResult(StatusCodes.Status404NotFound);
+        }
+
+        return list;
+    }
+
+    [HttpGet]
+    [Route("tertiaryGroup/{id:int}")]
+    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(int id)
+    {
+        var list = await _repository.FindByTertiaryGroup(id);
         if (!list.Any())
         {
             return new StatusCodeResult(StatusCodes.Status404NotFound);

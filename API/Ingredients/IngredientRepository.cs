@@ -30,6 +30,14 @@ public class IngredientRepository : IIngredientRepository
             .ToListAsync();
     }
 
+    public Task<List<Ingredient>> FindByPrimaryGroup(int id)
+    {
+       return _context
+            .Ingredients
+            .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Id == id)
+            .ToListAsync();
+    }
+
     public Task<List<Ingredient>> FindBySecondaryGroup(string name)
     {
         return _context
@@ -38,11 +46,27 @@ public class IngredientRepository : IIngredientRepository
             .ToListAsync();
     }
 
+    public Task<List<Ingredient>> FindBySecondaryGroup(int id)
+    {
+        return _context
+            .Ingredients
+            .Where(e => e.TertiaryGroup.SecondaryGroup.Id == id)
+            .ToListAsync();
+    }
+
     public Task<List<Ingredient>> FindByTertiaryGroup(string name)
     {
         return _context
             .Ingredients
             .Where(e => e.TertiaryGroup.Name.ToLower().Equals(name))
+            .ToListAsync();
+    }
+
+    public Task<List<Ingredient>> FindByTertiaryGroup(int id)
+    {
+        return _context
+            .Ingredients
+            .Where(e => e.TertiaryGroup.Id == id)
             .ToListAsync();
     }
 
