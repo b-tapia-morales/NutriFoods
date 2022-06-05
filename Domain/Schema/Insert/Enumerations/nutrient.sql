@@ -138,10 +138,14 @@ VALUES
     ('Cobre', 'Cu', false, 2, 12),
     ('Manganeso', 'Mn', false, 2, 12),
     ('Selenio', 'Se', false, 2, 12),
-    ('Fluoruro', 'F', false, 2, 12)
+    ('Fluoruro', 'F', false, 2, 12),
     -- Esteroles --
-
+    ('Colesterol', '', false, 2, 13),
+    ('Estigmasterol', 'Stigmasterin', false, 2, 13),
+    ('Campesterol', 'Campestanol', false, 2, 13),
+    ('Beta-sitosterol', '', false, 2, 13),
     -- Alcohol --
+    ('Alcohol', '', false, 2, 14)
 
 
 ON CONFLICT DO NOTHING;
