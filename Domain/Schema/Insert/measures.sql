@@ -1,4 +1,4 @@
-﻿INSERT INTO nutrifoods.measure (ingredient_id, name, grams)
+﻿INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams)
 VALUES
     -- Sal --
     (1, 'Cucharadita', 6.0),
