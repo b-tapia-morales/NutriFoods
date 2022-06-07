@@ -1,0 +1,7 @@
+2/3,taza,azúcar
+3,cucharadas,agua
+1,taza,leche entera
+1,tarro,leche condensada
+1,tarro,leche evaporada
+1,cucharadita,Esencia Vainilla
+6,x,huevos

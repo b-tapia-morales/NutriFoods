@@ -1,0 +1,13 @@
+500,gr,harina
+1,cuchar,azúcar
+1,cucharada,levadura seco
+1,cucharadita,sal
+1,½,cucharada,aceite oliva
+235,ml,agua
+200,gr,queso ricotta
+85,gr,queso mozzarella
+2,cucharadas,queso parmesano
+85,gr,jamón
+2,cucharaditas,Perejil
+x,x,Pimienta Negra
+x,x,sal

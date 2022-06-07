@@ -1,0 +1,7 @@
+1,x,coliflor
+4,cda,aceite oliva
+x,x,sal
+x,x,pimienta negra
+x,x,Merquén Gourmet
+1,cda,Sésamo
+x,Hojas,cilantro

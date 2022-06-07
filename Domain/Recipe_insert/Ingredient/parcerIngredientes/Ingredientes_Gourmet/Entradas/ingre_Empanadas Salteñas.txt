@@ -1,0 +1,19 @@
+4,tazas,harina
+½,taza,azúcar
+1,cucharadita,sal
+2,x,huevos
+125,gr,mantequilla
+1,taza,agua
+2,x,papas
+125,gr,mantequilla
+250,gr,cebolla
+3,x,cebollines
+500,gr,posta negra
+2,cucharadas,ají Color
+1,cucharadita,Comino
+1,cucharada,orégano
+x,x,sal
+½,cucharadita,pimienta negra
+½,taza,arvejas
+20,x,aceitunas
+3,x,huevo

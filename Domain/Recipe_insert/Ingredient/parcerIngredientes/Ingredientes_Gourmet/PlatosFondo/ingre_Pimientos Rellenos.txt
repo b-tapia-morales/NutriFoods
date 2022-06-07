@@ -1,0 +1,10 @@
+3,medianos,pimento rojo
+1,taza,arroz
+2,mediana,cebollas
+400,gramos,carne molida
+2,cucharaditas,Salsa Ajo
+2,cucharadas,aceite oliva
+1,cucharadita,Perejil
+x,x,Perejil
+x,x,Sal
+x,x,Queso parmesano

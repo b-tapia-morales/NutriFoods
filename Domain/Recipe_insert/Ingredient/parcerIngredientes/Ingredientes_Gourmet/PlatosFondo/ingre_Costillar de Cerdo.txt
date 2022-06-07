@@ -1,0 +1,13 @@
+2,kg,costillar cerdo
+5,cucharadas,vinagre
+2,cucharadas,aceite
+2,dientes,ajo
+2,cucharadas,Orégano
+1,cucharada,mostaza
+2,cucharadas,kétchup
+½,cucharadita,Merquén
+½,cucharadita,Pimienta Negra
+½,cucharadita,Comino
+2,cucharaditas,sal
+2,cucharaditas,Ají Color
+1,taza,vino blanco

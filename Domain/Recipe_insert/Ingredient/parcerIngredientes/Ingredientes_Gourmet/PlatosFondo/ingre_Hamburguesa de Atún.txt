@@ -1,0 +1,18 @@
+1,x,tarro atún
+2,x,huevos
+½,taza,pan rallado
+½,cdta,Ajo Polvo
+½,cdta,Cebolla Polvo
+½,cdta,Sal
+x,x,Aceite oliva
+120,g,yogurt griego
+2,cdas,mostaza Dijon
+½,cdta,Eneldo
+½,cdta,Sal
+x,x,Pimienta Negra
+1,cdta,aceite oliva
+½,cdta,Ajo Polvo
+4,x,pan hamburguesa
+½,x,pepino
+1,x,palta
+x,x,Sal

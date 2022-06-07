@@ -1,0 +1,7 @@
+800,gr,pulpa cerdo
+2,cdas,Pebre
+1,cda,Orégano
+1,cda,Salsa Soya
+x,x,sal
+x,x,Pimienta Negra
+1,cda,aceite

@@ -1,0 +1,10 @@
+6,pedazos,churrascos
+6,láminas,queso mantecoso
+3,láminas,jamón
+1,taza,harina
+3,x,huevos
+1,cucharadita,
+1,cucharadita,Pimienta Blanca
+1,cucharadita,Orégano
+1 ½,taza,pan rallado
+3,cucharadas,aceite

@@ -1,0 +1,11 @@
+3,tazas,harina
+2,cucharaditas,Polvos Hornear
+2,cucharaditas,Canela Polvo
+¼,cucharadita,Sal
+3,x,huevos
+1,taza,azúcar blanca
+½,taza,azúcar rubia
+1 ½,taza,aceite maravilla
+1,cucharadita,Esencia Vainilla
+3,tazas,manzanas
+2/3,taza,nueces

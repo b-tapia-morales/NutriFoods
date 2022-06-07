@@ -1,0 +1,10 @@
+½,taza,vinagre vino
+¼,taza,cilantro
+1,cucharada,Orégano
+½,cucharadita,Pimienta
+½,cucharadita,Comino
+3,dientes,ajo
+1,cucharada,azúcar rubia
+¼,taza,aceite oliva
+¼,taza,vino blanco
+700,gr,lomo cerdo

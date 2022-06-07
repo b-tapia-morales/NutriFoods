@@ -1,0 +1,12 @@
+400,gr,posta
+2,x,cebolla
+2,x,zanahorias
+1/4,x,pimento rojo
+1/4,x,pimento verde
+2,cucharaditas,Ají Color
+6,x,papas
+x,x,pimienta negra
+x,x,oregano
+x,x,comino
+x,x,Aceite
+x,x,Sal

@@ -1,0 +1,11 @@
+250,ml,leche
+250,ml,crema leche
+2,palos,Canela Entera
+150,gr,azúcar
+8,gr,Gelatina Polvo
+2,cdas,agua
+3,x,manzanas verdes
+1,cda,mantequilla
+1/2,taza,azúcar
+1/2,taza,agua
+1,cdta,Canela Molida

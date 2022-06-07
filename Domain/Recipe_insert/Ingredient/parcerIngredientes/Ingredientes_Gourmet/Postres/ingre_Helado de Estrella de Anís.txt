@@ -1,0 +1,6 @@
+200,ml,crema leche
+2,cdas,crema ácida
+120,gr,azúcar
+6,x,huevo
+500,ml,leche
+5,unidas,Anís Estrella

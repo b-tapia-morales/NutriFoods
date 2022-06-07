@@ -1,0 +1,15 @@
+1/4,taza,aceite oliva
+2,cucharadas,mantequilla
+1/2,taza,cebolla
+1,pizca,azúcar
+1,cucharadita,ajo Granulado
+1/4,taza,pimenton rojo
+1/4,taza ,pimenton verde
+1,cucharadita,orégano
+1,cucharadita,albahaca
+4,tazas,zapallo italiano
+x,x,sal
+x,x,pimienta negra
+4,x,huevo
+1,taza,pan
+1,taza,queso parmesano

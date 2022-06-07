@@ -1,0 +1,9 @@
+8,grandes,papas
+8,medianas,prietas
+2,x,cebollas moradas
+1,cucharada,aceite oliva
+1,cucharada,azúcar
+1,cucharadita,Orégano
+½,cucharadita,Ajo
+½,cucharadita,Pimienta Negra
+2,cucharadas,Salsa Soya

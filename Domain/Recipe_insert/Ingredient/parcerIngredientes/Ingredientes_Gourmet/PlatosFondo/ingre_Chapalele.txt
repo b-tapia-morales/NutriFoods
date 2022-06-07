@@ -1,0 +1,5 @@
+1,kilo,papas
+250,gr,harina
+1,cucharadita,Polvos Hornear
+1,cucharadita,Sal
+4,cucharadas,mantequilla

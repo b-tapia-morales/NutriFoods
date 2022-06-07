@@ -1,0 +1,8 @@
+4,x,zapallo italianos
+250,gr,carne molida
+1,cucharada,aceite oliva
+½,x,cebolla
+4,x,huevos
+x,x,Sal
+x,x,pimienta negra
+1,cucharadita,Ají color

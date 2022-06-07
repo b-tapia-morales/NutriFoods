@@ -1,0 +1,14 @@
+2,cucharadas,aceite oliva
+3,x,cebollines
+4,x,tomates
+x,x,Sal
+1,cucharadita,Merquén
+3,x,tazas
+½,taza,vino blanco
+1,taza,caldo verduras
+3,cucharadas,perejil
+400,gr,tagliatelle
+x,x,Sal
+x,x,Aceite oliva
+x,x,Queso parmesano
+x,x,Merquén

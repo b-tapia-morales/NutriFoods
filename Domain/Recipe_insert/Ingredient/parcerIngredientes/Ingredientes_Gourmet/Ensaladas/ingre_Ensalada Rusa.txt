@@ -1,0 +1,14 @@
+4,x,papas
+3,x,zanahorias
+1,taza,arvejas
+½,taza,apio
+2,x,cebollines
+½,taza,porotos verdes
+x,x,cilantro
+½,taza,mayonesa
+½,taza,yogurt natural
+x,x,jugo limón
+1,cucharadita,vinagre
+¼,taza,aceite
+1,cucharadita,sal
+½,cucharadita,pimienta negra

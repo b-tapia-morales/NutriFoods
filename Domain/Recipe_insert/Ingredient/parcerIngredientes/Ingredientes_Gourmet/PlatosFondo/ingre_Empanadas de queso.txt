@@ -1,0 +1,8 @@
+1,kilo,harina
+120,gr,manteca
+1,cucharadita,Sal
+1,cucharadita,azúcar
+1,taza,leche
+1,taza,agua
+200,gr,queso mantecoso
+x,x,Aceite

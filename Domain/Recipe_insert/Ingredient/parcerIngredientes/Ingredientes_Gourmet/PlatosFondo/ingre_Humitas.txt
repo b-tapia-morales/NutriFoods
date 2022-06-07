@@ -1,0 +1,7 @@
+12,x,choclos
+2,cucharadas,mantequilla
+1/2,x,cebolla
+1/2,cucharadita,Ají Color
+150,grs,albahaca
+x,x,Pimienta Negra
+x,x,Sal

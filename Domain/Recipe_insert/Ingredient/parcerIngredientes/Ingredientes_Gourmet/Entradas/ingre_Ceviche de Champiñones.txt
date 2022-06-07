@@ -1,0 +1,11 @@
+200,gr,champiñones
+3,x,cebollin
+1,x,pimento rojo
+7,cucharadas,jugo limón
+4,cucharadas,jugo naranja
+4,cucharadas,aceite oliva
+½,cucharadita,Jengibre
+x,x,sal
+x,x,pimienta negra
+1,x,palta
+½,taza,cilantro

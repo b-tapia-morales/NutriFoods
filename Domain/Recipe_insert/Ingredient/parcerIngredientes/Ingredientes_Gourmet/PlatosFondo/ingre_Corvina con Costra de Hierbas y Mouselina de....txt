@@ -1,0 +1,11 @@
+1,kg,filete corvina
+4,cdas,pan rallado
+2,cdas,Perejil
+1,cda,Albahaca
+1,cda,Orégano
+50,gr,mantequilla
+x,x,Pimienta Negra
+x,x,Sal
+300,gr,papas
+100,ml,leche
+50,gr,mantequilla

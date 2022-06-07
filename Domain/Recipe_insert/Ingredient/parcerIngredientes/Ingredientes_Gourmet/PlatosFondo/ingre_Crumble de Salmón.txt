@@ -1,0 +1,12 @@
+2,cucharadas,Alcaparras
+1,puñado,perejil
+30,g,tomates secos
+¾,taza,queso crema
+½,taza,crema ácida
+1,cucharadita,mostaza
+600,g,salmón
+x,x,Sal
+x,x,Pimienta Negra
+1,x,limon
+1/3,taza,harina
+½,taza,mantequilla

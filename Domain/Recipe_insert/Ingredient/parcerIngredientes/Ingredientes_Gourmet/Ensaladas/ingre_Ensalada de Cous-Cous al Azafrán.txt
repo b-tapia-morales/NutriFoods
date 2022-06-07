@@ -1,0 +1,13 @@
+1/2,lt,agua
+1,cdta,azafrán
+250,gr,cous-cous
+1,x,pepino
+2,x,tomate
+½,x,perejil
+½,x,cilantro
+200,gr,camarones
+2,x,palta
+30,ml,jugo de limón
+50,ml,aceite oliva
+x,x,pimienta negra
+x,x,sal

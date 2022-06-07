@@ -1,0 +1,9 @@
+350,gr,harina
+1 ½,cucharadita,polvos hornear
+350,gr,mantequilla
+350,gr,azúcar
+6,x,huevos
+1,cucharadita,Esencia Vainilla
+260,gr,queso crema
+2,sobres,Glaseado Vainilla
+1,taza,mermelada frambuesas

@@ -1,0 +1,16 @@
+250,grs,pechuga pollo
+500,grs,posta negra
+5,x,vienesas
+1,x,cebolla
+2,x,pimento
+x,x,salsa babecue
+x,x,Pimienta Negra
+2,x,paltas
+x,x,Albahaca
+2,x,tomates
+1/2,x,cebolla
+1,x,cilantro
+x,x,sal
+1,x,limon
+x,x,pebre
+x,x,Merquén

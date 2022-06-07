@@ -1,0 +1,16 @@
+400,gr,arroz
+4,tazas,agua
+6,cucharadas,vinagre arroz
+1,cucharada,azúcar
+¾,cucharaditas,Sal
+5,hojas,nori
+½,x,pepino
+100,gr,queso crema
+1,filete,atún
+x,x,Ciboulette
+2,x,paltas
+5,x,camarones
+100,gr,salmón ahumado
+100,gr,salmón
+x,x,Sésamos,Gourmet
+x,x,Salsa Soya

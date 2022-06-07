@@ -1,0 +1,14 @@
+4,x,pechuga pollo
+1,taza,harina
+2,cdas,aceite oliva
+3,dientes,ajo
+1,x,cebolla
+2,cdas,Salvia
+1/2,taza,vino blanco
+1,taza,crema leche
+x,x,Pimienta Negra
+x,x,Sal
+1/2,kilo,papas
+1/2,kilo,zanahorias
+2,cucharadas,mantequilla
+x,x,leche

@@ -1,0 +1,7 @@
+100,gr,mantequilla
+1,cda,agua
+1,x,huevo
+1/2,cdta,Canela Molida
+1/2,cdta,Jengibre Molido
+1/8,cdta,Clavo Olor Molido
+35,ml,agua

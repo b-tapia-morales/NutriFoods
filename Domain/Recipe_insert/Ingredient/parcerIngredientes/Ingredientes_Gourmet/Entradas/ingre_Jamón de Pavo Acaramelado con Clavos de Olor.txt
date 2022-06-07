@@ -1,0 +1,9 @@
+½,x,pechuga pavo
+15,x,clavo de olor
+1,lt,agua
+1,x,Laurel
+2,x,tomillo
+1,x,romero
+10,gr,sal
+2,cdas,aceite
+2,cdas,miel

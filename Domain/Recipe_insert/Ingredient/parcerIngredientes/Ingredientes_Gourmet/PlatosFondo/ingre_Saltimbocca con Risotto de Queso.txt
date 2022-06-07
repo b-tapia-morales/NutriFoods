@@ -1,0 +1,6 @@
+8,x,filete
+8,laminas,jamón,serrano
+1,cda,Salvia
+2,cdas,aceite oliva
+x,x,Pimienta Negra
+x,x,Sal

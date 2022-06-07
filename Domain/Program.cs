@@ -9,6 +9,5 @@ app.Run();
 
 using Domain.Recipe_insert;
 
-Console.WriteLine("hola mundo");
 Connect connect = new Connect();
 connect.InsertRecipe();

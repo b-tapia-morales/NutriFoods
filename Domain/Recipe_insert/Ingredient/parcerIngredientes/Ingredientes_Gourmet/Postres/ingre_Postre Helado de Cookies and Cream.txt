@@ -1,0 +1,7 @@
+100,gr,queso crema
+1,taza,leche condensada
+150,gr,yogurt
+1 ¼,taza,crema
+150,gr,galletas
+x,x,Berries
+x,x,Salsa Chocolate

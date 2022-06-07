@@ -1,0 +1,13 @@
+4,x,pechugas pollo
+400,ml,vino blanco
+6,unidas,Clavo Olor
+2,cdas,vinagre vino
+1,cda,mostaza dijon
+10,x,chalotas picadas
+1,x,zanahoria
+1,hoja,Laurel
+1,cda,maicena
+x,x,Caldo pollo
+x,x,Aceite oliva
+x,x,Pimienta Negra
+x,x,Sal

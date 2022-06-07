@@ -1,0 +1,13 @@
+1,x,cebolla
+3,x,zanahorias
+2,cucharadas,aceite oliva
+x,x,sal
+x,x,pimienta Negra
+480,gr,tomates tarro
+1 ½,cucharada,azúcar
+1 ½,taza,agua
+½,cucharadita,Azáfran
+x,x,Albahaca
+3,cucharadas,queso crema
+4,cucharadas,crema
+1 ½,cucharadita,Albahaca

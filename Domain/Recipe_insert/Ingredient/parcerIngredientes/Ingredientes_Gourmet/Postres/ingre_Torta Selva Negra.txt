@@ -1,0 +1,8 @@
+1,sobre,Bizcocho
+4,x,huevos
+200,ml,agua
+600,ml,crema
+1,cucharadita,Esencia Vainilla
+1/3,taza,azúcar flor
+2,tarros,cerezas
+x,x,Chocolate Granulados

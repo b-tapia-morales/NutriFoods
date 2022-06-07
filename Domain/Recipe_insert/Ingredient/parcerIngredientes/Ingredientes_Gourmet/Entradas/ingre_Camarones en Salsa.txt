@@ -1,0 +1,13 @@
+1,taza,ketchup
+1,taza,jugo tomate
+1,cucharada,salsa Inglesa
+1,cucharada,salsa horseradish
+1,cucharadita,vinagre manzana
+1,cucharadita,mostaza
+1,x,limón
+½,taza,apio
+x,x,sal
+x,x,pimienta negra
+36,x,camarones
+x,x,apio
+x,x,ciboulette

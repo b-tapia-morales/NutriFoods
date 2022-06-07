@@ -1,0 +1,10 @@
+x,x,Aceite oliva
+2,x,berenjenas
+2,x,zapallo italianos
+x,x,Sal
+x,x,pimienta negra
+x,x,Merquén
+750,ml,salsa tomate
+1,cuchara,Pesto
+1,unidad,queso mozzarrella
+1,taza,queso

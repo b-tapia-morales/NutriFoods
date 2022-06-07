@@ -1,0 +1,13 @@
+450,gr,porotos negros
+7,tazas,agua
+3,pedazos,jamón ahumado
+6,lonjas,tocino
+250,gr,chorizo
+1,x,cebolla
+2,dientes,ajo
+700,gr,costillas cerdo
+100,gr,charqui
+2,x,chuletas kayser
+3,hojas,Laurel
+¼,cucharadita,Pimienta Negra
+¼,cucharadita,Comino

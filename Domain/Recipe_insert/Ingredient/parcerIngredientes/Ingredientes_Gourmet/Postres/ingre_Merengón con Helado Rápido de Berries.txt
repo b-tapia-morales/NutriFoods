@@ -1,0 +1,8 @@
+6,x,huevos
+x,x,Endulzante
+2,cucharadas,maicena
+2,cucharada,vinagre
+1,cucharadita,Esencia Vainilla
+450,gr,berries
+½,taza,yogurt 
+1,cucharadita,jugo limón

@@ -1,0 +1,10 @@
+4,x,peras
+1/2,cucharada,Canela Molida
+1,cucharada,Chocolate Amargo
+1/4,taza,azúcar rubia
+1/4,taza,almendras
+50,gr,chocolate
+5,hojas,masa 
+100,gr,mantequilla
+2,cucharadas,almendras
+1,cucharada,azúcar rubia

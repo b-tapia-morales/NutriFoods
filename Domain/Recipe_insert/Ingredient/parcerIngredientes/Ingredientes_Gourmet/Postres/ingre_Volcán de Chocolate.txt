@@ -1,0 +1,8 @@
+150,g,Cobertura Chocolate Semiamargo
+150,g,mantequilla
+1,cdta,Esencia Vainilla
+6,x,huevos
+1 ½,tazas,azúcar flor
+½,taza,harina
+x,x,Salsa Frambuesa
+x,x,Helado vainilla

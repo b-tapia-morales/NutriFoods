@@ -1,0 +1,8 @@
+100,gr,manzana
+100,gr,ciruela
+100,gr,damasco
+100,gr,higos
+200,gr,azúcar
+250,ml,vino blanco
+1,palo,Canela Entera
+1,cda,maicena

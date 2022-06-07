@@ -1,0 +1,10 @@
+1,cda,aceite oliva
+3,x,trutros pollo
+1,diente,ajo
+1/2,jugo limón
+1,x,naranja
+Ralladura,1/2,naranja
+3,cdas,miel
+1,cdta,Pimienta negra
+1,cdta,Sal
+1,cda,mostaza

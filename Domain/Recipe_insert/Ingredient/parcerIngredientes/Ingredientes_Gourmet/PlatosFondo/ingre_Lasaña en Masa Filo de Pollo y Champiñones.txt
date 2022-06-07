@@ -1,0 +1,19 @@
+3,hojas,masa filo
+70,gr,mantequilla
+1 1/2,cucharadas,queso parmesano
+1,cucharada,Orégano
+1,cucharada,Sésamo
+1,cucharada,Perejil
+70,gr,queso ricotta
+1,cucharadas,queso parmesano
+1,x,yema
+1/2,taza,mozzarella
+1,cucharadita,Orégano
+2,cucharadas,aceite oliva
+2,x,cebollines
+4,x,pechuga pollo
+200,gr,champiñones
+1/4,taza,callampas secas
+1/4,taza,tomates secos
+1/3,taza,crema
+1,cucharada,queso crema

@@ -1,0 +1,10 @@
+1 1/2,tazas,porotos
+1,x,cebolla
+1,cucharada,aceite
+1 1/2,cucharadita,sal
+1,cucharadita,Pimienta Blanca
+1/2,cucharadita,Comino
+1/2,cucharadita,Ají Color
+1/2,diente,ajo
+1,taza,zapallo
+100,grs,tallarines

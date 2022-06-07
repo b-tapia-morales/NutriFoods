@@ -1,0 +1,7 @@
+1,kg,zapallo camote
+250,gr,papas
+50,ml,leche
+50,gr,mantequilla
+1,cda,Cardamomo
+x,x,Pimienta Negra
+x,x,Sal

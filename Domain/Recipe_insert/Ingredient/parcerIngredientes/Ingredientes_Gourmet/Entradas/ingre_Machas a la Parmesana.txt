@@ -1,0 +1,7 @@
+20,x,machas
+2,cucharadas,mantequilla
+20,cucharaditas,vino blanco
+20,cucharaditas,queso parmesano
+x,x,sal
+x,x,pimienta negra
+x,x,limon

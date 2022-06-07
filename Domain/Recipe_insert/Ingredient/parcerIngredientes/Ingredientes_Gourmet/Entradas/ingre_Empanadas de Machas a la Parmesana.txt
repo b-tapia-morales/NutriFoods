@@ -1,0 +1,11 @@
+1,taza,macha
+500,ml,agua
+3,cucharadas,vino blanco
+2,x,cebollines
+2,cucharadas,crema
+200,gr,queso mantecoso
+3,cucharadas,queso parmesano
+1,cucharadita,pimienta negra
+½,cucharadita,paprika
+1,cucharadita,orégano
+24,x,masa empanadas

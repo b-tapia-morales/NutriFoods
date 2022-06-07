@@ -1,0 +1,7 @@
+1,x,pechuga pollo
+2,dientes,ajo
+1,x,jengibre
+1,x,cebolla
+1,cdta,Curry
+1,x,cilantro
+100,gr,Coco Rallado

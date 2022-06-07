@@ -1,0 +1,7 @@
+¼,taza,aqua
+1,cdta,vinagre blanco
+½,cdta,Sal
+1,cdta,jugo limón
+2,cdtas,Mostaza
+¾,taza,aceite
+½,cdta,azúcar

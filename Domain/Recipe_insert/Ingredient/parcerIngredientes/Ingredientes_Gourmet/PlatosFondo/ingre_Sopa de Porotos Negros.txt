@@ -1,0 +1,17 @@
+500,g,porotos negros
+1,cda,aceite
+1,x,cebolla
+½,x,pimento verde
+100,g,tocino
+2,x,tomates
+1,cdta,Comino
+1,litro,agua
+2,potes,Caldo Carne
+1,hoja,Laurel
+3,vasos,agua
+1,taza,vino tinto
+½,taza,salsa tomates
+1,cda,Salsa Inglesa,Gourmet
+½,cdta,pimienta negra
+6,cdas,crema ácida
+6,cdas,cilantro

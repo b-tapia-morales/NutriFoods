@@ -1,0 +1,12 @@
+1,taza,couscous
+½,cdta,Comino
+½,cdta,Jengibre
+½,cdta,Paprika
+1 ½,taza,agua
+1/3,taza,cilantro
+1,x,zanahoria
+2,cdas,aceite oliva
+2,x,limon
+x,x,Pimienta Negra
+x,x,Sal
+½,taza,almendras

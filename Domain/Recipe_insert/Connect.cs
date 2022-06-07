@@ -31,7 +31,15 @@ public class Connect
     {
         var instance = Connecte();
         StreamReader fileRecipe = new StreamReader("Recipe_insert/Recipe/recipe.txt");
+        string queryIngredient = "select name from nutrifoods.ingredient";
+        NpgsqlCommand comand = new NpgsqlCommand(queryIngredient,instance);
+        var result = comand.ExecuteReader();
 
+        while (result.Read())
+        {
+            Console.WriteLine(result["name"]);
+        }
+        /*
         var contador = 0;
         while(!fileRecipe.EndOfStream)
         {
@@ -58,6 +66,7 @@ public class Connect
             cmd.ExecuteNonQuery();
 
         }
+        */
         instance.Close();
         return true;
     }

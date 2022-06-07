@@ -1,0 +1,16 @@
+1,cda,aceite oliva
+1,taza,quinoa
+1 1/4,taza,agua
+x,x,Sal
+x,x,Pimienta Negra
+2,cdas,aceite oliva
+1,x,pimento rojo
+1,x,cebolla morada
+1,x,zapallo italiano
+1,cda,Pimentón Ahumado
+2,x,huevos
+175,ml,crema leche
+125,ml,leche
+70,g,queso mozzarella
+x,x,Sal
+x,x,Pimienta Negra

@@ -1,0 +1,8 @@
+4,presas,pollo
+2,sobres,Crispy,Gourmet
+2,cucharadas,Salsa Barbecue
+6,grandes,papas
+3,cucharadas,aceite
+x,x,Sal
+2,x,huevos
+2,cucharadas,mantequilla

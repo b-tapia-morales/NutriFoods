@@ -1,0 +1,7 @@
+1,x,repollo
+2,x,zanahoria
+1/2,taza,mayonesa
+1,cucharada,vinagre manzana
+1,cucharada,mostaza Dijon
+1/2,cucharadita,pimienta
+x,x,sal
