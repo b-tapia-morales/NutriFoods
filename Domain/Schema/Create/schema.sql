@@ -112,7 +112,6 @@ CREATE TABLE IF NOT EXISTS nutrient
     subtype_id    INTEGER     NOT NULL,
     FOREIGN KEY (subtype_id) REFERENCES nutrient_subtype (id),
     UNIQUE (name),
-    UNIQUE (also_called),
     PRIMARY KEY (id)
 );
 
