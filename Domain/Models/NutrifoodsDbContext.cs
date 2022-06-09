@@ -678,6 +678,17 @@ namespace Domain.Models
             OnModelCreatingPartial(modelBuilder);
         }
 
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        private static void OnModelCreatingPartial(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PrimaryGroup>().Ignore(e => e.SecondaryGroups);
+            modelBuilder.Entity<SecondaryGroup>().Ignore(e => e.TertiaryGroups);
+            modelBuilder.Entity<TertiaryGroup>().Ignore(e => e.Ingredients);
+            modelBuilder.Entity<Diet>().Ignore(e => e.RecipeDiets).Ignore(e => e.UserBodyMetrics);
+            modelBuilder.Entity<MealType>().Ignore(e => e.RecipeMealTypes).Ignore(e => e.RecipeMealTypes);
+            modelBuilder.Entity<NutrientType>().Ignore(e => e.NutrientSubtypes);
+            modelBuilder.Entity<NutrientSubtype>().Ignore(e => e.Nutrients);
+            modelBuilder.Entity<Nutrient>().Ignore(e => e.IngredientNutrients);
+            modelBuilder.Entity<Ingredient>().Ignore(e => e.RecipeQuantities).Ignore(e => e.UserAllergies);
+        }
     }
 }
