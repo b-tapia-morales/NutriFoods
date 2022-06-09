@@ -249,4 +249,4 @@ VALUES ('Sal', false, false, 23),
 
 
 ON CONFLICT (name) DO NOTHING;
-       
+
