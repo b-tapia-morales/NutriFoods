@@ -283,12 +283,27 @@ VALUES
     -- Salsa de tomate --
     (79, 'Taza', 245),
     -- Puerro --
-    (80, 'Taza', 89)
+    (80, 'Taza', 89),
     -- Harina de almendra --
 
+    --Pimiento verde--
+    (82, 'Taza, picada',149),
+    (82, 'Taza, en rodajas',149),
+    (82,'cucharada',9.3),
+    (82,'Grande',164),
+    (82,'Mediano',119),
+    (82,'pequeño',74),
+    (82,'Tiras',27),
 
-
-
+    --Ciboulette--
+    (83,'Cucharada, picada',3),
+    (83,'Cucharadita, picada',1),
+    --Queso cabra--
+    (84,'oz',28.35),
+    --Vinagre balsamico--
+    (85,'cucharada',16),
+    (85,'cucharadadita',5.3),
+    (85,'Taza',255)
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
