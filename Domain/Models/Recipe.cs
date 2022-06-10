@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Domain.Models
+﻿namespace Domain.Models
 {
-    public partial class Recipe
+    public class Recipe
     {
         public Recipe()
         {
@@ -11,6 +8,7 @@ namespace Domain.Models
             RecipeDiets = new HashSet<RecipeDiet>();
             RecipeDishTypes = new HashSet<RecipeDishType>();
             RecipeMealTypes = new HashSet<RecipeMealType>();
+            RecipeSections = new HashSet<RecipeSection>();
         }
 
         public int Id { get; set; }
@@ -20,10 +18,10 @@ namespace Domain.Models
         public int? Portions { get; set; }
         public int? PreparationTime { get; set; }
 
-        public virtual RecipeSection RecipeSection { get; set; } = null!;
         public virtual ICollection<MealMenuRecipe> MealMenuRecipes { get; set; }
         public virtual ICollection<RecipeDiet> RecipeDiets { get; set; }
         public virtual ICollection<RecipeDishType> RecipeDishTypes { get; set; }
         public virtual ICollection<RecipeMealType> RecipeMealTypes { get; set; }
+        public virtual ICollection<RecipeSection> RecipeSections { get; set; }
     }
 }

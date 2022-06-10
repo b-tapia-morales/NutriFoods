@@ -1,5 +1,6 @@
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.Recipes;
 
@@ -12,6 +13,11 @@ public class RecipeRepository : IRecipeRepository
         _context = context;
     }
 
+    private static IIncludableQueryable<Recipe, IEnumerable<RecipeSection>> IncludeSubfields(IQueryable<Recipe> recipes)
+    {
+        return recipes.Include(e => e.RecipeSections);
+    }
+
     public Task<List<Recipe>> GetRecipes()
     {
         return _context.Recipes.ToListAsync();
@@ -20,8 +26,6 @@ public class RecipeRepository : IRecipeRepository
     public Task<List<Recipe>> GetVegetarianRecipes()
     {
         return _context.Recipes
-            .Where(r => r.RecipeSection.RecipeQuantities.Any(e => !e.Ingredient.IsAnimal) ||
-                        r.RecipeSection.RecipeMeasures.Any(e => !e.IngredientMeasure.Ingredient.IsAnimal))
             .ToListAsync();
     }
 

@@ -165,10 +165,11 @@ CREATE TABLE IF NOT EXISTS recipe
 
 CREATE TABLE IF NOT EXISTS recipe_section
 (
-    id   SERIAL,
-    name VARCHAR(64) DEFAULT '' NOT NULL,
+    id        SERIAL,
+    recipe_id INTEGER                NOT NULL,
+    name      VARCHAR(64) DEFAULT '' NOT NULL,
     UNIQUE (name),
-    FOREIGN KEY (id) REFERENCES recipe (id),
+    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
     PRIMARY KEY (id)
 );
 

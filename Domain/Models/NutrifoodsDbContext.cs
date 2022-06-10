@@ -2,19 +2,15 @@
 
 namespace Domain.Models
 {
-    public partial class NutrifoodsDbContext : DbContext
+    public class NutrifoodsDbContext : DbContext
     {
-        private readonly IConfiguration _configuration;
-
-        public NutrifoodsDbContext(IConfiguration configuration)
+        public NutrifoodsDbContext()
         {
-            _configuration = configuration;
         }
 
-        public NutrifoodsDbContext(DbContextOptions<NutrifoodsDbContext> options, IConfiguration configuration)
+        public NutrifoodsDbContext(DbContextOptions<NutrifoodsDbContext> options)
             : base(options)
         {
-            _configuration = configuration;
         }
 
         public virtual DbSet<Diet> Diets { get; set; } = null!;
@@ -500,20 +496,20 @@ namespace Domain.Models
                 entity.HasIndex(e => e.Name, "recipe_section_name_key")
                     .IsUnique();
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(64)
                     .HasColumnName("name")
                     .HasDefaultValueSql("''::character varying");
 
-                entity.HasOne(d => d.IdNavigation)
-                    .WithOne(p => p.RecipeSection)
-                    .HasForeignKey<RecipeSection>(d => d.Id)
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.RecipeSections)
+                    .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_section_id_fkey");
+                    .HasConstraintName("recipe_section_recipe_id_fkey");
             });
 
             modelBuilder.Entity<RecipeStep>(entity =>
