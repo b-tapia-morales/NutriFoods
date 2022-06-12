@@ -55,8 +55,8 @@ VALUES ('Fruta entera', 1),
        ('Azúcar', 16),
        ('Condimento', 17),
        ('Otros', 18),
-       ('Alcohol', 6),
-       ('Algas', 6)
+       ('Alcohol', 19),
+       ('Algas', 20)
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrifoods.meal_type (name)
