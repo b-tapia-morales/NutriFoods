@@ -5,7 +5,8 @@ VALUES ('Carbohidratos'),
        ('Vitaminas'),
        ('Minerales'),
        ('Esteroles'),
-       ('Otros')
+       ('Otros'),
+       ('Energía')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrifoods.nutrient_subtype (name, provides_energy, type_id)
@@ -23,7 +24,9 @@ VALUES ('Carbohidratos, total', true, 1),
        ('Minerales', false, 5),
        ('Esteroles', false, 6),
        ('Alcohol', true, 7),
-       ('Otros', false, 7)
+       ('Otros', false, 7),
+       ('Energía', true, 8)
+
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrifoods.nutrient (name, also_called, is_calculated, essentiality, subtype_id)
@@ -73,14 +76,14 @@ VALUES
     ('Ácido cis-tetracosenoico', 'Ácido nervónico', false, 2, 7),            -- MUFA 24:1 c
     -- Ácidos grasos poliinsaturados --
     ('Ácidos grasos poliinsaturados, total', '', true, 2, 8),
-    ('Ácido octadecatrienoico', 'Ácido linoleico', false, 2, 8),             -- PUFA 18:2
-    ('Ácido cis-octadecatrienoico', '', false, 2, 8),                        -- PUFA 18:2 c n-6
-    ('Ácido i-octadecatrienoico', '', false, 2, 8),                          -- PUFA 18:2 i
-    ('Ácido conjugated-octadecatrienoico', '', false, 2, 8),                 -- PUFA 18:2 con
-    ('Acido octadecatrienoico', 'Ácido linolenico', false, 2, 8),            -- PUFA 18:3
-    ('Acido cis3-octadecatrienoico', 'Ácido alpha-linolenico', false, 2, 8), -- PUFA 18:3 c n-3
-    ('Acido cis6-octadecatrienoico', 'Ácido gamma-linolenico', false, 2, 8), -- PUFA 18:3 c n-6
-    ('Acido i-octadecatrienoico', '', false, 2, 8),                          -- PUFA 18:3 i
+    ('Ácido octadecadienoico', 'Ácido linoleico', false, 2, 8),              -- PUFA 18:2
+    ('Ácido cis-octadecadienoico', '', false, 2, 8),                         -- PUFA 18:2 c n-6
+    ('Ácido i-octadecadienoico', '', false, 2, 8),                           -- PUFA 18:2 i
+    ('Ácido conjugated-octadecadienoico', '', false, 2, 8),                  -- PUFA 18:2 con
+    ('Ácido octadecatrienoico', 'Ácido linolenico', false, 2, 8),            -- PUFA 18:3
+    ('Ácido cis3-octadecatrienoico', 'Ácido alpha-linolenico', false, 2, 8), -- PUFA 18:3 c n-3
+    ('Ácido cis6-octadecatrienoico', 'Ácido gamma-linolenico', false, 2, 8), -- PUFA 18:3 c n-6
+    ('Ácido i-octadecatrienoico', '', false, 2, 8),                          -- PUFA 18:3 i
     ('Ácido octadecatetraenoico', 'Ácido parinarico', false, 2, 8),          -- PUFA 18:4
     ('Ácido eicosatrienoico', '', false, 2, 8),                              -- PUFA 20:3
     ('Ácido 3-eicosatrienoico', '', false, 2, 8),                            -- PUFA 20:3 n-3
@@ -145,7 +148,9 @@ VALUES
     ('Campesterol', 'Campestanol', false, 2, 13),
     ('Beta-sitosterol', '', false, 2, 13),
     -- Alcohol --
-    ('Alcohol', '', false, 2, 14)
+    ('Alcohol', '', false, 2, 14),
+    ('Ácido eicosadienoico', '', false, 2, 8),                               -- PUFA 20:2 n-6 cis
+    ('Energía', '', true, 0, 16)
 
 
 ON CONFLICT DO NOTHING;
