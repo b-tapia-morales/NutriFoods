@@ -6,7 +6,9 @@ public interface IRecipeRepository
 {
     Task<List<Recipe>> GetRecipes();
 
-    Task<List<Recipe>> GetVegetarianRecipes();
+    Task<List<Recipe>> ExcludeSecondaryGroups(IEnumerable<int> ids);
+
+    Task<List<Recipe>> ExcludeTertiaryGroups(IEnumerable<int> ids);
 
     Task<Recipe> FindRecipe(string name);
 
