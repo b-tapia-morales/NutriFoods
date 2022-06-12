@@ -4,13 +4,13 @@ DROP TABLE IF EXISTS nutrifoods.meal_plan;
 DROP TABLE IF EXISTS nutrifoods.user_allergy;
 DROP TABLE IF EXISTS nutrifoods.user_body_metrics;
 DROP TABLE IF EXISTS nutrifoods.user_profile;
+DROP TABLE IF EXISTS nutrifoods.recipe_nutrient;
 DROP TABLE IF EXISTS nutrifoods.recipe_quantity;
 DROP TABLE IF EXISTS nutrifoods.recipe_measure;
 DROP TABLE IF EXISTS nutrifoods.recipe_steps;
 DROP TABLE IF EXISTS nutrifoods.recipe_diet;
 DROP TABLE IF EXISTS nutrifoods.recipe_meal_type;
 DROP TABLE IF EXISTS nutrifoods.recipe_dish_type;
-DROP TABLE IF EXISTS nutrifoods.recipe_section;
 DROP TABLE IF EXISTS nutrifoods.recipe;
 DROP TABLE IF EXISTS nutrifoods.ingredient_measure;
 DROP TABLE IF EXISTS nutrifoods.ingredient_nutrient;
@@ -133,7 +133,7 @@ CREATE TABLE IF NOT EXISTS ingredient_nutrient
     ingredient_id INTEGER          NOT NULL,
     nutrient_id   INTEGER          NOT NULL,
     quantity      DOUBLE PRECISION NOT NULL,
-    unit          INTEGER,
+    unit          INTEGER          NOT NULL,
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     FOREIGN KEY (nutrient_id) REFERENCES nutrient (id),
     PRIMARY KEY (id)
@@ -160,16 +160,6 @@ CREATE TABLE IF NOT EXISTS recipe
     portions         INTEGER,
     preparation_time INTEGER,
     UNIQUE (name, author),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS recipe_section
-(
-    id        SERIAL,
-    recipe_id INTEGER                NOT NULL,
-    name      VARCHAR(64) DEFAULT '' NOT NULL,
-    UNIQUE (name),
-    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
     PRIMARY KEY (id)
 );
 
@@ -205,37 +195,49 @@ CREATE TABLE IF NOT EXISTS recipe_diet
 
 CREATE TABLE IF NOT EXISTS recipe_steps
 (
-    id                SERIAL,
-    recipe_section_id INTEGER NOT NULL,
-    step              INTEGER NOT NULL,
-    description       TEXT DEFAULT '',
-    FOREIGN KEY (recipe_section_id) REFERENCES recipe_section (id),
+    id          SERIAL,
+    recipe      INTEGER NOT NULL,
+    step        INTEGER NOT NULL,
+    description TEXT DEFAULT '',
+    FOREIGN KEY (recipe) REFERENCES recipe (id),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS recipe_measure
 (
     id                    SERIAL,
-    recipe_section_id     INTEGER           NOT NULL,
+    recipe_id             INTEGER           NOT NULL,
     ingredient_measure_id INTEGER           NOT NULL,
     integer_part          INTEGER DEFAULT 0 NOT NULL,
     numerator             INTEGER           NOT NULL,
     denominator           INTEGER           NOT NULL,
-    description           TEXT,
-    FOREIGN KEY (recipe_section_id) REFERENCES recipe_section (id),
+    description           TEXT    DEFAULT '',
+    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
     FOREIGN KEY (ingredient_measure_id) REFERENCES ingredient_measure (id),
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS recipe_quantity
 (
-    id                SERIAL,
-    recipe_section_id INTEGER          NOT NULL,
-    ingredient_id     INTEGER          NOT NULL,
-    grams             DOUBLE PRECISION NOT NULL,
-    description       TEXT,
-    FOREIGN KEY (recipe_section_id) REFERENCES recipe_section (id),
+    id            SERIAL,
+    recipe_id     INTEGER          NOT NULL,
+    ingredient_id INTEGER          NOT NULL,
+    grams         DOUBLE PRECISION NOT NULL,
+    description   TEXT DEFAULT '',
+    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS recipe_nutrient
+(
+    id          SERIAL,
+    recipe_id   INTEGER          NOT NULL,
+    nutrient_id INTEGER          NOT NULL,
+    quantity    DOUBLE PRECISION NOT NULL,
+    unit        INTEGER          NOT NULL,
+    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
+    FOREIGN KEY (nutrient_id) REFERENCES nutrient (id),
     PRIMARY KEY (id)
 );
 
