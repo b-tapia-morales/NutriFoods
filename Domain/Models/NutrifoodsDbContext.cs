@@ -688,11 +688,14 @@ namespace Domain.Models
             modelBuilder.Entity<SecondaryGroup>().Ignore(e => e.TertiaryGroups);
             modelBuilder.Entity<TertiaryGroup>().Ignore(e => e.Ingredients);
             modelBuilder.Entity<Diet>().Ignore(e => e.RecipeDiets).Ignore(e => e.UserBodyMetrics);
-            modelBuilder.Entity<MealType>().Ignore(e => e.RecipeMealTypes).Ignore(e => e.RecipeMealTypes);
+            modelBuilder.Entity<MealType>().Ignore(e => e.RecipeMealTypes).Ignore(e => e.MealMenus);
             modelBuilder.Entity<NutrientType>().Ignore(e => e.NutrientSubtypes);
             modelBuilder.Entity<NutrientSubtype>().Ignore(e => e.Nutrients);
-            modelBuilder.Entity<Nutrient>().Ignore(e => e.IngredientNutrients);
+            modelBuilder.Entity<Nutrient>().Ignore(e => e.IngredientNutrients).Ignore(e => e.RecipeNutrients);
             modelBuilder.Entity<Ingredient>().Ignore(e => e.RecipeQuantities).Ignore(e => e.UserAllergies);
+            modelBuilder.Entity<Recipe>().Ignore(e => e.MealMenuRecipes);
+            modelBuilder.Entity<MealPlan>().Ignore(e => e.User);
+            modelBuilder.Entity<MealMenu>().Ignore(e => e.MealPlan);
         }
     }
 }
