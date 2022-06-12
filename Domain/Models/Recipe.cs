@@ -1,6 +1,9 @@
-﻿namespace Domain.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace Domain.Models
 {
-    public class Recipe
+    public partial class Recipe
     {
         public Recipe()
         {
@@ -8,7 +11,10 @@
             RecipeDiets = new HashSet<RecipeDiet>();
             RecipeDishTypes = new HashSet<RecipeDishType>();
             RecipeMealTypes = new HashSet<RecipeMealType>();
-            RecipeSections = new HashSet<RecipeSection>();
+            RecipeMeasures = new HashSet<RecipeMeasure>();
+            RecipeNutrients = new HashSet<RecipeNutrient>();
+            RecipeQuantities = new HashSet<RecipeQuantity>();
+            RecipeSteps = new HashSet<RecipeStep>();
         }
 
         public int Id { get; set; }
@@ -22,6 +28,9 @@
         public virtual ICollection<RecipeDiet> RecipeDiets { get; set; }
         public virtual ICollection<RecipeDishType> RecipeDishTypes { get; set; }
         public virtual ICollection<RecipeMealType> RecipeMealTypes { get; set; }
-        public virtual ICollection<RecipeSection> RecipeSections { get; set; }
+        public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; }
+        public virtual ICollection<RecipeNutrient> RecipeNutrients { get; set; }
+        public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; }
+        public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
     }
 }

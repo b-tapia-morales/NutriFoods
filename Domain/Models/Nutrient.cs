@@ -8,6 +8,7 @@ namespace Domain.Models
         public Nutrient()
         {
             IngredientNutrients = new HashSet<IngredientNutrient>();
+            RecipeNutrients = new HashSet<RecipeNutrient>();
         }
 
         public int Id { get; set; }
@@ -19,5 +20,6 @@ namespace Domain.Models
 
         public virtual NutrientSubtype Subtype { get; set; } = null!;
         public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; }
+        public virtual ICollection<RecipeNutrient> RecipeNutrients { get; set; }
     }
 }

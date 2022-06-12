@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public class NutrifoodsDbContext : DbContext
+    public partial class NutrifoodsDbContext : DbContext
     {
         public NutrifoodsDbContext()
         {
@@ -31,8 +31,8 @@ namespace Domain.Models
         public virtual DbSet<RecipeDishType> RecipeDishTypes { get; set; } = null!;
         public virtual DbSet<RecipeMealType> RecipeMealTypes { get; set; } = null!;
         public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; } = null!;
+        public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; } = null!;
         public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; } = null!;
-        public virtual DbSet<RecipeSection> RecipeSections { get; set; } = null!;
         public virtual DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
         public virtual DbSet<SecondaryGroup> SecondaryGroups { get; set; } = null!;
         public virtual DbSet<TertiaryGroup> TertiaryGroups { get; set; } = null!;
@@ -439,7 +439,9 @@ namespace Domain.Models
 
                 entity.Property(e => e.Denominator).HasColumnName("denominator");
 
-                entity.Property(e => e.Description).HasColumnName("description");
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasDefaultValueSql("''::text");
 
                 entity.Property(e => e.IngredientMeasureId).HasColumnName("ingredient_measure_id");
 
@@ -447,7 +449,7 @@ namespace Domain.Models
 
                 entity.Property(e => e.Numerator).HasColumnName("numerator");
 
-                entity.Property(e => e.RecipeSectionId).HasColumnName("recipe_section_id");
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
                 entity.HasOne(d => d.IngredientMeasure)
                     .WithMany(p => p.RecipeMeasures)
@@ -455,11 +457,38 @@ namespace Domain.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("recipe_measure_ingredient_measure_id_fkey");
 
-                entity.HasOne(d => d.RecipeSection)
+                entity.HasOne(d => d.Recipe)
                     .WithMany(p => p.RecipeMeasures)
-                    .HasForeignKey(d => d.RecipeSectionId)
+                    .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_measure_recipe_section_id_fkey");
+                    .HasConstraintName("recipe_measure_recipe_id_fkey");
+            });
+
+            modelBuilder.Entity<RecipeNutrient>(entity =>
+            {
+                entity.ToTable("recipe_nutrient", "nutrifoods");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.NutrientId).HasColumnName("nutrient_id");
+
+                entity.Property(e => e.Quantity).HasColumnName("quantity");
+
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
+
+                entity.Property(e => e.Unit).HasColumnName("unit");
+
+                entity.HasOne(d => d.Nutrient)
+                    .WithMany(p => p.RecipeNutrients)
+                    .HasForeignKey(d => d.NutrientId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("recipe_nutrient_nutrient_id_fkey");
+
+                entity.HasOne(d => d.Recipe)
+                    .WithMany(p => p.RecipeNutrients)
+                    .HasForeignKey(d => d.RecipeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("recipe_nutrient_recipe_id_fkey");
             });
 
             modelBuilder.Entity<RecipeQuantity>(entity =>
@@ -468,13 +497,15 @@ namespace Domain.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
-                entity.Property(e => e.Description).HasColumnName("description");
+                entity.Property(e => e.Description)
+                    .HasColumnName("description")
+                    .HasDefaultValueSql("''::text");
 
                 entity.Property(e => e.Grams).HasColumnName("grams");
 
                 entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
 
-                entity.Property(e => e.RecipeSectionId).HasColumnName("recipe_section_id");
+                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
                 entity.HasOne(d => d.Ingredient)
                     .WithMany(p => p.RecipeQuantities)
@@ -482,34 +513,11 @@ namespace Domain.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("recipe_quantity_ingredient_id_fkey");
 
-                entity.HasOne(d => d.RecipeSection)
-                    .WithMany(p => p.RecipeQuantities)
-                    .HasForeignKey(d => d.RecipeSectionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_quantity_recipe_section_id_fkey");
-            });
-
-            modelBuilder.Entity<RecipeSection>(entity =>
-            {
-                entity.ToTable("recipe_section", "nutrifoods");
-
-                entity.HasIndex(e => e.Name, "recipe_section_name_key")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(64)
-                    .HasColumnName("name")
-                    .HasDefaultValueSql("''::character varying");
-
-                entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
-
                 entity.HasOne(d => d.Recipe)
-                    .WithMany(p => p.RecipeSections)
+                    .WithMany(p => p.RecipeQuantities)
                     .HasForeignKey(d => d.RecipeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_section_recipe_id_fkey");
+                    .HasConstraintName("recipe_quantity_recipe_id_fkey");
             });
 
             modelBuilder.Entity<RecipeStep>(entity =>
@@ -522,15 +530,15 @@ namespace Domain.Models
                     .HasColumnName("description")
                     .HasDefaultValueSql("''::text");
 
-                entity.Property(e => e.RecipeSectionId).HasColumnName("recipe_section_id");
+                entity.Property(e => e.Recipe).HasColumnName("recipe");
 
                 entity.Property(e => e.Step).HasColumnName("step");
 
-                entity.HasOne(d => d.RecipeSection)
+                entity.HasOne(d => d.RecipeNavigation)
                     .WithMany(p => p.RecipeSteps)
-                    .HasForeignKey(d => d.RecipeSectionId)
+                    .HasForeignKey(d => d.Recipe)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("recipe_steps_recipe_section_id_fkey");
+                    .HasConstraintName("recipe_steps_recipe_fkey");
             });
 
             modelBuilder.Entity<SecondaryGroup>(entity =>
