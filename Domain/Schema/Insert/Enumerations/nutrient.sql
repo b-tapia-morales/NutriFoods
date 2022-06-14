@@ -91,7 +91,7 @@ VALUES
     ('Ácido eicosatetraenoico', '', false, 2, 8),                            -- PUFA 20:4
     ('Ácido 6-eicosatetraenoico', 'Ácido araquidónico', false, 2, 8),        -- PUFA 20:4 n-6
     ('Ácido eicosapentaenoico', 'Ácido timnodónico', false, 2, 8),           -- PUFA 20:5 n-3
-    ('Ácido docosapentaenoico', '', false, 2, 8),                            -- PUFA 22:5
+    ('Ácido docosapentaenoico', '', false, 2, 8),                            -- PUFA 22:5 n-3
     ('Ácido docosahexaenoico', '', false, 2, 8),                             -- PUFA 22:6
     -- Ácidos grasos trans--
     ('Ácidos grasos trans, total', '', true, 2, 9),
