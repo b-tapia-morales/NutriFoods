@@ -1,44 +1,58 @@
 FoodDataCentralName,FoodDataCentralId,NutriFoodsName,NutriFoodsId
 "Carbohydrate, by difference",205,"Carbohidratos, total",1
 "Fiber, total dietary",291,Fibra,2
-Starch,209,Almidón,3
-"Sugars, Total NLEA",269.3,"Azúcares, total",4
+Starch,209,Almid?n,3
+"Sugars, Total NLEA",269.3,"Az?cares, total",4
 Fructose,212,Fructosa,5
 Galactose,287,Galactosa,6
 Glucose,211,Glucosa,7
 Lactose,213,Lactosa,8
 Maltose,214,Maltosa,9
 Sucrose,210,Sucrosa,10
-"Fatty acids, total saturated",606,"Ácidos grasos saturados, total",12
-SFA 4:0,607,Ácido butanoico,13
-SFA 6:0,608,Ácido hexanoico ,14
-SFA 8:0,609,Ácido octanoico,15
-SFA 10:0,610,Ácido decanoico,16
-SFA 12:0,611,Ácido dodecanoico,17
-SFA 14:0,612,Ácido tetradecanoico,19
-SFA 15:0,652,Ácido pentadecanoico,20
-SFA 16:0,613,Ácido hexadecanoico,21
-SFA 17:0,653,Ácido hexadecanoico,21
-SFA 18:0,614,Ácido octadecanoico,23
-SFA 20:0,615,Ácido eicosanoico,24
-SFA 22:0,624,Ácido docosanoico,25
-"Fatty acids, total monounsaturated",645,"Ácidos grasos monoinsaturados, total",27
-MUFA 14:1 c,822,Ácido tetradecenoico,28
-MUFA 15:1,697,Ácido pentadecenoico,29
-MUFA 16:1 c,673,Ácido cis-hexadecenoico,31
-MUFA 17:1,687,Ácido heptadecenoico,32
-MUFA 17:1 c,825,Ácido heptadecenoico,32
-MUFA 18:1,617,Ácido octadecenoico,33
-MUFA 18:1 c,674,Ácido cis-octadecenoico,34
-MUFA 20:1,628,Ácido eicosenoico,35
-"Fatty acids, total polyunsaturated",646,"Ácidos grasos poliinsaturados, total",39
-PUFA 18:2,618,Ácido octadecadienoico,40
+Total lipid (fat),204,"?cidos grasos, total",11
+"Fatty acids, total saturated",606,"?cidos grasos saturados, total",12
+SFA 4:0,607,?cido butanoico,13
+SFA 6:0,608,?cido hexanoico ,14
+SFA 8:0,609,?cido octanoico,15
+SFA 10:0,610,?cido decanoico,16
+SFA 12:0,611,?cido dodecanoico,17
+SFA 13:0,696,?cido tridecanoico,18
+SFA 14:0,612,?cido tetradecanoico,19
+SFA 15:0,652,?cido pentadecanoico,20
+SFA 16:0,613,?cido hexadecanoico,21
+SFA 17:0,653,?cido heptadecanoico,22
+SFA 18:0,614,?cido octadecanoico,23
+SFA 20:0,615,?cido eicosanoico,24
+SFA 22:0,624,?cido docosanoico,25
+SFA 24:0,654,?cido tetracosanoico,26
+"Fatty acids, total monounsaturated",645,"?cidos grasos monoinsaturados, total",27
+MUFA 14:1 c,822,?cido tetradecenoico,28
+MUFA 15:1,697,?cido pentadecenoico,29
+MUFA 16:1,626,?cido hexadecenoico,30
+MUFA 16:1 c,673,?cido cis-hexadecenoico,31
+MUFA 17:1,687,?cido heptadecenoico,32
+MUFA 17:1 c,825,?cido heptadecenoico,32
+MUFA 18:1,617,?cido octadecenoico,33
+MUFA 18:1 c,674,?cido cis-octadecenoico,34
+MUFA 20:1,628,?cido eicosenoico,35
+MUFA 22:1,630,?cido docosenoico,36
+MUFA 24:1 c,671,?cido cis-tetracosenoico,38
+"Fatty acids, total polyunsaturated",646,"?cidos grasos poliinsaturados, total",39
+PUFA 18:2,618,?cido octadecadienoico,40
+"PUFA 18:2 n-6 c,c",675,?cido cis-octadecadienoico,41
 PUFA 18:3,619,Acido octadecatrienoico,44
+"PUFA 18:3 n-3 c,c,c (ALA)",851,?cido cis3-octadecatrienoico,45
 "PUFA 18:3 n-6 c,c,c",685,Acido cis6-octadecatrienoico,46
-PUFA 20:3,689,Ácido eicosatrienoico,49
-PUFA 20:4,620,Ácido eicosatetraenoico,52
-Aspartic acid,514,Ácido aspartico,60
-Glutamic acid,515,Ácido glutámico,61
+PUFA 18:4,627,?cido octadecatetraenoico,48
+PUFA 20:3,689,?cido eicosatrienoico,49
+PUFA 20:4,620,?cido eicosatetraenoico,52
+PUFA 20:5 n-3 (EPA),629,?cido eicosapentaenoico,54
+PUFA 22:5 n-3 (DPA),631,?cido docosapentaenoico,55
+"Fatty acids, total trans",605,"?cidos grasos trans, total",57
+"Fatty acids, total trans-monoenoic",693,?cido trans-monoenoico,58
+"Fatty acids, total trans-polyenoic",695,"?cido trans-polinoico, total",59
+Aspartic acid,514,?cido aspartico,60
+Glutamic acid,515,?cido glut?mico,61
 Alanine,513,Alanina,62
 Arginine,511,Arginina,63
 Cystine,507,Cistina,64
@@ -53,15 +67,17 @@ Proline,517,Prolina,72
 Serine,518,Serina,73
 Tyrosine,509,Tirosina,74
 Threonine,502,Treonina,75
-Tryptophan,501,Triptófano,76
+Tryptophan,501,Tript?fano,76
 Valine,510,Valina,77
-"Vitamin C, total ascorbic acid",401,Ácido ascórbico,78
+"Vitamin C, total ascorbic acid",401,?cido asc?rbico,78
 Thiamin,404,Tiamina,79
 Riboflavin,405,Riboflavina,80
 Niacin,406,Niacina,81
-Pantothenic acid,410,Ácido pantoténico,82
+Pantothenic acid,410,?cido pantot?nico,82
 Vitamin B-6,415,Vitamina B6,83
-"Folate, total",417,Ácido fólico,85
+Vitamin B-12,418,Vitamina B12,84
+"Folate, total",417,?cido f?lico,85
+"Choline, total",421,Colina,86
 "Vitamin A, RAE",320,Vitamina A,87
 Vitamin D (D2 + D3),328,Vitamina D,88
 Vitamin E (alpha-tocopherol),323,Vitamina E,89
@@ -69,43 +85,49 @@ Vitamin K (Dihydrophylloquinone),429,Vitamina K,90
 "Calcium, Ca",301,Calcio,91
 "Iron, Fe",303,Hierro,92
 "Magnesium, Mg",304,Magnesio,93
-"Phosphorus, P",305,Fósforo,94
+"Phosphorus, P",305,F?sforo,94
 "Potassium, K",306,Potasio,95
 "Sodium, Na",307,Sodio,96
 "Zinc, Zn",309,Zinc,97
 "Copper, Cu",312,Cobre,98
 "Manganese, Mn",315,Magneso,99
 "Selenium, Se",317,Selenio,100
-"PUFA 20:2 n-6 c,c",672,Ácido eicosadienoico,107
-Energy,208,Energía,108
-Nitrogen,202,,
-Protein,203,,
-Total lipid (fat),204,,
-"Carbohydrate, by summation",205.2,,
+"Fluoride, F",313,Fluoruro,101
+Cholesterol,601,Colesterol,102
+Stigmasterol,638,Estigmasterol,103
+Campesterol,639,Campesterol,104
+Beta-sitosterol,641,Beta-sitosterol,105
+"Alcohol, ethyl",221,Alcohol,106
+"PUFA 20:2 n-6 c,c",672,?cido eicosadienoico,107
+Energy,208,Energ?a,108
 Ash,207,,
-Water,255,,
-Energy,268,,
-"Fiber, soluble",295,,
-"Fiber, insoluble",297,,
-Total fat (NLEA),298,,
-"Carotene, beta",321,,
+"Carbohydrate, by summation",205.2,,
 "Carotene, alpha",322,,
+"Carotene, beta",321,,
+"Cryptoxanthin, beta",334,,
+Energy,268,,
+"Fiber, insoluble",297,,
+"Fiber, soluble",295,,
+Lutein + zeaxanthin,338,,
+Lycopene,337,,
+MUFA 20:1 c,829,,
+Nitrogen,202,,
 Phytoene,330,,
 Phytofluene,331,,
-"Cryptoxanthin, beta",334,,
-Lycopene,337,,
-Lutein + zeaxanthin,338,,
-"Tocopherol, beta",341,,
-"Tocopherol, gamma",342,,
-"Tocopherol, delta",343,,
-"Tocotrienol, alpha",344,,
-"Tocotrienol, beta",345,,
-"Tocotrienol, gamma",346,,
-"Tocotrienol, delta",347,,
-Vitamin K (phylloquinone),430,,
-MUFA 20:1 c,829,,
+Protein,203,,
 PUFA 18:2 c,831,,
 PUFA 18:3 c,833,,
+PUFA 20:2 c,840,,
 PUFA 20:3 c,835,,
 PUFA 20:4c,836,,
-PUFA 20:2 c,840,,
+PUFA 22:6 n-3 (DHA),621,,
+"Tocopherol, beta",341,,
+"Tocopherol, delta",343,,
+"Tocopherol, gamma",342,,
+"Tocotrienol, alpha",344,,
+"Tocotrienol, beta",345,,
+"Tocotrienol, delta",347,,
+"Tocotrienol, gamma",346,,
+Total fat (NLEA),298,,
+Vitamin K (phylloquinone),430,,
+Water,255,,
