@@ -32,8 +32,8 @@ ON CONFLICT DO NOTHING;
 INSERT INTO nutrifoods.nutrient (name, also_called, is_calculated, essentiality, subtype_id)
 VALUES
     -- Carbohidratos --
-    ('Carbohidratos, total', '', true, 0, 1),
-    ('Fibra', '', false, 2, 2),
+    ('Carbohidratos, total', '', true, 0, 1), -- 
+    ('Fibra', '', false, 2, 2),  -- 
     ('Almidón', 'Fécula', false, 2, 3),
     -- Azúcares --
     ('Azúcares, total', '', true, 0, 4),
@@ -42,12 +42,12 @@ VALUES
     ('Glucosa', '', false, 2, 4),
     ('Lactosa', '', false, 2, 4),
     ('Maltosa', '', false, 2, 4),
-    ('Sucrosa', 'Sacarosa', false, 2, 4),
+    ('Sucrosa', 'Sacarosa', false, 2, 4), -- 
     --Ácidos grasos--
-    ('Ácidos grasos, total', '', true, 2, 5),
+    ('Ácidos grasos, total', '', true, 2, 5), -- 
     -- Ácidos grasos saturados --
     ('Ácidos grasos saturados, total', '', true, 2, 6),
-    ('Ácido butanoico', 'Ácido butírico', false, 2, 6),                      -- SFA 4:0
+    ('Ácido butanoico', 'Ácido butírico', false, 2, 6),                      -- SFA 4:0  
     ('Ácido hexanoico', 'Ácido caproico', false, 2, 6),                      -- SFA 6:0
     ('Ácido octanoico', 'Ácido caprílico', false, 2, 6),                     -- SFA 8:0
     ('Ácido decanoico', 'Ácido cáprico', false, 2, 6),                       -- SFA 10:0
@@ -55,15 +55,15 @@ VALUES
     ('Ácido tridecanoico', '', false, 2, 6),                                 -- SFA 13:0
     ('Ácido tetradecanoico', 'Ácido mirístico', false, 2, 6),                -- SFA 14:0
     ('Ácido pentadecanoico', '', false, 2, 6),                               -- SFA 15:0
-    ('Ácido hexadecanoico', 'Ácido palmítico', false, 2, 6),                 -- SFA 16:0
+    ('Ácido hexadecanoico', 'Ácido palmítico', false, 2, 6),                 -- SFA 16:0  
     ('Ácido heptadecanoico', 'Ácido margárico', false, 2, 6),                -- SFA 17:0
     ('Ácido octadecanoico', 'Ácido esteárico', false, 2, 6),                 -- SFA 18:0
     ('Ácido eicosanoico', 'Ácido araquídico', false, 2, 6),                  -- SFA 20:0
     ('Ácido docosanoico', 'Ácido behénico', false, 2, 6),                    -- SFA 22:0
-    ('Ácido tetracosanoico', 'Ácido lignocérico', false, 2, 6),              -- SFA 24:0
+    ('Ácido tetracosanoico', 'Ácido lignocérico', false, 2, 6),              -- SFA 24:0 
     -- Ácidos grasos monoinsaturados --
     ('Ácidos grasos monoinsaturados, total', '', true, 2, 7),
-    ('Ácido tetradecenoico', 'Ácido miristoleico', false, 2, 7),             -- MUFA 14:1
+    ('Ácido tetradecenoico', 'Ácido miristoleico', false, 2, 7),             -- MUFA 14:1 
     ('Ácido pentadecenoico', '', false, 2, 7),                               -- MUFA 15:1
     ('Ácido hexadecenoico', 'Ácido miristoleico', false, 2, 7),              -- MUFA 16:1
     ('Ácido cis-hexadecenoico', '', false, 2, 7),                            -- MUFA 16:1 c
@@ -76,27 +76,27 @@ VALUES
     ('Ácido cis-tetracosenoico', 'Ácido nervónico', false, 2, 7),            -- MUFA 24:1 c
     -- Ácidos grasos poliinsaturados --
     ('Ácidos grasos poliinsaturados, total', '', true, 2, 8),
-    ('Ácido octadecadienoico', 'Ácido linoleico', false, 2, 8),              -- PUFA 18:2
-    ('Ácido cis-octadecadienoico', '', false, 2, 8),                         -- PUFA 18:2 c n-6
-    ('Ácido i-octadecadienoico', '', false, 2, 8),                           -- PUFA 18:2 i
-    ('Ácido conjugated-octadecadienoico', '', false, 2, 8),                  -- PUFA 18:2 con
-    ('Ácido octadecatrienoico', 'Ácido linolenico', false, 2, 8),            -- PUFA 18:3
-    ('Ácido cis3-octadecatrienoico', 'Ácido alpha-linolenico', false, 2, 8), -- PUFA 18:3 c n-3
-    ('Ácido cis6-octadecatrienoico', 'Ácido gamma-linolenico', false, 2, 8), -- PUFA 18:3 c n-6
-    ('Ácido i-octadecatrienoico', '', false, 2, 8),                          -- PUFA 18:3 i
-    ('Ácido octadecatetraenoico', 'Ácido parinarico', false, 2, 8),          -- PUFA 18:4
-    ('Ácido eicosatrienoico', '', false, 2, 8),                              -- PUFA 20:3
-    ('Ácido 3-eicosatrienoico', '', false, 2, 8),                            -- PUFA 20:3 n-3
-    ('Ácido 6-eicosatrienoico', '', false, 2, 8),                            -- PUFA 20:3 n-6
-    ('Ácido eicosatetraenoico', '', false, 2, 8),                            -- PUFA 20:4
-    ('Ácido 6-eicosatetraenoico', 'Ácido araquidónico', false, 2, 8),        -- PUFA 20:4 n-6
-    ('Ácido eicosapentaenoico', 'Ácido timnodónico', false, 2, 8),           -- PUFA 20:5 n-3
-    ('Ácido docosapentaenoico', '', false, 2, 8),                            -- PUFA 22:5 n-3
-    ('Ácido docosahexaenoico', '', false, 2, 8),                             -- PUFA 22:6
+    ('Ácido octadecadienoico', 'Ácido linoleico', false, 2, 8),              -- PUFA 18:2 
+    ('Ácido cis-octadecadienoico', '', false, 2, 8),                         -- PUFA 18:2 c n-6 
+    ('Ácido i-octadecadienoico', '', false, 2, 8),                           -- PUFA 18:2 i 
+    ('Ácido conjugated-octadecadienoico', '', false, 2, 8),                  -- PUFA 18:2 con 
+    ('Ácido octadecatrienoico', 'Ácido linolenico', false, 2, 8),            -- PUFA 18:3 
+    ('Ácido cis3-octadecatrienoico', 'Ácido alpha-linolenico', false, 2, 8), -- PUFA 18:3 c n-3 
+    ('Ácido cis6-octadecatrienoico', 'Ácido gamma-linolenico', false, 2, 8), -- PUFA 18:3 c n-6 
+    ('Ácido i-octadecatrienoico', '', false, 2, 8),                          -- PUFA 18:3 i 
+    ('Ácido octadecatetraenoico', 'Ácido parinarico', false, 2, 8),          -- PUFA 18:4 
+    ('Ácido eicosatrienoico', '', false, 2, 8),                              -- PUFA 20:3 
+    ('Ácido 3-eicosatrienoico', '', false, 2, 8),                            -- PUFA 20:3 n-3 
+    ('Ácido 6-eicosatrienoico', '', false, 2, 8),                            -- PUFA 20:3 n-6 
+    ('Ácido eicosatetraenoico', '', false, 2, 8),                            -- PUFA 20:4 
+    ('Ácido 6-eicosatetraenoico', 'Ácido araquidónico', false, 2, 8),        -- PUFA 20:4 n-6 
+    ('Ácido eicosapentaenoico', 'Ácido timnodónico', false, 2, 8),           -- PUFA 20:5 n-3 
+    ('Ácido docosapentaenoico', '', false, 2, 8),                            -- PUFA 22:5 n-3 
+    ('Ácido docosahexaenoico', '', false, 2, 8),                             -- PUFA 22:6 
     -- Ácidos grasos trans--
     ('Ácidos grasos trans, total', '', true, 2, 9),
-    ('Ácido trans-monoenoico', '', false, 2, 9),                             -- TFA 16:1
-    ('Ácido polinoico', '', false, 2, 9),                                    -- TFA 18:2
+    ('Ácido trans-monoenoico, total', '', true, 2, 9),                             
+    ('Ácido trans-polinoico, total', '', true, 2, 9),                                    
     -- Proteínas -
     ('Ácido aspártico', '', false, 2, 10),
     ('Ácido glutámico', '', false, 2, 10),
