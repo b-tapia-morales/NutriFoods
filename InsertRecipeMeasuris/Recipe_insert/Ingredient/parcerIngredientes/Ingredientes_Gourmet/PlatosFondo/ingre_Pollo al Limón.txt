@@ -1,8 +1,0 @@
-1,x,pollo
-2,x,limones
-1,cucharada,Orégano
-1,cucharada,Sal
-½,cucharada,Pimienta Negra
-1,x,cebolla
-1 ½,cucharada,mantequilla
-½,cucharadita,Ajo Polvo

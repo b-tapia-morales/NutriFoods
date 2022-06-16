@@ -1,9 +1,0 @@
-1.2,kilo,palanca
-x,x,sal
-4,cucharadas,vinagre vino
-1,diente,ajo
-2,cucharadas,aceite oliva
-½,cucharadita,Comino
-1,cucharada,Orégano
-½,cucharadita,Merquén
-½,cucharadita,pimienta negra

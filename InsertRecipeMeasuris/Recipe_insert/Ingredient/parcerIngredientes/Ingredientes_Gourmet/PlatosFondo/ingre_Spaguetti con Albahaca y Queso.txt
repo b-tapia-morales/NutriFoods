@@ -1,9 +1,0 @@
-1,paquete,spaguetti
-1,taza,albahaca
-200,gr,jamón
-2,dientes,ajo
-1,x,Salsa Queso
-1,cda,mantequilla
-x,x,Aceite oliva
-x,x,Pimienta Blanca
-x,x,Queso parmesano

@@ -1,7 +1,0 @@
-500,grs,arroz
-600,grs,pechuga pollo
-1,x,pimento rojo
-3,cda,perejil
-1,banja,champiñones
-2,cda,Salsa Inglesa
-1/2,sobre,Salsa Pimienta

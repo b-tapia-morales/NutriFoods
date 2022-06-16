@@ -1,8 +1,0 @@
-1,cucharada,mantequilla
-1,cucharada,aceite oliva
-½,x,cebolla
-½,taza,apio
-6,tazas,arvejas
-1,litro,agua
-½,taza,crema
-6,x,tocinos

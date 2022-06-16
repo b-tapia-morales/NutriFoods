@@ -1,6 +1,0 @@
-4,x,peras
-1,lt,vino tinto
-5,unidas,Anís Estrella
-1,palo,Canela Entera
-½,x,Ralladura naranja
-300,gr,azúcar

@@ -1,9 +1,0 @@
-250,gr,espinacas
-250,gr,champiñones
-1,cucharada,aceite oliva
-140,gr,queso crema
-2,cucharadas,queso parmesano
-x,x,pimienta blanca
-12,x,masa empanadas
-x,x,aceite oliva
-x,x,sesamo

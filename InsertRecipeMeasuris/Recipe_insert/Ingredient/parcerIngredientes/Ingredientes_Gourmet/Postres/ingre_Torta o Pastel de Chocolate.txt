@@ -1,9 +1,0 @@
-1,sobre,Bizcocho
-4,x,huevos
-200,ml,agua
-1,kilo,manjar
-1,taza,agua
-1/2,taza,azúcar
-1,cucharadita,Esencia vainilla
-x,x,Chocolate Granulado
-x,x,Hojas chocolate

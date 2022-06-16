@@ -1,4 +1,0 @@
-125,gr,frutillas
-1/2,taza,crema
-3,hojas,Gelatina
-x,x,Salsa Frutilla

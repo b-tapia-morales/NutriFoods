@@ -1,5 +1,0 @@
-500,ml,crema
-400,ml,leche condensada
-4,cucharadas,polvo Chocolate Amargo
-150,gr,Chocolate semiamargo
-1,cucharadita,Esencia Vainilla

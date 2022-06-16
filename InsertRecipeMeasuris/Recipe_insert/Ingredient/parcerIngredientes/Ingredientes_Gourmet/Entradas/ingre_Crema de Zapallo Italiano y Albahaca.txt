@@ -1,7 +1,0 @@
-2,cdas,aceite oliva
-1,cda,mantequilla
-1,x,cebolla
-1,diente,ajo
-450,g,zapallo italianos
-500,ml,agua
-¾,taza,albahaca

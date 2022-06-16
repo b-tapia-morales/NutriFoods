@@ -1,7 +1,0 @@
-750,gr,harina
-1 ½,cucharaditas,Sal
-1,cucharadita,Comino
-1,cucharadita,azúcar
-7,gr,levadura
-2,cucharadas,aceite oliva
-400,ml,agua

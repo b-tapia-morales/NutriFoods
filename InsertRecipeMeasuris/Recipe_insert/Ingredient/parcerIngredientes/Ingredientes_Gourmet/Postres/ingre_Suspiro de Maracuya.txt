@@ -1,6 +1,0 @@
-2,tarros,leche condensada
-1,tarro,leche evaporada
-700,gr,pulpa maracuyá
-5,x,yemas
-1,sobre,Merengue
-80,ml,agua

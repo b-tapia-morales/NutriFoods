@@ -1,9 +1,0 @@
-400,gr,pasta
-500,gr,camarones
-3,cucharadas,aceite oliva
-1,x,zapallo italiano
-1/2,taza,albahaca
-1,cucharada,aceite oliva
-2/3,taza,crema
-x,x,Queso parmesano
-x,x,sal

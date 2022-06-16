@@ -1,8 +1,0 @@
-4,Filetes,salmón
-1,cucharada,mostaza
-1/3,taza,quínoa
-½,taza,quínoa roja
-3,cucharadas,queso parmesano
-1 ½,cucharadas,pan rallado
-1,cucharada,ciboulette
-4,cucharadas,aceite oliva

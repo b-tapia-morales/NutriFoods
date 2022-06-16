@@ -1,7 +1,0 @@
-400,gr,espaguetis
-1,cucharada,mantequilla
-200,gr,tocino
-½,diente,ajo
-3,x,huevos
-2/3,taza,queso parmesano
-x,x,pimienta negra

@@ -1,7 +1,0 @@
-300,gr,harina
-200,gr,azúcar
-200,gr,mantequilla
-4,x,manzanas verdes
-50,gr,mantequilla
-1/2,cdas,Canela Molida
-1,cdta,limón

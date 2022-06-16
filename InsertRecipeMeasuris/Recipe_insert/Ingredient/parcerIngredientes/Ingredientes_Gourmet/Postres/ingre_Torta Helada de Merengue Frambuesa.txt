@@ -1,6 +1,0 @@
-3,sobres,Merengue
-240,ml,agua
-1,litro,crema
-4,cucharadas,azúcar flor
-400,gr,frambuesas
-3,cucharadas,mermeladas frambuesas

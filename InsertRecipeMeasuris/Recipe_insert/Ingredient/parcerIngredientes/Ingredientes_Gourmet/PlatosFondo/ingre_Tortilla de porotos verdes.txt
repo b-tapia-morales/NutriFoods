@@ -1,9 +1,0 @@
-1,kilo,porotos verdes
-1,cucharada,mantequilla
-½,taza,cebolla
-1,cucharadita,Orégano
-½,cucharadita,Pimienta Blanca
-1,cucharadita,Sal
-5,x,huevos
-2,cucharadas,crema
-4,cucharadas,aceite

@@ -1,4 +1,0 @@
-6,Filetes,Pavo
-250,gramos,Jamón Serrano
-x,x,Salvia
-x,x,Aceite Oliva

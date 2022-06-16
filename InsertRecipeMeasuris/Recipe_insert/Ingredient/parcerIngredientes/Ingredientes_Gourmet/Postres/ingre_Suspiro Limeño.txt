@@ -1,7 +1,0 @@
-2,tarros,leche condensada
-2,tarros,leche evaporada
-5,x,huevos
-1,cucharadita,Esencia Vainilla
-1 1/2,taza,azúcar
-125,ml,oporto
-x,x,Canela Molida

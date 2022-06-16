@@ -1,6 +1,0 @@
-½,taza,azúcar
-3,tazas,leche almendras
-6,cucharadas,maple
-½,taza,maicena
-3,cucharadas,agua
-1,cucharadita,Esencia Vainilla

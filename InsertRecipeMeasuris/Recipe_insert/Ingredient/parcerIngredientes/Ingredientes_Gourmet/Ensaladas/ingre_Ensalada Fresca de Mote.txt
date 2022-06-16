@@ -1,7 +1,0 @@
-4,tazas,mote
-100,grs,champiñones
-1,x,tomate
-2,x,cebollines
-x,x,sésamos
-2,cdas,salsa de Ajo
-200,grs,mayonesa

@@ -1,9 +1,0 @@
-1,tarro,leche evaporada
-1,tarro,leche condensada
-x,x,Esencia Vainilla
-2,x,huevos
-2,tazas,azúcar
-1,taza,oporto
-1,taza,agua
-x,x,Canela Molida
-1,tarro,papayas

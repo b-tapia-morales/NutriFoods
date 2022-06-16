@@ -1,8 +1,0 @@
-4,grandes,papas
-1,x,cebolla
-1,grande,pimento rojo
-6,huevos
-x,x,Merquén
-x,x,Sal
-x,x,Pimienta Negra
-x,x,Aceite

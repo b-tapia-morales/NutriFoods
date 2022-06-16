@@ -1,7 +1,0 @@
-500,gr,frutillas
-4,cdas,azúcar
-1,taza,vino blanco
-1,cdta,Pimienta
-4,x,huevo
-50,gr,azúcar
-2,cdas,agua

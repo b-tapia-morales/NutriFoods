@@ -1,6 +1,0 @@
-2,tazas,chocolate
-2,x,huevos
-2 ½,taza,crema
-1,pizca,sal
-x,x,Esencia Ron
-1,lámina,Gelatina

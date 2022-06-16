@@ -1,7 +1,0 @@
-800,g,salmón
-x,x,aceite Oliva
-x,x,jugo Limón a gusto
-x,x,Ciboulette
-x,x,pimienta negra
-x,x,sal
-x,x,alcaparras

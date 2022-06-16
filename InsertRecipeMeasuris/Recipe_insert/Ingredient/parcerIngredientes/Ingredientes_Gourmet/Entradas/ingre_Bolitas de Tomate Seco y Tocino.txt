@@ -1,9 +1,0 @@
-10,x,tomate seco
-227,gr,queso crema
-1 ½,tazas,queso parmesano
-1,cucharada,cebollines
-1,cucharadita,jugo limón
-¼,cucharadita,merquen Gourmet
-1 ½,cucharadita,albahaca
-¼,cucharadita,pimienta negra
-300,gr,tocino crocante

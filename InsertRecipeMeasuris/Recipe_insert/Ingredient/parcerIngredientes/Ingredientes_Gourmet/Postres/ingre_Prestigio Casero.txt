@@ -1,4 +1,0 @@
-200,gr,Coco Rallado
-1,tarro,leche,condensada
-1,cucharada,mantequilla
-350,gr,Cobertura Chocolate

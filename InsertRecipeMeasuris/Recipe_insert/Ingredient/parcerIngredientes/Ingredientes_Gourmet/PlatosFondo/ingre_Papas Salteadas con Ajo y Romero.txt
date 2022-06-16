@@ -1,8 +1,0 @@
-1,kg,papas,soufflé
-2,dientes,ajo
-2,hojas,Laurel,Gourmet
-6,cdas,aceite,oliva
-1,cebolla,en,corte,pluma
-1,cdta,Romero,Gourmet
-1,cdta,Sal
-1,cdta,pimienta negra

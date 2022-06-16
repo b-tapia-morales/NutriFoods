@@ -1,7 +1,0 @@
-4,filetes,reineta
-½,taza,pan rallado
-1/3,taza,queso parmesano
-1,diente,ajo
-½,cucharadita,Orégano
-5,x,Aceitunas
-2,cucharadas,aceite oliva

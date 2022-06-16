@@ -1,7 +1,0 @@
-250,grs,yogurt vainilla
-1,cda,Esencia Vainilla
-6,cdas,Salsa Frambuesa
-1,taza,berries
-50,grs,almendras
-1,cda,azúcar flor
-6,x,galletas champaña

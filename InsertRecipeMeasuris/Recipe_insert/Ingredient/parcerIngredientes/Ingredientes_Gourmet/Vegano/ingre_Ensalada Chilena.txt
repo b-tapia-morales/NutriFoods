@@ -1,6 +1,0 @@
-3,x,tomates
-1,x,cebolla
-2,cucharadas,cilantro
-1,cucharada,aceite oliva
-x,x,pimienta negra
-x,x,Sal
