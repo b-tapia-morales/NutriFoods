@@ -34,12 +34,6 @@ public class Connect
         string queryIngredient = "select name from nutrifoods.ingredient";
         NpgsqlCommand comand = new NpgsqlCommand(queryIngredient,instance);
         var result = comand.ExecuteReader();
-
-        while (result.Read())
-        {
-            Console.WriteLine(result["name"]);
-        }
-        /*
         var contador = 0;
         while(!fileRecipe.EndOfStream)
         {
@@ -64,10 +58,15 @@ public class Connect
             string query = "INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time) VALUES ("+"'"+name+"'"+",'"+author+"','"+url+"',"+portions+","+timePreparation+") ON CONFLICT DO NOTHING";
             NpgsqlCommand cmd = new NpgsqlCommand(query,instance);
             cmd.ExecuteNonQuery();
-
         }
-        */
         instance.Close();
+        return true;
+    }
+
+    public Boolean InsertMeasuris()
+    {
+        
+        
         return true;
     }
 }
