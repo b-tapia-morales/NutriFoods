@@ -1,5 +1,6 @@
 ﻿using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.Ingredients;
 
@@ -12,87 +13,71 @@ public class IngredientRepository : IIngredientRepository
         _context = context;
     }
 
+    private static IIncludableQueryable<Ingredient, PrimaryGroup> LoadLazily(IQueryable<Ingredient> ingredients)
+    {
+        return ingredients.Include(e => e.IngredientMeasures)
+            .Include(e => e.TertiaryGroup)
+            .ThenInclude(e => e.SecondaryGroup)
+            .ThenInclude(e => e.PrimaryGroup);
+    }
+
     public Task<Ingredient> FindByName(string name)
     {
-        return _context.Ingredients
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
+        return LoadLazily(_context.Ingredients)
             .FirstAsync(e => e.Name.ToLower().Equals(name));
     }
 
     public Task<Ingredient> FindById(int id)
     {
-        return _context.Ingredients
-            .Include(e => e.IngredientMeasures)
-            .Include(e => e.TertiaryGroup)
+        return LoadLazily(_context.Ingredients)
             .FirstAsync(e => e.Id == id);
     }
 
     public Task<List<Ingredient>> FindByPrimaryGroup(string name)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Name.ToLower().Equals(name))
-            .Include(e => e.IngredientMeasures)
-            .Include(e => e.TertiaryGroup)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindByPrimaryGroup(int id)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Id == id)
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindBySecondaryGroup(string name)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.SecondaryGroup.Name.ToLower().Equals(name))
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindBySecondaryGroup(int id)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.SecondaryGroup.Id == id)
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindByTertiaryGroup(string name)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.Name.ToLower().Equals(name))
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindByTertiaryGroup(int id)
     {
-        return _context
-            .Ingredients
+        return LoadLazily(_context.Ingredients)
             .Where(e => e.TertiaryGroup.Id == id)
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
             .ToListAsync();
     }
 
     public Task<List<Ingredient>> FindAll()
     {
-        return _context.Ingredients
-            .Include(e => e.TertiaryGroup)
-            .Include(e => e.IngredientMeasures)
+        return LoadLazily(_context.Ingredients)
             .ToListAsync();
     }
 }

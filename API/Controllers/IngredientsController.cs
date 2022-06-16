@@ -6,11 +6,11 @@ namespace API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class IngredientController
+public class IngredientsController
 {
     private readonly IIngredientRepository _repository;
 
-    public IngredientController(IIngredientRepository repository)
+    public IngredientsController(IIngredientRepository repository)
     {
         _repository = repository;
     }
