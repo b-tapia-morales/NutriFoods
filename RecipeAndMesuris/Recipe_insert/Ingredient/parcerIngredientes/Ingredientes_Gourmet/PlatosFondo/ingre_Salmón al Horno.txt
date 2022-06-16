@@ -1,0 +1,14 @@
+800,gr,salmón
+2,cucharaditas,mostaza
+2,rodajas,limon
+6,x,cebollines
+½,taza,vino blanco
+2,cucharadas,perejil
+2,cucharadas,cilantro
+2,cucharada,albahaca
+2,cucharadas,ciboulette
+2,x,limones
+1,diente,ajo
+2,cucharadita,Sal
+1,cucharadita,Pimienta Blanca
+3,cucharada,aceite oliva

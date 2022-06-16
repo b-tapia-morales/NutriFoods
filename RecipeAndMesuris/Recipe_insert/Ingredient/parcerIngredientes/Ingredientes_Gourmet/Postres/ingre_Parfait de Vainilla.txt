@@ -1,0 +1,7 @@
+4,x,yemas
+2,x,claras
+2,tazas,Crema Chantilly
+6,cdas,azúcar fina
+1,cda,Esencia Vainilla
+3/4,taza,azúcar granulada
+x,x,agua

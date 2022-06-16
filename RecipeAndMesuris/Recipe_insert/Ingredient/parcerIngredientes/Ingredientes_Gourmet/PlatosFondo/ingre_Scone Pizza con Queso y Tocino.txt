@@ -1,0 +1,14 @@
+250,gr,harina
+1,cucharadita,sal
+2,cucharaditas,Polvos Hornear
+2,cucharaditas,Orégano
+50,gr,mantequilla
+2,x,huevos
+3,cucharadas,leche
+1,cucharada,aceite oliva
+1,x,pimento verde
+4,lonjas,tocino
+2,cucharadas,kétchup
+2,cucharadas,salsa tomates
+8,x,tomates,cherry
+90,gr,queso mozzarella

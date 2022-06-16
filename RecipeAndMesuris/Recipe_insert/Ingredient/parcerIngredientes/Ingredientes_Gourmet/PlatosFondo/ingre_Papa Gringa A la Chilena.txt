@@ -1,0 +1,11 @@
+6,x,papas
+2,cucharadas,aceite oliva
+x,x,Sal
+x,x,pimienta negra
+1,taza,choclo
+1,cucharadita,mantequilla
+1,cucharada,Albahaca
+½,cucharadita,Cebolla
+¼,cucharadita,Pimienta Blanca
+½,taza,queso parmesano
+3,x,tocino

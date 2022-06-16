@@ -1,0 +1,15 @@
+1,x,palta
+1,cucharada,queso crema
+1,cucharada,mayonesa
+½,x,limón
+x,x,sal
+x,x,Pimienta Blanca
+150,gr,salmón ahumado
+1,cucharada,Alcaparras
+1,cucharada,cebollín
+1,x,limón
+2,cucharadas,aceite oliva
+½,cucharadita,pimienta negra
+2,x,masa empanadas
+1,x,yema
+1,cucharadita,Merquén

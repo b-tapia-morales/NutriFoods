@@ -1,0 +1,10 @@
+1,kg,filete,res
+5,ramitas,tomillo
+5,ramitas,perejil
+5,ramitas,cilantro
+1,atado,ciboulette
+100,gr,azúcar
+1/2,lt,aceto balsámico
+x,x,aceite oliva
+250,gr,lechugas
+x,x,sal

@@ -1,0 +1,6 @@
+400,g,posta rosada
+150,g,trigo
+3,x,cebollines
+2,cucharadas,aceite oliva
+1,cucharadita,sal
+x,x,pimienta negra

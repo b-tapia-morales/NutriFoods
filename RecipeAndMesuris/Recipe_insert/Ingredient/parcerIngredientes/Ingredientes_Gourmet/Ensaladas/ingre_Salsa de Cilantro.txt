@@ -1,0 +1,8 @@
+150,gr,yogurt natural
+2/3,taza,cilantro
+1/3,taza,ají verde
+1,cucharadita,jengibre
+x,x,jugo limón
+1,cucharada,aceite oliva
+x,x,sal
+x,x,pimienta blanca

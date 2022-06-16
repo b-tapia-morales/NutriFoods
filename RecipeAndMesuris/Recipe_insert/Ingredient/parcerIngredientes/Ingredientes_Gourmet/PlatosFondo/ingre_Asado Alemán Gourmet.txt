@@ -1,0 +1,14 @@
+7,rebanadas,pan molde
+2/3,taza,leche
+2,cdas,aceite
+1.5,x,cebollas
+2,x,zanahorias
+1.5,pimento rojos
+24,g,Caldo Carne
+1.3,kg,carne molida
+5,x,huevos
+x,x,sal
+x,x,Pimienta Negra
+3,cdas,perejil
+5,x,huevos
+2,cdas,ketchup

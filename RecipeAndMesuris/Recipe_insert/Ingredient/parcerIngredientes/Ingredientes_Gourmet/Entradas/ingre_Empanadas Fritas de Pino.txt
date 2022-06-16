@@ -1,0 +1,12 @@
+3,cucharadas,aceite
+1,x,cebolla
+x,x,sal
+x,x,pimienta Negra
+400,g,posta
+1,cucharadita,ají Color
+1/2,cucharadita,ajo
+500,g,harina
+70,g,manteca
+1/4,cucharadita,sal
+1/2,cucharadita,Polvos Hornear
+x,x,leche

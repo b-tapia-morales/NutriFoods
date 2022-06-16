@@ -1,0 +1,9 @@
+1,kilo,jibia
+1,x,cebolla
+1,tarro,leche evaporada
+550,gramos,pan
+x,x,Ají Color
+½,vaso,vino blanco
+x,x,Queso parmesano
+x,x,Pimienta Blanca
+x,x,Sal

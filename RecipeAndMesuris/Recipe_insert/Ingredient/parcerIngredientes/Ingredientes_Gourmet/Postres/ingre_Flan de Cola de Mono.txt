@@ -1,0 +1,5 @@
+1,caja,flan vainilla
+1,litro,leche
+1,cda,café
+6,cdas,Esencia Cola Mono
+x,x,Salsa Caramelo

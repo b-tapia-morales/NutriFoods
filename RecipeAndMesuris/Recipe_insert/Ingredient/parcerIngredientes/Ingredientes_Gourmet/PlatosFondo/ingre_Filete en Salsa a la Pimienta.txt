@@ -1,0 +1,7 @@
+4,medallones,filete
+4,láminas,tocino
+4,cucharadas,Mantequilla
+2,cucharadas,Mostaza Dijon
+1,taza,Vino Blanco
+2,tazas,Crema
+2,cucharadas,pimienta negra

@@ -1,0 +1,11 @@
+1,x,pechuga pollo
+1 ½,taza,quínoa
+1,taza,espinacas
+1,taza,rúcula
+½,taza,cranberries
+¼,taza,vinagre balsámico
+1,cucharada,miel
+x,x,sal
+½,cucharadita,pimienta negra
+1/3,taza,aceite oliva
+¾,taza,almendras

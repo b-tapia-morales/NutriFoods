@@ -1,6 +1,6 @@
 using Npgsql;
 
-namespace Domain.Recipe_insert;
+namespace InsertRecipeMeasuris.Recipe_insert;
 
 public class Connect
 {
@@ -31,9 +31,6 @@ public class Connect
     {
         var instance = Connecte();
         StreamReader fileRecipe = new StreamReader("Recipe_insert/Recipe/recipe.txt");
-        string queryIngredient = "select name from nutrifoods.ingredient";
-        NpgsqlCommand comand = new NpgsqlCommand(queryIngredient,instance);
-        var result = comand.ExecuteReader();
         var contador = 0;
         while(!fileRecipe.EndOfStream)
         {
@@ -55,7 +52,8 @@ public class Connect
                 timePreparation = Int32.Parse(split[3]);
             }
             Console.WriteLine(contador);
-            string query = "INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time) VALUES ("+"'"+name+"'"+",'"+author+"','"+url+"',"+portions+","+timePreparation+") ON CONFLICT DO NOTHING";
+            string query =
+                $"INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time) VALUES ('{name}','{author}','{url}',{portions},{timePreparation}) ON CONFLICT DO NOTHING";
             NpgsqlCommand cmd = new NpgsqlCommand(query,instance);
             cmd.ExecuteNonQuery();
         }
@@ -65,8 +63,26 @@ public class Connect
 
     public Boolean InsertMeasuris()
     {
-        
-        
+        var instance = Connecte();
+        var directory = Path.GetFullPath("Recipe_insert");
+        Console.WriteLine(directory);
+        /*
+        StreamReader fileMeasuris = new StreamReader("Recipe_insert/measures/measures_id.csv");
+        Console.WriteLine(Environment.CurrentDirectory);
+        while (!fileMeasuris.EndOfStream)
+        {
+            string line = fileMeasuris.ReadLine() ?? throw new InvalidOperationException();
+            string[] name = line.Split(";");
+            string queryIngredient =
+                $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.ingredient.name ='{name[1]}';";
+            NpgsqlCommand comand = new NpgsqlCommand(queryIngredient,instance);
+            var result = comand.ExecuteScalar();
+            //Console.WriteLine(result);
+            StreamReader fileMeasures = new StreamReader(Path.GetFullPath(name[1]+".csv"));
+
+        }
+        instance.Close();
+        */
         return true;
     }
 }

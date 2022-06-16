@@ -1,0 +1,13 @@
+500,gr,carne molida
+½,x,cebolla
+1,diente,ajo
+½,atado,perejil
+1,cda,pan rallado
+1,x,huevos
+50,ml,vino blanco
+200,ml,crema leche
+1/4, lt,caldo pollo
+1,cda,mostaza dijon
+1,cdta,maicena
+x,x,pimienta negra
+x,x,sal

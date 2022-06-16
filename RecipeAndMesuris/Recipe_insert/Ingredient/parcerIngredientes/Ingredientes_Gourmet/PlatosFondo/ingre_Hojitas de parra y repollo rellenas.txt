@@ -1,0 +1,7 @@
+½,kilo,posta negra
+¼,kilo,arroz
+1,cucharada,aceite
+300,gr,parra
+2,cucharadas,mantequilla
+1,cabeza,ajo
+2,litros,agua

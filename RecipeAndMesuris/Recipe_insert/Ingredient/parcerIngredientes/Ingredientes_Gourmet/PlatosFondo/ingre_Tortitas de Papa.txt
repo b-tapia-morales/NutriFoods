@@ -1,0 +1,9 @@
+500,g,papa blanca
+1,x,huevo
+½,taza,queso mozzarella
+¼,taza,pan rallado
+1,cdta,Sal
+½,taza,leche
+¼,cdta,Ajo Polvo
+¼,cdta,Cebolla Polvo
+1,cdta,Orégano

@@ -1,0 +1,10 @@
+2,kilos,plateada
+3,cucharadas,aceite
+2,x,cebollas
+2,x,zanahorias
+2,x,puerros
+2,dientes,ajo
+x,x,Sal
+x,x,Pimienta Negra
+¼,taza,vinagre vino
+4,cucharadas,aceite

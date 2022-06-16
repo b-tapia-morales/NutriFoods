@@ -1,0 +1,17 @@
+1,kg,pechuga pollo
+3,x,cebolla
+2,diente,ajo
+1,cda,jengibre
+1,cda,curry
+4,x,tomate
+1,x,cilantro
+x,x,pimienta negra
+x,x,sal
+500,g,harina
+1,cdta,levadura
+1/2,cdta,bicarbonato Gourmet
+1,cdta,sal
+1,x,huevo
+1,cda,mantequilla
+125,gr,yogurt natural
+1,taza,leche

@@ -1,0 +1,12 @@
+800,gr,pechuga pollo
+1,cucharada,mantequilla
+2,cucharada,aceite
+3,x,cebolla
+1,cucharada,azúcar rubia
+1,hoja,Laurel
+1,cucharadita,Tomillo
+1,taza,vino blanco
+2,cucharada,mostaza Dijon
+1,sobre,Caldo,en,Polvo,Pollo,Gourmet
+2,tazas,agua
+1,taza,crema

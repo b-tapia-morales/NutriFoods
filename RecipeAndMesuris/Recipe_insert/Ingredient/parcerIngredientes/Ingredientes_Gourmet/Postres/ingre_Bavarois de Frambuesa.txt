@@ -1,0 +1,8 @@
+400,gr,leche evaporada
+100,gr,jalea frambuesas
+2,tazas,agua
+2,cdas,maicena
+2,x,yemas
+½,taza,azúcar
+2 ½,taza,leche
+1,cdta,Esencia Vainilla

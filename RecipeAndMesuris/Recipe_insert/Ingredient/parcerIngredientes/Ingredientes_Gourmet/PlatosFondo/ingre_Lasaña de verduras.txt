@@ -1,0 +1,21 @@
+2,tazas,harina integral
+2,x,huevos
+½,cucharadita,Sal
+6,cucharadas,agua
+1,x,cebolla
+1,cucharada,aceite
+1,cucharadita,Orégano
+1,cucharadita,Ají Color
+600,gr,champiñones
+500,gr,espinaca
+300,gr,ricota
+4,x,zanahoria
+900,gr,tomates
+1,hoja,Laurel
+1,cucharadita,Sal
+1,cucharadita,Albahaca
+1,cucharadita,Tomillo
+x,x,Sal
+x,x,pimienta negra
+150,gr,queso mozzarella
+2,cucharadas,queso parmesano

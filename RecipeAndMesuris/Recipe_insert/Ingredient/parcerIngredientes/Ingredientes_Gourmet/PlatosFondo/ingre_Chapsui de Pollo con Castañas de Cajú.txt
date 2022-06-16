@@ -1,0 +1,13 @@
+1,kg,pechuga pollo
+4,cdas,aceite
+1,cdta,Curry
+1,cda,ajo
+1,cda,jengibre
+2,x,cebollas
+200,gr,champiñones parís
+200,gr,champiñones ostra
+½,x,repollo chino
+150,gr,dientes dragón
+2,x,cebollines
+100,ml,Salsa Soya
+150,gr,castañas cajú

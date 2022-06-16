@@ -1,0 +1,17 @@
+2,x,lata atún
+1,x,limon
+1/2,x,jugo limón
+1,cucharada,mostaza
+200,g,queso crema
+¼,taza,crema
+¼,taza,mayonesa
+2,cucharadas,queso parmesano
+1,cucharada,aceite oliva
+1 1/2,cucharadita,Estragón
+2,x,Gelatina Hojas
+2,x,tomates
+1,cucharadita,Perejil
+2,cucharadas,albahaca
+1,cucharada,aceite oliva
+x,x,Pimienta Blanca
+x,x,sal

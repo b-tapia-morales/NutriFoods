@@ -1,0 +1,6 @@
+1/4,kilo,frutillas
+6,cdas,azúcar
+x,x,Salsa Frutilla
+200,cc,crema
+1,x,huevo
+1,hoja,Gelatina

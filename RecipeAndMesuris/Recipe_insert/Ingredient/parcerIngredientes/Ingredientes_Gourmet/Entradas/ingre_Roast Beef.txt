@@ -1,0 +1,6 @@
+1,kg,lomo liso
+4,cdas,mostaza dijon
+3,cdas,pimienta negra
+2,cdas,aceite oliva
+200,ml,agua
+x,x,sal

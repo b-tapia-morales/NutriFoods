@@ -1,0 +1,11 @@
+500,ml,agua
+4,cucharadas,café granulado
+5,cucharadas,amaretto
+1,cucharada,azúcar
+4,x,yemas
+250,g,azúcar flor
+1,x,queso crema
+100,g,crema leche
+500,ml,crema
+500,g,galletas champaña
+x,x,Chocolate Polvo

@@ -307,3 +307,7 @@ VALUES
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
+
+
+
+SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.ingredient.name = 'Sal';

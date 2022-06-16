@@ -1,0 +1,7 @@
+1,5,kilos,pechugas,pavo
+1,mediana,cebolla
+1,diente,ajo
+1/2,pimento rojo
+2,cucharaditas,Orégano
+1/2,taza,aceite
+3,cucharadas,Salsa Soya

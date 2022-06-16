@@ -1,0 +1,10 @@
+2,cdas,aceite oliva
+1,x,cebolla roja
+1,x,pimento rojo
+½,x,pimento amarillo
+1,taza,agua
+8,x,huevos
+100,g,queso cabra
+½,cdta,Paprika
+¼,taza,perejil
+¼,taza,ciboulette

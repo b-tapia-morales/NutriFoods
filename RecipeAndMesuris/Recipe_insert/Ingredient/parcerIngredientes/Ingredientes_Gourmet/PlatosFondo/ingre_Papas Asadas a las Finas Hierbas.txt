@@ -1,0 +1,7 @@
+600,gr,papas
+1/3,taza,aceite
+1/2,cebolla,chalota
+1,cucharada,hierbas
+½,cucharadita,Ají Color
+x,x,Sal
+x,x,pimienta negra

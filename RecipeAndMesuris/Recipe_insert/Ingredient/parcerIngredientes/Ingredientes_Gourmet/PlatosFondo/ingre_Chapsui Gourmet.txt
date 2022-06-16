@@ -1,0 +1,11 @@
+4,cdas,aceite
+1,taza,porotos verdes
+1,taza,champiñones
+½,taza,pimento rojo
+½,taza,pimento verde
+1,taza,zanahoria
+1,taza,brócoli
+1,x,cebollín
+125,g,dientes dragón
+½,taza,agua
+x,x,Almendras

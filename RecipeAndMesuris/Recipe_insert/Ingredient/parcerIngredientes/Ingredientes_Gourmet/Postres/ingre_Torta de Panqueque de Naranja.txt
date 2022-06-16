@@ -1,0 +1,12 @@
+2,tazas,harina
+2/3,tazas,almidón maíz
+3/4,cdta,Polvos Hornear
+8,x,huevos
+2,tazas,azúcar
+150,gr,mantequilla
+300,gr,manjar
+3,x,claras
+2 1/2,tazas,azúcar flor
+1/2,taza,jugo naranjas
+3,x,Ralladura naranjas
+3,bolsas,Fondant

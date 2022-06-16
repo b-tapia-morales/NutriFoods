@@ -1,0 +1,8 @@
+2,x,huevos
+100,ml,agua
+75,ml,aceite
+150,gr,Chocolate Semiamargo
+150,gr,crema leche
+1,cda,mantequilla
+1,cdta,Ron
+385,gr,queso crema

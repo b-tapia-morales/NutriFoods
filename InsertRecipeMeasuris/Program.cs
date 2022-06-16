@@ -1,6 +1,6 @@
 ﻿
 
-using Domain.Recipe_insert;
+using InsertRecipeMeasuris.Recipe_insert;
 
-Measures m = new Measures();
-m.GetMeasures();
+Connect c = new Connect();
+c.InsertMeasuris();

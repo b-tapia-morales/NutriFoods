@@ -1,0 +1,13 @@
+4,cdas,aceite oliva
+1,x,cebolla
+2,dientes,ajo
+1,cdta,Azafrán
+2,x,tomates
+3,x,papas
+1,cdta,Tomillo
+1,litro,agua
+3,hojas,Laurel
+750,g,congrio
+250,g,camarones
+x,x,pimienta negra
+x,x,sal

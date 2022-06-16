@@ -1,0 +1,14 @@
+2,tazas,carne vegetal
+4,taza,agua
+1,sobre,Caldo Verduras
+1,cucharada,aceite oliva
+1,x,cebolla
+½,taza,pimento rojo
+½,cucharadita,Ají color
+¼,cucharadita,Comino
+½,cucharadita,Ajo
+1,cucharada,perejil
+1,cucharadita,Salsa Inglesa
+1,x,huevo
+1/3,taza,harina
+x,x,Aceite

@@ -1,0 +1,9 @@
+500,gr,camarones
+4,pequeño,cebollines
+1,cucharada,mantequilla
+½,cucharadita,Ají Color
+1,cucharadita,Sal
+½,cucharadita,Pimienta Blanca
+1,diente,ajo
+2,cucharadas,tomate
+3,tazas,crema

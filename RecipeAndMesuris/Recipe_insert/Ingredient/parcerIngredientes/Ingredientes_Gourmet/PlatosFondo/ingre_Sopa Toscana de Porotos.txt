@@ -1,0 +1,14 @@
+1,cucharada,aceite oliva
+1,chica,cebolla,chica
+1/3,taza,zanahoria
+2/3,taza,tomate
+3,tazas,agua
+1 ½,sobres,Caldo Verduras
+1,taza,porotos
+1,cucharadita,Pimentón Ahumado
+1,cucharadita,Albahaca
+½,cucharadita,Ajo Polvo
+½,cucharadita,Pimienta Cayena
+100,gr,espinacas
+2,cucharadas,queso parmesano
+x,x,sal

@@ -1,0 +1,24 @@
+1,x,cebolla
+1,cucharada,aceite oliva
+2,x,tomates
+½,cucharadita,Comino
+½,cucharadita,Ajo
+½,cucharadita,Merquén
+1,cucharadita,Sal
+½,cucharadita,Pimienta negra
+½,cucharadita,Pimentón Ahumado
+2,tazas,agua
+1/2,taza,salsa tomates)
+2,cucharaditas,maicena
+2,taza,pollo
+1,taza,porotos negros
+1,taza,choclo
+3,cucharadas,crema ácida
+2,cucharadas,queso crema
+2,x,cebollines
+1,taza,queso cheddar
+x,x,Sal
+x,x,pimienta negra
+x,x,Orégano
+12,x,tortillas
+1,cucharada,cilantro

@@ -1,0 +1,9 @@
+4,Filetes,pechuga pollo
+400,gr,champiñones
+2,cucharadas,aceite oliva
+1,x,cebolla
+2/3,tazas,vino blanco
+2/3,taza,crema
+2,cucharaditas,Tomillo
+x,x,Pimienta Negra
+x,x,Sal

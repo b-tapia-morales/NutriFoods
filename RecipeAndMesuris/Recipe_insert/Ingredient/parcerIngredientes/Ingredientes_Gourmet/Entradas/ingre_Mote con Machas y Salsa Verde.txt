@@ -1,0 +1,13 @@
+1,taza,mote
+1,litro,agua
+40,x,machas
+4,x,cebollines
+½,taza,albahaca
+½,taza,cilantro
+¼,taza,perejil
+x,x,limón
+¼,diente,ajo
+½,taza,aceite oliva
+x,x,sal
+x,x,pimienta blanca
+200,gr,tomates cherry

@@ -1,0 +1,6 @@
+200,gr,Chocolate Semiamargo
+115,gr,mantequilla
+3,cucharadas,polvo Chocolate Amargo
+3,x,huevos
+1 ¼,tazas,azúcar
+1,taza,harina

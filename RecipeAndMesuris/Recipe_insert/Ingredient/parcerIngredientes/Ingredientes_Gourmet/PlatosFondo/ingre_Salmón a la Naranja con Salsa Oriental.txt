@@ -1,0 +1,13 @@
+4,filetes,salmón
+2,cucharadas,mantequilla
+1,x,naranja
+1,carcara,limón
+¼,taza,ciboulette
+¼,taza,cilantro
+1,cucharada,mantequilla
+1,diente,ajo
+1,cucharadita,Jengibre
+¼,taza,jugo naranjas
+¼,taza,jugo limón
+2,cucharadas,miel
+3,cucharadas,Salsa Soya

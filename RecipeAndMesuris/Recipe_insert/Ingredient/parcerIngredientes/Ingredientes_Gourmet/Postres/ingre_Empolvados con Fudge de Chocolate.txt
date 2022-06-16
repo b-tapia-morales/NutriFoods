@@ -1,0 +1,7 @@
+200,ml,agua
+4,x,huevos
+x,x,azúcar flor
+2,cucharadas,mantequilla
+½,taza,polvo Chocolate Amargo
+1,tarro,leche condensada
+1,tarro,leche evaporada

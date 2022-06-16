@@ -1,0 +1,10 @@
+8,x,papas
+2,tazas,crema
+½,taza,leche
+1 ½,cdta,Sal
+¼,cdta,Paprika
+½,cdta,Ajo Polvo
+½,cdta,Cebolla Polvo
+¼,cdta,Pimienta Negra
+1,taza,queso parmesano
+x,x,Mantequilla

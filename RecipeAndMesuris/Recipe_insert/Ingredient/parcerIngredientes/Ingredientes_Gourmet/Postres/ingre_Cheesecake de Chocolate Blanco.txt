@@ -1,0 +1,12 @@
+130,grs,galletas
+3,cucharadas,mantequilla
+1,cucharada,polvo Chocolate Amargo
+200,grs,queso crema
+4,cucharadas,azúcar
+1,cucharadita,Esencia Vainilla
+1,x,huevo
+130,grs,Chocolate Blanco
+1/2,taza,crema
+4,cucharadas,Coco rallado
+250,grs,maracuyá
+1,taza,azúcar

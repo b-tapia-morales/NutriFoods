@@ -1,0 +1,12 @@
+500,gr,garbanzos
+½,cucharadita,Bicarbonato
+2,x,cebollines
+2,cucharadas,cilantro
+2,cucharadas,perejil
+1,cucharadita,Sal
+1,cucharadita,Comino
+1,cucharadita,Ají Color
+1,cucharadita,Ajo
+½,cucharadita,Pimienta Blanca
+¼,taza,harina
+x,x,Aceite

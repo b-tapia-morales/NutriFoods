@@ -1,0 +1,17 @@
+1,cucharada,aceite
+2,x,cebolla
+500,gr,posta negra
+1,cucharadita,Comino
+1,cucharadita,Ají Color
+1,cucharada,Orégano
+½,taza,pasas
+6,x,trutro pollo
+3,x,huevos
+½,taza,aceitunas
+12,x,choclos
+1,cucharadita,Albahaca
+1,cucharada,mantequilla
+¾,taza,leche
+1,cucharadita,sal
+5,hojas,albahaca
+2,cucharadas,azúcar

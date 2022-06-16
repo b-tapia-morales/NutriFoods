@@ -1,0 +1,12 @@
+1,cucharada,mantequilla
+2,cucharadas,aceite
+5,x,cebollas
+1,cucharada,harina
+1,taza,crema
+1,cucharada,azúcar
+x,x,sal
+x,x,pimienta
+2,cucharaditas,Nuez Moscada
+8,x,huevos
+2,x,claras
+x,x,Perejil

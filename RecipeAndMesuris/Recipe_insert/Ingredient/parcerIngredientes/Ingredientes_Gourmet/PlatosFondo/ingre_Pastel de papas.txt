@@ -1,0 +1,15 @@
+1.5,kilos,papas
+½,taza,leche
+½,taza,crema
+2,cucharadas,mantequilla
+1,cucharadita,Sal
+1,cucharada,aceite
+500,gr,carne molida
+1,diente,ajo
+1,x,cebolla
+1,cucharadita,Orégano
+½,cucharadita,Comino
+½,cucharadita,Ají color
+2,cucharadas,pasas
+½,taza,aceitunas
+3,x,huevo

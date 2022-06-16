@@ -1,0 +1,6 @@
+200,gr,salmón
+2,hojas,Colapez
+2,cucharadas,jugo limón
+2,cucharadas,yoghurt natural
+140,gr,queso crema
+2,x,palta
