@@ -17,7 +17,8 @@ public class Measures
     }
     public void GetMeasures()
     {
-        StreamReader file = new StreamReader("Recipe_insert/measures/measures_id.csv");
+        StreamReader file = 
+            new StreamReader("C:/Users/Eduardo/RiderProjects/NutriFoods-Latest/RecipeAndMesuris/Recipe_insert/Ingredient/measures/measures_id.csv");
         while (!file.EndOfStream)
         {
             string line = file.ReadLine() ?? throw new InvalidOperationException();
@@ -34,11 +35,11 @@ public class Measures
     
     private void GetMeasuresiD(string nameIngredient, string id)
     {
-        Console.WriteLine(nameIngredient+ " "+id);
-        _WebDriver.Navigate().GoToUrl("https://fdc.nal.usda.gov/fdc-app.html#/food-details/"+id+"/measures");
+        Console.WriteLine($"{nameIngredient} {id}");
+        _WebDriver.Navigate().GoToUrl($"https://fdc.nal.usda.gov/fdc-app.html#/food-details/{id}/measures");
         Thread.Sleep(3000);
         StreamWriter fileMeasuires =
-            new StreamWriter("Recipe_insert/measures/ingredient_measures/" + nameIngredient + ".csv");
+            new StreamWriter($"C:/Users/Eduardo/RiderProjects/NutriFoods-Latest/RecipeAndMesuris/Recipe_insert/Ingredient/measures/ingredient_measures/{nameIngredient}.csv");
         var data = _WebDriver.FindElements(By.ClassName("tab-content"));
         foreach (var i in data)
         {
