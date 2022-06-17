@@ -31,7 +31,6 @@ public class Connect
     {
         var instance = Connecte();
         StreamReader fileRecipe = new StreamReader("Recipe_insert/Recipe/recipe.txt");
-        var contador = 0;
         while(!fileRecipe.EndOfStream)
         {
             string line = fileRecipe.ReadLine()!;
@@ -41,7 +40,6 @@ public class Connect
             var url = split[2];
             var portions = 0;
             var timePreparation = 0;
-            contador++;
             if (!split[4].Equals(""))
             {
                 portions = Int32.Parse(split[4]);
