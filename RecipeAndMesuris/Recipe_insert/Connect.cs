@@ -51,20 +51,19 @@ public class Connect
             {
                 timePreparation = Int32.Parse(split[3]);
             }
-            Console.WriteLine(contador);
             string query =
                 $"INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time) VALUES ('{name}','{author}','{url}',{portions},{timePreparation}) ON CONFLICT DO NOTHING";
             NpgsqlCommand cmd = new NpgsqlCommand(query,instance);
             cmd.ExecuteNonQuery();
         }
         instance.Close();
+        Console.WriteLine("Insert Recipe Correct!");
     }
 
     public void InsertMeasuris()
     {
         var instance = Connecte();
-        StreamReader fileIngredient = new StreamReader("C:/Users/Eduardo/RiderProjects/NutriFoods-Latest/RecipeAndMesuris/Recipe_insert/Ingredient/measures/measures_id.csv");
-        Console.WriteLine(Environment.CurrentDirectory);
+        StreamReader fileIngredient = new StreamReader("Recipe_insert/Ingredient/measures/measures_id.csv");
         while (!fileIngredient.EndOfStream)
         {
             string line = fileIngredient.ReadLine() ?? throw new InvalidOperationException();
@@ -77,7 +76,7 @@ public class Connect
             if (!nameIngredient[2].Equals(""))
             {
                 StreamReader fileMeasures = new StreamReader(
-                    $"C:/Users/Eduardo/RiderProjects/NutriFoods-Latest/RecipeAndMesuris/Recipe_insert/Ingredient/measures/ingredient_measures/{nameIngredient[1]}.csv");
+                    $"Recipe_insert/Ingredient/measures/ingredient_measures/{nameIngredient[1]}.csv");
                 while (!fileMeasures.EndOfStream)
                 {
                     string lineMeasury = fileMeasures.ReadLine() ?? throw new InvalidOperationException();
@@ -90,9 +89,9 @@ public class Connect
                 }
                 fileMeasures.Close();
             }
-
         }
         fileIngredient.Close();
         instance.Close();
+        Console.WriteLine("Insert Measures Ingredient Correct!");
     }
 }
