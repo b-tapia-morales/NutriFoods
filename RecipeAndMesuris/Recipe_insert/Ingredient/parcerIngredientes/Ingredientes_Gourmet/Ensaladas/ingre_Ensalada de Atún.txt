@@ -8,6 +8,6 @@
 1,cda,jugo de limón
 1,x,yogurt griego
 2,cdas,aceite oliva
-½,cdta de mostaza
+½,cdta,mostaza
 x,x,sal
 x,x,pimienta

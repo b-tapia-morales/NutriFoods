@@ -842,6 +842,1818 @@
       <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo spaghetti.csv">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada con salmón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada Chilena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada César.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Coleslaw.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Cous-Cous al Azafrán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Espinacas y Frutillas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de lentejas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Pasta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Porotos Negros.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Quinoa y Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada Fresca de Mote.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada Griega.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada Rusa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada Veraniega.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Molde de Arroz.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ostiones Acaramelados al Anís con Ensalada de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Salsa de Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Torta de Panqueques Salada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Wrap de Ensalada Griega.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_Entradas.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_Entradas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_PlatosFondo.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_PlatosFondo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_Postres.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_Postres.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_Vegano.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_Vegano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_Ensaladas.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_Ensaladas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\gourmet\recetas_Vegetariano.txt" />
+      <Content Include="Recipe_insert\Recipe\gourmet\recetas_Vegetariano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\Nestle\recetas_postres.txt" />
+      <Content Include="Recipe_insert\Recipe\Nestle\recetas_postres.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\Nestle\recetas_desayuno.txt" />
+      <Content Include="Recipe_insert\Recipe\Nestle\recetas_desayuno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\Nestle\recetas_ensaladas.txt" />
+      <Content Include="Recipe_insert\Recipe\Nestle\recetas_ensaladas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\Nestle\recetas_entradas.txt" />
+      <Content Include="Recipe_insert\Recipe\Nestle\recetas_entradas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Recipe\Nestle\recetas_plato_principal.txt" />
+      <Content Include="Recipe_insert\Recipe\Nestle\recetas_plato_principal.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Machas en Salsa Verde.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Machas en Salsa Verde.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas Salteñas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas Salteñas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mote con Machas y Salsa Verde.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mote con Machas y Salsa Verde.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Roast Beef.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Roast Beef.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mini Strudels de Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mini Strudels de Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio de Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio de Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mousse de Atún al Eneldo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mousse de Atún al Eneldo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Curry de Pollo con Pan Indio.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Curry de Pollo con Pan Indio.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Arrollados de Primavera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Arrollados de Primavera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Italiano y Albahaca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Italiano y Albahaca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Budín de Zapallo Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Budín de Zapallo Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Champiñones Rellenos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Champiñones Rellenos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Salmón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Salmón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones Acaramelados al Anís con Ensalada de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones Acaramelados al Anís con Ensalada de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Champiñones Casera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Champiñones Casera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Camote.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Camote.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Zapallo Italiano al Horno en Rodajas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Zapallo Italiano al Horno en Rodajas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Hojitas de parra y repollo rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Hojitas de parra y repollo rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones a la Parmesana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones a la Parmesana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Couscous con Zanahorias y Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Couscous con Zanahorias y Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Causa Limeña.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Causa Limeña.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Lentejas al Curry.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Lentejas al Curry.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Canapés Fríos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Canapés Fríos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de Tomates.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de Tomates.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Kubbhe.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Kubbhe.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Steaks de Coliflor con BBQ Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Steaks de Coliflor con BBQ Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Fondue de Queso en Pan.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Fondue de Queso en Pan.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Budín de Zapallito Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Budín de Zapallito Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Italiano al Cardamomo con....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Zapallo Italiano al Cardamomo con....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mousse de Atún con ensalada de Tomates.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mousse de Atún con ensalada de Tomates.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Quiche de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Quiche de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Pulpo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Pulpo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Espárragos casera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Espárragos casera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Palta Reina.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Palta Reina.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Huevos rellenos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Huevos rellenos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Bisque de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Bisque de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Tomates.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Tomates.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones en Salsa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones en Salsa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Reineta y Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Reineta y Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones con Salsa de Vainilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ostiones con Salsa de Vainilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Machas a la Parmesana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Machas a la Parmesana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de brócoli.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de brócoli.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Napoleón de Salmón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Napoleón de Salmón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Arvejas con Tocino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Arvejas con Tocino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de Espinacas y Ricotta con Tomates.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de Espinacas y Ricotta con Tomates.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Salmón con Palta en Vasitos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Salmón con Palta en Vasitos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones en Salsa de Anís.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones en Salsa de Anís.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Choclos a la Parrilla con Soya y Ají.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Choclos a la Parrilla con Soya y Ají.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Pollo al Cardamomo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Wrap de Pollo al Cardamomo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Pulpo al Olivo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Pulpo al Olivo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de espinacas casera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de espinacas casera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mini Strudels de Champiñón y Espinaca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Mini Strudels de Champiñón y Espinaca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Choritos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Crema de Choritos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de Cebolla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de Cebolla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Pino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Pino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones al Pil Pil.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones al Pil Pil.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Centolla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Centolla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Machas a la Parmesana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas de Machas a la Parmesana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas Fritas de Pino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Empanadas Fritas de Pino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Pastel de Pescado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Pastel de Pescado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Reineta.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Ceviche de Reineta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Quiche de Cebolla y Ricotta.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Quiche de Cebolla y Ricotta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Molde de Salmón Ahumado Relleno de Mousse de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Molde de Salmón Ahumado Relleno de Mousse de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Bolitas de Tomate Seco y Tocino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Bolitas de Tomate Seco y Tocino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Jamón de Pavo Acaramelado con Clavos de Olor.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Jamón de Pavo Acaramelado con Clavos de Olor.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Consomé de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Consomé de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de tomates y zanahorias al azafrán.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Sopa de tomates y zanahorias al azafrán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones al Ajillo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Camarones al Ajillo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Fritatta de Cebolla, Pimentones y Queso de Cabra.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Fritatta de Cebolla, Pimentones y Queso de Cabra.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio de salmón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Carpaccio de salmón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tortilla Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tortilla Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tortilla de Papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tortilla de Papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tártaro de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tártaro de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Torta de Panqueques Salada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Torta de Panqueques Salada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tiradito con Leche de Tigre.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tiradito con Leche de Tigre.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Terrina de Verduras Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Terrina de Verduras Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tataki de Res en Costra de Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tataki de Res en Costra de Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tartaletas de Albahaca y Queso Parmesano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tartaletas de Albahaca y Queso Parmesano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de zapallo y cebolla caramelizada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Entradas\ingre_Tarta de zapallo y cebolla caramelizada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpa de Cerdo al Horno con Cerveza y Clavo de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpa de Cerdo al Horno con Cerveza y Clavo de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Zapallo Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Zapallo Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Burritos de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Burritos de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Escabechado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Escabechado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Mostaza Dijon.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Mostaza Dijon.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paella de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paella de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chuletas de Cerdo Ahumadas con Puré al Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chuletas de Cerdo Ahumadas con Puré al Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo vetado al horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo vetado al horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado Alemán Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado Alemán Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ajiaco.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ajiaco.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Grillado con Papas Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Grillado con Papas Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Receta Pescado Frito.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Receta Pescado Frito.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Laqueado con Arroz Frito.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Laqueado con Arroz Frito.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Plancha con Espinacas a la Crema.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Plancha con Espinacas a la Crema.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Picante al Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Picante al Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado con Salsa de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado con Salsa de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Osobuco.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Osobuco.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de Berenjenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de Berenjenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz con Crema de Choclo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz con Crema de Choclo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Brochetas de Pollo al Curry con Coco.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Brochetas de Pollo al Curry con Coco.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pechuga de Pavo Rellena de Arándanos y Almendras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pechuga de Pavo Rellena de Arándanos y Almendras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Choritos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Choritos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Feijoada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Feijoada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña Boloñesa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña Boloñesa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Relleno con Espinacas y Alcachofas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Relleno con Espinacas y Alcachofas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con Mostaza a la Antigua y Arroz Rojo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con Mostaza a la Antigua y Arroz Rojo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Crispy con Papas Barbecue.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Crispy con Papas Barbecue.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Teriyaki.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Teriyaki.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Jibia.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Jibia.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Jaiba.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Jaiba.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa a las 3 Pimientas con Gratín de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa a las 3 Pimientas con Gratín de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Poke.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Poke.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Vacuno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Vacuno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Primavera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Primavera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Gratinadas Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Gratinadas Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Camarones con Arroz Basmati.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Camarones con Arroz Basmati.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Caldillo de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Caldillo de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Charquicán.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Charquicán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpo al Olivo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpo al Olivo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado Ahumado con Papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado Ahumado con Papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta Grillada con Salsa Verde y Puré al....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta Grillada con Salsa Verde y Puré al....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ciabatta de Jamón Serrano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ciabatta de Jamón Serrano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo con Castañas de Cajú.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo con Castañas de Cajú.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado al Estragón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado al Estragón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Congrio en Papillote.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Congrio en Papillote.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Anticuchos Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Anticuchos Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo Relleno con Papas al Tomillo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo Relleno con Papas al Tomillo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Caldillo de Congrio al Azafrán.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Caldillo de Congrio al Azafrán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Malaya Rellena.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Malaya Rellena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas Caseras de Carne Molida.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas Caseras de Carne Molida.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo o Pescado Apanado Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo o Pescado Apanado Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pad Thai de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pad Thai de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de queso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de queso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chilaquiles.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chilaquiles.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Oriental con Arroz Basmati.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Oriental con Arroz Basmati.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Grillado con Verduras Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Grillado con Verduras Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chacarero.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chacarero.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Locos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Locos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ají de Gallina.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ají de Gallina.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Crispy Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Crispy Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Choclo Vegetariano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Choclo Vegetariano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fetuccini con Salsa de Azafrán y Ostiones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fetuccini con Salsa de Azafrán y Ostiones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crepes Rellenos con Pollo y Choclo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crepes Rellenos con Pollo y Choclo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Tandoori.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Tandoori.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne al Jugo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne al Jugo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulled Pork.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulled Pork.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Salteado a la Salvia con Puré de Zanahoria.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Salteado a la Salvia con Puré de Zanahoria.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Romero.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Romero.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña en Masa Filo de Pollo y Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña en Masa Filo de Pollo y Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Arvejado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Arvejado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas al Curry.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas al Curry.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Salteadas con Ajo y Romero.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Salteadas con Ajo y Romero.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Macarrones con Queso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Macarrones con Queso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Humitas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Humitas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Falafel.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Falafel.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos con Riendas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos con Riendas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Camarones al Pil Pil.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Camarones al Pil Pil.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Sésamo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Sésamo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado al Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Asado al Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Champiñón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Champiñón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Arvejas con Tocino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Arvejas con Tocino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Couscous con Zanahorias y Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Couscous con Zanahorias y Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a las Finas Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a las Finas Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo con Arroz Frito.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapsui de Pollo con Arroz Frito.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Goulash.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Goulash.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Croquetas de Atún y Arroz.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Croquetas de Atún y Arroz.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crispy Rolls.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crispy Rolls.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Polenta Cremosa a la Vainilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Polenta Cremosa a la Vainilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos con mazamorra.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos con mazamorra.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Canelones de Zapallo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Canelones de Zapallo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Puré de Zapallo Camote al Cardamomo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Puré de Zapallo Camote al Cardamomo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Ostiones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chupe de Ostiones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Buddha Bowl de Garbanzos Crispy.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Buddha Bowl de Garbanzos Crispy.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos Granados.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Porotos Granados.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Estragón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Estragón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete con Costra de Queso Azul y Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete con Costra de Queso Azul y Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne con Salsa de Mostaza.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne con Salsa de Mostaza.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Cordero con Arroz Basmati.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Cordero con Arroz Basmati.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Cerveza.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Cerveza.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chili con Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chili con Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas de Carne de Soya.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas de Carne de Soya.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto con Camarones, Espárragos, Chalotas y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto con Camarones, Espárragos, Chalotas y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Aromatizado con Estrella de Anís.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Aromatizado con Estrella de Anís.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar Ahumado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar Ahumado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado de Tira a la Cerveza con Puré Rústico.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado de Tira a la Cerveza con Puré Rústico.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa de Champiñones y Papas al Romero.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa de Champiñones y Papas al Romero.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Entero al Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Entero al Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar de Cerdo Picante.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar de Cerdo Picante.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de Pino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de Pino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa a la Pimienta.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete en Salsa a la Pimienta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta con Zapallitos Italianos, Albahaca y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta con Zapallitos Italianos, Albahaca y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques de Acelga.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques de Acelga.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas de Carne con Salsa de Mostaza.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas de Carne con Salsa de Mostaza.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillas de Cerdo al Anís.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillas de Cerdo al Anís.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Palanca a la Parrilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Palanca a la Parrilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Arabe.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Arabe.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lasaña de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas de carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas de carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con Salsa de Clavo de Olor.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con Salsa de Clavo de Olor.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Polenta Rellena.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Polenta Rellena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paella Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paella Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas Apanadas Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas Apanadas Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carbonada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carbonada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de espinacas casera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de espinacas casera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curanto en Olla o Pulmay.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curanto en Olla o Pulmay.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Garbanzos con Quínoa y Zanahorias Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Garbanzos con Quínoa y Zanahorias Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Salmón, Camarones y Papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Salmón, Camarones y Papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado al Horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado al Horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastelera de Choclo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastelera de Choclo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Relleno de Queso Mozzarella y Jamón....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Relleno de Queso Mozzarella y Jamón....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con salsa de Champiñones y Chalotas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo con salsa de Champiñones y Chalotas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Corvina con Costra de Hierbas y Mouselina de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Corvina con Costra de Hierbas y Mouselina de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz con Salsa de Pollo al Curry.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz con Salsa de Pollo al Curry.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta con Salsa de Alcaparras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta con Salsa de Alcaparras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas de Carne Rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopas de Carne Rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza al Estilo Chicago con Espinacas y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza al Estilo Chicago con Espinacas y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Pollo con Pan Indio.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Curry de Pollo con Pan Indio.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Parrilla con Ensalada a la Chilena.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Parrilla con Ensalada a la Chilena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas en Salsa de Tomate.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Albóndigas en Salsa de Tomate.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Carne, Vino Tinto y Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Carne, Vino Tinto y Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Niños Envueltos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Niños Envueltos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Calzone Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Calzone Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Bisque de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Bisque de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de garbanzos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de garbanzos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche Vegetariano con Masa de Quinoa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche Vegetariano con Masa de Quinoa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Asada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Asada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopa Rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Escalopa Rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Medallones de Filete con Tocino, Papas Gajo y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Medallones de Filete con Tocino, Papas Gajo y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arrollado de Huaso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arrollado de Huaso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Vegetarianas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Vegetarianas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Choclos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Choclos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crumble de Salmón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crumble de Salmón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Plateada al Jugo Crocante con Puré.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Plateada al Jugo Crocante con Puré.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado Alemán.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Asado Alemán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de Mariscos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas de Mariscos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Plateada a la Cacerola.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Plateada a la Cacerola.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas Chilenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas Chilenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papa Gringa A la Chilena.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papa Gringa A la Chilena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chuletas en Salsa Barbecue.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chuletas en Salsa Barbecue.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Vino Blanco.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Vino Blanco.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Merluza a la Pimienta Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Merluza a la Pimienta Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Zapallo Italiano al Cardamomo con....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Zapallo Italiano al Cardamomo con....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Salteñas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Salteñas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cerdo al Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cerdo al Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Mole con Arroz al Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Mole con Arroz al Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pie de Carne y Papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pie de Carne y Papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Carne de Soya.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Carne de Soya.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo con Salsa de Arándanos y Papas Duquesas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo con Salsa de Arándanos y Papas Duquesas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Kubbhe.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Kubbhe.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Basmati Aromatizado con Clavo de Olor.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Basmati Aromatizado con Clavo de Olor.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Jaiba.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Jaiba.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta en Salsa Atomatada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Reineta en Salsa Atomatada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Asadas a las Finas Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Asadas a las Finas Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Lentejas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Lentejas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Mignon y Tulipas Rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete Mignon y Tulipas Rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Rústicas Al Horno con Dip de Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Rústicas Al Horno con Dip de Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso Crocante de Alcachofas y Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso Crocante de Alcachofas y Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pato Glaseado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pato Glaseado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado con Costra de Quínoa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado con Costra de Quínoa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Chaufa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz Chaufa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Duquesas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Duquesas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chorrillana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chorrillana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo Saltado Peruano Picante.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo Saltado Peruano Picante.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filetes de Pavo Apanados al Sésamo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filetes de Pavo Apanados al Sésamo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cerdo Picante a la Parrilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cerdo Picante a la Parrilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paila Marina.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Paila Marina.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Pavo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Pavo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Ave.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Ave.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza de Tomates Frescos y Aceitunas en Masa....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza de Tomates Frescos y Aceitunas en Masa....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo a las Finas Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo a las Finas Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Coñac.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo al Coñac.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ostiones a la Parmesana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ostiones a la Parmesana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chutney de Pepino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chutney de Pepino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mongoliana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mongoliana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo con Salsa al Vino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo con Salsa al Vino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapalele.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Chapalele.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Curry con Frutos Secos y Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arroz al Curry con Frutos Secos y Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Mote con Espárragos y Habas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Mote con Espárragos y Habas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo Marinado con Hierbas y Almendras con....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo Marinado con Hierbas y Almendras con....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques de Pollo con Salsa de Queso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques de Pollo con Salsa de Queso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Camarones en Salsa de Anís.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Camarones en Salsa de Anís.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Pimienta Limón.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo a la Pimienta Limón.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Zapallito Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Budín de Zapallito Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pastel de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mongoliana Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mongoliana Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Albóndigas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cazuela de Albóndigas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpa de Cerdo con Ciruelas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pulpa de Cerdo con Ciruelas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete al Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Filete al Cilantro.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Anticuchos de Sobrecostilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Anticuchos de Sobrecostilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Prietas con papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Prietas con papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Parrilla de Verduras Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Parrilla de Verduras Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Quinoa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesas de Quinoa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso de Pollo con Cebolla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso de Pollo con Cebolla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pimientos Rellenos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pimientos Rellenos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Pollo y Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Pollo y Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pie de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pie de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hojitas de parra y repollo rellenas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hojitas de parra y repollo rellenas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta Carbonara.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta Carbonara.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso Zapallo Italiano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso Zapallo Italiano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Cacerola Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne a la Cacerola Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Fritas de Pino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Empanadas Fritas de Pino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo Vetado a la Pimienta con Trilogía de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lomo Vetado a la Pimienta con Trilogía de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quinotto de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quinotto de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso de Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Guiso de Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fritatta de Cebolla, Pimentones y Queso de Cabra.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fritatta de Cebolla, Pimentones y Queso de Cabra.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo al Horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pavo al Horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillas de Cerdo con Salsa Barbecue.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillas de Cerdo con Salsa Barbecue.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mechada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Mechada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Lentejas al Curry.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Crema de Lentejas al Curry.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Gratinadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Papas Gratinadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado al Horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pescado al Horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ravioles Rellenos con Zapallo y Nueces en Salsa....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ravioles Rellenos con Zapallo y Nueces en Salsa....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ragout de Ave.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ragout de Ave.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Machas a la Parmesana.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Machas a la Parmesana.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Enchiladas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Enchiladas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Canelones de Ricota y Espinaca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Canelones de Ricota y Espinaca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ratatouille.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ratatouille.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cancato Citadino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Cancato Citadino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta con Frutos del Mar y Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pasta con Frutos del Mar y Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne asada al horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne asada al horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Rellena.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Carne Rellena.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fettuccini al Pesto.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fettuccini al Pesto.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Puré rústico y pollo con champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Puré rústico y pollo con champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Brochetas de Cerdo Adobado.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Brochetas de Cerdo Adobado.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fritos de Pollo al Sésamo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fritos de Pollo al Sésamo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Relleno con Champiñones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo Relleno con Champiñones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche de Cebolla y Ricotta.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Quiche de Cebolla y Ricotta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo estilo Celebración.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pollo estilo Celebración.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza Cuatro Quesos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Pizza Cuatro Quesos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques Salados Rellenos de Salmón y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Panqueques Salados Rellenos de Salmón y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fetuccini con Salsa Alfredo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Fetuccini con Salsa Alfredo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar a la parrilla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar a la parrilla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar de Cerdo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Costillar de Cerdo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas con Arroz.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Lentejas con Arroz.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arepas Reina Pepiada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Arepas Reina Pepiada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Merluza al Horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Merluza al Horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Hamburguesa de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Estofado de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Rollitos Orientales.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Rollitos Orientales.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Quínoa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Risotto de Quínoa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Rollo de Pollo y Nueces.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Rollo de Pollo y Nueces.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ropa Vieja.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ropa Vieja.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmon Pochado con Reducción Cítrica.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmon Pochado con Reducción Cítrica.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Naranja con Salsa Oriental.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Naranja con Salsa Oriental.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón al Horno.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón al Horno.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón con Salsa Teriyaki y Arroz Pegajoso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón con Salsa Teriyaki y Arroz Pegajoso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón con Costra de Sésamo y Salsa Teriyaki.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón con Costra de Sésamo y Salsa Teriyaki.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa Blanca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa Blanca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Mantequilla con Espárragos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Mantequilla con Espárragos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Finas Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salmón a la Finas Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa de Tomates Casera.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Salsa de Tomates Casera.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Saltimbocca con Risotto de Queso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Saltimbocca con Risotto de Queso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Saltimbocca de Pavo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Saltimbocca de Pavo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich Capresse Saludable.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich Capresse Saludable.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich Vegetariano.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich Vegetariano.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Scone Pizza con Queso y Tocino.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Scone Pizza con Queso y Tocino.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Shoyu Ramen.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Shoyu Ramen.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sopa de Porotos Negros.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sopa de Porotos Negros.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sopa Toscana de Porotos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sopa Toscana de Porotos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Steaks de Coliflor con BBQ Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Steaks de Coliflor con BBQ Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Suprema de Pollo Rellena con Queso Crema y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Suprema de Pollo Rellena con Queso Crema y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sushi.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sushi.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sándwich de Carne Mechada con cebolla....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sándwich de Carne Mechada con cebolla....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Spaguetti con Albahaca y Queso.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Spaguetti con Albahaca y Queso.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Solomillo de Cerdo a la Pimienta.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Solomillo de Cerdo a la Pimienta.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich en Pan Pita con Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sandwich en Pan Pita con Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sushi Nikkei con Salsa Cebiche.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Sushi Nikkei con Salsa Cebiche.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacos al Pastor Mexicanos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacos al Pastor Mexicanos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacos de Carne.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacos de Carne.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacu Tacu de Camarones.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tacu Tacu de Camarones.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tallarines de zapallo Italiano con Salsa....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tallarines de zapallo Italiano con Salsa....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tallarines Salteados con Ragú de Callampas y....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tallarines Salteados con Ragú de Callampas y....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tamales.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tamales.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tataki de Res en Costra de Hierbas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tataki de Res en Costra de Hierbas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Terrina de Verduras Asadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Terrina de Verduras Asadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tarta de zapallo y cebolla caramelizada.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tarta de zapallo y cebolla caramelizada.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tilapia con Salsa Merlot y Merquén.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tilapia con Salsa Merlot y Merquén.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tomaticán.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tomaticán.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Torta Pascualina.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Torta Pascualina.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Cebolla.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Cebolla.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Papas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Papas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Acelga.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Acelga.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de porotos verdes.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de porotos verdes.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Verduras.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Verduras.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Zanahoria.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla de Zanahoria.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla Española.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla Española.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla Gourmet.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortilla Gourmet.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortitas de Papa.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Tortitas de Papa.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Trutros Cortos de Pollo Asados con Arroz....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Trutros Cortos de Pollo Asados con Arroz....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wok de Cerdo al Jengibre y Curry.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wok de Cerdo al Jengibre y Curry.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wok de Verduras Salteadas.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wok de Verduras Salteadas.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Atún.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Ensalada Griega.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Ensalada Griega.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Pollo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Pollo al Cardamomo.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Wrap de Pollo al Cardamomo.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallitos Italianos Rellenos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallitos Italianos Rellenos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallitos Italianos Rellenos con Pesto de....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallitos Italianos Rellenos con Pesto de....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallo Spaghetti con Tomate Cherry y Albahaca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Zapallo Spaghetti con Tomate Cherry y Albahaca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Albahaca.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Albahaca.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Papa con Salsa Tres Quesos.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Papa con Salsa Tres Quesos.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Papa y Ricota con Salsa de Salmón....txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\PlatosFondo\ingre_Ñoquis de Papa y Ricota con Salsa de Salmón....txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Porotos Granados.txt" />
+      <Content Include="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada de Porotos Granados.txt">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

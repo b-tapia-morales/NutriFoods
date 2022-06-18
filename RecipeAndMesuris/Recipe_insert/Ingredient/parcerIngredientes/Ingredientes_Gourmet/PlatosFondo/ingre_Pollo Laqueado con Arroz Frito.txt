@@ -7,8 +7,8 @@
 1,x,cebolla
 1,cdta,jengibre
 1,cdta,ajo
-1,pimento rojo
-1,pimento verde
+1,x,pimento rojo
+1,x,pimento verde
 100,grs,jamón
 4,tazas,arroz
 3,x,huevos

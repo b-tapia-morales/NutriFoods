@@ -9,4 +9,4 @@ x,x,jugo limón
 1,cucharada,vinagre manzana
 2/3,taza,aceite
 x,x,sal
-x.x,pimienta negra
+x,x,pimienta negra

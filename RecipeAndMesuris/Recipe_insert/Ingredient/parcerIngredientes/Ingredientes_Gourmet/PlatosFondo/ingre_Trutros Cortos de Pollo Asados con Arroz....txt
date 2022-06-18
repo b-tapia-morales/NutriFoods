@@ -5,8 +5,8 @@
 300,ml,cerveza
 300,gr,arroz integral
 ½,taza,arroz silvestre
-200gr,champiñones parís
-100gr,champiñones portobello
-100gr,champiñones ostra
+200,gr,champiñones parís
+100,gr,champiñones portobello
+100,gr,champiñones ostra
 x,x,Pimienta Negra
 x,x,Sal

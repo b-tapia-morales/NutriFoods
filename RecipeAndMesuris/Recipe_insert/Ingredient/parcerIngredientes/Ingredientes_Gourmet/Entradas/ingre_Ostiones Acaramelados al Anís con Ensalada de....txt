@@ -1,6 +1,6 @@
 20,x,ostiones
 150,gr,mantequilla
-5,Anís Estrella
+5,x,Anís Estrella
 x,x,pimienta negra
 x,x,sal
 x,x,Azúcar rubia

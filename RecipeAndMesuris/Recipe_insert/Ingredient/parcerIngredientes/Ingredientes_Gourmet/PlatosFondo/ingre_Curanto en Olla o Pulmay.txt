@@ -1,6 +1,6 @@
 2,cucharadas,aceite
 1,x,cebollas
-1,x.pimento rojo
+1,x,pimento rojo
 ½,diente,ajo
 ½,cucharadita,Ají color
 6,presas,pollo
