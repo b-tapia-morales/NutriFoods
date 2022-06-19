@@ -1,0 +1,18 @@
+500,gr,almejas
+300,gr,choritos
+6,x,choros zapato
+400,gr,machas
+4,pedazos,congrio
+2,cucharadas,aceite
+1,x,cebolla
+1,x,tomate
+1,diente,ajo
+1 ½,taza,vino blanco
+1,cucharadita,Ají Color
+1,cucharada,Orégano
+¼,cucharadita,Comino
+¼,cucharadita,Merquén
+250,gr,camarones
+200,gr,ostiones
+500,ml,agua
+x,x,Cilantro

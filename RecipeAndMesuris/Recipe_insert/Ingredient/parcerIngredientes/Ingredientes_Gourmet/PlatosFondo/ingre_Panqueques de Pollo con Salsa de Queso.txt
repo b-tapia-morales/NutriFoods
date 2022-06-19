@@ -1,0 +1,14 @@
+x,x,Mantequilla
+1 ½,tazas,leche
+2/3,taza,harina
+½,cucharadita,sal
+3,x,huevos
+2,cucharadas,aceite
+2,x,cebollines
+4,tazas,pollo
+3,tazas,crema
+1,taza,pimento
+x,x,Sal
+x,x,Pimienta,Negra
+x,x,curry
+2,x,Salsa Queso

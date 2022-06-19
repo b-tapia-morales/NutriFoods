@@ -1,0 +1,16 @@
+4,x,tomates pera
+1,grande,zapallo italiano
+1,atado,espárragos
+1,x,berenjena
+1,x,pimento amarillo
+x,x,Aceite oliva
+x,x,Sal
+2/3,taza,aceite oliva
+1/2,diente,ajo
+1/2,cucharadita,Ají Color
+1/2,cucharadita,Pimienta negra
+1/2,cucharadita,Tomillo
+1/2,cucharadita,Orégano
+1/2,cucharadita,Albahaca
+1/2,cucharadita,Ciboulette
+1/2,cucharadita,Sal

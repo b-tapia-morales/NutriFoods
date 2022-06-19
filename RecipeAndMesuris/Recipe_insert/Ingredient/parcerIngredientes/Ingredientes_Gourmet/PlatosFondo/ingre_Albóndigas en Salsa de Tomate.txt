@@ -1,0 +1,20 @@
+½,taza,pan rallado
+½,taza,leche
+500,gr,carne molida
+1,x,huevos
+½,taza,queso parmesano
+¼,taza,perejil
+2,cucharaditas,sal
+½,cucharadita,ajo
+½,x,cebolla
+800,gr,tomate
+2,cucharadas,aceite oliva
+½,taza,vino,blanco
+2,cucharaditas,sal
+1,cucharada,Orégano
+½,cucharadita,Pimienta Negra
+1,cucharadita,Cebolla Polvo
+½,cucharadita,Ajo Polvo,Gourmet
+½,cucharadita,pimienta negra
+2,hojas,Laurel
+1,cucharada,azúcar

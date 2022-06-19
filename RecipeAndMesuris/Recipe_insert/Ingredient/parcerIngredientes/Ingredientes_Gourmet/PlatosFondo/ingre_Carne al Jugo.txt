@@ -1,0 +1,9 @@
+1,kg,choclillo
+200,gr,mantequilla
+1,x,cebolla
+2,x,zanahorias
+2,hojas,Laurel
+1,vaso,vino tinto
+1,cda,maicena
+x,x,Pimienta Negra
+x,x,Sal

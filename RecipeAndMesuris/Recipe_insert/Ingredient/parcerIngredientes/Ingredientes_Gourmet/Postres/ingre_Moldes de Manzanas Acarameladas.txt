@@ -1,0 +1,8 @@
+75,gr,mantequilla
+75,gr,azúcar rubia
+3,cucharadas,crema
+1,cucharadita,Esencia Vainilla
+4,x,manzanas verdes
+125,gr,galletas
+1,cucharadita,Canela Molida
+3,cucharadas,almendras laminadas

@@ -1,0 +1,13 @@
+1,x,zapallo italiano
+1,x,berenjena
+2,x,zanahorias
+2,tazas,porotos verdes
+4,medianos,tomates
+3,x,cebollas
+3,dientes,ajo
+1,cda,jengibre
+1,cda,Curry
+4,medianos,tomates
+1,atado,cilantro
+x,x,Pimienta Negra
+x,x,Sal

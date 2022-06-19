@@ -1,0 +1,10 @@
+4,x,huevos
+150,cc,agua
+60,gr,margarina
+160,gr,harina
+50,gr,azúcar
+2,tazas,leche
+20,cc,Esencia Vainilla
+1,sobre,Crema Pastelera
+1,sobre,Crema Chantilly
+1,tarro,duraznos

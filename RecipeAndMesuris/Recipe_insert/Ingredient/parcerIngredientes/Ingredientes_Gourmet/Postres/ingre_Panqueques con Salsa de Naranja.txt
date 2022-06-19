@@ -1,0 +1,13 @@
+250,g,harina
+4,x,huevos
+1,cucharadas,aceite
+500,cc,leche
+2,tazas,jugo naranja
+1,taza,agua
+1,taza,azúcar
+x,cucharadita,Canela Polvo
+1,cucharadita,naranja
+1,cucharadita,Salvia
+1,cucharada,licor
+2,cucharadas,crema 
+x,x,Salsa Manjar

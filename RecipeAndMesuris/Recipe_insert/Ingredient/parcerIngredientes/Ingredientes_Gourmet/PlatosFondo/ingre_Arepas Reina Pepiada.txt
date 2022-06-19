@@ -1,0 +1,14 @@
+2,x,pechugas pollo
+1,hoja,Laurel
+1,x,palta
+¼,taza,mayonesa
+½,cdta,Ajo
+½,cdta,Páprika
+2,cdas,cilantro
+x,x,sal
+x,x,pimienta negra
+1 ½,taza,harina
+1,taza,agua
+1,cdta,aceite vegetal
+x,x,sal
+2,cdtas,mantequilla

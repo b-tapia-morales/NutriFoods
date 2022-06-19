@@ -1,0 +1,14 @@
+1 ½,tazas,arroz
+2,cucharadas,aceite
+3,tazas,agua
+3/4,taza,choclo
+2,x,cebollines
+1/2,cucharadita,Ají Color
+1/2,cucharadita,Orégano
+1,cucharada,mantequilla
+1,taza,choclo
+1,taza,crema
+1/2,taza,queso parmesano
+x,x,sal
+x,x,Pimienta Blanca
+1/2,taza,agua

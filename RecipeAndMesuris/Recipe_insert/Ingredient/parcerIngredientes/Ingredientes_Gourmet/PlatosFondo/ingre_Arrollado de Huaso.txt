@@ -1,0 +1,12 @@
+900,gr,pulpa cerdo
+200,gr,tocino
+900,gr,malaya cerdo
+½,taza,vinagre vino
+1,cucharadita,Sal
+½,cucharadita,Pimienta blanca
+1,cucharadita,Comino
+1,cucharada,Orégano
+1,cucharada,Merquén
+1,cucharadita,Ajo
+2,cucharadas,aceite
+1,cucharada,Ají Color

@@ -1,0 +1,12 @@
+4,trozos,congrio
+2,x,papas
+1,x,zanahoria
+1,x,cebolla
+1,x,ají verde
+50,ml,vino blanco
+1,x,huevo
+x,x,Sal
+200,gr,mantequilla
+15,gr,perejil
+1,x,limón
+x,x,Pimienta Negra

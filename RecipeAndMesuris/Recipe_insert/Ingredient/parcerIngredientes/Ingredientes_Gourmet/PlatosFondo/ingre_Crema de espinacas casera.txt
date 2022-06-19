@@ -1,0 +1,10 @@
+1,x,cebolla
+½,diente,ajo
+½,cucharada,aceite
+½,cucharada,mantequilla
+3,x,papas
+1,litro,agua
+1,taza,leche
+1,cucharadita,Albahaca
+1,kilo,espinacas
+x,x,Crutones

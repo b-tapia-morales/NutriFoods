@@ -1,0 +1,4 @@
+230,gr,Cobertura Chocolate Semiamargo
+190,gr,Cobertura Chocolate Leche
+150,gr,Cobertura Chocolate Blanco
+4,tazas,crema

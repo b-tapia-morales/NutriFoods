@@ -1,0 +1,12 @@
+1/2,taza,aceite oliva
+1,cucharadita,Ajo Polvo
+1,cucharadita,Orégano
+1,pizca,Ají Color
+2,kilos,punta ganso
+1,x,cebolla
+2,x,zanahorias
+4,x,papas
+x,x,Sal
+1,cucharadita,Pimienta Negra
+1,taza,vino blanco
+x,x,Perejil

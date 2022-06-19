@@ -1,0 +1,9 @@
+800,grs,filete
+250,gr,champiñones
+1,cda,Romero
+4,x,papas
+4,cdas,aceite
+x,x,Sal
+x,x,Pimienta Negra
+3/4,taza,agua
+3/4,taza,leche

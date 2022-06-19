@@ -1,0 +1,11 @@
+100,g,mantequilla
+190,g,Chocolate
+2,x,huevos
+¾,taza,azúcar
+1 ¾,cucharadas,café polvo
+¾,taza,harina
+90,g,nueces
+1,cucharadita,Polvo Hornear
+1,cucharada,Esencia Vainilla
+x,x,Azúcar flor
+x,x,Salsa Chocolate

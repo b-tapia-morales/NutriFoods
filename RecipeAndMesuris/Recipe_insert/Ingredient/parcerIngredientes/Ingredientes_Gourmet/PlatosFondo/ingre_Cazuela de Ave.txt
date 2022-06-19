@@ -1,0 +1,15 @@
+6,presas,pollo
+4,cucharada,aceite
+1,cucharadita,Ají Color
+1/2,cucharadita,Orégano
+1,pizca,Comino
+1/2,x,pimento verde
+1/2,x,pimento rojo
+6,x,papas
+6,trozos,choclo
+500,gr,zapallo
+1,x,zanahoria
+1,x,cebolla
+1/2,taza,porotos verde
+1/2,taza,arroz
+x,x,Perejil

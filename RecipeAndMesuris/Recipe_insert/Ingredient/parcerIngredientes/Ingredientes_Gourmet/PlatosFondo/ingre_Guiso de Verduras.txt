@@ -1,0 +1,14 @@
+300,g,papas
+1,x,zanahorias
+4,x,tomates
+500,ml,agua
+1 1/2,cdas,aceite
+1,x,cebolla
+½,x,pimento rojo
+½,cdta,Merquén
+1,cdta,Comino
+1,cdta,Ají Color
+2,x,zapallo italianos
+1,x,berenjena
+1,taza,porotos verdes
+2,cdas,perejil

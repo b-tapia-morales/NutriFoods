@@ -1,0 +1,10 @@
+2,x,reinetas
+x,x,Sal
+x,x,Pimienta Blanca
+x,x,Aceite oliva
+1/2,taza,mayonesa
+4,x,limones
+2,cdas,yogurt natural
+x,x,Cebolla Polvo,Gourmet
+1/2,taza,Alcaparras
+x,x,sal

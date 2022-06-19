@@ -1,0 +1,7 @@
+1,x,repollo
+2,x,zanahorias
+1/2,taza,mayonesa vegana
+1,cucharada,vinagre manzana
+1 1/2,x,limón
+1/2,cucharadita,pimienta negra
+x,x,Sal

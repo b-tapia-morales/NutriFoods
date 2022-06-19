@@ -1,0 +1,8 @@
+4,x,filete Pavo
+3,x,Huevos
+x,x,Semillas Sésamo
+x,x,Aceite
+x,x,Sal
+x,x,Pimienta Negra
+1,x,Salsa Blanca
+1/2,taza,Mostaza

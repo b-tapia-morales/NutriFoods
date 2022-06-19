@@ -1,0 +1,15 @@
+500,grs,filete
+150,gramos,tocino
+x,x,Sal
+x,x,Pimienta Negra
+x,x,Aceite
+1,chorrito,Brandy
+12,x,panqueques
+1,taza,mantequilla
+1,x,pimento rojo
+1,x,pimento verde
+2,x,zapallo italianos
+x,x,Espárragos
+4,cdas,aceite oliva
+x,x,Salsa Soya
+x,x,Pimienta Negra

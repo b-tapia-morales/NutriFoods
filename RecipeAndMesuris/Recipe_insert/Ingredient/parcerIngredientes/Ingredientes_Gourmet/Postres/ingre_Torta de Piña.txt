@@ -1,0 +1,8 @@
+1,sobre,base Bizcocho Vainilla
+4,x,huevos
+200,ml,agua
+1,tarro,piña
+600,ml,crema
+1/3,taza,azúcar flor
+1,cucharadita,Esencia Vainilla
+x,x,Coco

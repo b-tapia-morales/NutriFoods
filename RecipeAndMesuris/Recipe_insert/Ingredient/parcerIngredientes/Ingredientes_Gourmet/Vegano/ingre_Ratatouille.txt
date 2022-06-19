@@ -1,0 +1,14 @@
+2,x,berenjenas
+2,x,zapallo italianos
+2,x,pimento rojos
+½,taza,aceite oliva
+1,grande,cebolla
+1,diente,ajo
+3,grandes,tomates
+400,gr,salsa tomate
+½,taza,albahaca
+2,cucharadas,tomillo
+1,cucharada,vinagre balsámico
+1,cucharada,azúcar
+x,x,sal
+¼,cucharadita,Pimienta Negra

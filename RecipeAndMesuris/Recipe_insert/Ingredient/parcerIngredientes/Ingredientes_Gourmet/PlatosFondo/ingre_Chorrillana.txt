@@ -1,0 +1,12 @@
+2,x,cebollas
+2,cucharadas,Salsa Soya
+600,g,posta negra
+3,cucharadas,Salsa Inglesa
+1,diente,ajo
+1/2,cucharadita,Merquén
+2,x,chorizos
+12,x,papas
+x,x,aceite
+x,x,Sal
+x,x,pimienta negra
+4,x,huevos

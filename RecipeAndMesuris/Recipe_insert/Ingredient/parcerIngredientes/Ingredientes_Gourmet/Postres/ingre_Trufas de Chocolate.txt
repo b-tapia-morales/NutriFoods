@@ -1,0 +1,5 @@
+400,gr,Cobertura Chocolate SemiAmargo
+150,ml,crema
+100,gr,mantequilla
+½,cucharadita,esencias Ron
+x,x,Chocolate Granulado

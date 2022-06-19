@@ -1,0 +1,6 @@
+1/2,lt,leche
+1,x,vainilla
+1,pizca,sal
+5,x,huevo
+250,gr,azúcar
+150,ml,crema fresca

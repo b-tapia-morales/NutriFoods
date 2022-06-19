@@ -1,0 +1,8 @@
+2.5,litros,agua
+x,x,perejil
+x,x,cilantro
+1,x,zanahoria
+1,x,cebolla
+2,diente,ajo
+5,x,huevos
+½,taza,cilantro

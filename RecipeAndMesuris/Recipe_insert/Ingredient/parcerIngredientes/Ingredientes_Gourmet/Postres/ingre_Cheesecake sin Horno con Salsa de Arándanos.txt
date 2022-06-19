@@ -1,0 +1,11 @@
+250,gr,galletas
+130,gr,mantequilla
+1,cucharadita,Esencia Vainilla
+¼,taza,leche
+350,gr,queso crema
+200,gr,azúcar
+4,hojas,Gelatina
+300,ml,crema
+200,gr,arándanos
+4,cucharadas,azúcar
+¼,taza,jugo limón

@@ -1,0 +1,8 @@
+6,unidades,pechuga,pollo
+3,x,huevos
+600,gr,pan rallado
+150,gr,harina
+x,x,Ajo Polvo
+x,x,Perejil
+x,x,sal
+x,x,aceite

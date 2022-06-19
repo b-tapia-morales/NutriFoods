@@ -1,0 +1,15 @@
+2 ½,tazas,quínoa
+2,x,cebollines
+1,x,zanahoria
+½,taza,queso parmesano
+½,taza,pan rallado
+1,cucharada,albahaca
+1,cucharada,ciboulette
+1,cucharadita,Orégano
+½,cucharadita,Ajo Polvo
+½,cucharadita,Paprika
+¼,cucharadita,Comino
+½,cucharadita,Sal
+½,cucharadita,Pimienta Blanca
+3,x,huevos
+4,cucharadas,aceite

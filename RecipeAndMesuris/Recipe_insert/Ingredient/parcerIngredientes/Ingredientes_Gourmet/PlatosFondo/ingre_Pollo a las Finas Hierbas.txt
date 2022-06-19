@@ -1,0 +1,13 @@
+1,x,pollo entero
+½,taza,caldo pollo
+½,taza,vino blanco
+2,cucharada,mantequilla
+2,cucharadas,aceite oliva
+1,x,ralladura limón
+½,cucharadita,Ajo Polvo
+½,cucharadita,Estragón
+½,cucharadita,Tomillo
+½,cucharadita,Perejil
+½,cucharadita,Orégano
+½,cucharadita,Pimienta Negra
+1,cucharadita,Sal

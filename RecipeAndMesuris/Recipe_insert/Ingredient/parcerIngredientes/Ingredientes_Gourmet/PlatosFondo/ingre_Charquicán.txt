@@ -1,0 +1,12 @@
+1,kilo,asiento
+2 ½,cdas,aceite
+1,x,cebolla
+2,dientes,ajo
+6,x,papas
+400,g,zapallo camote
+1,5,cdtas,Ají Color
+½,cdta,Comino
+2.5,cdtas,Orégano
+600,ml,agua
+2,tazas,choclo
+2,tazas,porotos verdes

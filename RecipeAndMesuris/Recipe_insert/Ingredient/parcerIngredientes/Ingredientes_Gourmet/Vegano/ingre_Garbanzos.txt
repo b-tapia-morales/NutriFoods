@@ -1,0 +1,12 @@
+500,gr,garbanzos
+2,cucharadas,aceite oliva
+1,x,cebolla
+x,x,Comino
+1,cdta,Ají Color
+2,hojas,Laurel
+2,x,tomates
+3/4,taza,zapallo
+2,Sobres,Caldo Verduras
+3,tazas,agua
+x,x,Sal
+x,x,Pimienta Negra

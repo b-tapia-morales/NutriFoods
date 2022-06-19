@@ -1,0 +1,10 @@
+1 ½,tazas,arroz
+2,cucharadas,aceite
+3,tazas,agua
+1/2,taza,almendras
+1,taza,cilantro
+1/2,taza,aceite oliva
+1,cucharadita,Pimienta negra
+x,x,sal
+1,x,limon
+1,taza,agua

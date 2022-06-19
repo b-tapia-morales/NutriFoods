@@ -1,0 +1,13 @@
+3,tazas,harina
+1,cdta,Polvos Hornear
+1,cdta,Bicarbonato
+¼,cdta,Sal Mar
+225,gr,mantequilla
+1 ¼,taza,azúcar
+3,x,huevos
+¾,taza,Cacao Amargo Polvo
+2/3,taza,agua hirviendo
+150,ml,crema ácida
+2/3,taza,Chips Chocolate
+2/3,taza,Cobertura Chocolate Semiamargo
+2/3,taza,crema

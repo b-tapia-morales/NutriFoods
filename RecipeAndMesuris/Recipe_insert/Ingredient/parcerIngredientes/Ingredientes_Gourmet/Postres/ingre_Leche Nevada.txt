@@ -1,0 +1,10 @@
+4,x,huevos
+x,x,limón
+3/4,taza,azúcar
+3,tazas,leche
+1,cucharadita,Esencia Vainilla
+2,tazas,leche
+1,cucharadita,Esencia Vainilla
+8,x,huevos
+3/4,taza,azúcar
+x,x,Salsa Caramelo

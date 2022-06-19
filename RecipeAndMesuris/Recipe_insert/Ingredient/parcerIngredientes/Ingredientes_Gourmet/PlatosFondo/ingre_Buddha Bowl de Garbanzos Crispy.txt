@@ -1,0 +1,18 @@
+1,cda,aceite oliva
+1,taza,quinoa
+1 1/4,taza,agua
+x,x,sal
+x,x,pimienta negra
+150,g,garbanzos
+1,cda,aceite oliva
+x,x,sal
+1,cda,Pimento Ahumado
+1/2,cdta,Ajo
+125,g,yogurt griego
+1,cda,mostaza Dijon
+1,cdta,Pimienta negro
+x,x,sal
+1,x,paltas
+1,x,camote
+x,x,Espinaca
+x,x,Cebolla morada

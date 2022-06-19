@@ -1,0 +1,10 @@
+2.5,cdas,aceite
+4,cdas,mantequilla
+½,x,cebolla
+1 ¼,taza,fideos cabello
+2,diente,ajo
+5,tazas,arroz
+2.5,cdas,Caldo Ave
+2.5,litros,agua
+200,g,pasas rubias
+4,cdas,perejil

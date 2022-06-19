@@ -1,0 +1,8 @@
+1,kilo,acelgas
+1,cucharada,aceite
+½,x,cebolla
+1,cucharadita,Orégano
+1,cucharadita,Sal
+¼,cucharadita,Pimienta Blanca
+5,x,huevos
+4,cucharadas,aceite

@@ -1,0 +1,13 @@
+4,medallones,posta rosada
+2,cucharaditas,mostaza
+200,gr,tocino
+10,x,papas
+½,taza,aceite oliva
+1,diente,ajo
+½,cucharadita,Merquén
+1,cucharadita,Tomillo
+¼,cucharadita,pimienta negra
+1,cucharadita,Sal
+400,gr,champiñones
+1,atado,espárragos
+2,cucharadas,Salsa Soya

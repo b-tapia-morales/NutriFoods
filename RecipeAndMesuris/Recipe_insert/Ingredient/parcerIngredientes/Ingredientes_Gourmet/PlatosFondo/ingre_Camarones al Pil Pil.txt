@@ -1,0 +1,9 @@
+1,kg,camarones
+30,ml,aceite oliva
+5,dientes,ajo
+1,cda,Pimienta Cayena
+100,ml,vino blanco
+100,gr,mantequilla
+x,x,Estragón
+x,x,pimienta negra
+x,x,Sal

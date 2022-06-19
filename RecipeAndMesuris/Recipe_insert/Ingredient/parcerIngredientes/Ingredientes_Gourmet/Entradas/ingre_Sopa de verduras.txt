@@ -1,0 +1,19 @@
+1,x,cebolla
+¼,taza,apio
+1,cucharada,aceite
+¼,cucharadita,Ají Color
+½,cucharadita,Comino
+½,cucharadita,Orégano
+½,cucharadita,Ajo
+1.5,litros,agua
+1,hoja,Laurel
+1,rama,cilantro
+2,x,zanahoria
+2,x,zapallos italianos
+3,x,papas
+1,taza,zapallo
+1,taza,poroto verde
+1,taza,espinacas
+¼,taza,cilantro
+x,x,sal
+x,x,pimienta negra

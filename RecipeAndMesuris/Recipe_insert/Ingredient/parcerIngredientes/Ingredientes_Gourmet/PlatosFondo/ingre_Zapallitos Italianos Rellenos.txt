@@ -1,0 +1,11 @@
+10,mediano,zapallo italianos
+4,cdas,aceite
+3,dientes,ajo
+2,x,cebollas
+2,x,pimento rojos
+1,kilo,carne molida
+1,cda,Comino
+2,cdas,Orégano
+6,x,huevos
+3,cdas,perejil
+250,g,queso parmesano

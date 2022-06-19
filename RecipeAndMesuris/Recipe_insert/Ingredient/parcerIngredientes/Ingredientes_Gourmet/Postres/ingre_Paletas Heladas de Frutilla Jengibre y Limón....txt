@@ -1,0 +1,9 @@
+¾,taza,azúcar
+1,taza,agua
+2,trozos,limón
+¾,taza,jugo limón
+2,cucharaditas,semillas amapola
+¾,taza,azúcar
+1,taza,agua
+1,pedazo,jengibre 
+2,tazas,frutillas

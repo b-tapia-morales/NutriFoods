@@ -1,0 +1,9 @@
+6,x,masa,empanadas
+200,gr,ricotta
+1/2,taza,albahaca
+1,cucharada,aceite oliva
+1,x,huevo
+½,taza,queso parmesano
+½,cucharadita,Pimienta negra
+x,x,sal
+x,x,Tomates cherry

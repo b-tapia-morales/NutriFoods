@@ -1,0 +1,14 @@
+1,kg,pechuga pollo
+1,cucharada,aceite
+2,x,cebollines
+2,cucharadas,Sésamo
+x,x,Arroz
+1,x,Brócoli
+165,cc,Salsa Teriyaki
+2/3,taza,Salsa Soya
+3,cucharadas,vinagre arroz
+1 ½,cucharaditas,aceite sésamo
+2 ½,cucharadas,miel
+1,diente,ajo
+2 ½,cucharaditas,jengibre
+3,cucharaditas,maicena

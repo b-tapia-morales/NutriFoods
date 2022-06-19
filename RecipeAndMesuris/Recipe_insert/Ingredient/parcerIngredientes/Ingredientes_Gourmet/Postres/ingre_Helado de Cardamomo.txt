@@ -1,0 +1,6 @@
+1/2,lt,leche
+1,cda,Cardamomo
+1,pizca,sal
+5,x,huevo
+150,gr,azúcar
+150,ml,crema fresca

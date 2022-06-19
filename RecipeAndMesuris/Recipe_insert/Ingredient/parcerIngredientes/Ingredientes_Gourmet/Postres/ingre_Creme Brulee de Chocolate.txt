@@ -1,0 +1,7 @@
+1,x,vainilla
+600,ml,Crema
+2,cucharadas,Chocolate Amargo
+4,cucharadas,Nutella
+3,x,Huevos
+1/2,taza,azúcar
+x,x,Azúcar rubia

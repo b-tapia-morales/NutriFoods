@@ -1,0 +1,9 @@
+6,trozos,salmón
+1,taza,Sésamo
+9,cucharadas,azúcar
+3/4,taza,vinagre manzana
+3/4,taza,Salsa Soya
+3/4,taza,aceite vegetal
+3,cucharadas,miel
+x,x,Sal
+x,x,Pimienta Negra

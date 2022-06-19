@@ -1,0 +1,8 @@
+1 ½,Kg,costillar cerdo
+6,cdas,Humo Líquido
+1,cda,Ají Color
+x,x,Orégano
+3,dientes,Ajo
+2,cdas,aceite
+1,cdta,Sal
+x,x,Merquen

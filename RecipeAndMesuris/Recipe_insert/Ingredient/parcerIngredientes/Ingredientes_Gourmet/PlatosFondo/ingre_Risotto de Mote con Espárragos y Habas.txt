@@ -1,0 +1,19 @@
+100,g,zanahoria
+100,g,cebolla
+100,g,apio
+1,Hoja,Laurel
+2,L,agua
+2,cdas,aceite oliva
+1/2,x,cebolla
+1,x,ajo
+100,ml,vino blanco
+2,tazas,mote
+1,cdta,Pimienta negra
+100,g,queso parmesano
+100,g,habas
+40,g,mantequilla
+x,x,Sal
+1,atado,espárragos
+1,cda,mantequilla
+1,cda,aceite oliva
+x,x,Sal

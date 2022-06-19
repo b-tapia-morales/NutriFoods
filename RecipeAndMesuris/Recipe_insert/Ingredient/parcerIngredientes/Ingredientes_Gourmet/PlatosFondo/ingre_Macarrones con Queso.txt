@@ -1,0 +1,12 @@
+500,gr,pasta penne
+5,cucharadas,mantequilla
+2,cucharadas,harina
+½,cucharadita,Cebolla
+½,cucharadita,Pimienta Negra
+½,cucharadita,Paprika
+3,tazas,leche
+1,cucharadita,mostaza Dijon
+1,cucharadita,Tomillo
+150,gr,queso crema
+1,tazas,queso cheddar
+1,taza,queso parmesano

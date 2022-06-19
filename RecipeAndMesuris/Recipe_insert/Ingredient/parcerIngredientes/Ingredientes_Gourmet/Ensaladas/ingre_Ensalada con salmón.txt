@@ -1,0 +1,10 @@
+100,g,salmón ahumado
+240,g,queso crema
+2,cucharadas,ciboulette
+1,cucharada,jugo de limón
+x,x,sal
+x,x,pimienta negra
+4,tazas,lechugas
+1,taza,tomate
+1,x,Yogurt eneldo
+1,cucharadita,eneldo

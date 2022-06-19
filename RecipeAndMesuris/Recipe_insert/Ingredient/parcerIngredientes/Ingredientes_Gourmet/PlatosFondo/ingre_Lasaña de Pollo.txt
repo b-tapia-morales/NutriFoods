@@ -1,0 +1,17 @@
+400,g,masa lasaña
+500,ml,agua
+125,g,mantequilla
+1,x,cebolla
+1,diente,ajo
+½,taza,harina
+1 ½,taza,leche
+4,tazas,queso mozarella
+1,taza,queso parmesano
+2,cdtas,Albahaca
+1,cdta,Orégano
+½,cdta,pimienta negra
+500,g,ricotta
+2,tazas,pechuga pollo
+500,g,espinacas
+1,cda,perejil
+¼,taza,queso parmesano

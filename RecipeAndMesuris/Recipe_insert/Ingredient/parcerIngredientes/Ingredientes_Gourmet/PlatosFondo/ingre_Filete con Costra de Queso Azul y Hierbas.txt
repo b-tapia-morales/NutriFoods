@@ -1,0 +1,17 @@
+6,medallones,filete
+2,cucharadas,aceite
+¼,taza,pan rallado
+6,cucharadas,queso roquefort
+¼,taza,perejil
+¼,taza,ciboulette
+½,cucharadita,pimienta negra
+1,cucharada,aceite oliva
+3,cucharadas,mantequilla
+¼,taza,cebolla
+3,cucharadas,harina
+2,tazas,agua
+1,taza,vino tinto
+1,cucharadita,Tomillo
+1,cucharadita,Perejil
+x,x,Sal
+x,x,Pimienta Negra

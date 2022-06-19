@@ -1,0 +1,12 @@
+1,litro,agua
+6,cdas,aceite oliva
+500,g,camarones
+½,taza,chalotas
+1,cdta,Ají Color
+4,x,tomates
+2,tazas,arroz arborio
+1,taza,vino blanco
+12,x,espárragos
+1/3,taza,crema
+1/3,taza,queso parmesano
+1,cda,perejil

@@ -1,0 +1,10 @@
+1,x,cebolla
+1,diente,ajo
+½,taza,apio
+½,cucharada,mantequilla
+½,cucharada,aceite
+1,x,brócoli
+½,x,manzana
+1,litro,agua
+1,cucharadita,tomillo
+¼,cucharadita,pimienta Blanca

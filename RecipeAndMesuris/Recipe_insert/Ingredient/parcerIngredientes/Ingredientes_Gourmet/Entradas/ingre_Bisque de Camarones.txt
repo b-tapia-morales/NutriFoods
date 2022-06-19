@@ -1,0 +1,16 @@
+500,g,camarones
+2,cdas,mantequilla
+1,litro,agua
+3,x,puerros
+1,diente,ajo
+1,cda,tomillo
+¼,taza,vino blanco
+¼,taza,harina
+1,hoja,Laurel
+1/3,taza,jugo naranja
+1,cda,cascara naranja
+3,cdas,concentrado tomate
+1,taza,crema
+x,x,pimienta negra
+x,x,sal
+x,x,tomillo

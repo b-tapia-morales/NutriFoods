@@ -1,0 +1,7 @@
+6,filetes,merluza austral
+1,x,limon
+x,x,Sal
+x,x,Pimienta Negra
+x,x,Orégano
+1,litro,aceite
+100,ml,agua

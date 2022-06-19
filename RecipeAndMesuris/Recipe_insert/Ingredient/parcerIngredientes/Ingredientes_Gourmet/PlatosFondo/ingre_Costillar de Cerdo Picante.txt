@@ -1,0 +1,12 @@
+2,kg,costillas cerdo
+1,x,cebolla
+2,hojas,Laurel
+2,x,apio
+1,x,zanahoria
+2,dientes,ajo
+100,cc,aceite
+50,cc,vinagre vino
+1,cdta,Orégano
+2,cdas,Pimienta Cayena
+x,x,Pimienta Negra
+x,x,Sal

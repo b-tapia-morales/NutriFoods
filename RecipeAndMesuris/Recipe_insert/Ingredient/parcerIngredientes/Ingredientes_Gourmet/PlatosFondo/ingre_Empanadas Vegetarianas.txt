@@ -1,0 +1,16 @@
+2,tazas,harina integral
+1,taza,harina
+1,cucharadita,Sal
+3,cucharadas,aceite oliva
+200,ml,agua
+1,x,huevo
+1,cucharada,aceite oliva
+1,x,cebolla
+1,cucharadita,Ají Color
+1,cucharada,Orégano
+400,gr,champiñones
+¾,cucharadita,Sal
+½,cucharadita,Pimienta negra
+2,tazas,espinacas
+100,gr,queso crema
+½,taza,queso parmesano

@@ -1,0 +1,8 @@
+500,g,harina
+375,g,mantequilla
+6,x,yemas
+1/4,taza,leche
+1,cucharada,pisco
+2,cucharaditas,Polvos Hornear
+1,cucharadita,Esencia Vainilla
+1,kilo,manjar

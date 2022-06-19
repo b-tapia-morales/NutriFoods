@@ -1,0 +1,15 @@
+2,tazas,arroz
+¾,taza,Coco Rallado
+1 ½,x,palta
+1,grande,pepino
+1,x,mango
+600,gr,atún
+¼,taza,cebollines
+3,cucharadas,Salsa Soya
+x,x,Jugo limón
+1,cda,aceite oliva
+½,cdta,aceite sésamo
+2,cdas,Sésamo
+½,taza,mayonesa
+¼,taza,yogurt natural
+1,cda,Merquén

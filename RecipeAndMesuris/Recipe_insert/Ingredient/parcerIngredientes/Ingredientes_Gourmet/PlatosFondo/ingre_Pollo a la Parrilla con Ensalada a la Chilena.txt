@@ -1,0 +1,18 @@
+1,cucharadita,ralladura limón
+1/4,taza,jugo limón
+1/4,taza,Salsa Soya
+1,cucharadita,mostaza
+1/4,taza,aceite
+1,cucharada,Salsa Inglesa
+1,cucharada,azúcar
+1/2,cucharadita,Orégano
+1/2,cucharadita,Albahaca
+1/2,cucharadita,Tomillo
+8,presas,pollo
+6,x,tomates
+2,x,cebollas
+1,x,ají verde
+1 1/2,cucharada,cilantro
+2,cucharadas,aceite
+x,x,sal
+x,x,Pimienta Negra

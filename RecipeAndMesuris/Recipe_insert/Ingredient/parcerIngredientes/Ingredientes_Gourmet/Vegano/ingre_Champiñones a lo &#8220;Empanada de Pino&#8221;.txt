@@ -1,0 +1,11 @@
+x,x,Aceitunas
+x,x,Aceite oliva
+x,x,Merquén
+x,x,Comino
+x,x,Orégano
+x,x,Sal
+x,x,Pimienta
+x,x,Cebolla
+6,x,champiñones portobello
+x,xPasas
+1,x,almendras

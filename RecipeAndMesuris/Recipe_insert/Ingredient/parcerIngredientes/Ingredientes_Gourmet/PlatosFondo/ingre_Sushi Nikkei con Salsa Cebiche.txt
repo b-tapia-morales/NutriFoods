@@ -1,0 +1,18 @@
+1,taza,arroz
+1,cucharada,vinagre blanco
+1,cucharada,azúcar
+1,cucharadita,sal
+250,gr,jaiba
+1,grande,Palta
+1/3,x,queso,crema
+200,gr,salmón
+4,hojas,Nori
+x,x,Sésamo
+x,x,Salsa Soya
+1/3,taza,jugo limón
+1/2,diente,ajo
+1,cucharadita,jengibre
+¼,taza,cilantro
+½,taza,apio
+1,cucharada,pasta ají
+2,cucharadas,mayonesa

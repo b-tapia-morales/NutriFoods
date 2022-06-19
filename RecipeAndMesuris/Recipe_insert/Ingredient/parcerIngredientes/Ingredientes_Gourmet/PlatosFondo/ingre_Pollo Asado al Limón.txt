@@ -1,0 +1,8 @@
+4,x,trutros pollo
+6,x,limones
+4,dientes,ajo
+1,taza,salsa ají
+1,cda,Orégano
+2,cdas,aceite
+x,x,Pimienta Negra
+x,x,Sal

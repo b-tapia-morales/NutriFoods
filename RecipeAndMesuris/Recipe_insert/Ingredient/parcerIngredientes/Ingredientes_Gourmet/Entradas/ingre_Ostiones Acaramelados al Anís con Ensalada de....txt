@@ -1,0 +1,13 @@
+20,x,ostiones
+150,gr,mantequilla
+5,x,Anís Estrella
+x,x,pimienta negra
+x,x,sal
+x,x,Azúcar rubia
+200,gr,quínoa
+½,x,pimento rojo
+1,x,apio
+1,x,cilantro
+4,cdas,aceite oliva
+2,cdas,vinagre manzana
+1,x,palta

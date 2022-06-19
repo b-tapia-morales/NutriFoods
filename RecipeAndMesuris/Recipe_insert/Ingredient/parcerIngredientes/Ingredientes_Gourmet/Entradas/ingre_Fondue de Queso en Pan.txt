@@ -1,0 +1,13 @@
+1,x,pan campo
+3,cucharadas,mantequilla
+2,x,cebollines
+2,cucharadas,harina
+1 ½,taza,leche
+150,gr,queso crema
+400,gr,queso parmesano
+1/3,taza,vino blanco
+1,cucharadita,orégano
+1,cucharadita,albahaca
+1,cucharada,ciboulette
+¼,cucharadita,merquen
+x,x,pimienta negra

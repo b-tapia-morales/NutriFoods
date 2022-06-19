@@ -1,0 +1,12 @@
+45,g,tocino
+½,x,pepino
+380,g,porotos negros
+1,taza,choclo
+1,x,tomate
+½,x,cebolla
+1,cda,jugo limón
+½,cdta,mostaza
+10,x,albahaca
+6,cdas,aceite oliva
+x,x,sal
+x,x,pimienta negra

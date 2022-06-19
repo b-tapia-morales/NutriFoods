@@ -1,0 +1,8 @@
+1,x,coliflor
+4,cdas,aceite oliva
+x,x,Sal
+x,x,pimienta negra
+1,botella,Salsa Barbecue
+1,x,merquen
+1,cda,Sésamo
+x,x,cilantro

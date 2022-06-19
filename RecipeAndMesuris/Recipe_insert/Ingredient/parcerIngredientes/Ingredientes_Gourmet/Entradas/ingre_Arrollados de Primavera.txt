@@ -1,0 +1,16 @@
+200,gr,carne cerdo
+5,cucharadas,salsa Soya
+3,x,cebollines
+3,hojas,repollo
+1 1/2,x,zanahorias
+1,cucharada,maicena
+1,litro,aceite
+1/2,cucharada,jengibre
+1/2,cucharada,pimienta negra
+1,x,masa filo
+4,cucharadas,vinagre
+3,cucharadas,azúcar
+1/2,cucharada,sal
+1/2,vaso,agua
+1 1/2,cucharadas,salsa tomate
+1,cucharadita,maicena

@@ -1,0 +1,22 @@
+1,x,congrio colorado
+x,x,Aceite
+3,x,cebollas
+1,x,pimento rojo
+1,x,zanahoria
+2,dientes,ajo
+100,ml,vino blanco
+1,cda,Azafrán
+200,ml,salsa tomate
+500,gr,choritos
+500,gr,almejas
+x,x,Pimienta Negra
+x,x,Sal
+1,x,cilantro
+1,kg,cabezas congrio
+4,lt,agua
+1,x,cebolla
+2,x,apio
+1,x,puerro
+2,hojas,Laurel
+1,cda,Pimienta Negra
+8,ramas,perejil

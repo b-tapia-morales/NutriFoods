@@ -1,0 +1,12 @@
+2,cucharadas,aceite
+2,cucharadas,mantequilla
+1,mediana,cebolla
+1,cucharadita,Ají Color
+10,x,choclos
+1/2,taza,albahaca
+500,ml,leche
+2,x,huevos
+x,x,Sal
+x,x,Pimienta Negra
+x,x,mantequilla
+x,x,Azúcar flor

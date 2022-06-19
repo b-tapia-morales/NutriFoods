@@ -1,0 +1,12 @@
+1,litro,agua
+1,x,Caldo Pollo,Gourmet
+1,x,pechuga pollo
+1/2,taza,apio
+1,taza,mayonesa
+1,cucharadita,mostaza
+6,x,paltas
+1,x,jugo limón
+3,cucharadas,aceite oliva
+x,x,sal
+6,x,aceitunas
+x,x,lechuga

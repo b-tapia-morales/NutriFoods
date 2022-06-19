@@ -1,0 +1,14 @@
+4,filetes,reineta
+8,cdas,mantequilla
+250,g,camarones
+250,g,ostiones
+250,g,calamares
+½,x,cebolla
+1,diente,ajo
+1/3,taza,tomate
+1,cdta,Ají Color
+3,cdas,harina
+1,pote,Caldo pescado,Gourmet
+500,ml,agua
+2,cdas,crema
+2,cdas,perejil

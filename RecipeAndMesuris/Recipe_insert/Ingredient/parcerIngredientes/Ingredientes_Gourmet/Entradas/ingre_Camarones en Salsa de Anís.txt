@@ -1,0 +1,13 @@
+40,x,camarones
+40,gr,mantequilla
+1,diente,ajo
+½,x,cebolla
+40,gr,harina
+100,ml,vino blanco
+250,ml,crema
+1,cdta,anís
+1,cdta,esencia Anís
+150,ml,caldo pescado
+2,cdas,perejil
+x,x,pimienta negra
+x,x,sal

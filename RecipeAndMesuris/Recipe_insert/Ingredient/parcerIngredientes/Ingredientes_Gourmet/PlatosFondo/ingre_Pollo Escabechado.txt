@@ -1,0 +1,9 @@
+1/4,taza,aceite oliva
+6,presas,pollo
+1,x,cebolla
+2,taza,vino blanco
+1/2,taza,vinagre vino
+2,hojas,Laurel
+1/2,cucharada,Pimienta Negra
+1,carcara,limón
+1/2,carcara,naranja

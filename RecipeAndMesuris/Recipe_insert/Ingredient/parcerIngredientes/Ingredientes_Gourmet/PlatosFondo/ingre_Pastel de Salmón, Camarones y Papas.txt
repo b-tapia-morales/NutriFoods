@@ -1,0 +1,15 @@
+700,gr,salmón
+500,gr,camarones
+250,ml,agua
+250,ml,leche
+100,ml,crema
+1,cucharadita,Pimienta Negra
+1,hoja,Laurel
+60,gr,mantequilla
+½,x,cebolla
+40,gr,harina
+50,gr,queso crema
+x,x,Sal
+4,x,papas
+30,gr,mantequilla
+70,gr,queso parmesano

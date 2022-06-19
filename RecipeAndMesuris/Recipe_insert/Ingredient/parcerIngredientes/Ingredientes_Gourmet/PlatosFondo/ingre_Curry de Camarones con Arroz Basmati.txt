@@ -1,0 +1,9 @@
+40,x,camarones
+6,x,cebollas
+1,cda,jengibre
+3,dientes,ajo
+1,cdta,Curry
+4,x,tomates
+1,x,cilantro
+x,x,Pimienta Negra
+x,x,Sal
