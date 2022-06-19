@@ -1,0 +1,11 @@
+1,x,marraqueta
+¾,taza,leche
+3,cucharadas,mantequilla
+2,x,cebollines
+1,cucharada,perejil
+1,cucharadita,tomillo
+800,gr,champiñones
+1,taza,vino blanco
+1.5,litros,agua
+¼,taza,crema
+x,x,ciboulette

@@ -1,0 +1,12 @@
+500,g,carne molida
+1,cucharada,mayonesa
+1,cucharadita,mostaza
+½,diente,ajo
+1,cucharada,Salsa Inglesa
+¼,taza,cebolla morada
+1,cucharada,pepinillos
+1,cucharada,Alcaparras
+x,x,sal
+2,cucharadas,cilantro
+1,x,pan molde
+x,x,Jugo limón

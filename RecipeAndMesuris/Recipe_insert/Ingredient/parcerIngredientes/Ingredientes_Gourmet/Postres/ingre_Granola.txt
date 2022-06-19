@@ -1,0 +1,9 @@
+2,tazas,avena tradicional
+½,taza,almendras
+½,taza,semillas
+½,cdta,Canela Molida
+¼,cdta,Sal Mar
+½,cdta,Esencia Vainilla
+2,cdas,aceite vegetal
+4,cdas,miel
+x,x,Pasas

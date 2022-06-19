@@ -1,0 +1,6 @@
+400,ml,crema leche
+2,palos,Canela Entera
+4,x,huevo
+200,gr,azúcar
+100,gr,azúcar
+1,palo,Canela Entera

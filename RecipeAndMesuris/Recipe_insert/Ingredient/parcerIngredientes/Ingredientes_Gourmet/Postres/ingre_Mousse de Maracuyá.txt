@@ -1,0 +1,7 @@
+500,gr,maracuyá
+1,tarro,leche condensada
+150,ml,yogurt
+300,gr,crema
+3,hojas,colapez
+1,taza,jugo naranja
+1 ¼,taza,azúcar

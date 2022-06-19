@@ -1,0 +1,6 @@
+1,sobre,Gelatina Polvo
+1,tarro,leche evaporada
+2,tazas,manjar
+1,taza,Cobertura Chocolate semiamargo
+8,x,galletas
+x,x,Chocolate Granulado

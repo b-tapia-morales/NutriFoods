@@ -1,0 +1,10 @@
+500,gr,carne pavo
+½,x,cebolla
+½,x,perejil
+½,taza,pan rallado
+2,x,tomates
+4,lamina,queso
+1,x,lechuga escarola
+4,x,pepinillos
+4,x,pan hamburguesa
+x,x,aceite

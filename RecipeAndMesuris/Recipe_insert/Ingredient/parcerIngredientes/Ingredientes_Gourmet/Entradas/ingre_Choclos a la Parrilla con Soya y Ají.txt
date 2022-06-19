@@ -1,0 +1,4 @@
+3,x,choclos
+1,taza,salsa ají amarillo
+1,taza,salsa Soya
+x,x,sésamo

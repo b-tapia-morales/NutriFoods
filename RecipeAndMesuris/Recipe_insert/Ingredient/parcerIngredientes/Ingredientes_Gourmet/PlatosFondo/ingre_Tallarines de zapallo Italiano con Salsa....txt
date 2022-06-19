@@ -1,0 +1,16 @@
+4,x,zapallo italianos
+½,x,cebolla
+1,cucharada,aceite oliva
+2,x,tocino
+1,chica,zanahoria
+1,vara,apio
+1,cucharadita,Ají Color
+¼,cucharadita,Comino
+1,cucharada,Orégano
+500,gr,carne molida
+400,gr,tomates
+1,cucharada,azúcar
+½,taza,vino tinto
+2,hojas,Laurel
+1,cucharadita,Sal
+2,cucharadas,albahaca

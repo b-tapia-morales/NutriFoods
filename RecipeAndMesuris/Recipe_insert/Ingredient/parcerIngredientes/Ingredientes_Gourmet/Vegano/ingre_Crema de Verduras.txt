@@ -1,0 +1,14 @@
+1,cucharada,aceite oliva
+½,x,cebolla
+½,taza,apio
+½,taza,pimentón
+½,cucharadita,Ajo Polvo
+½,cucharadita,Pimienta Blanca
+½,cucharadita,Estragón
+½,cucharadita,Orégano
+2,x,zanahorias
+2,medianos,zapallo italianos
+1,taza,arvejitas
+½,kilo,espinacas
+1.2,litros,agua
+2,sobres,Caldo verdura

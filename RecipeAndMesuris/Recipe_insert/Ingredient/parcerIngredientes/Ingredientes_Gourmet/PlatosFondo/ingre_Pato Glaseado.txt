@@ -1,0 +1,8 @@
+2,x,pechuga pato
+300,ml,jugonaranja
+3,cdas,miel
+200,ml,caldo ave
+10,x,Clavos Olor
+2,x,naranjas
+x,x,Pimienta Negra
+x,x,Sal

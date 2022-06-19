@@ -1,0 +1,11 @@
+2,tazas,lentejas
+1,cda,aceite oliva
+½,x,cebolla
+1,x,zanahoria
+1,x,pimento rojo
+1,cda,aceite oliva
+1,cdta,Ají Color
+1/3,cdta,Orégano
+½,taza,arroz
+6,tazas,agua
+1,cda,Sal

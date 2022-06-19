@@ -1,0 +1,7 @@
+6,x,manzanas verdes
+200,grs,azúcar
+1,cda,Canela Molida
+x,x,Salsa Caramelo
+2,sobres,Crema Pastelera
+x,x,Coco Rallado
+x,x,Almendras

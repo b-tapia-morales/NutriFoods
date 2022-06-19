@@ -1,0 +1,14 @@
+1,sobre,Bizcocho
+4,x,huevos
+200,ml,agua
+1/2,taza,azúcar
+1,taza,agua
+1,cucharadita,Esencia Vainilla
+2,sobre,Glaseado Vainilla
+260,gr,queso crema
+1,cucharada,café
+200,gr,chocolate
+200,ml,crema
+2,cucharadas,mantequilla
+1/2,taza,azúcar
+2/3,taza,almendras

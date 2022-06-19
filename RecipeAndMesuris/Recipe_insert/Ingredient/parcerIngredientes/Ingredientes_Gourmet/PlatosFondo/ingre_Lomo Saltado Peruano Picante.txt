@@ -1,0 +1,10 @@
+800,gr,lomo vetado
+3,x,cebollas
+3,x,tomates
+2,x,ají amarillo
+2,ramas,perejil
+1,cdta,Salsa Ajo
+100,ml,vinagre vino
+2,cdas,Salsa Soya
+x,x,Pimienta Negra
+x,x,Sal

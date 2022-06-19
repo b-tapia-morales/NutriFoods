@@ -1,0 +1,11 @@
+900,gramos,filete cerdo
+1,cucharada,Jengibre
+1,cucharadita,Curry
+2,cucharadas,cilantro
+3,cucharadas,aceite
+1,mediana,cebolla
+150,gramos,pimento rojo
+150,gramos,pimento amarillo
+3,cucharadas,Salsa Soya
+2,cucharadas,vinagre vino
+250,gramos,diente dragón

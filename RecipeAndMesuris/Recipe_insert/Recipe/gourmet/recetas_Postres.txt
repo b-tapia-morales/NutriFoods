@@ -1,0 +1,140 @@
+Huevos de Pascua de Chocolate;Gourmet;https://www.gourmet.cl/recetas/huevitos-arroz-inflado-chocolate/;20;15
+Galletas de Chocolate con Chips de Chocolate...;Gourmet;https://www.gourmet.cl/recetas/galletas-chocolate-chips-chocolate/;30; 
+Waffles con Chips de Chocolate y Salsa Fudge;Gourmet;https://www.gourmet.cl/recetas/waffles-con-chips-de-chocolate-y-salsa-fudge/;15;4 
+Granola;Gourmet;https://www.gourmet.cl/recetas/granola/;25; 
+Leche Asada Vegana;Gourmet;https://www.gourmet.cl/recetas/leche-asada-vegana/;;4 
+Queque de Manzana;Gourmet;https://www.gourmet.cl/recetas/queque-de-manzana/;80;10 
+Galletas Navideñas;Gourmet;https://www.gourmet.cl/recetas/galletas-navidenas/;40;20
+Queque de Chocolate;Gourmet;https://www.gourmet.cl/recetas/queque-de-chocolate/;80;8 
+Budín de Pan;Gourmet;https://www.gourmet.cl/recetas/budin-de-pan/;90;10 
+Rollos de Canela;Gourmet;https://www.gourmet.cl/recetas/rollos-de-canela/;150;12
+Cupcakes de Pie de Limón Decorados;Gourmet;https://www.gourmet.cl/recetas/cupcakes-pie-limon-decorados/;90;12
+Cakepops de Nuez;Gourmet;https://www.gourmet.cl/recetas/cakepops-de-nuez/;60;30
+Queque de Naranja;Gourmet;https://www.gourmet.cl/recetas/queque-de-naranja/;80;12 
+Galletas de Maicena;Gourmet;https://www.gourmet.cl/recetas/galletas-de-maicena/;60;24
+Torta de Trufa;Gourmet;https://www.gourmet.cl/recetas/torta-de-trufa/;90;12 
+Torta de Chocolate Decorada;Gourmet;https://www.gourmet.cl/recetas/torta-glam-2/;60;15 
+Trufas Decoradas;Gourmet;https://www.gourmet.cl/recetas/trufas-glam/;40;20
+Cakepops de Almendras Decorados;Gourmet;https://www.gourmet.cl/recetas/glam-cakepops/;40;30
+Cupcakes Rellenos con Ganache;Gourmet;https://www.gourmet.cl/recetas/party-cupcakes/;40;12
+Galletas de Almendras y Limón bañadas en...;Gourmet;https://www.gourmet.cl/recetas/galletas-almendras-limon-banadas-chocolate/;50;18
+Shots de Chocolate Blanco con Maracuyá;Gourmet;https://www.gourmet.cl/recetas/shots-chocolate-blanco-maracuya/;30;12
+Alfajores de Maicena;Gourmet;https://www.gourmet.cl/recetas/alfajores-de-maicena/;70;25
+Buñuelos de Manzana;Gourmet;https://www.gourmet.cl/recetas/bunuelos-de-manzana/;80;6 
+Torta de Galletas;Gourmet;https://www.gourmet.cl/recetas/torta-de-galletas/;30;10 
+Leche Asada con Caramelo;Gourmet;https://www.gourmet.cl/recetas/leche-asada-caramelo/;60;6 
+Muffins con Chispas de Chocolate;Gourmet;https://www.gourmet.cl/recetas/muffins-chips-chocolate/;50;12
+Mousse de Tres Chocolates;Gourmet;https://www.gourmet.cl/recetas/mousse-de-tres-chocolates/;220;4 
+Cheesecake de Chocolate Blanco;Gourmet;https://www.gourmet.cl/recetas/cheesecake-de-chocolate-blanco/;35;6 
+Torta de Bizcocho Chocolate y Manjar;Gourmet;https://www.gourmet.cl/recetas/torta-bizcocho-chocolate-manjar/;:
+Galletas con chips de chocolate;Gourmet;https://www.gourmet.cl/recetas/galletas-chips-chocolate/;;25
+Creme Brulee de Chocolate;Gourmet;https://www.gourmet.cl/recetas/creme-brulee-chocolate/;60;4 
+Helado de chocolate;Gourmet;https://www.gourmet.cl/recetas/helado-de-chocolate/;10;10
+Helados de frutas;Gourmet;https://www.gourmet.cl/recetas/helados-de-frutas/;20;6 
+Helado de yogurt;Gourmet;https://www.gourmet.cl/recetas/helado-de-yogurt/;15;8 
+Tartaleta de frutas;Gourmet;https://www.gourmet.cl/recetas/tartaleta-de-frutas/;45;2
+Flan de Coco;Gourmet;https://www.gourmet.cl/recetas/flan-de-coco/;70;8 
+Torta o Pastel de Chocolate;Gourmet;https://www.gourmet.cl/recetas/torta-de-chocolate/;60;15 
+Mousse de Maracuyá;Gourmet;https://www.gourmet.cl/recetas/mousse-de-maracuya/;20;10
+Babarua;Gourmet;https://www.gourmet.cl/recetas/babarua/;40;12 
+Torta de Panqueque de Naranja;Gourmet;https://www.gourmet.cl/recetas/torta-panqueque-naranja/;90;30 
+Galletas de Jengibre;Gourmet;https://www.gourmet.cl/recetas/galletas-de-jengibre/;180;36
+Postre para Halloween;Gourmet;https://www.gourmet.cl/recetas/postre-para-halloween/;90;8
+Mote con Huesillo;Gourmet;https://www.gourmet.cl/recetas/mote-con-huesillo/;60;6 
+Manzanas Confitadas;Gourmet;https://www.gourmet.cl/recetas/manzana-confitadas/;20;4
+Chilenitos;Gourmet;https://www.gourmet.cl/recetas/chilenitos/;60;12
+Queque de Plátano;Gourmet;https://www.gourmet.cl/recetas/queque-de-platano/;60;8 
+Kuchen de Manzanas;Gourmet;https://www.gourmet.cl/recetas/kuchen-de-manzanas/;50;8 
+Panqueques de Avena;Gourmet;https://www.gourmet.cl/recetas/panqueques-de-avena/;30;12
+Roscas;Gourmet;https://www.gourmet.cl/recetas/roscas/;;
+Queque de Zanahoria;Gourmet;https://www.gourmet.cl/recetas/queque-zanahoria/;70;12 
+Torta Moka;Gourmet;https://www.gourmet.cl/recetas/torta-moka/;60;15 
+Torta Selva Negra;Gourmet;https://www.gourmet.cl/recetas/torta-selva-negra/;60;15 
+Torta de Piña;Gourmet;https://www.gourmet.cl/recetas/torta-de-pina/;60;15 
+Copas de tres leches de lúcuma;Gourmet;https://www.gourmet.cl/recetas/copas-tres-leches-lucuma/;60;8
+Empolvados con Fudge de Chocolate;Gourmet;https://www.gourmet.cl/recetas/empolvados-2/;;24
+Rosquillas;Gourmet;https://www.gourmet.cl/recetas/rosquillas/;120;15
+Trufas de Chocolate;Gourmet;https://www.gourmet.cl/recetas/trufas-de-chocolate/;40;30
+Flan de Tres leches;Gourmet;https://www.gourmet.cl/recetas/flan-tres-leches/;65;8
+Panqueques con Manjar y Crema;Gourmet;https://www.gourmet.cl/recetas/panqueques-manjar-crema/;20;8
+Sémola con Leche;Gourmet;https://www.gourmet.cl/recetas/semola-con-leche/;35;6 
+Baklava;Gourmet;https://www.gourmet.cl/recetas/baklava/;55;24
+Prestigio Casero;Gourmet;https://www.gourmet.cl/recetas/prestigios-caseros/;20; 
+Tarta de Caramelo Salado y Chocolate;Gourmet;https://www.gourmet.cl/recetas/tarta-de-caramelo-salado-y-chocolate/;40;8 
+Budín de Pan y Manzanas;Gourmet;https://www.gourmet.cl/recetas/budin-de-pan-y-manzanas/;105;10 
+Torta Brownie con Manjar y Frutillas;Gourmet;https://www.gourmet.cl/recetas/torta-brownie-con-manjar-y-frutillas/;60;10 
+Copones de Brownies con Mousse de Chocolates;Gourmet;https://www.gourmet.cl/recetas/copones-de-brownies-con-mousse-de-chocolates/;60;8
+Paletas Heladas de Frutilla Jengibre y Limón...;Gourmet;https://www.gourmet.cl/recetas/paletas-heladas-de-frutilla-jengibre-y-limon.../;30;6
+Torta Panqueque Naranja;Gourmet;https://www.gourmet.cl/recetas/torta-panqueque-naranja/;90;30 
+Mousse de Manjar en Vasitos para Halloween;Gourmet;https://www.gourmet.cl/recetas/vasitos-de-manjar-halloween/;90;8
+Torta Tres Colores;Gourmet;https://www.gourmet.cl/recetas/torta-tres-colores/;40;12 
+Postre tibio de chocolate;Gourmet;https://www.gourmet.cl/recetas/postre-tibio-de-chocolate/;50;6 
+Duraznos Asados;Gourmet;https://www.gourmet.cl/recetas/duraznos-asados/;45;4 
+Postre Helado de Cookies and Cream;Gourmet;https://www.gourmet.cl/recetas/postre-helado-de-cookies-and-cream/;10;6 
+Brigadeiros;Gourmet;https://www.gourmet.cl/recetas/brigadeiros/;15;24
+Manzanas Acarameladas;Gourmet;https://www.gourmet.cl/recetas/manzanas-acarameladas/;20;4
+Turrón de Vino;Gourmet;https://www.gourmet.cl/recetas/turron-de-vino/;30;6 
+Triffle de Berries;Gourmet;https://www.gourmet.cl/recetas/triffle-de-berries/;90;6 
+Torta Helada de Merengue Frambuesa;Gourmet;https://www.gourmet.cl/recetas/torta-de-merengue-y-frambuesa/;90;1
+Strudel de Peras y Chocolate;Gourmet;https://www.gourmet.cl/recetas/strudel-de-peras-y-chocolate/;35;6 
+Suspiro de Maracuya;Gourmet;https://www.gourmet.cl/recetas/suspiro-de-maracuya/;180;6 
+Mousse de Tres Chocolates;Gourmet;https://www.gourmet.cl/recetas/mousse-de-tres-chocolates/;150;4 
+Merengón con Helado Rápido de Berries;Gourmet;https://www.gourmet.cl/recetas/merengon-con-helado-rapido-de-berries/;60;8 
+Crumble de Berries;Gourmet;https://www.gourmet.cl/recetas/crumble-de-berries/;40;9 
+Almendrón Achocolatado;Gourmet;https://www.gourmet.cl/recetas/almendron-achocolatado/;40;8 
+Cheesecake sin Horno con Salsa de Arándanos;Gourmet;https://www.gourmet.cl/recetas/cheesecake-sin-horno-con-salsa-de-arandanos/;25;6 
+Moldes de Manzanas Acarameladas;Gourmet;https://www.gourmet.cl/recetas/moldes-de-manzanas-acarameladas/;35;4 
+Pie de Limón;Gourmet;https://www.gourmet.cl/recetas/pie-de-limon/;40;6 
+Jalea de Berries sin Azúcar;Gourmet;https://www.gourmet.cl/recetas/jalea-de-berries-sin-azucar/;20;10 
+Frutillas con Sabayón de Pimientas;Gourmet;https://www.gourmet.cl/recetas/frutillas-con-sabayon-de-pimientas/;30;4 
+Helado de Vainilla;Gourmet;https://www.gourmet.cl/recetas/helado-de-vainilla/;220;4 
+Helado de Cardamomo;Gourmet;https://www.gourmet.cl/recetas/helado-de-cardamomo/;180;4 
+Peras al Vino Tinto;Gourmet;https://www.gourmet.cl/recetas/peras-al-vino-tinto/;40;4 
+Helado de Estrella de Anís;Gourmet;https://www.gourmet.cl/recetas/helado-de-estrella-de-anis/;180;4 
+Flan de Anís;Gourmet;https://www.gourmet.cl/recetas/flan-de-anis/;60;4 
+Pannacotta de Canela;Gourmet;https://www.gourmet.cl/recetas/pannacotta-de-canela/;50;4 
+Helado de Canela;Gourmet;https://www.gourmet.cl/recetas/helado-de-canela/;60;4 
+Parfait de Canela;Gourmet;https://www.gourmet.cl/recetas/parfait-de-canela/;480;4 
+Tutti Frutti de Frutos Secos;Gourmet;https://www.gourmet.cl/recetas/tutti-frutti-de-frutos-secos/;30;4 
+Crumble de Manzana;Gourmet;https://www.gourmet.cl/recetas/crumble-de-manzana/;50;4 
+Panqueques Rellenos de Frutillas Acarameladas;Gourmet;https://www.gourmet.cl/recetas/crepes-rellenos-de-frutillas-acarameladas/;30;4 
+Cupcakes de Naranja con Chocolate Blanco y...;Gourmet;https://www.gourmet.cl/recetas/cupcakes-de-naranja-con-chocolate-blanco-y.../;90;12 
+Cheesecake;Gourmet;https://www.gourmet.cl/recetas/cheesecake/;80;10 
+Flan de Manjar;Gourmet;https://www.gourmet.cl/recetas/flan-de-manjar/;70;8 
+Volcán de Chocolate;Gourmet;https://www.gourmet.cl/recetas/volcan-de-chocolate/;120;6 
+Helado de Canela a la Crema;Gourmet;https://www.gourmet.cl/recetas/helado-de-canela-a-la-crema/;;4 
+Brownies de Corazón;Gourmet;https://www.gourmet.cl/recetas/brownies-de-corazon/;60;4 
+Frutillas Bañadas en Chocolate;Gourmet;https://www.gourmet.cl/recetas/frutillas-banadas-en-chocolate/;30;16
+Soufflé de Chocolate;Gourmet;https://www.gourmet.cl/recetas/souffle-de-chocolate/;60;6 
+Capuccino Helado;Gourmet;https://www.gourmet.cl/recetas/capuccino-helado/;10;4 
+Tiramisú;Gourmet;https://www.gourmet.cl/recetas/tiramisu/;180;20
+Torta Mil Hojas;Gourmet;https://www.gourmet.cl/recetas/torta-mil-hojas/;600;15 
+Postre de Lúcuma con Galletas;Gourmet;https://www.gourmet.cl/recetas/tronco-de-lucuma-y-almendras/;;
+Tulipas Rellenas;Gourmet;https://www.gourmet.cl/recetas/tulipas-rellenas/;;
+Yogurt con Berries;Gourmet;https://www.gourmet.cl/recetas/yogurt-con-berries/;;
+Banana Split;Gourmet;https://www.gourmet.cl/recetas/banana-split/;30;2
+Suspiro Limeño;Gourmet;https://www.gourmet.cl/recetas/suspiro-limeno/;35;8 
+Papaya Rellena con Suspiro Limeño;Gourmet;https://www.gourmet.cl/recetas/papaya-rellena-con-suspiro-limeno/;;
+Parfait de Vainilla;Gourmet;https://www.gourmet.cl/recetas/parfait-de-vainilla/;;
+Pie de Limón de Pica;Gourmet;https://www.gourmet.cl/recetas/pie-de-limon-de-pica/;30;8 
+Mousse de Chocolate con Chantilly;Gourmet;https://www.gourmet.cl/recetas/mousse-de-chocolate-con-chantilly/;20;4 
+Mousse de Frutillas;Gourmet;https://www.gourmet.cl/recetas/mousse-de-frutillas/;;
+Pannacotta de Vainilla sobre Masa Filo;Gourmet;https://www.gourmet.cl/recetas/pannacotta-de-vainilla-sobre-masa-filo/;6;4 
+Panqueques de Manzana con Caramelo;Gourmet;https://www.gourmet.cl/recetas/panqueques-de-manzana-y-caramelo/;25;16
+Panqueques con Salsa de Naranja;Gourmet;https://www.gourmet.cl/recetas/crepes-con-salsa-de-naranja/;;
+Helado Artesanal de Frutilla;Gourmet;https://www.gourmet.cl/recetas/helado-artesanal-de-frutilla/;20;6 
+Leche Asada;Gourmet;https://www.gourmet.cl/recetas/leche-asada/;60;6 
+Leche Nevada;Gourmet;https://www.gourmet.cl/recetas/leche-nevada/;180;6 
+Manzanas Asadas;Gourmet;https://www.gourmet.cl/recetas/manzanas-asadas/;30;6 
+Flan de Cola de Mono;Gourmet;https://www.gourmet.cl/recetas/flan-de-cola-de-mono/;;
+Creme Brulee;Gourmet;https://www.gourmet.cl/recetas/creme-brulee/;40;6 
+Crumble de Berries;Gourmet;https://www.gourmet.cl/recetas/crumble-de-berries/;40;9 
+Cupcake con Chips de Chocolate y Frambuesas;Gourmet;https://www.gourmet.cl/recetas/cupcake-con-chips-de-chocolate-y-frambuesas/;50;12
+Corona rellena con Pastelera y Durazno;Gourmet;https://www.gourmet.cl/recetas/corona-rellena-con-pastelera-y-durazno/;30;6 
+Celestinos y Frutas de la Estación;Gourmet;https://www.gourmet.cl/recetas/celestinos-y-frutas-de-la-estacion/;45;16 
+Cheesecake de Frambuesas y Chocolate;Gourmet;https://www.gourmet.cl/recetas/cheesecake-de-frambuesas-y-chocolate/;360;10 
+Brownies de Chocolate;Gourmet;https://www.gourmet.cl/recetas/brownies-de-chocolate/;50;16 
+Mousse de Chocolate;Gourmet;https://www.gourmet.cl/recetas/mousse-de-chocolate/;;
+Arroz con Leche;Gourmet;https://www.gourmet.cl/recetas/arroz-con-leche/;30;6 
+Bavarois de Frambuesa;Gourmet;https://www.gourmet.cl/recetas/bavarois-de-frambuesa/;25;10
+Bavarois de Pisco Sour;Gourmet;https://www.gourmet.cl/recetas/bavarois-de-pisco-sour/;240;8

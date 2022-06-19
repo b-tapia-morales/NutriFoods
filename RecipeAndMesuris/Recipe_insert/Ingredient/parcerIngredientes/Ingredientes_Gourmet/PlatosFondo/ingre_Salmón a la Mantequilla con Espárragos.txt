@@ -1,0 +1,10 @@
+4,filetes,salmón
+x,x,pimienta negra
+x,x,sal
+4,cucharadas,mantequilla
+1,cucharada,Eneldo
+1,x,limon
+700,gramos,espárragos
+1,cucharadita,aceite oliva
+1,cucharadita,Jengibre
+1,cucharadita,Sal

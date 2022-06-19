@@ -1,0 +1,9 @@
+4,x,manzanas rojas
+300,gr,azúcar
+½,x,Jugo limón
+2,cucharadas,agua
+100,gramos,Mantequilla
+1/2,cucharada,Colorante rojo
+x,x,Estrellas Multicolor
+x,x,Nueces picadas
+x,x,Chocolate Leche

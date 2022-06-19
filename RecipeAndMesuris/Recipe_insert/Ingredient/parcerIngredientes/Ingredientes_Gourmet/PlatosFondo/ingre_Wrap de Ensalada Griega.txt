@@ -1,0 +1,11 @@
+1,taza,lechuga escarola
+4,x,Tomates
+1,x,Pepino
+½,x,pimento rojo
+12,x,aceitunas
+1,cucharada,Orégano
+1 ½,cucharada,aceite oliva
+1,cucharada,vinagre blanco
+250,gr,queso cabra
+x,x,Mayonesa
+8,x,tortillas

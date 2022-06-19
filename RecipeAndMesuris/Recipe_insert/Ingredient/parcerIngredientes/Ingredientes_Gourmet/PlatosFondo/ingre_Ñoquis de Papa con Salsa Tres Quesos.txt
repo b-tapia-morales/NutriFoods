@@ -1,0 +1,14 @@
+1,kilo,papas
+1,kilo,sal
+1/2,cucharadita,Pimienta Blanca
+1,pizca,Nuez Moscada
+30,g,queso parmesano
+1,x,yema
+100,g,harina
+600,ml,crema
+110,g,queso parmesano
+80,g,queso roquefort
+80,g,queso gruyere
+x,x,Pimienta Blanca
+1/2,taza,ciboulette
+50,g,nueces

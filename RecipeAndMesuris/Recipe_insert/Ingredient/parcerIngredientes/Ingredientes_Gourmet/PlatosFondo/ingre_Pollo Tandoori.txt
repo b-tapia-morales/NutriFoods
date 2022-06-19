@@ -1,0 +1,13 @@
+1,x,limón
+4,cucharaditas,Paprika
+2,x,cebollas moradas
+16,presas,pollo
+x,x,Aceite
+300,ml,yogurt natural
+1,cucharada,jengibre
+2,dientes,ajo
+¾,cucharadita,Curry
+¾,cucharadita,Comino
+¼,cucharadita,Pimienta Cayenna
+¼,cucharadita,Cúrcuma
+x,x,Cilantro

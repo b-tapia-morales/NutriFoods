@@ -1,0 +1,4 @@
+1,taza,azúcar granulada
+3/4,taza,vino tinto
+3,x,huevo
+½,taza,nueces

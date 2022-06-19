@@ -1,0 +1,10 @@
+300,kg,pechuga pollo
+1,mediana,palta
+1,x,tomate
+4,hojas,lechuga
+4,x,tortilla tacos
+1,x,pimeto rojo
+1,cda,aceite oliva
+1,cdta,jugo limón
+x,x,Molinillo
+3/4,taza,yogurt natural

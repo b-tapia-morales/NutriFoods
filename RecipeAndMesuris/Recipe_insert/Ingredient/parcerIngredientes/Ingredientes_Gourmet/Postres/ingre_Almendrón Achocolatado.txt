@@ -1,0 +1,10 @@
+170,gr,almendras
+200,gr,azúcar
+3,x,clara
+¼,cucharadita,Almendras
+1,cucharada,mantequilla
+200,gr,Chocolate amargo
+100,gr,mantequilla
+4,x,huevo
+40,gr,azúcar flor
+1,cucharadita,Esencia Vainilla

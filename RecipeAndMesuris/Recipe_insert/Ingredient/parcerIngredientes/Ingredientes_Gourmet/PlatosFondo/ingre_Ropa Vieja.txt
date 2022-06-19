@@ -1,0 +1,13 @@
+1,kilo,posta paleta
+2,hojas,laurel
+2,cucharadas,aceite
+1,x,cebolla
+1,x,pimento rojo
+1,x,pimento verde
+2,dientes,ajo
+1,cucharadita,Orégano
+1,cucharadita,Páprika
+½,cucharadita,Pimienta Negra
+½,pote,Caldo Carne
+1,taza,puré tomates
+¾,taza,vino blanco

@@ -1,0 +1,11 @@
+4,x,zapallo italianos
+1,x,cebolla
+1,diente,ajo
+1,cda,Cardamomo
+1,lt,crema
+1/2,lt,caldo ave
+4,rebanadas,pan,blanco
+2,cdas,aceite oliva
+x,x,Pimienta Negra
+x,x,Sal
+x,x,Perejil

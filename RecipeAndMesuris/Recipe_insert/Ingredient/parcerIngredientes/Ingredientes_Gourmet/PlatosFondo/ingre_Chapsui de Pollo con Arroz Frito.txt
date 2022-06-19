@@ -1,0 +1,12 @@
+1,kg,pechuga pollo
+1,cdta,ajo
+1,cdta,jengibre
+3,x,zanahorias
+1,x,brócoli
+200,gr,champiñones parís
+2,x,cebollas
+6,x,cebollines
+½,x,repollo
+2,cdas,aceite sésamo
+1,banja,dientes dragón
+½,taza,Salsa soya

@@ -1,0 +1,8 @@
+6,grandes,papas
+1,mediana,cebolla
+½,taza,aceite oliva
+1,diente,ajo
+7,x,huevos
+1,cucharadita,Páprika
+1,cucharadita,Sal
+½,cucharadita,Pimienta Blanca

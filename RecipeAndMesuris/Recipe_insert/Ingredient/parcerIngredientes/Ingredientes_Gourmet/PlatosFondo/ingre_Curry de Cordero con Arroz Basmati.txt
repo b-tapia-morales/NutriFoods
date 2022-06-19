@@ -1,0 +1,9 @@
+1,kg,Pierna cordero
+3,dientes,ajo
+1,cda,jengibre
+4,x,cebollas
+1,cda,Curry
+4,x,tomates
+1,x,cilantro
+x,x,Pimienta Negra
+x,x,sal

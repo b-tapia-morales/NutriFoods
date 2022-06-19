@@ -1,0 +1,15 @@
+8,rebanadas,pan blanco
+240,ml,leche
+120,ml,crema
+1,x,cebolla
+1,x,pimento rojo
+1,x,pimento verde
+1,diente,ajo
+1,cdta,ají Color
+40,ml,aceite
+200,ml,vino blanco
+500,gr,camarones
+100,gr,queso mantecoso
+x,x,Pimienta Negra
+x,x,Sal
+100,gr,queso parmesano

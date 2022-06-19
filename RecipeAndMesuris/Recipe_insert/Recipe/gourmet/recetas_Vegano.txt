@@ -1,0 +1,34 @@
+Steaks de Coliflor con BBQ Merquén;Gourmet;https://www.gourmet.cl/recetas/steaks-de-coliflor-con-bbq-merquen/;45;4 
+Lentejas con Arroz;Gourmet;https://www.gourmet.cl/recetas/lentejas-con-arroz/;80;6 
+Molde de Arroz;Gourmet;https://www.gourmet.cl/recetas/molde-de-arroz/;35;8
+Ensalada de Coleslaw;Gourmet;https://www.gourmet.cl/recetas/ensalada-de-coleslaw/;20;4 
+Champiñones a lo &#8220;Empanada de Pino&#8221;;Gourmet;https://www.gourmet.cl/recetas/champinones-rellenos-lo-empanada-pino/;50;3 
+Choclos a la Parrilla con Soya y Ají;Gourmet;https://www.gourmet.cl/recetas/choclos-la-parrilla-soya-aji-amarillo-sesamo/;;3
+Guacamole;Gourmet;https://www.gourmet.cl/recetas/guacamole/;5;1
+Sopa Toscana de Porotos;Gourmet;https://www.gourmet.cl/recetas/sopa-toscana-porotos/;30;4 
+Mayonesa Vegana;Gourmet;https://www.gourmet.cl/recetas/mayonesa-vegana/;;10
+Zapallo Spaghetti con Tomate Cherry y Albahaca;Gourmet;https://www.gourmet.cl/recetas/zapallo-spaghetti-tomate-cherry-albahaca/;60;2 
+Leche Asada Vegana;Gourmet;https://www.gourmet.cl/recetas/leche-asada-vegana/;;4 
+Hummus de Zanahoria;Gourmet;https://www.gourmet.cl/recetas/hummus-de-zanahoria/;10;1 
+Queque de Zanahoria Vegano;Gourmet;https://www.gourmet.cl/recetas/queque-zanahoria-vegano/;45;6 
+Manjar de Dátiles;Gourmet;https://www.gourmet.cl/recetas/manjar-de-datiles/;10;4
+Brownie Vegano;Gourmet;https://www.gourmet.cl/recetas/brownie-vegano/;30;16 
+Ensalada Chilena;Gourmet;https://www.gourmet.cl/recetas/ensalada-chilena/;20;4 
+Pan Árabe Plano;Gourmet;https://www.gourmet.cl/recetas/pan-plano-arabe/;100;6
+Baba Ganoush;Gourmet;https://www.gourmet.cl/recetas/baba-ganoush/;35;6
+Ratatouille;Gourmet;https://www.gourmet.cl/recetas/ratatouille/;45;6
+Parrilla de Verduras Asadas;Gourmet;https://www.gourmet.cl/recetas/parrilla-de-verduras-asadas/;60;6 
+Garbanzos;Gourmet;https://www.gourmet.cl/recetas/sopa-de-garbanzos/;170;6 
+Chips de Vegetales Horneados;Gourmet;https://www.gourmet.cl/recetas/chips-de-vegetales-horneados/;55;4 
+Hummus;Gourmet;https://www.gourmet.cl/recetas/hummus/;10;4 
+Chips de Manzana con Canela;Gourmet;https://www.gourmet.cl/recetas/chips-de-manzana-con-canela/;120;2 
+Ceviche de Champiñones;Gourmet;https://www.gourmet.cl/recetas/cebiche-de-champinones/;20;8
+Arroz Primavera;Gourmet;https://www.gourmet.cl/recetas/arroz-primavera/;30;10
+Crema de Verduras;Gourmet;https://www.gourmet.cl/recetas/crema-de-verduras/;40;6
+Couscous con Zanahorias y Cilantro;Gourmet;https://www.gourmet.cl/recetas/couscous-con-zanahorias-y-cilantro/;30;4
+Guiso de Verduras;Gourmet;https://www.gourmet.cl/recetas/guiso-de-verduras/;40;4
+Ensalada de Porotos Granados;Gourmet;https://www.gourmet.cl/recetas/ensalada-de-porotos-granados/;10;8
+Curry de Verduras;Gourmet;https://www.gourmet.cl/recetas/curry-de-verduras/;50;4
+Tutti Frutti de Frutos Secos;Gourmet;https://www.gourmet.cl/recetas/tutti-frutti-de-frutos-secos/;30;4
+Risotto de Champiñones;Gourmet;https://www.gourmet.cl/recetas/risotto-de-champinones/;50;6
+Crema de Zapallo Camote;Gourmet;https://www.gourmet.cl/recetas/crema-de-zapallo-camote/;40;6

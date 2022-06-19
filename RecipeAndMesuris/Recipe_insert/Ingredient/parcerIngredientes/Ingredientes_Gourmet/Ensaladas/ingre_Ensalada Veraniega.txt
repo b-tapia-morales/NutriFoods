@@ -1,0 +1,17 @@
+6,tazas,lechuga
+2,tazas,frutillas
+1,taza,queso cabra
+1,cucharada,azúcar
+1,cucharada,mostaza dijon
+1,cucharadita,sal
+¼,taza,vinagre manzana
+½,taza,aceite
+1,cucharadita,cebolla
+2,cucharada,amapola
+1/3,taza,azúcar
+2 ½,cucharadas,azúcar rubia
+½,cucharadita,sal
+½,cucharadita,canela
+x,x,merquen
+x,x,clara huevo
+400,g,nueces

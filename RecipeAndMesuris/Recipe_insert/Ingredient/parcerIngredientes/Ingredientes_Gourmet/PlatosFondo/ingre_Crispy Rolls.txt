@@ -1,0 +1,9 @@
+1,taza,arroz
+1,taza,agua
+2,cdas,vinagre
+1,pqte,ciboulette
+1,pqte,queso crema
+100,grs,salmón ahumado
+x,x,Salsa Soya
+x,x,aceite
+3,hojas,nori

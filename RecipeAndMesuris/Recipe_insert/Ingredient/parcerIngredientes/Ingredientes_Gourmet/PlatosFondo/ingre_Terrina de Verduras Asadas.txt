@@ -1,0 +1,12 @@
+1/2,taza,aceite oliva
+1,cucharada,sal
+1,cucharada,Pimienta Negra
+1,mediana,berenjena
+1,x,zapallo italiano
+5,hojas,gelatina
+1,taza,jugo tomates
+1,cucharada,Orégano
+1,diente,ajo
+2,x,pimento rojos
+2,x,pimento amarillos
+12,hojas,albahaca

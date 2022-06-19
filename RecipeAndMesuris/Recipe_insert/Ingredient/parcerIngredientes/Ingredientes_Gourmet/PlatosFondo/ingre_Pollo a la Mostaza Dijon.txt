@@ -1,0 +1,9 @@
+8,presas,trutro pollo
+2,cdas,aceite oliva
+¼,taza,cebolla
+1,diente,ajo
+500,ml,agua
+3,cdas,mostaza Dijon
+5,cdas,crema ácida
+2,cdtas,Estragón
+1,cdta,maicena

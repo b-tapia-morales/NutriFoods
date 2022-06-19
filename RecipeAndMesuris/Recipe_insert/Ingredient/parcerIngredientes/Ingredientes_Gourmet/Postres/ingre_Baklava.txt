@@ -1,0 +1,11 @@
+320,gr,masa
+200,gr,mantequilla
+100,gr,nueces
+100,gr,almendras
+50,gr,pistachos
+1,cucharada,azúcar
+1,cucharada,Canela
+300,gr,azúcar
+250,gr,agua
+x,x,cascara naranja
+2,x,Canela

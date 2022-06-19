@@ -1,0 +1,11 @@
+2,tazas,harina
+100,gramos,margarina
+1/4,taza,agua
+1/4,cdta,sal
+1,x,cebolla
+1,paquete,ciboulette
+1,taza,Salsa Queso
+1,x,pimento verde
+3,x,huevos
+1,tarro,atún
+1,taza,queso gauda

@@ -1,0 +1,14 @@
+200,g,galletas
+1/4,taza,azúcar rubia
+120g,mantequilla
+4,paquetes,queso crema
+1 1/2,taza,azúcar
+3/4,taza,leche
+4,x,huevos
+3/4,taza,crema ácida
+1,cucharada,Esencia Vainilla
+x,x,limón
+1/4,taza,harina
+3,tazas,berries
+x,x,Ralladura limón
+1,cucharada,azúcar flor

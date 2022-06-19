@@ -1,0 +1,10 @@
+200,ml,agua
+4,x,huevos
+1,litro,leche
+250,gr,puré lúcuma
+3,x,huevos
+¾,taza,azúcar
+100,gr,nueces
+1,tarro,leche condensada
+1,tarro,leche evaporada
+1,taza,crema

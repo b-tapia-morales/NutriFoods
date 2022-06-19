@@ -1,0 +1,6 @@
+3,cdas,aceite
+1,taza,tomate
+1,taza,choclo
+½,taza,albahaca
+2,x,huevos
+1,x,tortilla

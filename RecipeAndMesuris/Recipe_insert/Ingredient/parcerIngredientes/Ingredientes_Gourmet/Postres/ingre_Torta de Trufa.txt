@@ -1,0 +1,10 @@
+3,x,huevos
+1 ½,taza,aceite
+1,½,leche
+1,cdta,Esencia Vainilla
+3,tazas,harina
+2,cdtas,Bicarbonato
+1,taza,Cacao Amargo Polvo
+1,taza,azúcar
+500,gr,Cobertura Chocolate Semiamargo
+300,gr,crema

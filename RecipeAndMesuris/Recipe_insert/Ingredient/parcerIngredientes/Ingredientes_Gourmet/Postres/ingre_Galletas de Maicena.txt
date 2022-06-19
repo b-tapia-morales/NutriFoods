@@ -1,0 +1,6 @@
+1 ½,tazas,harina
+½,taza,almidón maíz
+½,cdta,Polvos Hornear
+200,gr,mantequilla
+1,cdta,Esencia Vainilla
+3/4,taza,azúcar flor

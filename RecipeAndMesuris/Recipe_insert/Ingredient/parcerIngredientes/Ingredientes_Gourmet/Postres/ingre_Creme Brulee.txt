@@ -1,0 +1,5 @@
+600,ml,crema líquida
+5,x,yemas
+1,x,vaina vainilla
+1/2,taza,azúcar granulada
+x,x,Azúcar rubia

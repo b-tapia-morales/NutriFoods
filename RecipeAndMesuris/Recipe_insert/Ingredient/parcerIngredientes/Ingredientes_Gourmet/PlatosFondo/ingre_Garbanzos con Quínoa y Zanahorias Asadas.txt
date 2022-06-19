@@ -1,0 +1,11 @@
+1,taza,quínoa
+1,cucharada,Caldo Verduras
+4,x,zanahorias
+1,taza,garbanzos
+½,cucharadita,Comino
+½,cucharadita,paprika
+1,cucharadita,Sal
+½,cucharadita,pimienta negra
+2,cucharadas,aceite oliva
+1/2,cucharadita,Ajo
+¼,taza,perejil

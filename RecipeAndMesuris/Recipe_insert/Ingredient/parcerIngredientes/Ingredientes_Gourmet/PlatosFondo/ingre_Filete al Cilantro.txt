@@ -1,0 +1,5 @@
+1.5,kilos,filete
+½,taza,Salsa Soya
+½,taza,aceite oliva
+1,cucharadita,Ajo
+2,atados,cilantro

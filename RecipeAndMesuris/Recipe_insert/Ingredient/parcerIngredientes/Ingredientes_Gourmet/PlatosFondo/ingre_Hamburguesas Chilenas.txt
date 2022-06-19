@@ -1,0 +1,23 @@
+500,gr,carne molida
+1,x,cebolla
+1,cucharadita,Comino
+1,cucharadita,Ají color
+1,cucharadita,Ajo
+1,cucharadita,Sal
+1,cucharadita,Pimienta Blanca
+1,cucharada,Orégano
+2,cucharaditas,mostaza
+2,cucharaditas,Salsa Inglesa
+1,x,huevo
+1,x,tomate
+3,x,cebollines
+2,cucharadas,cilantro
+2,cucharadas,aceite
+½,x,limón
+x,x,sal
+½,cucharadita,Merquén
+6,láminas,queso
+1,x,palta
+12,lonjas,tocino
+x,x,mayonesa
+6,x,pan amasado

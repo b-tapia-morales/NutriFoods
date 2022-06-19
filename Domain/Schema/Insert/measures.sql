@@ -135,11 +135,175 @@ VALUES
     (33, 'Cucharadita', 5),
     -- Ají color --
     (34, 'Cucharadita', 5),
-    (34, 'Taza', 249)
+    (34, 'Taza', 249),
     -- Queso --
-    -- (35, '', ),
-
+    (35, 'Lámina', 17),
+    (35, 'Taza', 105),
     -- Berenjena --
+    (36, 'Taza', 82),
+    -- Cebollín --
+    (37, 'Cucharada', 3),
+    (37, 'Cucharadita', 1),
+    -- Ajo en polvo --
+    (38, 'Cucharadita', 3.1),
+    (38, 'Cucharada', 9.7),
+    -- Tomate cherry --
+    (39, '', 0),
+    -- Almendras --
+    (40, 'Taza', 143),
+    -- Harina --
+    (41, 'Taza', 125),
+    -- Tomillo --
+    (42, 'Cucharadita', 0.8),
+    -- Brócoli --
+    (43, 'Taza', 91),
+    (43, 'Racimo', 608),
+    (43, 'Trozos', 88),
+    -- Choclo --
+    (44, 'Taza', 166),
+    -- Espárrago --
+    (45, 'Taza', 134),
+    -- Vinagre manzana --
+    (46, 'Cucharada', 14.9),
+    (46, 'Taza', 239),
+    (46, 'Cucharadita', 5),
+    -- Jengibre --
+    (47, 'Cucharadita', 1.8),
+    (47, 'Cucharada', 5.2),
+    -- Apio --
+    (48, 'Cucharada', 7.5),
+    (48, 'Tallo Mediano', 40),
+    (48, 'Tallo Pequeño', 17),
+    (48, 'Tallo Grande', 64),
+    (48, 'Taza', 101),
+    -- Leche evaporada --
+    (49, 'Taza', 252),
+    (49, 'Tarro', 369),
+    --  Papa -- 
+    (50, 'Pequeña', 170),
+    (50, 'Taza', 150),
+    (50, 'Grande', 369),
+    (50, 'Mediana', 213),
+    --  Merkén --
+    (51, 'Cucharada', 8),
+    (51, 'Cucharadita', 2.7),
+    --  Manzana -- 
+    (52, 'Taza', 110),
+    (52, 'Grande', 216),
+    (52, 'Mediana', 161),
+    (52, 'Pequeña', 132),
+    --  Pechuga de pollo -- 
+    (53, 'Trozo', 15),
+    --  Vinagre -- 
+    (54, 'Cucharada', 14.9),
+    (54, 'Cucharadita', 5),
+    (54, 'Taza', 238),
+    --  Pimiento -- 
+    (55, 'Grande', 164),
+    (55, 'Cucharada', 9.3),
+    (55, 'Taza, en trozos', 92),
+    (55, 'Taza, en tiras', 149),
+    (55, 'Mediano', 119),
+    (55, 'Pequeño', 74),
+    -- Garbanzo --
+    (56, 'Cucharada', 12.5),
+    (56, 'Taza', 200),
+    -- Atún --
+    
+    -- Vainilla --
+    (58, 'Cucharadita', 4.2),
+    (58, 'Taza', 208),
+    (58, 'Cucharada', 13),
+    -- Aceite de coco --
+    (59, 'Taza', 218),
+    (59, 'Cucharadita', 4.5),
+    (59, 'Cucharada', 13.6),
+    -- Leche --
+    (60, 'Taza', 244),
+    (60, 'lt', 1027),
+    -- Queso mozzarella --
+    (61, 'Taza', 112),
+    (61, 'Tiras', 170),
+    (61, 'Rodaja', 170),
+    -- Salmón --
+    (62, 'Filete', 159),
+    -- Aceite de palta --
+    (63, 'Cucharadita', 4.5),
+    (63, 'Cucharada', 14),
+    (63, 'Taza', 218),
+    -- Repollo --
+    (64, 'Hoja Grande', 33),
+    (64, 'Mediano', 908),
+    (64, 'Taza, pícado', 85),
+    (64, 'Grande', 1248),
+    (64, 'Pequeño', 714),
+    -- Aceituna --
+    (65, 'Cucharada', 8.4),
+    (65, 'Grande', 4.4),
+    (65, 'Pequeña', 3.2),
+    -- Arvejas --
+    (66, 'Taza', 145),
+    -- Pepino --
+    (67, 'Entero', 301),
+    (67, 'Taza', 52),
+    -- Porotos verdes --
+    (68, 'Taza', 200),
+    -- Aceituna negra --
+    (69, 'Cucharada', 8.4),
+    (69, 'Grande', 4.4),
+    (69, 'Pequeña', 3.2),
+    -- Sésamo --
+    (70, 'Taza', 144),
+    (70, 'Cucharada', 9),
+    -- Linaza --
+    (71, 'Cucharadita, molida', 2.5),
+    (72, 'Cucharada, molida', 7),
+    (72, 'Taza', 168),
+    (72, 'Cucharadita, entera', 3.4),
+    (72, 'Cucharada, entera', 10.3),
+    -- Polvo de hornear --
+    (73, 'Cucharadita', 5),
+    -- Canela --
+    (74, 'Cucharadita', 2.6),
+    (74, 'Cucharada', 7.8),
+    -- Zapallo --
+    (75, 'Taza, en cubos', 116),
+    -- Curry --
+    (76, 'Cucharadita', 2),
+    (76, 'Cucharada', 6.3),
+    -- Nuez moscada --
+    (77, 'Cucharada', 7),
+    (77, 'Cucharadita', 2.2),
+    -- Queso cheddar --
+    (78, 'Taza, derretido', 244),
+    (78, 'Rodaja', 28),
+    (78, 'Taza, rallado', 113),
+    (78, 'Cubo', 17),
+    (78, 'Taza', 132),
+    -- Salsa de tomate --
+    (79, 'Taza', 245),
+    -- Puerro --
+    (80, 'Taza', 89),
+    -- Harina de almendra --
+
+    --Pimiento verde--
+    (82, 'Taza, picada',149),
+    (82, 'Taza, en rodajas',149),
+    (82,'cucharada',9.3),
+    (82,'Grande',164),
+    (82,'Mediano',119),
+    (82,'pequeño',74),
+    (82,'Tiras',27),
+
+    --Ciboulette--
+    (83,'Cucharada, picada',3),
+    (83,'Cucharadita, picada',1),
+    --Queso cabra--
+    (84,'oz',28.35),
+    --Vinagre balsamico--
+    (85,'cucharada',16),
+    (85,'cucharadadita',5.3),
+    (85,'Taza',255)
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;

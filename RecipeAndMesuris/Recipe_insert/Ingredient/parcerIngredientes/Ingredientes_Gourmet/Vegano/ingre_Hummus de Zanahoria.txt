@@ -1,0 +1,11 @@
+1,mediana,zanahoria
+2,cucharada,aceite oliva
+¼,cucharadita,Comino
+¼,cucharadita,Páprika
+½,cucharadita,Cúrcuma
+1,cucharadita,Sal
+½,cucharadita,Pimienta Negra
+½,cucharadita,Ajo Polvo
+1,taza,garbanzos
+1,cucharada,tahini
+1,x,jugo limón

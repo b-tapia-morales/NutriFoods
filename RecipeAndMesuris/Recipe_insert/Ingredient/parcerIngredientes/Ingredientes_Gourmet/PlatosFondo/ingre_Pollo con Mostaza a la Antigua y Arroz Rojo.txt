@@ -1,0 +1,20 @@
+6,presas,pollo
+3/4,taza,cerveza
+3,cucharaditas,mostaza
+2,cucharaditas,mantequilla
+x,x,Pimienta Negra
+x,x,Comino
+x,x,Sal
+2,tazas,arroz
+2 1/2,tazas,agua
+1,taza,salsa tomate
+1,mediana,cebolla
+1/2,cucharadita,Ajo
+1,cucharadita,Perejil
+2,hojas,Laurel
+2,cdas,aceite
+x,x,Sal
+x,x,marraqueta
+x,x,Mantequilla
+x,x,Ajo
+x,x,Perejil

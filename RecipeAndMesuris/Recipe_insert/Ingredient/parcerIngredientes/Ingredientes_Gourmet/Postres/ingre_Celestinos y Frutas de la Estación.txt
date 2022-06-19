@@ -1,0 +1,10 @@
+2,x,huevos
+1,taza,leche
+1/3,taza,agua
+1,taza,harina
+1/4,cucharadita,sal
+1,cucharadita,Esencia Vainilla
+5,cucharadas,margarina
+150,g,Salsa Frambuesas
+1/2,kilo,manjar
+1/3,taza,leche

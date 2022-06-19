@@ -1,0 +1,8 @@
+4,x,pechugas
+1,sobre,Salsa Champiñones
+2,x,cebollines
+2,dientes,ajo
+1/4,taza,salsa tomate
+1/2,taza,vino blanco
+1/2,taza,crema
+4,cucharaditas,aceite

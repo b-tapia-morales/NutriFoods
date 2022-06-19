@@ -1,0 +1,13 @@
+2,cucharadas,aceite
+1,x,cebollas
+1,x,pimento rojo
+½,diente,ajo
+½,cucharadita,Ají color
+6,presas,pollo
+1,x,costillar cerdo
+2,x,longaniza
+250,ml,agua
+1,x,repollo
+600,gr,choros
+8,x,papas
+1,litro,vino blanco

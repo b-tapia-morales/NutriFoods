@@ -1,0 +1,13 @@
+6,bistec,asiento
+2,x,zanahorias
+3,lonjas,tocino
+2,x,huevos
+x,x,Aceite
+1/2,cucharadita,Ají color
+1/2,cucharadita,Orégano
+1/2,cucharadita,Comino
+1/2,x,cebolla
+x,x,zanahoria
+2,x,tomates
+2,taza,agua
+1/4,taza,vino blanco
