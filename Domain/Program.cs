@@ -1,6 +1,3 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Domain.ApiRetrieval;
 
-app.MapGet("/", () => "Hello World!");
-
-app.Run();
+var dictionary = ApiRetrieval.CreateDictionaryIds();

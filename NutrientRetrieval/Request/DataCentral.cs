@@ -3,22 +3,18 @@ using Newtonsoft.Json;
 
 namespace NutrientRetrieval.Request;
 
-public class DataCentral
+public static class DataCentral
 {
-    private readonly string api_key;
+    private const string ApiKey = "aLGkW4nbdeEhoFefi68nOYLNPaSXhiSjO7bIBzQk";
 
-    public DataCentral(string key)
+    public static Food? FoodRequest(string id)
     {
-        api_key = key;
-    }
-    
-    public Food? FoodRequest(string id)
-    {
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{id}?format=abridged&" + $"api_key={api_key}";
+        var path = $"https://api.nal.usda.gov/fdc/v1/food/{id}?format=abridged&api_key={ApiKey}";
+        var uri = new Uri(path);
 
         using var client = new HttpClient();
-        var foodObject = JsonConvert.DeserializeObject<Food>(client.GetAsync(new Uri(path)).Result.Content.ReadAsStringAsync().Result);
+        var food = JsonConvert.DeserializeObject<Food>(client.GetAsync(uri).Result.Content.ReadAsStringAsync().Result);
 
-        return foodObject;
+        return food;
     }
 }
