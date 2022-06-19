@@ -307,3 +307,7 @@ VALUES
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
+
+
+SELECT name from nutrifoods.ingredient WHERE similarity_dist(name,'Aceite') < 0.10;
+SELECT * FROM pg_available_extensions ORDER BY name;

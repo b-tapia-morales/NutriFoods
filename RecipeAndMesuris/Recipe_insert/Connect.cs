@@ -80,8 +80,7 @@ public class Connect
                     string lineMeasury = fileMeasures.ReadLine() ?? throw new InvalidOperationException();
                     string[] data = lineMeasury.Split(";");
                     string queryMeasury =
-                        $"INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams) VALUES ({result},'{data[0]}',{data[1]})" +
-                        $"ON CONFLICT DO NOTHING;";
+                        $"INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams) VALUES ({result},'{data[0]}',{data[1]})ON CONFLICT DO NOTHING;";
                     NpgsqlCommand commandMeasury = new NpgsqlCommand(queryMeasury, instance);
                     commandMeasury.ExecuteNonQuery();
                 }
@@ -91,5 +90,13 @@ public class Connect
         fileIngredient.Close();
         instance.Close();
         Console.WriteLine("Insert Measures Ingredient Correct!");
+    }
+
+
+    public void InsertRecipeIngredient()
+    {
+        var instance = Connecte();
+        IngredientRecipe i = new IngredientRecipe(instance);
+        i.ReadInsertRecipeIngredient();
     }
 }

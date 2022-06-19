@@ -8,5 +8,6 @@
     <file url="file://$PROJECT_DIR$/Domain/Schema/Insert/ingredients.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/Domain/Schema/Insert/measures.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/RecipeAndMesuris/Recipe_insert/Connect.cs" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/RecipeAndMesuris/Recipe_insert/IngredientRecipe.cs" dialect="PostgreSQL" />
   </component>
 </project>

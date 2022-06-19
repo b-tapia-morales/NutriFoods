@@ -6,11 +6,10 @@ using RecipeAndMesuris.Recipe_insert;
 
 
 /*Measures m = new Measures();
-m.GetMeasures();
-*/
-/*Connect c = new Connect();
-c.InsertRecipe();
-c.InsertMeasuris();*/
+m.GetMeasures();*/
 
-IngredientRecipe i = new IngredientRecipe();
-i.ReadInsertRecipeIngredient();
+Connect c = new Connect();
+//c.InsertRecipe();
+//c.InsertMeasuris();
+
+c.InsertRecipeIngredient();
