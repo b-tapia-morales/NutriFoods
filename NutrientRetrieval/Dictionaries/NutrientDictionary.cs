@@ -1,24 +1,17 @@
 using System.Globalization;
+using System.Reflection;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
-using Domain.Models;
 
-namespace Domain.ApiRetrieval;
+namespace NutrientRetrieval.Dictionaries;
 
-public class ApiRetrieval
+public static class NutrientDictionary
 {
-    private readonly NutrifoodsDbContext _context;
-
-    public ApiRetrieval(NutrifoodsDbContext context)
-    {
-        _context = context;
-    }
-
     public static Dictionary<string, int> CreateDictionaryIds()
     {
-        var currentDirectory = Directory.GetCurrentDirectory();
-        var path = Path.Combine(currentDirectory, "Schema", "MapeoNutrientsID.out.csv");
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+        var path = Path.Combine(directory, "Files", "NutrientIDs.csv");
         var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Encoding = Encoding.UTF8,
@@ -28,21 +21,21 @@ public class ApiRetrieval
 
         using var textReader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(textReader, configuration);
-        csv.Context.RegisterClassMap<RowMapping>();
-        return csv.GetRecords<CsvRow>().ToDictionary(record => record.FoodDataCentralId, record => record.NutriFoodsId);
+        csv.Context.RegisterClassMap<NutrientMapping>();
+        return csv.GetRecords<NutrientRow>().ToDictionary(record => record.FoodDataCentralId, record => record.NutriFoodsId);
     }
 
-    public sealed class CsvRow
+    private sealed class NutrientRow
     {
         public string FoodDataCentralName { get; set; }
         public string FoodDataCentralId { get; set; }
         public string NutriFoodsName { get; set; }
         public int NutriFoodsId { get; set; }
     }
-    
-    public sealed class RowMapping: ClassMap<CsvRow>
+
+    private sealed class NutrientMapping: ClassMap<NutrientRow>
     {
-        public RowMapping()
+        public NutrientMapping()
         {
             Map(p => p.FoodDataCentralName).Index(0);
             Map(p => p.FoodDataCentralId).Index(1);

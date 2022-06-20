@@ -11,7 +11,6 @@ public class Food
         return $@"
 {FdcId}
 {Description}
-{string.Join(Environment.NewLine, (IEnumerable<FoodNutrient>)FoodNutrients)}
-";
+{string.Join(Environment.NewLine, (IEnumerable<FoodNutrient>) FoodNutrients)}";
     }
 }

@@ -9,7 +9,8 @@ public class FoodNutrient
 
     public override string ToString()
     {
-        return $@"{Number}
+        return $@"
+{Number}
 {Name}
 {Amount}
 {UnitName}";

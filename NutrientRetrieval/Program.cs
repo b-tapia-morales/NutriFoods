@@ -1,9 +1,9 @@
-﻿using NutrientRetrieval.Request;
+﻿using NutrientRetrieval;
+using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Request;
 
-var food = DataCentral.FoodRequest("170186");
-
-Console.WriteLine(food);
-foreach (var item in food.FoodNutrients)
-{
-    Console.WriteLine($"Nutriente: {item.Name}\t\t\t\tID: {item.Number}");
-}
+var ingredientIds = IngredientDictionary.CreateDictionaryIds();
+ingredientIds.Select(e => $"{e.Key} : {e.Value}").ToList().ForEach(Console.WriteLine);
+var foods = DataCentral.FoodRequest();
+foods.Select(e => $"{e.Key}\n{e.Value}").ToList().ForEach(Console.WriteLine);
+ApiRetrieval.InsertNutrients();
