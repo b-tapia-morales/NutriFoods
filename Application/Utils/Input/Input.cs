@@ -1,6 +1,4 @@
 using System.Text.RegularExpressions;
-using static System.Console;
-using static System.String;
 
 namespace Application.Utils.Input;
 
@@ -8,22 +6,29 @@ public static class Input
 {
     public static int ReadInteger(string message, int lowerBound, int upperBound)
     {
-        while (true)
+        for (var i = 1;; i++)
         {
             try
             {
-                WriteLine($"{message} [{lowerBound}, {upperBound}]: ");
-                var integer = int.Parse(ReadLine() ?? Empty);
+                Console.WriteLine($"{message} [{lowerBound}, {upperBound}]: ");
+                var integer = int.Parse(Console.ReadLine() ?? string.Empty);
                 if (integer >= lowerBound && integer <= upperBound)
                 {
                     return integer;
                 }
 
-                WriteLine("Debe ingresar un valor entero dentro del rango establecido. Intente nuevamente.");
+                if (i is 3)
+                {
+                    Console.WriteLine("Se han registrado demasiados intentos sin éxito. La aplicación se detendrá");
+                    Console.ReadKey();
+                    Environment.Exit(-1);
+                }
+
+                Console.WriteLine("Debe ingresar un valor entero dentro del rango establecido. Intente nuevamente.");
             }
-            catch (FormatException exception)
+            catch (FormatException)
             {
-                WriteLine("Debe ingresar un valor entero. Intente nuevamente.");
+                Console.WriteLine("Debe ingresar un valor entero. Intente nuevamente.");
             }
         }
     }
@@ -32,28 +37,38 @@ public static class Input
     {
         return ReadChar(message, 'y', 'n');
     }
-    
+
     public static char ReadChar(string message, char characterOne, char characterTwo)
     {
-        while (true)
+        for (var i = 1;; i++)
         {
-            WriteLine($"{message} <{characterOne}, {characterTwo}>: ");
-            var character = char.ToLower(ReadKey().KeyChar);
+            Console.WriteLine($"{message} <{characterOne}, {characterTwo}>: ");
+            var character = char.ToLower(Console.ReadKey().KeyChar);
             if (character == characterOne || character == characterTwo)
             {
                 return character;
             }
+
+            if (i is not 3) continue;
+            Console.WriteLine("Se han registrado demasiados intentos sin éxito. La aplicación se detendrá");
+            Console.ReadKey();
+            Environment.Exit(-1);
         }
     }
 
     public static string ReadString(string message)
     {
-        WriteLine($"{message}: ");
-        var str = ReadLine() ?? Empty;
+        Console.WriteLine($"{message}: ");
+        var str = Console.ReadLine() ?? string.Empty;
         str = str.Trim();
         return str;
     }
 
+    public static string ReadString(string request, string formatRequest, params string[] expressions)
+    {
+        return ReadString(true, request, formatRequest, expressions);
+    }
+    
     public static string ReadString(bool verbosity, string request, string formatRequest,
         params string[] expressions)
     {
@@ -63,15 +78,21 @@ public static class Input
         }
 
         var regexes = expressions.Select(s => new Regex(s)).ToList();
-        while (true)
+        for (var i = 1;; i++)
         {
-            WriteLine(verbosity ? $"{request}\n{formatRequest}: " : $"{request}: ");
-            var str = ReadLine() ?? Empty;
+            Console.WriteLine(verbosity ? $"{request}\n{formatRequest}: " : $"{request}: ");
+            var str = Console.ReadLine() ?? string.Empty;
             str = str.Trim();
             if (regexes.Select(regex => regex.Match(str)).Any(match => match.Success))
             {
                 return str;
             }
+
+            if (i is not 3) continue;
+            Console.WriteLine("Se han registrado demasiados intentos sin éxito. La aplicación se detendrá");
+            Console.ReadKey();
+            Environment.Exit(-1);
         }
     }
+
 }
