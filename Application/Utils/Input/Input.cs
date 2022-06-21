@@ -28,20 +28,25 @@ public static class Input
         }
     }
 
-    public static int ReadChar(string message, char characterOne, char characterTwo)
+    public static char ReadConfirmation(string message)
+    {
+        return ReadChar(message, 'y', 'n');
+    }
+    
+    public static char ReadChar(string message, char characterOne, char characterTwo)
     {
         while (true)
         {
             WriteLine($"{message} <{characterOne}, {characterTwo}>: ");
-            var character = ReadKey().KeyChar;
-            if (character == characterOne || (character == characterTwo))
+            var character = char.ToLower(ReadKey().KeyChar);
+            if (character == characterOne || character == characterTwo)
             {
                 return character;
             }
         }
     }
 
-    public static string GetString(string message)
+    public static string ReadString(string message)
     {
         WriteLine($"{message}: ");
         var str = ReadLine() ?? Empty;
@@ -49,12 +54,12 @@ public static class Input
         return str;
     }
 
-    public static string getStringWithMatches(bool verbosity, string request, string formatRequest,
+    public static string ReadString(bool verbosity, string request, string formatRequest,
         params string[] expressions)
     {
         if (expressions.Length == 0)
         {
-            throw new ArgumentException("No regular expressions were received");
+            throw new ArgumentException("No regular expressions were received to validate input");
         }
 
         var regexes = expressions.Select(s => new Regex(s)).ToList();
