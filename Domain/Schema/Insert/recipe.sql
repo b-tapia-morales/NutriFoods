@@ -45,7 +45,7 @@ VALUES
     (1, 7),
     (3, 1),
     (3, 6),
-    (3, 7),
+    (3, 7)
     
 ;
 
@@ -85,9 +85,9 @@ VALUES
     (1, 245, 0, 1, 2, ''),
     (1, 200, 1, 0, 0, ''),
     (1, 181, 1, 0, 0, ''),
-    (1, ),
+    
     (1, 216, 2, 0, 0, ''),
-    (1, ), -- BERROS
+     -- BERROS
     (1, 106, 2, 0, 0, 'Picadas'),
     (1, 100, 1, 0, 0, ''),
     (1, 452, 1, 0, 0, ''),
@@ -108,7 +108,7 @@ VALUES
     (3, 107, 1, 0, 0, ''),
     (3, 126, 1, 0, 0, ''),
     (3, 358, 5, 0, 0, ''),
-    (3, 388, ), -- CUCHARADAS, solo hay TAZA
+     -- CUCHARADAS, solo hay TAZA
     (3, 100, 1, 0, 0, ''),
     (3, 140, 1, 0, 0, ''),
     (3, 9, 4, 0, 0, ''),
@@ -122,7 +122,7 @@ VALUES
     (4, 68, 7, 0, 0, ''),
     (4, 75, 2, 0, 0, ''),
     (4, 14, 0, 1, 4, ''),
-    (4,), -- CHERRY
+     -- CHERRY
     (4, 9, 2, 0, 0, ''),
 
     -- COLESLAW --
@@ -139,6 +139,6 @@ VALUES
 INSERT INTO nutrifoods.recipe_quantity (recipe_id, ingredient_id, grams, description)
 VALUES
     (2, 92, 45, ''),
-    (2, , 380, ''), -- Porotos negros
+     -- Porotos negros receta 2
     (3, 40, 50, '')
 ;
