@@ -8,7 +8,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F14F74ED-58EC-4C88-9CE4-F4951795448D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeAndMesuris", "RecipeAndMesuris\RecipeAndMesuris.csproj", "{2841B2F2-0203-461E-A502-CCD5B6423394}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutrientRetrieval", "NutrientRetrieval\NutrientRetrieval.csproj", "{4E4D53B3-FB95-46E4-A861-96E969A86626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{B11CFDDD-D8F9-4E3E-8F5F-9AC168681752}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +35,10 @@ Global
 		{4E4D53B3-FB95-46E4-A861-96E969A86626}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E4D53B3-FB95-46E4-A861-96E969A86626}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E4D53B3-FB95-46E4-A861-96E969A86626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B11CFDDD-D8F9-4E3E-8F5F-9AC168681752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B11CFDDD-D8F9-4E3E-8F5F-9AC168681752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B11CFDDD-D8F9-4E3E-8F5F-9AC168681752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B11CFDDD-D8F9-4E3E-8F5F-9AC168681752}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
