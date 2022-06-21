@@ -83,11 +83,14 @@ VALUES ('Aperitivo'),  --Comidas chilenas
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrifoods.diet (name)
-VALUES ('Lacto-Vegetariana'),
-       ('Ovo-Vegetariana'),
+VALUES ('Ovo-Vegetariana'),
+       ('Lacto-Vegetariana'),
+       ('Ovo-Lacto-Vegetariana'),
        ('Pollotariana'),
        ('Pescetariana'),
        ('Pollo-Pescetariana'),
-       ('Keto'),
-       ('Sin Gluten')
+       ('Vegetariana'),
+       ('Vegana'),
+       ('Sin Gluten'),
+       ('Keto')
 ON CONFLICT DO NOTHING;
