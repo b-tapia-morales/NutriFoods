@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using static System.Console;
 using static System.String;
 
@@ -47,5 +48,25 @@ public static class Input
         str = str.Trim();
         return str;
     }
-    
+
+    public static string getStringWithMatches(bool verbosity, string request, string formatRequest,
+        params string[] expressions)
+    {
+        if (expressions.Length == 0)
+        {
+            throw new ArgumentException("No regular expressions were received");
+        }
+
+        var regexes = expressions.Select(s => new Regex(s)).ToList();
+        while (true)
+        {
+            WriteLine(verbosity ? $"{request}\n{formatRequest}: " : $"{request}: ");
+            var str = ReadLine() ?? Empty;
+            str = str.Trim();
+            if (regexes.Select(regex => regex.Match(str)).Any(match => match.Success))
+            {
+                return str;
+            }
+        }
+    }
 }
