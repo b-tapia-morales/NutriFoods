@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace Domain.DTO;
+﻿namespace Domain.DTO;
 
 public class DietDto
 {
