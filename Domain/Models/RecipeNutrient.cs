@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models
 {
@@ -9,7 +10,7 @@ namespace Domain.Models
         public int RecipeId { get; set; }
         public int NutrientId { get; set; }
         public double Quantity { get; set; }
-        public int Unit { get; set; }
+        public Unit Unit { get; set; }
 
         public virtual Nutrient Nutrient { get; set; } = null!;
         public virtual Recipe Recipe { get; set; } = null!;

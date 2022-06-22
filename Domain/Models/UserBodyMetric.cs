@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models
 {
@@ -11,7 +12,7 @@ namespace Domain.Models
         public double Weight { get; set; }
         public double BodyMassIndex { get; set; }
         public double? MuscleMassPercentage { get; set; }
-        public int PhysicalActivityLevel { get; set; }
+        public PhysicalActivity PhysicalActivityLevel { get; set; }
         public int? DietId { get; set; }
 
         public virtual Diet? Diet { get; set; }

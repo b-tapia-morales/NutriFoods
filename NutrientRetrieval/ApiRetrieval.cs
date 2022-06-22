@@ -1,3 +1,4 @@
+using Domain.Enum;
 using Domain.Models;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Request;
@@ -36,7 +37,7 @@ public static class ApiRetrieval
                     IngredientId = key,
                     NutrientId = id,
                     Quantity = nutrient.Amount,
-                    Unit = code
+                    Unit = Unit.FromValue(code)
                 };
 
                 context.IngredientNutrients.Add(ingredientNutrient);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models
 {
@@ -15,7 +16,7 @@ namespace Domain.Models
         public string Name { get; set; } = null!;
         public string? AlsoCalled { get; set; }
         public bool IsCalculated { get; set; }
-        public int Essentiality { get; set; }
+        public Essentiality Essentiality { get; set; }
         public int SubtypeId { get; set; }
 
         public virtual NutrientSubtype Subtype { get; set; } = null!;

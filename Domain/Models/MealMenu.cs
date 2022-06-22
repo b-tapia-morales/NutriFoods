@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models
 {
@@ -13,7 +14,7 @@ namespace Domain.Models
         public int Id { get; set; }
         public int MealPlanId { get; set; }
         public int MealTypeId { get; set; }
-        public int Satiety { get; set; }
+        public Satiety Satiety { get; set; }
         public double EnergyTotal { get; set; }
         public double CarbohydratesTotal { get; set; }
         public double LipidsTotal { get; set; }

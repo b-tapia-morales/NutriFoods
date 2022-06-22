@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Enum;
+using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Models
 {
@@ -696,6 +697,19 @@ namespace Domain.Models
             modelBuilder.Entity<Recipe>().Ignore(e => e.MealMenuRecipes);
             modelBuilder.Entity<MealPlan>().Ignore(e => e.User);
             modelBuilder.Entity<MealMenu>().Ignore(e => e.MealPlan);
+
+            modelBuilder.Entity<Nutrient>().Property(e => e.Essentiality)
+                .HasConversion(v => v.Value, v => Essentiality.FromValue(v));
+            modelBuilder.Entity<IngredientNutrient>().Property(e => e.Unit)
+                .HasConversion(v => v.Value, v => Unit.FromValue(v));
+            modelBuilder.Entity<RecipeNutrient>().Property(e => e.Unit)
+                .HasConversion(v => v.Value, v => Unit.FromValue(v));
+            modelBuilder.Entity<UserProfile>().Property(e => e.Gender)
+                .HasConversion(v => v.Value, v => Gender.FromValue(v));
+            modelBuilder.Entity<UserBodyMetric>().Property(e => e.PhysicalActivityLevel)
+                .HasConversion(v => v.Value, v => PhysicalActivity.FromValue(v));
+            modelBuilder.Entity<MealMenu>().Property(e => e.Satiety)
+                .HasConversion(v => v.Value, v => Satiety.FromValue(v));
         }
     }
 }

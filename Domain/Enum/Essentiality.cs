@@ -4,9 +4,9 @@ namespace Domain.Enum;
 
 public class Essentiality : SmartEnum<Essentiality>
 {
-    public static readonly Essentiality Indispensable = new Essentiality(nameof(Indispensable), "Indispensable", 1);
-    public static readonly Essentiality Conditional = new Essentiality(nameof(Conditional), "Condicional", 2);
-    public static readonly Essentiality Dispensable = new Essentiality(nameof(Dispensable), "Dispensable", 3);
+    public static readonly Essentiality Indispensable = new Essentiality(nameof(Indispensable), "Indispensable", 0);
+    public static readonly Essentiality Conditional = new Essentiality(nameof(Conditional), "Condicional", 1);
+    public static readonly Essentiality Dispensable = new Essentiality(nameof(Dispensable), "Dispensable", 2);
 
     public string NameDisplay { get; set; }
 

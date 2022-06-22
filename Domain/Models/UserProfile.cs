@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models
 {
@@ -20,7 +21,7 @@ namespace Domain.Models
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public DateOnly Birthdate { get; set; }
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
         public DateTime JoinedOn { get; set; }
 
         public virtual ICollection<MealPlan> MealPlans { get; set; }
