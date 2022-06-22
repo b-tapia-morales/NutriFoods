@@ -67,7 +67,7 @@ VALUES
     (2, 3, 'Pelar el pepino y cortarlo a la mitad a lo largo. Con una cuchara, retirar las pepas. Picar en cubos de 5mm'),
     (2, 4, 'Mezclar todos los ingredientes de la ensalada en un bowl.'),
     (2, 5, 'Usar una licuadora de inmersión o licuadora tradicional para mezclar los ingredientes.'),
-    (2, 6,  'Servir sobre la ensalada.'),
+    (2, 6, 'Servir sobre la ensalada.'),
     
     -- Ensalada de Espinaca y Frutillas --
     (3, 1, 'Mezclar la lechuga con la espinaca en un bowl.'),

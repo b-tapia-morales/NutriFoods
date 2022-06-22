@@ -32,8 +32,8 @@ ON CONFLICT DO NOTHING;
 INSERT INTO nutrifoods.nutrient (name, also_called, is_calculated, essentiality, subtype_id)
 VALUES
     -- Carbohidratos --
-    ('Carbohidratos, total', '', true, 0, 1), -- 
-    ('Fibra', '', false, 2, 2),  -- 
+    ('Carbohidratos, total', '', true, 0, 1),                                -- 
+    ('Fibra', '', false, 2, 2),                                              -- 
     ('Almidón', 'Fécula', false, 2, 3),
     -- Azúcares --
     ('Azúcares, total', '', true, 0, 4),
@@ -42,9 +42,9 @@ VALUES
     ('Glucosa', '', false, 2, 4),
     ('Lactosa', '', false, 2, 4),
     ('Maltosa', '', false, 2, 4),
-    ('Sucrosa', 'Sacarosa', false, 2, 4), -- 
+    ('Sucrosa', 'Sacarosa', false, 2, 4),                                    -- 
     --Ácidos grasos--
-    ('Ácidos grasos, total', '', true, 2, 5), -- 
+    ('Ácidos grasos, total', '', true, 2, 5),                                -- 
     -- Ácidos grasos saturados --
     ('Ácidos grasos saturados, total', '', true, 2, 6),
     ('Ácido butanoico', 'Ácido butírico', false, 2, 6),                      -- SFA 4:0  
@@ -95,8 +95,8 @@ VALUES
     ('Ácido docosahexaenoico', '', false, 2, 8),                             -- PUFA 22:6 
     -- Ácidos grasos trans--
     ('Ácidos grasos trans, total', '', true, 2, 9),
-    ('Ácido trans-monoenoico, total', '', true, 2, 9),                             
-    ('Ácido trans-polinoico, total', '', true, 2, 9),                                    
+    ('Ácido trans-monoenoico, total', '', true, 2, 9),
+    ('Ácido trans-polinoico, total', '', true, 2, 9),
     -- Proteínas -
     ('Ácido aspártico', '', false, 2, 10),
     ('Ácido glutámico', '', false, 2, 10),

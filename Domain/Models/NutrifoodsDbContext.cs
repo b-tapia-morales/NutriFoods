@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public partial class NutrifoodsDbContext : DbContext
+    public class NutrifoodsDbContext : DbContext
     {
         public NutrifoodsDbContext()
         {
@@ -46,7 +46,7 @@ namespace Domain.Models
             {
                 optionsBuilder.UseNpgsql(
                     "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
-                    x => x.UseNetTopologySuite());
+                    o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
             }
         }
 
