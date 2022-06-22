@@ -1,11 +1,10 @@
-﻿using API.Ingredients;
-using Domain.Models;
+﻿using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace API.Controllers;
+namespace API.Ingredients;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/ingredients")]
 public class IngredientsController
 {
     private readonly IIngredientRepository _repository;
