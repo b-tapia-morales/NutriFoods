@@ -35,8 +35,4 @@
       <None Remove="Schema\Insert\Recipe\recipe.sql" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="DTO" />
-    </ItemGroup>
-
 </Project>
