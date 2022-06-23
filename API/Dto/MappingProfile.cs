@@ -1,4 +1,5 @@
 using AutoMapper;
+using Domain.Enum;
 using Domain.Models;
 
 namespace API.Dto;
@@ -13,10 +14,13 @@ public class MappingProfile : Profile
         CreateMap<NutrientType, NutrientTypeDto>();
         CreateMap<NutrientSubtype, NutrientSubtypeDto>();
         CreateMap<Nutrient, NutrientDto>()
-            .ForMember(e => e.Essentiality, 
+            .ForMember(dest => Essentiality.FromName(dest.Essentiality, false),
                 opt => opt.MapFrom(src => src.Essentiality.NameDisplay));
         CreateMap<PrimaryGroup, PrimaryGroupDto>();
         CreateMap<SecondaryGroup, SecondaryGroupDto>();
         CreateMap<TertiaryGroup, TertiaryGroupDto>();
+        CreateMap<IngredientNutrient, IngredientNutrientDto>().ForMember(dest => Unit.FromName(dest.Unit, false),
+            opt => opt.MapFrom(src => src.Unit.NameDisplay));
+        CreateMap<IngredientMeasure, IngredientMeasureDto>();
     }
 }
