@@ -1,4 +1,4 @@
-﻿namespace Domain.DTO;
+﻿namespace API.Dto;
 
 public class NutrientDto
 {
