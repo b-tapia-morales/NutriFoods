@@ -4,7 +4,7 @@
 4,x,zanahorias
 1,x,pimento rojo
 600,g,arroz
-1,25,cdas,Caldo Verduras
+1.25,cdas,Caldo Verduras
 1.2,litros,agua
 300,g,arvejas
 300,g,choclo

@@ -1,6 +1,6 @@
 1,x,sierra
 3,x,queso
-2,chorizos,parrilleros
+2,x,chorizos
 2,x,tomates
 x,x,pimienta negra
 x,x,Ajo

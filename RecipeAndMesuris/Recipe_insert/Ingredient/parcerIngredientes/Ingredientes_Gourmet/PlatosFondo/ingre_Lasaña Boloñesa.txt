@@ -13,5 +13,5 @@ x,x,Sal
 4,tazas,leche
 x,x,Nuez Moscada
 x,x,Sal
-18,hojas,masa lasañas
+18,hojas,pasta lasaña
 2 1/2,tazas,queso parmesano

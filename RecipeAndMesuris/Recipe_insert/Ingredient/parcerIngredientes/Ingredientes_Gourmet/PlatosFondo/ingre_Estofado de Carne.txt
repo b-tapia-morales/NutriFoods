@@ -6,6 +6,6 @@
 1,x,pimento rojo
 3,x,zanahorias
 2,cdtas,Ají Color
-1,5,cdas,Orégano
+1.5,cdas,Orégano
 500,ml,agua
 2,cdas,cilantro

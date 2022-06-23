@@ -6,5 +6,4 @@
 1,x,pimeto rojo
 1,cda,aceite oliva
 1,cdta,jugo limón
-x,x,Molinillo
 3/4,taza,yogurt natural

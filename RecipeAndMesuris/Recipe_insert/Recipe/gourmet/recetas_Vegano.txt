@@ -2,7 +2,6 @@ Steaks de Coliflor con BBQ Merquén;Gourmet;https://www.gourmet.cl/recetas/steak
 Lentejas con Arroz;Gourmet;https://www.gourmet.cl/recetas/lentejas-con-arroz/;80;6 
 Molde de Arroz;Gourmet;https://www.gourmet.cl/recetas/molde-de-arroz/;35;8
 Ensalada de Coleslaw;Gourmet;https://www.gourmet.cl/recetas/ensalada-de-coleslaw/;20;4 
-Champiñones a lo &#8220;Empanada de Pino&#8221;;Gourmet;https://www.gourmet.cl/recetas/champinones-rellenos-lo-empanada-pino/;50;3 
 Choclos a la Parrilla con Soya y Ají;Gourmet;https://www.gourmet.cl/recetas/choclos-la-parrilla-soya-aji-amarillo-sesamo/;;3
 Guacamole;Gourmet;https://www.gourmet.cl/recetas/guacamole/;5;1
 Sopa Toscana de Porotos;Gourmet;https://www.gourmet.cl/recetas/sopa-toscana-porotos/;30;4 

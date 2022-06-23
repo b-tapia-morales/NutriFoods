@@ -1,7 +1,7 @@
 1,kilo,pulpa cerdo
 1/2,lt,cerveza negra
 4,cdas,miel
-10,x,Clavos Olor
+10,x,Clavo de olor
 2,x,cebollas
 2,x,zanahorias
 1,diente,ajo

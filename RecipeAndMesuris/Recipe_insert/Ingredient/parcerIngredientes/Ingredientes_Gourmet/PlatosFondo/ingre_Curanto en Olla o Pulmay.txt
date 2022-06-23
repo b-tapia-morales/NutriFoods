@@ -5,7 +5,7 @@
 ½,cucharadita,Ají color
 6,presas,pollo
 1,x,costillar cerdo
-2,x,longaniza
+2,x,chorizo
 250,ml,agua
 1,x,repollo
 600,gr,choros

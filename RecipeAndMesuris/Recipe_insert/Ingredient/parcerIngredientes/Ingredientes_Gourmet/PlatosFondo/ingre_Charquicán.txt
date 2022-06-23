@@ -4,7 +4,7 @@
 2,dientes,ajo
 6,x,papas
 400,g,zapallo camote
-1,5,cdtas,Ají Color
+1.5,cdtas,Ají Color
 ½,cdta,Comino
 2.5,cdtas,Orégano
 600,ml,agua

@@ -1,6 +1,6 @@
-40,camarones,36-40,con,cáscara
+40,x,camarones
 1,lt,agua
-2 sachets, Caldo,en,Polvo,Verduras,Gourmet
+2,Taza,Caldo Verduras
 1,x,cebolla
 500,grs,arroz arbóreo
 200,ml,vino blanco

@@ -1,6 +1,6 @@
 1,kg,pechuga pollo
 3,x,cebollas
-2,x,dientes
+2,diente,aji
 1,cda,jengibre
 1,cda,Curry
 4,x,tomates

@@ -1,6 +1,6 @@
 4,x,pechugas pollo
 400,ml,vino blanco
-6,unidas,Clavo Olor
+6,unidas,Clavo de olor
 2,cdas,vinagre vino
 1,cda,mostaza dijon
 10,x,chalotas picadas

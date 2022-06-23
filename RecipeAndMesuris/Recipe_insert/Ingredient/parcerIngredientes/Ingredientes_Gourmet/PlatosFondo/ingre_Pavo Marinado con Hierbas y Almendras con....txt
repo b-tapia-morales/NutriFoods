@@ -14,7 +14,7 @@
 1,cucharadita,Perejil
 1,cucharadita,Ciboulette
 1/2,taza,almendras
-1,2,kilos,papas
+1.2,kilos,papas
 1,cucharada,mantequilla
 1,cucharada,Cebolla Polvo
 2,x,huevos

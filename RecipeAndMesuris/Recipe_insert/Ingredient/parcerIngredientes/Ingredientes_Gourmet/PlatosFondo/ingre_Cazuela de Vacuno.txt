@@ -10,7 +10,7 @@
 3,cucharadas,arroz
 6,trozos,choclo
 x,x,Perejil
-1,1/2,litro,agua
+1.5,litro,agua
 1,cucharada,Orégano
 x,x,Sal
 x,x,Perejil

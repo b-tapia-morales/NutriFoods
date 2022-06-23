@@ -10,7 +10,7 @@
 ¾,taza,leche
 1,cucharadita,sal
 1,cucharadita,Albahaca
-6,aceitunas,negras
+6,x,aceitunas
 3,x,huevos
 1,cucharada,aceite
 1,cucharadita,Ají Color

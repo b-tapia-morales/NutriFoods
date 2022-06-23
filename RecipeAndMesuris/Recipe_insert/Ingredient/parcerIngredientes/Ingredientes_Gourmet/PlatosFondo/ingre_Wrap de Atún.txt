@@ -5,5 +5,4 @@
 1/2,tarro,atún
 1/4,taza,yogurt natural
 1,cdta,Mostaza Dijon
-x,x,molinillo
 x,x,Sal

@@ -1,4 +1,4 @@
-1,1/2,taza,harina
+1 ½,taza,harina
 2,taza,leche
 2,x,huevos
 1/2,cucharadita,sal

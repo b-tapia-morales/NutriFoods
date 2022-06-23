@@ -1,6 +1,6 @@
 200,g,galletas
 1/4,taza,azúcar rubia
-120g,mantequilla
+120,g,mantequilla
 4,paquetes,queso crema
 1 1/2,taza,azúcar
 3/4,taza,leche

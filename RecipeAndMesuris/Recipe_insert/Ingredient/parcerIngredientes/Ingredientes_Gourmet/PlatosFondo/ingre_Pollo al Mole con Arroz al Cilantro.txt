@@ -1,6 +1,6 @@
 1,x,ají cacho cabra
 3,cucharadas,aceite vegetal
-8,x,trutros cortos
+8,x,trutro pollo
 x,x,Sal
 x,x,Pimienta Negra
 2,x,cebollas

@@ -1,4 +1,4 @@
-1,taza,galletass
+1,taza,galletas
 1 ¼,taza,nueces
 2,cucharaditas,aceite oliva
 2,dientes,ajo

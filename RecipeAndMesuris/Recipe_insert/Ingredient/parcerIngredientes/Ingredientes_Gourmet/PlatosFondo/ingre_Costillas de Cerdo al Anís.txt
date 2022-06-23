@@ -4,7 +4,7 @@
 100,ml,Salsa Soya
 100,ml,agua
 200,gr,champiñon
-100,gr,champiñones Shitake
+100,gr,champiñones Shiitake
 3,x,cebollines
 50,gr,maní
 x,x,Maicena

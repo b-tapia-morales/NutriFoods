@@ -7,22 +7,25 @@ namespace RecipeAndMesuris.Recipe_insert;
 public class IngredientRecipe
 {
     private NpgsqlConnection _connection;
+    private MissingIngredient _missingIngredient;
 
     public IngredientRecipe(NpgsqlConnection connection)
     {
         _connection = connection;
+        _missingIngredient = new MissingIngredient();
     }
     private void ReadFileRecipeIngredient(string pathReceta)
     {
         StreamReader fileRecipeIngredients = new StreamReader(pathReceta);
         //Console.WriteLine(pathReceta);
+        
         while (!fileRecipeIngredients.EndOfStream)
         {
             string line = fileRecipeIngredients.ReadLine() ?? throw new InvalidOperationException();
             string[] split = line.Split(",");
             string ingredient = split[2];
-            TransformUnits(split[0],split[1], ingredient);
-
+            TransformUnits(split[0], split[1], ingredient, pathReceta);
+            
         }
         fileRecipeIngredients.Close();
     }
@@ -30,6 +33,7 @@ public class IngredientRecipe
     private void InsertIngredientRecipe(string pathReceta)
     {
         StreamReader fileRecipe = new StreamReader($"Recipe_insert/Recipe/gourmet/recetas_{pathReceta}.txt");
+        
         while (!fileRecipe.EndOfStream)
         {
             String line = fileRecipe.ReadLine() ?? throw new InvalidOperationException();
@@ -43,21 +47,51 @@ public class IngredientRecipe
 
     public void ReadInsertRecipeIngredient()
     {
-        string[] path = {"Ensaladas","Entradas","PlatosFondo"};
+        string[] path = {"Ensaladas","Entradas","PlatosFondo","Postres","Vegano"};
         foreach (var nameDirectory in path)
         {
             InsertIngredientRecipe(nameDirectory);
         }
+        _missingIngredient.Write();
     }
 
-    private void TransformUnits(String quantity, String units, String ingredient)
+    private void TransformUnits(String quantity, String units, String ingredient, String pathReceta)
     {
         List<int> numDem;
-        String consult = $"SELECT name FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name::TEXT,'{ingredient}'::TEXT) > 0.55;";
+
+        if (ingredient.ToLower().Contains("merquen") || ingredient.Contains("Merquén") || ingredient.Contains("merquén")) ingredient = "Merkén";
+        if (ingredient.ToLower().Equals("caldo pollo")) ingredient = "Caldo de ave";
+        if (ingredient.Equals("cous-cous") || ingredient.Equals("couscous")) ingredient = "Cuscús";
+        if (ingredient.Equals("camarones")) ingredient = "Camarón";
+        if (ingredient.ToLower().Equals("pimentón") || ingredient.Equals("pimenton")) ingredient = "Pimiento";
+        if (ingredient.Equals("limon") || ingredient.Equals("limones")) ingredient = "Limón";
+        if (ingredient.Equals("yemas") || ingredient.Equals("yema")) ingredient = "yema de huevo";
+        if (ingredient.Equals("claras")) ingredient = "Clara de huevo";
+        if (ingredient.ToLower().Equals("callampas")) ingredient = "Champiñón";
+        if (ingredient.Equals("pasas rubias")) ingredient = "Pasa";
+        if (ingredient.ToLower().Equals("Caldo Costilla")) ingredient = "Caldo de carne";
+        if (ingredient.Equals("Pimiento Ahumano") || ingredient.Equals("Pimento Ahumado") || ingredient.Equals("Pimentón Ahumado")) ingredient = "Paprika";
+        if (ingredient.Equals("pechugas")) ingredient = "Pechuga de pollo";
+        if (ingredient.Equals("pasta ají amarillo")) ingredient = "Pasta de aji";
+        if (ingredient.Equals("yoghurt natural") || ingredient.ToLower().Equals("yogurts naturales")) ingredient = "Yogurt";
+        if (ingredient.Equals("ají amarillos")) ingredient = "Ají";
+        if (ingredient.ToLower().Equals("salvia")) ingredient = "Salvia deshidratada";
+        if (ingredient.ToLower().Equals("cranberries")) ingredient = "arándano";
+        if (ingredient.ToLower().Equals("aji")) ingredient = "ají";
+            String consult = $"SELECT name FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name::TEXT,'{ingredient}'::TEXT) > 0.40;";
         NpgsqlCommand commandSelectIngredient = new NpgsqlCommand(consult,_connection);
-        Console.Write(ingredient + " ");
         var ingredientResult = commandSelectIngredient.ExecuteScalar();
-        Console.WriteLine(ingredientResult);
+        
+        if (ingredientResult == null)
+        {
+            if (!ingredient.ToLower().Equals("agua"))
+            {
+                Console.WriteLine(pathReceta);
+                
+                _missingIngredient.ExistIngredient(ingredient.ToLower());
+            }
+        }
+        
         /*
         if (quantity.Length == 1)
         {

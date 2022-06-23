@@ -1,4 +1,4 @@
-800,gr,filete pescado
+800,gr,reineta
 1,x,cebolla
 2,hojas,Laurel
 2,x,apio

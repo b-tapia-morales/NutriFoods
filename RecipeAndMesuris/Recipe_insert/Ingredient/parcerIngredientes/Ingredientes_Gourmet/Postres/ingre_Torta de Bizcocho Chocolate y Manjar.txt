@@ -1,5 +1,5 @@
 1,Mezcla,Bizcocho
-200,ml,agua 
+200,ml,agua
 4,x,Huevos
 1/2,taza,azúcar
 1,taza,jugo naranja

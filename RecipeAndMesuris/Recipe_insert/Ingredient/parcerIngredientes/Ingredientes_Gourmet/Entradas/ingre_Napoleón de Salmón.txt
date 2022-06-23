@@ -1,4 +1,4 @@
-200,gr,masa
+200,gr,masa filo
 200,gr,mantequilla
 3,cucharadas,Eneldo
 80,gr,salmón

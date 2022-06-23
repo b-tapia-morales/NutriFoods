@@ -1,4 +1,4 @@
-1,5,kilos,pechugas,pavo
+1.5,kilos,pechugas
 1,mediana,cebolla
 1,diente,ajo
 1/2,x,pimento rojo

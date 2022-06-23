@@ -7,5 +7,5 @@ x,x,Sal
 x,x,Pimienta
 x,x,Cebolla
 6,x,champiñones portobello
-x,xPasas
+x,x,Pasas
 1,x,almendras

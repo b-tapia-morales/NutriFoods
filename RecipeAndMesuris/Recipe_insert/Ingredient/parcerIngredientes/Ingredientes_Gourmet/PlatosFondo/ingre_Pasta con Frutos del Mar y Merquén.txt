@@ -3,7 +3,7 @@
 4,x,tomates
 x,x,Sal
 1,cucharadita,Merquén
-3,x,tazas
+3,taza,mariscos
 ½,taza,vino blanco
 1,taza,caldo verduras
 3,cucharadas,perejil

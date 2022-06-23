@@ -12,4 +12,3 @@ x,x,aceite
 x,x,sal
 x,x,pimienta negra
 1,cucharada,jugo limón
-x,x,pizca

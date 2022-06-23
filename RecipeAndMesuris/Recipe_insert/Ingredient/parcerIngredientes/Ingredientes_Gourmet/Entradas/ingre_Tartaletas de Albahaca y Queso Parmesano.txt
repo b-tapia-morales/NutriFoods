@@ -1,4 +1,4 @@
-6,x,masa,empanadas
+6,x,masa empanadas
 200,gr,ricotta
 1/2,taza,albahaca
 1,cucharada,aceite oliva

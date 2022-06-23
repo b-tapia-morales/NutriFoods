@@ -4,9 +4,9 @@
 ¼,taza,ketchup
 ¼,taza,jugo limón
 2,cdas,azúcar rubia
-3,cdtas,ajo picado
+3,cdtas,ajo
 ½,cdta,Pimienta Cayena
-300,g,filetes pollo
+300,g,pechuga de pollo
 ¼,taza,aceite vegetal
 1,cda,ajo
 2,cdas,jengibre
