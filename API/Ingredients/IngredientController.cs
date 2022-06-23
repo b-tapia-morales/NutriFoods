@@ -1,4 +1,5 @@
-﻿using Domain.Models;
+﻿using API.Dto;
+using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Ingredients;
@@ -16,96 +17,118 @@ public class IngredientController
 
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> GetAllIngredients()
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> GetAllIngredients()
     {
         return await _repository.FindAll();
     }
 
     [HttpGet]
     [Route("name/{name}")]
-    public async Task<ActionResult<Ingredient>> FindByName(string name)
+    public async Task<ActionResult<IngredientDto>> FindByName(string name)
     {
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
+        }
+
         try
         {
             return await _repository.FindByName(name.ToLower());
         }
         catch (InvalidOperationException)
         {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
+            return new IngredientDto();
         }
     }
 
     [HttpGet]
     [Route("id/{id:int}")]
-    public async Task<ActionResult<Ingredient>> FindById(int id)
+    public async Task<ActionResult<IngredientDto>> FindById(int id)
     {
+        if (id < 0)
+        {
+            return new BadRequestObjectResult("Parameter can't be a negative integer");
+        }
+
         try
         {
             return await _repository.FindById(id);
         }
         catch (InvalidOperationException)
         {
-            return new StatusCodeResult(StatusCodes.Status404NotFound);
+            return new IngredientDto();
         }
     }
 
     [HttpGet]
     [Route("primaryGroup/{name}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(string name)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByPrimaryGroup(string name)
     {
-        var list = await _repository.FindByPrimaryGroup(name.ToLower());
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
+        }
 
-        return list;
+        return await _repository.FindByPrimaryGroup(name.ToLower());
     }
 
     [HttpGet]
     [Route("primaryGroup/{id:int}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByPrimaryGroup(int id)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByPrimaryGroup(int id)
     {
-        var list = await _repository.FindByPrimaryGroup(id);
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (id < 0)
+        {
+            return new BadRequestObjectResult("Parameter can't be a negative integer");
+        }
 
-        return list;
+        return await _repository.FindByPrimaryGroup(id);
     }
 
     [HttpGet]
     [Route("secondaryGroup/{name}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(string name)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindBySecondaryGroup(string name)
     {
-        var list = await _repository.FindBySecondaryGroup(name.ToLower());
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
+        }
 
-        return list;
+        return await _repository.FindBySecondaryGroup(name.ToLower());
     }
 
     [HttpGet]
     [Route("secondaryGroup/{id:int}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindBySecondaryGroup(int id)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindBySecondaryGroup(int id)
     {
-        var list = await _repository.FindBySecondaryGroup(id);
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (id < 0)
+        {
+            return new BadRequestObjectResult("Parameter can't be a negative integer");
+        }
 
-        return list;
+        return await _repository.FindBySecondaryGroup(id);
     }
 
     [HttpGet]
     [Route("tertiaryGroup/{name}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(string name)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByTertiaryGroup(string name)
     {
-        var list = await _repository.FindByTertiaryGroup(name.ToLower());
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
+        }
 
-        return list;
+        return await _repository.FindByTertiaryGroup(name.ToLower());
     }
 
     [HttpGet]
     [Route("tertiaryGroup/{id:int}")]
-    public async Task<ActionResult<IEnumerable<Ingredient>>> FindByTertiaryGroup(int id)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByTertiaryGroup(int id)
     {
-        var list = await _repository.FindByTertiaryGroup(id);
-        if (!list.Any()) return new StatusCodeResult(StatusCodes.Status404NotFound);
+        if (id < 0)
+        {
+            return new BadRequestObjectResult("Parameter can't be a negative integer");
+        }
 
-        return list;
+        return await _repository.FindByTertiaryGroup(id);
     }
 }
