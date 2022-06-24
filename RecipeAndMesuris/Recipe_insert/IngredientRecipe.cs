@@ -91,7 +91,7 @@ public class IngredientRecipe
                 //_missingIngredient.ExistIngredient(ingredient.ToLower());
             }
 
-            if (ingredient.ToLower().Equals("achiote"))
+            if (ingredient.ToLower().Equals("ralladarura limon"))
             {
                 Console.WriteLine(pathReceta);
             }

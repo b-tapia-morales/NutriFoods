@@ -3,7 +3,6 @@
 1,cucharadita,Pimienta Negra
 1,cucharadita,Orégano
 1,diente,ajo
-x,x,ralladarura limon
 ¼,cucharadita,mostaza
 3,cucharadas,aceite
 2,cucharadas,vinagre vino
