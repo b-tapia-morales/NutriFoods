@@ -12,7 +12,7 @@ public class IngredientRecipe
     public IngredientRecipe(NpgsqlConnection connection)
     {
         _connection = connection;
-        _missingIngredient = new MissingIngredient();
+        //_missingIngredient = new MissingIngredient();
     }
     private void ReadFileRecipeIngredient(string pathReceta)
     {
@@ -86,9 +86,14 @@ public class IngredientRecipe
         {
             if (!ingredient.ToLower().Equals("agua"))
             {
-                Console.WriteLine(pathReceta);
                 
-                _missingIngredient.ExistIngredient(ingredient.ToLower());
+                
+                //_missingIngredient.ExistIngredient(ingredient.ToLower());
+            }
+
+            if (ingredient.ToLower().Equals("achiote"))
+            {
+                Console.WriteLine(pathReceta);
             }
         }
         
