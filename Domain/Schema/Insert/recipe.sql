@@ -1,18 +1,3 @@
-INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time)
-VALUES
-    -- ENSALADAS GOURMET --
-    ('Ensalada de Atún', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-de-atun/', 2, 20),
-    ('Ensalada de Porotos Negros','Gourmet','https://www.gourmet.cl/recetas/ensalada-porotos-negros/', 2, 30),
-    ('Ensalada de Espinacas y Frutillas','Gourmet','https://www.gourmet.cl/recetas/ensalada-espinacas-frutillas/', 2, 15),
-    ('Molde de Arroz', 'Gourmet', 'https://www.gourmet.cl/recetas/molde-de-arroz/', 8, 35),
-    ('Ensalada de Coleslaw', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-de-coleslaw/', 4, 20), 
-    ('Salsa de Cilantro', 'Gourmet', 'https://www.gourmet.cl/recetas/salsa-de-cilantro/', 1, 10),
-    ('Ensalada de lentejas', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-de-lentejas/', 5, 20), 
-    ('Ensalada Rusa', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-rusa/', 4, 15), 
-    ('Ensalada Chilena', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-chilena/', 4, 20), 
-    ('Ensalada Griega', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-griega/', 4, 15)
-;
-
 INSERT INTO nutrifoods.recipe_dish_type (recipe_id, dish_type_id)
 VALUES
     (1, 3),
@@ -25,7 +10,6 @@ VALUES
     (8, 3)
 ;
 
-
 INSERT INTO nutrifoods.recipe_meal_type (recipe_id, meal_type_id)
 VALUES
     (1, 2),
@@ -37,7 +21,6 @@ VALUES
     (4, 2),
     (4, 3)
 ;
-
 
 INSERT INTO nutrifoods.recipe_diet (recipe_id, diet_id)
 VALUES
@@ -132,8 +115,7 @@ VALUES
     (5, 176, 1, 0, 0, ''),
     (5, 140, 1, 0, 0, ''),
     (5, 7, 0, 1, 2, '')
-    
-    
+     
 ;
 
 INSERT INTO nutrifoods.recipe_quantity (recipe_id, ingredient_id, grams, description)
