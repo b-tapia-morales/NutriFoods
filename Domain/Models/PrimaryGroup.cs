@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace Domain.Models;
 
-namespace Domain.Models
+public class PrimaryGroup
 {
-    public partial class PrimaryGroup
+    public PrimaryGroup()
     {
-        public PrimaryGroup()
-        {
-            SecondaryGroups = new HashSet<SecondaryGroup>();
-        }
-
-        public int Id { get; set; }
-        public string Name { get; set; } = null!;
-
-        public virtual ICollection<SecondaryGroup> SecondaryGroups { get; set; }
+        SecondaryGroups = new HashSet<SecondaryGroup>();
     }
+
+    public int Id { get; set; }
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<SecondaryGroup> SecondaryGroups { get; set; }
 }

@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS ingredient_measure
 CREATE TABLE IF NOT EXISTS recipe
 (
     id               SERIAL,
-    name             TEXT NOT NULL,
+    name             TEXT        NOT NULL,
     author           VARCHAR(64) NOT NULL,
     url              TEXT,
     portions         INTEGER,

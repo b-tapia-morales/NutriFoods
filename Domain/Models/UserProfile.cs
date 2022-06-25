@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain.Enum;
+﻿using Domain.Enum;
 
-namespace Domain.Models
+namespace Domain.Models;
+
+public class UserProfile
 {
-    public partial class UserProfile
+    public UserProfile()
     {
-        public UserProfile()
-        {
-            MealPlans = new HashSet<MealPlan>();
-            UserAllergies = new HashSet<UserAllergy>();
-            UserBodyMetrics = new HashSet<UserBodyMetric>();
-        }
-
-        public int Id { get; set; }
-        public string Username { get; set; } = null!;
-        public string Email { get; set; } = null!;
-        public string Password { get; set; } = null!;
-        public string ApiKey { get; set; } = null!;
-        public string? Name { get; set; }
-        public string? LastName { get; set; }
-        public DateOnly Birthdate { get; set; }
-        public Gender Gender { get; set; }
-        public DateTime JoinedOn { get; set; }
-
-        public virtual ICollection<MealPlan> MealPlans { get; set; }
-        public virtual ICollection<UserAllergy> UserAllergies { get; set; }
-        public virtual ICollection<UserBodyMetric> UserBodyMetrics { get; set; }
+        MealPlans = new HashSet<MealPlan>();
+        UserAllergies = new HashSet<UserAllergy>();
+        UserBodyMetrics = new HashSet<UserBodyMetric>();
     }
+
+    public int Id { get; set; }
+    public string Username { get; set; } = null!;
+    public string Email { get; set; } = null!;
+    public string Password { get; set; } = null!;
+    public string ApiKey { get; set; } = null!;
+    public string? Name { get; set; }
+    public string? LastName { get; set; }
+    public DateOnly Birthdate { get; set; }
+    public Gender Gender { get; set; }
+    public DateTime JoinedOn { get; set; }
+
+    public virtual ICollection<MealPlan> MealPlans { get; set; }
+    public virtual ICollection<UserAllergy> UserAllergies { get; set; }
+    public virtual ICollection<UserBodyMetric> UserBodyMetrics { get; set; }
 }

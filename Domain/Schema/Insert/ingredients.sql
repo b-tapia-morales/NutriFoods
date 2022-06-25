@@ -257,9 +257,6 @@ VALUES ('Sal', false, false, 23),
        ('Galletas', true, false, 1),
        ('Ostiones', true, false, 1),
        ('Berries', false, false, 1)
-       
-       
-
 
 
 ON CONFLICT (name) DO NOTHING;
