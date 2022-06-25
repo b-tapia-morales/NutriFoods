@@ -1,4 +1,6 @@
-﻿INSERT INTO nutrifoods.ingredient (name, is_animal, contains_gluten, tertiary_group_id)
+﻿SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO ingredient (name, is_animal, contains_gluten, tertiary_group_id)
 VALUES ('Sal', false, false, 23),
        ('Pimienta negra', false, false, 23),
        ('Aceite de oliva', false, false, 21),

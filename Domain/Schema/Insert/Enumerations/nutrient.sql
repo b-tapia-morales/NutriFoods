@@ -1,4 +1,6 @@
-﻿INSERT INTO nutrifoods.nutrient_type (name)
+﻿SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO nutrient_type (name)
 VALUES ('Carbohidratos'),
        ('Grasas y Ácidos grasos'),
        ('Proteínas y Aminoácidos'),
@@ -9,7 +11,7 @@ VALUES ('Carbohidratos'),
        ('Energía')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.nutrient_subtype (name, provides_energy, type_id)
+INSERT INTO nutrient_subtype (name, provides_energy, type_id)
 VALUES ('Carbohidratos, total', true, 1),
        ('Fibra', true, 1),
        ('Almidón', true, 1),
@@ -29,7 +31,7 @@ VALUES ('Carbohidratos, total', true, 1),
 
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.nutrient (name, also_called, is_calculated, essentiality, subtype_id)
+INSERT INTO nutrient (name, also_called, is_calculated, essentiality, subtype_id)
 VALUES
     -- Carbohidratos --
     ('Carbohidratos, total', '', true, 0, 1),                                -- 

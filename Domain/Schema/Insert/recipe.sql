@@ -1,4 +1,6 @@
-INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time)
+SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO recipe (name, author, url, portions, preparation_time)
 VALUES
     -- ENSALADAS GOURMET --
     ('Ensalada de Atún', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-de-atun/', 2, 20),
@@ -13,7 +15,7 @@ VALUES
     ('Ensalada Griega', 'Gourmet', 'https://www.gourmet.cl/recetas/ensalada-griega/', 4, 15)
 ;
 
-INSERT INTO nutrifoods.recipe_dish_type (recipe_id, dish_type_id)
+INSERT INTO recipe_dish_type (recipe_id, dish_type_id)
 VALUES
     (1, 3),
     (2, 3),
@@ -26,7 +28,7 @@ VALUES
 ;
 
 
-INSERT INTO nutrifoods.recipe_meal_type (recipe_id, meal_type_id)
+INSERT INTO recipe_meal_type (recipe_id, meal_type_id)
 VALUES
     (1, 2),
     (1, 3),
@@ -39,7 +41,7 @@ VALUES
 ;
 
 
-INSERT INTO nutrifoods.recipe_diet (recipe_id, diet_id)
+INSERT INTO recipe_diet (recipe_id, diet_id)
 VALUES
     (1, 4),
     (1, 7),
@@ -49,7 +51,7 @@ VALUES
     
 ;
 
-INSERT INTO nutrifoods.recipe_steps (recipe, step, description)
+INSERT INTO recipe_steps (recipe, step, description)
 VALUES
     -- Ensalada de atún --
     (1, 1, 'Cortar el pepino a lo largo en dos mitades. Con una cuchara, retirar las pepas. Cortarlo en cubitos de 5mm.'),
@@ -78,7 +80,7 @@ VALUES
     (3, 6, 'Agregar el aliño a la ensalada y servir con un chorrito de reducción de vinagre balsámico.')
 ;
 
-INSERT INTO nutrifoods.recipe_measure (recipe_id, ingredient_measure_id, integer_part, numerator, denominator, description)
+INSERT INTO recipe_measure (recipe_id, ingredient_measure_id, integer_part, numerator, denominator, description)
 VALUES
 
     -- Ensalada de atún --
@@ -136,7 +138,7 @@ VALUES
     
 ;
 
-INSERT INTO nutrifoods.recipe_quantity (recipe_id, ingredient_id, grams, description)
+INSERT INTO recipe_quantity (recipe_id, ingredient_id, grams, description)
 VALUES
     (2, 92, 45, ''),
      -- Porotos negros receta 2
