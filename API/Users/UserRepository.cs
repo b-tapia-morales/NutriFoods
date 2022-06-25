@@ -24,9 +24,7 @@ public class UserRepository : IUserRepository
     {
         var user = await _context.UserProfiles.FirstAsync(e => e.Username.ToLower().Equals(username));
         if (PasswordEncryption.Verify(password, user.Password))
-        {
             throw new ArgumentException("No user with the specified password has been found");
-        }
 
         return user;
     }
@@ -35,9 +33,7 @@ public class UserRepository : IUserRepository
     {
         var user = await _context.UserProfiles.FirstAsync(e => e.Email.ToLower().Equals(email));
         if (PasswordEncryption.Verify(password, user.Password))
-        {
             throw new ArgumentException("No user with the specified password has been found");
-        }
 
         return user;
     }

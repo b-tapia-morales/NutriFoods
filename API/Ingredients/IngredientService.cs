@@ -1,6 +1,5 @@
 namespace API.Ingredients;
 
-public class IngredientService: IIngredientService
+public class IngredientService : IIngredientService
 {
-    
 }

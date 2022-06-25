@@ -14,7 +14,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<NutrifoodsDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$"));
+    options.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
+        opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 

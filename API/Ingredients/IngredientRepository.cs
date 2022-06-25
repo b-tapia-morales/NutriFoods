@@ -1,6 +1,5 @@
 ﻿using API.Dto;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,20 +14,6 @@ public class IngredientRepository : IIngredientRepository
     {
         _context = context;
         _mapper = mapper;
-    }
-
-    private static IQueryable<Ingredient> FullLazyLoad(IQueryable<Ingredient> ingredients)
-    {
-        return ingredients
-            .Include(e => e.IngredientNutrients)
-            .ThenInclude(e => e.Nutrient)
-            .ThenInclude(e => e.Subtype)
-            .ThenInclude(e => e.Type)
-            .Include(e => e.IngredientMeasures)
-            .Include(e => e.TertiaryGroup)
-            .ThenInclude(e => e.SecondaryGroup)
-            .ThenInclude(e => e.PrimaryGroup)
-            .AsNoTracking();
     }
 
     public async Task<IngredientDto> FindByName(string name)
@@ -89,5 +74,21 @@ public class IngredientRepository : IIngredientRepository
     {
         return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .ToListAsync();
+    }
+
+    private static IQueryable<Ingredient> FullLazyLoad(IQueryable<Ingredient> ingredients)
+    {
+        return ingredients
+            .Include(e => e.TertiaryGroup)
+            .ThenInclude(e => e.SecondaryGroup)
+            .ThenInclude(e => e.PrimaryGroup)
+            .AsSplitQuery()
+            .Include(e => e.IngredientMeasures)
+            .Include(e => e.IngredientNutrients)
+            .ThenInclude(e => e.Nutrient)
+            .ThenInclude(e => e.Subtype)
+            .ThenInclude(e => e.Type)
+            .AsSplitQuery()
+            .AsNoTracking();
     }
 }

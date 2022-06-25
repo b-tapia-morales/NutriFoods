@@ -13,27 +13,6 @@ public class RecipeRepository : IRecipeRepository
         _context = context;
     }
 
-    private static IIncludableQueryable<Recipe, PrimaryGroup> IncludeSubfields(IQueryable<Recipe> recipes)
-    {
-        return recipes
-            .Include(e => e.RecipeSteps)
-            .Include(e => e.RecipeNutrients)
-            .ThenInclude(e => e.Nutrient)
-            .ThenInclude(e => e.Subtype)
-            .ThenInclude(e => e.Type)
-            .Include(e => e.RecipeMeasures)
-            .ThenInclude(e => e.IngredientMeasure)
-            .ThenInclude(e => e.Ingredient)
-            .ThenInclude(e => e.TertiaryGroup)
-            .ThenInclude(e => e.SecondaryGroup)
-            .ThenInclude(e => e.PrimaryGroup)
-            .Include(e => e.RecipeQuantities)
-            .ThenInclude(e => e.Ingredient)
-            .ThenInclude(e => e.TertiaryGroup)
-            .ThenInclude(e => e.SecondaryGroup)
-            .ThenInclude(e => e.PrimaryGroup);
-    }
-
     public async Task<List<Recipe>> GetRecipes()
     {
         return await IncludeSubfields(_context.Recipes).ToListAsync();
@@ -74,5 +53,26 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
         await Task.WhenAll(findMeasures, findQuantities);
         return findMeasures.Result.Concat(findQuantities.Result).ToList();
+    }
+
+    private static IIncludableQueryable<Recipe, PrimaryGroup> IncludeSubfields(IQueryable<Recipe> recipes)
+    {
+        return recipes
+            .Include(e => e.RecipeSteps)
+            .Include(e => e.RecipeNutrients)
+            .ThenInclude(e => e.Nutrient)
+            .ThenInclude(e => e.Subtype)
+            .ThenInclude(e => e.Type)
+            .Include(e => e.RecipeMeasures)
+            .ThenInclude(e => e.IngredientMeasure)
+            .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.TertiaryGroup)
+            .ThenInclude(e => e.SecondaryGroup)
+            .ThenInclude(e => e.PrimaryGroup)
+            .Include(e => e.RecipeQuantities)
+            .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.TertiaryGroup)
+            .ThenInclude(e => e.SecondaryGroup)
+            .ThenInclude(e => e.PrimaryGroup);
     }
 }

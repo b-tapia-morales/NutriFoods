@@ -1,5 +1,4 @@
 ﻿using API.Dto;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Ingredients;
@@ -27,9 +26,7 @@ public class IngredientController
     public async Task<ActionResult<IngredientDto>> FindByName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-        {
             return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
-        }
 
         try
         {
@@ -45,10 +42,7 @@ public class IngredientController
     [Route("id/{id:int}")]
     public async Task<ActionResult<IngredientDto>> FindById(int id)
     {
-        if (id < 0)
-        {
-            return new BadRequestObjectResult("Parameter can't be a negative integer");
-        }
+        if (id < 0) return new BadRequestObjectResult("Parameter can't be a negative integer");
 
         try
         {
@@ -65,9 +59,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByPrimaryGroup(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-        {
             return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
-        }
 
         return await _repository.FindByPrimaryGroup(name.ToLower());
     }
@@ -76,10 +68,7 @@ public class IngredientController
     [Route("primaryGroup/{id:int}")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByPrimaryGroup(int id)
     {
-        if (id < 0)
-        {
-            return new BadRequestObjectResult("Parameter can't be a negative integer");
-        }
+        if (id < 0) return new BadRequestObjectResult("Parameter can't be a negative integer");
 
         return await _repository.FindByPrimaryGroup(id);
     }
@@ -89,9 +78,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindBySecondaryGroup(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-        {
             return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
-        }
 
         return await _repository.FindBySecondaryGroup(name.ToLower());
     }
@@ -100,10 +87,7 @@ public class IngredientController
     [Route("secondaryGroup/{id:int}")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindBySecondaryGroup(int id)
     {
-        if (id < 0)
-        {
-            return new BadRequestObjectResult("Parameter can't be a negative integer");
-        }
+        if (id < 0) return new BadRequestObjectResult("Parameter can't be a negative integer");
 
         return await _repository.FindBySecondaryGroup(id);
     }
@@ -113,9 +97,7 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByTertiaryGroup(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-        {
             return new BadRequestObjectResult("Parameter can't be a null, empty or whitespace string");
-        }
 
         return await _repository.FindByTertiaryGroup(name.ToLower());
     }
@@ -124,10 +106,7 @@ public class IngredientController
     [Route("tertiaryGroup/{id:int}")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByTertiaryGroup(int id)
     {
-        if (id < 0)
-        {
-            return new BadRequestObjectResult("Parameter can't be a negative integer");
-        }
+        if (id < 0) return new BadRequestObjectResult("Parameter can't be a negative integer");
 
         return await _repository.FindByTertiaryGroup(id);
     }
