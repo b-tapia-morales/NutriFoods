@@ -25,5 +25,6 @@ public class MappingProfile : Profile
         CreateMap<RecipeQuantity, RecipeQuantityDto>();
         CreateMap<RecipeNutrient, RecipeNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.NameDisplay));
+        CreateMap<Recipe, RecipeDto>();
     }
 }
