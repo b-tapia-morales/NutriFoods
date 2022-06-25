@@ -1,16 +1,17 @@
+using API.Dto;
 using Domain.Models;
 
 namespace API.Recipes;
 
 public interface IRecipeRepository
 {
-    Task<List<Recipe>> GetRecipes();
+    Task<IEnumerable<RecipeDto>> FindAll();
 
-    Task<List<Recipe>> ExcludeSecondaryGroups(IEnumerable<int> ids);
+    Task<RecipeDto> FindByName(string name);
 
-    Task<List<Recipe>> ExcludeTertiaryGroups(IEnumerable<int> ids);
+    Task<RecipeDto> FindById(int id);
+    
+    Task<IReadOnlyCollection<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids);
 
-    Task<Recipe> FindRecipe(string name);
-
-    Task<Recipe> FindRecipe(int id);
+    Task<IReadOnlyCollection<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids);
 }

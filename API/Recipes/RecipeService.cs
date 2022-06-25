@@ -1,3 +1,4 @@
+using API.Dto;
 using Domain.Models;
 
 namespace API.Recipes;
@@ -16,23 +17,38 @@ public class RecipeService : IRecipeService
         _repository = repository;
     }
 
-    public Task<List<Recipe>> GetVegetarianRecipes()
+    public async Task<IEnumerable<RecipeDto>> FindAll()
     {
-        return _repository.ExcludeSecondaryGroups(_nonVegetarianGroups);
+        return await _repository.FindAll();
     }
 
-    public Task<List<Recipe>> GetOvoVegetarianRecipes()
+    public async Task<RecipeDto> FindByName(string name)
     {
-        return _repository.ExcludeTertiaryGroups(_nonOvoVegetarianGroups);
+        return await _repository.FindByName(name.Trim().ToLower());
     }
 
-    public Task<List<Recipe>> GetOvoLactoVegetarianRecipes()
+    public async Task<RecipeDto> FindById(int id)
     {
-        return _repository.ExcludeTertiaryGroups(_nonOvoLactoVegetarianGroups);
+        return await _repository.FindById(id);
+    }
+    
+    public async Task<IReadOnlyCollection<RecipeDto>> GetVegetarianRecipes()
+    {
+        return await _repository.ExcludeSecondaryGroups(_nonVegetarianGroups);
     }
 
-    public Task<List<Recipe>> GetLactoVegetarianRecipes()
+    public async Task<IReadOnlyCollection<RecipeDto>> GetOvoVegetarianRecipes()
     {
-        return _repository.ExcludeTertiaryGroups(_nonLactoVegetarianGroups);
+        return await _repository.ExcludeTertiaryGroups(_nonOvoVegetarianGroups);
+    }
+
+    public async Task<IReadOnlyCollection<RecipeDto>> GetOvoLactoVegetarianRecipes()
+    {
+        return await _repository.ExcludeTertiaryGroups(_nonOvoLactoVegetarianGroups);
+    }
+
+    public async Task<IReadOnlyCollection<RecipeDto>> GetLactoVegetarianRecipes()
+    {
+        return await _repository.ExcludeTertiaryGroups(_nonLactoVegetarianGroups);
     }
 }

@@ -16,7 +16,7 @@ public class IngredientController
 
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<IEnumerable<IngredientDto>>> GetAllIngredients()
+    public async Task<ActionResult<IList<IngredientDto>>> GetAllIngredients()
     {
         return await _repository.FindAll();
     }
