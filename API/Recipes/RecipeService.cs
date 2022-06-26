@@ -32,22 +32,22 @@ public class RecipeService : IRecipeService
         return await _repository.FindById(id);
     }
     
-    public async Task<IReadOnlyCollection<RecipeDto>> GetVegetarianRecipes()
+    public async Task<IEnumerable<RecipeDto>> GetVegetarianRecipes()
     {
         return await _repository.ExcludeSecondaryGroups(_nonVegetarianGroups);
     }
 
-    public async Task<IReadOnlyCollection<RecipeDto>> GetOvoVegetarianRecipes()
+    public async Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonOvoVegetarianGroups);
     }
 
-    public async Task<IReadOnlyCollection<RecipeDto>> GetOvoLactoVegetarianRecipes()
+    public async Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonOvoLactoVegetarianGroups);
     }
 
-    public async Task<IReadOnlyCollection<RecipeDto>> GetLactoVegetarianRecipes()
+    public async Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonLactoVegetarianGroups);
     }

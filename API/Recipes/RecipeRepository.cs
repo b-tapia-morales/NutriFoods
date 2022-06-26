@@ -37,7 +37,7 @@ public class RecipeRepository : IRecipeRepository
         return await _mapper.ProjectTo<RecipeDto>(_context.Recipes).Where(e => e.Id == id).FirstAsync();
     }
 
-    public async Task<IReadOnlyCollection<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids)
+    public async Task<IEnumerable<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids)
     {
         var findMeasures = _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => !e.RecipeMeasures.Any(m =>
@@ -50,10 +50,10 @@ public class RecipeRepository : IRecipeRepository
         await Task.WhenAll(findMeasures, findQuantities);
         var measures = await findMeasures;
         var quantities = await findQuantities;
-        return measures.Concat(quantities).ToImmutableList();
+        return measures.Concat(quantities).ToList();
     }
 
-    public async Task<IReadOnlyCollection<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids)
+    public async Task<IEnumerable<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids)
     {
         var findMeasures = _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => !e.RecipeMeasures.Any(m =>
@@ -66,7 +66,7 @@ public class RecipeRepository : IRecipeRepository
         await Task.WhenAll(findMeasures, findQuantities);
         var measures = await findMeasures;
         var quantities = await findQuantities;
-        return measures.Concat(quantities).ToImmutableList();
+        return measures.Concat(quantities).ToList();
     }
 
     private static IQueryable<Recipe> IncludeSubfields(IQueryable<Recipe> recipes)

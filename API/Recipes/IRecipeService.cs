@@ -11,11 +11,11 @@ public interface IRecipeService
 
     public Task<RecipeDto> FindById(int id);
     
-    public Task<IReadOnlyCollection<RecipeDto>> GetVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetVegetarianRecipes();
 
-    public Task<IReadOnlyCollection<RecipeDto>> GetOvoVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes();
 
-    public Task<IReadOnlyCollection<RecipeDto>> GetOvoLactoVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes();
 
-    public Task<IReadOnlyCollection<RecipeDto>> GetLactoVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes();
 }

@@ -11,7 +11,7 @@ public interface IRecipeRepository
 
     Task<RecipeDto> FindById(int id);
     
-    Task<IReadOnlyCollection<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids);
+    Task<IEnumerable<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids);
 
-    Task<IReadOnlyCollection<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids);
+    Task<IEnumerable<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids);
 }
