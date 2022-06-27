@@ -1,6 +1,6 @@
-using NutrientRetrieval.Model;
 using Newtonsoft.Json;
 using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Model;
 
 namespace NutrientRetrieval.Request;
 
@@ -8,27 +8,24 @@ public static class DataCentral
 {
     private const string ApiKey = "aLGkW4nbdeEhoFefi68nOYLNPaSXhiSjO7bIBzQk";
 
-    public static Food? FoodRequest(int id)
+    private static readonly HttpClient Client = new();
+
+    public static async Task<(int Id, Food? Food)> FoodRequest(int nutriFoodsId, int foodDataCentralId)
     {
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{id}?format=abridged&api_key={ApiKey}";
+        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format=abridged&api_key={ApiKey}";
         var uri = new Uri(path);
 
-        using var client = new HttpClient();
-        var food = JsonConvert.DeserializeObject<Food>(client.GetAsync(uri).Result.Content.ReadAsStringAsync().Result);
-
-        Array.Sort(food.FoodNutrients, (x, y) => string.Compare(x.Number, y.Number, StringComparison.InvariantCulture));
-        return food;
+        var response = await Client.GetAsync(uri);
+        response.EnsureSuccessStatusCode();
+        var content = await response.Content.ReadAsStringAsync();
+        return (nutriFoodsId, JsonConvert.DeserializeObject<Food>(content));
     }
 
-    public static Dictionary<int, Food?> FoodRequest()
+    public static async Task<Dictionary<int, Food?>> FoodRequest()
     {
-        var ingredientIds = IngredientDictionary.CreateDictionaryIds().Take(10);
-        var dictionary = new Dictionary<int, Food?>();
-        foreach (var (key, value) in ingredientIds)
-        {
-            dictionary.Add(key, FoodRequest(value));
-        }
-
-        return dictionary;
+        var ingredientIds = IngredientDictionary.CreateDictionaryIds();
+        var tasks = ingredientIds.Select(e => FoodRequest(e.Key, e.Value));
+        var tuples = await Task.WhenAll(tasks);
+        return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);
     }
 }
