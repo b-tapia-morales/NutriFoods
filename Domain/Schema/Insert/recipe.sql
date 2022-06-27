@@ -1,4 +1,5 @@
-SET SEARCH_PATH = "nutrifoods";
+SET
+SEARCH_PATH = "nutrifoods";
 
 INSERT INTO recipe (name, author, url, portions, preparation_time)
 VALUES

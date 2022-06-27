@@ -13,7 +13,7 @@ public class RecipeController
     {
         _service = service;
     }
-    
+
     [HttpGet]
     [Route("")]
     public async Task<IEnumerable<RecipeDto>> FindAll()

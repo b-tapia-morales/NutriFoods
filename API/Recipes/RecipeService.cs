@@ -1,5 +1,4 @@
 using API.Dto;
-using Domain.Models;
 
 namespace API.Recipes;
 
@@ -31,7 +30,7 @@ public class RecipeService : IRecipeService
     {
         return await _repository.FindById(id);
     }
-    
+
     public async Task<IEnumerable<RecipeDto>> GetVegetarianRecipes()
     {
         return await _repository.ExcludeSecondaryGroups(_nonVegetarianGroups);

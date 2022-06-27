@@ -30,5 +30,4 @@ public static class PasswordEncryption
     {
         return BCrypt.Net.BCrypt.Verify(password, hash);
     }
-    
 }

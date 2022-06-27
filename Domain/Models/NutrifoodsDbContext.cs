@@ -5,7 +5,16 @@ namespace Domain.Models;
 
 public class NutrifoodsDbContext : DbContext
 {
-    private readonly IConfiguration _configuration;
+    private readonly IConfiguration _configuration = null!;
+
+    public NutrifoodsDbContext()
+    {
+    }
+
+    public NutrifoodsDbContext(DbContextOptions<NutrifoodsDbContext> options)
+        : base(options)
+    {
+    }
 
     public NutrifoodsDbContext(IConfiguration configuration)
     {

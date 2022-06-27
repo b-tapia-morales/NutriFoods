@@ -12,6 +12,7 @@ public static class Program
         var weight = Input.ReadInteger("Ingrese su peso (en [Kg])", 50, 200);
         var height = Input.ReadInteger("Ingrese su peso (en [cm])", 150, 200);
         var physicalActivity = Input.ReadInteger("Ingrese su nivel de actividad física", 1, 4);
-        Console.WriteLine($"Su GET es: {1}", TotalMetabolicRate.Calculate(gender, weight, height, age, physicalActivity));
+        Console.WriteLine($"Su GET es: {1}",
+            TotalMetabolicRate.Calculate(gender, weight, height, age, physicalActivity));
     }
 }

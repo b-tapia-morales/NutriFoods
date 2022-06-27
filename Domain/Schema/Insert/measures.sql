@@ -236,7 +236,7 @@ VALUES
     -- Repollo --
     (64, 'Hoja Grande', 33),
     (64, 'Mediano', 908),
-    (64, 'Taza, pícado', 85),
+    (64, 'Taza, picado', 85),
     (64, 'Grande', 1248),
     (64, 'Pequeño', 714),
     -- Aceituna --
