@@ -5,13 +5,17 @@ namespace Domain.Models;
 
 public class NutrifoodsDbContext : DbContext
 {
-    public NutrifoodsDbContext()
+    private readonly IConfiguration _configuration;
+
+    public NutrifoodsDbContext(IConfiguration configuration)
     {
+        _configuration = configuration;
     }
 
-    public NutrifoodsDbContext(DbContextOptions<NutrifoodsDbContext> options)
+    public NutrifoodsDbContext(DbContextOptions<NutrifoodsDbContext> options, IConfiguration configuration)
         : base(options)
     {
+        _configuration = configuration;
     }
 
     public virtual DbSet<Diet> Diets { get; set; } = null!;
@@ -45,8 +49,8 @@ public class NutrifoodsDbContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(
-                "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
-                opt => opt.UseNetTopologySuite());
+                _configuration.GetConnectionString("DatabaseConnection"),
+                opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
