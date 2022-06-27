@@ -7,15 +7,11 @@ public static class Input
     public static int ReadInteger(string message, int lowerBound, int upperBound)
     {
         for (var i = 1;; i++)
-        {
             try
             {
                 Console.WriteLine($"{message} [{lowerBound}, {upperBound}]: ");
                 var integer = int.Parse(Console.ReadLine() ?? string.Empty);
-                if (integer >= lowerBound && integer <= upperBound)
-                {
-                    return integer;
-                }
+                if (integer >= lowerBound && integer <= upperBound) return integer;
 
                 if (i is 3)
                 {
@@ -30,7 +26,6 @@ public static class Input
             {
                 Console.WriteLine("Debe ingresar un valor entero. Intente nuevamente.");
             }
-        }
     }
 
     public static char ReadConfirmation(string message)
@@ -44,10 +39,7 @@ public static class Input
         {
             Console.WriteLine($"{message} <{characterOne}, {characterTwo}>: ");
             var character = char.ToLower(Console.ReadKey().KeyChar);
-            if (character == characterOne || character == characterTwo)
-            {
-                return character;
-            }
+            if (character == characterOne || character == characterTwo) return character;
 
             if (i is not 3) continue;
             Console.WriteLine("Se han registrado demasiados intentos sin éxito. La aplicación se detendrá");
@@ -68,14 +60,12 @@ public static class Input
     {
         return ReadString(true, request, formatRequest, expressions);
     }
-    
+
     public static string ReadString(bool verbosity, string request, string formatRequest,
         params string[] expressions)
     {
         if (expressions.Length == 0)
-        {
             throw new ArgumentException("No regular expressions were received to validate input");
-        }
 
         var regexes = expressions.Select(s => new Regex(s)).ToList();
         for (var i = 1;; i++)
@@ -83,10 +73,7 @@ public static class Input
             Console.WriteLine(verbosity ? $"{request}\n{formatRequest}: " : $"{request}: ");
             var str = Console.ReadLine() ?? string.Empty;
             str = str.Trim();
-            if (regexes.Select(regex => regex.Match(str)).Any(match => match.Success))
-            {
-                return str;
-            }
+            if (regexes.Select(regex => regex.Match(str)).Any(match => match.Success)) return str;
 
             if (i is not 3) continue;
             Console.WriteLine("Se han registrado demasiados intentos sin éxito. La aplicación se detendrá");
@@ -94,5 +81,4 @@ public static class Input
             Environment.Exit(-1);
         }
     }
-
 }

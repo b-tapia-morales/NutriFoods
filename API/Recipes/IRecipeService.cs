@@ -1,14 +1,20 @@
-using Domain.Models;
+using API.Dto;
 
 namespace API.Recipes;
 
 public interface IRecipeService
 {
-    public Task<List<Recipe>> GetVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> FindAll();
 
-    public Task<List<Recipe>> GetOvoVegetarianRecipes();
+    public Task<RecipeDto> FindByName(string name);
 
-    public Task<List<Recipe>> GetOvoLactoVegetarianRecipes();
+    public Task<RecipeDto> FindById(int id);
 
-    public Task<List<Recipe>> GetLactoVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetVegetarianRecipes();
+
+    public Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes();
+
+    public Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes();
+
+    public Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes();
 }

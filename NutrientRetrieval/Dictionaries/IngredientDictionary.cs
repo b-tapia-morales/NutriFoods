@@ -9,8 +9,8 @@ public static class IngredientDictionary
 {
     public static Dictionary<int, int> CreateDictionaryIds()
     {
-        var directory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        var path = Path.Combine(directory, "Files", "IngredientIDs.csv");
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+        var path = Path.Combine(directory, "NutrientRetrieval", "Files", "IngredientIDs.csv");
         var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Encoding = Encoding.UTF8,
@@ -27,9 +27,9 @@ public static class IngredientDictionary
 
     private sealed class IngredientRow
     {
-        public int NutriFoodsId { get; set; }
-        public string NutriFoodsName { get; set; }
-        public int FoodDataCentralId { get; set; }
+        public int NutriFoodsId { get; set; } = 0;
+        public string NutriFoodsName { get; set; } = null!;
+        public int FoodDataCentralId { get; set; } = 0;
     }
 
     private sealed class IngredientMapping : ClassMap<IngredientRow>

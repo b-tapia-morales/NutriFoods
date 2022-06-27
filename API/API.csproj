@@ -7,16 +7,26 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper.EF6" Version="2.1.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="6.0.6" />
         <PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="6.0.6">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
         <PackageReference Include="Microsoft.OpenApi" Version="1.3.1" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Application\Application.csproj" />
         <ProjectReference Include="..\Domain\Domain.csproj" />
+        <ProjectReference Include="..\NutrientRetrieval\NutrientRetrieval.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Controllers" />
     </ItemGroup>
 
 </Project>

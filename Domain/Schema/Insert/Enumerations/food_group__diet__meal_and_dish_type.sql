@@ -1,4 +1,6 @@
-﻿INSERT INTO nutrifoods.primary_group (name)
+﻿SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO primary_group (name)
 VALUES ('Frutas'),
        ('Verduras'),
        ('Granos'),
@@ -7,7 +9,7 @@ VALUES ('Frutas'),
        ('Otros')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.secondary_group (name, primary_group_id)
+INSERT INTO secondary_group (name, primary_group_id)
 VALUES ('Fruta entera', 1),
        ('Jugo de fruta', 1),
        ('Vegetales verdes', 2),
@@ -30,7 +32,7 @@ VALUES ('Fruta entera', 1),
        ('Algas', 6)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.tertiary_group (name, secondary_group_id)
+INSERT INTO tertiary_group (name, secondary_group_id)
 VALUES ('Fruta entera', 1),
        ('Jugo de fruta', 2),
        ('Vegetales verdes', 3),
@@ -59,7 +61,7 @@ VALUES ('Fruta entera', 1),
        ('Algas', 20)
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.meal_type (name)
+INSERT INTO meal_type (name)
 VALUES
     -- Hora del día
     ('Desayuno'),    --Gourmet
@@ -69,7 +71,7 @@ VALUES
     ('Refrigerio')
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.dish_type (name)
+INSERT INTO dish_type (name)
 VALUES ('Aperitivo'),  --Comidas chilenas
        ('Bebida'),     --Comidas chilenas
        ('Ensalada'),   --Comidas chilenas
@@ -82,7 +84,7 @@ VALUES ('Aperitivo'),  --Comidas chilenas
        ('Sopa')        --Comidas chilenas
 ON CONFLICT DO NOTHING;
 
-INSERT INTO nutrifoods.diet (name)
+INSERT INTO diet (name)
 VALUES ('Ovo-Vegetariana'),
        ('Lacto-Vegetariana'),
        ('Ovo-Lacto-Vegetariana'),

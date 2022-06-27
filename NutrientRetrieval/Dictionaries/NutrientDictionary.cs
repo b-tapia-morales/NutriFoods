@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
@@ -10,8 +9,8 @@ public static class NutrientDictionary
 {
     public static Dictionary<string, int> CreateDictionaryIds()
     {
-        var directory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
-        var path = Path.Combine(directory, "Files", "NutrientIDs.csv");
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+        var path = Path.Combine(directory, "NutrientRetrieval", "Files", "NutrientIDs.csv");
         var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             Encoding = Encoding.UTF8,
@@ -22,18 +21,19 @@ public static class NutrientDictionary
         using var textReader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(textReader, configuration);
         csv.Context.RegisterClassMap<NutrientMapping>();
-        return csv.GetRecords<NutrientRow>().ToDictionary(record => record.FoodDataCentralId, record => record.NutriFoodsId);
+        return csv.GetRecords<NutrientRow>()
+            .ToDictionary(record => record.FoodDataCentralId, record => record.NutriFoodsId);
     }
 
     private sealed class NutrientRow
     {
-        public string FoodDataCentralName { get; set; }
-        public string FoodDataCentralId { get; set; }
-        public string NutriFoodsName { get; set; }
-        public int NutriFoodsId { get; set; }
+        public string FoodDataCentralName { get; set; } = null!;
+        public string FoodDataCentralId { get; set; } = null!;
+        public string NutriFoodsName { get; set; } = null!;
+        public int NutriFoodsId { get; set; } = 0;
     }
 
-    private sealed class NutrientMapping: ClassMap<NutrientRow>
+    private sealed class NutrientMapping : ClassMap<NutrientRow>
     {
         public NutrientMapping()
         {
