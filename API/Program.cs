@@ -5,9 +5,10 @@ using Domain.DatabaseInitialization;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using NutrientRetrieval;
 
 DatabaseInitialization.Initialize();
+ApiRetrieval.InsertNutrients();
 
 var builder = WebApplication.CreateBuilder(args);
 
