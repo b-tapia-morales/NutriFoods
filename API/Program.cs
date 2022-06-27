@@ -1,8 +1,13 @@
 using System.Text.Json.Serialization;
 using API.Ingredients;
 using API.Recipes;
+using Domain.DatabaseInitialization;
 using Domain.Models;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
+DatabaseInitialization.Initialize();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,15 +19,21 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<NutrifoodsDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
-        opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
+builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
+    {
+        if (!optionsBuilder.IsConfigured)
+            optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
+                opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+    }
+);
 
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
 var app = builder.Build();
 
