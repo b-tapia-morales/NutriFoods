@@ -10,6 +10,6 @@
 1,cucharadita,limón
 ½,cucharadita,ajo
 3,x,anchoas
-¾,taza,aceite,oliva
+¾,taza,aceite oliva
 1,cucharadita,sal
 ½,cucharadita,pimienta blanca

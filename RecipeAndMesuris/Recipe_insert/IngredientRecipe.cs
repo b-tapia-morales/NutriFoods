@@ -14,19 +14,24 @@ public class IngredientRecipe
         _connection = connection;
         //_missingIngredient = new MissingIngredient();
     }
-    private void ReadFileRecipeIngredient(string pathReceta)
+    private void ReadFileRecipeIngredient(string pathReceta,string nameRecipe)
     {
         StreamReader fileRecipeIngredients = new StreamReader(pathReceta);
-        //Console.WriteLine(pathReceta);
-        
+        Console.WriteLine("--------------------------------------");
+        Console.WriteLine(pathReceta);
+        var cant = 0;
         while (!fileRecipeIngredients.EndOfStream)
         {
             string line = fileRecipeIngredients.ReadLine() ?? throw new InvalidOperationException();
             string[] split = line.Split(",");
             string ingredient = split[2];
-            TransformUnits(split[0], split[1], ingredient, pathReceta);
-            
+            string consultId = $"SELECT id FROM nutrifoods.recipe WHERE name = '{nameRecipe}';";
+            NpgsqlCommand command = new NpgsqlCommand(consultId,_connection);
+            var recipeId = command.ExecuteScalar();
+            TransformUnits(split[0], split[1], ingredient, pathReceta,recipeId.ToString());
+            cant++;
         }
+        Console.WriteLine(cant);
         fileRecipeIngredients.Close();
     }
 
@@ -39,7 +44,7 @@ public class IngredientRecipe
             String line = fileRecipe.ReadLine() ?? throw new InvalidOperationException();
             String[] spilt = line.Split(";");
             ReadFileRecipeIngredient(
-                $"Recipe_insert/Ingredient/parcerIngredientes/Ingredientes_Gourmet/{pathReceta}/ingre_{spilt[0]}.txt");
+                $"Recipe_insert/Ingredient/parcerIngredientes/Ingredientes_Gourmet/{pathReceta}/ingre_{spilt[0]}.txt",spilt[0]);
         }
         fileRecipe.Close();
         
@@ -55,7 +60,7 @@ public class IngredientRecipe
         _missingIngredient.Write();
     }
 
-    private void TransformUnits(String quantity, String units, String ingredient, String pathReceta)
+    private void TransformUnits(String quantity, String units, String ingredient, String pathReceta,String recipeId)
     {
         List<int> numDem;
 
@@ -78,12 +83,62 @@ public class IngredientRecipe
         if (ingredient.ToLower().Equals("salvia")) ingredient = "Salvia deshidratada";
         if (ingredient.ToLower().Equals("cranberries")) ingredient = "arándano";
         if (ingredient.ToLower().Equals("aji")) ingredient = "ají";
-            String consult = $"SELECT name FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name::TEXT,'{ingredient}'::TEXT) > 0.40;";
+        if (units.Equals("cda") || units.Equals("cdas")) units = "cucharada"; 
+        if (units.Equals("cdta") || units.Equals("cdtas")) units = "cucharadita";
+        String consult = $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name::TEXT,'{ingredient}'::TEXT) > 0.40;";
         NpgsqlCommand commandSelectIngredient = new NpgsqlCommand(consult,_connection);
         var ingredientResult = commandSelectIngredient.ExecuteScalar();
         
-        if (ingredientResult == null)
+        if (ingredientResult != null)
         {
+            if (quantity.Equals("x") && units.Equals("x"))
+            {
+                //Console.WriteLine(ingredient);
+            }
+            else
+            {
+                if (units.Equals("x"))
+                {
+                    string avg = $"SELECT avg(grams) FROM nutrifoods.ingredient_measure WHERE ingredient_id = {ingredientResult};";
+                    NpgsqlCommand comAvg = new NpgsqlCommand(avg,_connection);
+                    var result = comAvg.ExecuteScalar();
+                    Console.WriteLine(result);
+                }
+                else
+                {
+                    if (units.Equals("g") || units.Equals("gr"))
+                    {
+                        
+                        string insertRecipeQuantity = $"INSERT INTO nutrifoods.recipe_quantity (recipe_id, ingredient_id, grams) " +
+                                                      $"VALUES ({recipeId},{ingredientResult},{quantity}) ON CONFLICT DO NOTHING;";
+                        NpgsqlCommand command = new NpgsqlCommand(insertRecipeQuantity, _connection);
+                        command.ExecuteNonQuery();
+                        //Console.WriteLine(quantity +" | "+units+ "| ingredient "+ingredient);
+                    }
+                    else
+                    {
+                        //Console.WriteLine(quantity +" | "+units.Replace("s","")+ "| ingredient "+ingredient);
+                        string measurisConsult = $"SELECT * FROM nutrifoods.ingredient_measure WHERE ingredient_id = {ingredientResult} " +
+                                                 $"AND nutrifoods.similarity(name,'{units.Replace("s","")}') > 0.40 LIMIT 1;";
+                        NpgsqlCommand commands = new NpgsqlCommand(measurisConsult,_connection);
+                        var measurisResult = commands.ExecuteReader();
+                        while (measurisResult.Read())
+                        {
+                            //Console.WriteLine(units +" == "+measurisResult.GetValue(2) + " | ingrediente "+ingredient);
+                        }
+                        measurisResult.Close();
+                    }
+                    
+                }
+            }
+
+
+
+
+
+
+
+            /*
             if (!ingredient.ToLower().Equals("agua"))
             {
                 
@@ -95,6 +150,7 @@ public class IngredientRecipe
             {
                 Console.WriteLine(pathReceta);
             }
+            */
         }
         
         /*
