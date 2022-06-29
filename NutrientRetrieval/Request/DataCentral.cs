@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
+using NutrientRetrieval.AbridgedModel;
 using NutrientRetrieval.Dictionaries;
-using NutrientRetrieval.Model;
 
 namespace NutrientRetrieval.Request;
 
@@ -16,7 +16,6 @@ public static class DataCentral
         var uri = new Uri(path);
 
         var response = await Client.GetAsync(uri);
-        response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         return (nutriFoodsId, JsonConvert.DeserializeObject<Food>(content));
     }
