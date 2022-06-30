@@ -20,7 +20,7 @@ public static class DatabaseInitialization
         var enumerationScript = Path.Combine(EnumerationsDirectory, "food_group__diet__meal_and_dish_type.sql");
         var nutrientScript = Path.Combine(EnumerationsDirectory, "nutrient.sql");
         var ingredientScript = Path.Combine(InsertDirectory, "ingredients.sql");
-        var measureScript = Path.Combine(InsertDirectory, "measures.sql");
+        //var measureScript = Path.Combine(InsertDirectory, "measures.sql");
         var connection = new NpgsqlConnection(ConnectionString);
         connection.Open();
         using var schemaCommand = new NpgsqlCommand(File.ReadAllText(schemaScript), connection);
@@ -31,8 +31,8 @@ public static class DatabaseInitialization
         nutrientCommand.ExecuteNonQuery();
         using var ingredientCommand = new NpgsqlCommand(File.ReadAllText(ingredientScript), connection);
         ingredientCommand.ExecuteNonQuery();
-        using var measureCommand = new NpgsqlCommand(File.ReadAllText(measureScript), connection);
-        measureCommand.ExecuteNonQuery();
+        /*using var measureCommand = new NpgsqlCommand(File.ReadAllText(measureScript), connection);
+        measureCommand.ExecuteNonQuery();*/
         connection.Close();
     }
 }
