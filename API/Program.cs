@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval;
 
 DatabaseInitialization.Initialize();
-ApiRetrieval.InsertNutrients();
+ApiRetrieval.RetrieveFromApi();
 
 var builder = WebApplication.CreateBuilder(args);
 
