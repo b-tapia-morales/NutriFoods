@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
-using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Model;
+using NutrientRetrieval.Dictionaries;
 
 namespace NutrientRetrieval.Request;
 
@@ -12,18 +12,17 @@ public static class DataCentral
 
     public static async Task<(int Id, Food? Food)> FoodRequest(int nutriFoodsId, int foodDataCentralId)
     {
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format=abridged&api_key={ApiKey}";
+        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format=full&api_key={ApiKey}";
         var uri = new Uri(path);
 
         var response = await Client.GetAsync(uri);
-        response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
         return (nutriFoodsId, JsonConvert.DeserializeObject<Food>(content));
     }
 
     public static async Task<Dictionary<int, Food?>> FoodRequest()
     {
-        var ingredientIds = IngredientDictionary.CreateDictionaryIds();
+        var ingredientIds = IngredientDictionary.CreateDictionaryIds().Take(10);
         var tasks = ingredientIds.Select(e => FoodRequest(e.Key, e.Value));
         var tuples = await Task.WhenAll(tasks);
         return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);

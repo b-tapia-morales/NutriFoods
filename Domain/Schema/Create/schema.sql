@@ -146,7 +146,6 @@ CREATE TABLE IF NOT EXISTS ingredient_measure
     name          VARCHAR(64)           NOT NULL,
     grams         DOUBLE PRECISION      NOT NULL,
     is_default    BOOLEAN DEFAULT FALSE NOT NULL,
-    UNIQUE (ingredient_id, name),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     PRIMARY KEY (id)
 );
