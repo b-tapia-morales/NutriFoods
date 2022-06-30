@@ -1,9 +1,11 @@
+using System.Globalization;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Model;
 using NutrientRetrieval.Request;
+using NutrientRetrieval.Translation;
 
 namespace NutrientRetrieval;
 
@@ -23,10 +25,10 @@ public static class ApiRetrieval
             .Where(e => !ReferenceEquals(null, e.Value))
             .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(string.Join(", ", foodsDictionary.Values));
-        foreach (var (ingredientId, food) in foodsDictionary)
+        foreach (var pair in foodsDictionary)
         {
-            InsertNutrients(context, nutrientsDictionary, ingredientId, food);
-            InsertMeasures(context, ingredientId, food);
+            InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
+            InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();
@@ -36,6 +38,8 @@ public static class ApiRetrieval
         int ingredientId, Food? food)
     {
         if (ReferenceEquals(null, food)) return;
+
+        if (food.FoodNutrients.Length == 0) return;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
@@ -67,13 +71,25 @@ public static class ApiRetrieval
     {
         if (ReferenceEquals(null, food)) return;
 
-        foreach (var foodPortion in food.FoodPortions)
+        if (food.FoodPortions.Length == 0) return;
+
+        var untranslatedString = string.Join(Environment.NewLine, food.FoodPortions.Select(e =>
         {
-            var modifier = foodPortion.Modifier;
-            var name = modifier.Contains('(') ? modifier.Remove(modifier.IndexOf('(') + 1) : modifier;
-            var amount = foodPortion.Amount;
+            var span = e.Modifier.AsSpan();
+            var slice = span.Contains('(') ? span[..span.IndexOf('(')] : span;
+            return slice.ToString();
+        }));
+        var translatedString = TranslationApi.Translate(untranslatedString).Result;
+        var translations = translatedString!.Split(Environment.NewLine);
+        var n = translations.Length;
+        for (var i = 0; i < n; i++)
+        {
+            var span = translations[i].AsSpan().Trim();
+            var name = $"{char.ToUpper(span[0])}{span[1..].ToString()}";
+            var portion = food.FoodPortions[i];
+            var amount = portion.Amount;
             var multiplier = Math.Abs(amount - 1) < 1e-4 ? 1 : 1 / amount;
-            var grams = Math.Round((double) (multiplier * foodPortion.GramWeight), 4);
+            var grams = Math.Round(multiplier * portion.GramWeight, 4);
             var ingredientMeasure = new IngredientMeasure
             {
                 IngredientId = ingredientId,
