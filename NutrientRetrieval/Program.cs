@@ -1,3 +1,3 @@
 ﻿using NutrientRetrieval;
 
-ApiRetrieval.InsertNutrients();
+ApiRetrieval.RetrieveFromApi();
