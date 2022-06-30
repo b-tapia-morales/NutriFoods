@@ -18,7 +18,7 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest().Result;
+        var foodsDictionary = DataCentral.FoodRequest().Result.Where(e => !ReferenceEquals(null, e.Value));
         foreach (var (key, value) in foodsDictionary)
         foreach (var nutrient in value!.FoodNutrients)
         {
@@ -45,6 +45,7 @@ public static class ApiRetrieval
 
             context.IngredientNutrients.Add(ingredientNutrient);
         }
+
         context.SaveChanges();
     }
 }
