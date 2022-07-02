@@ -21,7 +21,7 @@
 250,g,ricotta
 1,taza,crema ácida
 1/2,taza,queso parmesano
-x,pizca,sal
+x,x,sal
 x,x,Pimienta Negra
 1,cucharadita,Ajo Polvo,Gourmet
 1,cucharadita,Tomillo

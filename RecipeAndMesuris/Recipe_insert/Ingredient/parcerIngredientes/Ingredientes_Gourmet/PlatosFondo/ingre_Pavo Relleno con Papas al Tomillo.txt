@@ -16,5 +16,5 @@ x,x,pimienta negra
 2,cucharadas,mantequilla
 2,cucharadas,aceite oliva
 x,x,merquen
-x,pizca,Pimienta Negra
-x,pizca,sal
+x,x,Pimienta Negra
+x,x,sal

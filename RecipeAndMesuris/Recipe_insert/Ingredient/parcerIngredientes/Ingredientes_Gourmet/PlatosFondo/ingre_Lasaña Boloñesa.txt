@@ -5,7 +5,7 @@
 1,kilo,carne molida
 1/2,cucharadita,Canela
 1,cucharadita,Pimienta Negra
-800g,x,tomate
+800,g,tomate
 1,cucharada,azúcar
 x,x,Sal
 1/2,taza,mantequilla

@@ -10,6 +10,5 @@ m.GetMeasures();*/
 
 Connect c = new Connect();
 //c.InsertRecipe();
-//c.InsertMeasuris();
-
+c.InsertMeasuris();
 c.InsertRecipeIngredient();

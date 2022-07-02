@@ -9,7 +9,7 @@
 2,lt,agua
 x,x,Sal
 100,gr,harina
-6,claras,huevo
+6,x,claras de huevo
 100,gr,pan rallado
 1,kg,papas
 300,ml,leche

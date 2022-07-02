@@ -34,7 +34,7 @@ public class Connect
         while(!fileRecipe.EndOfStream)
         {
             string line = fileRecipe.ReadLine()!;
-            string[] split = line.Split(";");
+            string [] split = line.Split(";");
             var name = split[0];
             var author = split[1];
             var url = split[2];
