@@ -7,6 +7,7 @@ namespace NutrientRetrieval.Request;
 public static class DataCentral
 {
     private const string ApiKey = "aLGkW4nbdeEhoFefi68nOYLNPaSXhiSjO7bIBzQk";
+    private const string Format = "full";
 
     private static readonly HttpClient Client = new();
 
