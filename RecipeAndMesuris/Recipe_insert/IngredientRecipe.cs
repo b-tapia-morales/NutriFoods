@@ -148,7 +148,6 @@ public class IngredientRecipe
                                     
                                     gram = listGram[listGram.Count / 2] *
                                            (quantity[0]- '0' + CharUnicodeInfo.GetNumericValue(quantity[2]));
-                                    Console.WriteLine(gram + " "+quantity);
                                 }
                                 else
                                 {
