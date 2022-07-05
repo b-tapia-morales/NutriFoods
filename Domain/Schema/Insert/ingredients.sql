@@ -1,4 +1,6 @@
-﻿INSERT INTO nutrifoods.ingredient (name, is_animal, contains_gluten, tertiary_group_id)
+﻿SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO ingredient (name, is_animal, contains_gluten, tertiary_group_id)
 VALUES ('Sal', false, false, 23),
        ('Pimienta negra', false, false, 23),
        ('Aceite de oliva', false, false, 21),
@@ -245,7 +247,16 @@ VALUES ('Sal', false, false, 23),
        ('Calamar', true, false, 11),
        ('Solomillo de cerdo', true, false, 12),
        ('Whisky', false, false, 25),
-       ('Kanikama', true, false, 11)
+       ('Kanikama', true, false, 11),
+       -- Nueva Lista --
+       ('Leche condensada', true, false, 1),
+       ('Manjar', true, false, 1),
+       ('Cobertura chocolate semiamargo', true, false, 1),
+       ('Filete', true, false, 1),
+       ('Salsa caramelo', false, false, 1),
+       ('Galletas', true, false, 1),
+       ('Ostiones', true, false, 1),
+       ('Berries', false, false, 1)
 
 
 ON CONFLICT (name) DO NOTHING;

@@ -1,4 +1,6 @@
-﻿INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams)
+﻿SET SEARCH_PATH = "nutrifoods";
+
+INSERT INTO ingredient_measure (ingredient_id, name, grams)
 VALUES
     -- Sal --
     (1, 'Cucharadita', 6.0),
@@ -122,7 +124,7 @@ VALUES
     (30, 'Racimo', 340),
     (30, 'Hoja', 10),
     (30, 'Paquete', 284),
-    -- Champiñon --
+    -- Champiñón --
     (31, 'Taza', 70),
     (31, 'Grande', 23),
     (31, 'Mediano', 18),
@@ -209,7 +211,7 @@ VALUES
     (56, 'Cucharada', 12.5),
     (56, 'Taza', 200),
     -- Atún --
-    
+
     -- Vainilla --
     (58, 'Cucharadita', 4.2),
     (58, 'Taza', 208),
@@ -234,7 +236,7 @@ VALUES
     -- Repollo --
     (64, 'Hoja Grande', 33),
     (64, 'Mediano', 908),
-    (64, 'Taza, pícado', 85),
+    (64, 'Taza, picado', 85),
     (64, 'Grande', 1248),
     (64, 'Pequeño', 714),
     -- Aceituna --
@@ -285,29 +287,23 @@ VALUES
     -- Puerro --
     (80, 'Taza', 89),
     -- Harina de almendra --
-
-    --Pimiento verde--
-    (82, 'Taza, picada',149),
-    (82, 'Taza, en rodajas',149),
-    (82,'cucharada',9.3),
-    (82,'Grande',164),
-    (82,'Mediano',119),
-    (82,'pequeño',74),
-    (82,'Tiras',27),
-
-    --Ciboulette--
-    (83,'Cucharada, picada',3),
-    (83,'Cucharadita, picada',1),
-    --Queso cabra--
-    (84,'oz',28.35),
-    --Vinagre balsamico--
-    (85,'cucharada',16),
-    (85,'cucharadadita',5.3),
-    (85,'Taza',255)
+    -- Pimiento verde --
+    (82, 'Taza, picada', 149),
+    (82, 'Taza, en rodajas', 149),
+    (82, 'cucharada', 9.3),
+    (82, 'Grande', 164),
+    (82, 'Mediano', 119),
+    (82, 'pequeño', 74),
+    (82, 'Tiras', 27),
+    -- Ciboulette --
+    (83, 'Cucharada, picada', 3),
+    (83, 'Cucharadita, picada', 1),
+    -- Queso cabra --
+    (84, 'Onza', 28.35),
+    -- Vinagre balsámico --
+    (85, 'Cucharada', 16),
+    (85, 'Cucharadita', 5.3),
+    (85, 'Taza', 255)
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
-
-
-SELECT name from nutrifoods.ingredient WHERE similarity(name,'Merken') > 0.40;
-SELECT * FROM pg_available_extensions ORDER BY name;

@@ -1,83 +1,94 @@
-﻿using Domain.Models;
+﻿using API.Dto;
+using AutoMapper;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace API.Ingredients;
 
 public class IngredientRepository : IIngredientRepository
 {
     private readonly NutrifoodsDbContext _context;
+    private readonly IMapper _mapper;
 
-    public IngredientRepository(NutrifoodsDbContext context)
+    public IngredientRepository(NutrifoodsDbContext context, IMapper mapper)
     {
         _context = context;
+        _mapper = mapper;
     }
 
-    private static IIncludableQueryable<Ingredient, PrimaryGroup> LoadLazily(IQueryable<Ingredient> ingredients)
+    public async Task<IngredientDto> FindByName(string name)
     {
-        return ingredients.Include(e => e.IngredientMeasures)
-            .Include(e => e.TertiaryGroup)
-            .ThenInclude(e => e.SecondaryGroup)
-            .ThenInclude(e => e.PrimaryGroup);
-    }
-
-    public Task<Ingredient> FindByName(string name)
-    {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .FirstAsync(e => e.Name.ToLower().Equals(name));
     }
 
-    public Task<Ingredient> FindById(int id)
+    public async Task<IngredientDto> FindById(int id)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .FirstAsync(e => e.Id == id);
     }
 
-    public Task<List<Ingredient>> FindByPrimaryGroup(string name)
+    public async Task<List<IngredientDto>> FindByPrimaryGroup(string name)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Name.ToLower().Equals(name))
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindByPrimaryGroup(int id)
+    public async Task<List<IngredientDto>> FindByPrimaryGroup(int id)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.SecondaryGroup.PrimaryGroup.Id == id)
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindBySecondaryGroup(string name)
+    public async Task<List<IngredientDto>> FindBySecondaryGroup(string name)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.SecondaryGroup.Name.ToLower().Equals(name))
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindBySecondaryGroup(int id)
+    public async Task<List<IngredientDto>> FindBySecondaryGroup(int id)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.SecondaryGroup.Id == id)
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindByTertiaryGroup(string name)
+    public async Task<List<IngredientDto>> FindByTertiaryGroup(string name)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.Name.ToLower().Equals(name))
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindByTertiaryGroup(int id)
+    public async Task<List<IngredientDto>> FindByTertiaryGroup(int id)
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .Where(e => e.TertiaryGroup.Id == id)
             .ToListAsync();
     }
 
-    public Task<List<Ingredient>> FindAll()
+    public async Task<List<IngredientDto>> FindAll()
     {
-        return LoadLazily(_context.Ingredients)
+        return await _mapper.ProjectTo<IngredientDto>(FullLazyLoad(_context.Ingredients))
             .ToListAsync();
+    }
+
+    private static IQueryable<Ingredient> FullLazyLoad(IQueryable<Ingredient> ingredients)
+    {
+        return ingredients
+            .Include(e => e.TertiaryGroup)
+            .ThenInclude(e => e.SecondaryGroup)
+            .ThenInclude(e => e.PrimaryGroup)
+            .AsSplitQuery()
+            .Include(e => e.IngredientMeasures)
+            .Include(e => e.IngredientNutrients)
+            .ThenInclude(e => e.Nutrient)
+            .ThenInclude(e => e.Subtype)
+            .ThenInclude(e => e.Type)
+            .AsSplitQuery()
+            .AsNoTracking();
     }
 }

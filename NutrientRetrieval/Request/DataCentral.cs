@@ -1,24 +1,30 @@
-using NutrientRetrieval.Model;
 using Newtonsoft.Json;
+using NutrientRetrieval.Model;
+using NutrientRetrieval.Dictionaries;
 
 namespace NutrientRetrieval.Request;
 
-public class DataCentral
+public static class DataCentral
 {
-    private readonly string api_key;
+    private const string ApiKey = "aLGkW4nbdeEhoFefi68nOYLNPaSXhiSjO7bIBzQk";
 
-    public DataCentral(string key)
+    private static readonly HttpClient Client = new();
+
+    public static async Task<(int Id, Food? Food)> FoodRequest(int nutriFoodsId, int foodDataCentralId)
     {
-        api_key = key;
+        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format=full&api_key={ApiKey}";
+        var uri = new Uri(path);
+
+        var response = await Client.GetAsync(uri);
+        var content = await response.Content.ReadAsStringAsync();
+        return (nutriFoodsId, JsonConvert.DeserializeObject<Food>(content));
     }
-    
-    public Food? FoodRequest(string id)
+
+    public static async Task<Dictionary<int, Food?>> FoodRequest()
     {
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{id}?format=abridged&" + $"api_key={api_key}";
-
-        using var client = new HttpClient();
-        var foodObject = JsonConvert.DeserializeObject<Food>(client.GetAsync(new Uri(path)).Result.Content.ReadAsStringAsync().Result);
-
-        return foodObject;
+        var ingredientIds = IngredientDictionary.CreateDictionaryIds().Take(10);
+        var tasks = ingredientIds.Select(e => FoodRequest(e.Key, e.Value));
+        var tuples = await Task.WhenAll(tasks);
+        return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);
     }
 }
