@@ -315,145 +315,139 @@
 315,frutos rojo,168997
 316,pulpa lúcuma,
 317,huesillo,169934
-318,cdta,
-319,cerezas,171719
-320,coco,170169
-321,esencias ron,174817
-322,pistachos,170184
-323,brownies,172713
-324,helado,168809
-325,masa ,
-326,endulzante,168142
-327,sucralosa,170673
-328,anís semilla,171316
-329,cubos hielo,
-330,café granulado,171893
-331,amaretto,
-332,guindas,171719
-333,licor,175097
-334,salsa manjar,173461
-335,esencia cola mono,173665
-336,salsa frambuesas,167808
-337,jalea frambuesas,
-338,compota manzanas,173928
-339,cacao amargo,169594
-340,higos deshidratados,174665
-341,picada,
-342,berro,170068
-343,colapez,169879
-344,masa,
-345,esencia anís,
-346,mariscos surtidos,174216
-347,masa filo,172738
-348,merluza austral,
-349,salsa teriyaki,171167
-350,picado,
-351,polenta,168038
-352,punta ganso,167673
-353,pollo entero,
-354,sémola,169715
-355,mariscos,174216
-356,choros,174216
-357,espaguetis,169736
-358,salsa pescado,174531
-359,maní,172430
-360,trutro pollo,173619
-361,cranberries,169804
-362,pasta espirales,169736
-363,pan molde blanco,167532
-364,fideos cabellos,169736
-365,reineta.,
-366,rocoto,168570
-367,trigo,169720
-368,hojas parra,168575
-369,azáfran,170934
-370,macha,174214
-371,masa empanada,
-372,baguette,172675
-373,gelatina hojas,169599
-374,salsa horseradish,173472
-375,achiote,172242
-376,jugo piñas,167792
-377,fideos ramen,169732
-378,mango,169910
-379,crutones,172687
-380,churrascos,168634
-381,prietas,171618
-382,merluza,171964
-383,longaniza,174584
-384,trigo burgol,170287
-385,palanca,174746
-386,Pollo ganso,171746
-387,marraquetas,167532
-388,ají cacho cabra,170106
-389,pan amasado,167532
-390,panes ciabatta,174913
-391,parra,168575
-392,asado tira,
-393,cerveza oscura,168746
-394,quínoa roja,173405
-395,tallarines,169736
-396,pimienta cayenna,170932
-397,malaya,172159
-398,pasta penne,169736
-399,osobuco,172649
-400,callampas secas,168436
-401,caldo costilla,171561
-402,posta paleta,
-403,charqui,167536
-404,chuletas kayser,
-405,cdtas,
-406,fideos cabello,169736
-407,tallarines arroz,169742
-408,filetes pollo,
-409,locos,
-410,masa lasaña,
-411,lamina lasaña,
-412,tutros pollo,
-413,masa hoja,
-414,callampas deshidratadas,
-415,champiñones ostras,
-416,salsa ostras,
-417,galletass,
-418,cerveza negra,
-419,sobrecostilla,
-420,champiñones shitake,168436
-421,champiñones shiitake,168436
-422,filete corvina,
-423,arroz silvestre,
-424,champiñones portobello,
-425,congrio colorado,
-426,cabezas congrio,
-427,cabeza pescado,
-428,pierna cordero,
-429,aji,
-430,lemon grass,
-431,tagliatelle,
-432,ralladarura limon,
-433,tomates deshidratados,
-434,batido,
-435,filetitos pollo,
-436,diente dragón,
-437,tilapia,
-438,merlot,
-439,pavo,
-440,reinetas,
-441,brotes arveja,
-442,salsa champiñones,
-443,choros zapato,
-444,sofrito,
-445,masa lasañas,
-446,fettuccini,
-447,filete pavo,
-448,fettucines,
-449,humo líquido,
-450,jibia,
-451,sierra,
-452,mediana,
-453,spaguetti,
-454,abastero,
-455,vienesas,
-456,salsa babecue,
-457,tapapecho,
-458,marshmallows,
-459,avena tradicional,
+318,cerezas,171719
+319,coco,170169
+320,esencias ron,174817
+321,pistachos,170184
+322,brownies,172713
+323,helado,168809
+324,masa ,
+325,endulzante,168142
+326,sucralosa,170673
+327,anís semilla,171316
+328,cubos hielo,
+329,café granulado,171893
+330,amaretto,
+331,guindas,171719
+332,licor,175097
+333,salsa manjar,173461
+334,esencia cola mono,173665
+335,salsa frambuesas,167808
+336,jalea frambuesas,
+337,compota manzanas,173928
+338,cacao amargo,169594
+339,higos deshidratados,174665
+340,picada,
+341,berro,170068
+342,colapez,169879
+343,masa,
+344,esencia anís,
+345,mariscos surtidos,174216
+346,masa filo,172738
+347,merluza austral,
+348,salsa teriyaki,171167
+349,polenta,168038
+350,punta ganso,167673
+351,pollo entero,171951
+352,sémola,169715
+353,mariscos,174216
+354,choros,174216
+355,espaguetis,169736
+356,salsa pescado,174531
+357,maní,172430
+358,trutro pollo,173619
+359,cranberries,169804
+360,pasta espirales,169736
+361,pan molde blanco,167532
+362,fideos cabellos,169736
+363,rocoto,168570
+364,trigo,169720
+365,hojas parra,168575
+366,azáfran,170934
+367,macha,174214
+368,masa empanada,
+369,baguette,172675
+370,gelatina hojas,169599
+371,salsa horseradish,173472
+372,achiote,172242
+373,jugo piñas,167792
+374,fideos ramen,169732
+375,mango,169910
+376,crutones,172687
+377,churrascos,168634
+378,prietas,171618
+379,merluza,171964
+380,longaniza,174584
+381,trigo burgol,170287
+382,palanca,174746
+383,Pollo ganso,171746
+384,marraquetas,167532
+385,ají cacho cabra,170106
+386,pan amasado,167532
+387,panes ciabatta,174913
+388,parra,168575
+389,asado tira,173405
+390,cerveza oscura,168746
+391,quínoa roja,173405
+392,tallarines,169736
+393,pimienta cayenna,170932
+394,malaya,172159
+395,pasta penne,169736
+396,osobuco,172649
+397,callampas secas,168436
+398,caldo costilla,171561
+399,posta paleta,172122
+400,charqui,167536
+401,chuletas kayser,168238
+402,fideos cabello,169736
+403,tallarines arroz,169742
+404,filetes pollo,172855
+405,locos,174212
+406,masa lasaña,168955
+407,lamina lasaña,168955
+408,tutros pollo,172855
+409,masa hoja,172790
+410,callampas deshidratadas,168436
+411,champiñones ostras,168580
+412,salsa ostras,174529
+413,galletass,172086
+414,cerveza negra,174863
+415,sobrecostilla,170809
+416,champiñones shitake,168436
+417,champiñones shiitake,168436
+418,filete corvina,175142
+419,arroz silvestre,169726
+420,champiñones portobello,169255
+421,congrio colorado,173670
+422,cabezas congrio,168034
+423,cabeza pescado,168034
+424,pierna cordero,174342
+425,aji,170106
+426,lemon grass,168573
+427,tagliatelle,168955
+428,ralladarura limon,167749
+429,tomates deshidratados,168567
+430,filetitos pollo,171515
+431,diente dragón,172441
+432,tilapia,175176
+433,merlot,171925
+434,pavo,171490
+435,reinetas,171951
+436,brotes arveja,170422
+437,salsa champiñones,171170
+438,choros zapato,174216
+439,sofrito,
+440,masa lasañas,168955
+441,fettuccini,169736
+442,filete pavo,171490
+443,fettucines,169736
+444,humo líquido,
+445,jibia,174215
+446,sierra,175139
+447,spaguetti,169736
+448,abastero,
+449,vienesas,174584
+450,salsa babecue,174523
+451,tapapecho,174740
+452,marshmallows,167995
+453,avena tradicional,172989
