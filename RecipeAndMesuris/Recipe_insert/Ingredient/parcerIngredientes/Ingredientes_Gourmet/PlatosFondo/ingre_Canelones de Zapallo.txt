@@ -4,7 +4,7 @@
 300,gr,ricotta
 100,gr,queso parmesano
 x,x,Pimienta Blanca
-12,x,lamina lasaña
+12,x,pasta lasaña
 x,x,Sal
 2,tazas,leche
 ½,cucharadita,cardamomo

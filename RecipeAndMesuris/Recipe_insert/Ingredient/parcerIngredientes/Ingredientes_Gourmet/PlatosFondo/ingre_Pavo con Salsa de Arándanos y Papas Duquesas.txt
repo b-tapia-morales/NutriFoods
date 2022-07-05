@@ -12,7 +12,7 @@
 700,gr,papas
 1/2,cucharada,mantequilla
 1,x,yema
-x,pizca,sal
-x,pizca,pimienta negra
+x,x,sal
+x,x,pimienta negra
 1/2,taza,harina
 x,x,aceite

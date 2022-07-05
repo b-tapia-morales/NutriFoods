@@ -307,11 +307,3 @@ VALUES
 
 ON CONFLICT (ingredient_id, name) DO UPDATE SET ingredient_id = excluded.ingredient_id,
                                                 grams         = excluded.grams;
-
-
-
-
-
-
-
-

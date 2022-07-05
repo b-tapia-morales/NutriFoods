@@ -1,6 +1,6 @@
 35,gr,Callampas
 2/3,taza,vino blanco
-1,½,taza,tomates secos
+1 ½,taza,tomates secos
 1,cucharada,aceite oliva
 1,x,cebolla
 3,lonjas,tocino

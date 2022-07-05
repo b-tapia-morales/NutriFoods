@@ -5,7 +5,7 @@
 2,tazas,jugo naranja
 1,taza,agua
 1,taza,azúcar
-x,cucharadita,Canela Polvo
+1,cucharadita,Canela Polvo
 1,cucharadita,naranja
 1,cucharadita,Salvia
 1,cucharada,licor

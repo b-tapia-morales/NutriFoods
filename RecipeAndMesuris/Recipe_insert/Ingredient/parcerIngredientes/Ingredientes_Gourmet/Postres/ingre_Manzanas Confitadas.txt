@@ -4,6 +4,5 @@
 2,cucharadas,agua
 100,gramos,Mantequilla
 1/2,cucharada,Colorante rojo
-x,x,Estrellas Multicolor
 x,x,Nueces picadas
 x,x,Cobertura Chocolate Leche

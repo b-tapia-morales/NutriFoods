@@ -5,3 +5,6 @@ GRANT USAGE ON SCHEMA nutrifoods TO nutrifoods_dev;
 GRANT SELECT ON ALL TABLES IN SCHEMA nutrifoods TO nutrifoods_dev;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA nutrifoods TO nutrifoods_dev;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA nutrifoods TO nutrifoods_dev;
+CREATE EXTENSION fuzzystrmatch;
+create extension pg_trgm;
+drop EXTENSION pg_trgm;

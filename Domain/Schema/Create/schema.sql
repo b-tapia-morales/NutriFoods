@@ -319,4 +319,4 @@ CREATE TABLE IF NOT EXISTS meal_menu_recipe
     FOREIGN KEY (meal_menu_id) REFERENCES meal_menu (id),
     FOREIGN KEY (recipe_id) REFERENCES recipe (id),
     PRIMARY KEY (id)
-)
+);

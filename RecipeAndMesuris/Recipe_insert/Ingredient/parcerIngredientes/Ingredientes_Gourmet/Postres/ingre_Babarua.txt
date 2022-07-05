@@ -1,4 +1,4 @@
-6,claras,huevo
+6,x,clara de huevo
 1 ¼,tazas,azúcar
 330,gr,pulpa lúcuma
 1,x,Gelatina

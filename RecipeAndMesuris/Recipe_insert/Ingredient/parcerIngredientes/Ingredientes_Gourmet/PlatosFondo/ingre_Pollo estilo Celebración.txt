@@ -1,4 +1,4 @@
-8,x,trutros cortos
+8,x,trutro pollo
 1,diente,ajo
 1/4,taza,Orégano
 1,cucharadita,Pimienta Negra

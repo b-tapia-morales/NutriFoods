@@ -4,4 +4,4 @@ x,x,sal
 x,x,pimienta negra
 x,x,Merquén Gourmet
 1,cda,Sésamo
-x,Hojas,cilantro
+2,Hojas,cilantro

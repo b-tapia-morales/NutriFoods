@@ -1,5 +1,5 @@
 4,tazas,caldo ave
-10,unidas,Clavo Olor
+10,unidas,Clavo de olor
 2,tazas,arroz basmati
 1,x,cebolla
 1,x,zanahoria

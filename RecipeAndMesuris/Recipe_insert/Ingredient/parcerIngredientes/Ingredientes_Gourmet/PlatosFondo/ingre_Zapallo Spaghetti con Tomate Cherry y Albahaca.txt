@@ -3,4 +3,4 @@
 x,x,sal
 1,cdta,pimienta negra
 10,x,tomate cherry
-x,Hojas,albahaca
+1,Hojas,albahaca

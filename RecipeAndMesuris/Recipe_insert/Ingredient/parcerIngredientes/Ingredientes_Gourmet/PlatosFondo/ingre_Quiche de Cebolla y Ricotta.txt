@@ -1,7 +1,7 @@
 300,g,harina
 100,g,mantequilla
 3,cucharadas,crema
-1,yema,huevo
+3,x,huevo
 x,x,Sal
 x,x,Pimienta Negra
 6,x,cebollas
@@ -10,7 +10,5 @@ x,x,Pimienta Negra
 3,cucharadas,queso parmesano
 2,cucharadas,ciboulette
 2,cucharadas,almendras
-1,x,huevo
-1,yema,huevo
 x,x,Sal
 x,x,Pimienta Negra

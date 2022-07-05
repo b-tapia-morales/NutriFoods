@@ -11,6 +11,6 @@
 ½,cucharadita,Pimienta Blanca
 4,x,papas
 1,x,zanahoria
-3/4,taza,fideos cabellos
+3/4,taza,fideos cabello
 1,x,pechuga pollo
 ½,taza,cilantro

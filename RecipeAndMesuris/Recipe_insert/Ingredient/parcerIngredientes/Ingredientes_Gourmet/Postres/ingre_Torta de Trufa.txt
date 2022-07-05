@@ -1,6 +1,6 @@
 3,x,huevos
 1 ½,taza,aceite
-1,½,leche
+1 ½,Taza,leche
 1,cdta,Esencia Vainilla
 3,tazas,harina
 2,cdtas,Bicarbonato

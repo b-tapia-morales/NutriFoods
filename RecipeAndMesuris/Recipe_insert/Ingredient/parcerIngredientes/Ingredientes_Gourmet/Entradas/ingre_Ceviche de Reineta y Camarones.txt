@@ -1,7 +1,7 @@
 1,kilo,reineta
 500,g,camarones
 2,x,cebolla moradas
-10,x,limon pica
+10,pica,limon
 1/3,taza,aceite oliva
 1 1/2,taza,cilantro fresco
 1/2,x,ají verde

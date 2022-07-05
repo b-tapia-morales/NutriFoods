@@ -1,4 +1,4 @@
-400,g,masa lasaña
+400,g,pasta lasaña
 500,ml,agua
 125,g,mantequilla
 1,x,cebolla

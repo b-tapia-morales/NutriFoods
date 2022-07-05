@@ -1,6 +1,6 @@
 ½,taza,mantequilla
 4,x,cebolla
-1,diente,,ajo,,picado,fino
+1,diente,ajo
 2,hojas,Laurel
 1,cdta,Tomillo
 x,x,pimienta negra

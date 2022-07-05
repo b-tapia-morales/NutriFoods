@@ -260,4 +260,16 @@ VALUES ('Sal', false, false, 23),
 
 
 ON CONFLICT (name) DO NOTHING;
-       
+
+DELETE from recipe_quantity;
+DELETE from recipe_measure;
+DELETE from recipe;
+DELETE from ingredient_measure;
+SELECT count(*) FROM recipe_measure;
+SELECT count(*) FROM recipe_quantity;
+
+SELECT count(*) FROM recipe;
+SELECT count(*) FROM ingredient_measure;
+
+SELECT * from recipe_quantity WHERE recipe_id = 2457;
+SELECT * from recipe_measure WHERE recipe_id = 2457;

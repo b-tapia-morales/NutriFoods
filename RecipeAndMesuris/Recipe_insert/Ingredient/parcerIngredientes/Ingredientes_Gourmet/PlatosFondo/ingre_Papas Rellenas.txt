@@ -1,5 +1,5 @@
 1,kilo,papas
-½ 1,taza,harina
+½,taza,harina
 ½,cucharadita,Sal
 2,x,huevos
 1,taza,pan rallado

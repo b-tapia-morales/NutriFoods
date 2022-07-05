@@ -1,4 +1,4 @@
-1,cebolla morada,gran,cortada,en,pluma
+1,grande,cebolla morada
 ½,cucharadita,aceite oliva
 ½,cucharadita,mantequilla
 1,cucharadita,azúcar
@@ -20,5 +20,5 @@
 1,taza,pan rallado
 x,x,aceite
 4,x,pan hamburguesa
-1,½,taza,rúcula
+1 ½,taza,rúcula
 4,cucharadas,mayonesa

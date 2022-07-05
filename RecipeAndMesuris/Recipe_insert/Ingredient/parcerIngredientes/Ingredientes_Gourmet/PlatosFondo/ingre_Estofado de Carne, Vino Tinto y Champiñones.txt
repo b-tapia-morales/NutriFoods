@@ -7,7 +7,7 @@
 1,botella,vino tinto
 x,x,sal
 x,x,pimienta negra
-½,taza,Callampas deshidratadas
+½,taza,Callampas secas
 1,taza,oporto
 4,cdas,aceite vegetal
 3,lonjas,tocino

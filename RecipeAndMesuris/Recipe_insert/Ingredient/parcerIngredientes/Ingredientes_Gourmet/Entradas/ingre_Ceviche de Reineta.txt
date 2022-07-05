@@ -1,4 +1,4 @@
-300,gr,reineta.
+300,gr,reineta
 1,x,pimento rojo
 1,x,pimento verde
 1,x,cebollín

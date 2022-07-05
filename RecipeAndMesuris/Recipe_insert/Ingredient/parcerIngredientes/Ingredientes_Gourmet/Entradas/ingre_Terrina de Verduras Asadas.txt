@@ -4,9 +4,9 @@
 1,x,berenjena
 1,x,zapallo italiano
 5,hojas,Gelatina
-1,taza,,jugo,,tomates*
-1,cucharada,,Orégano,Entero,Gourmet
-1,diente,,ajo
-2,pimientos,rojos,cortados,en,tiras
-2,pimientos,amarillos,cortados,en,tiras
-12,hojas,,albahaca,fresca
+1,taza,jugo tomates
+1,cucharada,Orégano
+1,diente,ajo
+2,x,pimiento rojos
+2,x,pimiento amarillo
+12,hojas,albahaca

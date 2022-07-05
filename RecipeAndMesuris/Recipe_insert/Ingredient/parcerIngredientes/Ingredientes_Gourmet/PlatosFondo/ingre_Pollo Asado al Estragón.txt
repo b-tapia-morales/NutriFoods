@@ -1,7 +1,7 @@
 75,gr,mantequilla
 2,cucharadas,Estragón
 1,cucharadita,Ají Color
-6,x,trutros cortos
+6,x,trutro pollo
 4,x,cebollas rojas
 2,dientes,ajo
 250,ml,vino blanco

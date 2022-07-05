@@ -9,5 +9,5 @@ x,x,Pimienta Blanca
 x,x,pimienta negra
 500,ml,agua
 1/4,taza,vino blanco
-1,½,taza,arvejas
+1 ½,taza,arvejas
 x,x,Sal

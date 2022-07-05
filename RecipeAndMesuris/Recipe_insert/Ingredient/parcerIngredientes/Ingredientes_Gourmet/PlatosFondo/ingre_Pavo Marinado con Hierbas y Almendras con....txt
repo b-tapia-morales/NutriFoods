@@ -14,14 +14,14 @@
 1,cucharadita,Perejil
 1,cucharadita,Ciboulette
 1/2,taza,almendras
-1,2,kilos,papas
+1.2,kilos,papas
 1,cucharada,mantequilla
 1,cucharada,Cebolla Polvo
 2,x,huevos
 250,g,ricotta
 1,taza,crema ácida
 1/2,taza,queso parmesano
-x,pizca,sal
+x,x,sal
 x,x,Pimienta Negra
 1,cucharadita,Ajo Polvo,Gourmet
 1,cucharadita,Tomillo

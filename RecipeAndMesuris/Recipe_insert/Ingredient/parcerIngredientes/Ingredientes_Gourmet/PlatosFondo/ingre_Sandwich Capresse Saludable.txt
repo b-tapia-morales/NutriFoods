@@ -2,7 +2,7 @@
 4,cdas,Pesto
 1,x,tomate
 2,bolas,mozzarella
-x,Hojas,rúcula
+1,Hojas,rúcula
 x,x,Aceite oliva
 x,x,Sal
 x,x,pimienta negra
