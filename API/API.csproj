@@ -23,6 +23,7 @@
         <ProjectReference Include="..\Application\Application.csproj" />
         <ProjectReference Include="..\Domain\Domain.csproj" />
         <ProjectReference Include="..\NutrientRetrieval\NutrientRetrieval.csproj" />
+        <ProjectReference Include="..\RecipeAndMesuris\RecipeAndMesuris.csproj" />
     </ItemGroup>
 
 </Project>
