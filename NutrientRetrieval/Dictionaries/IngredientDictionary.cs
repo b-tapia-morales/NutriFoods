@@ -25,14 +25,14 @@ public static class IngredientDictionary
             .ToDictionary(record => record.NutriFoodsId, record => record.FoodDataCentralId);
     }
 
-    private sealed class IngredientRow
+    public sealed class IngredientRow
     {
         public int NutriFoodsId { get; set; } = 0;
         public string NutriFoodsName { get; set; } = null!;
         public int FoodDataCentralId { get; set; } = 0;
     }
 
-    private sealed class IngredientMapping : ClassMap<IngredientRow>
+    public sealed class IngredientMapping : ClassMap<IngredientRow>
     {
         public IngredientMapping()
         {
