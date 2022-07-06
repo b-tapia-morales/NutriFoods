@@ -2,12 +2,13 @@ using Npgsql;
 
 namespace RecipeAndMesuris.Recipe_insert;
 
-public class Connect
+public static class Connect
 {
-    private NpgsqlConnection Connecte()
+    private static NpgsqlConnection Connecte()
     {
         NpgsqlConnection connection = new NpgsqlConnection();
-        var stringConnection = "Server=localhost;Port=5432;User Id=nutrifoods_dev;Password=MVmYneLqe91$;Database=nutrifoods_db";
+        var stringConnection =
+            "Server=localhost;Port=5432;User Id=nutrifoods_dev;Password=MVmYneLqe91$;Database=nutrifoods_db";
 
         if (!string.IsNullOrWhiteSpace(stringConnection))
         {
@@ -24,17 +25,20 @@ public class Connect
                 throw;
             }
         }
+
         return connection;
     }
 
-    public void InsertRecipe()
+    public static void InsertRecipe()
     {
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+        var path = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Recipe", "recipe.txt");
         var instance = Connecte();
-        StreamReader fileRecipe = new StreamReader("Recipe_insert/Recipe/recipe.txt");
-        while(!fileRecipe.EndOfStream)
+        using var fileRecipe = new StreamReader(path);
+        while (!fileRecipe.EndOfStream)
         {
             string line = fileRecipe.ReadLine()!;
-            string [] split = line.Split(";");
+            string[] split = line.Split(";");
             var name = split[0];
             var author = split[1];
             var url = split[2];
@@ -49,32 +53,38 @@ public class Connect
             {
                 timePreparation = Int32.Parse(split[3]);
             }
+
             string query =
                 $"INSERT INTO nutrifoods.recipe (name, author, url, portions, preparation_time) VALUES ('{name}','{author}','{url}',{portions},{timePreparation}) ON CONFLICT DO NOTHING";
-            NpgsqlCommand cmd = new NpgsqlCommand(query,instance);
+            NpgsqlCommand cmd = new NpgsqlCommand(query, instance);
             cmd.ExecuteNonQuery();
         }
+
         instance.Close();
         Console.WriteLine("Insert Recipe Correct!");
     }
 
-    public void InsertMeasuris()
+    public static void InsertMeasuris()
     {
         var instance = Connecte();
-        StreamReader fileIngredient = new StreamReader("Recipe_insert/Ingredient/measures/measures_id.csv");
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+        var path = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Ingredient", "measures",
+            "measures_id.csv");
+        using var fileIngredient = new StreamReader(path);
         while (!fileIngredient.EndOfStream)
         {
             string line = fileIngredient.ReadLine() ?? throw new InvalidOperationException();
             string[] nameIngredient = line.Split(";");
             string queryIngredient =
                 $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.ingredient.name ='{nameIngredient[1]}';";
-            NpgsqlCommand comand = new NpgsqlCommand(queryIngredient,instance);
+            NpgsqlCommand comand = new NpgsqlCommand(queryIngredient, instance);
             var result = comand.ExecuteScalar();
-            
+
             if (!nameIngredient[2].Equals(""))
             {
-                StreamReader fileMeasures = new StreamReader(
-                    $"Recipe_insert/Ingredient/measures/ingredient_measures/{nameIngredient[1]}.csv");
+                var measuresPath = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Ingredient",
+                    "measures", "ingredient_measures", $"{nameIngredient[1]}.csv");
+                using var fileMeasures = new StreamReader(measuresPath);
                 while (!fileMeasures.EndOfStream)
                 {
                     string lineMeasury = fileMeasures.ReadLine() ?? throw new InvalidOperationException();
@@ -84,16 +94,18 @@ public class Connect
                     NpgsqlCommand commandMeasury = new NpgsqlCommand(queryMeasury, instance);
                     commandMeasury.ExecuteNonQuery();
                 }
+
                 fileMeasures.Close();
             }
         }
+
         fileIngredient.Close();
         instance.Close();
         Console.WriteLine("Insert Measures Ingredient Correct!");
     }
 
 
-    public void InsertRecipeIngredient()
+    public static void InsertRecipeIngredient()
     {
         var instance = Connecte();
         IngredientRecipe i = new IngredientRecipe(instance);
