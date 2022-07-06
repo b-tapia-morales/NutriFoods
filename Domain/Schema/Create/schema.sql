@@ -31,6 +31,12 @@ CREATE SCHEMA IF NOT EXISTS nutrifoods;
 
 SET SEARCH_PATH = "nutrifoods";
 
+DROP EXTENSION IF EXISTS fuzzystrmatch;
+CREATE EXTENSION fuzzystrmatch;
+
+DROP EXTENSION IF EXISTS pg_trgm;
+CREATE EXTENSION pg_trgm;
+
 CREATE TABLE IF NOT EXISTS primary_group
 (
     id   SERIAL,
