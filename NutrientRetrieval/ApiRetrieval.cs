@@ -28,7 +28,7 @@ public static class ApiRetrieval
         foreach (var pair in foodsDictionary)
         {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            InsertMeasures(context, pair.Key, pair.Value);
+            //InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();
