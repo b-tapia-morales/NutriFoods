@@ -1,3 +1,4 @@
+using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Models;
 
@@ -20,7 +21,9 @@ public class MappingProfile : Profile
         CreateMap<IngredientNutrient, IngredientNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.NameDisplay));
         CreateMap<IngredientMeasure, IngredientMeasureDto>();
+        CreateMap<IngredientMeasure, IngredientMeasureAbridged>();
         CreateMap<Ingredient, IngredientDto>();
+        CreateMap<Ingredient, IngredientAbridged>();
         CreateMap<RecipeMeasure, RecipeMeasureDto>();
         CreateMap<RecipeQuantity, RecipeQuantityDto>();
         CreateMap<RecipeNutrient, RecipeNutrientDto>()
