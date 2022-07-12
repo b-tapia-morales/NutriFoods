@@ -7,7 +7,7 @@ namespace NutrientRetrieval.Dictionaries;
 
 public static class IngredientDictionary
 {
-    public static Dictionary<int, int> CreateDictionaryIds()
+    public static IReadOnlyDictionary<int, int> CreateDictionaryIds()
     {
         var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         var path = Path.Combine(directory, "NutrientRetrieval", "Files", "IngredientIDs.csv");
