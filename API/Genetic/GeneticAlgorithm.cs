@@ -139,6 +139,7 @@ public class GeneticAlgorithm
 
     private void Mutation(Random r)
     {
+        
         if (r.NextDouble() <= 0.2)
         {
             int cantMutation = r.Next(0, _listRegime.Count);
