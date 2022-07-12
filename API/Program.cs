@@ -8,13 +8,16 @@ using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval;
 using RecipeAndMesuris.Recipe_insert;
 
+/*
 DatabaseInitialization.Initialize();
 ApiRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
+ */
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
