@@ -1,29 +1,34 @@
-DROP TABLE IF EXISTS nutrifoods.meal_menu_recipe;
-DROP TABLE IF EXISTS nutrifoods.meal_menu;
-DROP TABLE IF EXISTS nutrifoods.meal_plan;
-DROP TABLE IF EXISTS nutrifoods.user_allergy;
-DROP TABLE IF EXISTS nutrifoods.user_body_metrics;
-DROP TABLE IF EXISTS nutrifoods.user_profile;
-DROP TABLE IF EXISTS nutrifoods.recipe_nutrient;
-DROP TABLE IF EXISTS nutrifoods.recipe_quantity;
-DROP TABLE IF EXISTS nutrifoods.recipe_measure;
-DROP TABLE IF EXISTS nutrifoods.recipe_steps;
-DROP TABLE IF EXISTS nutrifoods.recipe_diet;
-DROP TABLE IF EXISTS nutrifoods.recipe_meal_type;
-DROP TABLE IF EXISTS nutrifoods.recipe_dish_type;
-DROP TABLE IF EXISTS nutrifoods.recipe;
-DROP TABLE IF EXISTS nutrifoods.ingredient_measure;
-DROP TABLE IF EXISTS nutrifoods.ingredient_nutrient;
-DROP TABLE IF EXISTS nutrifoods.ingredient;
-DROP TABLE IF EXISTS nutrifoods.nutrient;
-DROP TABLE IF EXISTS nutrifoods.nutrient_subtype;
-DROP TABLE IF EXISTS nutrifoods.nutrient_type;
-DROP TABLE IF EXISTS nutrifoods.diet;
-DROP TABLE IF EXISTS nutrifoods.dish_type;
-DROP TABLE IF EXISTS nutrifoods.meal_type;
-DROP TABLE IF EXISTS nutrifoods.tertiary_group;
-DROP TABLE IF EXISTS nutrifoods.secondary_group;
-DROP TABLE IF EXISTS nutrifoods.primary_group;
+SET SEARCH_PATH = "nutrifoods";
+
+DROP TABLE IF EXISTS meal_menu_recipe;
+DROP TABLE IF EXISTS meal_menu;
+DROP TABLE IF EXISTS meal_plan;
+DROP TABLE IF EXISTS user_allergy;
+DROP TABLE IF EXISTS user_body_metrics;
+DROP TABLE IF EXISTS user_profile;
+DROP TABLE IF EXISTS recipe_nutrient;
+DROP TABLE IF EXISTS recipe_quantity;
+DROP TABLE IF EXISTS recipe_measure;
+DROP TABLE IF EXISTS recipe_steps;
+DROP TABLE IF EXISTS recipe_diet;
+DROP TABLE IF EXISTS recipe_meal_type;
+DROP TABLE IF EXISTS recipe_dish_type;
+DROP TABLE IF EXISTS recipe;
+DROP TABLE IF EXISTS ingredient_measure;
+DROP TABLE IF EXISTS ingredient_nutrient;
+DROP TABLE IF EXISTS ingredient;
+DROP TABLE IF EXISTS nutrient;
+DROP TABLE IF EXISTS nutrient_subtype;
+DROP TABLE IF EXISTS nutrient_type;
+DROP TABLE IF EXISTS diet;
+DROP TABLE IF EXISTS dish_type;
+DROP TABLE IF EXISTS meal_type;
+DROP TABLE IF EXISTS tertiary_group;
+DROP TABLE IF EXISTS secondary_group;
+DROP TABLE IF EXISTS primary_group;
+
+DROP EXTENSION IF EXISTS fuzzystrmatch;
+DROP EXTENSION IF EXISTS pg_trgm;
 
 DROP SCHEMA IF EXISTS nutrifoods;
 
@@ -31,11 +36,8 @@ CREATE SCHEMA IF NOT EXISTS nutrifoods;
 
 SET SEARCH_PATH = "nutrifoods";
 
-DROP EXTENSION IF EXISTS fuzzystrmatch;
-CREATE EXTENSION fuzzystrmatch;
-
-DROP EXTENSION IF EXISTS pg_trgm;
-CREATE EXTENSION pg_trgm;
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+CREATE EXTENSION IF NOT EXISTS pg_trgm;
 
 CREATE TABLE IF NOT EXISTS primary_group
 (
