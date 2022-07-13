@@ -69,17 +69,15 @@ public static class NutrientCalculation
     {
         foreach (var quantity in recipeQuantities)
         {
-            var grams = quantity.Grams * ratio;
+            var ingredientGrams = quantity.Grams * ratio;
             foreach (var ingredientNutrient in quantity.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.NutrientId)))
             {
-                if (dictionary.ContainsKey(ingredientNutrient.NutrientId))
+                var nutrientId = ingredientNutrient.NutrientId;
+                var nutrientGrams = ingredientGrams / 100.0 * ingredientNutrient.Quantity;
+                if (!dictionary.TryAdd(nutrientId, nutrientGrams))
                 {
-                    dictionary[ingredientNutrient.NutrientId] += grams / 100.0 * ingredientNutrient.Quantity;
-                }
-                else
-                {
-                    dictionary.Add(ingredientNutrient.NutrientId, grams / 100.0 * ingredientNutrient.Quantity);
+                    dictionary[nutrientId] += nutrientGrams;
                 }
             }
         }
@@ -91,18 +89,16 @@ public static class NutrientCalculation
         //
         foreach (var measure in recipeMeasures)
         {
-            var grams = CalculateMeasureGrams(measure.IngredientMeasure.Grams, measure.IntegerPart, measure.Numerator,
-                measure.Denominator) * ratio;
+            var ingredientGrams = CalculateMeasureGrams(measure.IngredientMeasure.Grams, measure.IntegerPart,
+                measure.Numerator, measure.Denominator) * ratio;
             foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.NutrientId)))
             {
-                if (dictionary.ContainsKey(ingredientNutrient.NutrientId))
+                var nutrientId = ingredientNutrient.NutrientId;
+                var nutrientGrams = ingredientGrams / 100.0 * ingredientNutrient.Quantity;
+                if (!dictionary.TryAdd(nutrientId, nutrientGrams))
                 {
-                    dictionary[ingredientNutrient.NutrientId] += grams / 100.0 * ingredientNutrient.Quantity;
-                }
-                else
-                {
-                    dictionary.Add(ingredientNutrient.NutrientId, grams / 100.0 * ingredientNutrient.Quantity);
+                    dictionary[nutrientId] += nutrientGrams;
                 }
             }
         }
