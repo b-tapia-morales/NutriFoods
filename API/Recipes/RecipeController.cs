@@ -54,4 +54,53 @@ public class RecipeController
             return new RecipeDto();
         }
     }
+    
+    [HttpGet]
+    [Route("vegetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetVegetarianRecipes()
+    {
+        return await _service.GetVegetarianRecipes();
+    }
+
+    [HttpGet]
+    [Route("ovo-vegetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes()
+    {
+        return await _service.GetOvoVegetarianRecipes();
+    }
+    
+    [HttpGet]
+    [Route("lacto-vegetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes()
+    {
+        return await _service.GetLactoVegetarianRecipes();
+    }
+    
+    [HttpGet]
+    [Route("ovo-lacto-vegetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes()
+    {
+        return await _service.GetOvoLactoVegetarianRecipes();
+    }
+    
+    [HttpGet]
+    [Route("pollotarian")]
+    public async Task<IEnumerable<RecipeDto>> GetPollotarianRecipes()
+    {
+        return await _service.GetPollotarianRecipes();
+    }
+    
+    [HttpGet]
+    [Route("pescetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetPescetarianRecipes()
+    {
+        return await _service.GetPescetarianRecipes();
+    }
+    
+    [HttpGet]
+    [Route("pollo-pescetarian")]
+    public async Task<IEnumerable<RecipeDto>> GetPolloPescetarianRecipes()
+    {
+        return await _service.GetPolloPescetarianRecipes();
+    }
 }

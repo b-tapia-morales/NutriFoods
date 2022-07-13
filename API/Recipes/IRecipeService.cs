@@ -13,8 +13,14 @@ public interface IRecipeService
     public Task<IEnumerable<RecipeDto>> GetVegetarianRecipes();
 
     public Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes();
-
+    
+    public Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes();
+    
     public Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes();
 
-    public Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes();
+    public Task<IEnumerable<RecipeDto>> GetPollotarianRecipes();
+
+    public Task<IEnumerable<RecipeDto>> GetPescetarianRecipes();
+
+    public Task<IEnumerable<RecipeDto>> GetPolloPescetarianRecipes();
 }
