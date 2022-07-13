@@ -32,6 +32,7 @@ public class GeneticAlgorithm
         GenerateSolutions();
         while ( 0 < 1000)
         {
+            
             Tournamet(random);
             Cross(random);
             Mutation(random);
@@ -150,7 +151,7 @@ public class GeneticAlgorithm
                 int index = r.Next(0, _listRegime.Count);
                 // selecciono ese regimen
                 Solutions cromo = _listRegime[index];
-                // 
+                // selecciono un receta al azar para reemplazar
                 RecipeDto recipe = _totalRecipes[r.Next(0, _totalRecipes.Count)];
                 cromo.ListRecipe[index] = recipe;
             }
