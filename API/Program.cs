@@ -6,6 +6,7 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval;
+using NutrientRetrieval.NutrientCalculation;
 using RecipeAndMesuris.Recipe_insert;
 
 /*
@@ -14,7 +15,9 @@ ApiRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
- */
+NutrientCalculation.Calculate();
+*/
+
 
 var builder = WebApplication.CreateBuilder(args);
 
