@@ -74,7 +74,7 @@ public static class NutrientCalculation
                          nutrientIds.Contains(e.NutrientId)))
             {
                 var nutrientId = ingredientNutrient.NutrientId;
-                var nutrientGrams = ingredientGrams / 100.0 * ingredientNutrient.Quantity;
+                var nutrientGrams = (ingredientGrams / 100.0) * ingredientNutrient.Quantity;
                 if (!dictionary.TryAdd(nutrientId, nutrientGrams))
                 {
                     dictionary[nutrientId] += nutrientGrams;
