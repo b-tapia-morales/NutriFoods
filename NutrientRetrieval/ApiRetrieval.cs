@@ -28,7 +28,7 @@ public static class ApiRetrieval
         foreach (var pair in foodsDictionary)
         {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            InsertMeasures(context, pair.Key, pair.Value);
+            //InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();
@@ -56,14 +56,13 @@ public static class ApiRetrieval
             };
 
             var nutrientId = dictionary[fdcNutrientId];
-            var ingredientNutrient = new IngredientNutrient
+            context.IngredientNutrients.Add(new IngredientNutrient
             {
                 IngredientId = ingredientId,
                 NutrientId = nutrientId,
                 Quantity = foodNutrient.Amount,
                 Unit = Unit.FromValue(code)
-            };
-            context.IngredientNutrients.Add(ingredientNutrient);
+            });
         }
     }
 

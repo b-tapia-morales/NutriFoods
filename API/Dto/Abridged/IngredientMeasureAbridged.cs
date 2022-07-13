@@ -1,9 +1,9 @@
-namespace API.Dto;
+namespace API.Dto.Abridged;
 
-public class IngredientMeasureDto
+public class IngredientMeasureAbridged
 {
     public string Name { get; set; } = string.Empty;
     public double Grams { get; set; }
     public bool IsDefault { get; set; }
-    public IngredientDto Ingredient { get; set; } = null!;
+    public IngredientAbridged Ingredient { get; set; } = null!;
 }

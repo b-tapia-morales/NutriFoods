@@ -7,5 +7,5 @@ public class NutrientDto
     public string? AlsoCalled { get; set; }
     public bool IsCalculated { get; set; }
     public string Essentiality { get; set; } = string.Empty;
-    public NutrientSubtypeDto NutrientSubtype { get; set; } = null!;
+    public NutrientSubtypeDto Subtype { get; set; } = null!;
 }

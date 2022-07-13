@@ -152,7 +152,7 @@ VALUES
     -- Alcohol --
     ('Alcohol', '', false, 2, 14),
     ('Ácido eicosadienoico', '', false, 2, 8),                               -- PUFA 20:2 n-6 cis
-    ('Energía', '', true, 0, 16)
-
+    ('Energía', '', true, 0, 16),
+    ('Proteína, total', '', true, 0, 10)
 
 ON CONFLICT DO NOTHING;

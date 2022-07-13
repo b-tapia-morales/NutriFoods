@@ -1,3 +1,4 @@
+using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Models;
 
@@ -20,12 +21,19 @@ public class MappingProfile : Profile
         CreateMap<IngredientNutrient, IngredientNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.NameDisplay));
         CreateMap<IngredientMeasure, IngredientMeasureDto>();
+        CreateMap<IngredientMeasure, IngredientMeasureAbridged>();
         CreateMap<Ingredient, IngredientDto>();
+        CreateMap<Ingredient, IngredientAbridged>();
         CreateMap<RecipeMeasure, RecipeMeasureDto>();
         CreateMap<RecipeQuantity, RecipeQuantityDto>();
         CreateMap<RecipeNutrient, RecipeNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.NameDisplay));
         CreateMap<RecipeStep, RecipeStepDto>();
         CreateMap<Recipe, RecipeDto>();
+        CreateMap<MealMenuRecipe, MealMenuRecipeDto>();
+        CreateMap<MealMenu, MealMenuDto>()
+            .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MealMenuRecipes))
+            .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.NameDisplay));
+        CreateMap<MealPlan, MealPlanDto>();
     }
 }
