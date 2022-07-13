@@ -30,5 +30,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.NameDisplay));
         CreateMap<RecipeStep, RecipeStepDto>();
         CreateMap<Recipe, RecipeDto>();
+        CreateMap<MealMenuRecipe, MealMenuRecipeDto>();
+        CreateMap<MealMenu, MealMenuDto>()
+            .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MealMenuRecipes))
+            .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.NameDisplay));
+        CreateMap<MealPlan, MealPlanDto>();
     }
 }

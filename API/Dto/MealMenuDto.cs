@@ -10,4 +10,5 @@ public class MealMenuDto
     public double CarbohydratesTotal { get; set; }
     public double LipidsTotal { get; set; }
     public double ProteinsTotal { get; set; }
+    public IEnumerable<RecipeDto> Recipes { get; set; } = null!;
 }
