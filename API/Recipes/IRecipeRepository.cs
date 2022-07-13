@@ -19,4 +19,6 @@ public interface IRecipeRepository
     Task<List<RecipeDto>> FilterByPortions(int portions);
 
     Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByNutrientQuantity(int id, int lowerBound, int upperBound);
 }

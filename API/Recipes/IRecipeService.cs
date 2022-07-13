@@ -4,29 +4,37 @@ namespace API.Recipes;
 
 public interface IRecipeService
 {
-    public Task<List<RecipeDto>> FindAll();
+    Task<List<RecipeDto>> FindAll();
 
-    public Task<RecipeDto> FindByName(string name);
+    Task<RecipeDto> FindByName(string name);
 
-    public Task<RecipeDto> FindById(int id);
+    Task<RecipeDto> FindById(int id);
 
-    public Task<List<RecipeDto>> GetVegetarianRecipes();
+    Task<List<RecipeDto>> GetVegetarianRecipes();
 
-    public Task<List<RecipeDto>> GetOvoVegetarianRecipes();
+    Task<List<RecipeDto>> GetOvoVegetarianRecipes();
+
+    Task<List<RecipeDto>> GetLactoVegetarianRecipes();
+
+    Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
+
+    Task<List<RecipeDto>> GetPollotarianRecipes();
+
+    Task<List<RecipeDto>> GetPescetarianRecipes();
+
+    Task<List<RecipeDto>> GetPolloPescetarianRecipes();
+
+    Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByPortions(int portions);
+
+    Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound);
     
-    public Task<List<RecipeDto>> GetLactoVegetarianRecipes();
+    Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound);
     
-    public Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
-
-    public Task<List<RecipeDto>> GetPollotarianRecipes();
-
-    public Task<List<RecipeDto>> GetPescetarianRecipes();
-
-    public Task<List<RecipeDto>> GetPolloPescetarianRecipes();
-
-    public Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
-
-    public Task<List<RecipeDto>> FilterByPortions(int portions);
-
-    public Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound);
+    
+    Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 }

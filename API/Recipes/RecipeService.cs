@@ -53,7 +53,7 @@ public class RecipeService : IRecipeService
     {
         return await _repository.ExcludeTertiaryGroups(_nonLactoVegetarianGroups);
     }
-    
+
     public async Task<List<RecipeDto>> GetPollotarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonPollotarianGroups);
@@ -68,19 +68,39 @@ public class RecipeService : IRecipeService
     {
         return await _repository.ExcludeTertiaryGroups(_nonPolloPescetarianGroups);
     }
-    
+
     public async Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
     {
-        return (await _repository.FilterByPreparationTime(lowerBound, upperBound)).ToList();
+        return await _repository.FilterByPreparationTime(lowerBound, upperBound);
     }
 
     public async Task<List<RecipeDto>> FilterByPortions(int portions)
     {
-        return (await _repository.FilterByPortions(portions)).ToList();
+        return await _repository.FilterByPortions(portions);
     }
 
     public async Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
     {
-        return (await _repository.FilterByPortions(lowerBound, upperBound)).ToList();
+        return await _repository.FilterByPortions(lowerBound, upperBound);
+    }
+
+    public async Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound)
+    {
+        return await _repository.FilterByNutrientQuantity(108, lowerBound, upperBound);
+    }
+
+    public async Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound)
+    {
+        return await _repository.FilterByNutrientQuantity(1, lowerBound, upperBound);
+    }
+
+    public async Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound)
+    {
+        return await _repository.FilterByNutrientQuantity(11, lowerBound, upperBound);
+    }
+
+    public async Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound)
+    {
+        return await _repository.FilterByNutrientQuantity(109, lowerBound, upperBound);
     }
 }

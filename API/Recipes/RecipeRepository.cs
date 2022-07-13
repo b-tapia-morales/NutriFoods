@@ -75,6 +75,14 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
     }
 
+    public async Task<List<RecipeDto>> FilterByNutrientQuantity(int id, int lowerBound, int upperBound)
+    {
+        return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
+                .Where(e => e.RecipeNutrients.Any(
+                    x => x.NutrientId == id && x.Quantity >= lowerBound && x.Quantity <= upperBound)))
+            .ToListAsync();
+    }
+
     private static IQueryable<Recipe> IncludeSubfields(IQueryable<Recipe> recipes)
     {
         return recipes
