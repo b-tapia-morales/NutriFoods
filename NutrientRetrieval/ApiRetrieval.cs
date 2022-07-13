@@ -56,14 +56,13 @@ public static class ApiRetrieval
             };
 
             var nutrientId = dictionary[fdcNutrientId];
-            var ingredientNutrient = new IngredientNutrient
+            context.IngredientNutrients.Add(new IngredientNutrient
             {
                 IngredientId = ingredientId,
                 NutrientId = nutrientId,
                 Quantity = foodNutrient.Amount,
                 Unit = Unit.FromValue(code)
-            };
-            context.IngredientNutrients.Add(ingredientNutrient);
+            });
         }
     }
 
