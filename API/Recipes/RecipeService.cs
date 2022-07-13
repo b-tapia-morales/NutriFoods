@@ -68,4 +68,19 @@ public class RecipeService : IRecipeService
     {
         return await _repository.ExcludeTertiaryGroups(_nonPolloPescetarianGroups);
     }
+    
+    public async Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
+    {
+        return (await _repository.FilterByPreparationTime(lowerBound, upperBound)).ToList();
+    }
+
+    public async Task<List<RecipeDto>> FilterByPortions(int portions)
+    {
+        return (await _repository.FilterByPortions(portions)).ToList();
+    }
+
+    public async Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
+    {
+        return (await _repository.FilterByPortions(lowerBound, upperBound)).ToList();
+    }
 }

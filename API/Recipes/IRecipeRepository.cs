@@ -13,4 +13,10 @@ public interface IRecipeRepository
     Task<IEnumerable<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids);
 
     Task<IEnumerable<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids);
+
+    Task<IEnumerable<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
+
+    Task<IEnumerable<RecipeDto>> FilterByPortions(int portions);
+
+    Task<IEnumerable<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
 }

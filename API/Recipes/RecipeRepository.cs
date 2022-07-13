@@ -53,6 +53,28 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
     }
 
+    public async Task<IEnumerable<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
+    {
+        return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
+                .Where(e => e.PreparationTime != null && e.PreparationTime >= lowerBound &&
+                            e.PreparationTime <= upperBound))
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<RecipeDto>> FilterByPortions(int portions)
+    {
+        return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
+                .Where(e => e.Portions != null && e.Portions == portions))
+            .ToListAsync();
+    }
+
+    public async Task<IEnumerable<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
+    {
+        return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
+                .Where(e => e.Portions != null && e.Portions >= lowerBound && e.Portions <= upperBound))
+            .ToListAsync();
+    }
+
     private static IQueryable<Recipe> IncludeSubfields(IQueryable<Recipe> recipes)
     {
         return recipes
