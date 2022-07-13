@@ -114,7 +114,7 @@ public static class NutrientCalculation
         {
             > 0 when (numerator is 0 || denominator is 0) => integerPart * grams,
             0 => ((double) numerator / denominator) * grams,
-            _ => ((double) integerPart / denominator) * ((double) numerator / denominator) * grams
+            _ => ((double) integerPart * denominator) * ((double) numerator / denominator) * grams
         };
     }
 
