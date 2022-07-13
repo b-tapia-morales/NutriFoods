@@ -6,5 +6,4 @@ public class IngredientAbridged
     public string Name { get; set; } = string.Empty;
     public bool IsAnimal { get; set; }
     public bool ContainsGluten { get; set; }
-    public TertiaryGroupDto TertiaryGroup { get; set; } = null!;
 }
