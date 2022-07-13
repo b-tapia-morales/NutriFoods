@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS ingredient_nutrient
     PRIMARY KEY (id)
 );
 
+CREATE INDEX ingredient_nutrient_idx ON ingredient_nutrient USING btree(quantity);
+
 CREATE TABLE IF NOT EXISTS ingredient_measure
 (
     id            SERIAL,
@@ -247,6 +249,8 @@ CREATE TABLE IF NOT EXISTS recipe_nutrient
     FOREIGN KEY (nutrient_id) REFERENCES nutrient (id),
     PRIMARY KEY (id)
 );
+
+CREATE INDEX recipe_nutrient_idx ON recipe_nutrient USING btree(quantity);
 
 CREATE TABLE IF NOT EXISTS user_profile
 (
