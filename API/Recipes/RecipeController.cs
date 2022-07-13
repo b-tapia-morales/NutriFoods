@@ -16,7 +16,7 @@ public class RecipeController
 
     [HttpGet]
     [Route("")]
-    public async Task<IEnumerable<RecipeDto>> FindAll()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll()
     {
         return await _service.FindAll();
     }
@@ -57,49 +57,49 @@ public class RecipeController
 
     [HttpGet]
     [Route("vegetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetVegetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetVegetarianRecipes()
     {
         return await _service.GetVegetarianRecipes();
     }
 
     [HttpGet]
     [Route("ovo-vegetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetOvoVegetarianRecipes()
     {
         return await _service.GetOvoVegetarianRecipes();
     }
 
     [HttpGet]
     [Route("lacto-vegetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetLactoVegetarianRecipes()
     {
         return await _service.GetLactoVegetarianRecipes();
     }
 
     [HttpGet]
     [Route("ovo-lacto-vegetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetOvoLactoVegetarianRecipes()
     {
         return await _service.GetOvoLactoVegetarianRecipes();
     }
 
     [HttpGet]
     [Route("pollotarian")]
-    public async Task<IEnumerable<RecipeDto>> GetPollotarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPollotarianRecipes()
     {
         return await _service.GetPollotarianRecipes();
     }
 
     [HttpGet]
     [Route("pescetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetPescetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPescetarianRecipes()
     {
         return await _service.GetPescetarianRecipes();
     }
 
     [HttpGet]
     [Route("pollo-pescetarian")]
-    public async Task<IEnumerable<RecipeDto>> GetPolloPescetarianRecipes()
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPolloPescetarianRecipes()
     {
         return await _service.GetPolloPescetarianRecipes();
     }

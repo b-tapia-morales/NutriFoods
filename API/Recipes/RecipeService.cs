@@ -19,7 +19,7 @@ public class RecipeService : IRecipeService
         _repository = repository;
     }
 
-    public async Task<IEnumerable<RecipeDto>> FindAll()
+    public async Task<List<RecipeDto>> FindAll()
     {
         return await _repository.FindAll();
     }
@@ -34,37 +34,37 @@ public class RecipeService : IRecipeService
         return await _repository.FindById(id);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetVegetarianRecipes()
+    public async Task<List<RecipeDto>> GetVegetarianRecipes()
     {
         return await _repository.ExcludeSecondaryGroups(_nonVegetarianGroups);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes()
+    public async Task<List<RecipeDto>> GetOvoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonOvoVegetarianGroups);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes()
+    public async Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonOvoLactoVegetarianGroups);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes()
+    public async Task<List<RecipeDto>> GetLactoVegetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonLactoVegetarianGroups);
     }
     
-    public async Task<IEnumerable<RecipeDto>> GetPollotarianRecipes()
+    public async Task<List<RecipeDto>> GetPollotarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonPollotarianGroups);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetPescetarianRecipes()
+    public async Task<List<RecipeDto>> GetPescetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonPescetarianGroups);
     }
 
-    public async Task<IEnumerable<RecipeDto>> GetPolloPescetarianRecipes()
+    public async Task<List<RecipeDto>> GetPolloPescetarianRecipes()
     {
         return await _repository.ExcludeTertiaryGroups(_nonPolloPescetarianGroups);
     }
