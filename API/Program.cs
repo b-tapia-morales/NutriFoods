@@ -1,9 +1,12 @@
 using System.Text.Json.Serialization;
+using API.Converter;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
+using CsvHelper.TypeConversion;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -40,6 +43,11 @@ builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.Configure<JsonOptions>(options =>
+    {
+        options.SerializerOptions.Converters.Add(new CustomDateOnlyConverter("YYYY-mm-dd"));
+        options.SerializerOptions.Converters.Add(new CustomDateTimeConverter("YYYY-mm-dd HH:mm:ss"));
+    });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -67,7 +75,6 @@ if (app.Environment.IsDevelopment())
         {
             ["activated"] = false
         };
-        
     });
 }
 
