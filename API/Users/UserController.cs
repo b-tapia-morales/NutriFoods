@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using API.Dto;
 using API.Utils;
@@ -33,7 +34,8 @@ public class UserController
     }
 
     [HttpGet]
-    public async Task<ActionResult<UserDto>> FindByUsername([FromQuery(Name = "username")] string username, [FromQuery(Name = "password")] string password)
+    [Route("byUsername")]
+    public async Task<ActionResult<UserDto>> FindByUsername(string username, string password)
     {
         if (!Regex.IsMatch(username, RegexUtils.Username))
         {
@@ -57,6 +59,7 @@ public class UserController
     }
 
     [HttpGet]
+    [Route("byEmail")]
     public async Task<ActionResult<UserDto>> FindByEmail([FromQuery(Name = "email")] string email, [FromQuery(Name = "password")] string password)
     {
         if (!new EmailAddressAttribute().IsValid(email))
@@ -82,7 +85,7 @@ public class UserController
 
     [HttpPut]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
-        [Required] string password, [Required] DateOnly birthDate, [Required] string gender, string name = "", string lastName = "")
+        [Required] string password, [Required] string birthDate, [Required] string gender, string name = "", string lastName = "")
     {
         if (!Regex.IsMatch(username, RegexUtils.Username))
         {
@@ -102,10 +105,22 @@ public class UserController
                 $"Provided argument {password} does not match required string validation rules.\n{RegexUtils.PasswordRule}");
         }
 
-        var user = await _repository.SaveUser(username, email, password, name, lastName, birthDate, Gender.FromName(gender));
+        if (!DateOnly.TryParse(birthDate, out var date))
+        {
+            return new BadRequestObjectResult(
+                $"Provided argument {birthDate} does not correspond to a valid date.");
+        }
+
+        if (!Gender.TryFromName(gender, out var value))
+        {
+            return new BadRequestObjectResult(
+                $"Provided argument {value} does not correspond to a valid gender.");
+        }
+
+        var user = await _repository.SaveUser(username, email, password, name, lastName, date, value);
         if (user == null)
         {
-            return new UnauthorizedObjectResult(
+            return new BadRequestObjectResult(
                 "Can't register user because there's a user already using the provided credentials");
         }
 
