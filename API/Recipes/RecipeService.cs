@@ -4,13 +4,13 @@ namespace API.Recipes;
 
 public class RecipeService : IRecipeService
 {
-    private readonly List<int> _nonVegetarianGroups = new() {10, 11};
-    private readonly List<int> _nonOvoVegetarianGroups = new() {10, 11, 12, 13, 18, 19, 20};
     private readonly List<int> _nonLactoVegetarianGroups = new() {10, 11, 12, 13, 14};
     private readonly List<int> _nonOvoLactoVegetarianGroups = new() {10, 11, 12, 13};
-    private readonly List<int> _nonPollotarianGroups = new() {10, 11, 12, 14};
+    private readonly List<int> _nonOvoVegetarianGroups = new() {10, 11, 12, 13, 18, 19, 20};
     private readonly List<int> _nonPescetarianGroups = new() {12, 13, 14};
     private readonly List<int> _nonPolloPescetarianGroups = new() {12, 14};
+    private readonly List<int> _nonPollotarianGroups = new() {10, 11, 12, 14};
+    private readonly List<int> _nonVegetarianGroups = new() {10, 11};
 
     private readonly IRecipeRepository _repository;
 

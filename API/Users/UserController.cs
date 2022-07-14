@@ -6,5 +6,4 @@ namespace API.Users;
 [Route("api/v1/users")]
 public class UserController
 {
-    
 }

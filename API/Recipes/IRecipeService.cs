@@ -31,10 +31,10 @@ public interface IRecipeService
     Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
 
     Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound);
-    
+
     Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound);
-    
+
     Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound);
-    
+
     Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 }

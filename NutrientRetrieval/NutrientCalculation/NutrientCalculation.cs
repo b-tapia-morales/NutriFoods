@@ -50,7 +50,6 @@ public static class NutrientCalculation
             AddMeasures(gramDictionary, idSet, recipe.RecipeMeasures, ratio);
 
             foreach (var pair in gramDictionary)
-            {
                 context.Add(new RecipeNutrient
                 {
                     RecipeId = recipe.Id,
@@ -58,7 +57,6 @@ public static class NutrientCalculation
                     Quantity = pair.Value,
                     Unit = Unit.FromValue(unitDictionary[pair.Key])
                 });
-            }
         }
 
         context.SaveChanges();
@@ -74,11 +72,8 @@ public static class NutrientCalculation
                          nutrientIds.Contains(e.NutrientId)))
             {
                 var nutrientId = ingredientNutrient.NutrientId;
-                var nutrientGrams = (ingredientGrams / 100.0) * ingredientNutrient.Quantity;
-                if (!dictionary.TryAdd(nutrientId, nutrientGrams))
-                {
-                    dictionary[nutrientId] += nutrientGrams;
-                }
+                var nutrientGrams = ingredientGrams / 100.0 * ingredientNutrient.Quantity;
+                if (!dictionary.TryAdd(nutrientId, nutrientGrams)) dictionary[nutrientId] += nutrientGrams;
             }
         }
     }
@@ -95,11 +90,8 @@ public static class NutrientCalculation
                          nutrientIds.Contains(e.NutrientId)))
             {
                 var nutrientId = ingredientNutrient.NutrientId;
-                var nutrientGrams = (ingredientGrams / 100.0) * ingredientNutrient.Quantity;
-                if (!dictionary.TryAdd(nutrientId, nutrientGrams))
-                {
-                    dictionary[nutrientId] += nutrientGrams;
-                }
+                var nutrientGrams = ingredientGrams / 100.0 * ingredientNutrient.Quantity;
+                if (!dictionary.TryAdd(nutrientId, nutrientGrams)) dictionary[nutrientId] += nutrientGrams;
             }
         }
     }
@@ -108,8 +100,8 @@ public static class NutrientCalculation
     {
         return integerPart switch
         {
-            > 0 when (numerator is 0 || denominator is 0) => integerPart * grams,
-            0 => ((double) numerator / denominator) * grams,
+            > 0 when numerator is 0 || denominator is 0 => integerPart * grams,
+            0 => (double) numerator / denominator * grams,
             _ => (integerPart + (double) numerator / denominator) * grams
         };
     }

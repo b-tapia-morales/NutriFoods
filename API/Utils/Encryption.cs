@@ -1,6 +1,6 @@
 using System.Security.Cryptography;
 
-namespace Application.Utils;
+namespace API.Utils;
 
 public static class ApiKeyGenerator
 {

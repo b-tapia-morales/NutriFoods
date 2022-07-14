@@ -106,7 +106,8 @@ public class RecipeController
 
     [HttpGet]
     [Route("preparationTime")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPreparationTime([FromQuery] int gte, [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPreparationTime([FromQuery] int gte,
+        [FromQuery] int lte)
     {
         if (gte < 0 || lte < 0)
             return new BadRequestObjectResult(
@@ -145,7 +146,7 @@ public class RecipeController
 
         return await _service.FilterByPortions(gte, lte);
     }
-    
+
     [HttpGet]
     [Route("energy")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByEnergy([FromQuery] int gte, [FromQuery] int lte)
@@ -160,10 +161,11 @@ public class RecipeController
 
         return await _service.FilterByEnergy(gte, lte);
     }
-    
+
     [HttpGet]
     [Route("carbohydrates")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByCarbohydrates([FromQuery] int gte, [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByCarbohydrates([FromQuery] int gte,
+        [FromQuery] int lte)
     {
         if (gte < 0 || lte < 0)
             return new BadRequestObjectResult(
@@ -175,7 +177,7 @@ public class RecipeController
 
         return await _service.FilterByCarbohydrates(gte, lte);
     }
-    
+
     [HttpGet]
     [Route("lipids")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByLipids([FromQuery] int gte, [FromQuery] int lte)
@@ -190,7 +192,7 @@ public class RecipeController
 
         return await _service.FilterByLipids(gte, lte);
     }
-    
+
     [HttpGet]
     [Route("proteins")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByProteins([FromQuery] int gte, [FromQuery] int lte)

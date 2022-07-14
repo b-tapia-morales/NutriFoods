@@ -1,5 +1,5 @@
 using API.Dto;
-using Application.Utils;
+using API.Utils;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;

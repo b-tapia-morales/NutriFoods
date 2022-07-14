@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Application.Utils.Input;
+namespace API.Utils.Input;
 
 public static class Input
 {
