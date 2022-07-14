@@ -1,21 +1,46 @@
-using static Application.Utils.Nutrition.BasalMetabolicRate;
+using Domain.Enum;
 using static Application.Utils.Nutrition.CalculationMethod;
 
 namespace Application.Utils.Nutrition;
 
 public static class TotalMetabolicRate
 {
-    public static double Calculate(int gender, double weight, int height, int age, int physicalActivity)
+    public static double Calculate(Gender gender, double weight, int height, int age, PhysicalActivity level)
     {
-        var multiplier = PhysicalActivityFactor(physicalActivity);
-        return HarrisBenedictEquation(gender, weight, height, age) * (1 + multiplier);
+        var multiplier = PhysicalActivityFactor(level);
+        return BasalMetabolicRate.Calculate(gender, weight, height, age) * (1 + multiplier);
     }
 
-    public static double Calculate(CalculationMethod method, int gender, double weight, int height, int age,
-        int physicalActivity)
+    public static double Calculate(CalculationMethod method, Gender gender, double weight, int height, int age,
+        PhysicalActivity level)
     {
-        var multiplier = 1.00 + PhysicalActivityFactor(physicalActivity);
-        return multiplier * method switch
+        var multiplier = 1.00 + PhysicalActivityFactor(level);
+        return multiplier * BasalMetabolicRate.Calculate(method, gender, weight, height, age);
+    }
+
+    private static double PhysicalActivityFactor(int level)
+    {
+        return level switch
+        {
+            1 => 0.30,
+            2 => 0.50,
+            3 => 0.75,
+            4 => 1.00,
+            _ => throw new ArgumentException($"Value {level} for physical activity is not recognized")
+        };
+    }
+}
+
+public static class BasalMetabolicRate
+{
+    public static double Calculate(Gender gender, double weight, int height, int age)
+    {
+        return HarrisBenedictEquation(gender, weight, height, age);
+    }
+
+    public static double Calculate(CalculationMethod method, Gender gender, double weight, int height, int age)
+    {
+        return method switch
         {
             HarrisBenedict => HarrisBenedictEquation(gender, weight, height, age),
             RozaShizgal => RozaShizgalEquation(gender, weight, height, age),
@@ -24,22 +49,7 @@ public static class TotalMetabolicRate
         };
     }
 
-    private static double PhysicalActivityFactor(int physicalActivity)
-    {
-        return physicalActivity switch
-        {
-            1 => 0.30,
-            2 => 0.50,
-            3 => 0.75,
-            4 => 1.00,
-            _ => throw new ArgumentException($"Value {physicalActivity} for physical activity is not recognized")
-        };
-    }
-}
-
-public static class BasalMetabolicRate
-{
-    public static double HarrisBenedictEquation(int gender, double weight, int height, int age)
+    internal static double HarrisBenedictEquation(int gender, double weight, int height, int age)
     {
         return gender switch
         {
@@ -49,7 +59,7 @@ public static class BasalMetabolicRate
         };
     }
 
-    public static double RozaShizgalEquation(int gender, double weight, int height, int age)
+    internal static double RozaShizgalEquation(int gender, double weight, int height, int age)
     {
         return gender switch
         {
@@ -59,7 +69,7 @@ public static class BasalMetabolicRate
         };
     }
 
-    public static double MifflinStJeorEquation(int gender, double weight, int height, int age)
+    internal static double MifflinStJeorEquation(int gender, double weight, int height, int age)
     {
         return gender switch
         {
