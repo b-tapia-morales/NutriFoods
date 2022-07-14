@@ -64,6 +64,9 @@ public class NutrifoodsDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasPostgresExtension("nutrifoods", "fuzzystrmatch")
+            .HasPostgresExtension("nutrifoods", "pg_trgm");
+
         modelBuilder.Entity<Diet>(entity =>
         {
             entity.ToTable("diet", "nutrifoods");
@@ -122,9 +125,6 @@ public class NutrifoodsDbContext : DbContext
         {
             entity.ToTable("ingredient_measure", "nutrifoods");
 
-            entity.HasIndex(e => new {e.IngredientId, e.Name}, "ingredient_measure_ingredient_id_name_key")
-                .IsUnique();
-
             entity.Property(e => e.Id).HasColumnName("id");
 
             entity.Property(e => e.Grams).HasColumnName("grams");
@@ -147,6 +147,8 @@ public class NutrifoodsDbContext : DbContext
         modelBuilder.Entity<IngredientNutrient>(entity =>
         {
             entity.ToTable("ingredient_nutrient", "nutrifoods");
+
+            entity.HasIndex(e => e.Quantity, "ingredient_nutrient_idx");
 
             entity.Property(e => e.Id).HasColumnName("id");
 
@@ -244,14 +246,6 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.MealsPerDay).HasColumnName("meals_per_day");
 
             entity.Property(e => e.ProteinsTarget).HasColumnName("proteins_target");
-
-            entity.Property(e => e.UserId).HasColumnName("user_id");
-
-            entity.HasOne(d => d.User)
-                .WithMany(p => p.MealPlans)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("meal_plan_user_id_fkey");
         });
 
         modelBuilder.Entity<MealType>(entity =>
@@ -363,9 +357,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasMaxLength(64)
                 .HasColumnName("author");
 
-            entity.Property(e => e.Name)
-                .HasMaxLength(64)
-                .HasColumnName("name");
+            entity.Property(e => e.Name).HasColumnName("name");
 
             entity.Property(e => e.Portions).HasColumnName("portions");
 
@@ -479,6 +471,8 @@ public class NutrifoodsDbContext : DbContext
         modelBuilder.Entity<RecipeNutrient>(entity =>
         {
             entity.ToTable("recipe_nutrient", "nutrifoods");
+
+            entity.HasIndex(e => e.Quantity, "recipe_nutrient_idx");
 
             entity.Property(e => e.Id).HasColumnName("id");
 
@@ -628,8 +622,6 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.BodyMassIndex).HasColumnName("body_mass_index");
 
-            entity.Property(e => e.DietId).HasColumnName("diet_id");
-
             entity.Property(e => e.Height).HasColumnName("height");
 
             entity.Property(e => e.MuscleMassPercentage).HasColumnName("muscle_mass_percentage");
@@ -639,11 +631,6 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.Property(e => e.Weight).HasColumnName("weight");
-
-            entity.HasOne(d => d.Diet)
-                .WithMany(p => p.UserBodyMetrics)
-                .HasForeignKey(d => d.DietId)
-                .HasConstraintName("user_body_metrics_diet_id_fkey");
 
             entity.HasOne(d => d.User)
                 .WithMany(p => p.UserBodyMetrics)
@@ -668,6 +655,8 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.Birthdate).HasColumnName("birthdate");
 
+            entity.Property(e => e.DietId).HasColumnName("diet_id");
+
             entity.Property(e => e.Email).HasColumnName("email");
 
             entity.Property(e => e.Gender).HasColumnName("gender");
@@ -680,6 +669,8 @@ public class NutrifoodsDbContext : DbContext
                 .HasMaxLength(64)
                 .HasColumnName("last_name");
 
+            entity.Property(e => e.MealPlanId).HasColumnName("meal_plan_id");
+
             entity.Property(e => e.Name)
                 .HasMaxLength(64)
                 .HasColumnName("name");
@@ -689,6 +680,16 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.Username)
                 .HasMaxLength(64)
                 .HasColumnName("username");
+
+            entity.HasOne(d => d.Diet)
+                .WithMany(p => p.UserProfiles)
+                .HasForeignKey(d => d.DietId)
+                .HasConstraintName("user_profile_diet_id_fkey");
+
+            entity.HasOne(d => d.MealPlan)
+                .WithMany(p => p.UserProfiles)
+                .HasForeignKey(d => d.MealPlanId)
+                .HasConstraintName("user_profile_meal_plan_id_fkey");
         });
 
         OnModelCreatingPartial(modelBuilder);
@@ -699,14 +700,14 @@ public class NutrifoodsDbContext : DbContext
         modelBuilder.Entity<PrimaryGroup>().Ignore(e => e.SecondaryGroups);
         modelBuilder.Entity<SecondaryGroup>().Ignore(e => e.TertiaryGroups);
         modelBuilder.Entity<TertiaryGroup>().Ignore(e => e.Ingredients);
-        modelBuilder.Entity<Diet>().Ignore(e => e.RecipeDiets).Ignore(e => e.UserBodyMetrics);
+        modelBuilder.Entity<Diet>().Ignore(e => e.RecipeDiets).Ignore(e => e.UserProfiles);
         modelBuilder.Entity<MealType>().Ignore(e => e.RecipeMealTypes).Ignore(e => e.MealMenus);
         modelBuilder.Entity<NutrientType>().Ignore(e => e.NutrientSubtypes);
         modelBuilder.Entity<NutrientSubtype>().Ignore(e => e.Nutrients);
         modelBuilder.Entity<Nutrient>().Ignore(e => e.IngredientNutrients).Ignore(e => e.RecipeNutrients);
         modelBuilder.Entity<Ingredient>().Ignore(e => e.RecipeQuantities).Ignore(e => e.UserAllergies);
         modelBuilder.Entity<Recipe>().Ignore(e => e.MealMenuRecipes);
-        modelBuilder.Entity<MealPlan>().Ignore(e => e.User);
+        modelBuilder.Entity<MealPlan>().Ignore(e => e.UserProfiles);
         modelBuilder.Entity<MealMenu>().Ignore(e => e.MealPlan);
 
         modelBuilder.Entity<Nutrient>().Property(e => e.Essentiality)

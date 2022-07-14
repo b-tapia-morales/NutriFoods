@@ -11,8 +11,6 @@ public class UserBodyMetric
     public double BodyMassIndex { get; set; }
     public double? MuscleMassPercentage { get; set; }
     public PhysicalActivity PhysicalActivityLevel { get; set; }
-    public int? DietId { get; set; }
 
-    public virtual Diet? Diet { get; set; }
     public virtual UserProfile User { get; set; } = null!;
 }
