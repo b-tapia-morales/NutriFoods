@@ -8,7 +8,7 @@ public class UserDto
     public string ApiKey { get; set; } = null!;
     public string? Name { get; set; }
     public string? LastName { get; set; }
-    public DateOnly Birthdate { get; set; }
+    public string Birthdate { get; set; }
     public string Gender { get; set; } = null!;
     public DateTime JoinedOn { get; set; }
     public DietDto? Diet { get; set; }

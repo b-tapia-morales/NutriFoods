@@ -1,3 +1,4 @@
+using System.Globalization;
 using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Models;
@@ -39,6 +40,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src => src.PhysicalActivityLevel.NameDisplay));
         CreateMap<UserProfile, UserDto>()
+            .ForMember(dest => dest.Birthdate,
+                opt => opt.MapFrom(src => src.Birthdate.ToString()))
             .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.NameDisplay))
             .ForMember(dest => dest.BodyMetrics, opt => opt.MapFrom(src => src.UserBodyMetrics));
     }
