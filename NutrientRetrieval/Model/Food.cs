@@ -37,7 +37,7 @@ public class Nutrient
     public string Number { get; set; } = null!;
     public string Name { get; set; } = null!;
     public string UnitName { get; set; } = null!;
-    
+
     public override string ToString()
     {
         return $@"
@@ -53,7 +53,7 @@ public class FoodPortion
     public double GramWeight { get; set; }
     public double Amount { get; set; }
     public string Modifier { get; set; } = null!;
-    
+
     public override string ToString()
     {
         return $@"

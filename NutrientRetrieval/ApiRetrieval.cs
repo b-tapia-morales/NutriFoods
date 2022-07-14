@@ -1,4 +1,3 @@
-using System.Globalization;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -26,10 +25,8 @@ public static class ApiRetrieval
             .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(string.Join(", ", foodsDictionary.Values));
         foreach (var pair in foodsDictionary)
-        {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            //InsertMeasures(context, pair.Key, pair.Value);
-        }
+        //InsertMeasures(context, pair.Key, pair.Value);
 
         context.SaveChanges();
     }

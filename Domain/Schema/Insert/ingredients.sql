@@ -294,7 +294,7 @@ VALUES ('Sal', false, false, 23),
        ('Coñac', false, false, 25),
        -- se quita ('Pebre', false, false, 7),
        ('Pisco', false, false, 25),
-       ('Café', false, false, 24), 
+       ('Café', false, false, 24),
        ('Esencia ron', false, false, 25),
        ('Crema pastelera', true, false, 18),
        ('Manteca vegetal', false, false, 21),
@@ -348,7 +348,7 @@ VALUES ('Sal', false, false, 23),
        -- se quita('Esencia anís', false, false, 23),
        ('Mariscos surtidos', true, false, 11),
        ('Masa filo', true, true, 9),
-       ('Merluza austral',true, false, 10),
+       ('Merluza austral', true, false, 10),
        ('Salsa teriyaki', false, false, 23),
        ('Polenta', false, false, 9),
        ('Punta ganso', true, false, 12),
@@ -357,7 +357,7 @@ VALUES ('Sal', false, false, 23),
        ('Mariscos', true, false, 11),
        ('Choros', true, false, 11),
        ('Espaguetis', false, true, 9),
-       ('Salsa pescado',true, false, 10),
+       ('Salsa pescado', true, false, 10),
        ('Maní', false, false, 5),
        ('Trutro pollo', true, false, 12),
        ('Cranberries', false, false, 1),
@@ -373,14 +373,14 @@ VALUES ('Sal', false, false, 23),
        ('Baguette', false, true, 9),
        ('Gelatina hojas', true, false, 24),
        ('Salsa horseradish', false, false, 23),
-       ('Achiote', false, false, 23), 
+       ('Achiote', false, false, 23),
        ('Jugo piñas', false, false, 2),
        ('Fideos ramen', false, true, 9),
        ('Mango', false, false, 1),
        ('Crutones', false, true, 9),
        ('Churrascos', true, false, 12),
        ('Prietas', true, false, 12),
-       ('Merluza',true, false, 10),
+       ('Merluza', true, false, 10),
        ('Longaniza', true, false, 12),
        ('Trigo burgol', false, true, 8),
        ('Palanca', true, false, 12),
@@ -419,12 +419,12 @@ VALUES ('Sal', false, false, 23),
        ('Sobrecostilla', true, false, 12),
        ('Champiñones shitake', false, false, 7),
        ('Champiñones shiitake', false, false, 7),
-       ('Filete corvina',true, false, 10),
+       ('Filete corvina', true, false, 10),
        ('Arroz silvestre', false, false, 8),
        ('Champiñones portobello', false, false, 7),
-       ('Congrio colorado',true, false, 10),
-       ('Cabezas congrio',true, false, 10),
-       ('Cabeza pescado',true, false, 10),
+       ('Congrio colorado', true, false, 10),
+       ('Cabezas congrio', true, false, 10),
+       ('Cabeza pescado', true, false, 10),
        ('Pierna cordero', true, false, 12),
        ('Aji', false, false, 4),
        ('Lemon grass', false, false, 23),
@@ -433,10 +433,10 @@ VALUES ('Sal', false, false, 23),
        ('Tomates deshidratados', false, false, 4),
        ('Filetitos pollo', true, false, 12),
        ('Diente dragón', false, false, 7),
-       ('Tilapia',true, false, 10),
+       ('Tilapia', true, false, 10),
        ('Merlot', false, false, 25),
        ('Pavo', true, false, 12),
-       ('Reinetas',true, false, 10),
+       ('Reinetas', true, false, 10),
        ('Brotes arveja', false, false, 7),
        ('Salsa champiñones', false, false, 23),
        ('Choros zapato', true, false, 11),
@@ -447,7 +447,7 @@ VALUES ('Sal', false, false, 23),
        ('Fettucines', false, true, 9),
        -- se elimina('humo líquido'),
        ('Jibia', true, false, 11),
-       ('Sierra',true, false, 10),
+       ('Sierra', true, false, 10),
        ('Spaguetti', false, true, 9),
        ('Abastero', true, false, 12),
        ('Vienesas', true, false, 12),
@@ -458,15 +458,27 @@ VALUES ('Sal', false, false, 23),
 
 ON CONFLICT (name) DO NOTHING;
 
-DELETE from recipe_quantity;
-DELETE from recipe_measure;
-DELETE from recipe;
-DELETE from ingredient_measure;
-SELECT count(*) FROM recipe_measure;
-SELECT count(*) FROM recipe_quantity;
+DELETE
+from recipe_quantity;
+DELETE
+from recipe_measure;
+DELETE
+from recipe;
+DELETE
+from ingredient_measure;
+SELECT count(*)
+FROM recipe_measure;
+SELECT count(*)
+FROM recipe_quantity;
 
-SELECT count(*) FROM recipe;
-SELECT count(*) FROM ingredient_measure;
+SELECT count(*)
+FROM recipe;
+SELECT count(*)
+FROM ingredient_measure;
 
-SELECT * from recipe_quantity WHERE recipe_id = 2457;
-SELECT * from recipe_measure WHERE recipe_id = 2457;
+SELECT *
+from recipe_quantity
+WHERE recipe_id = 2457;
+SELECT *
+from recipe_measure
+WHERE recipe_id = 2457;

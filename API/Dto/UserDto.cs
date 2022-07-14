@@ -1,5 +1,3 @@
-using Domain.Enum;
-
 namespace API.Dto;
 
 public class UserDto
