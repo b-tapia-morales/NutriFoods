@@ -1,9 +1,11 @@
 using System.Text.Json.Serialization;
 using API.Ingredients;
 using API.Recipes;
+using API.Users;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 /*
 DatabaseInitialization.Initialize();
@@ -37,10 +39,21 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "NutriFoods",
+        Description = "The official API for the NutriFoods project"
+    });
+});
 
 var app = builder.Build();
 
@@ -54,6 +67,7 @@ if (app.Environment.IsDevelopment())
         {
             ["activated"] = false
         };
+        
     });
 }
 
