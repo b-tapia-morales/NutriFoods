@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Ingredients;
 
 [ApiController]
-[Route("api/ingredients")]
+[Route("api/v1/ingredients")]
 public class IngredientController
 {
     private readonly IIngredientRepository _repository;
@@ -16,7 +16,7 @@ public class IngredientController
 
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<IList<IngredientDto>>> GetAllIngredients()
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> GetAllIngredients()
     {
         return await _repository.FindAll();
     }

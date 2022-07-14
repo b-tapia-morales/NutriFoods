@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Recipes;
 
 [ApiController]
-[Route("api/recipes")]
+[Route("api/v1/recipes")]
 public class RecipeController
 {
     private readonly IRecipeService _service;
