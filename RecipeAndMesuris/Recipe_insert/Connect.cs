@@ -80,7 +80,7 @@ public static class Connect
             NpgsqlCommand comand = new NpgsqlCommand(queryIngredient, instance);
             var result = comand.ExecuteScalar();
 
-            if (!nameIngredient[2].Equals(""))
+            if (!nameIngredient[2].Equals("") )
             {
                 var measuresPath = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Ingredient",
                     "measures", "ingredient_measures", $"{nameIngredient[1]}.csv");
@@ -94,7 +94,6 @@ public static class Connect
                     NpgsqlCommand commandMeasury = new NpgsqlCommand(queryMeasury, instance);
                     commandMeasury.ExecuteNonQuery();
                 }
-
                 fileMeasures.Close();
             }
         }

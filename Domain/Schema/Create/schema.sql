@@ -26,6 +26,9 @@ DROP TABLE IF EXISTS meal_type;
 DROP TABLE IF EXISTS tertiary_group;
 DROP TABLE IF EXISTS secondary_group;
 DROP TABLE IF EXISTS primary_group;
+DROP TABLE IF EXISTS meal_menu_recipe;
+DROP TABLE IF EXISTS meal_menu;
+DROP TABLE IF EXISTS meal_plan;
 
 DROP EXTENSION IF EXISTS fuzzystrmatch;
 DROP EXTENSION IF EXISTS pg_trgm;

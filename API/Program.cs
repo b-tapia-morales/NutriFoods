@@ -20,7 +20,7 @@ Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-*/
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -83,6 +83,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-//GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
-//g.GetRegimen();
+*/
+GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
+var Menus = g.GetRegimen();
