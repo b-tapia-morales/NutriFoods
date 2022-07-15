@@ -1,4 +1,6 @@
 using System.Text.Json.Serialization;
+using API.Converter;
+using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
@@ -18,7 +20,8 @@ Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-*/
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -80,3 +83,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+*/
+GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
+var Menus = g.GetRegimen();

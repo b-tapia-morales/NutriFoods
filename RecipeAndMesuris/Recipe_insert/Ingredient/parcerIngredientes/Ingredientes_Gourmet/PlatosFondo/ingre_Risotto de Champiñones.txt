@@ -1,4 +1,4 @@
-1,sobre,Callampas
+1,x,Callampas
 400,ml,agua
 2,cdas,aceite oliva
 1,x,cebolla
