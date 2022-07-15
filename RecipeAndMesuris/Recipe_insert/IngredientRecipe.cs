@@ -69,13 +69,29 @@ public class IngredientRecipe
     {
         if (ingredient.ToLower().Contains("merquen") || ingredient.Contains("Merquén") ||
             ingredient.Contains("merquén")) ingredient = "Merkén";
+        if (ingredient.ToLower().Contains("manzana")) ingredient = "manzana";
+        if (ingredient.Contains("costilla")) ingredient = "chuleta de cerdo";
+        if (ingredient.Equals("aceite maravilla")) ingredient = "aceite";
+        if (ingredient.Equals("Páprika")) ingredient = "aji color";
+        if (ingredient.Equals("pasta lasaña")) ingredient = "Espaguetis";
+        if (ingredient.Contains("azúcar")) ingredient = "Azúcar";
+        if (ingredient.Equals("ají amarillo")) ingredient = "Ají";
+        if (ingredient.Equals("margarina")) ingredient = "manteca vegetal";
+        if (ingredient.Equals("pechuga pavo") || ingredient.Equals("pechuga pato")) ingredient = "pechuga de pollo";
+        if (ingredient.Equals("harina integral")) ingredient = "Harina";
+        if (ingredient.Contains("arroz")) ingredient = "Arroz";
+        if (ingredient.Equals("porotos negros")) ingredient = "poroto";
+        if (ingredient.Equals("tomates secos")) ingredient = "Tomates deshidratados";
+        if (ingredient.Equals("tocino crocante") || ingredient.Equals("panceta cerdo")) ingredient = "Tocino";
+        if (ingredient.ToLower().Contains("queso")) ingredient = "queso";
+        if (ingredient.ToLower().Equals("orégano")) ingredient = "Oregano";
         if (ingredient.ToLower().Equals("caldo pollo")) ingredient = "Caldo de ave";
         if (ingredient.Equals("cous-cous") || ingredient.Equals("couscous")) ingredient = "Cuscús";
         if (ingredient.Equals("camarones")) ingredient = "Camarón";
         if (ingredient.ToLower().Equals("pimentón") || ingredient.Equals("pimenton")) ingredient = "Pimiento";
         if (ingredient.Equals("limon") || ingredient.Equals("limones")) ingredient = "Limón";
         if (ingredient.Equals("yemas") || ingredient.Equals("yema")) ingredient = "yema de huevo";
-        if (ingredient.Equals("claras")) ingredient = "Clara de huevo";
+        if (ingredient.Equals("claras") || ingredient.Equals("clara")) ingredient = "Clara de huevo";
         if (ingredient.ToLower().Equals("callampas")) ingredient = "Champiñón";
         if (ingredient.Equals("pasas rubias")) ingredient = "Pasa";
         if (ingredient.ToLower().Equals("Caldo Costilla")) ingredient = "Caldo de carne";
@@ -95,13 +111,12 @@ public class IngredientRecipe
         if (ingredient.ToLower().Equals("caldo carne") || ingredient.Equals("Caldo de carne"))
             ingredient = "Caldo de carne";
         String consult =
-            $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name,'{ingredient}') > 0.50;";
+            $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name,'{ingredient}') > 0.50 LIMIT 1;";
         NpgsqlCommand commandSelectIngredient = new NpgsqlCommand(consult, _connection);
         var ingredientResult = commandSelectIngredient.ExecuteScalar();
-
         if (ingredientResult != null)
         {
-            if (units.Equals("x") || units.Equals("unidad"))
+            if (units.Equals("x") || units.Equals("unidad") || units.Equals("unidas")) 
             {
                 string avg =
                     $"SELECT grams FROM nutrifoods.ingredient_measure WHERE ingredient_id = {ingredientResult} ORDER BY grams;";
@@ -193,12 +208,13 @@ public class IngredientRecipe
                 {
                     if (units.Equals("pote") || units.Equals("potes")) units = "taza";
                     if (units.Contains("grande")) units = "largo";
+                    /*
                     if ((ingredient.Contains("queso") || ingredient.Contains("mozzarella")) &&
                         units.Replace("s", "").ToLower().Equals("taza"))
                     {
                         ingredientResult = 308;
                         units = "Taza,rallada";
-                    }
+                    }*/
 
                     if (ingredient.Equals("queso")) units = "rodaja";
                     if (ingredient.Equals("queso cabra")) units = "oz";
@@ -275,6 +291,14 @@ public class IngredientRecipe
                         }
                     }
                 }
+            }
+        }
+        else
+        {
+            if (!ingredient.ToLower().Equals("agua") && !ingredient.Contains("masa") && !ingredient.Equals("Crema Chantilly")
+                && !ingredient.Equals("polvo Chocolate Amargo") && !ingredient.Equals("Merengue"))
+            {
+                //Console.WriteLine(ingredient);
             }
         }
     }

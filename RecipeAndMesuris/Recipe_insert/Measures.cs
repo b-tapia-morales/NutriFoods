@@ -19,9 +19,9 @@ public class Measures
     {
         var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         var path = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Ingredient", "measures",
-            "measures_id.csv");
+            "ingredient_measures","IngreMissing.csv");
         StreamReader file = 
-            new StreamReader(path);
+            new StreamReader("C:/Users/Eduardo/RiderProjects/NutriFoods-Latest/RecipeAndMesuris/Recipe_insert/Ingredient/measures/IngreMissing.csv");
         while (!file.EndOfStream)
         {
             string line = file.ReadLine() ?? throw new InvalidOperationException();

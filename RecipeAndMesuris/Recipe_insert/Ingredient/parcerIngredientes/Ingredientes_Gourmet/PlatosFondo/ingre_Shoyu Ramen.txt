@@ -5,7 +5,7 @@
 2,litros,caldo pollo
 1,x,cebolla
 3,dientes,ajo
-5,cm,jengibre
+1,x,jengibre
 3,cucharadas,Salsa soya
 4,grandes,huevos
 200,g,fideos ramen

@@ -76,7 +76,7 @@ public static class Connect
             string line = fileIngredient.ReadLine() ?? throw new InvalidOperationException();
             string[] nameIngredient = line.Split(";");
             string queryIngredient =
-                $"SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.ingredient.name ='{nameIngredient[1]}';";
+                $"SELECT id FROM nutrifoods.ingredient WHERE lower(nutrifoods.ingredient.name) ='{nameIngredient[1].ToLower()}';";
             NpgsqlCommand comand = new NpgsqlCommand(queryIngredient, instance);
             var result = comand.ExecuteScalar();
 

@@ -1,6 +1,6 @@
 2,tazas,lentejas
 1,cda,aceite,oliva
-½,cebolla,blanca,picada,fina
+½,x,cebolla
 1,x,zanahoria
 1,x,pimento rojo
 1,cda,aceite oliva

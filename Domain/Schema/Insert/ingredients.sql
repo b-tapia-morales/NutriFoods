@@ -470,3 +470,5 @@ SELECT count(*) FROM ingredient_measure;
 
 SELECT * from recipe_quantity WHERE recipe_id = 2457;
 SELECT * from recipe_measure WHERE recipe_id = 2457;
+
+SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name,'queso') > 0.50 LIMIT 1;
