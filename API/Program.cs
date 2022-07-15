@@ -13,7 +13,7 @@ using RecipeAndMesuris.Recipe_insert;
 
 
 DatabaseInitialization.Initialize();
-//ApiRetrieval.RetrieveFromApi();
+ApiRetrieval.RetrieveFromApi();
 
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
