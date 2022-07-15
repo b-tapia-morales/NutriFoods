@@ -20,11 +20,11 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest().Result
-            .Where(e => e.Value != null)
-            .ToDictionary(e => e.Key, e => e.Value);
+        var foodsDictionary = DataCentral.FoodRequest().Result.Where(e => e.Value != null).ToDictionary(e => e.Key, e => e.Value);
+        Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
+            Console.WriteLine(pair.Value?.ToString());
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
             //InsertMeasures(context, pair.Key, pair.Value);
         }
@@ -64,9 +64,7 @@ public static class ApiRetrieval
 
     private static void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food? food)
     {
-        if (ReferenceEquals(null, food)) return;
-
-        if (food.FoodPortions.Length == 0) return;
+        if (food?.FoodPortions == null || food.FoodPortions.Length == 0) return;
 
         var untranslatedString = string.Join(Environment.NewLine, food.FoodPortions.Select(e =>
         {
