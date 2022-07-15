@@ -1,26 +1,24 @@
 using System.Text.Json.Serialization;
+using API.Converter;
 using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
-using Domain.DatabaseInitialization;
+using API.Users;
+using CsvHelper.TypeConversion;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
-using NutrientRetrieval;
-using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Recipe_insert;
+using Microsoft.OpenApi.Models;
 
-
-
+/*
 DatabaseInitialization.Initialize();
 ApiRetrieval.RetrieveFromApi();
-
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
-
 NutrientCalculation.Calculate();
-
+*/
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -45,10 +43,26 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.Configure<JsonOptions>(options =>
+    {
+        options.SerializerOptions.Converters.Add(new CustomDateOnlyConverter("YYYY-mm-dd"));
+        options.SerializerOptions.Converters.Add(new CustomDateTimeConverter("YYYY-mm-dd HH:mm:ss"));
+    });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "NutriFoods",
+        Description = "The official API for the NutriFoods project"
+    });
+});
 
 var app = builder.Build();
 

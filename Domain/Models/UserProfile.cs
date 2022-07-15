@@ -6,7 +6,6 @@ public class UserProfile
 {
     public UserProfile()
     {
-        MealPlans = new HashSet<MealPlan>();
         UserAllergies = new HashSet<UserAllergy>();
         UserBodyMetrics = new HashSet<UserBodyMetric>();
     }
@@ -21,8 +20,11 @@ public class UserProfile
     public DateOnly Birthdate { get; set; }
     public Gender Gender { get; set; }
     public DateTime JoinedOn { get; set; }
+    public int? DietId { get; set; }
+    public int? MealPlanId { get; set; }
 
-    public virtual ICollection<MealPlan> MealPlans { get; set; }
+    public virtual Diet? Diet { get; set; }
+    public virtual MealPlan? MealPlan { get; set; }
     public virtual ICollection<UserAllergy> UserAllergies { get; set; }
     public virtual ICollection<UserBodyMetric> UserBodyMetrics { get; set; }
 }

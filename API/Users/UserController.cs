@@ -19,7 +19,7 @@ public class UserController
     {
         _repository = repository;
     }
-    /*
+
     [HttpGet]
     [Route("api-key")]
     public async Task<ActionResult<UserDto>> Find(string apiKey)
@@ -125,5 +125,5 @@ public class UserController
         }
 
         return user;
-    }*/
+    }
 }

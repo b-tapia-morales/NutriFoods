@@ -4,29 +4,37 @@ namespace API.Recipes;
 
 public interface IRecipeService
 {
-    public Task<IEnumerable<RecipeDto>> FindAll();
+    Task<List<RecipeDto>> FindAll();
 
-    public Task<RecipeDto> FindByName(string name);
+    Task<RecipeDto> FindByName(string name);
 
-    public Task<RecipeDto> FindById(int id);
+    Task<RecipeDto> FindById(int id);
 
-    public Task<IEnumerable<RecipeDto>> GetVegetarianRecipes();
+    Task<List<RecipeDto>> GetVegetarianRecipes();
 
-    public Task<IEnumerable<RecipeDto>> GetOvoVegetarianRecipes();
-    
-    public Task<IEnumerable<RecipeDto>> GetLactoVegetarianRecipes();
-    
-    public Task<IEnumerable<RecipeDto>> GetOvoLactoVegetarianRecipes();
+    Task<List<RecipeDto>> GetOvoVegetarianRecipes();
 
-    public Task<IEnumerable<RecipeDto>> GetPollotarianRecipes();
+    Task<List<RecipeDto>> GetLactoVegetarianRecipes();
 
-    public Task<IEnumerable<RecipeDto>> GetPescetarianRecipes();
+    Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
 
-    public Task<IEnumerable<RecipeDto>> GetPolloPescetarianRecipes();
+    Task<List<RecipeDto>> GetPollotarianRecipes();
 
-    public Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> GetPescetarianRecipes();
 
-    public Task<List<RecipeDto>> FilterByPortions(int portions);
+    Task<List<RecipeDto>> GetPolloPescetarianRecipes();
 
-    public Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByPortions(int portions);
+
+    Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 }

@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
-using NutrientRetrieval.Model;
 using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Model;
 
 namespace NutrientRetrieval.Request;
 

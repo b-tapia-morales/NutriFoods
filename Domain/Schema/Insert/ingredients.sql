@@ -1,5 +1,4 @@
 ﻿SET SEARCH_PATH = "nutrifoods";
-
 INSERT INTO ingredient (name, is_animal, contains_gluten, tertiary_group_id)
 VALUES ('Sal', false, false, 23),
        ('Pimienta negra', false, false, 23),
@@ -235,7 +234,6 @@ VALUES ('Sal', false, false, 23),
        ('Rábano', false, false, 7),
        ('Chuleta de cerdo', true, false, 12),
        ('Uva', false, false, 1),
-       -- se elimina('Cava', false, false, 25), -- alcohol
        ('Pasta sin gluten', false, false, 9),
        ('Carne de cordero', true, false, 12),
        ('Rabo de ternera', true, false, 12),
@@ -248,7 +246,6 @@ VALUES ('Sal', false, false, 23),
        ('Solomillo de cerdo', true, false, 12),
        ('Whisky', false, false, 25),
        ('Kanikama', true, false, 11),
-       -- Nueva Lista --
        ('Leche condensada', true, false, 22),
        ('Manjar', true, false, 22),
        ('Cobertura chocolate semiamargo', true, false, 23),
@@ -271,9 +268,6 @@ VALUES ('Sal', false, false, 23),
        ('Ralladura naranjas', false, false, 23),
        ('Fondant', false, false, 22),
        ('Chancaca', false, false, 22),
-       -- SE ELIMINA --('Colorante rojo', false, false, 24),
-       -- SE ELIMINA --('Estrellas multicolor', fase)
-       -- SE ELIMINA --('Puré lúcuma'),
        ('Duraznos', false, false, 1),
        ('Peras', false, false, 1),
        ('Moras', false, false, 1),
@@ -287,14 +281,12 @@ VALUES ('Sal', false, false, 23),
        ('Pan integral', false, true, 9),
        ('Lomo vetado', true, false, 12),
        ('Trutros cortos', true, false, 12),
-       -- Se quita('Nori', false, false, 26),
        ('Cerveza', false, false, 25),
        ('Congrio', true, false, 10),
        ('Champiñones ostra', false, false, 7),
        ('Coñac', false, false, 25),
-       -- se quita ('Pebre', false, false, 7),
        ('Pisco', false, false, 25),
-       ('Café', false, false, 24), 
+       ('Café', false, false, 24),
        ('Esencia ron', false, false, 25),
        ('Crema pastelera', true, false, 18),
        ('Manteca vegetal', false, false, 21),
@@ -302,7 +294,6 @@ VALUES ('Sal', false, false, 23),
        ('Trutros pollo', true, false, 12),
        ('Oporto', false, false, 25),
        ('Almejas', true, false, 11),
-       -- se quita('Merengue', true, false, 22),
        ('Cobertura chocolate blanco', true, false, 24),
        ('Bizcocho', true, true, 9),
        ('Anís estrella', false, false, 23),
@@ -312,24 +303,19 @@ VALUES ('Sal', false, false, 23),
        ('Asiento', true, false, 12),
        ('Dientes dragón', false, false, 7),
        ('Champiñones parís', false, false, 7),
-       -- se quita('agua hirviendo'),
        ('Ron', false, false, 25),
-       -- se quita('agua'),
        ('Nutella', false, false, 24),
        ('Frutos rojo', false, false, 1),
-       -- se quita ('Pulpa lúcuma', false, false, 1),
-       ('Puesillo', false, false, 1),
+       ('Huesillo', false, false, 1),
        ('Cerezas', false, false, 1),
        ('Coco', false, false, 1),
        ('Esencias ron', false, false, 25),
        ('Pistachos', false, false, 15),
        ('Brownies', true, false, 9),
        ('Helado', true, false, 18),
-       -- Se elimina ('masa', false, true, 9),
        ('Endulzante', false, false, 22),
        ('Sucralosa', false, false, 22),
        ('Anís semilla', false, false, 23),
-       -- SE elimina('cubos hielo'),
        ('Café granulado', false, false, 24),
        ('Amaretto', false, false, 25),
        ('Guindas', false, false, 1),
@@ -337,18 +323,14 @@ VALUES ('Sal', false, false, 23),
        ('Salsa manjar', true, false, 22),
        ('Esencia cola mono', false, false, 25),
        ('Salsa frambuesas', false, false, 24),
-       ('Jalea frambuesas', false, false, 24),
        ('Compota manzanas', false, false, 24),
        ('Cacao amargo', false, false, 24),
        ('Higos deshidratados', false, false, 15),
-       -- se quita('picada'),
        ('Berro', false, false, 5),
        ('Colapez', true, false, 23),
-       -- se elimina ('masa'),
-       -- se quita('Esencia anís', false, false, 23),
        ('Mariscos surtidos', true, false, 11),
        ('Masa filo', true, true, 9),
-       ('Merluza austral',true, false, 10),
+       ('Merluza austral', true, false, 10),
        ('Salsa teriyaki', false, false, 23),
        ('Polenta', false, false, 9),
        ('Punta ganso', true, false, 12),
@@ -357,7 +339,7 @@ VALUES ('Sal', false, false, 23),
        ('Mariscos', true, false, 11),
        ('Choros', true, false, 11),
        ('Espaguetis', false, true, 9),
-       ('Salsa pescado',true, false, 10),
+       ('Salsa pescado', true, false, 10),
        ('Maní', false, false, 5),
        ('Trutro pollo', true, false, 12),
        ('Cranberries', false, false, 1),
@@ -367,20 +349,19 @@ VALUES ('Sal', false, false, 23),
        ('Rocoto', false, false, 4),
        ('Trigo', false, true, 8),
        ('Hojas parra', false, false, 7),
-       ('Azáfran', false, false, 23),
+       ('Azafrán', false, false, 23),
        ('Macha', true, false, 11),
-       -- se elimina('masa empanada'),
        ('Baguette', false, true, 9),
        ('Gelatina hojas', true, false, 24),
        ('Salsa horseradish', false, false, 23),
-       ('Achiote', false, false, 23), 
+       ('Achiote', false, false, 23),
        ('Jugo piñas', false, false, 2),
        ('Fideos ramen', false, true, 9),
        ('Mango', false, false, 1),
        ('Crutones', false, true, 9),
        ('Churrascos', true, false, 12),
        ('Prietas', true, false, 12),
-       ('Merluza',true, false, 10),
+       ('Merluza', true, false, 10),
        ('Longaniza', true, false, 12),
        ('Trigo burgol', false, true, 8),
        ('Palanca', true, false, 12),
@@ -419,12 +400,12 @@ VALUES ('Sal', false, false, 23),
        ('Sobrecostilla', true, false, 12),
        ('Champiñones shitake', false, false, 7),
        ('Champiñones shiitake', false, false, 7),
-       ('Filete corvina',true, false, 10),
+       ('Filete corvina', true, false, 10),
        ('Arroz silvestre', false, false, 8),
        ('Champiñones portobello', false, false, 7),
-       ('Congrio colorado',true, false, 10),
-       ('Cabezas congrio',true, false, 10),
-       ('Cabeza pescado',true, false, 10),
+       ('Congrio colorado', true, false, 10),
+       ('Cabezas congrio', true, false, 10),
+       ('Cabeza pescado', true, false, 10),
        ('Pierna cordero', true, false, 12),
        ('Aji', false, false, 4),
        ('Lemon grass', false, false, 23),
@@ -433,21 +414,19 @@ VALUES ('Sal', false, false, 23),
        ('Tomates deshidratados', false, false, 4),
        ('Filetitos pollo', true, false, 12),
        ('Diente dragón', false, false, 7),
-       ('Tilapia',true, false, 10),
+       ('Tilapia', true, false, 10),
        ('Merlot', false, false, 25),
        ('Pavo', true, false, 12),
-       ('Reinetas',true, false, 10),
+       ('Reinetas', true, false, 10),
        ('Brotes arveja', false, false, 7),
        ('Salsa champiñones', false, false, 23),
        ('Choros zapato', true, false, 11),
-       -- se quita('sofrito'),
        ('Masa lasañas', false, true, 9),
        ('Fettuccini', false, true, 9),
        ('Filete pavo', true, false, 12),
        ('Fettucines', false, true, 9),
-       -- se elimina('humo líquido'),
        ('Jibia', true, false, 11),
-       ('Sierra',true, false, 10),
+       ('Sierra', true, false, 10),
        ('Spaguetti', false, true, 9),
        ('Abastero', true, false, 12),
        ('Vienesas', true, false, 12),
@@ -458,17 +437,27 @@ VALUES ('Sal', false, false, 23),
 
 ON CONFLICT (name) DO NOTHING;
 
-DELETE from recipe_quantity;
-DELETE from recipe_measure;
-DELETE from recipe;
-DELETE from ingredient_measure;
-SELECT count(*) FROM recipe_measure;
-SELECT count(*) FROM recipe_quantity;
+DELETE
+from recipe_quantity;
+DELETE
+from recipe_measure;
+DELETE
+from recipe;
+DELETE
+from ingredient_measure;
+SELECT count(*)
+FROM recipe_measure;
+SELECT count(*)
+FROM recipe_quantity;
 
-SELECT count(*) FROM recipe;
-SELECT count(*) FROM ingredient_measure;
+SELECT count(*)
+FROM recipe;
+SELECT count(*)
+FROM ingredient_measure;
 
-SELECT * from recipe_quantity WHERE recipe_id = 2457;
-SELECT * from recipe_measure WHERE recipe_id = 2457;
-
-SELECT id FROM nutrifoods.ingredient WHERE nutrifoods.similarity(ingredient.name,'queso') > 0.50 LIMIT 1;
+SELECT *
+from recipe_quantity
+WHERE recipe_id = 2457;
+SELECT *
+from recipe_measure
+WHERE recipe_id = 2457;

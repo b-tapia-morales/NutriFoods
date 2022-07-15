@@ -5,12 +5,12 @@ public class Diet
     public Diet()
     {
         RecipeDiets = new HashSet<RecipeDiet>();
-        UserBodyMetrics = new HashSet<UserBodyMetric>();
+        UserProfiles = new HashSet<UserProfile>();
     }
 
     public int Id { get; set; }
     public string Name { get; set; } = null!;
 
     public virtual ICollection<RecipeDiet> RecipeDiets { get; set; }
-    public virtual ICollection<UserBodyMetric> UserBodyMetrics { get; set; }
+    public virtual ICollection<UserProfile> UserProfiles { get; set; }
 }

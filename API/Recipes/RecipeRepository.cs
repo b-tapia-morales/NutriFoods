@@ -16,7 +16,7 @@ public class RecipeRepository : IRecipeRepository
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<RecipeDto>> FindAll()
+    public async Task<List<RecipeDto>> FindAll()
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)).ToListAsync();
     }
@@ -33,7 +33,7 @@ public class RecipeRepository : IRecipeRepository
         return await _mapper.ProjectTo<RecipeDto>(_context.Recipes).Where(e => e.Id == id).FirstAsync();
     }
 
-    public async Task<IEnumerable<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids)
+    public async Task<List<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids)
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => !e.RecipeMeasures.Any(m =>
@@ -43,7 +43,7 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids)
+    public async Task<List<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids)
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => !e.RecipeMeasures.Any(m =>
@@ -53,7 +53,7 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
+    public async Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => e.PreparationTime != null && e.PreparationTime >= lowerBound &&
@@ -61,17 +61,25 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<RecipeDto>> FilterByPortions(int portions)
+    public async Task<List<RecipeDto>> FilterByPortions(int portions)
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => e.Portions != null && e.Portions == portions))
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
+    public async Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
     {
         return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
                 .Where(e => e.Portions != null && e.Portions >= lowerBound && e.Portions <= upperBound))
+            .ToListAsync();
+    }
+
+    public async Task<List<RecipeDto>> FilterByNutrientQuantity(int id, int lowerBound, int upperBound)
+    {
+        return await _mapper.ProjectTo<RecipeDto>(IncludeSubfields(_context.Recipes)
+                .Where(e => e.RecipeNutrients.Any(
+                    x => x.NutrientId == id && x.Quantity >= lowerBound && x.Quantity <= upperBound)))
             .ToListAsync();
     }
 

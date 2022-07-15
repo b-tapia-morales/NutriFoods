@@ -1,3 +1,4 @@
+using System.Globalization;
 using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Models;
@@ -32,8 +33,16 @@ public class MappingProfile : Profile
         CreateMap<Recipe, RecipeDto>();
         CreateMap<MealMenuRecipe, MealMenuRecipeDto>();
         CreateMap<MealMenu, MealMenuDto>()
-            .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MealMenuRecipes))
+            .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.MealMenuRecipes))
             .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.NameDisplay));
         CreateMap<MealPlan, MealPlanDto>();
+        CreateMap<UserBodyMetric, UserBodyMetricDto>()
+            .ForMember(dest => dest.PhysicalActivityLevel,
+                opt => opt.MapFrom(src => src.PhysicalActivityLevel.NameDisplay));
+        CreateMap<UserProfile, UserDto>()
+            .ForMember(dest => dest.Birthdate,
+                opt => opt.MapFrom(src => src.Birthdate.ToString()))
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.NameDisplay))
+            .ForMember(dest => dest.BodyMetrics, opt => opt.MapFrom(src => src.UserBodyMetrics));
     }
 }

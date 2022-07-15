@@ -1,35 +1,31 @@
 INSERT INTO nutrifoods.recipe_dish_type (recipe_id, dish_type_id)
-VALUES
-    (1, 3),
-    (2, 3),
-    (3, 3),
-    (4, 3),
-    (5, 3),
-    (6, 3),
-    (7, 3),
-    (8, 3)
+VALUES (1, 3),
+       (2, 3),
+       (3, 3),
+       (4, 3),
+       (5, 3),
+       (6, 3),
+       (7, 3),
+       (8, 3)
 ;
 
 INSERT INTO nutrifoods.recipe_meal_type (recipe_id, meal_type_id)
-VALUES
-    (1, 2),
-    (1, 3),
-    (2, 2),
-    (2, 3),
-    (3, 2),
-    (3, 3),
-    (4, 2),
-    (4, 3)
+VALUES (1, 2),
+       (1, 3),
+       (2, 2),
+       (2, 3),
+       (3, 2),
+       (3, 3),
+       (4, 2),
+       (4, 3)
 ;
 
 INSERT INTO nutrifoods.recipe_diet (recipe_id, diet_id)
-VALUES
-    (1, 4),
-    (1, 7),
-    (3, 1),
-    (3, 6),
-    (3, 7)
-    
+VALUES (1, 4),
+       (1, 7),
+       (3, 1),
+       (3, 6),
+       (3, 7)
 ;
 
 INSERT INTO recipe_steps (recipe, step, description)
@@ -117,7 +113,6 @@ VALUES
     (5, 176, 1, 0, 0, ''),
     (5, 140, 1, 0, 0, ''),
     (5, 7, 0, 1, 2, '')
-     
 ;
 
 INSERT INTO recipe_quantity (recipe_id, ingredient_id, grams, description)

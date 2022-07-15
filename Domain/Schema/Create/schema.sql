@@ -1,11 +1,11 @@
 SET SEARCH_PATH = "nutrifoods";
 
-DROP TABLE IF EXISTS meal_menu_recipe;
-DROP TABLE IF EXISTS meal_menu;
-DROP TABLE IF EXISTS meal_plan;
 DROP TABLE IF EXISTS user_allergy;
 DROP TABLE IF EXISTS user_body_metrics;
 DROP TABLE IF EXISTS user_profile;
+DROP TABLE IF EXISTS meal_menu_recipe;
+DROP TABLE IF EXISTS meal_menu;
+DROP TABLE IF EXISTS meal_plan;
 DROP TABLE IF EXISTS recipe_nutrient;
 DROP TABLE IF EXISTS recipe_quantity;
 DROP TABLE IF EXISTS recipe_measure;
@@ -147,6 +147,8 @@ CREATE TABLE IF NOT EXISTS ingredient_nutrient
     PRIMARY KEY (id)
 );
 
+CREATE INDEX ingredient_nutrient_idx ON ingredient_nutrient USING btree (quantity);
+
 CREATE TABLE IF NOT EXISTS ingredient_measure
 (
     id            SERIAL,
@@ -248,58 +250,16 @@ CREATE TABLE IF NOT EXISTS recipe_nutrient
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS user_profile
-(
-    id        SERIAL,
-    username  VARCHAR(64) NOT NULL,
-    email     TEXT        NOT NULL,
-    password  TEXT        NOT NULL,
-    api_key   TEXT        NOT NULL,
-    name      VARCHAR(64),
-    last_name VARCHAR(64),
-    birthdate DATE        NOT NULL,
-    gender    INTEGER     NOT NULL,
-    joined_on TIMESTAMP   NOT NULL,
-    UNIQUE (username),
-    UNIQUE (email),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS user_body_metrics
-(
-    id                      SERIAL,
-    user_id                 INTEGER          NOT NULL,
-    height                  DOUBLE PRECISION NOT NULL,
-    weight                  DOUBLE PRECISION NOT NULL,
-    body_mass_index         DOUBLE PRECISION NOT NULL,
-    muscle_mass_percentage  DOUBLE PRECISION,
-    physical_activity_level INTEGER          NOT NULL,
-    diet_id                 INTEGER,
-    FOREIGN KEY (user_id) REFERENCES user_profile (id),
-    FOREIGN KEY (diet_id) REFERENCES diet (id),
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS user_allergy
-(
-    id            SERIAL,
-    user_id       INTEGER NOT NULL,
-    ingredient_id INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user_profile (id),
-    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
-    PRIMARY KEY (id)
-);
+CREATE INDEX recipe_nutrient_idx ON recipe_nutrient USING btree (quantity);
 
 CREATE TABLE IF NOT EXISTS meal_plan
 (
     id                   SERIAL,
-    user_id              INTEGER          NOT NULL,
     meals_per_day        INTEGER          NOT NULL,
     energy_target        DOUBLE PRECISION NOT NULL,
     carbohydrates_target DOUBLE PRECISION NOT NULL,
     lipids_target        DOUBLE PRECISION NOT NULL,
     proteins_target      DOUBLE PRECISION NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user_profile (id),
     PRIMARY KEY (id)
 );
 
@@ -326,5 +286,49 @@ CREATE TABLE IF NOT EXISTS meal_menu_recipe
     quantity     INTEGER NOT NULL,
     FOREIGN KEY (meal_menu_id) REFERENCES meal_menu (id),
     FOREIGN KEY (recipe_id) REFERENCES recipe (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_profile
+(
+    id           SERIAL,
+    username     VARCHAR(64) NOT NULL,
+    email        TEXT        NOT NULL,
+    password     TEXT        NOT NULL,
+    api_key      TEXT        NOT NULL,
+    name         VARCHAR(64),
+    last_name    VARCHAR(64),
+    birthdate    DATE        NOT NULL,
+    gender       INTEGER     NOT NULL,
+    joined_on    TIMESTAMP   NOT NULL,
+    diet_id      INTEGER,
+    meal_plan_id INTEGER,
+    UNIQUE (username),
+    UNIQUE (email),
+    FOREIGN KEY (diet_id) REFERENCES diet (id),
+    FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_body_metrics
+(
+    id                      SERIAL,
+    user_id                 INTEGER          NOT NULL,
+    height                  DOUBLE PRECISION NOT NULL,
+    weight                  DOUBLE PRECISION NOT NULL,
+    body_mass_index         DOUBLE PRECISION NOT NULL,
+    muscle_mass_percentage  DOUBLE PRECISION,
+    physical_activity_level INTEGER          NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user_profile (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_allergy
+(
+    id            SERIAL,
+    user_id       INTEGER NOT NULL,
+    ingredient_id INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user_profile (id),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     PRIMARY KEY (id)
 );
