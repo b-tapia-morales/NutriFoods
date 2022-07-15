@@ -13,7 +13,7 @@ public static class DataCentral
 
     public static async Task<(int Id, Food? Food)> FoodRequest(int nutriFoodsId, int foodDataCentralId)
     {
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format=full&api_key={ApiKey}";
+        var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format={Format}&api_key={ApiKey}";
         var uri = new Uri(path);
 
         var response = await Client.GetAsync(uri);
