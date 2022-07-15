@@ -60,7 +60,8 @@ public class UserController
 
     [HttpGet]
     [Route("byEmail")]
-    public async Task<ActionResult<UserDto>> FindByEmail([FromQuery(Name = "email")] string email, [FromQuery(Name = "password")] string password)
+    public async Task<ActionResult<UserDto>> FindByEmail([FromQuery(Name = "email")] string email,
+        [FromQuery(Name = "password")] string password)
     {
         if (!new EmailAddressAttribute().IsValid(email))
         {
@@ -84,8 +85,10 @@ public class UserController
     }
 
     [HttpPut]
+    [Route("saveUser")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
-        [Required] string password, [Required] string birthDate, [Required] string gender, string name = "", string lastName = "")
+        [Required] string password, [Required] string birthDate, [Required] string gender, string name = "",
+        string lastName = "")
     {
         if (!Regex.IsMatch(username, RegexUtils.Username))
         {
@@ -122,6 +125,44 @@ public class UserController
         {
             return new BadRequestObjectResult(
                 "Can't register user because there's a user already using the provided credentials");
+        }
+
+        return user;
+    }
+
+    [HttpPut]
+    [Route("saveMetrics")]
+    public async Task<ActionResult<UserDto>> SaveUser([Required] string apiKey, [Required] int height,
+        [Required] double weight, [Required] string physicalActivity, double muscleMassPercentage = 0)
+    {
+        if (height is < 150 or > 200)
+        {
+            return new BadRequestObjectResult(
+                "Minimum and maximum values allowed for height are 150 and 200 [cm] respectively)");
+        }
+
+        if (weight is < 50 or > 150)
+        {
+            return new BadRequestObjectResult(
+                "Minimum and maximum values allowed for weight are 50 and 150 [kg] respectively)");
+        }
+
+        if (muscleMassPercentage is < 0 or > 1)
+        {
+            return new BadRequestObjectResult(
+                "Minimum and maximum values allowed for muscle mass percentage are 0% and 100% respectively)");
+        }
+
+        if (!PhysicalActivity.TryFromName(physicalActivity, out var value))
+        {
+            return new BadRequestObjectResult(
+                $"Provided argument {value} does not correspond to a valid gender.");
+        }
+
+        var user = await _repository.SaveBodyMetrics(apiKey, height, weight, value, muscleMassPercentage);
+        if (user == null)
+        {
+            return new NotFoundObjectResult("There's no user with the specified key");
         }
 
         return user;

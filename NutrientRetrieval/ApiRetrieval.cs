@@ -21,12 +21,13 @@ public static class ApiRetrieval
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
         var foodsDictionary = DataCentral.FoodRequest().Result
-            .Where(e => !ReferenceEquals(null, e.Value))
+            .Where(e => e.Value != null)
             .ToDictionary(e => e.Key, e => e.Value);
-        Console.WriteLine(string.Join(", ", foodsDictionary.Values));
         foreach (var pair in foodsDictionary)
+        {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-        //InsertMeasures(context, pair.Key, pair.Value);
+            //InsertMeasures(context, pair.Key, pair.Value);
+        }
 
         context.SaveChanges();
     }
@@ -34,9 +35,7 @@ public static class ApiRetrieval
     private static void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
         int ingredientId, Food? food)
     {
-        if (ReferenceEquals(null, food)) return;
-
-        if (food.FoodNutrients.Length == 0) return;
+        if (food?.FoodNutrients == null || food.FoodNutrients.Length == 0) return;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
