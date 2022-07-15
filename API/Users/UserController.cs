@@ -1,10 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using API.Dto;
 using API.Utils;
 using Domain.Enum;
-using Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Users;
@@ -34,7 +32,7 @@ public class UserController
     }
 
     [HttpGet]
-    [Route("byUsername")]
+    [Route("find-by-username")]
     public async Task<ActionResult<UserDto>> FindByUsername(string username, string password)
     {
         if (!Regex.IsMatch(username, RegexUtils.Username))
@@ -59,7 +57,7 @@ public class UserController
     }
 
     [HttpGet]
-    [Route("byEmail")]
+    [Route("find-by-email")]
     public async Task<ActionResult<UserDto>> FindByEmail([FromQuery(Name = "email")] string email,
         [FromQuery(Name = "password")] string password)
     {
@@ -85,7 +83,7 @@ public class UserController
     }
 
     [HttpPut]
-    [Route("saveUser")]
+    [Route("save-user")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
         [Required] string password, [Required] string birthDate, [Required] string gender, string name = "",
         string lastName = "")
@@ -131,7 +129,7 @@ public class UserController
     }
 
     [HttpPut]
-    [Route("saveMetrics")]
+    [Route("save-metrics")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string apiKey, [Required] int height,
         [Required] double weight, [Required] string physicalActivity, double muscleMassPercentage = 0)
     {
@@ -167,4 +165,5 @@ public class UserController
 
         return user;
     }
+    
 }
