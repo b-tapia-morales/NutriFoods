@@ -59,7 +59,7 @@ public class GeneticAlgorithm
         var random = new Random(seed);
         GenerateSolutions();
         var ite = 0;
-        while ( ite < 1000000)
+        while ( ite < 1000)
         {
             //Solutions();
             Tournamet(random);
@@ -277,5 +277,6 @@ public class GeneticAlgorithm
         }
         return false;
     }
+    
     
 }

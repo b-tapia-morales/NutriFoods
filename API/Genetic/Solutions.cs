@@ -48,16 +48,16 @@ public class Solutions
                 switch (nutrient.NutrientId)
                 {
                     case 108:
-                        CantKilocalories += nutrient.Quantity;
+                        CantKilocalories += nutrient.Quantity/(double) recipe.Portions;
                         break;
                     case 109:
-                        CantProteins += nutrient.Quantity;
+                        CantProteins += nutrient.Quantity/(double) recipe.Portions;
                         break;
                     case 11:
-                        CantFats += nutrient.Quantity;
+                        CantFats += nutrient.Quantity/(double) recipe.Portions;
                         break;
                     case 1:
-                        CantCarbohydrates += nutrient.Quantity;
+                        CantCarbohydrates += nutrient.Quantity/(double) recipe.Portions;
                         break;
                 }
             }

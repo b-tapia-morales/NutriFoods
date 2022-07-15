@@ -69,7 +69,7 @@ public static class NutrientCalculation
     {
         foreach (var quantity in recipeQuantities)
         {
-            var grams = quantity.Grams * ratio;
+            var grams = quantity.Grams;
             foreach (var ingredientNutrient in quantity.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.NutrientId)))
             {
@@ -92,7 +92,7 @@ public static class NutrientCalculation
         foreach (var measure in recipeMeasures)
         {
             var grams = CalculateMeasureGrams(measure.IngredientMeasure.Grams, measure.IntegerPart, measure.Numerator,
-                measure.Denominator) * ratio;
+                measure.Denominator);
             foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.NutrientId)))
             {
