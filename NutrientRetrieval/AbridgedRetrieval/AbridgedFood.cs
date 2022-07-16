@@ -1,4 +1,4 @@
-namespace NutrientRetrieval.AbridgedModel;
+namespace NutrientRetrieval.AbridgedRetrieval;
 
 public class Food
 {

@@ -1,6 +1,6 @@
-namespace NutrientRetrieval.Model;
+namespace NutrientRetrieval.FullRetrieval;
 
-public class Food
+public class FullFood
 {
     public int FdcId { get; set; }
     public string Description { get; set; } = null!;

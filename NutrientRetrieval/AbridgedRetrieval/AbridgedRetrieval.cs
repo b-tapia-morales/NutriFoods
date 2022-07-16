@@ -2,16 +2,16 @@ using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
-using NutrientRetrieval.Model;
 using NutrientRetrieval.Request;
-using NutrientRetrieval.Translation;
 
-namespace NutrientRetrieval.Retrieval;
+namespace NutrientRetrieval.AbridgedRetrieval;
 
-public static class ApiRetrieval
+public static class AbridgedRetrieval
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+
+    private const string Format = "abridged";
 
     public static void RetrieveFromApi()
     {
@@ -20,14 +20,13 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest().Result.Where(e => e.Value != null)
+        var foodsDictionary = DataCentral.FoodRequest<Food>(Format).Result.Where(e => e.Value != null)
             .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
             Console.WriteLine(pair.Value?.ToString());
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            //InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();
@@ -40,10 +39,10 @@ public static class ApiRetrieval
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
-            var fdcNutrientId = foodNutrient.Nutrient.Number;
+            var fdcNutrientId = foodNutrient.Number;
             if (!dictionary.ContainsKey(fdcNutrientId)) continue;
 
-            var code = foodNutrient.Nutrient.UnitName switch
+            var code = foodNutrient.UnitName switch
             {
                 "g" or "G" => 1,
                 "mg" or "MG" => 2,
@@ -60,37 +59,6 @@ public static class ApiRetrieval
                 Quantity = foodNutrient.Amount,
                 Unit = Unit.FromValue(code)
             });
-        }
-    }
-
-    private static void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food? food)
-    {
-        if (food?.FoodPortions == null || food.FoodPortions.Length == 0) return;
-
-        var untranslatedString = string.Join(Environment.NewLine, food.FoodPortions.Select(e =>
-        {
-            var span = e.Modifier.AsSpan();
-            var slice = span.Contains('(') ? span[..span.IndexOf('(')] : span;
-            return slice.ToString();
-        }));
-        var translatedString = TranslationApi.Translate(untranslatedString).Result;
-        var translations = translatedString!.Split(Environment.NewLine);
-        var n = translations.Length;
-        for (var i = 0; i < n; i++)
-        {
-            var span = translations[i].AsSpan().Trim();
-            var name = $"{char.ToUpper(span[0])}{span[1..].ToString()}";
-            var portion = food.FoodPortions[i];
-            var amount = portion.Amount;
-            var multiplier = Math.Abs(amount - 1) < 1e-4 ? 1 : 1 / amount;
-            var grams = Math.Round(multiplier * portion.GramWeight, 4);
-            var ingredientMeasure = new IngredientMeasure
-            {
-                IngredientId = ingredientId,
-                Name = name,
-                Grams = grams
-            };
-            context.IngredientMeasures.Add(ingredientMeasure);
         }
     }
 }
