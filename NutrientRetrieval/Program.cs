@@ -1,3 +1,1 @@
-﻿using NutrientRetrieval;
-
-ApiRetrieval.RetrieveFromApi();
+Console.WriteLine();
