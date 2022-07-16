@@ -6,7 +6,7 @@ using NutrientRetrieval.Model;
 using NutrientRetrieval.Request;
 using NutrientRetrieval.Translation;
 
-namespace NutrientRetrieval;
+namespace NutrientRetrieval.Retrieval;
 
 public static class ApiRetrieval
 {
@@ -20,7 +20,8 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest().Result.Where(e => e.Value != null).ToDictionary(e => e.Key, e => e.Value);
+        var foodsDictionary = DataCentral.FoodRequest().Result.Where(e => e.Value != null)
+            .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
