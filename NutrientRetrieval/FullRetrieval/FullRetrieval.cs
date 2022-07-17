@@ -26,7 +26,6 @@ public static class ApiRetrieval
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
-            Console.WriteLine(pair.Value?.ToString());
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
             InsertMeasures(context, pair.Key, pair.Value);
         }

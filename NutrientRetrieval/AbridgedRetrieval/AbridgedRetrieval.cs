@@ -25,7 +25,6 @@ public static class AbridgedRetrieval
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
-            Console.WriteLine(pair.Value?.ToString());
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
         }
 
