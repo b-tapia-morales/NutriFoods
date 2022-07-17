@@ -10,19 +10,18 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval;
+using NutrientRetrieval.FullRetrieval;
 using NutrientRetrieval.NutrientCalculation;
 using RecipeAndMesuris.Recipe_insert;
 
-
-DatabaseInitialization.Initialize();
 /*
+DatabaseInitialization.Initialize();
 ApiRetrieval.RetrieveFromApi();
-*/
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-
+*/
 
 /*
 var builder = WebApplication.CreateBuilder(args);
@@ -86,5 +85,5 @@ app.MapControllers();
 
 app.Run();
 */
-//GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
-//var Menus = g.GetRegimen();
+GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
+var Menus = g.GetRegimen();
