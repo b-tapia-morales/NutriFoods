@@ -1,6 +1,4 @@
 using System.Text.Json.Serialization;
-using API.Converter;
-using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
@@ -9,7 +7,6 @@ using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
 using RecipeAndMesuris.Recipe_insert;

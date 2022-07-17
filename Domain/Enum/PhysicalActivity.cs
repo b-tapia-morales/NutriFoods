@@ -4,15 +4,17 @@ namespace Domain.Enum;
 
 public class PhysicalActivity : SmartEnum<PhysicalActivity>
 {
-    public static readonly PhysicalActivity VerySedentary = new(nameof(VerySedentary), "Muy Sedentaria", 1);
-    public static readonly PhysicalActivity Sedentary = new(nameof(Sedentary), "Sedentaria", 2);
-    public static readonly PhysicalActivity Moderate = new(nameof(Moderate), "Moderada", 3);
-    public static readonly PhysicalActivity Active = new(nameof(Active), "Activa", 3);
+    public static readonly PhysicalActivity VerySedentary = new(nameof(VerySedentary), "Muy Sedentaria", 1, 0.30);
+    public static readonly PhysicalActivity Sedentary = new(nameof(Sedentary), "Sedentaria", 2, 0.50);
+    public static readonly PhysicalActivity Moderate = new(nameof(Moderate), "Moderada", 3, 0.75);
+    public static readonly PhysicalActivity Active = new(nameof(Active), "Activa", 3, 1.00);
 
-    public PhysicalActivity(string name, string nameDisplay, int value) : base(name, value)
+    public PhysicalActivity(string name, string display, int value, double multiplier) : base(name, value)
     {
-        NameDisplay = nameDisplay;
+        Display = display;
+        Multiplier = multiplier;
     }
 
-    public string NameDisplay { get; set; }
+    public string Display { get; set; }
+    public double Multiplier { get; set; }
 }
