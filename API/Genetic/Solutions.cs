@@ -1,104 +1,79 @@
-using API.Dto;
 using Domain.Models;
 
 namespace API.Genetic;
 
 public class Solutions
 {
-    public List<Recipe> ListRecipe { get; set; }
-    public double CantKilocalories { get; set; }
-    private double CantProteins { get; set; }
-    private double CantFats { get; set; }
-    private double CantCarbohydrates { get; set; }
-    private double porcent { get; set; }
-
-    public int fittnes { get; set; }
-
     public Solutions(int quantity)
     {
         ListRecipe = new List<Recipe>(quantity);
-        porcent = 0.8;
-        CantCarbohydrates = 0;
-        CantFats = 0;
-        CantProteins = 0;
-        CantKilocalories = 0;
-        fittnes = 0;
-    }
-    
-    public void AddRecipe(Recipe r)
-    {
-        ListRecipe.Add(r);
+        AcceptancePercentage = 0.8;
+        CarbohydratesTotal = 0;
+        LipidsTotal = 0;
+        ProteinsTotal = 0;
+        EnergyTotal = 0;
+        Fitness = 0;
     }
 
-    private void Reset()
+    public List<Recipe> ListRecipe { get; set; }
+    public double EnergyTotal { get; set; }
+    private double ProteinsTotal { get; set; }
+    private double LipidsTotal { get; set; }
+    private double CarbohydratesTotal { get; set; }
+    private double AcceptancePercentage { get; }
+
+    public int Fitness { get; set; }
+
+    public void AddGene(Recipe gene)
     {
-        CantCarbohydrates = 0;
-        CantKilocalories = 0;
-        CantFats = 0;
-        CantProteins = 0;
+        ListRecipe.Add(gene);
     }
 
-    public void CalculatFittnes()
+    public void CalculateFitness()
     {
-        Reset();
-        foreach (var recipe in ListRecipe)
-        {
-            foreach (var nutrient in recipe.RecipeNutrients.ToList())
-            {
-                switch (nutrient.NutrientId)
-                {
-                    case 108:
-                        CantKilocalories += nutrient.Quantity;
-                        break;
-                    case 109:
-                        CantProteins += nutrient.Quantity;
-                        break;
-                    case 11:
-                        CantFats += nutrient.Quantity;
-                        break;
-                    case 1:
-                        CantCarbohydrates += nutrient.Quantity;
-                        break;
-                }
-            }
-        }
+        EnergyTotal = AccumulateNutrientQuantity(ListRecipe, 108);
+        ProteinsTotal = AccumulateNutrientQuantity(ListRecipe, 109);
+        LipidsTotal = AccumulateNutrientQuantity(ListRecipe, 11);
+        CarbohydratesTotal = AccumulateNutrientQuantity(ListRecipe, 1);
     }
 
-    public void Fitness(double userValueCarhohydrates, double userValueProteins, double userValueKilocalories, double userValueFats)
+    public void EvaluateFitness(double carbohydratesTarget, double proteinsTarget, double energyTarget,
+        double lipidsTarget)
     {
-        fittnes = FitnessResult(userValueKilocalories,CantKilocalories) +
-                  FitnessResult(userValueProteins,CantProteins)+
-                  FitnessResult(userValueFats,CantFats)+
-                  FitnessResult(userValueCarhohydrates,CantCarbohydrates);
+        Fitness = FitnessResult(energyTarget, EnergyTotal) +
+                  FitnessResult(proteinsTarget, ProteinsTotal) +
+                  FitnessResult(lipidsTarget, LipidsTotal) +
+                  FitnessResult(carbohydratesTarget, CarbohydratesTotal);
     }
 
-    private int FitnessResult(double userValue, double cantMicroNutrients )
+    private int FitnessResult(double targetQuantity, double actualQuantity)
     {
-        if ((userValue * (1 - (porcent/2))) <= cantMicroNutrients && ((userValue) * (1 + (porcent/2))) >= cantMicroNutrients)
-        {
-            return 2;
-        }
+        if (targetQuantity * (1 - (AcceptancePercentage / 2)) <= actualQuantity &&
+            targetQuantity * (1 + (AcceptancePercentage / 2)) >= actualQuantity)
+            return +2;
 
-        if (((userValue * (1 - porcent) <= cantMicroNutrients && (userValue * (1 - (porcent / 2))) > cantMicroNutrients)) ||
-              ((userValue * (1 + (porcent / 2))) < cantMicroNutrients && (userValue * (1 + porcent)) >= cantMicroNutrients))
-        {
-                return 0;
-        }
+        if ((targetQuantity * (1 - AcceptancePercentage) <= actualQuantity &&
+             targetQuantity * (1 - (AcceptancePercentage / 2)) > actualQuantity) ||
+            (targetQuantity * (1 + (AcceptancePercentage / 2)) < actualQuantity &&
+             targetQuantity * (1 + AcceptancePercentage) >= actualQuantity))
+            return 0;
 
-        if ((userValue * (1 - porcent) > cantMicroNutrients) ||
-            (userValue * (1 + porcent) < cantMicroNutrients))
-        {
+        if (targetQuantity * (1 - AcceptancePercentage) > actualQuantity ||
+            targetQuantity * (1 + AcceptancePercentage) < actualQuantity)
             return -2;
-        }
 
         return 0;
     }
 
     public void Print()
     {
-        Console.WriteLine(" Energy : "+CantKilocalories +"\n"+
-                          "Proteins : "+CantProteins +"\n"+
-                          "Carbohidratos : "+CantCarbohydrates + "\n"+
-                          "Grasas : "+CantFats + "\n");
+        Console.WriteLine(
+            $"Energy: {EnergyTotal}\nProteins: {ProteinsTotal}\nCarbohydrates: {CarbohydratesTotal}\nLipids: {LipidsTotal}\n");
+    }
+
+    private static double AccumulateNutrientQuantity(IEnumerable<Recipe> recipes, int id)
+    {
+        return recipes.Where(e => e.RecipeNutrients.Any(x => x.NutrientId == id)).SelectMany(e => e.RecipeNutrients)
+            .Sum(e => e.Quantity);
     }
 }
