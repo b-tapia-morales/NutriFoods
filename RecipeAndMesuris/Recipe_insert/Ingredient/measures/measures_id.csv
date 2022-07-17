@@ -43,7 +43,7 @@
 43;Brócoli;170379
 44;Choclo;170288
 45;Espárrago;168389
-46;Vinagre manzana;173469
+46;Vinagre de manzana;173469
 47;Jengibre;170926
 48;Apio;169988
 49;Leche evaporada;171302
@@ -125,7 +125,7 @@
 125;Ají verde;170497
 126;Miel de maple;169661
 127;Maicena;169698
-128;Jugo naranja;169044
+128;Jugo de naranja;169044
 129;Cacao en polvo;169593
 130;Granada;169134
 131;Tomate en tarro;170501
@@ -164,7 +164,7 @@
 164;Maíz;170288
 165;Salsa de ají;171605
 166;Salsa de soya;174278
-167;Caldo verduras;171180
+167;Caldo de verduras;171180
 168;Aquafaba;
 169;Zapallo spaghetti;169298
 170;Leche de almendra;174832
@@ -177,7 +177,7 @@
 177;Papa camote;169305
 178;Ciruela;169949
 179;Damasco turco;171697
-180;Higos;173021
+180;Higo;173021
 181;Zapallo camote;168472
 182;Zapallo butternut;169295
 183;Cardamomo;170919
@@ -188,14 +188,14 @@
 188;Tortilla;175037
 189;Caldo de ave;174566
 190;Habas;175205
-191;Grano choclo;170288
+191;Granos de choclo;170288
 192;Tapas de empanadas;167660
 193;Pesto;171582
 194;Tomate roma;170457
 195;Carne vegetal;169067
 196;Tortilla maíz;175036
 197;Concentrado de tomate;170459
-198;Crema acida;171257
+198;Crema ácida;171257
 199;Pan rallado;174928
 200;Crema de leche;170859
 201;Harina sin polvos de hornear;174928
@@ -249,9 +249,9 @@
 248;Manjar;173461
 249;Cobertura chocolate semiamargo;169581
 250;Filete;169544
-251;Salsa caramelo;167743
+251;Salsa de caramelo;167743
 252;Galletas;174971
-253;Ostiones;174487
+253;Ostión;174487
 254;Berries;171711
 255;Ralladura limón;167749
 256;Marraqueta;167532
@@ -262,15 +262,15 @@
 261;Jerez;169071
 262;Salsa blanca;174525
 263;Crispy;172806
-264;Brandyb;171907
+264;Brandy;171907
 265;Panqueques;175009
-266;Ralladura naranjas;169103
+266;Ralladura de naranja;169103
 267;Fondant;167986
 268;Chancaca;168820
-269;Duraznos;169928
-270;Peras;169118
-271;Moras;173946
-272;Galletas champaña;172086
+269;Durazno;169928
+270;Pera;169118
+271;Mora;173946
+272;Galletas de champaña;172086
 273;Pulpo;174218
 274;Lomo liso;168721
 275;Posta;172122
@@ -286,26 +286,26 @@
 285;Coñac;174815
 286;Pisco;174815
 287;Café;171893
-288;Esencia ron;174817
+288;Esencias ron;174817
 289;Crema pastelera;168772
 290;Manteca vegetal;173584
-291;Pan hamburguesa;172675
-292;Trutros pollo;172855
+291;Pan de hamburguesa;172675
+292;Trutro de pollo;172855
 293;Oporto;169071
-294;Almejas;174214
-295;Cobertura chocolate blanco;167571
+294;Almeja;174214
+295;Cobertura de chocolate blanco;167571
 296;Bizcocho;172707
 297;Anís estrella;171316
 298;Ajo granulado;171325
 299;Anís;171316
 300;Salsa barbecue;171325
 301;Asiento;168736
-302;Dientes dragón;172441
-303;Champiñones parís;169251
+302;Diente de dragón;172441
+303;Champiñón París;169251
 305;Ron;174817
 307;Nutella;168000
-308;frutos rojo;168997
-310;cerezas;171719
+308;Frutos rojos;168997
+310;cereza;171719
 311;coco;170169
 312;esencias ron;174817
 313;pistachos;170184
@@ -313,19 +313,19 @@
 315;helado;168809
 316;endulzante;168142
 317;sucralosa;170673
-318;anís semilla;171316
+318;Anís;171316
 319;cubos hielo;
 320;café granulado;171893
 321;amaretto;175097
 322;guindas;171719
 323;licor;175097
-324;salsa manjar;173461
-325;esencia cola mono;173665
-326;salsa frambuesas;167808
+324;Salsa de manjar;173461
+325;Esencia de cola mono;173665
+326;Salsa de frambuesa;167808
 327;jalea frambuesas;
-328;compota manzanas;173928
+328;Compota de manzana;173928
 329;cacao amargo;169594
-330;higos deshidratados;174665
+330;Higo deshidratado;174665
 331;picada;
 332;berro;170068
 333;colapez;169879
@@ -340,27 +340,27 @@
 342;mariscos;174216
 343;choros;174216
 344;espaguetis;169736
-345;salsa pescado;174531
+345;salsa de pescado;174531
 346;maní;172430
 347;trutro pollo;173619
 348;cranberries;169804
-349;pasta espirales;169736
-350;pan molde blanco;167532
-351;fideos cabellos;169736
+349;pasta espiral;169736
+350;pan de molde blanco;167532
+351;fideos cabello;169736
 352;rocoto;168570
 353;trigo;169720
-354;hojas parra;168575
+354;hojas de parra;168575
 356;macha;174214
 357;baguette;172675
-358;gelatina hojas;169599
+358;hojas de gelatina;169599
 359;salsa horseradish;173472
 360;achiote;172242
-361;jugo piñas;167792
+361;jugo de piña;167792
 362;fideos ramen;169732
 363;mango;169910
 364;crutones;172687
-365;churrascos;168634
-366;prietas;171618
+365;churrasco;168634
+366;prieta;171618
 367;merluza;171964
 368;longaniza;174584
 369;trigo burgol;170287
@@ -369,7 +369,7 @@
 372;marraquetas;167532
 373;ají cacho cabra;170106
 374;pan amasado;167532
-375;panes ciabatta;174913
+375;pan ciabatta;174913
 376;parra;168575
 377;asado tira;173405
 378;cerveza oscura;168746
@@ -383,54 +383,54 @@
 386;caldo costilla;171561
 387;posta paleta;172122
 388;charqui;167536
-389;chuletas kayser;168238
+389;chuleta kayser;168238
 390;fideos cabello;169736
-391;tallarines arroz;169742
-392;filetes pollo;172855
+391;tallarines de arroz;169742
+392;filete de pollo;172855
 393;locos;174212
 394;masa lasaña;168955
 395;lamina lasaña;168955
-396;tutros pollo;172855
+396;Trutro de pollo;172855
 397;masa hoja;172790
 398;callampas deshidratadas;168436
-399;champiñones ostras;168580
-400;salsa ostras;174529
+399;Champiñones ostra;168580
+400;salsa de ostras;174529
 401;galletass;172086
 402;cerveza negra;174863
 403;sobrecostilla;170809
 404;champiñones shitake;168436
 405;champiñones shiitake;168436
-406;filete corvina;175142
+406;filete de corvina;175142
 407;arroz silvestre;169726
 408;champiñones portobello;169255
 409;congrio colorado;173670
 410;cabezas congrio;168034
 411;cabeza pescado;168034
-412;pierna cordero;174342
+412;pierna de cordero;174342
 413;aji;170106
 414;lemon grass;168573
 415;tagliatelle;168955
-416;ralladarura limon;167749
-417;tomates deshidratados;168567
-418;filetitos pollo;171515
+416;Ralladura de limón;167749
+417;tomate deshidratado;168567
+418;filete de pollo;171515
 419;diente dragón;172441
 420;tilapia;175176
 421;merlot;171925
 422;pavo;171490
 423;reinetas;171951
-424;brotes arveja;170422
-425;salsa champiñones;171170
-426;choros zapato;174216
+424;brotes de arveja;170422
+425;salsa de champiñón;171170
+426;choros de zapato;174216
 427;masa lasañas;168955
 428;fettuccini;169736
-429;filete pavo;171490
+429;filete de pavo;171490
 430;fettucines;169736
 431;jibia;174215
 432;sierra;175139
 433;spaguetti;169736
 434;abastero;172128
 435;vienesas;174584
-436;salsa babecue;174523
+436;Salsa barbecue;174523
 437;tapapecho;174740
 438;marshmallows;167995
 439;avena tradicional;172989
