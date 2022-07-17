@@ -7,27 +7,15 @@ public static class TotalMetabolicRate
 {
     public static double Calculate(Gender gender, double weight, int height, int age, PhysicalActivity level)
     {
-        var multiplier = PhysicalActivityFactor(level);
+        var multiplier = level.Multiplier;
         return BasalMetabolicRate.Calculate(gender, weight, height, age) * (1 + multiplier);
     }
 
     public static double Calculate(CalculationMethod method, Gender gender, double weight, int height, int age,
         PhysicalActivity level)
     {
-        var multiplier = 1.00 + PhysicalActivityFactor(level);
+        var multiplier = 1.00 + level.Multiplier;
         return multiplier * BasalMetabolicRate.Calculate(method, gender, weight, height, age);
-    }
-
-    private static double PhysicalActivityFactor(int level)
-    {
-        return level switch
-        {
-            1 => 0.30,
-            2 => 0.50,
-            3 => 0.75,
-            4 => 1.00,
-            _ => throw new ArgumentException($"Value {level} for physical activity is not recognized")
-        };
     }
 }
 
