@@ -14,17 +14,18 @@ using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
 using RecipeAndMesuris.Recipe_insert;
 
-
+/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
+*/
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+/*
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -81,6 +82,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-//GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
+*/
+GeneticAlgorithm g = new GeneticAlgorithm(6,1782.0);
 //var Menus = g.GetRegimen();

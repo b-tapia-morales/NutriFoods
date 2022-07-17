@@ -1,5 +1,6 @@
 
 using API.Dto;
+using API.Utils.Nutrition;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,20 @@ public class GeneticAlgorithm
     private double _fats;
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+    
+    public GeneticAlgorithm(int cantRecipe, double kilocalories)
+    {
+        _listRegime = new List<Solutions>(cantRecipe);
+        _winners = new List<Solutions>(cantRecipe);
+        _totalRecipes = TotalRecipes();
+        _kilocalories = kilocalories;
+        _cantRecipe = cantRecipe;
+        var tuple = EnergyDistribution.Calculate(kilocalories);
+        _carbohydrates = tuple.Carbohydrates;
+        _proteins = tuple.Proteins;
+        _fats = tuple.Lipids;
+        Console.WriteLine(_kilocalories+" "+_carbohydrates + " "+_proteins+ " "+_fats);
+    }
     public GeneticAlgorithm(int cantRecipe,double kilocalories, double carbohydrates,double proteins,double fats)
     {
         _listRegime = new List<Solutions>(cantRecipe);
@@ -59,7 +74,7 @@ public class GeneticAlgorithm
         var random = new Random(seed);
         GenerateSolutions();
         var ite = 0;
-        while ( ite < 1000)
+        while (!ResultFittnes())
         {
             //Solutions();
             Tournamet(random);
@@ -67,6 +82,7 @@ public class GeneticAlgorithm
             Mutation(random);
             ModifyFitness();
             ite++;
+            Console.WriteLine(ite);
         }
         Solutions();
         SolutionsFinal();
@@ -95,9 +111,11 @@ public class GeneticAlgorithm
 
     private void Tournamet(Random r)
     {
-        int cantTournamet = r.Next(2, _listRegime.Count);
+        int total = _cantRecipe / 2; 
+        int cantTournamet = r.Next(2, total);
         _winners.Clear();
         var ite = 0;
+        var bucles = 0;
         while (ite < cantTournamet)
         {
             int combatant1 = r.Next(0, _listRegime.Count);
@@ -109,21 +127,35 @@ public class GeneticAlgorithm
                 if (_listRegime[combatant1].fittnes > _listRegime[combatant2].fittnes)
                 {
                     // reviso que si exite el ganador, si no existe lo ingreso a la lista de ganadores y se cumplio un duelo
-
+                    if (!ExistWinners(_listRegime[combatant1]))
+                    {
                         _winners.Add(_listRegime[combatant1]);
                         ite++;
-
+                    }
                 }
                 else
                 {
                     // reviso que si exite el ganador, si no existe lo ingreso a la lista de ganadores y se cumplio un duelo
-
+                    if (!ExistWinners(_listRegime[combatant2]))
+                    {
                         _winners.Add(_listRegime[combatant2]);
                         ite++;
-                    
+                    }
                 }
             }
+
+            bucles++;
         }
+
+        foreach (var VARIABLE in _winners)
+        {
+            foreach (var recipe in VARIABLE.ListRecipe)
+            {
+                Console.Write(" "+recipe.Id);
+            }
+            Console.WriteLine();
+        }
+        Console.WriteLine("------------------");
         
     }
 
@@ -151,13 +183,14 @@ public class GeneticAlgorithm
         if (probability <= 0.8)
         {
             int i = 0;
-            while (i < 6)
+            int j = 0;
+            while (j < 6)
             {
                 // selecciona uno de la lista de ganadores
                 Solutions padre1 = _winners[r.Next(0, _winners.Count)];
                 // selecciona uno al azar de los anteriores
                 Solutions padre2 = _listRegime[r.Next(0, _listRegime.Count)];
-
+                
                 //selecciona al azar una posiciones para cada padre
                 int indexGenP1 = r.Next(0, padre1.ListRecipe.Count);
                 int indexGenP2 = r.Next(0, padre2.ListRecipe.Count);
@@ -169,12 +202,15 @@ public class GeneticAlgorithm
                 // se produce el intercambio de genes
                 if(gen1.Id != gen2.Id)
                 {
-                    sons.Add(Sons(gen2,indexGenP1,padre1));
-                    sons.Add(Sons(gen1,indexGenP2,padre2));
-                    i+=2;
+                    if (!Exist(padre1, gen2) && !Exist(padre2, gen1))
+                    {
+                        sons.Add(Sons(gen2,indexGenP1,padre1));
+                        sons.Add(Sons(gen1,indexGenP2,padre2));
+                        i++;
+                        j+=2;
+                    }
                 }
             }
-
             _listRegime = sons;
         }
     }
@@ -277,6 +313,25 @@ public class GeneticAlgorithm
         }
         return false;
     }
-    
+
+    public Boolean ResultFittnes()
+    {
+        foreach (var solutions in _listRegime)
+        {
+            if (solutions.fittnes == 8) return true;
+        }
+
+        return false;
+    }
+
+    private Boolean Exist(Solutions s,Recipe r)
+    {
+        foreach (var recipe in s.ListRecipe)
+        {
+            if (recipe.Id == r.Id) return true;
+        }
+
+        return false;
+    }
     
 }

@@ -3,9 +3,9 @@ using static API.Utils.Nutrition.Macronutrient;
 
 namespace API.Utils.Nutrition;
 
-public class EnergyDistribution
+public static class EnergyDistribution
 {
-    public (double Carbohydrates, double Lipids, double Proteins, double Alcohol) Calculate(double energy)
+    public static (double Carbohydrates, double Lipids, double Proteins, double Alcohol) Calculate(double energy)
     {
         return (energy / Carbohydrates.Multiplier, energy / Lipids.Multiplier, energy / Proteins.Multiplier,
             energy / Alcohol.Multiplier);

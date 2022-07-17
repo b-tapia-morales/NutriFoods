@@ -17,7 +17,7 @@ public class Solutions
     public Solutions(int quantity)
     {
         ListRecipe = new List<Recipe>(quantity);
-        porcent = 0.8;
+        porcent = 0.1;
         CantCarbohydrates = 0;
         CantFats = 0;
         CantProteins = 0;
