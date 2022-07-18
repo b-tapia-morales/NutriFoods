@@ -3,7 +3,7 @@ using static API.Utils.Nutrition.Macronutrient;
 
 namespace API.Utils.Nutrition;
 
-public class EnergyDistribution
+public static class EnergyDistribution
 {
     private const double CarbohydratesPercentage = 0.6;
     private const double LipidsPercentage = 0.25;
