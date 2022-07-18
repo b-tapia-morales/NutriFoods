@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
@@ -80,5 +81,8 @@ app.MapControllers();
 
 app.Run();
 */
-GeneticAlgorithm g = new GeneticAlgorithm(6,1782.0);
-//var Menus = g.GetRegimen();
+double kicaloriasDesayuno = 809.1; // 2 recetas
+double KilocaloriasAlmuerzo = 1078.8; // 4 recetas
+double kilocaloriasCompleto = 2293; // 6 recetas
+GeneticAlgorithm g = new GeneticAlgorithm(6,kilocaloriasCompleto);
+var Menus = g.GetRegimen();
