@@ -1,16 +1,13 @@
 using System.Text.Json.Serialization;
-using API.Genetic;
 using API.Ingredients;
+using API.MealPlans;
 using API.Recipes;
 using API.Users;
-using Domain.DatabaseInitialization;
+using API.Utils.Nutrition;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.AbridgedRetrieval;
-using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Recipe_insert;
 
 /*
 DatabaseInitialization.Initialize();
@@ -21,9 +18,11 @@ Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
 */
 
+Console.WriteLine(EnergyDistribution.Calculate(1782));
+
 var builder = WebApplication.CreateBuilder(args);
 
-/*
+
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -43,6 +42,7 @@ builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IMealPlanService, MealPlanService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -80,9 +80,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-*/
-double kicaloriasDesayuno = 809.1; // 2 recetas
+
+/*double kicaloriasDesayuno = 809.1; // 2 recetas
 double KilocaloriasAlmuerzo = 1078.8; // 4 recetas
 double kilocaloriasCompleto = 2293; // 6 recetas
 GeneticAlgorithm g = new GeneticAlgorithm(6,kilocaloriasCompleto);
-var Menus = g.GetRegimen();
+var Menus = g.GetRegimen();*/
