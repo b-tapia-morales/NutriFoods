@@ -41,13 +41,13 @@ public class MealPlanController
                 "Minimum and maximum values allowed for weight are 50 and 150 [kg] respectively)");
         }
 
-        if (!Gender.TryFromName(gender, out var genderValue))
+        if (!Gender.TryFromName(gender, true, out var genderValue))
         {
             return new BadRequestObjectResult(
                 $"Provided argument {genderValue} does not correspond to a valid gender.");
         }
 
-        if (!PhysicalActivity.TryFromName(physicalActivity, out var activityValue))
+        if (!PhysicalActivity.TryFromName(physicalActivity, true, out var activityValue))
         {
             return new BadRequestObjectResult(
                 $"Provided argument {activityValue} does not correspond to a valid gender.");

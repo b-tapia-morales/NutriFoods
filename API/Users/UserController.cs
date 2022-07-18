@@ -112,7 +112,7 @@ public class UserController
                 $"Provided argument {birthDate} does not correspond to a valid date.");
         }
 
-        if (!Gender.TryFromName(gender, out var value))
+        if (!Gender.TryFromName(gender, true, out var value))
         {
             return new BadRequestObjectResult(
                 $"Provided argument {value} does not correspond to a valid gender.");
@@ -151,7 +151,7 @@ public class UserController
                 "Minimum and maximum values allowed for muscle mass percentage are 0% and 100% respectively)");
         }
 
-        if (!PhysicalActivity.TryFromName(physicalActivity, out var value))
+        if (!PhysicalActivity.TryFromName(physicalActivity, true, out var value))
         {
             return new BadRequestObjectResult(
                 $"Provided argument {value} does not correspond to a valid gender.");
