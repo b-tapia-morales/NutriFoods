@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
@@ -22,6 +23,7 @@ NutrientCalculation.Calculate();
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -78,6 +80,9 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-//GeneticAlgorithm g = new GeneticAlgorithm(6,711.8,106.8,26.73,19.64);
-//var Menus = g.GetRegimen();
+*/
+double kicaloriasDesayuno = 809.1; // 2 recetas
+double KilocaloriasAlmuerzo = 1078.8; // 4 recetas
+double kilocaloriasCompleto = 2293; // 6 recetas
+GeneticAlgorithm g = new GeneticAlgorithm(6,kilocaloriasCompleto);
+var Menus = g.GetRegimen();

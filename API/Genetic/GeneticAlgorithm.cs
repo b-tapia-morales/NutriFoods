@@ -1,5 +1,5 @@
 
-using API.Dto;
+using API.Utils.Nutrition;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +17,19 @@ public class GeneticAlgorithm
     private double _fats;
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+    
+    public GeneticAlgorithm(int cantRecipe, double kilocalories)
+    {
+        _listRegime = new List<Solutions>(6);
+        _winners = new List<Solutions>(6);
+        _totalRecipes = TotalRecipes();
+        _kilocalories = kilocalories;
+        _cantRecipe = cantRecipe;
+        var tuple = EnergyDistribution.Calculate(kilocalories);
+        _carbohydrates = tuple.Carbohydrates;
+        _proteins = tuple.Proteins;
+        _fats = tuple.Lipids;
+    }
     public GeneticAlgorithm(int cantRecipe,double kilocalories, double carbohydrates,double proteins,double fats)
     {
         _listRegime = new List<Solutions>(cantRecipe);
@@ -53,13 +66,13 @@ public class GeneticAlgorithm
         return recipes;
     }
 
-    public List<Solutions> GetRegimen()
+    public Solutions GetRegimen()
     {
         var seed = Environment.TickCount;
         var random = new Random(seed);
         GenerateSolutions();
         var ite = 0;
-        while ( ite < 1000)
+        while (!ResultFittnes())
         {
             //Solutions();
             Tournamet(random);
@@ -68,21 +81,24 @@ public class GeneticAlgorithm
             ModifyFitness();
             ite++;
         }
+        Console.WriteLine("Generaciones totales : "+ite);
+        Console.WriteLine("Generacion con Valor Fitnesss = 8\n-------------------------------------");
         Solutions();
+        Console.WriteLine("-------------------------------------\n    MicroNutrientes Resultantes");
         SolutionsFinal();
-        return _listRegime;
+        return  _listRegime.Where(e => e.fittnes == 8).MaxBy(e => e.CantKilocalories)!;;
     }
     private void GenerateSolutions()
     {
         var seed = Environment.TickCount;
         var random = new Random(seed);
-        for (int i = 0; i < _cantRecipe; i++)
+        for (int i = 0; i < 6; i++)
         {
             /* una solucion consta de 3 platos por ejemplo un almuerzo
              se crea una solucion de tamaño 3 [R1,R2,R3]
             */
-            Solutions s = new Solutions(6);
-            for (int j = 0; j < 6; j++)
+            Solutions s = new Solutions(_cantRecipe);
+            for (int j = 0; j < _cantRecipe; j++)
             {
                 // numero random para elegir al azar una receta
                 int rand = random.Next(0, _totalRecipes.Count);
@@ -95,7 +111,8 @@ public class GeneticAlgorithm
 
     private void Tournamet(Random r)
     {
-        int cantTournamet = r.Next(2, _listRegime.Count);
+        int total = 6 / 2;
+        int cantTournamet = r.Next(2, total);
         _winners.Clear();
         var ite = 0;
         while (ite < cantTournamet)
@@ -109,27 +126,28 @@ public class GeneticAlgorithm
                 if (_listRegime[combatant1].fittnes > _listRegime[combatant2].fittnes)
                 {
                     // reviso que si exite el ganador, si no existe lo ingreso a la lista de ganadores y se cumplio un duelo
-
+                    if (!ExistWinners(_listRegime[combatant1]))
+                    {
                         _winners.Add(_listRegime[combatant1]);
                         ite++;
-
+                    }
                 }
                 else
                 {
                     // reviso que si exite el ganador, si no existe lo ingreso a la lista de ganadores y se cumplio un duelo
-
+                    if (!ExistWinners(_listRegime[combatant2]))
+                    {
                         _winners.Add(_listRegime[combatant2]);
                         ite++;
-                    
+                    }
                 }
             }
         }
-        
     }
 
     private Solutions Sons(Recipe r,int indexm,Solutions father)
     {
-        Solutions s = new Solutions(6);
+        Solutions s = new Solutions(_cantRecipe);
         for (int i = 0; i < father.ListRecipe.Count; i++)
         {
             if (indexm != i)
@@ -150,14 +168,14 @@ public class GeneticAlgorithm
         List<Solutions> sons = new List<Solutions>();
         if (probability <= 0.8)
         {
-            int i = 0;
-            while (i < 6)
+            int j = 0;
+            while (j < 6)
             {
                 // selecciona uno de la lista de ganadores
                 Solutions padre1 = _winners[r.Next(0, _winners.Count)];
                 // selecciona uno al azar de los anteriores
                 Solutions padre2 = _listRegime[r.Next(0, _listRegime.Count)];
-
+                
                 //selecciona al azar una posiciones para cada padre
                 int indexGenP1 = r.Next(0, padre1.ListRecipe.Count);
                 int indexGenP2 = r.Next(0, padre2.ListRecipe.Count);
@@ -169,12 +187,14 @@ public class GeneticAlgorithm
                 // se produce el intercambio de genes
                 if(gen1.Id != gen2.Id)
                 {
-                    sons.Add(Sons(gen2,indexGenP1,padre1));
-                    sons.Add(Sons(gen1,indexGenP2,padre2));
-                    i+=2;
+                    if (!Exist(padre1, gen2) && !Exist(padre2, gen1))
+                    {
+                        sons.Add(Sons(gen2,indexGenP1,padre1));
+                        sons.Add(Sons(gen1,indexGenP2,padre2));
+                        j+=2;
+                    }
                 }
             }
-
             _listRegime = sons;
         }
     }
@@ -196,7 +216,7 @@ public class GeneticAlgorithm
 
     private Solutions NewSolution(int index, int indexNew,int indexNewRecipe)
     {
-        Solutions s = new Solutions(6);
+        Solutions s = new Solutions(2);
         for (int i = 0; i < _listRegime[index].ListRecipe.Count; i++)
         {
             if (i != indexNew)
@@ -248,19 +268,20 @@ public class GeneticAlgorithm
             Console.Write(" | "+solutions.fittnes+ " | "+solutions.CantKilocalories);
             Console.WriteLine();
         }
-        Console.WriteLine("-----------------------");
     }
 
     private void SolutionsFinal()
     {
-        foreach (var solutions in _listRegime)
+        foreach (var solutions in _listRegime.Where(solutions => solutions.fittnes == 8))
         {
             solutions.Print();
+            break;
         }
+
         Console.WriteLine();
     }
 
-    private Boolean ExistWinners(Solutions s)
+    private bool ExistWinners(Solutions s)
     {
         foreach (var solutions in _winners)
         {
@@ -277,6 +298,25 @@ public class GeneticAlgorithm
         }
         return false;
     }
-    
+
+    public bool ResultFittnes()
+    {
+        foreach (var solutions in _listRegime)
+        {
+            if (solutions.fittnes == 8) return true;
+        }
+
+        return false;
+    }
+
+    private bool Exist(Solutions s,Recipe r)
+    {
+        foreach (var recipe in s.ListRecipe)
+        {
+            if (recipe.Id == r.Id) return true;
+        }
+
+        return false;
+    }
     
 }

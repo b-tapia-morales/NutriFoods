@@ -1,4 +1,3 @@
-using API.Dto;
 using Domain.Models;
 
 namespace API.Genetic;
@@ -7,17 +6,17 @@ public class Solutions
 {
     public List<Recipe> ListRecipe { get; set; }
     public double CantKilocalories { get; set; }
-    private double CantProteins { get; set; }
-    private double CantFats { get; set; }
-    private double CantCarbohydrates { get; set; }
-    private double porcent { get; set; }
+    public double CantProteins { get; set; }
+    public double CantFats { get; set; }
+    public double CantCarbohydrates { get; set; }
+    public double porcent { get; set; }
 
     public int fittnes { get; set; }
 
     public Solutions(int quantity)
     {
         ListRecipe = new List<Recipe>(quantity);
-        porcent = 0.8;
+        porcent = 0.1;
         CantCarbohydrates = 0;
         CantFats = 0;
         CantProteins = 0;
@@ -96,9 +95,9 @@ public class Solutions
 
     public void Print()
     {
-        Console.WriteLine(" Energy : "+CantKilocalories +"\n"+
-                          "Proteins : "+CantProteins +"\n"+
-                          "Carbohidratos : "+CantCarbohydrates + "\n"+
-                          "Grasas : "+CantFats + "\n");
+        Console.WriteLine("  Energy : "+CantKilocalories +"\n"+
+                          "  Proteins : "+CantProteins +"\n"+
+                          "  Carbohidratos : "+CantCarbohydrates + "\n"+
+                          "  Grasas : "+CantFats + "\n");
     }
 }
