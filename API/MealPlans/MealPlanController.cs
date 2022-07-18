@@ -19,7 +19,7 @@ public class MealPlanController
 
     [HttpGet]
     [Route("metrics-based")]
-    public ActionResult<MealPlanDto> GenerateBasedOnMbr([Required] string gender, [Required] int height,
+    public ActionResult<MealPlanDto> GenerateBasedOnMetrics([Required] string gender, [Required] int height,
         [Required] double weight, [Required] int age, [Required] string physicalActivity,
         [Required] string isLunchFilling, [Required] string breakfastSatiety, [Required] string dinnerSatiety)
     {
