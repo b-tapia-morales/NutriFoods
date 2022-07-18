@@ -86,7 +86,7 @@ public class GeneticAlgorithm
         Solutions();
         Console.WriteLine("-------------------------------------\n    MicroNutrientes Resultantes");
         SolutionsFinal();
-        return  _listRegime.Where(e => e.fittnes == 8).MaxBy(e => e.CantKilocalories)!;;
+        return  _listRegime.Where(e => e.fittnes == 8).MinBy(e => Math.Abs(_kilocalories - e.CantKilocalories))!;
     }
     private void GenerateSolutions()
     {
