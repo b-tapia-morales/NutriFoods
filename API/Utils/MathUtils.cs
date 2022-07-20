@@ -16,4 +16,14 @@ public static class MathUtils
             b = Math.Max(a, b) % Math.Min(a, b);
         }
     }
+    
+    public static double RelativeError(double actualValue, double targetValue)
+    {
+        return (Math.Abs(actualValue - targetValue) / actualValue) * 100;
+    }
+    
+    public static double RelativeError(double actualValue, double targetValue, int decimalPlaces)
+    {
+        return Math.Round((Math.Abs(actualValue - targetValue) / actualValue) * 100, decimalPlaces);
+    }
 }
