@@ -103,8 +103,6 @@ public class MealPlanController
 
         var latestMetric = user.BodyMetrics.Last();
         var age = DateOnly.FromDateTime(DateTime.Now).Year - DateOnly.Parse(user.Birthdate).Year;
-        Console.WriteLine(Gender.ReadOnlyDictionary[user.Gender].Display);
-        Console.WriteLine(PhysicalActivity.ReadOnlyDictionary[latestMetric.PhysicalActivityLevel].Display);
         return GenerateBasedOnMetrics(
             Gender.ReadOnlyDictionary[user.Gender].Name,
             (int) latestMetric.Height, latestMetric.Weight, age,
