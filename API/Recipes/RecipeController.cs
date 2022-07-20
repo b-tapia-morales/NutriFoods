@@ -106,18 +106,18 @@ public class RecipeController
 
     [HttpGet]
     [Route("preparationTime")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPreparationTime([FromQuery] int gte,
-        [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPreparationTime([FromQuery] int lower,
+        [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum prep time = {gte}, maximum prep time = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum prep time = {lower}, maximum prep time = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum prep time must be lower or equal to minimum prep time (Values provided were {gte} and {lte} respectively)");
+                $"Maximum prep time must be lower or equal to minimum prep time (Values provided were {lower} and {upper} respectively)");
 
-        return await _service.FilterByPreparationTime(gte, lte);
+        return await _service.FilterByPreparationTime(lower, upper);
     }
 
     [HttpGet]
@@ -127,84 +127,86 @@ public class RecipeController
         if (portions < 0)
             return new BadRequestObjectResult(
                 $"Parameter can't be a negative integer (Value provided was: {portions})");
-
+        
         return await _service.FilterByPortions(portions);
     }
 
     [HttpGet]
     [Route("portions")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPortions([FromQuery] int gte,
-        [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByPortions([FromQuery] int lower,
+        [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum portions = {gte}, maximum portions = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum portions = {lower}, maximum portions = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum portions must be lower or equal to minimum portions (Values provided were {gte} and {lte} respectively)");
+                $"Maximum portions must be lower or equal to minimum portions (Values provided were {lower} and {upper} respectively)");
 
-        return await _service.FilterByPortions(gte, lte);
+        Console.WriteLine($"{lower} - {upper}");
+        return await _service.FilterByPortions(lower, upper);
     }
 
     [HttpGet]
     [Route("energy")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByEnergy([FromQuery] int gte, [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByEnergy([FromQuery] int lower, [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum energy = {gte}, maximum energy = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum energy = {lower}, maximum energy = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum energy must be lower or equal to minimum energy (Values provided were {gte} and {lte} respectively)");
+                $"Maximum energy must be lower or equal to minimum energy (Values provided were {lower} and {upper} respectively)");
 
-        return await _service.FilterByEnergy(gte, lte);
+        return await _service.FilterByEnergy(lower, upper);
     }
 
     [HttpGet]
     [Route("carbohydrates")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByCarbohydrates([FromQuery] int gte,
-        [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByCarbohydrates([FromQuery] int lower,
+        [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum carbohydrates = {gte}, maximum carbohydrates = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum carbohydrates = {lower}, maximum carbohydrates = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum carbohydrates must be lower or equal to minimum carbohydrates (Values provided were {gte} and {lte} respectively)");
+                $"Maximum carbohydrates must be lower or equal to minimum carbohydrates (Values provided were {lower} and {upper} respectively)");
 
-        return await _service.FilterByCarbohydrates(gte, lte);
+        return await _service.FilterByCarbohydrates(lower, upper);
     }
 
     [HttpGet]
     [Route("lipids")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByLipids([FromQuery] int gte, [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByLipids([FromQuery] int lower, [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum lipids = {gte}, maximum lipids = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum lipids = {lower}, maximum lipids = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum lipids must be lower or equal to minimum lipids (Values provided were {gte} and {lte} respectively)");
+                $"Maximum lipids must be lower or equal to minimum lipids (Values provided were {lower} and {upper} respectively)");
 
-        return await _service.FilterByLipids(gte, lte);
+        return await _service.FilterByLipids(lower, upper);
     }
 
     [HttpGet]
     [Route("proteins")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByProteins([FromQuery] int gte, [FromQuery] int lte)
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByProteins([FromQuery] int lower,
+        [FromQuery] int upper)
     {
-        if (gte < 0 || lte < 0)
+        if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum proteins = {gte}, maximum proteins = {lte})");
+                $"Neither value can be a negative integer (Values provided were: minimum proteins = {lower}, maximum proteins = {upper})");
 
-        if (gte > lte)
+        if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {gte} and {lte} respectively)");
-
-        return await _service.FilterByProteins(gte, lte);
+                $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {lower} and {upper} respectively)");
+        
+        return await _service.FilterByProteins(lower, upper);
     }
 }
