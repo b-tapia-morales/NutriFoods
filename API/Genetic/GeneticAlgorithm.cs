@@ -40,19 +40,6 @@ public class GeneticAlgorithm
         _carbohydrates = carbohydrates;
         _proteins = proteins;
         _fats = fats;
-        /*
-        foreach (var variaRecipe in _totalRecipes)
-        {
-            foreach (var vaNutrient in variaRecipe.RecipeNutrients.ToList())
-            {
-                if (vaNutrient.NutrientId == 108)
-                {
-                    Console.WriteLine(vaNutrient.Quantity +" "+variaRecipe.Name);
-                }
-            }
-        }
-        Console.WriteLine(_totalRecipes.Count);
-        */
     }
 
     public static List<Recipe> TotalRecipes()
