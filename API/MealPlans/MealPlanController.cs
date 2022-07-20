@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using API.Dto;
+using API.Users;
 using API.Utils.Nutrition;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +12,12 @@ namespace API.MealPlans;
 public class MealPlanController
 {
     private readonly IMealPlanService _mealPlanService;
+    private readonly IUserRepository _userRepository;
 
-    public MealPlanController(IMealPlanService mealPlanService)
+    public MealPlanController(IMealPlanService mealPlanService, IUserRepository userRepository)
     {
         _mealPlanService = mealPlanService;
+        _userRepository = userRepository;
     }
 
     [HttpGet]
@@ -79,5 +82,33 @@ public class MealPlanController
 
         var lunchChoice = lunchValue == "y" ? Satiety.Filling : Satiety.Normal;
         return _mealPlanService.GenerateMealPlan(totalMetabolicRate, breakfastChoice, lunchChoice, dinnerChoice);
+    }
+
+    [HttpGet]
+    [Route("user-based")]
+    public ActionResult<MealPlanDto> GenerateBasedOnUser([Required] string apiKey,
+        [Required] string isLunchFilling, [Required] string breakfastSatiety, [Required] string dinnerSatiety)
+    {
+        var user = _userRepository.Find(apiKey).Result;
+        if (user == null)
+        {
+            return new NotFoundObjectResult("There's no user with the specified Api key.");
+        }
+
+        if (!user.BodyMetrics.Any())
+        {
+            return new NotFoundObjectResult(
+                "There's a user with the specified Api key but it has no body metrics associated.");
+        }
+
+        var latestMetric = user.BodyMetrics.Last();
+        var age = DateOnly.FromDateTime(DateTime.Now).Year - DateOnly.Parse(user.Birthdate).Year;
+        Console.WriteLine(Gender.ReadOnlyDictionary[user.Gender].Display);
+        Console.WriteLine(PhysicalActivity.ReadOnlyDictionary[latestMetric.PhysicalActivityLevel].Display);
+        return GenerateBasedOnMetrics(
+            Gender.ReadOnlyDictionary[user.Gender].Name,
+            (int) latestMetric.Height, latestMetric.Weight, age,
+            PhysicalActivity.ReadOnlyDictionary[latestMetric.PhysicalActivityLevel].Name, isLunchFilling,
+            breakfastSatiety, dinnerSatiety);
     }
 }
