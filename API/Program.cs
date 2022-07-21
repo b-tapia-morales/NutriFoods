@@ -4,10 +4,15 @@ using API.MealPlans;
 using API.Recipes;
 using API.Users;
 using API.Utils.Nutrition;
+using Domain.DatabaseInitialization;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NutrientRetrieval.AbridgedRetrieval;
+using NutrientRetrieval.NutrientCalculation;
+using RecipeAndMesuris.Recipe_insert;
+
 
 /*
 DatabaseInitialization.Initialize();
@@ -17,8 +22,6 @@ Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
 */
-
-Console.WriteLine(EnergyDistribution.Calculate(1782));
 
 var builder = WebApplication.CreateBuilder(args);
 
