@@ -20,7 +20,7 @@ public static class DataCentral
 
         var response = await Client.GetAsync(uri);
         var serialized = await response.Content.ReadAsStringAsync();
-        var food = JsonConvert.DeserializeObject<T>(serialized) ?? throw new InvalidOperationException();
+        var food = JsonConvert.DeserializeObject<T>(serialized) ?? throw new NullReferenceException();
 
         return (nutriFoodsId, food);
     }
@@ -34,7 +34,7 @@ public static class DataCentral
 
         var response = await Client.GetAsync(uri);
         var serialized = await response.Content.ReadAsStringAsync();
-        var list = JsonConvert.DeserializeObject<List<T>>(serialized) ?? throw new InvalidOperationException();
+        var list = JsonConvert.DeserializeObject<List<T>>(serialized) ?? throw new NullReferenceException();
 
         return list.Select(e => (dictionary[e.FdcId()], e));
     }
