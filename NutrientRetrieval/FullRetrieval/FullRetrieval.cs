@@ -1,9 +1,9 @@
-using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Request;
 using NutrientRetrieval.Translation;
+using Utils.Enum;
 
 namespace NutrientRetrieval.FullRetrieval;
 
@@ -21,7 +21,7 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest<FullFood>(Format).Result.Where(e => e.Value != null)
+        var foodsDictionary = DataCentral.SingleRetrieval<FullFood>(Format).Result.Where(e => e.Value != null)
             .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
