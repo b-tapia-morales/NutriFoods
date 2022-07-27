@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using API.Dto;
 using API.Users;
-using API.Utils.Nutrition;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enum;
 using Utils.Nutrition;

@@ -1,4 +1,4 @@
-using Domain.Enum;
+using Utils.Enum;
 using static Utils.Nutrition.CalculationMethod;
 
 namespace Utils.Nutrition;

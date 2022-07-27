@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 using API.Dto;
-using API.Utils;
 using Microsoft.AspNetCore.Mvc;
+using Utils;
 using Utils.Enum;
 
 namespace API.Users;
