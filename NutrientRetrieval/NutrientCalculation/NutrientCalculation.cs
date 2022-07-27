@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Text;
 using CsvHelper;
 using CsvHelper.Configuration;
-using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Enum;
 
 namespace NutrientRetrieval.NutrientCalculation;
 

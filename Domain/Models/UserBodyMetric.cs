@@ -1,4 +1,4 @@
-﻿using Domain.Enum;
+﻿using Utils.Enum;
 
 namespace Domain.Models;
 
@@ -10,7 +10,7 @@ public class UserBodyMetric
     public double Weight { get; set; }
     public double BodyMassIndex { get; set; }
     public double? MuscleMassPercentage { get; set; }
-    public PhysicalActivity PhysicalActivityLevel { get; set; }
+    public PhysicalActivity PhysicalActivityLevel { get; set; } = null!;
 
     public virtual UserProfile User { get; set; } = null!;
 }

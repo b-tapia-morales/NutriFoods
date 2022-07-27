@@ -1,4 +1,4 @@
-﻿using Domain.Enum;
+﻿using Utils.Enum;
 
 namespace Domain.Models;
 
@@ -14,7 +14,7 @@ public class Nutrient
     public string Name { get; set; } = null!;
     public string? AlsoCalled { get; set; }
     public bool IsCalculated { get; set; }
-    public Essentiality Essentiality { get; set; }
+    public Essentiality Essentiality { get; set; } = null!;
     public int SubtypeId { get; set; }
 
     public virtual NutrientSubtype Subtype { get; set; } = null!;

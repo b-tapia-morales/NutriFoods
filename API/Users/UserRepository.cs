@@ -2,10 +2,10 @@ using API.Dto;
 using API.Utils;
 using API.Utils.Nutrition;
 using AutoMapper;
-using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Utils;
+using Utils.Enum;
 
 namespace API.Users;
 

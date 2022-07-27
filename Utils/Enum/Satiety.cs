@@ -1,6 +1,6 @@
 using Ardalis.SmartEnum;
 
-namespace Domain.Enum;
+namespace Utils.Enum;
 
 public class Satiety : SmartEnum<Satiety>
 {
