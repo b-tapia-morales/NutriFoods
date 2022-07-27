@@ -1,10 +1,16 @@
+using NutrientRetrieval.Food;
+
 namespace NutrientRetrieval.AbridgedRetrieval;
 
-public class Food
+public class Food : IFood
 {
     public int FdcId { get; set; }
     public string Description { get; set; } = null!;
     public FoodNutrient[] FoodNutrients { get; set; } = null!;
+
+    int IFood.FdcId() => FdcId;
+
+    string IFood.Description() => Description;
 
     public override string ToString()
     {

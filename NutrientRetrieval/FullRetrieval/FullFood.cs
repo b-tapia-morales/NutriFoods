@@ -1,12 +1,18 @@
+using NutrientRetrieval.Food;
+
 namespace NutrientRetrieval.FullRetrieval;
 
-public class FullFood
+public class FullFood : IFood
 {
     public int FdcId { get; set; }
     public string Description { get; set; } = null!;
     public FoodNutrient[] FoodNutrients { get; set; } = null!;
     public FoodPortion[] FoodPortions { get; set; } = null!;
     public int NdbNumber { get; set; }
+
+    int IFood.FdcId() => FdcId;
+
+    string IFood.Description() => Description;
 
     public override string ToString()
     {
