@@ -3,7 +3,6 @@ using API.Ingredients;
 using API.MealPlans;
 using API.Recipes;
 using API.Users;
-using API.Utils.Nutrition;
 using Domain.DatabaseInitialization;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;

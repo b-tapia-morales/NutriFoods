@@ -1,7 +1,7 @@
 using Ardalis.SmartEnum;
-using static API.Utils.Nutrition.Macronutrient;
+using static Utils.Nutrition.Macronutrient;
 
-namespace API.Utils.Nutrition;
+namespace Utils.Nutrition;
 
 public static class EnergyDistribution
 {

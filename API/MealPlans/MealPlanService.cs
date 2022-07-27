@@ -4,6 +4,7 @@ using API.Utils.Nutrition;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
+using Utils.Nutrition;
 
 namespace API.MealPlans;
 

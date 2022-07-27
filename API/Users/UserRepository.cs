@@ -5,6 +5,7 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils;
 
 namespace API.Users;
 

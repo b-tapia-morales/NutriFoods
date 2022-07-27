@@ -1,7 +1,7 @@
 using Domain.Enum;
-using static API.Utils.Nutrition.CalculationMethod;
+using static Utils.Nutrition.CalculationMethod;
 
-namespace API.Utils.Nutrition;
+namespace Utils.Nutrition;
 
 public static class TotalMetabolicRate
 {
