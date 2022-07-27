@@ -28,7 +28,7 @@ public static class DataCentral
     public static async Task<IEnumerable<(int Id, T Food)>> MultipleRequests<T>(
         Dictionary<int, int> dictionary, string format) where T : IFood
     {
-        var ids = string.Join('&', dictionary.Select(e => $"fdcIds={e.Value}"));
+        var ids = string.Join('&', dictionary.Select(e => $"fdcIds={e.Key}"));
         var path = $"https://api.nal.usda.gov/fdc/v1/food/{ids}?format={format}&api_key={ApiKey}";
         var uri = new Uri(path);
 
