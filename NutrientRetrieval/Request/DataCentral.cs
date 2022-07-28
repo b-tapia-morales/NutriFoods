@@ -29,7 +29,7 @@ public static class DataCentral
         Dictionary<int, int> dictionary, string format) where T : IFood
     {
         var ids = string.Join('&', dictionary.Select(e => $"fdcIds={e.Key}"));
-        var path = $"https://api.nal.usda.gov/fdc/v1/food/{ids}?format={format}&api_key={ApiKey}";
+        var path = $"https://api.nal.usda.gov/fdc/v1/foods?{ids}&format={format}&api_key={ApiKey}";
         var uri = new Uri(path);
 
         var response = await Client.GetAsync(uri);
@@ -43,7 +43,7 @@ public static class DataCentral
     {
         var dictionary = IngredientRetrieval.RetrieveRows()
             .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId);
-        var tasks = dictionary.Select(e => FetchItem<T>(e.Key, e.Value, format));
+        var tasks = dictionary.Select(e => FetchItem<T>(e.Key, e.Value.GetValueOrDefault(), format));
         var tuples = await Task.WhenAll(tasks);
         return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);
     }
@@ -51,8 +51,9 @@ public static class DataCentral
     public static async Task<Dictionary<int, T>> RetrieveByList<T>(string format) where T : IFood
     {
         var dictionary = IngredientRetrieval.RetrieveRows()
+            .Where(e => e.FoodDataCentralId != null)
             .DistinctBy(e => e.FoodDataCentralId)
-            .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
+            .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);
         var dictionaryList = EnumerableUtils.Partition(dictionary, MaxItemsPerRequest);
         var tasks = dictionaryList.Select(e => FetchList<T>(new Dictionary<int, int>(e), format));
         var tuplesList = await Task.WhenAll(tasks);
@@ -68,7 +69,7 @@ public static class DataCentral
             _ => throw new ArgumentOutOfRangeException(nameof(method), method, null)
         };
     }
-    
+
     public static async Task<Dictionary<int, T>> PerformRequest<T>(string format) where T : IFood
     {
         return await RetrieveByList<T>(format);
