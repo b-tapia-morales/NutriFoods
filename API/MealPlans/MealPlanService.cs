@@ -1,9 +1,9 @@
 ﻿using API.Dto;
 using API.Genetic;
-using API.Utils.Nutrition;
 using AutoMapper;
-using Domain.Enum;
 using Domain.Models;
+using Utils.Enum;
+using Utils.Nutrition;
 
 namespace API.MealPlans;
 

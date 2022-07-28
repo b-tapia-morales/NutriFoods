@@ -1,7 +1,7 @@
-using API.Utils;
-using API.Utils.Nutrition;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils;
+using Utils.Nutrition;
 
 namespace API.Genetic;
 

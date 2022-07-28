@@ -3,7 +3,6 @@ using API.Ingredients;
 using API.MealPlans;
 using API.Recipes;
 using API.Users;
-using API.Utils.Nutrition;
 using Domain.DatabaseInitialization;
 using Domain.Models;
 using Microsoft.AspNetCore.Authentication.Certificate;
@@ -14,14 +13,12 @@ using NutrientRetrieval.NutrientCalculation;
 using RecipeAndMesuris.Recipe_insert;
 
 
-/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,9 +80,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-/*double kicaloriasDesayuno = 809.1; // 2 recetas
-double KilocaloriasAlmuerzo = 1078.8; // 4 recetas
-double kilocaloriasCompleto = 2293; // 6 recetas
-GeneticAlgorithm g = new GeneticAlgorithm(6,kilocaloriasCompleto);
-var Menus = g.GetRegimen();*/

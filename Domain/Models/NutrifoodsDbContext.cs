@@ -1,5 +1,5 @@
-﻿using Domain.Enum;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Utils.Enum;
 
 namespace Domain.Models;
 

@@ -1,4 +1,4 @@
-namespace API.Utils;
+namespace Utils;
 
 public static class RegexUtils
 {

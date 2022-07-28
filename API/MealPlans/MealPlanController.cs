@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using API.Dto;
 using API.Users;
-using API.Utils.Nutrition;
-using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
+using Utils.Enum;
+using Utils.Nutrition;
 
 namespace API.MealPlans;
 

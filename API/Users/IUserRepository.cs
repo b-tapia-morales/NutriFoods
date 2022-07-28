@@ -1,5 +1,5 @@
 using API.Dto;
-using Domain.Enum;
+using Utils.Enum;
 
 namespace API.Users;
 

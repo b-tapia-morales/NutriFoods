@@ -5,9 +5,9 @@ using CsvHelper.Configuration;
 
 namespace NutrientRetrieval.Dictionaries;
 
-public static class IngredientDictionary
+public static class IngredientRetrieval
 {
-    public static IReadOnlyDictionary<int, int> CreateDictionaryIds()
+    public static IEnumerable<IngredientRow> RetrieveRows()
     {
         var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         var path = Path.Combine(directory, "NutrientRetrieval", "Files", "IngredientIDs.csv");
@@ -15,13 +15,13 @@ public static class IngredientDictionary
         {
             Encoding = Encoding.UTF8,
             Delimiter = ";",
-            HasHeaderRecord = true
+            HasHeaderRecord = true,
+            MissingFieldFound = null
         };
 
         using var textReader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(textReader, configuration);
         csv.Context.RegisterClassMap<IngredientMapping>();
-        return csv.GetRecords<IngredientRow>()
-            .ToDictionary(record => record.NutriFoodsId, record => record.FoodDataCentralId);
+        return csv.GetRecords<IngredientRow>().ToList();
     }
 }

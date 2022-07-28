@@ -1,8 +1,8 @@
-using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Request;
+using Utils.Enum;
 
 namespace NutrientRetrieval.AbridgedRetrieval;
 
@@ -20,8 +20,7 @@ public static class AbridgedRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest<Food>(Format).Result.Where(e => e.Value != null)
-            .ToDictionary(e => e.Key, e => e.Value);
+        var foodsDictionary = DataCentral.RetrieveByList<Food>(Format).Result.ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
@@ -32,9 +31,9 @@ public static class AbridgedRetrieval
     }
 
     private static void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
-        int ingredientId, Food? food)
+        int ingredientId, Food food)
     {
-        if (food?.FoodNutrients == null || food.FoodNutrients.Length == 0) return;
+        if (food.FoodNutrients.Length == 0) return;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {

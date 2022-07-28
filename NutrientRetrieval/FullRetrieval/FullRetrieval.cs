@@ -1,9 +1,9 @@
-using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Request;
 using NutrientRetrieval.Translation;
+using Utils.Enum;
 
 namespace NutrientRetrieval.FullRetrieval;
 
@@ -21,7 +21,7 @@ public static class ApiRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.FoodRequest<FullFood>(Format).Result.Where(e => e.Value != null)
+        var foodsDictionary = DataCentral.RetrieveByList<Food>(Format).Result
             .ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
@@ -34,9 +34,9 @@ public static class ApiRetrieval
     }
 
     private static void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
-        int ingredientId, FullFood? food)
+        int ingredientId, Food food)
     {
-        if (food?.FoodNutrients == null || food.FoodNutrients.Length == 0) return;
+        if (food.FoodNutrients.Length == 0) return;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
@@ -63,9 +63,9 @@ public static class ApiRetrieval
         }
     }
 
-    private static void InsertMeasures(NutrifoodsDbContext context, int ingredientId, FullFood? food)
+    private static void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food)
     {
-        if (food?.FoodPortions == null || food.FoodPortions.Length == 0) return;
+        if (food.FoodPortions.Length == 0) return;
 
         var untranslatedString = string.Join(Environment.NewLine, food.FoodPortions.Select(e =>
         {

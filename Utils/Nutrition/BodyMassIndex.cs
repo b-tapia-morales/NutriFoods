@@ -1,6 +1,6 @@
-using static API.Utils.Nutrition.BmiMethod;
+using static Utils.Nutrition.BmiMethod;
 
-namespace API.Utils.Nutrition;
+namespace Utils.Nutrition;
 
 public static class BodyMassIndex
 {

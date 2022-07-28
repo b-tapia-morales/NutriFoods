@@ -1,4 +1,4 @@
-﻿using Domain.Enum;
+﻿using Utils.Enum;
 
 namespace Domain.Models;
 
@@ -12,7 +12,7 @@ public class MealMenu
     public int Id { get; set; }
     public int MealPlanId { get; set; }
     public int MealTypeId { get; set; }
-    public Satiety Satiety { get; set; }
+    public Satiety Satiety { get; set; } = null!;
     public double EnergyTotal { get; set; }
     public double CarbohydratesTotal { get; set; }
     public double LipidsTotal { get; set; }

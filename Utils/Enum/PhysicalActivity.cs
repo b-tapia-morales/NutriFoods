@@ -1,6 +1,6 @@
 using Ardalis.SmartEnum;
 
-namespace Domain.Enum;
+namespace Utils.Enum;
 
 public class PhysicalActivity : SmartEnum<PhysicalActivity>
 {
