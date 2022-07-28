@@ -6,7 +6,7 @@ public sealed class IngredientRow
 {
     public int NutriFoodsId { get; set; } = 0;
     public string NutriFoodsName { get; set; } = null!;
-    public int FoodDataCentralId { get; set; } = 0;
+    public int? FoodDataCentralId { get; set; } = 0;
 }
 
 public sealed class IngredientMapping : ClassMap<IngredientRow>

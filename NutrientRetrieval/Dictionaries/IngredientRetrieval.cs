@@ -15,12 +15,13 @@ public static class IngredientRetrieval
         {
             Encoding = Encoding.UTF8,
             Delimiter = ";",
-            HasHeaderRecord = true
+            HasHeaderRecord = true,
+            MissingFieldFound = null
         };
 
         using var textReader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(textReader, configuration);
         csv.Context.RegisterClassMap<IngredientMapping>();
-        return csv.GetRecords<IngredientRow>();
+        return csv.GetRecords<IngredientRow>().ToList();
     }
 }
