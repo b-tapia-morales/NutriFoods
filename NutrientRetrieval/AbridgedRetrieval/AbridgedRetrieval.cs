@@ -20,7 +20,7 @@ public static class AbridgedRetrieval
             .Options;
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.RetrieveByItem<Food>(Format).Result.ToDictionary(e => e.Key, e => e.Value);
+        var foodsDictionary = DataCentral.RetrieveByList<Food>(Format).Result.ToDictionary(e => e.Key, e => e.Value);
         Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
