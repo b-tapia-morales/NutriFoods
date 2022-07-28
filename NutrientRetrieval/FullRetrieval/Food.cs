@@ -2,7 +2,7 @@ using NutrientRetrieval.Food;
 
 namespace NutrientRetrieval.FullRetrieval;
 
-public class FullFood : IFood
+public class Food : IFood
 {
     public int FdcId { get; set; }
     public string Description { get; set; } = null!;
