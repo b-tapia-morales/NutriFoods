@@ -4,7 +4,7 @@ namespace Utils.Date;
 
 public static class DateOnlyUtils
 {
-    public static readonly string[] AllowedFormats = {"YYYY-mm-dd", "YYYY-m-d"};
+    public static readonly string[] AllowedFormats = {"yyyy-mm-dd", "yyyy-m-d"};
 
     public static DateTime ToDateTime(DateOnly date) => new(date.Year, date.Month, date.Day, 0, 0, 0);
 
