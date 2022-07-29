@@ -1,52 +1,67 @@
 ﻿SET SEARCH_PATH = "nutrifoods";
 
 INSERT INTO nutrient_type (name)
-VALUES ('Carbohidratos'),
-       ('Grasas y Ácidos grasos'),
-       ('Proteínas y Aminoácidos'),
+VALUES ('Energía'),
+       ('Carbohidratos'),
+       ('Lípidos'),
+       ('Proteínas'),
        ('Vitaminas'),
        ('Minerales'),
        ('Esteroles'),
-       ('Otros'),
-       ('Energía')
+       ('Otros')
+
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrient_subtype (name, provides_energy, type_id)
-VALUES ('Carbohidratos, total', true, 1),
-       ('Fibra', true, 1),
-       ('Almidón', true, 1),
-       ('Azúcar', true, 1),
-       ('Grasa, total', true, 2),
-       ('Ácidos grasos saturados', true, 2),
-       ('Ácidos grasos monoinsaturados', true, 2),
-       ('Ácidos grasos poliinsaturados', true, 2),
-       ('Ácidos grasos trans', true, 2),
-       ('Proteínas', true, 3),
-       ('Vitaminas', false, 4),
-       ('Minerales', false, 5),
-       ('Esteroles', false, 6),
-       ('Alcohol', true, 7),
-       ('Otros', false, 7),
-       ('Energía', true, 8)
-
+VALUES ('Energía', true, 1),
+       ('Proteínas', true, 4),
+       ('Grasa, total', true, 3),
+       ('Carbohidratos, total', true, 2),
+       ('Fibra', true, 2),
+       ('Azúcar', true, 2),
+       ('Almidón', true, 2),
+       ('Vitaminas', false, 5),
+       ('Minerales', false, 6),
+       ('Esteroles', false, 7),
+       ('Ácidos grasos saturados', true, 3),
+       ('Ácidos grasos monoinsaturados', true, 3),
+       ('Ácidos grasos poliinsaturados', true, 3),
+       ('Ácidos grasos trans', true, 3),
+       ('Alcohol', true, 8),
+       ('Otros', false, 8)
+       
 ON CONFLICT DO NOTHING;
 
 INSERT INTO nutrient (name, also_called, is_calculated, essentiality, subtype_id)
 VALUES
-    -- Carbohidratos --
-    ('Carbohidratos, total', '', true, 0, 1),                                -- 
-    ('Fibra', '', false, 2, 2),                                              -- 
-    ('Almidón', 'Fécula', false, 2, 3),
-    -- Azúcares --
-    ('Azúcares, total', '', true, 0, 4),
-    ('Fructosa', 'Levulosa', false, 2, 4),
-    ('Galactosa', '', false, 2, 4),
-    ('Glucosa', '', false, 2, 4),
-    ('Lactosa', '', false, 2, 4),
-    ('Maltosa', '', false, 2, 4),
-    ('Sucrosa', 'Sacarosa', false, 2, 4),                                    -- 
-    --Ácidos grasos--
-    ('Ácidos grasos, total', '', true, 2, 5),                                -- 
+    ('Agua', '', false, 1, 8),
+    ('Energía', '', true, 0, 1),
+    ('Proteína, total', '', true, 0, 2),
+    ('Ácidos grasos, total', '', true, 2, 3),
+    ('Ceniza','', false, 2, 8),
+    ('Carbohidratos, total', '', true, 0, 4),
+    ('Fibra', '', false, 2, 5),
+    ('Azúcares, total', '', true, 0, 6),          
+    ('Sucrosa', 'Sacarosa', false, 2, 6),
+    ('Glucosa', '', false, 2, 6),
+    ('Fructosa', 'Levulosa', false, 2, 6),
+    ('Lactosa', '', false, 2, 6),
+    ('Maltosa', '', false, 2, 6),
+    ('Galactosa', '', false, 2, 6),
+    ('Almidón', 'Fécula', false, 2, 7),
+    -- Minerales --
+    ('Calcio', 'Ca', false, 2, 9),
+    ('Hierro', 'Fe', false, 2, 9),
+    ('Magnesio', 'Mg', false, 2, 9),
+    ('Fósforo', 'P', false, 2, 9),
+    ('Potasio', 'K', false, 2, 9),
+    ('Sodio', 'Na', false, 2, 9),
+    ('Zinc', 'Zn', false, 2, 9),
+    ('Cobre', 'Cu', false, 2, 9),
+    ('Manganeso', 'Mn', false, 2, 9),
+    ('Selenio', 'Se', false, 2, 9),
+    ('Fluoruro', 'F', false, 2, 9),
+    
     -- Ácidos grasos saturados --
     ('Ácidos grasos saturados, total', '', true, 2, 6),
     ('Ácido butanoico', 'Ácido butírico', false, 2, 6),                      -- SFA 4:0  
@@ -132,18 +147,7 @@ VALUES
     ('Vitamina D', '', false, 2, 11),
     ('Vitamina E', '', false, 2, 11),
     ('Vitamina K', '', false, 2, 11),
-    -- Minerales --
-    ('Calcio', 'Ca', false, 2, 12),
-    ('Hierro', 'Fe', false, 2, 12),
-    ('Magnesio', 'Mg', false, 2, 12),
-    ('Fósforo', 'P', false, 2, 12),
-    ('Potasio', 'K', false, 2, 12),
-    ('Sodio', 'Na', false, 2, 12),
-    ('Zinc', 'Zn', false, 2, 12),
-    ('Cobre', 'Cu', false, 2, 12),
-    ('Manganeso', 'Mn', false, 2, 12),
-    ('Selenio', 'Se', false, 2, 12),
-    ('Fluoruro', 'F', false, 2, 12),
+    
     -- Esteroles --
     ('Colesterol', '', false, 2, 13),
     ('Estigmasterol', 'Stigmasterin', false, 2, 13),
@@ -151,8 +155,8 @@ VALUES
     ('Beta-sitosterol', '', false, 2, 13),
     -- Alcohol --
     ('Alcohol', '', false, 2, 14),
-    ('Ácido eicosadienoico', '', false, 2, 8),                               -- PUFA 20:2 n-6 cis
-    ('Energía', '', true, 0, 16),
-    ('Proteína, total', '', true, 0, 10)
+    ('Ácido eicosadienoico', '', false, 2, 8)                               -- PUFA 20:2 n-6 cis
+    
+    
 
 ON CONFLICT DO NOTHING;
