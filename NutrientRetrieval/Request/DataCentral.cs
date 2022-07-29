@@ -40,7 +40,8 @@ public static class DataCentral
     /// <exception cref="NullReferenceException">
     ///     The request failed due to not following the request format specified by
     ///     FoodDataCentral. See
-    ///     <a href="https://app.swaggerhub.com/apis/fdcnal/food-data_central_api/1.0.1#/FDC/getFoods">here</a> for reference.
+    ///     <a href="https://app.swaggerhub.com/apis/fdcnal/food-data_central_api/1.0.1#/FDC/getFoods">here</a>
+    ///     for reference.
     /// </exception>
     public static async Task<IEnumerable<(int Id, T Food)>> FetchList<T>(
         Dictionary<int, int> dictionary, string format) where T : IFood
@@ -69,10 +70,19 @@ public static class DataCentral
         return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);
     }
 
+    /// <summary>
+    /// Fetches all FoodDataCentral and NutriFoods ids specified in the corresponding CSV file, performs a request to
+    /// FoodDataCentral's Api in batches of 20 food items each, and returns a dictionary which contains the NutriFoods
+    /// Ids and food items themselves as the keys and values respectively.
+    /// </summary>
+    /// <param name="format">The format used, which can be either <i>full</i> or <i>abridged</i>.</param>
+    /// <typeparam name="T">The provided class must implement <c>IFood</c>.</typeparam>
+    /// <returns>A dictionary which contains the NutriFoods Ids and food items themselves as the keys and values
+    /// respectively.</returns>
     public static async Task<Dictionary<int, T>> RetrieveByList<T>(string format) where T : IFood
     {
         // Takes all the CSV rows, filters those which have no corresponding FoodDataCentral Id, removes duplicate Ids,
-        // and then it converts them to a dictionary which which contains the FoodDataCentral and NutriFoods ids as keys
+        // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
         // and values respectively.
         var dictionary = IngredientRetrieval.RetrieveRows()
             .Where(e => e.FoodDataCentralId != null)
@@ -87,7 +97,7 @@ public static class DataCentral
         var tuplesList = await Task.WhenAll(tasks);
         // The resulting value from the request is a list of lists of named tuples, which need to be flattened into
         // a single list of named tuples. The last step is transforming each named tuple into a dictionary, which
-        // takes each NutriFoods Id and food item itself as the keys and values respectively.
+        // takes each NutriFoods Id and food item as the keys and values respectively.
         return tuplesList.SelectMany(e => e).ToDictionary(e => e.Id, e => e.Food);
     }
 
