@@ -1,8 +1,11 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using API.Dto;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils;
+using Utils.Date;
 using Utils.Enum;
 
 namespace API.Users;
@@ -12,10 +15,12 @@ namespace API.Users;
 public class UserController
 {
     private readonly IUserRepository _repository;
+    private readonly IValidator<UserDto> _validator;
 
-    public UserController(IUserRepository repository)
+    public UserController(IUserRepository repository, IValidator<UserDto> validator)
     {
         _repository = repository;
+        _validator = validator;
     }
 
     [HttpGet]
@@ -33,21 +38,21 @@ public class UserController
 
     [HttpGet]
     [Route("find-by-username")]
-    public async Task<ActionResult<UserDto>> FindByUsername(string username, string password)
+    public async Task<ActionResult<UserDto>> FindByUsername([Required] string username, [Required] string password)
     {
-        if (!Regex.IsMatch(username, RegexUtils.Username))
+        var user = new UserDto
         {
-            return new BadRequestObjectResult(
-                $"Provided argument {username} does not match required string validation rules.\n{RegexUtils.UsernameRule}");
+            Username = username,
+            Password = password
+        };
+        var validationResult = await _validator.ValidateAsync(user);
+        if (!validationResult.IsValid)
+        {
+            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary(), null, null,
+                400));
         }
 
-        if (!Regex.IsMatch(password, RegexUtils.Password))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {password} does not match required string validation rules.\n{RegexUtils.PasswordRule}");
-        }
-
-        var user = await _repository.FindByUsername(username, password);
+        user = await _repository.FindByUsername(username, password);
         if (user == null)
         {
             return new NotFoundObjectResult("There's no user with the specified username and password provided.");
@@ -58,22 +63,20 @@ public class UserController
 
     [HttpGet]
     [Route("find-by-email")]
-    public async Task<ActionResult<UserDto>> FindByEmail([FromQuery(Name = "email")] string email,
-        [FromQuery(Name = "password")] string password)
+    public async Task<ActionResult<UserDto>> FindByEmail([Required] string email, [Required] string password)
     {
-        if (!new EmailAddressAttribute().IsValid(email))
+        var user = new UserDto
         {
-            return new BadRequestObjectResult(
-                $"Provided argument {email} does not correspond to a valid email.");
+            Email = email,
+            Password = password
+        };
+        var validationResult = await _validator.ValidateAsync(user);
+        if (!validationResult.IsValid)
+        {
+            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
-        if (!Regex.IsMatch(password, RegexUtils.Password))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {password} does not match required string validation rules.\n{RegexUtils.PasswordRule}");
-        }
-
-        var user = await _repository.FindByEmail(email, password);
+        user = await _repository.FindByEmail(email, password);
         if (user == null)
         {
             return new NotFoundObjectResult("There's no user with the specified key");
@@ -85,40 +88,28 @@ public class UserController
     [HttpPut]
     [Route("save-user")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
-        [Required] string password, [Required] string birthDate, [Required] string gender, string name = "",
-        string lastName = "")
+        [Required] string password, [Required] string birthDate, [Required] string gender, string? name = "",
+        string? lastName = "")
     {
-        if (!Regex.IsMatch(username, RegexUtils.Username))
+        var user = new UserDto
         {
-            return new BadRequestObjectResult(
-                $"Provided argument {username} does not match required string validation rules.\n{RegexUtils.UsernameRule}");
+            Username = username,
+            Email = email,
+            Password = password,
+            Birthdate = birthDate,
+            Gender = gender,
+            Name = string.IsNullOrWhiteSpace(name) ? null : name,
+            LastName = string.IsNullOrWhiteSpace(lastName) ? null : lastName,
+        };
+        var validationResult = await _validator.ValidateAsync(user);
+        if (!validationResult.IsValid)
+        {
+            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
-        if (!new EmailAddressAttribute().IsValid(email))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {email} does not correspond to a valid email.");
-        }
-
-        if (!Regex.IsMatch(password, RegexUtils.Password))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {password} does not match required string validation rules.\n{RegexUtils.PasswordRule}");
-        }
-
-        if (!DateOnly.TryParse(birthDate, out var date))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {birthDate} does not correspond to a valid date.");
-        }
-
-        if (!Gender.TryFromName(gender, true, out var value))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {value} does not correspond to a valid gender.");
-        }
-
-        var user = await _repository.SaveUser(username, email, password, name, lastName, date, value);
+        var dateValue = DateOnly.ParseExact(birthDate, DateOnlyUtils.AllowedFormats, null);
+        var genderValue = Gender.ReadOnlyDictionary[gender];
+        user = await _repository.SaveUser(username, email, password, name, lastName, dateValue, genderValue);
         if (user == null)
         {
             return new BadRequestObjectResult(
@@ -165,5 +156,4 @@ public class UserController
 
         return user;
     }
-    
 }
