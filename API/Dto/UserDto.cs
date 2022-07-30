@@ -13,6 +13,7 @@ public class UserDto
     public string Gender { get; set; } = string.Empty;
     public DateTime JoinedOn { get; set; }
     public DietDto? Diet { get; set; }
+    public string? UpdateFrequency { get; set; }
     public MealPlanDto? MealPlan { get; set; }
     public ICollection<UserBodyMetricDto> BodyMetrics { get; set; } = null!;
 }
