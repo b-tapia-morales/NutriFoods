@@ -341,75 +341,80 @@
 342;rocoto;168570
 343;trigo;169720
 344;hojas parra;168575
-345;baguette;172675
-346;gelatina hojas;169599
-347;salsa horseradish;173472
-348;achiote;172242
-349;jugo piñas;167792
-350;fideos ramen;169732
-351;mango;169910
-352;crutones;172687
-353;churrascos;168634
-354;prietas;171618
-355;merluza;171964
-356;longaniza;174584
-357;trigo burgol;170287
-358;palanca;174746
-359;ají cacho cabra;170106
-360;pan amasado;167532
-361;panes ciabatta;174913
-362;parra;168575
-363;asado tira;173405
-364;cerveza oscura;168746
-365;quínoa roja;173405
-366;tallarines;169736
-367;pimienta cayenna;170932
-368;malaya;172159
-369;pasta penne;169736
-370;osobuco;172649
-371;callampas secas;168436
-372;caldo costilla;171561
-373;posta paleta;172122
-374;charqui;167536
-375;chuletas kayser;168238
-376;fideos cabello;169736
-377;tallarines arroz;169742
-378;filetes pollo;172855
-379;locos;174212
-380;lamina lasaña;168955
-381;tutros pollo;172855
-382;masa hoja;172790
-383;callampas deshidratadas;168436
-384;salsa ostras;174529
-385;cerveza negra;174863
-386;sobrecostilla;170809
-387;champiñones shitake;168436
-388;filete corvina;175142
-389;arroz silvestre;169726
-390;champiñones portobello;169255
-391;congrio colorado;173670
-392;cabezas congrio;168034
-393;cabeza pescado;168034
-394;pierna cordero;174342
-395;lemon grass;168573
-396;tagliatelle;168955
-397;tomates deshidratados;168567
-398;filetitos pollo;171515
-399;diente dragón;172441
-400;tilapia;175176
-401;merlot;171925
-402;pavo;171490
-403;reinetas;171951
-404;brotes arveja;170422
-405;salsa champiñones;171170
-406;choros zapato;174216
-407;fettuccini;169736
-408;filete pavo;171490
-409;jibia;174215
-410;sierra;175139
-411;spaguetti;169736
-412;abastero;172128
-413;vienesas;174584
-414;tapapecho;174740
-415;marshmallows;167995
-416;avena tradicional;172989
+345;azáfran;170934
+346;macha;174214
+347;baguette;172675
+348;gelatina hojas;169599
+349;salsa horseradish;173472
+350;achiote;172242
+351;jugo piñas;167792
+352;fideos ramen;169732
+353;mango;169910
+354;crutones;172687
+355;churrascos;168634
+356;prietas;171618
+357;merluza;171964
+358;longaniza;174584
+359;trigo burgol;170287
+360;palanca;174746
+361;Pollo ganso;171746
+362;marraquetas;167532
+363;ají cacho cabra;170106
+364;pan amasado;167532
+365;panes ciabatta;174913
+366;parra;168575
+367;asado tira;173405
+368;cerveza oscura;168746
+369;quínoa roja;173405
+370;tallarines;169736
+371;pimienta cayenna;170932
+372;malaya;172159
+373;pasta penne;169736
+374;osobuco;172649
+375;callampas secas;168436
+376;caldo costilla;171561
+377;posta paleta;172122
+378;charqui;167536
+379;chuletas kayser;168238
+380;fideos cabello;169736
+381;tallarines arroz;169742
+382;filetes pollo;172855
+383;locos;174212
+384;lamina lasaña;168955
+385;tutros pollo;172855
+386;masa hoja;172790
+387;callampas deshidratadas;168436
+388;salsa ostras;174529
+389;cerveza negra;174863
+390;sobrecostilla;170809
+391;champiñones shitake;168436
+392;filete corvina;175142
+393;arroz silvestre;169726
+394;champiñones portobello;169255
+395;congrio colorado;173670
+396;cabezas congrio;168034
+397;cabeza pescado;168034
+398;pierna cordero;174342
+399;lemon grass;168573
+400;tagliatelle;168955
+401;tomates deshidratados;168567
+402;filetitos pollo;171515
+403;diente dragón;172441
+404;tilapia;175176
+405;merlot;171925
+406;pavo;171490
+407;reinetas;171951
+408;brotes arveja;170422
+409;salsa champiñones;171170
+410;choros zapato;174216
+411;fettuccini;169736
+412;filete pavo;171490
+413;jibia;174215
+414;sierra;175139
+415;spaguetti;169736
+416;abastero;172128
+417;vienesas;174584
+418;salsa babecue;174523
+419;tapapecho;174740
+420;marshmallows;167995
+421;avena tradicional;172989
