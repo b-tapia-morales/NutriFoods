@@ -1,103 +1,121 @@
 FoodDataCentralName;FoodDataCentralId;NutriFoodsName;NutriFoodsId
-Carbohydrate, by difference;205;Carbohidratos, total;1
-Fiber, total dietary;291;Fibra;2
-Starch;209;Almidón;3
-Sugars, Total NLEA;269.3;Azúcares, total;4
-Fructose;212;Fructosa;5
-Galactose;287;Galactosa;6
-Glucose;211;Glucosa;7
+Carbohydrate, by difference;208;Energía;1
+Fiber, total dietary;205;Carbohidratos, total;2
+Starch;291;Fibra;3
+Sugars, Total NLEA;269;Azúcares, total;4
+Fructose;210;Sucrosa;5
+Galactose;211;Glucosa;6
+Glucose;212;Fructosa;7
 Lactose;213;Lactosa;8
 Maltose;214;Maltosa;9
-Sucrose;210;Sucrosa;10
-Total lipid (fat);204;Ácidos grasos, total;11
-Fatty acids, total saturated;606;Ácidos grasos saturados, total;12
-SFA 4:0;607;Ácido butanoico;13
-SFA 6:0;608;Ácido hexanoico;14
-SFA 8:0;609;Ácido octanoico;15
-SFA 10:0;610;Ácido decanoico;16
-SFA 12:0;611;Ácido dodecanoico;17
-SFA 13:0;696;Ácido tridecanoico;18
-SFA 14:0;612;Ácido tetradecanoico;19
-SFA 15:0;652;Ácido pentadecanoico;20
-SFA 16:0;613;Ácido hexadecanoico;21
-SFA 17:0;653;Ácido heptadecanoico;22
-SFA 18:0;614;Ácido octadecanoico;23
-SFA 20:0;615;Ácido eicosanoico;24
-SFA 22:0;624;Ácido docosanoico;25
-SFA 24:0;654;Ácido tetracosanoico;26
-Fatty acids, total monounsaturated;645;Ácidos grasos monoinsaturados, total;27
-MUFA 14:1 c;822;Ácido tetradecenoico;28
-MUFA 15:1;697;Ácido pentadecenoico;29
-MUFA 16:1;626;Ácido hexadecenoico;30
-MUFA 16:1 c;673;Ácido cis-hexadecenoico;31
-MUFA 17:1;687;Ácido heptadecenoico;32
-MUFA 17:1 c;825;Ácido heptadecenoico;32
-MUFA 18:1;617;Ácido octadecenoico;33
-MUFA 18:1 c;674;Ácido cis-octadecenoico;34
-MUFA 20:1;628;Ácido eicosenoico;35
-MUFA 22:1;630;Ácido docosenoico;36
-MUFA 24:1 c;671;Ácido cis-tetracosenoico;38
-Fatty acids, total polyunsaturated;646;Ácidos grasos poliinsaturados, total;39
-PUFA 18:2;618;Ácido octadecadienoico;40
-PUFA 18:2 n-6 c,c;675;Ácido cis-octadecadienoico;41
-PUFA 18:3;619;Acido octadecatrienoico;44
-PUFA 18:3 n-3 c,c,c (ALA);851;Ácido cis3-octadecatrienoico;45
-PUFA 18:3 n-6 c,c,c;685;Acido cis6-octadecatrienoico;46
-PUFA 18:4;627;Ácido octadecatetraenoico;48
-PUFA 20:3;689;Ácido eicosatrienoico;49
-PUFA 20:4;620;Ácido eicosatetraenoico;52
-PUFA 20:5 n-3 (EPA);629;Ácido eicosapentaenoico;54
-PUFA 22:5 n-3 (DPA);631;Ácido docosapentaenoico;55
-Fatty acids, total trans;605;Ácidos grasos trans, total;57
-Fatty acids, total trans-monoenoic;693;Ácido trans-monoenoico;58
-Fatty acids, total trans-polyenoic;695;Ácido trans-polinoico, total;59
-Aspartic acid;514;Ácido aspartico;60
-Glutamic acid;515;Ácido glutámico;61
-Alanine;513;Alanina;62
-Arginine;511;Arginina;63
-Cystine;507;Cistina;64
-Phenylalanine;508;Fenilalanina;65
-Glycine;516;Glicina;66
-Histidine;512;Histidina;67
-Isoleucine;503;Isoleucina;68
-Leucine;504;Leucina;69
-Lysine;505;Lisina;70
-Methionine;506;Metionina;71
-Proline;517;Prolina;72
-Serine;518;Serina;73
-Tyrosine;509;Tirosina;74
-Threonine;502;Treonina;75
-Tryptophan;501;Triptófano;76
-Valine;510;Valina;77
-Vitamin C, total ascorbic acid;401;Ácido ascórbico;78
-Thiamin;404;Tiamina;79
-Riboflavin;405;Riboflavina;80
-Niacin;406;Niacina;81
-Pantothenic acid;410;Ácido pantoténico;82
-Vitamin B-6;415;Vitamina B6;83
-Vitamin B-12;418;Vitamina B12;84
-Folate, total;417;Ácido fólico;85
-Choline, total;421;Colina;86
-Vitamin A, RAE;320;Vitamina A;87
-Vitamin D (D2 + D3);328;Vitamina D;88
-Vitamin E (alpha-tocopherol);323;Vitamina E;89
-Vitamin K (Dihydrophylloquinone);429;Vitamina K;90
-Calcium, Ca;301;Calcio;91
-Iron, Fe;303;Hierro;92
-Magnesium, Mg;304;Magnesio;93
-Phosphorus, P;305;Fósforo;94
-Potassium, K;306;Potasio;95
-Sodium, Na;307;Sodio;96
-Zinc, Zn;309;Zinc;97
-Copper, Cu;312;Cobre;98
-Manganese, Mn;315;Magnesio;99
-Selenium, Se;317;Selenio;100
-Fluoride, F;313;Fluoruro;101
-Cholesterol;601;Colesterol;102
-Stigmasterol;638;Estigmasterol;103
-Campesterol;639;Campesterol;104
-Beta-sitosterol;641;Beta-sitosterol;105
-Alcohol, ethyl;221;Alcohol;106
-PUFA 20:2 n-6 c,c;672;Ácido eicosadienoico;107
-Energy;208;Energía;108
-Protein;203;Proteína, total;109
+Sucrose;287;Galactosa;10
+Total lipid (fat);209;Almidón;11
+Fatty acids, total saturated;204;Ácidos grasos, total;12
+SFA 4:0;606;Ácidos grasos saturados, total;13
+SFA 6:0;607;Ácido butanoico;14
+SFA 8:0;608;Ácido hexanoico;15
+SFA 10:0;609;Ácido octanoico;16
+SFA 12:0;610;Ácido decanoico;17
+SFA 13:0;611;Ácido dodecanoico;18
+SFA 14:0;696;Ácido tridecanoico;19
+SFA 15:0;612;Ácido tetradecanoico;20
+SFA 16:0;652;Ácido pentadecanoico;21
+SFA 17:0;613;Ácido hexadecanoico;22
+SFA 18:0;653;Ácido heptadecanoico;23
+SFA 20:0;614;Ácido octadecanoico;24
+SFA 22:0;615;Ácido eicosanoico;25
+SFA 24:0;624;Ácido docosanoico;26
+Fatty acids, total monounsaturated;654;Ácido tetracosanoico;27
+MUFA 14:1 c;645;Ácidos grasos monoinsaturados, total;28
+MUFA 15:1;822;Ácido tetradecenoico;29
+MUFA 16:1;697;Ácido pentadecenoico;30
+MUFA 16:1 c;626;Ácido hexadecenoico;31
+MUFA 17:1;673;Ácido cis-hexadecenoico;32
+MUFA 17:1 c;687;Ácido heptadecenoico;32
+MUFA 18:1;825;Ácido i-heptadecenoico;33
+MUFA 18:1 c;617;Ácido octadecenoico;34
+MUFA 20:1;674;Ácido cis-octadecenoico;35
+MUFA 22:1;628;Ácido eicosenoico;36
+MUFA 24:1 c;630;Ácido docosenoico;38
+Fatty acids, total polyunsaturated;676;Ácido cis-docosenoico;39
+PUFA 18:2;671;Ácido cis-tetracosenoico;40
+PUFA 18:2 n-6 c,c;646;Ácidos grasos poliinsaturados, total;41
+PUFA 18:3;618;Ácido octadecadienoico;44
+PUFA 18:3 n-3 c,c,c (ALA);675;Ácido cis-octadecadienoico;45
+PUFA 18:3 n-6 c,c,c;0;Ácido i-octadecadienoico;46
+PUFA 18:4;670;Ácido conjugated-octadecadienoico;48
+PUFA 20:3;619;Ácido octadecatrienoico;49
+PUFA 20:4;851;Ácido cis3-octadecatrienoico;52
+PUFA 20:5 n-3 (EPA);685;Ácido cis6-octadecatrienoico;54
+PUFA 22:5 n-3 (DPA);856;Ácido i-octadecatrienoico;55
+Fatty acids, total trans;627;Ácido octadecatetraenoico;57
+Fatty acids, total trans-monoenoic;672;Ácido eicosadienoico;58
+Fatty acids, total trans-polyenoic;689;Ácido eicosatrienoico;59
+Aspartic acid;852;Ácido 3-eicosatrienoico;60
+Glutamic acid;0;Ácido 6-eicosatrienoico;61
+Alanine;620;Ácido eicosatetraenoico;62
+Arginine;853;Ácido 6-eicosatetraenoico;63
+Cystine;629;Ácido eicosapentaenoico;64
+Phenylalanine;631;Ácido docosapentaenoico;65
+Glycine;621;Ácido 3-docosahexaenoico;66
+Histidine;605;Ácidos grasos trans, total;67
+Isoleucine;693;Ácido trans-monoenoico, total;68
+Leucine;695;Ácido trans-polinoico, total;69
+Lysine;203;Proteína, total;70
+Methionine;501;Triptófano;71
+Proline;502;Treonina;72
+Serine;503;Isoleucina;73
+Tyrosine;504;Leucina;74
+Threonine;505;Lisina;75
+Tryptophan;506;Metionina;76
+Valine;507;Cistina;77
+Vitamin C, total ascorbic acid;508;Fenilalanina;78
+Thiamin;509;Tirosina;79
+Riboflavin;510;Valina;80
+Niacin;511;Arginina;81
+Pantothenic acid;512;Histidina;82
+Vitamin B-6;513;Alanina;83
+Vitamin B-12;514;Ácido aspártico;84
+Folate, total;515;Ácido glutámico;85
+Choline, total;516;Glicina;86
+Vitamin A, RAE;517;Prolina;87
+Vitamin D (D2 + D3);518;Serina;88
+Vitamin E (alpha-tocopherol);401;Ácido ascórbico;89
+Vitamin K (Dihydrophylloquinone);404;Tiamina;90
+Calcium, Ca;405;Riboflavina;91
+Iron, Fe;406;Niacina;92
+Magnesium, Mg;410;Ácido pantoténico;93
+Phosphorus, P;415;Vitamina B6;94
+Potassium, K;417;Folato, total;95
+Sodium, Na;431;Ácido fólico;96
+Zinc, Zn;432;Folato, alimento;97
+Copper, Cu;435;Folato, DFE;98
+Manganese, Mn;421;Colina;99
+Selenium, Se;454;Betaína;100
+Fluoride, F;418;Vitamina B12;101
+Cholesterol;578;Vitamina B12, añadida;102
+Stigmasterol;320;Vitamina A;103
+Campesterol;319;Retinol;104
+Beta-sitosterol;328;Vitamina D;105
+Alcohol, ethyl;323;Vitamina E;106
+PUFA 20:2 n-6 c,c;429;Vitamina K;107
+Energy;301;Calcio;108
+Protein;303;Hierro;109
+Protein;304;Magnesio;110
+Protein;305;Fósforo;111
+Protein;306;Potasio;112
+Protein;307;Sodio;113
+Protein;309;Zinc;114
+Protein;312;Cobre;115
+Protein;315;Manganeso;116
+Protein;317;Selenio;117
+Protein;313;Fluoruro;118
+Protein;601;Colesterol;119
+Protein;638;Estigmasterol;120
+Protein;639;Campesterol;121
+Protein;641;Beta-sitosterol;122
+Protein;221;Alcohol etílico;123
+Protein;255;Agua;124
+Protein;207;Ceniza;125
+Protein;262;Cafeína;126
+Protein;263;Teobromina;127
