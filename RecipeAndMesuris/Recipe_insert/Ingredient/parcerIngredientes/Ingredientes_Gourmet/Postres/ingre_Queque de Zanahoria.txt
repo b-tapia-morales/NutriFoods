@@ -6,7 +6,7 @@
 1,taza,azúcar morena
 4,x,huevos
 1,taza,aceite
-2,tazas,zanahoria rallada
+2,tazas,zanahoria
 1,taza,nueces
 130,gr,queso crema
 1,sobre,Glaseado Vainilla

@@ -1,4 +1,4 @@
-1,cebolla,picada
+1,x,cebolla
 1,cucharada,aceite
 1,kilo,zapallo camote
 2,grandes,zanahorias
