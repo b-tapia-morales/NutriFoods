@@ -99,6 +99,7 @@ VALUES
        ('Ácido eicosapentaenoico', 'Ácido timnodónico', false, 2, 9),           -- PUFA 20:5 n-3 
        ('Ácido 3-docosapentaenoico', '', false, 2, 9),                          -- PUFA 22:5 n-3 
        ('Ácido 3-docosahexaenoico', '', false, 2, 9),                           -- PUFA 22:6 n-3
+       
        -- Ácidos grasos trans--
        ('Ácidos grasos trans, total', '', true, 2, 10),
        ('Ácido trans-monoenoico, total', '', true, 2, 10),
@@ -129,7 +130,7 @@ VALUES
        ('Tiamina', 'Vitamina B1', false, 1, 12),
        ('Riboflavina', 'Vitamina B2', false, 1, 12),
        ('Niacina', 'Vitamina B3', false, 1, 12),
-       ('Ácido pantoténico', 'Vitamina B5', false, 0, 12),
+       ('Ácido pantoténico', 'Vitamina B5', false, 1, 12),
        ('Vitamina B6', '', false, 1, 12),
        ('Folato, total', '', true, 3, 12),
        ('Ácido fólico', 'Vitamina B9', false, 1, 12),
