@@ -16,15 +16,11 @@ public class FrecuencyTable
     
     public static string RemoveAccentsWithNormalization(string inputString)
     {
-        string normalizedString = inputString.Normalize(NormalizationForm.FormD);
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < normalizedString.Length; i++)
+        var normalizedString = inputString.Normalize(NormalizationForm.FormD);
+        var sb = new StringBuilder();
+        foreach (var t in from t in normalizedString let uc = CharUnicodeInfo.GetUnicodeCategory(t) where uc != UnicodeCategory.NonSpacingMark select t)
         {
-            UnicodeCategory uc = CharUnicodeInfo.GetUnicodeCategory(normalizedString[i]);
-            if (uc != UnicodeCategory.NonSpacingMark)
-            {
-                sb.Append(normalizedString[i]);
-            }
+            sb.Append(t);
         }
         return (sb.ToString().Normalize(NormalizationForm.FormC));
     }

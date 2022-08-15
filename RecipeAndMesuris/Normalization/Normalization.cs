@@ -51,6 +51,7 @@ public static class Normalization
                 var name = x.Split(";")[0];
                 var fileRecipeIngredientMeasures = File.ReadAllLines($"Recipe_insert/ingredient/parcerIngredientes/" +
                                                                      $"ingredientes_Gourmet/{nameCategory}/ingre_{name}.txt");
+                var dataRecipeIngredientMeasures = new StreamWriter($"C:/Users/Eduardo/RiderProjects/NutriFoods/RecipeAndMesuris/Recipes/Ingredient/{nameCategory}/{name.ToLower().Replace(" ","_")}.csv");
 
                 foreach (var dataRecipe in fileRecipeIngredientMeasures)
                 {
@@ -60,9 +61,19 @@ public static class Normalization
                     var measuresNormalized = GetKeyMeasures(measures);
                     var ingredientNormalized = GetKeyIngredient(ingredient);
                     var quantityNormalized = NormalizationUnicodeQuantity(quantity,measures);
-                    Console.WriteLine($"{quantity} {quantityNormalized} | {measures} {measuresNormalized} | {ingredient} {ingredientNormalized}");
-                    
+                    var lineData = quantityNormalized+","+measuresNormalized+","+ingredientNormalized;
+                    dataRecipeIngredientMeasures.WriteLine(lineData);
                 }
+                dataRecipeIngredientMeasures.Close();
+
+                var fileRecipeStep = File.ReadAllLines($"C:/Users/Eduardo/RiderProjects/NutriFoods/RecipeAndMesuris/Recipe_insert/ingredient/preparacion_recetas_gourmet/{nameCategory}/prepa_{name}.txt");
+                
+                var dataRecipeIngredientSteps = new StreamWriter($"C:/Users/Eduardo/RiderProjects/NutriFoods/RecipeAndMesuris/Recipes/Steps/{nameCategory}/{name.ToLower().Replace(" ","_")}.csv");
+                foreach (var dataSteps in fileRecipeStep)
+                {
+                    dataRecipeIngredientSteps.WriteLine(dataSteps.Normalize());
+                }
+                dataRecipeIngredientSteps.Close();
             }
         }
     }

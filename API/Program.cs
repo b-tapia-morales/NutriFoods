@@ -10,9 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
+using RecipeAndMesuris.Normalization;
 using RecipeAndMesuris.Recipe_insert;
 
-
+/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
@@ -79,4 +80,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run();*/
+Normalization.NormalizationFilesRecipeIngredient();
