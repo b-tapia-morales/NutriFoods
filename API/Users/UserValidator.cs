@@ -16,7 +16,7 @@ public class UserValidator : AbstractValidator<UserDto>
     public UserValidator()
     {
         When(e => !string.IsNullOrWhiteSpace(e.Email), () => RuleFor(e => e.Email)
-            .Must(e => new EmailAddressAttribute().IsValid(e))
+            .EmailAddress()
             .WithMessage(e =>
                 JsonConvert.ToString($"Provided argument “{e.Email}” does not correspond to a valid email.")));
         When(e => !string.IsNullOrWhiteSpace(e.Username), () => RuleFor(e => e.Username).Matches(RegexUtils.Username)
