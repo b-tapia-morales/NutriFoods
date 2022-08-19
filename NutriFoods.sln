@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutrientRetrieval", "Nutrie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{D72BACE4-535E-4BF5-8B86-84209ADE0CC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipesInsert", "RecipesInsert\RecipesInsert.csproj", "{F68EA50F-0876-49BC-96AC-31F0F061B5E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{D72BACE4-535E-4BF5-8B86-84209ADE0CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D72BACE4-535E-4BF5-8B86-84209ADE0CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D72BACE4-535E-4BF5-8B86-84209ADE0CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68EA50F-0876-49BC-96AC-31F0F061B5E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68EA50F-0876-49BC-96AC-31F0F061B5E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68EA50F-0876-49BC-96AC-31F0F061B5E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68EA50F-0876-49BC-96AC-31F0F061B5E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
