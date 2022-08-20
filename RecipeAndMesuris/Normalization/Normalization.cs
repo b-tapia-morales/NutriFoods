@@ -77,7 +77,11 @@ public static class Normalization
             }
         }
     }
-
+    /// <summary>
+    /// returns a dictionary according to input 1 for measures and any other number for ingredient
+    /// </summary>
+    /// <param name="values">1 for Diccionary Measures, other number for Ingredient</param>
+    /// <returns></returns>
     public static Dictionary<string, List<string>> ValuesMeasuresOrIngredient(int values)
     {
         var dictionary = new Dictionary<string, List<string>>();
@@ -92,13 +96,26 @@ public static class Normalization
         }
         return dictionary;
     }
-
+    
+    /// <summary>
+    /// normalizes numbers in unicode format to fixed values, for example ½, normalizing...
+    /// result -> 1/2
+    /// If you have a corresponding unit of measure or the amount is a decimal, enter your measure.
+    /// </summary>
+    /// <param name="unicode">number in unicode format</param>
+    /// <param name="units">unit of measure if applicable</param>
+    /// <returns>number normalize, if number does not contain the format it returns the same </returns>
     public static string NormalizationUnicodeQuantity(string unicode,string units)
     {
         var normalized = "";
         if (unicode.Contains('.'))
         {
             return NormalizationDecimal(unicode, units);
+        }
+        
+        if (units.Contains('k'))
+        {
+            return TransformKgAGrams(unicode);
         }
         foreach (var character in unicode)
         {
@@ -138,6 +155,12 @@ public static class Normalization
         };
     }
 
+    /// <summary>
+    /// according to a measurement it returns the key or the associated value that must correspond.
+    /// if the measure entered does not exist within the possible values, its return will be the same.
+    /// </summary>
+    /// <param name="measures">unit of measure to find</param>
+    /// <returns>the key of the measure entered, it returns the same value, if it does not exist.</returns>
     public static string GetKeyMeasures(string measures)
     {
         foreach (var dictionaryKeys in MeasuresNormalization.Where(dictionaryKeys =>
@@ -148,15 +171,46 @@ public static class Normalization
 
         return measures;
     }
-    
-    public static string GetKeyIngredient(string measures)
+
+    /// <summary>
+    /// according to a ingredient it returns the key or the associated value that must correspond.
+    /// if the ingredient entered does not exist within the possible values, its return will be the same.
+    /// </summary>
+    /// <param name="ingredient">ingredient name to look for</param>
+    /// <returns>the key of the ingredient entered, it returns the same value, if it does not exist.</returns>
+    public static string GetKeyIngredient(string ingredient)
     {
         foreach (var dictionaryKeys in IngredientNormalization.Where(dictionaryKeys =>
-                     dictionaryKeys.Value.Any(ingredientSimile => ingredientSimile.Equals(measures))))
+                     dictionaryKeys.Value.Any(ingredientSimile => ingredientSimile.Equals(ingredient))))
         {
             return dictionaryKeys.Key;
         }
 
-        return measures;
+        return ingredient;
+    }
+
+    private static string TransformKgAGrams(string quantity)
+    {
+        var normalized = "";
+        foreach (var character in quantity)
+        {
+            if (char.GetUnicodeCategory(character) == UnicodeCategory.OtherNumber)
+            {
+                normalized += TransformUnicode(character);
+            }
+            else normalized += character;
+
+        }
+
+        if (normalized.Length == 3)
+        {
+            var num = normalized.Split("/")[1];
+            return (1000 / int.Parse(num)).ToString();
+        }
+
+        if (!normalized.Contains(' ')) return (1000 * int.Parse(quantity)).ToString();
+        var other = normalized.Split(" ")[1][2] - '0';
+        return ((1000 * int.Parse(normalized.Split(" ")[0])) + (1000 / other)).ToString();
+
     }
 }

@@ -97,5 +97,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();*/
-Normalization.NormalizationFilesRecipeIngredient();
+app.Run();
+//Normalization.NormalizationFilesRecipeIngredient();

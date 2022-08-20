@@ -2,18 +2,18 @@ namespace RecipeAndMesuris.Normalization;
 
 public class ValuesIngredientMeasures
 {
-    public string name { get; set; }
-    public int frecuency { get; set; }
+    public string Name { get; set; }
+    public int Frecuency { get; set; }
 
     public ValuesIngredientMeasures(string name)
     {
-        this.name = name;
-        frecuency = 0;
+        this.Name = name;
+        Frecuency = 0;
     }
 
     public bool AddFrecuency()
     {
-        frecuency++;
+        Frecuency++;
         return true;
     }
 }
