@@ -1,12 +1,11 @@
 using System.Globalization;
 using System.Text;
-using AutoMapper;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace RecipesInsert.Inserts;
+namespace RecipeAndMesuris.Inserts;
 
 public static class Recipes
 {
