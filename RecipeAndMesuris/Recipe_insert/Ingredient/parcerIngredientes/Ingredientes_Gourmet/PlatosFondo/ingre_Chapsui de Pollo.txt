@@ -2,7 +2,7 @@
 4,cucharadas,aceite
 150,gr,pollo
 1,taza,coliflor
-1,cebollín,picado
+1,x,cebollin
 125,g,dientes dragón
 1,taza,brócoli
 2,tazas,porotos verdes

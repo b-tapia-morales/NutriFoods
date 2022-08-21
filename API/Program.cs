@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
+using RecipeAndMesuris.Normalization;
 using RecipeAndMesuris.Recipe_insert;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -97,3 +98,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+//Normalization.NormalizationFilesRecipeIngredient();

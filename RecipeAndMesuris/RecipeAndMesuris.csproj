@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="F23.StringSimilarity" Version="5.0.0" />
       <PackageReference Include="FSharp.Core" Version="6.0.5" />
       <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
       <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.4" />
@@ -16,6 +17,7 @@
       <PackageReference Include="ScrapySharp" Version="3.0.0" />
       <PackageReference Include="Selenium.WebDriver" Version="4.3.0" />
       <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="103.0.5060.5300" />
+      <PackageReference Include="StringSimilarities" Version="2.0.0" />
       <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
       <PackageReference Include="System.Runtime.Caching" Version="6.0.0" />
     </ItemGroup>
@@ -4467,6 +4469,144 @@
       <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\ron.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
+      <None Remove="Normalization\ingredient.csv" />
+      <Content Include="Normalization\ingredient.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Normalization\measures.csv" />
+      <Content Include="Normalization\measures.csv">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Normalization\groupedMeasures.csv" />
+      <Content Include="Normalization\groupedMeasures.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Normalization\groupedIngredient.csv" />
+      <Content Include="Normalization\groupedIngredient.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv" />
+      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv" />
+      <Content Include="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv" />
+      <Content Include="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv" />
+      <Content Include="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv" />
+      <Content Include="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv" />
+      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Atún.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Atún.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Porotos Negros.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Porotos Negros.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Espinacas y Frutillas.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Espinacas y Frutillas.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Molde de Arroz.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Molde de Arroz.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada con salmón.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada con salmón.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada César.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada César.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Quinoa y Pollo.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Quinoa y Pollo.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Fresca de Mote.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Fresca de Mote.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Porotos Granados.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Porotos Granados.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de lentejas.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de lentejas.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Cous-Cous al Azafrán.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Cous-Cous al Azafrán.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Veraniega.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Veraniega.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Rusa.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Rusa.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Griega.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Griega.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ostiones Acaramelados al Anís con Ensalada de....txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ostiones Acaramelados al Anís con Ensalada de....txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Salsa de Cilantro.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Salsa de Cilantro.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Torta de Panqueques Salada.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Torta de Panqueques Salada.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Wrap de Ensalada Griega.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Wrap de Ensalada Griega.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Pasta.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Pasta.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+      <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Coleslaw.txt" />
+      <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada de Coleslaw.txt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Recipes\Ingredient\Ensaladas" />
+      <Folder Include="Recipes\Ingredient\Entradas" />
+      <Folder Include="Recipes\Ingredient\PlatosFondo" />
+      <Folder Include="Recipes\Ingredient\Postres" />
+      <Folder Include="Recipes\Ingredient\Vegano" />
+      <Folder Include="Recipes\Steps\Ensaladas" />
+      <Folder Include="Recipes\Steps\Entradas" />
+      <Folder Include="Recipes\Steps\PlatosFondo" />
+      <Folder Include="Recipes\Steps\Postres" />
+      <Folder Include="Recipes\Steps\Vegano" />
+      <Folder Include="Recipes\Tags" />
     </ItemGroup>
 
 </Project>
