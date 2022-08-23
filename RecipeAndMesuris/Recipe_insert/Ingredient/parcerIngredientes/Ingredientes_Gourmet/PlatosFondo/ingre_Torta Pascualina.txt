@@ -3,7 +3,7 @@
 100,ml,agua
 100,ml,aceite
 1,kilo,acelga
-1,cebolla,mediana
+1,mediana,cebolla
 1 ½,cucharada,mantequilla
 1,cucharada,harina
 1,taza,leche
