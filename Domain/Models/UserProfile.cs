@@ -21,6 +21,7 @@ public class UserProfile
     public Gender Gender { get; set; } = null!;
     public DateTime JoinedOn { get; set; }
     public int? DietId { get; set; }
+    public UpdateFrequency? UpdateFrequency { get; set; }
     public int? MealPlanId { get; set; }
 
     public virtual Diet? Diet { get; set; }

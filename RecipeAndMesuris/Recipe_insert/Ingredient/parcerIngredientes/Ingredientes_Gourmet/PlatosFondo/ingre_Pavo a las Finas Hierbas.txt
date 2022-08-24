@@ -4,7 +4,7 @@ x,x,Pimienta Negra
 4,tajadas,tocino
 2,cucharadas,mantequilla
 1,chica,cebolla
-3,manzanas,verdes
+3,x,manzana verde
 3/4,taza,pan rallado
 1,cucharadita,Tomillo
 ½,cucharadita,Salvia
