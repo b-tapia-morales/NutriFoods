@@ -4,6 +4,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Csv;
 
 namespace RecipeAndMesuris.Inserts;
 
@@ -11,6 +12,15 @@ public static class Recipes
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+    private const string ProjectDirectory = "RecipeAndMesuris";
+    private const string FolderDirectory = "Recipe_insert";
+    private const string SubFolderDirectory = "Recipe";
+    private const string FileName = "recipe.csv";
+    private static readonly string FilePath =
+        Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FolderDirectory,
+            SubFolderDirectory, FileName);
+
+    private const string TemporalPath = @"C:\Users\Rock-\RiderProjects\NutriFoods\RecipeAndMesuris\Recipe_insert\Recipe\recipe.csv";
 
     public static void RecipeInsert()
     {
@@ -19,9 +29,10 @@ public static class Recipes
                 builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
             .Options;
         using var context = new NutrifoodsDbContext(options);
+
+        var recipes = RowRetrieval.RetrieveRows<RecipeTemporal, RecipeMapping>(TemporalPath, DelimiterToken.Semicolon, true)
+            .GroupBy(e => e.Name).Select(g => g.First());
         
-        var totalRecipes = RetrieveRecipes();
-        var recipes = totalRecipes.GroupBy(x => x.Name).Select(c => c.First());
         foreach (var recipe in recipes)
         {
             context.Add(new Recipe
@@ -33,9 +44,8 @@ public static class Recipes
                 PreparationTime = recipe.PreparationTime
             });
         }
-        
+
         context.SaveChanges();
-        
     }
 
     public static IEnumerable<RecipeTemporal> RetrieveRecipes()
@@ -68,6 +78,7 @@ public sealed class RecipeTemporal
     public int? Portions { get; set; }
     public int? PreparationTime { get; set; }
 }
+
 public sealed class RecipeMapping : ClassMap<RecipeTemporal>
 {
     public RecipeMapping()
@@ -77,6 +88,5 @@ public sealed class RecipeMapping : ClassMap<RecipeTemporal>
         Map(p => p.Url).Index(2).Optional();
         Map(p => p.PreparationTime).Index(3).Optional();
         Map(p => p.Portions).Index(4).Optional();
-        
     }
 }
