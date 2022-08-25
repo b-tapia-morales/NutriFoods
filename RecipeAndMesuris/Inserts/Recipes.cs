@@ -30,9 +30,10 @@ public static class Recipes
             .Options;
         using var context = new NutrifoodsDbContext(options);
 
-        var recipes = RowRetrieval.RetrieveRows<RecipeTemporal, RecipeMapping>(TemporalPath, DelimiterToken.Semicolon, true)
-            .GroupBy(e => e.Name).Select(g => g.First());
-        
+        var recipes = RowRetrieval
+            .RetrieveRows<RecipeTemporal, RecipeMapping>(FilePath, DelimiterToken.Semicolon, true)
+            .DistinctBy(e => e.Name);
+
         foreach (var recipe in recipes)
         {
             context.Add(new Recipe
