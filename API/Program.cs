@@ -15,13 +15,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
+using RecipeAndMesuris.Inserts;
 using RecipeAndMesuris.Normalization;
 using RecipeAndMesuris.Recipe_insert;
 using Swashbuckle.AspNetCore.Swagger;
 
-/*
+
 DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
+Recipes.RecipeInsert();
+/*AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
