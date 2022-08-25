@@ -4,7 +4,9 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using RecipeAndMesuris.Inserts.Mapping;
 using Utils.Csv;
+
 
 namespace RecipeAndMesuris.Inserts;
 
@@ -12,15 +14,16 @@ public static class Recipes
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+
     private const string ProjectDirectory = "RecipeAndMesuris";
     private const string FolderDirectory = "Recipe_insert";
     private const string SubFolderDirectory = "Recipe";
     private const string FileName = "recipe.csv";
+
     private static readonly string FilePath =
         Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FolderDirectory,
             SubFolderDirectory, FileName);
 
-    private const string TemporalPath = @"C:\Users\Rock-\RiderProjects\NutriFoods\RecipeAndMesuris\Recipe_insert\Recipe\recipe.csv";
 
     public static void RecipeInsert()
     {
@@ -31,7 +34,7 @@ public static class Recipes
         using var context = new NutrifoodsDbContext(options);
 
         var recipes = RowRetrieval
-            .RetrieveRows<RecipeTemporal, RecipeMapping>(FilePath, DelimiterToken.Semicolon, true)
+            .RetrieveRows<Recipe, RecipeMapping>(FilePath, DelimiterToken.Semicolon, true)
             .DistinctBy(e => e.Name);
 
         foreach (var recipe in recipes)
@@ -49,7 +52,7 @@ public static class Recipes
         context.SaveChanges();
     }
 
-    public static IEnumerable<RecipeTemporal> RetrieveRecipes()
+    public static IEnumerable<Recipe> RetrieveRecipes()
     {
         //var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         //Console.WriteLine(directory);
@@ -66,28 +69,6 @@ public static class Recipes
         using var textReader = new StreamReader(path, Encoding.UTF8);
         using var csv = new CsvReader(textReader, configuration);
         csv.Context.RegisterClassMap<RecipeMapping>();
-        return csv.GetRecords<RecipeTemporal>().ToList();
-    }
-}
-
-public sealed class RecipeTemporal
-{
-    public int Id { get; set; }
-    public string Name { get; set; } = null!;
-    public string Author { get; set; } = null!;
-    public string Url { get; set; } = null!;
-    public int? Portions { get; set; }
-    public int? PreparationTime { get; set; }
-}
-
-public sealed class RecipeMapping : ClassMap<RecipeTemporal>
-{
-    public RecipeMapping()
-    {
-        Map(p => p.Name).Index(0);
-        Map(p => p.Author).Index(1);
-        Map(p => p.Url).Index(2).Optional();
-        Map(p => p.PreparationTime).Index(3).Optional();
-        Map(p => p.Portions).Index(4).Optional();
+        return csv.GetRecords<Recipe>().ToList();
     }
 }
