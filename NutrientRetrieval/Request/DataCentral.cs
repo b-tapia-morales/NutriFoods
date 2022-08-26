@@ -1,7 +1,9 @@
 using Newtonsoft.Json;
 using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Food;
+using Utils.Csv;
 using Utils.Enumerable;
+using static Utils.Csv.DelimiterToken;
 
 namespace NutrientRetrieval.Request;
 
@@ -9,6 +11,14 @@ public static class DataCentral
 {
     private const int MaxItemsPerRequest = 20;
     private const string ApiKey = "aLGkW4nbdeEhoFefi68nOYLNPaSXhiSjO7bIBzQk";
+
+    private const string ProjectDirectory = "NutrientRetrieval";
+    private const string FileDirectory = "Files";
+    private const string FileName = "NewIngredientIDs.csv";
+
+    private static readonly string FilePath =
+        Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FileDirectory,
+            FileName);
 
     private static readonly HttpClient Client = new();
 
@@ -62,7 +72,7 @@ public static class DataCentral
 
     public static async Task<Dictionary<int, T>> RetrieveByItem<T>(string format) where T : IFood
     {
-        var dictionary = IngredientRetrieval.RetrieveRows()
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(FilePath, Semicolon, true)
             .Where(e => e.FoodDataCentralId != null)
             .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId.GetValueOrDefault());
         var tasks = dictionary.Select(e => FetchItem<T>(e.Key, e.Value, format));
@@ -84,7 +94,7 @@ public static class DataCentral
         // Takes all the CSV rows, filters those which have no corresponding FoodDataCentral Id, removes duplicate Ids,
         // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
         // and values respectively.
-        var dictionary = IngredientRetrieval.RetrieveRows()
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(FilePath, Semicolon, true)
             .Where(e => e.FoodDataCentralId != null)
             .DistinctBy(e => e.FoodDataCentralId)
             .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);
