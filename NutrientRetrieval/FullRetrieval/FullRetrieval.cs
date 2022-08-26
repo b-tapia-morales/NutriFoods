@@ -1,39 +1,31 @@
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Food;
 using NutrientRetrieval.Request;
 using NutrientRetrieval.Translation;
 using Utils.Enum;
 
 namespace NutrientRetrieval.FullRetrieval;
 
-public static class ApiRetrieval
+public class FullRetrieval : IFoodRetrieval<Food>
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
 
     private const string Format = "full";
 
-    public static void RetrieveFromApi()
-    {
-        var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
-            .UseNpgsql(ConnectionString)
-            .Options;
-        using var context = new NutrifoodsDbContext(options);
-        var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.RetrieveByList<Food>(Format).Result
-            .ToDictionary(e => e.Key, e => e.Value);
-        Console.WriteLine(foodsDictionary.Count);
-        foreach (var pair in foodsDictionary)
-        {
-            InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            InsertMeasures(context, pair.Key, pair.Value);
-        }
+    private static readonly IFoodRetrieval<Food> Instance = new FullRetrieval();
 
-        context.SaveChanges();
-    }
+    public static void RetrieveFromApi() => Instance.RetrieveFromApi(ConnectionString, Format);
 
-    private static void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
+    public void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
+        int ingredientId, Food food) => s_InsertNutrients(context, dictionary, ingredientId, food);
+
+    public void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food) =>
+        s_InsertMeasures(context, ingredientId, food);
+
+    private static void s_InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
         int ingredientId, Food food)
     {
         if (food.FoodNutrients.Length == 0) return;
@@ -63,7 +55,7 @@ public static class ApiRetrieval
         }
     }
 
-    private static void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food)
+    private static void s_InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food)
     {
         if (food.FoodPortions.Length == 0) return;
 

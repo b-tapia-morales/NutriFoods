@@ -1,36 +1,32 @@
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Food;
 using NutrientRetrieval.Request;
 using Utils.Enum;
 
 namespace NutrientRetrieval.AbridgedRetrieval;
 
-public static class AbridgedRetrieval
+public class AbridgedRetrieval : IFoodRetrieval<Food>
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
 
     private const string Format = "abridged";
 
-    public static void RetrieveFromApi()
-    {
-        var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
-            .UseNpgsql(ConnectionString)
-            .Options;
-        using var context = new NutrifoodsDbContext(options);
-        var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
-        var foodsDictionary = DataCentral.RetrieveByList<Food>(Format).Result.ToDictionary(e => e.Key, e => e.Value);
-        Console.WriteLine(foodsDictionary.Count);
-        foreach (var pair in foodsDictionary)
-        {
-            InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-        }
+    private static readonly IFoodRetrieval<Food> Instance = new AbridgedRetrieval();
 
-        context.SaveChanges();
+    public static void RetrieveFromApi() => Instance.RetrieveFromApi(ConnectionString, Format);
+
+    public void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
+        int ingredientId, Food food) => s_InsertNutrients(context, dictionary, ingredientId, food);
+
+    public void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food)
+    {
+        // Unused
     }
 
-    private static void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
+    private static void s_InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary,
         int ingredientId, Food food)
     {
         if (food.FoodNutrients.Length == 0) return;
