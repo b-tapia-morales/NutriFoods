@@ -14,7 +14,7 @@ public static class DataCentral
 
     private const string ProjectDirectory = "NutrientRetrieval";
     private const string FileDirectory = "Files";
-    private const string FileName = "NewIngredientIDs.csv";
+    private const string FileName = "IngredientIDs.csv";
 
     private static readonly string FilePath =
         Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FileDirectory,
