@@ -173,7 +173,3 @@ VALUES
        ('Cafeína', '', false, 3, 16),
        ('Teobromina', '', false, 3, 16)
 ;
-
-
-SELECT id, name
-from nutrifoods.nutrient_subtype;
