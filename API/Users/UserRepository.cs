@@ -58,7 +58,7 @@ public class UserRepository : IUserRepository
             LastName = lastName ?? string.Empty,
             Birthdate = birthDate,
             Gender = gender,
-            JoinedOn = DateTime.SpecifyKind(DateTime.UtcNow, DateTimeKind.Local)
+            JoinedOn = DateTime.Now.ToLocalTime()
         };
         _context.UserProfiles.Add(newUser);
         await _context.SaveChangesAsync();
@@ -77,7 +77,8 @@ public class UserRepository : IUserRepository
             Weight = weight,
             BodyMassIndex = BodyMassIndex.Calculate(weight, height),
             PhysicalActivityLevel = level,
-            MuscleMassPercentage = muscleMassPercentage
+            MuscleMassPercentage = muscleMassPercentage,
+            AddedOn = DateTime.Now.ToLocalTime()
         };
         _context.UserBodyMetrics.Add(bodyMetric);
         await _context.SaveChangesAsync();

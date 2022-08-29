@@ -19,15 +19,15 @@ using RecipeAndMesuris.Normalization;
 using RecipeAndMesuris.Recipe_insert;
 using Swashbuckle.AspNetCore.Swagger;
 
-
-//DatabaseInitialization.Initialize();
+/*
+DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
+*/
 
-/*
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -98,4 +98,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-//Normalization.NormalizationFilesRecipeIngredient();*/
+//Normalization.NormalizationFilesRecipeIngredient();
