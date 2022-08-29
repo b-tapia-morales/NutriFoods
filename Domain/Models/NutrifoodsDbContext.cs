@@ -620,6 +620,10 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
 
+            entity.Property(e => e.AddedOn)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("added_on");
+
             entity.Property(e => e.BodyMassIndex).HasColumnName("body_mass_index");
 
             entity.Property(e => e.Height).HasColumnName("height");
@@ -677,6 +681,8 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.Password).HasColumnName("password");
 
+            entity.Property(e => e.UpdateFrequency).HasColumnName("update_frequency");
+
             entity.Property(e => e.Username)
                 .HasMaxLength(64)
                 .HasColumnName("username");
@@ -718,6 +724,8 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(v => v.Value, v => Unit.FromValue(v));
         modelBuilder.Entity<UserProfile>().Property(e => e.Gender)
             .HasConversion(v => v.Value, v => Gender.FromValue(v));
+        modelBuilder.Entity<UserProfile>().Property(e => e.UpdateFrequency)
+            .HasConversion(v => v!.Value, v => UpdateFrequency.FromValue(v));
         modelBuilder.Entity<UserBodyMetric>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(v => v.Value, v => PhysicalActivity.FromValue(v));
         modelBuilder.Entity<MealMenu>().Property(e => e.Satiety)

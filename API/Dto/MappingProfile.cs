@@ -41,9 +41,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src => src.PhysicalActivityLevel.Display));
         CreateMap<UserProfile, UserDto>()
-            .ForMember(dest => dest.Birthdate,
-                opt => opt.MapFrom(src => src.Birthdate.ToString()))
+            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString()))
             .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Display))
+            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.Display))
             .ForMember(dest => dest.BodyMetrics, opt => opt.MapFrom(src => src.UserBodyMetrics));
     }
 }

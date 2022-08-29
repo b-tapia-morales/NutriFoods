@@ -3,7 +3,7 @@
 2,cucharadas,azúcar
 2,palos,Canela Entera
 2,tazas,yogurt vainilla
-1-2,cucharaditas,Esencia Vainilla
+2,cucharaditas,Esencia Vainilla
 1/4,taza,agua
 1,cucharada,Gelatina Polvo
 ¼,taza,Salsa Caramelo

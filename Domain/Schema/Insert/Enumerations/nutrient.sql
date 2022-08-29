@@ -35,7 +35,7 @@ ON CONFLICT DO NOTHING;
 INSERT INTO nutrient (name, also_called, is_calculated, essentiality, subtype_id)
 VALUES 
        ('Energía', '', true, 1, 1),
-       ('Carbohidratos, total', '', true, 0, 2),
+       ('Carbohidratos, total', '', true, 3, 2),
        ('Fibra', '', false, 2, 3),
        -- Azúcar --
        ('Azúcares, total', '', true, 3, 4),
@@ -48,7 +48,7 @@ VALUES
        -- Almidón --
        ('Almidón', 'Fécula', false, 3, 5),
        
-       ('Ácidos grasos, total', '', true, 2, 6),
+       ('Ácidos grasos, total', '', true, 3, 6),
        -- Ácidos grasos saturados --
        ('Ácidos grasos saturados, total', '', true, 3, 7),
        ('Ácido butanoico', 'Ácido butírico', false, 3, 7),                      -- SFA 4:0  
@@ -66,10 +66,10 @@ VALUES
        ('Ácido docosanoico', 'Ácido behénico', false, 3, 7),                    -- SFA 22:0
        ('Ácido tetracosanoico', 'Ácido lignocérico', false, 3, 7),              -- SFA 24:0 
        -- Ácidos grasos monoinsaturados --
-       ('Ácidos grasos monoinsaturados, total', '', true, 2, 8),
+       ('Ácidos grasos monoinsaturados, total', '', true, 3, 8),
        ('Ácido tetradecenoico', 'Ácido miristoleico', false, 2, 8),             -- MUFA 14:1 
        ('Ácido pentadecenoico', '', false, 2, 8),                               -- MUFA 15:1
-       ('Ácido hexadecenoico', 'Ácido miristoleico', false, 2, 8),              -- MUFA 16:1
+       ('Ácido hexadecenoico', 'Ácido palmitoleico', false, 2, 8),              -- MUFA 16:1
        ('Ácido cis-hexadecenoico', '', false, 2, 8),                            -- MUFA 16:1 c
        ('Ácido heptadecenoico', '', false, 2, 8),                               -- MUFA 17:1
        ('Ácido i-heptadecenoico', '', false, 2, 8),                             -- MUFA 17:1 i
