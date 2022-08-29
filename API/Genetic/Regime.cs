@@ -6,9 +6,8 @@ namespace API.Genetic;
 public class Regime : IGeneticAlgorithm
 {
     private readonly IRecipeRepository _repository;
-    private static readonly ICollection<MealMenuDto> Solutions = new List<MealMenuDto>();
-    private static readonly ICollection<MealMenuDto> Winners = new List<MealMenuDto>();
-
+    private static readonly ICollection<PossibleRegime> Solutions = new List<PossibleRegime>();
+    private static readonly ICollection<PossibleRegime> Winners = new List<PossibleRegime>();
     
     public Regime(IRecipeRepository recipeRepository)
     {
