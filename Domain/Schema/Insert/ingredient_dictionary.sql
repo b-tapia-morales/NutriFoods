@@ -78,15 +78,111 @@ VALUES
     -- Tocino --
     ('Tocineta', 90),
     -- Betarraga --
-    ('Remolacha', 92),
-    ('Betabel', 92),
+    ('Remolacha', find_ingredient_id('Betarraga')),
+    ('Betabel', find_ingredient_id('Betarraga')),
     -- Alcachofa --
-    ('Alcacil', 96),
-    ('Alcaucil', 96),
-    ('Alcarcil', 96),
-    -- Alcachofa --
-    ('Aneldo', 100),
-    ('Abesón', 100),
-    ('Hinojo hediondo', 100),
-    ('Hinojo fétido', 100)
+    ('Alcacil', find_ingredient_id('Alcachofa')),
+    ('Alcaucil', find_ingredient_id('Alcachofa')),
+    ('Alcarcil', find_ingredient_id('Alcachofa')),
+    -- Eneldo --
+    ('Aneldo', find_ingredient_id('Eneldo')),
+    ('Abesón', find_ingredient_id('Eneldo')),
+    ('Hinojo hediondo', find_ingredient_id('Eneldo')),
+    ('Hinojo fétido', find_ingredient_id('Eneldo')),
+    -- Salsa Inglesa --
+    ('Salsa Worcestershire', find_ingredient_id('Salsa Inglesa')),
+    ('Salsa Worcester', find_ingredient_id('Salsa Inglesa')),
+    -- Pimiento amarillo --
+    ('Morrón amarillo', find_ingredient_id('Pimiento amarillo')),
+    -- Cerdo --
+    ('Animal de bellota', find_ingredient_id('Cerdo')),
+    ('Chancho', find_ingredient_id('Cerdo')),
+    ('Coche', find_ingredient_id('Cerdo')),
+    ('Cochino', find_ingredient_id('Cerdo')),
+    ('Cocho', find_ingredient_id('Cerdo')),
+    ('Cuche', find_ingredient_id('Cerdo')),
+    ('Cuchi', find_ingredient_id('Cerdo')),
+    ('Cuino', find_ingredient_id('Cerdo')),
+    ('Cuto', find_ingredient_id('Cerdo')),
+    ('Gorrino', find_ingredient_id('Cerdo')),
+    ('Guarro', find_ingredient_id('Cerdo')),
+    ('Marrano', find_ingredient_id('Cerdo')),
+    ('Puerco', find_ingredient_id('Cerdo')),
+    ('Tunco', find_ingredient_id('Cerdo')),
+    ('Lecho', find_ingredient_id('Cerdo')),
+    ('Cochinillo', find_ingredient_id('Cerdo')),
+    -- Ají --
+    ('Chile', find_ingredient_id('Ají')),
+    ('Ají en vaina', find_ingredient_id('Cerdo')),
+
+    -- Anchoa --
+    ('Anchoveta', find_ingredient_id('Anchoa')),
+    ('Bocarte', find_ingredient_id('Anchoa')),
+    ('Boquerón', find_ingredient_id('Anchoa')),
+    -- Chalota --
+    ('Escaloña', find_ingredient_id('Chalota')),
+    -- Frutilla --
+    ('Fresa', find_ingredient_id('Frutilla')),
+    -- Porotos --
+    ('Alubia', find_ingredient_id('Porotos')),
+    ('Caraota', find_ingredient_id('Porotos')),
+    ('Frejol', find_ingredient_id('Porotos')),
+    ('Frijol', find_ingredient_id('Porotos')),
+    ('Haba', find_ingredient_id('Porotos')),
+    ('Habichuela', find_ingredient_id('Porotos')),
+    ('Judía', find_ingredient_id('Porotos')),
+    -- Pasas --
+    ('Pasa de uva', find_ingredient_id('Pasas')),
+    ('Uva pasa', find_ingredient_id('Pasas')),
+    ('Pansa', find_ingredient_id('Pasas')),
+    -- Ají verde --
+    ('Chile verde', find_ingredient_id('Ají verde')),
+    -- Maicena -- 
+    ('Almidón de Maíz', find_ingredient_id('Maicena')),
+    ('Maizena', find_ingredient_id('Maicena')),
+    ('Fécula de maíz', find_ingredient_id('Maicena')),
+    -- Porotos granados --
+    ('Chaucha', find_ingredient_id('Porotos granados')),
+    ('Ejote', find_ingredient_id('Porotos granados')),
+    ('Judía verde', find_ingredient_id('Porotos granados')),
+    ('Vainica', find_ingredient_id('Porotos granados')),
+    ('Vainita', find_ingredient_id('Porotos granados')),
+    -- Ricotta --
+    ('Requesón', find_ingredient_id('Ricotta')),
+    -- Jalapeño --
+    ('Cuarasmeñio', find_ingredient_id('Jalapeño')),
+    -- Jamón --
+    ('Jamón york', find_ingredient_id('Jamón')),
+    ('Jamoneta', find_ingredient_id('Jamón')),
+    -- Ulte --
+    ('Lembo', find_ingredient_id('Ulte')),
+    ('Lunfo', find_ingredient_id('Ulte')),
+    ('Raguay', find_ingredient_id('Ulte')),
+    -- Maracuyá --
+    ('Calala', find_ingredient_id('Maracuyá')),
+    ('Chinola', find_ingredient_id('Maracuyá')),
+    ('Parchío', find_ingredient_id('Maracuyá')),
+    ('Parchita', find_ingredient_id('Maracuyá')),
+    -- Escalopa de carne --
+    ('Milanesa', find_ingredient_id('Escalopa de carne')),
+    -- Papas fritas --
+    ('Papas a la francesa', find_ingredient_id('Papas fritas')),
+    ('Papitas', find_ingredient_id('Papas fritas')),
+    ('Patatas fritas', find_ingredient_id('Papas fritas')),
+    -- Ketchup --
+    ('Cachú', find_ingredient_id('Ketchup')),
+    -- Piña --
+    ('Ananá', find_ingredient_id('Piña')),
+    -- Plátano --
+    ('Banana', find_ingredient_id('Plátano')),
+    ('Cambur', find_ingredient_id('Plátano')),
+    ('Guineo', find_ingredient_id('Plátano')),
+    -- Cochayuyo --
+    ('Chicoria de mar', find_ingredient_id('Cochayuyo')),
+    ('Mochoco', find_ingredient_id('Cochayuyo')),
+    ('Yuyo', find_ingredient_id('Cochayuyo')),
+    -- Acelga --
+    ('Bleda', find_ingredient_id('Acelga'))
+
+   
 ;
