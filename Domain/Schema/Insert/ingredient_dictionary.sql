@@ -182,7 +182,23 @@ VALUES
     ('Mochoco', find_ingredient_id('Cochayuyo')),
     ('Yuyo', find_ingredient_id('Cochayuyo')),
     -- Acelga --
-    ('Bleda', find_ingredient_id('Acelga'))
+    ('Bleda', find_ingredient_id('Acelga')),
+    -- Quinoa --
+    ('Quinua', find_ingredient_id('Quinoa')),
+    -- Salsa de soya --
+    ('Salsa de soja', find_ingredient_id('Salsa de soya')),
+    -- Azúcar rubia --
+    ('Azúcar amarilla', find_ingredient_id('Azúcar rubia')),
+    ('Azúcar negra', find_ingredient_id('Azúcar rubia')),
+    ('Azúcar morena', find_ingredient_id('Azúcar rubia')),
+    ('Azúcar terciado', find_ingredient_id('Azúcar rubia')),
+    -- Tomate pera --
+    ('Tomate roma', find_ingredient_id('Tomate pera')),    
+    -- Zapallo camote --
+    ('Ahuyama', find_ingredient_id('Zapallo camote'))
+    
+    
+    
 
    
 ;
