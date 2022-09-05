@@ -3,80 +3,80 @@ SET SEARCH_PATH = "nutrifoods";
 INSERT INTO ingredient_synonym (name, ingredient_id)
 VALUES
     -- Palta --
-    ('Abacate', 15),
-    ('Aguacate', 15),
-    ('Avocado', 15),
+    ('Abacate', find_ingredient_id('Palta')),
+    ('Aguacate', find_ingredient_id('Palta')),
+    ('Avocado', find_ingredient_id('Palta')),
     -- Albahaca --
-    ('Albaca', 16),
-    ('Alhábega', 16),
-    ('Basílico', 16),
+    ('Albaca', find_ingredient_id('Albahaca')),
+    ('Alhábega', find_ingredient_id('Albahaca')),
+    ('Basílico', find_ingredient_id('Albahaca')),
     -- Pimiento rojo --
-    ('Pimiento', 19),
-    ('Pimentón rojo', 19),
-    ('Morrón rojo', 19),
+    ('Pimiento', find_ingredient_id('Pimiento rojo')),
+    ('Pimentón rojo', find_ingredient_id('Pimiento rojo')),
+    ('Morrón rojo', find_ingredient_id('Pimiento rojo')),
     -- Zapallo italiano --
-    ('Zapallito', 29),
-    ('Calabacita', 29),
-    ('Calabacín', 29),
+    ('Zapallito', find_ingredient_id('Zapallo italiano')),
+    ('Calabacita', find_ingredient_id('Zapallo italiano')),
+    ('Calabacín', find_ingredient_id('Zapallo italiano')),
     -- Cebollín --
-    ('Cebolleta', 37),
-    ('Puerro', 37),
-    ('Cebolla larga', 37),
+    ('Cebolleta', find_ingredient_id('Cebollín')),
+    ('Puerro', find_ingredient_id('Cebollín')),
+    ('Cebolla larga', find_ingredient_id('Cebollín')),
     -- Tomate cherry --
-    ('Tomate cherri', 39),
-    ('Tomate cereza', 39),
-    ('Tomate pasa', 39),
-    ('Tomate uva', 39),
+    ('Tomate cherri', find_ingredient_id('Tomate cherry')),
+    ('Tomate cereza', find_ingredient_id('Tomate cherry')),
+    ('Tomate pasa', find_ingredient_id('Tomate cherry')),
+    ('Tomate uva', find_ingredient_id('Tomate cherry')),
     -- Brócoli --
-    ('Brécol', 43),
-    ('Bróculi', 43),
+    ('Brécol', find_ingredient_id('Brócoli')),
+    ('Bróculi', find_ingredient_id('Brócoli')),
     -- Espárrago --
-    ('Esparraguera', 45),
+    ('Esparraguera', find_ingredient_id('Espárrago')),
     -- Merkén --
-    ('Merquén', 51),
+    ('Merquén', find_ingredient_id('Merkén')),
     -- Aceite de palta --
-    ('Aceite de aguacate', 62),
+    ('Aceite de aguacate', find_ingredient_id('Aceite de palta')),
     -- Repollo --
-    ('Col', 63),
+    ('Col', find_ingredient_id('Repollo')),
     -- Arvejas --
-    ('Alverjas', 65),
-    ('Chícharos', 65),
-    ('Guisantes', 65),
+    ('Alverjas', find_ingredient_id('Arvejas')),
+    ('Chícharos', find_ingredient_id('Arvejas')),
+    ('Guisantes', find_ingredient_id('Arvejas')),
     -- Pepino --
-    ('Pepinillo', 66),
+    ('Pepinillo', find_ingredient_id('Pepino')),
     -- Porotos verdes --
-    ('Habichuelas', 67),
-    ('Ejote', 67),
-    ('Judías verdes', 67),
+    ('Habichuelas', find_ingredient_id('Porotos verdes')),
+    ('Ejote', find_ingredient_id('Porotos verdes')),
+    ('Judías verdes', find_ingredient_id('Porotos verdes')),
     -- Sésamo --
-    ('Semillas de sésamo', 69),
+    ('Semillas de sésamo', find_ingredient_id('Sésamo')),
     -- Linaza --
-    ('Semillas de lino', 70),
+    ('Semillas de lino', find_ingredient_id('Linaza')),
     -- Curry --
-    ('Curri', 74),
+    ('Curri', find_ingredient_id('Curry')),
     -- Pimiento verde --
-    ('Pimentón verde', 79),
-    ('Morrón verde', 79),
+    ('Pimentón verde', find_ingredient_id('Pimiento verde')),
+    ('Morrón verde', find_ingredient_id('Pimiento verde')),
     -- Ciboulette --
-    ('Cebolla de verdeo', 80),
-    ('Cebollano', 80),
-    ('Cebollino', 80),
-    ('Ajo cebollino', 80),
+    ('Cebolla de verdeo', find_ingredient_id('Ciboulette')),
+    ('Cebollano', find_ingredient_id('Ciboulette')),
+    ('Cebollino', find_ingredient_id('Ciboulette')),
+    ('Ajo cebollino', find_ingredient_id('Ciboulette')),
     -- Queso cabra --
-    ('Queso de cabra', 81),
-    ('Queso de leche de cabra', 81),
+    ('Queso de cabra', find_ingredient_id('Queso cabra')),
+    ('Queso de leche de cabra', find_ingredient_id('Queso cabra')),
     -- Vinagre balsámico --
-    ('Aceto', 82),
-    ('Aceto balsámico', 82),
+    ('Aceto', find_ingredient_id('Vinagre balsámico')),
+    ('Aceto balsámico', find_ingredient_id('Vinagre balsámico')),
     -- Laurel --
-    ('Lauro', 83),
+    ('Lauro', find_ingredient_id('Laurel')),
     -- Tahini --
-    ('Tahina', 85),
+    ('Tahina', find_ingredient_id('Tahini')),
     -- Camarón --
-    ('Quisquilla', 89),
-    ('Esquila', 89),
+    ('Quisquilla', find_ingredient_id('Camarón')),
+    ('Esquila', find_ingredient_id('Camarón')),
     -- Tocino --
-    ('Tocineta', 90),
+    ('Tocineta', find_ingredient_id('Tocino')),
     -- Betarraga --
     ('Remolacha', find_ingredient_id('Betarraga')),
     ('Betabel', find_ingredient_id('Betarraga')),
@@ -193,12 +193,68 @@ VALUES
     ('Azúcar morena', find_ingredient_id('Azúcar rubia')),
     ('Azúcar terciado', find_ingredient_id('Azúcar rubia')),
     -- Tomate pera --
-    ('Tomate roma', find_ingredient_id('Tomate pera')),    
+    ('Tomate roma', find_ingredient_id('Tomate pera')),
     -- Zapallo camote --
-    ('Ahuyama', find_ingredient_id('Zapallo camote'))
-    
-    
-    
+    ('Ahuyama', find_ingredient_id('Zapallo camote')),
+    -- Mermelada de Frambuesa --
+    ('Mermelada de Parrón', find_ingredient_id('Mermelada de frambuesa')),
+    -- Tortilla --
+    ('Memela', find_ingredient_id('Tortilla')),
+    -- Caldo de ave --
+    ('Consomé de ave', find_ingredient_id('Caldo de ave')),
+    ('Caldo de pollo', find_ingredient_id('Caldo de ave')),
+    ('Consomé de pollo', find_ingredient_id('Caldo de ave')),
+    -- Granos de choclo --
+    ('Granos de elote', find_ingredient_id('Granos de choclo')),
+    ('Granos de chócolo', find_ingredient_id('Granos de choclo')),
+    ('Granos de jojoto', find_ingredient_id('Granos de choclo')),
+    -- Tapas para empanada --
+    ('Masas de empanada', find_ingredient_id('Tapas para empanada')),
+    -- Tortilla de maíz --
+    ('Memela', find_ingredient_id('Tortilla de maíz')),
+    -- Salsa de tomate --
+    ('Salsa de jitomate', find_ingredient_id('Salsa de tomate')),
+    -- Crema ácida --
+    ('Crema agria', find_ingredient_id('Crema ácida')),
+    -- Crema de leche --
+    ('Nata', find_ingredient_id('Crema de leche')),
+    -- Pure de zapallo --
+    ('Puré de Ahuyama', find_ingredient_id('Pure de zapallo')),
+    -- Lomo de ternera --
+    ('Solomillo', find_ingredient_id('Lomo de ternera')),
+    ('Solomillo de ternera', find_ingredient_id('Lomo de ternera')),
+    -- Queso azul --
+    ('Bleu', find_ingredient_id('Queso azul')),
+    -- Anato --
+    ('Annatto', find_ingredient_id('Anato')),
+    -- Pasta de chipotle --
+    ('Pasta de kaponchili', find_ingredient_id('Pasta de chipotle')),
+    -- Gelatina en polvo --
+    ('Jalea en polvo', find_ingredient_id('Gelatina en polvo')),
+    -- Caldo de carne --
+    ('Consomé de carne', find_ingredient_id('Caldo de carne')),
+    -- Aceituna verde --
+    ('Oliva verde', find_ingredient_id('Aceituna verde')),
+    -- Almeja --
+    ('Taca', find_ingredient_id('Almeja')),
+    -- Semillas de zapallo --
+    ('Semillas de calabaza', find_ingredient_id('Semillas de zapallo')),
+    ('Semillas de calabacera', find_ingredient_id('Semillas de zapallo')),
+    -- Mandarina --
+    ('Naranja mandarina', find_ingredient_id('Mandarina')),
+    ('Naranja mandarina', find_ingredient_id('Tangerina')),
+    ('Naranja mandarina', find_ingredient_id('Tanjorona')),
+    -- Bacalao --
+    ('Abadejo', find_ingredient_id('Bacalao')),
+    -- Chuleta de cerdo --
+    ('Chuleta de chancho', find_ingredient_id('Chuleta de cerdo')),
+    -- Carne de cordero --
+    ('Carne de lechazo', find_ingredient_id('Carne de cordero')),
+    ('Carne de ternasco', find_ingredient_id('Carne de cordero')),
+    -- Rabo de ternera --
+    ('Rabo de toro', find_ingredient_id('Rabo de ternera')),
+    ('Cola de ternera', find_ingredient_id('Rabo de ternera')),
+    ('Cola de toro', find_ingredient_id('Rabo de ternera'))
 
-   
+
 ;
