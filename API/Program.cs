@@ -26,8 +26,8 @@ Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-*/
 
+/*
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -98,4 +98,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-//Normalization.NormalizationFilesRecipeIngredient();
+*///Normalization.NormalizationFilesRecipeIngredient();

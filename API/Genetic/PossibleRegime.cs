@@ -4,8 +4,9 @@ namespace API.Genetic;
 
 public class PossibleRegime
 {
-    private MealMenuDto Recipes { get; }
+    public MealMenuDto Recipes { get; }
     private const double Percent = 0.1;
+    public int Fitness { get; private set; }
 
     public PossibleRegime(int numberRecipes)
     {
@@ -17,18 +18,15 @@ public class PossibleRegime
             ProteinsTotal = 0,
             MenuRecipes = new List<MealMenuRecipeDto>(numberRecipes)
         };
+        Fitness = 0;
     }
 
-    public void AddRecipe(RecipeDto r)
+    public void AddRecipe(MealMenuRecipeDto mealMenuRecipe)
     {
-        Recipes.MenuRecipes.ToList().Add(new MealMenuRecipeDto()
-        {
-            Recipe = r,
-            Quantity = 1
-        });
+        Recipes.MenuRecipes.ToList().Add(mealMenuRecipe);
     }
 
-    public void FitnessTotal()
+    public void MacroNutrientCalculation()
     {
         double carbohydrates = 0;
         double lipids = 0;
@@ -38,16 +36,16 @@ public class PossibleRegime
         {
             switch (macroNutrients.Nutrient.Id)
             {
-                case 1:
+                case 108:
                     energy += macroNutrients.Quantity;
                     break;
-                case 2:
+                case 1:
                     carbohydrates += macroNutrients.Quantity;
                     break;
-                case 3:
+                case 109:
                     proteins += macroNutrients.Quantity;
                     break;
-                case 4:
+                case 11:
                     lipids += macroNutrients.Quantity;
                     break;
             }
@@ -59,9 +57,9 @@ public class PossibleRegime
         Recipes.ProteinsTotal = proteins;
     }
 
-    public int Fitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories, double userValueFats)
+    public void CalculateFitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories, double userValueFats)
     {
-        return FitnessResult(userValueKilocalories,Recipes.EnergyTotal) +
+        Fitness = FitnessResult(userValueKilocalories,Recipes.EnergyTotal) +
                FitnessResult(userValueProteins,Recipes.ProteinsTotal)+
                FitnessResult(userValueFats,Recipes.LipidsTotal)+
                FitnessResult(userValueCarbohydrates,Recipes.CarbohydratesTotal);
@@ -88,4 +86,5 @@ public class PossibleRegime
 
         return 0;
     }
+    
 }
