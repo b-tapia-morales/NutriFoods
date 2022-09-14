@@ -254,7 +254,104 @@ VALUES
     -- Rabo de ternera --
     ('Rabo de toro', find_ingredient_id('Rabo de ternera')),
     ('Cola de ternera', find_ingredient_id('Rabo de ternera')),
-    ('Cola de toro', find_ingredient_id('Rabo de ternera'))
+    ('Cola de toro', find_ingredient_id('Rabo de ternera')),
+    -- Mostaza --
+    ('Savora', find_ingredient_id('Mostaza')),
+    -- Solomillo de cerdo --
+    ('Lomo de cerdo', find_ingredient_id('Solomillo de cerdo')),
+    ('Solomillo de chancho', find_ingredient_id('Solomillo de cerdo')),
+    -- Manjar --
+    ('Arequipe', find_ingredient_id('Manjar')),
+    ('Cajeta', find_ingredient_id('Manjar')),
+    ('Manjar blanco', find_ingredient_id('Manjar')),
+    ('Dulce de leche', find_ingredient_id('Manjar')),
+    -- Filete --
+    ('Filete miñon', find_ingredient_id('Filete')),
+    ('Filet mignon', find_ingredient_id('Filete')),
+    -- Berries --
+    ('Frutos rojos', find_ingredient_id('Berries')),
+    ('Frutos del bosque', find_ingredient_id('Berries')),
+    -- Ralladura de Limón --
+    ('Ralladura de lima', find_ingredient_id('Ralladura de limón')),
+    -- Marraqueta --
+    ('Pan francés', find_ingredient_id('Marraqueta')),
+    ('Pan batido', find_ingredient_id('Marraqueta')),
 
+    -- Plateada --
+    ('Tapa de asado', find_ingredient_id('Plateada')),
+    ('Tapa de lomo alto', find_ingredient_id('Plateada')),
+    -- Salsa blanca --
+    ('Bechamel', find_ingredient_id('Salsa blanca')),
+    ('Besamela', find_ingredient_id('Salsa blanca')),
+    -- Crispy --
+    ('Crocante', find_ingredient_id('Crispy')),
+    -- Panqueque --
+    ('Tortita', find_ingredient_id('Panqueque')),
+    ('Panqueca', find_ingredient_id('Panqueque')),
+    ('Hotcake', find_ingredient_id('Panqueque')),
+    ('Celestino', find_ingredient_id('Panqueque')),
+    ('Panqueque celestino', find_ingredient_id('Panqueque')),
+    -- Chancaca --
+    ('Panela', find_ingredient_id('Chancaca')),
+    ('Papelón', find_ingredient_id('Chancaca')),
+    ('Piloncillo', find_ingredient_id('Chancaca')),
+    ('Tapadulce', find_ingredient_id('Chancaca')),
 
+    -- Durazno --
+    ('Melocotón', find_ingredient_id('Durazno')),
+    -- Moras --
+    ('Zarzamoras', find_ingredient_id('Moras')),
+    ('Murras', find_ingredient_id('Moras')),
+
+    -- Lomo liso --
+    ('Nueva york', find_ingredient_id('Lomo liso')),
+    ('Bife angosto', find_ingredient_id('Lomo liso')),
+    ('Lomo', find_ingredient_id('Lomo liso')),
+    -- Posta --
+
+    -- Manteca --
+    ('Mantequilla', find_ingredient_id('Manteca')),
+    -- Pollo ganso --
+    ('Redondo redondel', find_ingredient_id('Pollo ganso')),
+    ('Asado pejerrey', find_ingredient_id('Pollo ganso')),
+    ('Pulpa choriso', find_ingredient_id('Pollo ganso')),
+
+    -- Lomo vetado --
+    ('Bife ancho', find_ingredient_id('Lomo vetado')),
+    ('Lomo alto', find_ingredient_id('Lomo vetado')),
+
+    -- Trutros cortos --
+    ('Tuto cortos', find_ingredient_id('Trutros cortos')),
+    -- Cerveza --
+    ('Birra', find_ingredient_id('Cerveza')),
+    ('Cerbatana', find_ingredient_id('Cerveza')),
+    ('Chela', find_ingredient_id('Cerveza')),
+    ('Pilsen', find_ingredient_id('Cerveza')),
+    -- Champiñon ostra --
+    ('Seta ostra', find_ingredient_id('Champiñon ostra')),
+    -- Pisco --
+    ('Agua ardiente', find_ingredient_id('Pisco')),
+    -- Pan de hamburguesa --
+    ('Bollos de hamburguesa', find_ingredient_id('Pan de hamburguesa')),
+
+    -- Bizcocho --
+    ('Ponqué', find_ingredient_id('Bizcocho')),
+    ('Queque', find_ingredient_id('Bizcocho')),
+    ('Torta', find_ingredient_id('Bizcocho')),
+    --Salsa barbecue--
+    ('Salsa barbacoa', find_ingredient_id('Salsa barbecue')),
+    -- ASiento --
+    -- Dientes de dragón --
+    ('Brotes de soya', find_ingredient_id('Dientes de dragón')),
+    ('Brotes de soja', find_ingredient_id('Dientes de dragón')),
+    -- Nutella --
+    ('Crema de avellanas', find_ingredient_id('Nutella')),
+    -- Frutos rojos --
+    -- Huesillo --
+    ('Durazno seco', find_ingredient_id('Huesillo')),
+    -- Pistacho --
+    ('Alfóncigo', find_ingredient_id('Pistacho')),
+    ('Alhócigo', find_ingredient_id('Pistacho'))
+  
+    
 ;
