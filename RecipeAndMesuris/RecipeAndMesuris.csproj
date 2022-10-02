@@ -11,6 +11,7 @@
       <PackageReference Include="F23.StringSimilarity" Version="5.0.0" />
       <PackageReference Include="FSharp.Core" Version="6.0.5" />
       <PackageReference Include="HtmlAgilityPack" Version="1.11.43" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
       <PackageReference Include="Microsoft.NETCore.Platforms" Version="6.0.4" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="Npgsql" Version="6.0.5" />
@@ -4607,6 +4608,10 @@
       <Folder Include="Recipes\Steps\Postres" />
       <Folder Include="Recipes\Steps\Vegano" />
       <Folder Include="Recipes\Tags" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
     </ItemGroup>
 
 </Project>
