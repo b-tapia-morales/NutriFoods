@@ -351,7 +351,104 @@ VALUES
     ('Durazno seco', find_ingredient_id('Huesillo')),
     -- Pistacho --
     ('Alfóncigo', find_ingredient_id('Pistacho')),
-    ('Alhócigo', find_ingredient_id('Pistacho'))
-  
+    ('Alhócigo', find_ingredient_id('Pistacho')),
+    -- Helado --
+    ('Sorbete', find_ingredient_id('Helado')),
+    ('Crema Helada', find_ingredient_id('Helado')),
+    ('Mantecado', find_ingredient_id('Helado')),
+    ('Nieve', find_ingredient_id('Helado')),
+     -- Salsa de manjar --
+    ('Salsa de arequipe', find_ingredient_id('Salsa de manjar')),
+    -- Higo deshidratado --
+    ('Higo seco', find_ingredient_id('Higo deshidradato')),
+    -- Colapez --
+    ('Cola de pescado', find_ingredient_id('Colapez')),
+    ('Colapí', find_ingredient_id('Colapez')),
+    ('Colapizo', find_ingredient_id('Colapez')),
+    ('Ictiocola', find_ingredient_id('Colapez')),
+    -- 320 --
     
+    -- Punta de ganso --
+    ('Picanha', find_ingredient_id('Punta de ganso')),
+    ('Tapa de Cuadril', find_ingredient_id('Punta de ganso')),
+    
+    -- Semola --
+    ('Semolina', find_ingredient_id('Semola')),
+    
+    -- Choros --
+    ('Choritos', find_ingredient_id('Choros')),
+    ('Mejillón', find_ingredient_id('Choros')),
+    -- Maní --
+    ('Cacahuate', find_ingredient_id('Maní')),
+    ('Cacahuete', find_ingredient_id('Maní')),
+    
+    -- Salsa horseradish --
+    ('Salsa de rábano picante', find_ingredient_id('Salsa horseradish')),
+    -- Jugo de piña -- 
+    ('Jugo de ananá', find_ingredient_id('Jugo de piña')),
+    -- Prieta --
+    ('Morcilla', find_ingredient_id('Prieta')),
+    -- Palanca --
+    ('Bife de Vazio', find_ingredient_id('Palanca')),
+    ('Bife de Vacío', find_ingredient_id('Palanca')),
+    -- Asado de tira --     
+    ('Asado de tira', find_ingredient_id('Asado de tira')),
+    ('Tira de asado', find_ingredient_id('Asado de tira')),
+    ('Tira de costilla', find_ingredient_id('Asado de tira')),
+    ('Costilla cargada', find_ingredient_id('Asado de tira')),
+    
+    -- Cerveza oscura --    
+    --('Cerveza negra', find_ingredient_id('Cerveza oscura')),
+    
+    -- Tallarines --
+    ('Taglierini', find_ingredient_id('Tallarines')),
+    
+    -- Pimienta cayenna --
+    ('Pimienta de Cayena', find_ingredient_id('Pimienta cayenna')),
+    
+    -- Malaya --
+    ('Matambre', find_ingredient_id('Malaya')),
+    ('sobrebarriga', find_ingredient_id('Malaya')),
+    
+    -- Osobuco --
+    ('Ossobuco', find_ingredient_id('Osobuco')),
+    
+    -- Posta paleta --
+    ('Posta de paleta', find_ingredient_id('Posta paleta')),
+    
+    -- Callampas deshidratadas --
+    ('Callampas secas', find_ingredient_id('Callampas deshidratadas')),
+    
+    -- Sobrecostilla -- 
+    ('Asado', find_ingredient_id('Sobrecostilla')),
+    
+    -- Lemon grass --
+    ('Pasto de limón', find_ingredient_id('Lemon grass')),
+    -- Brotes de arveja --
+    ('Brotes de guisante', find_ingredient_id('Brotes de arveja')),
+    ('Brotes de alverja', find_ingredient_id('Brotes de arveja')),
+    ('Brotes de chícharo', find_ingredient_id('Brotes de arveja')),
+
+
+    -- Salsa de champiñon --
+    ('Salsa de setas', find_ingredient_id('Salsa de champiñon')),
+    -- Jibia --
+    ('Calamar gigante', find_ingredient_id('Jibia')),
+    ('Pota', find_ingredient_id('Jibia')),
+    -- Vienesa --
+    ('Salchicha', find_ingredient_id('Vienesa')),
+    -- Tapapecho -- 
+    ('Carne de Quijada', find_ingredient_id('Tapapecho')),
+    ('Pecho', find_ingredient_id('Tapapecho')),
+
+    -- Marshmallows --
+    ('Malvaviscos', find_ingredient_id('Marshmallows')),
+
+    -- Avena tradicional --
+    ('Avena', find_ingredient_id('Avena tradicional'))
+
+
+
+
+
 ;
