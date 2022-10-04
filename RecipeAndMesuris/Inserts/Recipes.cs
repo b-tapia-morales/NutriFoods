@@ -71,4 +71,23 @@ public static class Recipes
         csv.Context.RegisterClassMap<RecipeMapping>();
         return csv.GetRecords<Recipe>().ToList();
     }
+
+    public static void RecipeMeasures()
+    {
+        var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
+            .UseNpgsql(ConnectionString,
+                builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            .Options;
+        using var context = new NutrifoodsDbContext(options);
+        //lectura de id a los archivos
+        // ejecutar query con las id de los ingredientes
+        // buscarlas
+        //insertarlas con context
+        context.Add(new IngredientMeasure
+        {
+
+        });
+    }
+    
+    
 }
