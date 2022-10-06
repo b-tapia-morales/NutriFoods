@@ -1,46 +1,14 @@
 SET SEARCH_PATH = "nutrifoods";
 
-DROP TABLE IF EXISTS user_allergy;
-DROP TABLE IF EXISTS user_body_metrics;
-DROP TABLE IF EXISTS user_profile;
-DROP TABLE IF EXISTS meal_menu_recipe;
-DROP TABLE IF EXISTS meal_menu;
-DROP TABLE IF EXISTS meal_plan;
-DROP TABLE IF EXISTS recipe_nutrient;
-DROP TABLE IF EXISTS recipe_quantity;
-DROP TABLE IF EXISTS recipe_measure;
-DROP TABLE IF EXISTS recipe_steps;
-DROP TABLE IF EXISTS recipe_diet;
-DROP TABLE IF EXISTS recipe_meal_type;
-DROP TABLE IF EXISTS recipe_dish_type;
-DROP TABLE IF EXISTS recipe;
-DROP TABLE IF EXISTS ingredient_measure;
-DROP TABLE IF EXISTS ingredient_nutrient;
-DROP TABLE IF EXISTS ingredient;
-DROP TABLE IF EXISTS nutrient;
-DROP TABLE IF EXISTS nutrient_subtype;
-DROP TABLE IF EXISTS nutrient_type;
-DROP TABLE IF EXISTS diet;
-DROP TABLE IF EXISTS dish_type;
-DROP TABLE IF EXISTS meal_type;
-DROP TABLE IF EXISTS tertiary_group;
-DROP TABLE IF EXISTS secondary_group;
-DROP TABLE IF EXISTS primary_group;
-DROP TABLE IF EXISTS meal_menu_recipe;
-DROP TABLE IF EXISTS meal_menu;
-DROP TABLE IF EXISTS meal_plan;
-
-DROP EXTENSION IF EXISTS fuzzystrmatch;
-DROP EXTENSION IF EXISTS pg_trgm;
-
-DROP SCHEMA IF EXISTS nutrifoods;
+DROP SCHEMA IF EXISTS nutrifoods CASCADE;
 
 CREATE SCHEMA IF NOT EXISTS nutrifoods;
 
 SET SEARCH_PATH = "nutrifoods";
 
-CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
+CREATE EXTENSION btree_gist;
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 
 CREATE TABLE IF NOT EXISTS primary_group
 (
@@ -135,6 +103,16 @@ CREATE TABLE IF NOT EXISTS ingredient
     tertiary_group_id INTEGER     NOT NULL,
     UNIQUE (name),
     FOREIGN KEY (tertiary_group_id) REFERENCES tertiary_group (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS ingredient_synonym
+(
+    id            SERIAL,
+    name          VARCHAR(64) NOT NULL,
+    ingredient_id INTEGER     NOT NULL,
+    UNIQUE (name),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     PRIMARY KEY (id)
 );
 
