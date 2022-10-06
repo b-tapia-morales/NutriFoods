@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="DataRecipes" />
+      <Folder Include="Measures" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="DataRecipes\Ingredient\Ensaladas\ensalada_chilena.csv" />
+      <Content Include="DataRecipes\Ingredient\Ensaladas\ensalada_de_atún.csv" />
+      <Content Include="DataRecipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv" />
+      <Content Include="DataRecipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv" />
+      <Content Include="DataRecipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv" />
+      <Content Include="DataRecipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv" />
+    </ItemGroup>
+
+</Project>

@@ -4487,29 +4487,11 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv" />
-      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv" />
-      <Content Include="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv" />
-      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt" />
       <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -4597,16 +4579,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Recipes\Ingredient\Ensaladas" />
-      <Folder Include="Recipes\Ingredient\Entradas" />
-      <Folder Include="Recipes\Ingredient\PlatosFondo" />
-      <Folder Include="Recipes\Ingredient\Postres" />
-      <Folder Include="Recipes\Ingredient\Vegano" />
-      <Folder Include="Recipes\Steps\Ensaladas" />
-      <Folder Include="Recipes\Steps\Entradas" />
-      <Folder Include="Recipes\Steps\PlatosFondo" />
-      <Folder Include="Recipes\Steps\Postres" />
-      <Folder Include="Recipes\Steps\Vegano" />
       <Folder Include="Recipes\Tags" />
     </ItemGroup>
 
