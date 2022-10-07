@@ -5,23 +5,17 @@ using Utils.Csv;
 
 namespace RecipeInsertion;
 
-public static class Class1
+public static class Recipes
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
 
-    private const string ProjectDirectory = "";
-    private const string FolderDirectory = "";
-    private const string SubFolderDirectory = "";
-    private const string FileName = "";
-
     private static readonly string FilePathRecipes = Path.Combine(Directory.GetParent(
-            Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FolderDirectory, SubFolderDirectory
-        , FileName);
+            Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "recipe.csv");
 
     private static readonly string FilePathIngredient = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion","Ingredient","ingredient.csv");
-    
+
     public static void RecipeInsert()
     {
         using var context = Context();
@@ -53,8 +47,22 @@ public static class Class1
         foreach (var name in nameIngredient)
         {
             var id = ingredients.Find(x => x.Name.Equals(name))!.Id;
-            Console.WriteLine(id);
+            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
+                "RecipeInsertion", "Measures" , $"{name}.csv");
+            var measuresIngredient =
+                RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
+            foreach (var measure in measuresIngredient)
+            {
+                context.Add(new IngredientMeasure
+                {
+                    IngredientId = id,
+                    Name = measure.Name,
+                    Grams = measure.Grams
+                });
+            }
         }
+
+        context.SaveChanges();
     }
     private static NutrifoodsDbContext Context()
     {
