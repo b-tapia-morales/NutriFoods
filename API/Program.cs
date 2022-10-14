@@ -48,7 +48,6 @@ builder.Services
     .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
-    .AddScoped<IRecipeService, RecipeService>()
     .AddScoped<IUserRepository, UserRepository>()
     .AddScoped<IMealPlanService, MealPlanService>();
 

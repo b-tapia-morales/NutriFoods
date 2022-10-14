@@ -7,9 +7,9 @@ namespace API.Recipes;
 [Route("api/v1/recipes")]
 public class RecipeController
 {
-    private readonly IRecipeService _service;
+    private readonly IRecipeRepository _service;
 
-    public RecipeController(IRecipeService service)
+    public RecipeController(IRecipeRepository service)
     {
         _service = service;
     }
