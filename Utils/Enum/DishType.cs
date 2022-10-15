@@ -51,7 +51,7 @@ public class DishType : SmartEnum<DishType>
             {DishTypeToken.Soup, Soup},
             {DishTypeToken.Pastries, Pastries},
             {DishTypeToken.Bread, Bread},
-            {DishTypeToken.Sandwich, Sandwich},
+            {DishTypeToken.Sandwich, Sandwich}
         }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, DishType> ReadableNameDictionary = TokenDictionary
@@ -59,11 +59,13 @@ public class DishType : SmartEnum<DishType>
 
     public DishType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
-    private string ReadableName { get; }
+    public string ReadableName { get; }
 
-    public static DishType FromReadableName(string name) => ReadableNameDictionary[name];
+    public static DishType? FromReadableName(string name) =>
+        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static DishType FromToken(DishTypeToken token) => TokenDictionary[token];
+    public static DishType? FromToken(DishTypeToken token) =>
+        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
 }
 
 public enum DishTypeToken

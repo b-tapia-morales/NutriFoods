@@ -32,29 +32,32 @@ public class Diet : SmartEnum<Diet>
     public static readonly Diet Vegan =
         new(nameof(Vegan), (int) DietToken.Vegan, "Vegano");
 
-    private static readonly IDictionary<DietToken, Diet> TokenDictionary = new Dictionary<DietToken, Diet>
-    {
-        {DietToken.None, None},
-        {DietToken.Vegetarian, Vegetarian},
-        {DietToken.OvoVegetarian, OvoVegetarian},
-        {DietToken.LactoVegetarian, LactoVegetarian},
-        {DietToken.OvoLactoVegetarian, OvoLactoVegetarian},
-        {DietToken.Pollotarian, Pollotarian},
-        {DietToken.Pescetarian, Pescetarian},
-        {DietToken.PolloPescetarian, PolloPescetarian},
-        {DietToken.Vegan, Vegan}
-    }.ToImmutableDictionary();
+    private static readonly IDictionary<DietToken, Diet> TokenDictionary =
+        new Dictionary<DietToken, Diet>
+        {
+            {DietToken.None, None},
+            {DietToken.Vegetarian, Vegetarian},
+            {DietToken.OvoVegetarian, OvoVegetarian},
+            {DietToken.LactoVegetarian, LactoVegetarian},
+            {DietToken.OvoLactoVegetarian, OvoLactoVegetarian},
+            {DietToken.Pollotarian, Pollotarian},
+            {DietToken.Pescetarian, Pescetarian},
+            {DietToken.PolloPescetarian, PolloPescetarian},
+            {DietToken.Vegan, Vegan}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, Diet> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
 
     public Diet(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
-    private string ReadableName { get; }
+    public string ReadableName { get; }
 
-    public static Diet FromReadableName(string name) => ReadableNameDictionary[name];
+    public static Diet? FromReadableName(string name) =>
+        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Diet FromToken(DietToken token) => TokenDictionary[token];
+    public static Diet? FromToken(DietToken token) =>
+        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
 }
 
 public enum DietToken

@@ -1,26 +1,44 @@
+using System.Collections.Immutable;
 using Ardalis.SmartEnum;
 
 namespace Utils.Enum;
 
 public class Essentiality : SmartEnum<Essentiality>
 {
-    public static readonly Essentiality Indispensable = new(nameof(Indispensable), "Indispensable", 1);
-    public static readonly Essentiality Conditional = new(nameof(Conditional), "Condicional", 2);
-    public static readonly Essentiality Dispensable = new(nameof(Dispensable), "Dispensable", 3);
+    public static readonly Essentiality Indispensable =
+        new(nameof(Indispensable), (int) EssentialityToken.Indispensable, "Indispensable");
 
-    private static readonly Dictionary<string, Essentiality> Dictionary = new(StringComparer.InvariantCultureIgnoreCase)
-    {
-        {"Indispensable", Indispensable},
-        {"Condicional", Conditional},
-        {"Dispensable", Dispensable}
-    };
+    public static readonly Essentiality Conditional =
+        new(nameof(Conditional), (int) EssentialityToken.Conditional, "Condicional");
 
-    public static readonly IReadOnlyDictionary<string, Essentiality> ReadOnlyDictionary = Dictionary;
+    public static readonly Essentiality Dispensable =
+        new(nameof(Dispensable), (int) EssentialityToken.Dispensable, "Dispensable");
 
-    public Essentiality(string name, string display, int value) : base(name, value)
-    {
-        Display = display;
-    }
+    private static readonly IDictionary<EssentialityToken, Essentiality> TokenDictionary =
+        new Dictionary<EssentialityToken, Essentiality>
+        {
+            {EssentialityToken.Indispensable, Indispensable},
+            {EssentialityToken.Conditional, Conditional},
+            {EssentialityToken.Dispensable, Dispensable}
+        }.ToImmutableDictionary();
 
-    public string Display { get; set; }
+    private static readonly IDictionary<string, Essentiality> ReadableNameDictionary = TokenDictionary
+        .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
+
+    public Essentiality(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+
+    public string ReadableName { get; }
+
+    public static Essentiality? FromReadableName(string name) =>
+        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+
+    public static Essentiality? FromToken(EssentialityToken token) =>
+        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+}
+
+public enum EssentialityToken
+{
+    Indispensable = 1,
+    Conditional = 2,
+    Dispensable = 3
 }
