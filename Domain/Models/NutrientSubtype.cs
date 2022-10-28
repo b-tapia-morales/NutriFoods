@@ -2,10 +2,7 @@
 
 public class NutrientSubtype
 {
-    public NutrientSubtype()
-    {
-        Nutrients = new HashSet<Nutrient>();
-    }
+    public NutrientSubtype() => Nutrients = new HashSet<Nutrient>();
 
     public int Id { get; set; }
     public string Name { get; set; } = null!;

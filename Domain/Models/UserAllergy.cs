@@ -2,8 +2,8 @@
 
 public class UserAllergy
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
+    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
     public int IngredientId { get; set; }
 
     public virtual Ingredient Ingredient { get; set; } = null!;

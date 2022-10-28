@@ -1,12 +1,10 @@
 ﻿namespace Domain.Models;
 
-public class RecipeQuantity
+public class IngredientSynonym
 {
     public int Id { get; set; }
-    public int RecipeId { get; set; }
+    public string Name { get; set; } = null!;
     public int IngredientId { get; set; }
-    public double Grams { get; set; }
 
     public virtual Ingredient Ingredient { get; set; } = null!;
-    public virtual Recipe Recipe { get; set; } = null!;
 }

@@ -8,7 +8,6 @@ public class RecipeMeasure
     public int IntegerPart { get; set; }
     public int Numerator { get; set; }
     public int Denominator { get; set; }
-    public string? Description { get; set; }
 
     public virtual IngredientMeasure IngredientMeasure { get; set; } = null!;
     public virtual Recipe Recipe { get; set; } = null!;

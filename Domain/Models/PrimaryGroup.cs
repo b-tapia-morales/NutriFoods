@@ -2,10 +2,7 @@
 
 public class PrimaryGroup
 {
-    public PrimaryGroup()
-    {
-        SecondaryGroups = new HashSet<SecondaryGroup>();
-    }
+    public PrimaryGroup() => SecondaryGroups = new HashSet<SecondaryGroup>();
 
     public int Id { get; set; }
     public string Name { get; set; } = null!;

@@ -6,6 +6,7 @@ public class Ingredient
     {
         IngredientMeasures = new HashSet<IngredientMeasure>();
         IngredientNutrients = new HashSet<IngredientNutrient>();
+        IngredientSynonyms = new HashSet<IngredientSynonym>();
         RecipeQuantities = new HashSet<RecipeQuantity>();
         UserAllergies = new HashSet<UserAllergy>();
     }
@@ -19,6 +20,7 @@ public class Ingredient
     public virtual TertiaryGroup TertiaryGroup { get; set; } = null!;
     public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; }
     public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; }
+    public virtual ICollection<IngredientSynonym> IngredientSynonyms { get; set; }
     public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; }
     public virtual ICollection<UserAllergy> UserAllergies { get; set; }
 }

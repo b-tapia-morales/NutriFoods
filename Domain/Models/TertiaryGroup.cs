@@ -2,10 +2,7 @@
 
 public class TertiaryGroup
 {
-    public TertiaryGroup()
-    {
-        Ingredients = new HashSet<Ingredient>();
-    }
+    public TertiaryGroup() => Ingredients = new HashSet<Ingredient>();
 
     public int Id { get; set; }
     public string Name { get; set; } = null!;

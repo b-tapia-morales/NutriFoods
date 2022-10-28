@@ -2,10 +2,7 @@
 
 public class IngredientMeasure
 {
-    public IngredientMeasure()
-    {
-        RecipeMeasures = new HashSet<RecipeMeasure>();
-    }
+    public IngredientMeasure() => RecipeMeasures = new HashSet<RecipeMeasure>();
 
     public int Id { get; set; }
     public int IngredientId { get; set; }

@@ -4,7 +4,7 @@ public class Recipe
 {
     public Recipe()
     {
-        MealMenuRecipes = new HashSet<MealMenuRecipe>();
+        MenuRecipes = new HashSet<MenuRecipe>();
         RecipeDiets = new HashSet<RecipeDiet>();
         RecipeDishTypes = new HashSet<RecipeDishType>();
         RecipeMealTypes = new HashSet<RecipeMealType>();
@@ -21,7 +21,7 @@ public class Recipe
     public int? Portions { get; set; }
     public int? PreparationTime { get; set; }
 
-    public virtual ICollection<MealMenuRecipe> MealMenuRecipes { get; set; }
+    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; }
     public virtual ICollection<RecipeDiet> RecipeDiets { get; set; }
     public virtual ICollection<RecipeDishType> RecipeDishTypes { get; set; }
     public virtual ICollection<RecipeMealType> RecipeMealTypes { get; set; }
