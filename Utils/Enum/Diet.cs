@@ -56,8 +56,7 @@ public class Diet : SmartEnum<Diet>
     public static Diet? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Diet? FromToken(DietToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static Diet FromToken(DietToken token) => TokenDictionary[token];
 }
 
 public enum DietToken

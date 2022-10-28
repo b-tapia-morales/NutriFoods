@@ -36,8 +36,7 @@ public class Unit : SmartEnum<Unit>
     public static Unit? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Unit? FromToken(UnitToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static Unit FromToken(UnitToken token) => TokenDictionary[token];
 }
 
 public enum UnitToken

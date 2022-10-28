@@ -32,8 +32,7 @@ public class Essentiality : SmartEnum<Essentiality>
     public static Essentiality? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Essentiality? FromToken(EssentialityToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static Essentiality FromToken(EssentialityToken token) => TokenDictionary[token];
 }
 
 public enum EssentialityToken

@@ -41,8 +41,7 @@ public class PhysicalActivity : SmartEnum<PhysicalActivity>
     public static PhysicalActivity? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static PhysicalActivity? FromToken(PhysicalActivityToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static PhysicalActivity FromToken(PhysicalActivityToken token) => TokenDictionary[token];
 }
 
 public enum PhysicalActivityToken

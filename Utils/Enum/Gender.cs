@@ -29,8 +29,7 @@ public class Gender : SmartEnum<Gender>
     public static Gender? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Gender? FromToken(GenderToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static Gender FromToken(GenderToken token) => TokenDictionary[token];
 }
 
 public enum GenderToken

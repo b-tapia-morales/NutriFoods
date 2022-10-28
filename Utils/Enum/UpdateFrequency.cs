@@ -30,8 +30,7 @@ public class UpdateFrequency : SmartEnum<UpdateFrequency>
     public static UpdateFrequency? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static UpdateFrequency? FromToken(UpdateFrequencyToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static UpdateFrequency FromToken(UpdateFrequencyToken token) => TokenDictionary[token];
 }
 
 public enum UpdateFrequencyToken

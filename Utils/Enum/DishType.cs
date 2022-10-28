@@ -64,8 +64,7 @@ public class DishType : SmartEnum<DishType>
     public static DishType? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static DishType? FromToken(DishTypeToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static DishType FromToken(DishTypeToken token) => TokenDictionary[token];
 }
 
 public enum DishTypeToken

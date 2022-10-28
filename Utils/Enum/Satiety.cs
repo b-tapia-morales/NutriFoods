@@ -36,8 +36,7 @@ public class Satiety : SmartEnum<Satiety>
     public static Satiety? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static Satiety? FromToken(SatietyToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static Satiety FromToken(SatietyToken token) => TokenDictionary[token];
 }
 
 public enum SatietyToken

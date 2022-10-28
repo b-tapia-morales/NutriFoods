@@ -40,8 +40,7 @@ public class MealType : SmartEnum<MealType>
     public static MealType? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 
-    public static MealType? FromToken(MealTypeToken token) =>
-        TokenDictionary.ContainsKey(token) ? TokenDictionary[token] : null;
+    public static MealType FromToken(MealTypeToken token) => TokenDictionary[token];
 }
 
 public enum MealTypeToken
