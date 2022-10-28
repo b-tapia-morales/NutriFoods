@@ -8,8 +8,10 @@ public class RecipeDto
     public string Url { get; set; } = null!;
     public int? Portions { get; set; }
     public int? PreparationTime { get; set; }
-    public IEnumerable<RecipeMeasureDto> RecipeMeasures { get; set; } = new List<RecipeMeasureDto>();
-    public IEnumerable<RecipeQuantityDto> RecipeQuantities { get; set; } = new List<RecipeQuantityDto>();
-    public IEnumerable<RecipeStepDto> RecipeSteps { get; set; } = new List<RecipeStepDto>();
-    public IEnumerable<RecipeNutrientDto> RecipeNutrients { get; set; } = new List<RecipeNutrientDto>();
+    public ICollection<RecipeMeasureDto> Measures { get; set; } = null!;
+    public ICollection<RecipeQuantityDto> Quantities { get; set; } = null!;
+    public ICollection<RecipeStepDto> Steps { get; set; } = null!;
+    public ICollection<RecipeNutrientDto> Nutrients { get; set; } = null!;
+    public ICollection<string> MealTypes { get; set; } = null!;
+    public ICollection<string> DishTypes { get; set; } = null!;
 }
