@@ -1,4 +1,4 @@
-SET
+﻿SET
 SEARCH_PATH = "nutrifoods";
 
 INSERT INTO ingredient (name, is_animal, contains_gluten, tertiary_group_id)
@@ -80,6 +80,7 @@ VALUES ('Sal', false, false, 23),
        ('Nuez moscada', false, false, 23),
        ('Queso cheddar', true, false, 20),
        ('Salsa de tomate', false, false, 24),
+       ('Puerro', false, false, 3),
        ('Harina de almendra', false, false, 24),
        ('Pimiento verde', false, false, 3),
        ('Ciboulette', false, false, 7),

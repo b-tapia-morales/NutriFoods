@@ -15,25 +15,30 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Inserts;
 using RecipeAndMesuris.Normalization;
 using RecipeAndMesuris.Recipe_insert;
+using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-DatabaseInitialization.Initialize();
-Recipes.RecipeInsert();
+//DatabaseInitialization.Initialize();
+//Recipes.RecipeInsert();
+Recipes.RecipeMeasures();
 /*AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
 Connect.InsertRecipeIngredient();
 NutrientCalculation.Calculate();
-*/
 
+/*
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
+
+builder.Services.AddFluentValidation();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
     {
@@ -58,29 +63,24 @@ builder.Services
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    })
-    .AddFluentValidation();
+    });
 
-builder.Services
-    .AddEndpointsApiExplorer()
-    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-    .AddFluentValidation()
-    .AddSwaggerGen(options =>
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
+builder.Services.AddFluentValidationRulesToSwagger();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
-        options.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "NutriFoods",
-            Description = "The official API for the NutriFoods project"
-        });
-        options.AddFluentValidationRulesScoped();
-    })
-    .AddFluentValidationRulesToSwagger();
-
-builder.Services
-    .AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-    .AddCertificate();
-
+        Version = "v1",
+        Title = "NutriFoods",
+        Description = "The official API for the NutriFoods project"
+    });
+    options.AddFluentValidationRulesScoped();
+});
 
 var app = builder.Build();
 
@@ -97,8 +97,11 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app
-    .UseHttpsRedirection()
-    .UseAuthorization();
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();
+*///Normalization.NormalizationFilesRecipeIngredient();

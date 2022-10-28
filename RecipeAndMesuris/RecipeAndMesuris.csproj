@@ -25,7 +25,6 @@
 
     <ItemGroup>
       <None Remove="Recipe_insert\Recipe\recipe.txt" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Ralladura limón.csv" />
       <Content Include="Recipe_insert\Recipe\recipe.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
@@ -113,504 +112,6 @@
       <Content Include="Recipe_insert\Ingredient\Ingredientes_Gourmet\Ensaladas\ingre_Wrap de Ensalada Griega.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Perejil.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pescado blanco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ciruela.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Crema.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ají en polvo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Almidón de maíz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso cheddar.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Azúcar rubia.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Lomo de ternera.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Especias italianas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Papa camote.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salchicha.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Quinoa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Caldo de ave.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate en tarro.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa de tomate.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Mayonesa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Acelga.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Garbanzo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cúrcuma.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Carne molida.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de almendra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Caldo de verduras.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pimienta blanca.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Nuez moscada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Piñón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Papas fritas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Espinaca.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Curry.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla morada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cacao en polvo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite de coco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Rúcula.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Jugo de almeja.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salmón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pan rallado.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Harina sin polvos de hornear.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Masa para pizza sin gluten.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Berenjena.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Chuleta de cerdo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ajo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Chorizo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Granada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Piña.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Arándano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Betarraga.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Avena.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Arvejas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Jugo de naranja.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cardamomo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Crema de coco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Carne vegetal.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Romero.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Palmito.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento verde.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa de ají.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ketchup.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Concentrado de tomate.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ricotta.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa de tabasco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cebollín.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Jalapeño.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Arroz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Miel de maple.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Alcaparra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cochayuyo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Anchoa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Higo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ajo en polvo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite de palta.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tomillo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Rábano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Kanikama.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Albahaca.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso cabra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Dátiles.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Calamar.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Maíz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cerdo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Polvo de hornear.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso crema.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Habas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Papa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Frutilla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento amarillo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Coliflor.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Anato.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Linaza.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso mozzarella.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pesto.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Mote.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Escalopa de carne.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Uva.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Solomillo de cerdo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Jugo de limón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Estragón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta sin gluten.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Carne.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate roma.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pure de papas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Laurel.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate cherry.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Vainilla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Lentejas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Espárrago.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Bistec.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Lechuga.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Bacalao.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Jamón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Aceituna verde.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ají rojo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Levadura.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ají.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Queso azul.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Miel.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Leche evaporada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Brócoli.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ají verde.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta de aji.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Naranja.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Rabo de ternera.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Clara de huevo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Lechuga escarola.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Sal.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tortilla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Huevo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Champiñón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Maracuyá.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Muslo de pollo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cuscús.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Maicena.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa inglesa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Poroto.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa tomate.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Manzana.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tapas de empanadas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Merkén.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Tocino.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa de soya.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Pure de zapallo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Castañas.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre balsámico.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla chalota.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Canela.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Limón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Almendras.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Bicarbonato.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Crema de leche.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Salvia deshidratada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Nueces.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Fiambre de pollo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Mostaza en grano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Ulte.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Harina.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre blanco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Whisky.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Yogurt.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Yogurt griego.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo camote.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo italiano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo spaghetti.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
       <None Update="Recipe_insert\Ingredient\parcerIngredientes\Ingredientes_Gourmet\Ensaladas\ingre_Ensalada con salmón.txt">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -3540,936 +3041,273 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Poroto granado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Poroto granado.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Huevo de codorniz.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Huevo de codorniz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Vino tinto.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Vino tinto.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de coco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de coco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Azúcar.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Azúcar.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cola de langostino.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cola de langostino.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Leche.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Leche.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Chocolate.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Chocolate.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Yema de huevo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Yema de huevo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Leche de coco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Leche de coco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Leche de almendra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Leche de almendra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de garbanzos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de garbanzos.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Comino.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Comino.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Semillas de zapallo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Semillas de zapallo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre manzana.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Mantequilla.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Mantequilla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Eritritol.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Eritritol.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Grano choclo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Aceituna.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Aceituna.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla en polvo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla en polvo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Queso parmesano.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Queso parmesano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Zanahoria.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Zanahoria.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite de oliva.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Aceite de oliva.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Queso provoleta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Queso provoleta.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Mermelada frambuesa.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Mermelada frambuesa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Alcachofa.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Alcachofa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Aceituna negra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Aceituna negra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Porotos verdes.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Porotos verdes.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Choclo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Choclo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla perla.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cebolla perla.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Mostaza.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Mostaza.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pasa.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pasa.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Tortilla maíz.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Tortilla maíz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta de chipotle.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta de chipotle.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Aliño completo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Aliño completo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Sal rosada.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Sal rosada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Gelatina en polvo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Gelatina en polvo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Plátano.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Plátano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Repollo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Repollo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Chía.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Chía.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Mandarina.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Mandarina.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Tahini.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Tahini.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta de curry.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pasta de curry.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Jengibre.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Jengibre.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Eneldo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Eneldo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre de vino blanco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Vinagre de vino blanco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate pera.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Tomate pera.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Damasco turco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Damasco turco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Puerro.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Puerro.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de maíz.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Harina de maíz.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Atún.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Atún.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pimienta negra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pimienta negra.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Paprika.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Paprika.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Crema acida.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Amapola.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Amapola.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Sésamo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Sésamo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pepinillo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pepinillo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pepino.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pepino.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Caldo de carne.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Caldo de carne.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Chalota.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Chalota.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Menta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Menta.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ají color.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Ají color.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Leche semidescremada.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Leche semidescremada.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Carne de cordero.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Carne de cordero.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Sal de mar.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Sal de mar.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Azafrán.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Azafrán.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pan.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pan.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pechuga de pollo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pechuga de pollo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Oregano.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Oregano.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Apio.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Apio.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo butternut.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Zapallo butternut.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Camarón.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Camarón.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ciboulette.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Ciboulette.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Palta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Palta.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Vino blanco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Vino blanco.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cilantro.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cilantro.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento rojo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pimiento rojo.csv">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Congrio.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Congrio.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\masa lasañas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\masa lasañas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ostiones.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\lemon grass.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\lemon grass.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Almejas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\brownies.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\brownies.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\osobuco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\osobuco.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\gelatina hojas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Peras.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\fettucines.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\fettucines.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\maní.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\maní.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Moras.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Café.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Café.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pierna cordero.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Manteca vegetal.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Manteca vegetal.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pasta penne.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pasta penne.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Manjar.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Manjar.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\masa lasaña.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\masa lasaña.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\fideos ramen.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\fideos ramen.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\marshmallows.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\marshmallows.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cranberries.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cranberries.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Brandyb.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\longaniza.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\longaniza.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\avena tradicional.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\avena tradicional.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\caldo costilla.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\caldo costilla.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cabeza pescado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cabeza pescado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\mango.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\mango.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones portobello.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones portobello.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\polenta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\polenta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\masa hoja.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\masa hoja.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\abastero.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\abastero.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Lomo liso.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Lomo liso.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pimienta cayenna.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pimienta cayenna.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\filete pavo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\coco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\coco.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cobertura chocolate semiamargo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cobertura chocolate semiamargo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\amaretto.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\amaretto.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\nutella.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\nutella.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\anís semilla.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\anís semilla.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\berro.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\berro.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\crutones.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\crutones.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ajo granulado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Ajo granulado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones ostras.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones ostras.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones shitake.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones shitake.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pisco.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pisco.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pistachos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pistachos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pan hamburguesa.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Marraqueta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Marraqueta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\brotes arveja.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\charqui.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\charqui.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\mariscos surtidos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\mariscos surtidos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\galletass.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\galletass.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\aji.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\aji.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\callampas secas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\callampas secas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\hojas parra.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\espaguetis.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\espaguetis.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Fondant.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Fondant.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Asiento.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Asiento.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\fideos cabellos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\fideos cabellos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Esencia ron.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Esencias ron.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\locos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\locos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Anís.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Anís.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\licor.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\licor.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\macha.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\macha.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pavo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pavo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones shiitake.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\champiñones shiitake.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\huesillo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\huesillo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\filete corvina.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\compota manzanas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\callampas deshidratadas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\callampas deshidratadas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\endulzante.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\endulzante.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\malaya.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\malaya.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pan molde blanco.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\café granulado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\café granulado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\agua .csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pasta espirales.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\congrio colorado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\congrio colorado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cobertura chocolate blanco.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\palanca.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\palanca.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\ají cacho cabra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\ají cacho cabra.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\choros.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\choros.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\fideos cabello.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\fideos cabello.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\merluza.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\merluza.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\jugo piñas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cerveza oscura.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cerveza oscura.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\mariscos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\mariscos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\higos deshidratados.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\merluza austral.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\merluza austral.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Champiñones ostra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Champiñones ostra.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Clavo de olor.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Clavo de olor.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Champiñones parís.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\baguette.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\baguette.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\guindas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\guindas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Manteca.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Manteca.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Anís estrella.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Anís estrella.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Bizcocho.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Bizcocho.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Machas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Machas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Panqueques.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Panqueques.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\helado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\helado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Galletas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Galletas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Duraznos.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\filetitos pollo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\filetitos pollo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\frutos rojo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\merlot.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\merlot.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\azáfran.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\azáfran.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cacao amargo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cacao amargo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\lamina lasaña.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\lamina lasaña.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Plateada.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Plateada.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\filetes pollo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Crispy.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Crispy.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\masa filo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\masa filo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\choros zapato.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\panes ciabatta.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Jerez.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Jerez.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\achiote.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\achiote.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Filete.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Filete.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pan amasado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pan amasado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\diente dragón.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\diente dragón.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Oporto.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Oporto.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\esencia cola mono.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cerezas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\chuletas kayser.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Dientes dragón.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Jaiba.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Jaiba.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Galletas champaña.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\agua hirviendo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\agua hirviendo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\parra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\parra.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\arroz silvestre.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\arroz silvestre.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Cerveza.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Cerveza.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Lomo vetado.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Lomo vetado.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cabezas congrio.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cabezas congrio.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pan integral.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pan integral.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\esencias ron.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\esencias ron.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\churrascos.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\marraquetas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\marraquetas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Coñac.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Coñac.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\colapez.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\colapez.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\fettuccini.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\fettuccini.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\cerveza negra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\cerveza negra.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Berries.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Berries.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\asado tira.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\asado tira.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Leche condensada .csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Leche condensada.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\jibia.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\jibia.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Chancaca.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Chancaca.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Crema pastelera.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Crema pastelera.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\pollo entero.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\pollo entero.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pollo ganso.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pollo ganso.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Posta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Posta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\posta paleta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\posta paleta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\prietas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Pulpo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Pulpo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\punta ganso.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\punta ganso.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\quínoa roja.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\quínoa roja.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\ralladarura limon.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ralladura limón.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Ralladura naranjas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Reineta.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Reineta.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\reinetas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\reinetas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\rocoto.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\rocoto.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa babecue.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\salsa babecue.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa barbecue.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa barbecue.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa blanca.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa blanca.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Salsa caramelo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa champiñones.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa frambuesas.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa horseradish.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\salsa horseradish.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa manjar.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa ostras.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa pescado.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\salsa teriyaki.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\salsa teriyaki.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\sierra.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\sierra.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\sobrecostilla.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\sobrecostilla.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\spaguetti.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\spaguetti.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\sucralosa.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\sucralosa.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\sémola.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\sémola.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tagliatelle.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\tagliatelle.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tallarines.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\tallarines.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tallarines arroz.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tapapecho.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\tapapecho.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tilapia.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\tilapia.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tomates deshidratados.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\trigo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\trigo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\trigo burgol.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\trigo burgol.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\trutro pollo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\trutro pollo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Trutros cortos.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\Trutros cortos.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\Trutros pollo.csv" />
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\tutros pollo.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\tutros pollo.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\vienesas.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\vienesas.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\measures\ingredient_measures\ron.csv" />
-      <Content Include="Recipe_insert\Ingredient\measures\ingredient_measures\ron.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Normalization\ingredient.csv" />
       <Content Include="Normalization\ingredient.csv">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -4487,29 +3325,11 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv" />
-      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_chilena.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\PlatosFondo\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv" />
-      <Content Include="Recipes\Ingredient\Postres\huevos_de_pascua_de_chocolate.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv" />
-      <Content Include="Recipes\Ingredient\Vegano\steaks_de_coliflor_con_bbq_merquén.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv" />
-      <Content Include="Recipes\Ingredient\Ensaladas\ensalada_de_atún.csv">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt" />
       <Content Include="Recipe_insert\Ingredient\preparacion_recetas_gourmet\Ensaladas\prepa_Ensalada Chilena.txt">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -4597,16 +3417,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Recipes\Ingredient\Ensaladas" />
-      <Folder Include="Recipes\Ingredient\Entradas" />
-      <Folder Include="Recipes\Ingredient\PlatosFondo" />
-      <Folder Include="Recipes\Ingredient\Postres" />
-      <Folder Include="Recipes\Ingredient\Vegano" />
-      <Folder Include="Recipes\Steps\Ensaladas" />
-      <Folder Include="Recipes\Steps\Entradas" />
-      <Folder Include="Recipes\Steps\PlatosFondo" />
-      <Folder Include="Recipes\Steps\Postres" />
-      <Folder Include="Recipes\Steps\Vegano" />
       <Folder Include="Recipes\Tags" />
     </ItemGroup>
 
