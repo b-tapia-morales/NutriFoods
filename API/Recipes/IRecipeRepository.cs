@@ -10,9 +10,19 @@ public interface IRecipeRepository
 
     Task<RecipeDto> FindById(int id);
 
-    Task<List<RecipeDto>> ExcludeSecondaryGroups(IEnumerable<int> ids);
+    Task<List<RecipeDto>> GetVegetarianRecipes();
 
-    Task<List<RecipeDto>> ExcludeTertiaryGroups(IEnumerable<int> ids);
+    Task<List<RecipeDto>> GetOvoVegetarianRecipes();
+    
+    Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
+    
+    Task<List<RecipeDto>> GetLactoVegetarianRecipes();
+    
+    Task<List<RecipeDto>> GetPollotarianRecipes();
+    
+    Task<List<RecipeDto>> GetPescetarianRecipes();
+
+    Task<List<RecipeDto>> GetPolloPescetarianRecipes();
 
     Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
 
@@ -20,5 +30,11 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
 
-    Task<List<RecipeDto>> FilterByNutrientQuantity(int id, int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound);
+
+    Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 }
