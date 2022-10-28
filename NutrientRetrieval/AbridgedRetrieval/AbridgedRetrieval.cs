@@ -1,8 +1,5 @@
 using Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Food;
-using NutrientRetrieval.Request;
 using Utils.Enum;
 
 namespace NutrientRetrieval.AbridgedRetrieval;

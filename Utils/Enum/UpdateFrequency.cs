@@ -1,6 +1,5 @@
 using System.Collections.Immutable;
 using Ardalis.SmartEnum;
-using static Utils.Enum.UpdateFrequencyToken;
 
 namespace Utils.Enum;
 
