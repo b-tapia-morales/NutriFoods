@@ -50,13 +50,16 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
     }
 );
 
-builder.Services.AddScoped<IValidator<UserDto>, UserValidator>();
-builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
-builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
-builder.Services.AddScoped<IRecipeService, RecipeService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IMealPlanService, MealPlanService>();
-builder.Services.AddControllers()
+builder.Services
+    .AddScoped<IValidator<UserDto>, UserValidator>()
+    .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
+    .AddScoped<IIngredientRepository, IngredientRepository>()
+    .AddScoped<IRecipeRepository, RecipeRepository>()
+    .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<IMealPlanService, MealPlanService>();
+
+builder.Services
+    .AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
