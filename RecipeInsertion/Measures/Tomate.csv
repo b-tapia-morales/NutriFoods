@@ -1,5 +1,5 @@
 Mediano;123
-Rebanada,mediana;20
+Rebanada;20
 Largo;182
 Pequeño;17
 Tomate;62
@@ -13,3 +13,7 @@ servido;148
 Pluma;62
 Tarro;300
 Cucharada;25
+unidad;62
+grande;182
+mediana;123
+rodaja;15

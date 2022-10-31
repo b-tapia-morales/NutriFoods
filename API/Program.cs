@@ -21,9 +21,11 @@ using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-//DatabaseInitialization.Initialize();
-//Recipes.RecipeInsert();
+DatabaseInitialization.Initialize();
+Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
+Recipes.InsertionOfRecipeData();
+//Normalization.StandardizationOfIngredientUnist();
 /*AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();

@@ -1,4 +1,7 @@
-﻿using Domain.Models;
+﻿using System.Diagnostics;
+using System.Globalization;
+using System.Text;
+using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using RecipeInsertion.Mapping;
 using Utils.Csv;
@@ -61,10 +64,33 @@ public static class Recipes
                 });
             }
         }
-
         context.SaveChanges();
     }
-    private static NutrifoodsDbContext Context()
+
+    public static void InsertionOfRecipeData()
+    {
+        using var context = Context();
+        var ingredients = context.Ingredients.ToList();
+        var recipes = context.Recipes.ToList();
+        var units = context.IngredientMeasures.ToList();
+        var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
+            "RecipeInsertion", "DataRecipes", "Ingredient");
+        var dataRecipes = Directory.GetFiles(path, "*.csv", SearchOption.AllDirectories);
+        foreach (var pathDataRecipe in dataRecipes)
+        {
+            var nameRecipe = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
+            var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
+            var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
+                .Where(x => !x.Quantity.Equals("x"));
+            foreach (var dataRecipe in recipe)
+            {
+                InsertDataRecipe(context,dataRecipe,ingredients,units,idRecipe);
+            }
+            context.SaveChanges();
+        }
+    }
+
+    private static NutrifoodsDbContext Context() 
     {
         var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
             .UseNpgsql(ConnectionString,
@@ -73,5 +99,73 @@ public static class Recipes
         var context = new NutrifoodsDbContext(options);
         return context;
     }
+
+    private static string RemoveAccents(this string text) =>
+        new string(text.Normalize(NormalizationForm.FormD).Where(
+                c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray()
+        ).Normalize(NormalizationForm.FormC);
     
+
+    private static void InsertDataRecipe(DbContext context,DataRecipe dataRecipe, List<Ingredient> ingredients, List<IngredientMeasure> units,int idRecipe)
+    {
+        try
+        {
+            var idIngredient =
+                ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(dataRecipe.NameIngredients))!.Id;
+            if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
+            {
+                context.Add(new RecipeQuantity
+                {
+                    RecipeId = idRecipe,
+                    IngredientId = idIngredient,
+                    Grams = double.Parse(dataRecipe.Quantity)
+                });
+            }
+            else
+            {
+                var idMeasures = units.Find(u =>
+                    u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
+                switch (dataRecipe.Quantity.Length)
+                {
+                    case 1:
+                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
+                            dataRecipe.Quantity, "0", "0");
+                        break;
+                    case 3:
+                    {
+                        var numerator = dataRecipe.Quantity[0].ToString();
+                        var denominator = dataRecipe.Quantity[2].ToString();
+                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator,
+                            denominator);
+                        break;
+                    }
+                    default:
+                    {
+                        var integerPart = dataRecipe.Quantity[0].ToString();
+                        var numerator = dataRecipe.Quantity[2].ToString();
+                        var denominator = dataRecipe.Quantity[4].ToString();
+                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator,
+                            denominator);
+                        break;
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            //por si 
+        }
+    }
+    
+    private static void InsertMeasuresWhitIngredient(DbContext context,int idRecipe ,int ingredientIdMeasure, string integerPart,string numerator, string denominator)
+    {
+        context.Add(new RecipeMeasure
+        {
+            RecipeId = idRecipe,
+            IngredientMeasureId = ingredientIdMeasure,
+            IntegerPart = int.Parse(integerPart),
+            Numerator = int.Parse(numerator),
+            Denominator = int.Parse(denominator)
+        });
+    }
 }
