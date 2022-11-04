@@ -111,6 +111,7 @@ VALUES
     ('Tunco', find_ingredient_id('Cerdo')),
     ('Lecho', find_ingredient_id('Cerdo')),
     ('Cochinillo', find_ingredient_id('Cerdo')),
+    ('Carne de cerdo', find_ingredient_id('Cerdo')),
     -- Ají --
     ('Chile', find_ingredient_id('Ají')),
     ('Ají en vaina', find_ingredient_id('Cerdo')),
@@ -260,6 +261,8 @@ VALUES
     -- Solomillo de cerdo --
     ('Lomo de cerdo', find_ingredient_id('Solomillo de cerdo')),
     ('Solomillo de chancho', find_ingredient_id('Solomillo de cerdo')),
+    ('Filete de cerdo', find_ingredient_id('Solomillo de cerdo')),
+    ('Filete de chancho', find_ingredient_id('Solomillo de cerdo')),
     -- Manjar --
     ('Arequipe', find_ingredient_id('Manjar')),
     ('Cajeta', find_ingredient_id('Manjar')),
@@ -445,7 +448,14 @@ VALUES
     ('Malvaviscos', find_ingredient_id('Marshmallows')),
 
     -- Avena tradicional --
-    ('Avena', find_ingredient_id('Avena tradicional'))
+    ('Avena', find_ingredient_id('Avena tradicional')),
+    
+    -- Ralladura de naranja --
+    ('Cascara de naranja', find_ingredient_id('Ralladura de naranja')),
+    -- Pavo --
+    ('Carne de pavo', find_ingredient_id('Pavo'))
+
+    
 
 
 
