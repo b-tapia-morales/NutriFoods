@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using API.Dto;
+using API.Genetic;
 using API.Ingredients;
 using API.MealPlans;
 using API.Recipes;
@@ -21,11 +22,16 @@ using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
+/*
 DatabaseInitialization.Initialize();
+AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
-//Normalization.StandardizationOfIngredientUnist();
+NutrientCalculation.Calculate();
+*/
+var ag = new GeneticAlgorithm(2, 1200);
+var regimen = ag.GetRegimen();
 /*AbridgedRetrieval.RetrieveFromApi();
 Connect.InsertMeasuris();
 Connect.InsertRecipe();
@@ -106,4 +112,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-*///Normalization.NormalizationFilesRecipeIngredient();
+*/

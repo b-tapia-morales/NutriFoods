@@ -46,16 +46,16 @@ public class Solutions
             {
                 switch (nutrient.NutrientId)
                 {
-                    case 108:
+                    case 1:
                         CantKilocalories += nutrient.Quantity;
                         break;
                     case 109:
                         CantProteins += nutrient.Quantity;
                         break;
-                    case 11:
+                    case 12:
                         CantFats += nutrient.Quantity;
                         break;
-                    case 1:
+                    case 2:
                         CantCarbohydrates += nutrient.Quantity;
                         break;
                 }
