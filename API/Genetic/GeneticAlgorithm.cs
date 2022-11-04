@@ -63,8 +63,6 @@ public class GeneticAlgorithm
         var ite = 0;
         while (!ResultFittnes())
         {
-            Solutions();
-            Console.WriteLine();
             Tournamet(random);
             Cross(random);
             Mutation(random);
