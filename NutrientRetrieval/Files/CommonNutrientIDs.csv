@@ -1,14 +1,14 @@
 FoodDataCentralName;FoodDataCentralId;NutriFoodsName;NutriFoodsId;Unit
 Sugars, total including NLEA;269;Azúcares, total;4;1
-Fiber, total dietary;291;Fibra;2;1
-Protein;203;Proteína, total;109;1
-Cholesterol;601;Colesterol;102;2
-Calcium, Ca;301;Calcio;91;2
-Fatty acids, total saturated;606;Ácidos grasos saturados, total;12;1
-Energy;208;Energía;108;4
-Vitamin C, total ascorbic acid;401;Ácido ascórbico;78;2
-Sodium, Na;307;Sodio;96;2
+Fiber, total dietary;291;Fibra;3;1
+Protein;203;Proteína, total;63;1
+Cholesterol;601;Colesterol;112;2
+Calcium, Ca;301;Calcio;101;2
+Fatty acids, total saturated;606;Ácidos grasos saturados, total;13;1
+Energy;208;Energía;1;4
+Vitamin C, total ascorbic acid;401;Ácido ascórbico;82;2
+Sodium, Na;307;Sodio;106;2
 Fatty acids, total trans;605;Ácidos grasos trans, total;57;1
-Total lipid (fat);204;Ácidos grasos, total;11;1
-Iron, Fe;303;Hierro;92;2
-Carbohydrate, by difference;205;Carbohidratos, total;1;1
+Total lipid (fat);204;Ácidos grasos, total;60;1
+Iron, Fe;303;Hierro;102;2
+Carbohydrate, by difference;205;Carbohidratos, total;2;1

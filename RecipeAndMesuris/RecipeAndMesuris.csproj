@@ -3418,6 +3418,7 @@
 
     <ItemGroup>
       <Folder Include="Recipes\Tags" />
+      <Folder Include="Recipe_insert\Ingredient\measures\ingredient_measures" />
     </ItemGroup>
 
     <ItemGroup>
