@@ -467,6 +467,7 @@ VALUES ('Sal', false, false, 23),
         ('Manzana deshidratada', false, false, 15),
         ('Glaseado de vainilla', false, false, 24),
         ('Colorante rojo', true, false, 24),
-        ('Mayonesa vegana', false, false, 24)
+        ('Mayonesa vegana', false, false, 24),
+        ('Costillar de cerdo', true, false, 12)
 
 ;
