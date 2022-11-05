@@ -28,7 +28,7 @@ AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
-NutrientCalculation.Calculate();
+//NutrientCalculation.Calculate();
 
 /*
 DatabaseInitialization.Initialize();

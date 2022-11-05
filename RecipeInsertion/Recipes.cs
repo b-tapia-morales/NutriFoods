@@ -52,14 +52,13 @@ public static class Recipes
             var id = ingredients.Find(x => x.Name.Equals(name))!.Id;
             var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
                 "RecipeInsertion", "Measures" , $"{name}.csv");
-            var measuresIngredient =
-                RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
+            var measuresIngredient = RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
             foreach (var measure in measuresIngredient)
             {
                 context.Add(new IngredientMeasure
                 {
                     IngredientId = id,
-                    Name = measure.Name,
+                    Name = measure.Name, 
                     Grams = measure.Grams
                 });
             }
@@ -81,10 +80,10 @@ public static class Recipes
             var nameRecipe = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
-                .Where(x => !x.Quantity.Equals("x"));
+                .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
             foreach (var dataRecipe in recipe)
             {
-                InsertDataRecipe(context,dataRecipe,ingredients,units,idRecipe);
+                InsertDataRecipe(context,dataRecipe,ingredients,units,idRecipe,pathDataRecipe);
             }
             context.SaveChanges();
         }
@@ -106,7 +105,7 @@ public static class Recipes
         ).Normalize(NormalizationForm.FormC);
     
 
-    private static void InsertDataRecipe(DbContext context,DataRecipe dataRecipe, List<Ingredient> ingredients, List<IngredientMeasure> units,int idRecipe)
+    private static void InsertDataRecipe(DbContext context,DataRecipe dataRecipe, List<Ingredient> ingredients, List<IngredientMeasure> units,int idRecipe, string path)
     {
         try
         {
@@ -127,7 +126,7 @@ public static class Recipes
                     u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
                 switch (dataRecipe.Quantity.Length)
                 {
-                    case 1:
+                    case 1 or 2:
                         InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
                             dataRecipe.Quantity, "0", "0");
                         break;
@@ -153,7 +152,7 @@ public static class Recipes
         }
         catch (Exception e)
         {
-            //por si 
+            Console.WriteLine($"{dataRecipe.NameIngredients} {path}");
         }
     }
     

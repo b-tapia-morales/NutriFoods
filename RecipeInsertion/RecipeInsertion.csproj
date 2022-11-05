@@ -250,4 +250,19 @@
       <Folder Include="DataRecipes\Ingredient\Desayunos" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Update="Measures\Aceite de sésamo.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Alga nori.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Arroz arboreo.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Ostiones.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
 </Project>
