@@ -1,5 +1,6 @@
 using System.Globalization;
 using F23.StringSimilarity;
+using Utils.Csv;
 
 namespace RecipeAndMesuris.Normalization;
 
@@ -58,11 +59,11 @@ public static class Normalization
                     var quantity = dataRecipe.Split(",")[0];
                     var ingredient = FrecuencyTable.RemoveAccentsWithNormalization(dataRecipe.Split(",")[2].ToLower());
                     var measures = FrecuencyTable.RemoveAccentsWithNormalization(dataRecipe.Split(",")[1].ToLower());
-                    var measuresNormalized = GetKeyMeasures(measures);
+                    //var measuresNormalized = GetKeyMeasures(measures);
                     var ingredientNormalized = GetKeyIngredient(ingredient);
                     var quantityNormalized = NormalizationUnicodeQuantity(quantity,measures);
-                    var lineData = quantityNormalized+","+measuresNormalized+","+ingredientNormalized;
-                    dataRecipeIngredientMeasures.WriteLine(lineData);
+                    //var lineData = quantityNormalized+","+measuresNormalized+","+ingredientNormalized;
+                    //dataRecipeIngredientMeasures.WriteLine(lineData);
                 }
                 dataRecipeIngredientMeasures.Close();
 
@@ -161,9 +162,9 @@ public static class Normalization
     /// </summary>
     /// <param name="measures">unit of measure to find</param>
     /// <returns>the key of the measure entered, it returns the same value, if it does not exist.</returns>
-    public static string GetKeyMeasures(string measures)
+    public static string GetKeyMeasures(string measures, Dictionary<string,List<string>> measuresKey)
     {
-        foreach (var dictionaryKeys in MeasuresNormalization.Where(dictionaryKeys =>
+        foreach (var dictionaryKeys in measuresKey.Where(dictionaryKeys =>
                      dictionaryKeys.Value.Any(measuresSimile => measuresSimile.Equals(measures))))
         {
             return dictionaryKeys.Key;
@@ -212,5 +213,40 @@ public static class Normalization
         var other = normalized.Split(" ")[1][2] - '0';
         return ((1000 * int.Parse(normalized.Split(" ")[0])) + (1000 / other)).ToString();
 
+    }
+
+    public static void StandardizationOfIngredientUnist()
+    {
+        var filePath = Path.Combine(Directory.GetParent(
+            Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Ingredient", "ingredient.csv");
+        var ingredients = File.ReadAllLines(filePath);
+        var keyMeasures = MeasurementDictionary();
+        foreach (var nameIngredient in ingredients)
+        {
+            var filePathMeasure = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
+                "RecipeInsertion","Measures", $"{nameIngredient}.csv");
+            var measuresIngredient = File.ReadAllLines(filePathMeasure);
+            Console.WriteLine("   "+nameIngredient.ToUpper()+ "   " );
+            foreach (var measure in measuresIngredient)
+            {
+                var keyMeasure = GetKeyMeasures(measure.Split(";")[0].ToLower(), keyMeasures);
+                Console.WriteLine($"{keyMeasure}  {measure.Split(";")[1]}");
+            }
+        }
+    }
+
+    private static Dictionary<string, List<string>> MeasurementDictionary()
+    {
+        var dictionary = new Dictionary<string, List<string>>();
+        var file = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
+            "RecipeAndMesuris", "Normalization", "groupedMeasures.csv");
+        var measuresNormalization = File.ReadAllLines(file);
+        foreach (var data in measuresNormalization)
+        {
+            var key = data.Split(";")[0];
+            var similarWords = data.Split(";")[1].Split(",").ToList();
+            dictionary.Add(key,similarWords);
+        }
+        return dictionary;
     }
 }

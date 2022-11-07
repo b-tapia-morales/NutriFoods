@@ -15,10 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="DataRecipes" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Include="DataRecipes\Ingredient\Ensaladas\ensalada_chilena.csv" />
       <Content Include="DataRecipes\Ingredient\Ensaladas\ensalada_de_atún.csv" />
       <Content Include="DataRecipes\Ingredient\Entradas\steaks_de_coliflor_con_bbq_merquén.csv" />
@@ -48,7 +44,7 @@
       <Content Include="Measures\Asado de tira.csv" />
       <Content Include="Measures\Asiento.csv" />
       <Content Include="Measures\Atún.csv" />
-      <Content Include="Measures\avena tradicional.csv" />
+      <Content Include="Measures\Avena tradicional.csv" />
       <Content Include="Measures\Azafrán.csv" />
       <Content Include="Measures\azáfran.csv" />
       <Content Include="Measures\Azúcar.csv" />
@@ -247,6 +243,26 @@
       <Content Include="Measures\Yema de huevo.csv" />
       <Content Include="Measures\Zanahoria.csv" />
       <Content Include="Measures\Zapallo butternut.csv" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="DataRecipes\Ingredient\Cenas" />
+      <Folder Include="DataRecipes\Ingredient\Desayunos" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Measures\Aceite de sésamo.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Alga nori.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Arroz arboreo.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="Measures\Ostiones.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
