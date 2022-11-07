@@ -22,13 +22,16 @@ using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-
+/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
-//NutrientCalculation.Calculate();
+NutrientCalculation.Calculate();*/
+
+var reg = new GeneticAlgorithm(4,1800);
+reg.GetRegimen();
 
 /*
 DatabaseInitialization.Initialize();

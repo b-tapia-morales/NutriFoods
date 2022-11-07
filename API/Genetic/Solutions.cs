@@ -49,7 +49,7 @@ public class Solutions
                     case 1:
                         CantKilocalories += nutrient.Quantity;
                         break;
-                    case 109:
+                    case 63:
                         CantProteins += nutrient.Quantity;
                         break;
                     case 12:

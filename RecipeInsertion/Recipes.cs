@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -38,7 +37,7 @@ public static class Recipes
                 PreparationTime = recipe.PreparationTime
             });
         }
-
+        // iria cuando esten por tipo de almuerzo
         context.SaveChanges();
     }
 
@@ -83,7 +82,7 @@ public static class Recipes
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
             foreach (var dataRecipe in recipe)
             {
-                InsertDataRecipe(context,dataRecipe,ingredients,units,idRecipe,pathDataRecipe);
+                InsertDataRecipe(context,dataRecipe,ingredients,units,idRecipe);
             }
             context.SaveChanges();
         }
@@ -105,55 +104,48 @@ public static class Recipes
         ).Normalize(NormalizationForm.FormC);
     
 
-    private static void InsertDataRecipe(DbContext context,DataRecipe dataRecipe, List<Ingredient> ingredients, List<IngredientMeasure> units,int idRecipe, string path)
+    private static void InsertDataRecipe(DbContext context,DataRecipe dataRecipe, List<Ingredient> ingredients, List<IngredientMeasure> units,int idRecipe)
     {
-        try
+        var idIngredient = 
+            ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(dataRecipe.NameIngredients))!.Id;
+        if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc")) {
+            context.Add(new RecipeQuantity 
+            { 
+                RecipeId = idRecipe, 
+                IngredientId = idIngredient, 
+                Grams = double.Parse(dataRecipe.Quantity)
+            });
+        }
+        else
         {
-            var idIngredient =
-                ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(dataRecipe.NameIngredients))!.Id;
-            if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
+            var idMeasures = units.Find(u =>
+                u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
+            switch (dataRecipe.Quantity.Length)
             {
-                context.Add(new RecipeQuantity
+                case 1 or 2:
+                    InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
+                        dataRecipe.Quantity, "0", "0");
+                    break;
+                case 3:
                 {
-                    RecipeId = idRecipe,
-                    IngredientId = idIngredient,
-                    Grams = double.Parse(dataRecipe.Quantity)
-                });
-            }
-            else
-            {
-                var idMeasures = units.Find(u =>
-                    u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
-                switch (dataRecipe.Quantity.Length)
+                    var numerator = dataRecipe.Quantity[0].ToString();
+                    var denominator = dataRecipe.Quantity[2].ToString();
+                    InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator,
+                        denominator);
+                    break;
+                }
+                default:
                 {
-                    case 1 or 2:
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
-                            dataRecipe.Quantity, "0", "0");
-                        break;
-                    case 3:
-                    {
-                        var numerator = dataRecipe.Quantity[0].ToString();
-                        var denominator = dataRecipe.Quantity[2].ToString();
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator,
-                            denominator);
-                        break;
-                    }
-                    default:
-                    {
-                        var integerPart = dataRecipe.Quantity[0].ToString();
-                        var numerator = dataRecipe.Quantity[2].ToString();
-                        var denominator = dataRecipe.Quantity[4].ToString();
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator,
-                            denominator);
-                        break;
-                    }
+                    var integerPart = dataRecipe.Quantity[0].ToString();
+                    var numerator = dataRecipe.Quantity[2].ToString();
+                    var denominator = dataRecipe.Quantity[4].ToString();
+                    InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator,
+                        denominator);
+                    break;
                 }
             }
         }
-        catch (Exception e)
-        {
-            Console.WriteLine($"{dataRecipe.NameIngredients} {path}");
-        }
+        
     }
     
     private static void InsertMeasuresWhitIngredient(DbContext context,int idRecipe ,int ingredientIdMeasure, string integerPart,string numerator, string denominator)
