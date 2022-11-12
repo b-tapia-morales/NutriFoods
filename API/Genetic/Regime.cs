@@ -1,4 +1,3 @@
-
 using API.Dto;
 using API.Recipes;
 using Utils.Nutrition;
@@ -9,136 +8,165 @@ public class Regime : IGeneticAlgorithm
 {
     private readonly IRecipeRepository _repository;
     private readonly Random _r = new Random(Environment.TickCount);
-    private static readonly ICollection<PossibleRegime> Solutions = new List<PossibleRegime>();
-    private static readonly ICollection<PossibleRegime> Winners = new List<PossibleRegime>();
-    private int _numberRecipe;
-
+    public IList<PossibleRegime> Solutions { get; private set; }
+    public IList<PossibleRegime> Winners { get; private set; }
 
     public Regime(IRecipeRepository recipeRepository)
     {
         _repository = recipeRepository;
-        _numberRecipe = 0;
+        Solutions = new List<PossibleRegime>();
+        Winners = new List<PossibleRegime>();
     }
-    public MealMenuDto GenerateSolution(int recipeAmount, double energyTotal, double carbohydratesPercentage, double lipidsPercentage, MealTypeDto mealType)
+
+    public MealMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal)
     {
         var recipes = GetUniverseRecipes();
         var macroNutrientsUser = EnergyDistribution.Calculate(energyTotal);
-        GenerateInitialPopulation(recipeAmount,recipes);
-        CalculatePopulationFitness(energyTotal,macroNutrientsUser.Carbohydrates,macroNutrientsUser.Proteins,macroNutrientsUser.Lipids);
+        GenerateInitialPopulation(recipeAmount, solutionsAmount, recipes);
+        CalculatePopulationFitness(energyTotal, macroNutrientsUser.Carbohydrates, macroNutrientsUser.Proteins,
+            macroNutrientsUser.Lipids);
+        var ite = 0;
         while (SolutionExist())
         {
             Selection();
-            Crossover();
-            Mutation(recipes);
-            CalculatePopulationFitness(energyTotal,macroNutrientsUser.Carbohydrates,macroNutrientsUser.Proteins,macroNutrientsUser.Lipids);
+            Crossover(solutionsAmount);
+            Mutation(recipes, recipeAmount, solutionsAmount);
+            CalculatePopulationFitness(energyTotal, macroNutrientsUser.Carbohydrates, macroNutrientsUser.Proteins,
+                macroNutrientsUser.Lipids);
+            Console.WriteLine(ite);
+            String();
+            ite++;
         }
-        
-        return Solutions.First(pr => pr.Fitness == 8).Recipes;
+        String();
+
+        return null;
     }
-    public void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates,double userValueProteins, double userValurFats)
+
+    public void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates, double userValueProteins,
+        double userValurFats)
     {
         foreach (var possibleRegime in Solutions)
         {
             possibleRegime.MacroNutrientCalculation();
-            possibleRegime.CalculateFitness(userValueCarbohydrates,userValueProteins,energyTotal,userValurFats);
+            possibleRegime.CalculateFitness(userValueCarbohydrates, userValueProteins, energyTotal, userValurFats);
         }
     }
 
-    public void GenerateInitialPopulation(int cantRecipes, ICollection<MealMenuRecipeDto> totalRecipes)
+    public void GenerateInitialPopulation(int cantRecipes, int cantSolutions,
+        IList<MealMenuRecipeDto> totalRecipes)
     {
-        _numberRecipe = cantRecipes;
-        if (totalRecipes == null) throw new ArgumentNullException(nameof(totalRecipes));
-        for (var i = 0; i < 6; i++)
+        for (var i = 0; i < cantSolutions; i++)
         {
-            var pr = new PossibleRegime(cantRecipes);
+            var listRecipe = new List<MealMenuRecipeDto>(cantRecipes);
             for (var j = 0; j < cantRecipes; j++)
             {
                 var rand = _r.Next(0, totalRecipes.Count);
-                pr.AddRecipe(totalRecipes.ToList()[rand]);
+                listRecipe.Add(totalRecipes[rand]);
             }
+
+            var pr = new PossibleRegime(cantRecipes, listRecipe);
             Solutions.Add(pr);
         }
     }
 
     public void Selection()
     {
-        var total = Solutions.Count / 2;
-        var cantTournament = _r.Next(2, total);
+        var rangeMax = Solutions.Count / 2;
+        var cantTournament = _r.Next(2, rangeMax);
         Winners.Clear();
         for (var i = 0; i < cantTournament;)
         {
             var fighter1 = _r.Next(0, Solutions.Count);
             var fighter2 = _r.Next(0, Solutions.Count);
 
-            if (fighter1 != fighter2)
-            {
-                // veriricar si existe ya en los nuevos ganadores
-                var win = Solutions.ToList()[fighter1].Fitness > Solutions.ToList()[fighter2].Fitness
-                    ? Solutions.ToList()[fighter1]
-                    : Solutions.ToList()[fighter2];
-                var exist = Winners.All(s => s.Recipes.MenuRecipes.SequenceEqual(win.Recipes.MenuRecipes));
-                if (!exist) Winners.Add(win);
-                i++;
-            }
+            if (fighter1 == fighter2) continue;
+            var win = Solutions[fighter1].Fitness > Solutions[fighter2].Fitness
+                ? Solutions[fighter1]
+                : Solutions[fighter2];
+            var exist = Winners.Any(s => s.Recipes.MenuRecipes.SequenceEqual(win.Recipes.MenuRecipes));
+            if (!exist) Winners.Add(win);
+            i++;
         }
     }
 
-    public void Crossover()
+    public void Crossover(int solutionsAmount)
     {
         var probability = _r.NextDouble();
-        if (probability <= 0.8)
+        if (probability >= 0.8) return;
+
+        var sonsNew = new List<PossibleRegime>();
+        for (var i = 0; i < solutionsAmount;)
         {
-            for (var i = 0; i < 6;)
-            {
-                var father1 = Winners.ToList()[_r.Next(0, Winners.Count)];
-                var father2 = Solutions.ToList()[_r.Next(0, Winners.Count)];
+            var father1 = Winners[_r.Next(0, Winners.Count)];
+            var father2 = Solutions[_r.Next(0, Winners.Count)];
 
-                var indexGenFather1 = _r.Next(0, father1.Recipes.MenuRecipes.ToList().Count);
-                var indexGenFather2 = _r.Next(0, father2.Recipes.MenuRecipes.ToList().Count);
+            var indexGenFather1 = _r.Next(0, father1.Recipes.MenuRecipes.Count);
+            var indexGenFather2 = _r.Next(0, father2.Recipes.MenuRecipes.Count);
 
-                var gen1 = father1.Recipes.MenuRecipes.ToList()[indexGenFather1];
-                var gen2 = father2.Recipes.MenuRecipes.ToList()[indexGenFather2];
+            var gen1 = father1.Recipes.MenuRecipes[indexGenFather1];
+            var gen2 = father2.Recipes.MenuRecipes[indexGenFather2];
 
-                if (gen1.Recipe.Id == gen2.Recipe.Id) continue;
-                if (father1.Recipes.MenuRecipes.All(r => r.Recipe.Id != gen2.Recipe.Id) &&
-                    father2.Recipes.MenuRecipes.All(r => r.Recipe.Id != gen1.Recipe.Id))
-                {
-                    //debe ir el intercambio
-                    i+=2;
-                }
+            if (gen1.Recipe.Id == gen2.Recipe.Id) continue;
+            if (father1.Recipes.MenuRecipes.Any(r => r.Recipe.Id == gen2.Recipe.Id) ||
+                father2.Recipes.MenuRecipes.Any(r => r.Recipe.Id == gen1.Recipe.Id)) continue;
+            //revisar el cruze
+            father1.Recipes.MenuRecipes[indexGenFather1] = gen2;
+            father2.Recipes.MenuRecipes[indexGenFather2] = gen1;
+            sonsNew.Add(father1);
+            sonsNew.Add(father2);
+            i += 2;
+        }
 
-            }
+        Solutions.Clear();
+        foreach (var newSon in sonsNew)
+        {
+            Solutions.Add(newSon);
         }
     }
 
-    public void Mutation(ICollection<MealMenuRecipeDto> totalRecipes)
+    public void Mutation(IList<MealMenuRecipeDto> totalRecipes, int recipesAmount, int solutionsAmount)
     {
-        if(_r.NextDouble() <= 0.4)
+        if (_r.NextDouble() > 0.4) return;
+        var numberMutation = _r.Next(1, Solutions.Count);
+        for (var i = 0; i < numberMutation; i++)
         {
-            var numberMutation = _r.Next(1, Solutions.Count);
-            for (var i = 0; i < numberMutation; i++)
-            {
-                var changePosition = _r.Next(0, Solutions.Count);
-                var changeIndexRegime = _r.Next(0, _numberRecipe);
-                var rateChangeRecipe = _r.Next(0, totalRecipes.Count);
-                var changeRecipe = totalRecipes.ToList()[rateChangeRecipe];
-                // con testin probar el cambio "Verificar ref o out"
-                Solutions.ToList()[changePosition].Recipes.MenuRecipes.ToList()[changeIndexRegime] = changeRecipe;
-            }
+            var changePosition = _r.Next(0, solutionsAmount);
+            var changeIndexRegime = _r.Next(0, recipesAmount);
+            var rateChangeRecipe = _r.Next(0, totalRecipes.Count);
+            var changeRecipe = totalRecipes[rateChangeRecipe];
+            // implementacion por problemas de referencias 
+            Solutions[changePosition] = NewMutation(changeIndexRegime,changeRecipe,changePosition,recipesAmount);
         }
-        
     }
-    
+
 
     public bool SolutionExist()
     {
         return Solutions.Any(r => r.Fitness != 8);
     }
 
-    private ICollection<MealMenuRecipeDto> GetUniverseRecipes()
+    private IList<MealMenuRecipeDto> GetUniverseRecipes()
     {
-
-        return _repository.FindAll().Result.Select(r => new MealMenuRecipeDto() {Recipe = r, Quantity = 1}).ToList();
+        return _repository.FindAll().Result.Select(r => new MealMenuRecipeDto() { Recipe = r, Quantity = 1 }).ToList();
     }
-    
+
+    private void String()
+    {
+        Console.WriteLine();
+        foreach (var solution in Solutions)
+        {
+            solution.DataString();
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
+    }
+
+    private PossibleRegime NewMutation(int changeIndexRegime,MealMenuRecipeDto mealMenuRecipeDto,int changePosition,int recipeAmount)
+    {
+        var newRecipes = Solutions[changePosition].Recipes.MenuRecipes.Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
+
+        var pr = new PossibleRegime(recipeAmount, newRecipes);
+        return pr;
+    }
 }

@@ -8,7 +8,7 @@ public class PossibleRegime
     private const double Percent = 0.1;
     public int Fitness { get; private set; }
 
-    public PossibleRegime(int numberRecipes)
+    public PossibleRegime(int numberRecipes,IList<MealMenuRecipeDto> menuRecipe)
     {
         Recipes = new MealMenuDto
         {
@@ -16,15 +16,11 @@ public class PossibleRegime
             CarbohydratesTotal = 0,
             LipidsTotal = 0,
             ProteinsTotal = 0,
-            MenuRecipes = new List<MealMenuRecipeDto>(numberRecipes)
+            MenuRecipes = menuRecipe
         };
         Fitness = 0;
     }
-
-    public void AddRecipe(MealMenuRecipeDto mealMenuRecipe)
-    {
-        Recipes.MenuRecipes.ToList().Add(mealMenuRecipe);
-    }
+    
 
     public void MacroNutrientCalculation()
     {
@@ -36,16 +32,16 @@ public class PossibleRegime
         {
             switch (macroNutrients.Nutrient.Id)
             {
-                case 108:
+                case 1:
                     energy += macroNutrients.Quantity;
                     break;
-                case 1:
+                case 2:
                     carbohydrates += macroNutrients.Quantity;
                     break;
-                case 109:
+                case 63:
                     proteins += macroNutrients.Quantity;
                     break;
-                case 11:
+                case 12:
                     lipids += macroNutrients.Quantity;
                     break;
             }
@@ -64,10 +60,11 @@ public class PossibleRegime
                FitnessResult(userValueFats,Recipes.LipidsTotal)+
                FitnessResult(userValueCarbohydrates,Recipes.CarbohydratesTotal);
     }
-    
-    private static int FitnessResult(double userValue, double cantMicroNutrients )
+
+    private static int FitnessResult(double userValue, double cantMicroNutrients)
     {
-        if (userValue * (1 - Percent/2) <= cantMicroNutrients && userValue * (1 + (Percent/2)) >= cantMicroNutrients)
+        if (userValue * (1 - Percent / 2) <= cantMicroNutrients &&
+            userValue * (1 + (Percent / 2)) >= cantMicroNutrients)
         {
             return 2;
         }
@@ -86,5 +83,18 @@ public class PossibleRegime
 
         return 0;
     }
-    
+
+    public void DataString()
+    {
+        foreach (var recipe in Recipes.MenuRecipes)
+        {
+            Console.Write($"{recipe.Recipe.Id} ");
+        }
+        Console.Write($"F = {Fitness}");
+    }
+
+    public void ChangeRecipe(MealMenuRecipeDto newRecipe, int index)
+    {
+        Recipes.MenuRecipes.ToList()[index] = newRecipe;
+    }
 }
