@@ -5,10 +5,10 @@ namespace API.Genetic;
 public class PossibleRegime
 {
     public MealMenuDto Recipes { get; }
-    private const double Percent = 0.1;
+    private const double Percent = 0.05;
     public int Fitness { get; private set; }
 
-    public PossibleRegime(int numberRecipes,IList<MealMenuRecipeDto> menuRecipe)
+    public PossibleRegime(IList<MealMenuRecipeDto> menuRecipe)
     {
         Recipes = new MealMenuDto
         {
@@ -20,7 +20,7 @@ public class PossibleRegime
         };
         Fitness = 0;
     }
-    
+
 
     public void MacroNutrientCalculation()
     {
@@ -28,22 +28,25 @@ public class PossibleRegime
         double lipids = 0;
         double proteins = 0;
         double energy = 0;
-        foreach (var macroNutrients in Recipes.MenuRecipes.SelectMany(r => r.Recipe.RecipeNutrients.ToList()))
+        foreach (var recipesMenu in Recipes.MenuRecipes)
         {
-            switch (macroNutrients.Nutrient.Id)
+            foreach (var nutrient in recipesMenu.Recipe.RecipeNutrients)
             {
-                case 1:
-                    energy += macroNutrients.Quantity;
-                    break;
-                case 2:
-                    carbohydrates += macroNutrients.Quantity;
-                    break;
-                case 63:
-                    proteins += macroNutrients.Quantity;
-                    break;
-                case 12:
-                    lipids += macroNutrients.Quantity;
-                    break;
+                switch (nutrient.Nutrient.Id)
+                {
+                    case 1:
+                        energy += nutrient.Quantity;
+                        break;
+                    case 2:
+                        carbohydrates += nutrient.Quantity;
+                        break;
+                    case 63:
+                        proteins += nutrient.Quantity;
+                        break;
+                    case 12:
+                        lipids += nutrient.Quantity;
+                        break;
+                }
             }
         }
 
@@ -53,24 +56,27 @@ public class PossibleRegime
         Recipes.ProteinsTotal = proteins;
     }
 
-    public void CalculateFitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories, double userValueFats)
+    public void CalculateFitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories,
+        double userValueFats)
     {
-        Fitness = FitnessResult(userValueKilocalories,Recipes.EnergyTotal) +
-               FitnessResult(userValueProteins,Recipes.ProteinsTotal)+
-               FitnessResult(userValueFats,Recipes.LipidsTotal)+
-               FitnessResult(userValueCarbohydrates,Recipes.CarbohydratesTotal);
+        Fitness = FitnessResult(userValueKilocalories, Recipes.EnergyTotal) +
+                  FitnessResult(userValueProteins, Recipes.ProteinsTotal) +
+                  FitnessResult(userValueFats, Recipes.LipidsTotal) +
+                  FitnessResult(userValueCarbohydrates, Recipes.CarbohydratesTotal);
     }
 
     private static int FitnessResult(double userValue, double cantMicroNutrients)
     {
-        if (userValue * (1 - Percent / 2) <= cantMicroNutrients &&
-            userValue * (1 + (Percent / 2)) >= cantMicroNutrients)
+        if ((userValue * (1 - (Percent / 2)) <= cantMicroNutrients) &&
+            (userValue * (1 + (Percent / 2)) >= cantMicroNutrients))
         {
             return 2;
         }
 
-        if ((userValue * (1 - Percent) <= cantMicroNutrients && userValue * (1 - Percent / 2) > cantMicroNutrients) ||
-            (userValue * (1 + Percent / 2) < cantMicroNutrients && userValue * (1 + Percent) >= cantMicroNutrients))
+        if (((userValue * (1 - Percent) <= cantMicroNutrients) &&
+             (userValue * (1 - (Percent / 2)) > cantMicroNutrients)) ||
+            ((userValue * (1 + (Percent / 2)) < cantMicroNutrients) &&
+             (userValue * (1 + Percent) >= cantMicroNutrients)))
         {
             return 0;
         }
@@ -90,11 +96,7 @@ public class PossibleRegime
         {
             Console.Write($"{recipe.Recipe.Id} ");
         }
-        Console.Write($"F = {Fitness}");
-    }
 
-    public void ChangeRecipe(MealMenuRecipeDto newRecipe, int index)
-    {
-        Recipes.MenuRecipes.ToList()[index] = newRecipe;
+        Console.Write($"F = {Fitness}");
     }
 }

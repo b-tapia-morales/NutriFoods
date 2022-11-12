@@ -28,7 +28,7 @@ public class MealPlanService : IMealPlanService
         var denominator = values.Sum(e => e.Value);
         var mealPlan = MapToMealPlan(mealsPerDay, energyTarget, carbohydratesTarget, lipidsTarget, proteinsTarget);
         var mealMenus = new List<MealMenuDto>();
-        _regime.GenerateSolution(3, 10, energyTarget);
+        _regime.GenerateSolution(3, 20, energyTarget,carbohydratesTarget,lipidsTarget,proteinsTarget);
         /*
         foreach (var satiety in values)
         {
