@@ -26,6 +26,7 @@ public class Regime : IGeneticAlgorithm
         GenerateInitialPopulation(recipeAmount, solutionsAmount, recipes);
         CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
             lipidsPercentage);
+        var ite = 0;
         while (!SolutionExist())
         {
             Selection();
@@ -33,8 +34,9 @@ public class Regime : IGeneticAlgorithm
             Mutation(recipes, recipeAmount, solutionsAmount);
             CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
             lipidsPercentage);
+            ite++;
         }
-
+        Console.WriteLine("Generaciones : "+ite);
         String();
 
         return Solutions.First(p => p.Fitness == 8).Recipes;

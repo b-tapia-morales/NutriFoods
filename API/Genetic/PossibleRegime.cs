@@ -5,7 +5,7 @@ namespace API.Genetic;
 public class PossibleRegime
 {
     public MealMenuDto Recipes { get; }
-    private const double Percent = 0.05;
+    private const double Percent = 0.08;
     public int Fitness { get; private set; }
 
     public PossibleRegime(IList<MealMenuRecipeDto> menuRecipe)
