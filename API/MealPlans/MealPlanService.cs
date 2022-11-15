@@ -1,4 +1,5 @@
-﻿using API.Dto;
+﻿using System.Diagnostics;
+using API.Dto;
 using API.Genetic;
 using AutoMapper;
 using Domain.Models;
@@ -7,35 +8,42 @@ using Utils.Nutrition;
 
 namespace API.MealPlans;
 
-public class MealPlanService: IMealPlanService
+public class MealPlanService : IMealPlanService
 {
     private readonly IMapper _mapper;
+    private readonly IGeneticAlgorithm _regime;
 
-    public MealPlanService(IMapper mapper)
+    public MealPlanService(IMapper mapper, IGeneticAlgorithm regime)
     {
         _mapper = mapper;
+        _regime = regime;
     }
 
     public MealPlanDto GenerateMealPlan(double energyTarget, Satiety breakfastSatiety,
         Satiety lunchSatiety, Satiety dinnerSatiety)
     {
+        var timeMeasure = new Stopwatch();
         var (carbohydratesTarget, lipidsTarget, proteinsTarget) = EnergyDistribution.Calculate(energyTarget);
         var values =
-            new List<Satiety> {breakfastSatiety, lunchSatiety, dinnerSatiety};
+            new List<Satiety> { breakfastSatiety, lunchSatiety, dinnerSatiety };
         var mealsPerDay = values.Count(e => e != Satiety.None);
         var denominator = values.Sum(e => e.Value);
         var mealPlan = MapToMealPlan(mealsPerDay, energyTarget, carbohydratesTarget, lipidsTarget, proteinsTarget);
         var mealMenus = new List<MealMenuDto>();
+        timeMeasure.Start();
         foreach (var satiety in values)
         {
             if (satiety == Satiety.None) continue;
-            var numerator = (double) satiety.Value;
-            var ratio = (numerator / denominator);
-            var geneticAlgorithm = new GeneticAlgorithm(4, ratio * energyTarget);
-            var solution = geneticAlgorithm.GetRegimen();
-            mealMenus.Add(MapToMealMenu(_mapper, solution, satiety));
+            var numerator = (double)satiety.Value;
+            var ratio = (numerator / denominator) * energyTarget;
+            var energy = EnergyDistribution.Calculate(ratio);
+            var mealPlanSolution = _regime.GenerateSolution(3, 20,
+                ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins);
+            mealMenus.Add(mealPlanSolution);
+            
         }
-
+        timeMeasure.Stop();
+        Console.WriteLine($"Tiempo de ejecucion : {timeMeasure.Elapsed.TotalMilliseconds} ms");
         mealPlan.MealMenus = mealMenus;
         return mealPlan;
     }
@@ -50,21 +58,6 @@ public class MealPlanService: IMealPlanService
             CarbohydratesTarget = carbohydratesTarget,
             LipidsTarget = lipidsTarget,
             ProteinsTarget = proteinsTarget
-        };
-    }
-
-    private static MealMenuDto MapToMealMenu(IMapper mapper, Solutions solution, Satiety satiety)
-    {
-        var recipes = solution.ListRecipe.Select(mapper.Map<Recipe, RecipeDto>);
-        var mealMenuRecipes = recipes.Select(e => new MealMenuRecipeDto {Recipe = e, Quantity = 1});
-        return new MealMenuDto
-        {
-            Satiety = satiety.Display,
-            EnergyTotal = solution.CantKilocalories,
-            CarbohydratesTotal = solution.CantCarbohydrates,
-            LipidsTotal = solution.CantFats,
-            ProteinsTotal = solution.CantProteins,
-            MenuRecipes = mealMenuRecipes
         };
     }
 }
