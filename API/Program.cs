@@ -21,28 +21,17 @@ using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-/*
-DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
-Recipes.RecipeInsert();
+
+//DatabaseInitialization.Initialize();
+//AbridgedRetrieval.RetrieveFromApi();
+//Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
-NutrientCalculation.Calculate();
-
-var reg = new GeneticAlgorithm(4,1800);
-reg.GetRegimen();
-
-
-DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
-Connect.InsertMeasuris();
-Connect.InsertRecipe();
-Connect.InsertRecipeIngredient();
-NutrientCalculation.Calculate();
-*/
+//NutrientCalculation.Calculate();
 
 
 
+/*
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -115,4 +104,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run();*/

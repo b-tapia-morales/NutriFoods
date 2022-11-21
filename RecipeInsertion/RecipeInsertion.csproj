@@ -248,6 +248,8 @@
     <ItemGroup>
       <Folder Include="DataRecipes\Ingredient\Cenas" />
       <Folder Include="DataRecipes\Ingredient\Desayunos" />
+      <Folder Include="DataRecipes\Steps\Cenas" />
+      <Folder Include="DataRecipes\Steps\Desayunos" />
     </ItemGroup>
 
     <ItemGroup>
