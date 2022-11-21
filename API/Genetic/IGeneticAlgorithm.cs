@@ -1,4 +1,5 @@
 using API.Dto;
+using Domain.Models;
 
 namespace API.Genetic;
 
@@ -9,7 +10,7 @@ public interface IGeneticAlgorithm
     void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates,double userValueProteins, double userValurFats);
     void GenerateInitialPopulation(int cantRecipes,int cantSolutions, IList<MealMenuRecipeDto> totalRecipes);
     MealMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal,double carbohydratesPercentage,
-        double lipidsPercentage, double proteinsPercentage);
+        double lipidsPercentage, double proteinsPercentage, MealType mealType);
     void Selection();
     void Crossover(int solutionsAmount);
     void Mutation(IList<MealMenuRecipeDto> totalRecipes,int recipesAmount, int solutionsAmount);

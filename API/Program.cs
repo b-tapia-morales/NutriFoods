@@ -22,12 +22,12 @@ using Swashbuckle.AspNetCore.Swagger;
 
 
 
-//DatabaseInitialization.Initialize();
-//AbridgedRetrieval.RetrieveFromApi();
-//Recipes.RecipeInsert();
+DatabaseInitialization.Initialize();
+AbridgedRetrieval.RetrieveFromApi();
+Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
-//NutrientCalculation.Calculate();
+NutrientCalculation.Calculate();
 
 
 

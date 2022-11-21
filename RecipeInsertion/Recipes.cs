@@ -181,7 +181,7 @@ public static class Recipes
         var dataRecipesSteps = Directory.GetFiles(pathSteps, "*.csv", SearchOption.AllDirectories);
         foreach (var pathDataRecipesStep in dataRecipesSteps)
         {
-            var nameRecipe = pathDataRecipesStep.Split(@"/")[^1].Replace(" ", " ").Replace(".csv", " ");
+            var nameRecipe = pathDataRecipesStep.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
             var dataStep = File.ReadAllLines(pathDataRecipesStep);
             for (var i = 0; i < dataStep.Length; i++)
