@@ -8,5 +8,5 @@ public class DailyMenuDto
     public double CarbohydratesTotal { get; set; }
     public double LipidsTotal { get; set; }
     public double ProteinsTotal { get; set; }
-    public ICollection<MenuRecipeDto> MenuRecipes { get; set; } = null!;
+    public IList<MenuRecipeDto> MenuRecipes { get; set; } = null!;
 }
