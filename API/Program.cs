@@ -15,25 +15,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Inserts;
-using RecipeAndMesuris.Normalization;
-using RecipeAndMesuris.Recipe_insert;
+using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
+
 
 
 DatabaseInitialization.Initialize();
 Recipes.RecipeInsert();
-/*AbridgedRetrieval.RetrieveFromApi();
-Connect.InsertMeasuris();
-Connect.InsertRecipe();
-Connect.InsertRecipeIngredient();
+Recipes.RecipeMeasures();
+Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
-*/
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 
-// Add services to the container.
+builder.Services.AddCors();
+builder.Services.AddFluentValidation();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
     {
@@ -97,8 +97,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app
-    .UseHttpsRedirection()
-    .UseAuthorization();
+app.UseCors(options => options
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+);
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
