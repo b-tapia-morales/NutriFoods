@@ -17,7 +17,8 @@ public class Regime : IGeneticAlgorithm
         Winners = new List<PossibleRegime>();
     }
 
-    public MealMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal, double carbohydratesPercentage,
+    public DailyMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal,
+        double carbohydratesPercentage,
         double lipidsPercentage, double proteinsPercentage)
     {
         Solutions.Clear();
@@ -33,10 +34,11 @@ public class Regime : IGeneticAlgorithm
             Crossover(solutionsAmount);
             Mutation(recipes, recipeAmount, solutionsAmount);
             CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
-            lipidsPercentage);
+                lipidsPercentage);
             ite++;
         }
-        Console.WriteLine("Generaciones : "+ite);
+
+        Console.WriteLine("Generaciones : " + ite);
         String();
 
         return Solutions.First(p => p.Fitness == 8).Recipes;
@@ -53,11 +55,11 @@ public class Regime : IGeneticAlgorithm
     }
 
     public void GenerateInitialPopulation(int cantRecipes, int cantSolutions,
-        IList<MealMenuRecipeDto> totalRecipes)
+        IList<MenuRecipeDto> totalRecipes)
     {
         for (var i = 0; i < cantSolutions; i++)
         {
-            var listRecipe = new List<MealMenuRecipeDto>(cantRecipes);
+            var listRecipe = new List<MenuRecipeDto>(cantRecipes);
             for (var j = 0; j < cantRecipes; j++)
             {
                 var rand = _r.Next(0, totalRecipes.Count);
@@ -124,7 +126,7 @@ public class Regime : IGeneticAlgorithm
         }
     }
 
-    public void Mutation(IList<MealMenuRecipeDto> totalRecipes, int recipesAmount, int solutionsAmount)
+    public void Mutation(IList<MenuRecipeDto> totalRecipes, int recipesAmount, int solutionsAmount)
     {
         if (_r.NextDouble() > 0.4) return;
         var numberMutation = _r.Next(1, Solutions.Count);
@@ -144,9 +146,9 @@ public class Regime : IGeneticAlgorithm
         return Solutions.Any(r => r.Fitness == 8);
     }
 
-    private IList<MealMenuRecipeDto> GetUniverseRecipes()
+    private IList<MenuRecipeDto> GetUniverseRecipes()
     {
-        return _repository.FindAll().Result.Select(r => new MealMenuRecipeDto() { Recipe = r, Quantity = 1 }).ToList();
+        return _repository.FindAll().Result.Select(r => new MenuRecipeDto {Recipe = r, Portions = 1}).ToList();
     }
 
     private void String()
@@ -161,7 +163,7 @@ public class Regime : IGeneticAlgorithm
         Console.WriteLine();
     }
 
-    private PossibleRegime NewMutation(int changeIndexRegime, MealMenuRecipeDto mealMenuRecipeDto, int changePosition)
+    private PossibleRegime NewMutation(int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto, int changePosition)
     {
         var newRecipes = Solutions[changePosition].Recipes.MenuRecipes
             .Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
@@ -170,7 +172,7 @@ public class Regime : IGeneticAlgorithm
         return pr;
     }
 
-    private static PossibleRegime NewChromosome(PossibleRegime father, MealMenuRecipeDto gen, int indexFather)
+    private static PossibleRegime NewChromosome(PossibleRegime father, MenuRecipeDto gen, int indexFather)
     {
         var newChromosomal = father.Recipes.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
         var pr = new PossibleRegime(newChromosomal);

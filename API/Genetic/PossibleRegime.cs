@@ -4,13 +4,13 @@ namespace API.Genetic;
 
 public class PossibleRegime
 {
-    public MealMenuDto Recipes { get; }
+    public DailyMenuDto Recipes { get; }
     private const double Percent = 0.08;
     public int Fitness { get; private set; }
 
-    public PossibleRegime(IList<MealMenuRecipeDto> menuRecipe)
+    public PossibleRegime(IList<MenuRecipeDto> menuRecipe)
     {
-        Recipes = new MealMenuDto
+        Recipes = new DailyMenuDto
         {
             EnergyTotal = 0,
             CarbohydratesTotal = 0,
@@ -30,7 +30,7 @@ public class PossibleRegime
         double energy = 0;
         foreach (var recipesMenu in Recipes.MenuRecipes)
         {
-            foreach (var nutrient in recipesMenu.Recipe.RecipeNutrients)
+            foreach (var nutrient in recipesMenu.Recipe.Nutrients)
             {
                 switch (nutrient.Nutrient.Id)
                 {
