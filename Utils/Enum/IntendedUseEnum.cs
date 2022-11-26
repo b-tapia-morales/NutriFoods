@@ -39,5 +39,5 @@ public enum IntendedUse
 {
     LoseWeight = 1,
     MaintainWeight = 2,
-    GainWeight = 2
+    GainWeight = 3
 }
