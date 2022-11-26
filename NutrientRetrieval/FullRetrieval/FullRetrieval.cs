@@ -47,7 +47,7 @@ public class FullRetrieval : IFoodRetrieval<Food>
                 IngredientId = ingredientId,
                 NutrientId = nutrientId,
                 Quantity = foodNutrient.Amount,
-                Unit = Unit.FromValue(code)
+                UnitEnum = UnitEnum.FromValue(code)
             });
         }
     }
