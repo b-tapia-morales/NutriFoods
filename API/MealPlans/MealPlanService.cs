@@ -58,7 +58,7 @@ public class MealPlanService: IMealPlanService
         var mealMenuRecipes = recipes.Select(e => new MealMenuRecipeDto {Recipe = e, Quantity = 1});
         return new MealMenuDto
         {
-            Satiety = satiety.Display,
+            Satiety = satiety.ReadableName,
             EnergyTotal = solution.CantKilocalories,
             CarbohydratesTotal = solution.CantCarbohydrates,
             LipidsTotal = solution.CantFats,

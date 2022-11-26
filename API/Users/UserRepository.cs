@@ -65,8 +65,7 @@ public class UserRepository : IUserRepository
         return _mapper.Map<UserProfile, UserDto>(newUser);
     }
 
-    public async Task<UserDto?> SaveBodyMetrics(string apiKey, int height, double weight, PhysicalActivity level,
-        double? muscleMassPercentage)
+    public async Task<UserDto?> SaveBodyMetrics(string apiKey, int height, double weight, PhysicalActivity level)
     {
         var user = await Find(apiKey);
         if (user == null) return null;
@@ -76,8 +75,7 @@ public class UserRepository : IUserRepository
             Height = height,
             Weight = weight,
             BodyMassIndex = BodyMassIndex.Calculate(weight, height),
-            PhysicalActivityLevel = level,
-            MuscleMassPercentage = muscleMassPercentage,
+            PhysicalActivity = level,
             AddedOn = DateTime.Now.ToLocalTime()
         };
         _context.UserBodyMetrics.Add(bodyMetric);
@@ -89,17 +87,17 @@ public class UserRepository : IUserRepository
 
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
-        return users.Include(e => e.Diet)
+        return users
+            .Include(e => e.Diet)
             .Include(e => e.MealPlan)
-            .ThenInclude(e => e!.MealMenus)
-            .ThenInclude(e => e.MealMenuRecipes)
-            .ThenInclude(e => e.Recipe.RecipeNutrients)
-            .ThenInclude(e => e.Nutrient.Subtype.Type)
-            .Include(e => e.MealPlan)
-            .ThenInclude(e => e!.MealMenus)
-            .ThenInclude(e => e.MealMenuRecipes)
-            .ThenInclude(e => e.Recipe.RecipeMeasures)
-            .ThenInclude(e => e.IngredientMeasure.Ingredient)
+            .ThenInclude(e => e!.DailyMealPlans)
+            .ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe)
+            .ThenInclude(e => e.RecipeNutrients)
+            .ThenInclude(e => e.Nutrient)
+            .ThenInclude(e => e.Subtype)
+            .ThenInclude(e => e.Type)
             .Include(e => e.UserBodyMetrics);
     }
 }

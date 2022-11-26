@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Date;
 using Utils.Enum;
+using Utils.Nutrition;
 
 namespace API.Users;
 
@@ -12,12 +13,15 @@ namespace API.Users;
 public class UserController
 {
     private readonly IUserRepository _repository;
-    private readonly IValidator<UserDto> _validator;
+    private readonly IValidator<UserDto> _userValidator;
+    private readonly IValidator<UserBodyMetricDto> _userBodyMetricValidator;
 
-    public UserController(IUserRepository repository, IValidator<UserDto> validator)
+    public UserController(IUserRepository repository, IValidator<UserDto> userValidator,
+        IValidator<UserBodyMetricDto> userBodyMetricValidator)
     {
         _repository = repository;
-        _validator = validator;
+        _userValidator = userValidator;
+        _userBodyMetricValidator = userBodyMetricValidator;
     }
 
     [HttpGet]
@@ -42,7 +46,7 @@ public class UserController
             Username = username,
             Password = password
         };
-        var validationResult = await _validator.ValidateAsync(user);
+        var validationResult = await _userValidator.ValidateAsync(user);
         if (!validationResult.IsValid)
         {
             return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary(), null, null,
@@ -67,7 +71,7 @@ public class UserController
             Email = email,
             Password = password
         };
-        var validationResult = await _validator.ValidateAsync(user);
+        var validationResult = await _userValidator.ValidateAsync(user);
         if (!validationResult.IsValid)
         {
             return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
@@ -85,7 +89,7 @@ public class UserController
     [HttpPut]
     [Route("save-user")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
-        [Required] string password, [Required] string birthDate, [Required] string gender, string? name = "",
+        [Required] string password, [Required] string birthDate, [Required] GenderToken gender, string? name = "",
         string? lastName = "")
     {
         var user = new UserDto
@@ -94,19 +98,19 @@ public class UserController
             Email = email,
             Password = password,
             Birthdate = birthDate,
-            Gender = gender,
+            Gender = Gender.FromToken(gender).ReadableName,
             Name = string.IsNullOrWhiteSpace(name) ? null : name,
             LastName = string.IsNullOrWhiteSpace(lastName) ? null : lastName,
         };
-        var validationResult = await _validator.ValidateAsync(user);
+        var validationResult = await _userValidator.ValidateAsync(user);
         if (!validationResult.IsValid)
         {
             return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
         var dateValue = DateOnly.ParseExact(birthDate, DateOnlyUtils.AllowedFormats, null);
-        var genderValue = Gender.ReadOnlyDictionary[gender];
-        user = await _repository.SaveUser(username, email, password, name, lastName, dateValue, genderValue);
+        user =
+            await _repository.SaveUser(username, email, password, name, lastName, dateValue, Gender.FromToken(gender));
         if (user == null)
         {
             return new BadRequestObjectResult(
@@ -119,33 +123,23 @@ public class UserController
     [HttpPut]
     [Route("save-metrics")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string apiKey, [Required] int height,
-        [Required] double weight, [Required] string physicalActivity, double muscleMassPercentage = 0)
+        [Required] double weight, [Required] PhysicalActivityToken physicalActivity)
     {
-        if (height is < 150 or > 200)
+        var bodyMetricDto = new UserBodyMetricDto
         {
-            return new BadRequestObjectResult(
-                "Minimum and maximum values allowed for height are 150 and 200 [cm] respectively)");
+            Height = height,
+            Weight = weight,
+            BodyMassIndex = BodyMassIndex.Calculate(weight, height),
+            PhysicalActivity = PhysicalActivity.FromToken(physicalActivity).ReadableName
+        };
+        var validationResult = await _userBodyMetricValidator.ValidateAsync(bodyMetricDto);
+        if (!validationResult.IsValid)
+        {
+            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
-        if (weight is < 50 or > 150)
-        {
-            return new BadRequestObjectResult(
-                "Minimum and maximum values allowed for weight are 50 and 150 [kg] respectively)");
-        }
-
-        if (muscleMassPercentage is < 0 or > 1)
-        {
-            return new BadRequestObjectResult(
-                "Minimum and maximum values allowed for muscle mass percentage are 0% and 100% respectively)");
-        }
-
-        if (!PhysicalActivity.TryFromName(physicalActivity, true, out var value))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {value} does not correspond to a valid gender.");
-        }
-
-        var user = await _repository.SaveBodyMetrics(apiKey, height, weight, value, muscleMassPercentage);
+        var user = await _repository.SaveBodyMetrics(apiKey, height, weight,
+            PhysicalActivity.FromToken(physicalActivity));
         if (user == null)
         {
             return new NotFoundObjectResult("There's no user with the specified key");

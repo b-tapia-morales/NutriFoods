@@ -22,8 +22,8 @@ public class MealPlanController
 
     [HttpGet]
     [Route("metrics-based")]
-    public ActionResult<MealPlanDto> GenerateBasedOnMetrics([Required] string gender, [Required] int height,
-        [Required] double weight, [Required] int age, [Required] string physicalActivity,
+    public ActionResult<MealPlanDto> GenerateBasedOnMetrics([Required] GenderToken gender, [Required] int height,
+        [Required] double weight, [Required] int age, [Required] PhysicalActivityToken physicalActivity,
         [Required] string isLunchFilling, [Required] string breakfastSatiety, [Required] string dinnerSatiety)
     {
         if (age is < 18 or > 60)
@@ -44,19 +44,8 @@ public class MealPlanController
                 "Minimum and maximum values allowed for weight are 50 and 150 [kg] respectively)");
         }
 
-        if (!Gender.TryFromName(gender, true, out var genderValue))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {genderValue} does not correspond to a valid gender.");
-        }
-
-        if (!PhysicalActivity.TryFromName(physicalActivity, true, out var activityValue))
-        {
-            return new BadRequestObjectResult(
-                $"Provided argument {activityValue} does not correspond to a valid gender.");
-        }
-
-        var totalMetabolicRate = TotalMetabolicRate.Calculate(genderValue, weight, height, age, activityValue);
+        var totalMetabolicRate = TotalMetabolicRate.Calculate(Gender.FromToken(gender), weight, height, age,
+            PhysicalActivity.FromToken(physicalActivity));
         Console.WriteLine(totalMetabolicRate);
         return GenerateBasedOnMbr(totalMetabolicRate, isLunchFilling, breakfastSatiety, dinnerSatiety);
     }
@@ -104,9 +93,9 @@ public class MealPlanController
         var latestMetric = user.BodyMetrics.Last();
         var age = DateOnly.FromDateTime(DateTime.Now).Year - DateOnly.Parse(user.Birthdate).Year;
         return GenerateBasedOnMetrics(
-            Gender.ReadOnlyDictionary[user.Gender].Name,
-            (int) latestMetric.Height, latestMetric.Weight, age,
-            PhysicalActivity.ReadOnlyDictionary[latestMetric.PhysicalActivityLevel].Name, isLunchFilling,
+            (GenderToken) Gender.FromReadableName(user.Gender)!.Value,
+            latestMetric.Height, latestMetric.Weight, age,
+            (PhysicalActivityToken) PhysicalActivity.FromReadableName(user.Gender)!.Value, isLunchFilling,
             breakfastSatiety, dinnerSatiety);
     }
 }
