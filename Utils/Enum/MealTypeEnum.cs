@@ -21,7 +21,14 @@ public class MealTypeEnum : SmartEnum<MealTypeEnum>
         new(nameof(Snack), (int) MealType.Snack, MealType.Snack, "Merienda");
 
     private static readonly IDictionary<MealType, MealTypeEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<MealType, MealTypeEnum>
+        {
+            {MealType.None, None},
+            {MealType.Breakfast, Breakfast},
+            {MealType.Lunch, Lunch},
+            {MealType.Dinner, Dinner},
+            {MealType.Snack, Snack},
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, MealTypeEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

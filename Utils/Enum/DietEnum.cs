@@ -35,7 +35,18 @@ public class DietEnum : SmartEnum<DietEnum>
         new(nameof(Vegan), (int) Diet.Vegan, Diet.Vegan, "Vegano");
 
     private static readonly IDictionary<Diet, DietEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<Diet, DietEnum>
+        {
+            {Diet.None, None},
+            {Diet.Vegetarian, Vegetarian},
+            {Diet.OvoVegetarian, OvoVegetarian},
+            {Diet.LactoVegetarian, LactoVegetarian},
+            {Diet.OvoLactoVegetarian, OvoLactoVegetarian},
+            {Diet.Pollotarian, Pollotarian},
+            {Diet.Pescetarian, Pescetarian},
+            {Diet.PolloPescetarian, PolloPescetarian},
+            {Diet.Vegan, Vegan}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, DietEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

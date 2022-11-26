@@ -15,7 +15,12 @@ public class EssentialityEnum : SmartEnum<EssentialityEnum>
         new(nameof(Dispensable), (int) Essentiality.Dispensable, Essentiality.Dispensable, "Dispensable");
 
     private static readonly IDictionary<Essentiality, EssentialityEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<Essentiality, EssentialityEnum>
+        {
+            {Essentiality.Indispensable, Indispensable},
+            {Essentiality.Conditional, Conditional},
+            {Essentiality.Dispensable, Dispensable}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, EssentialityEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

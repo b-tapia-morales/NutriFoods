@@ -27,7 +27,16 @@ public class DayOfWeekEnum : SmartEnum<DayOfWeekEnum>
         new(nameof(Sunday), (int) DayOfWeek.Sunday, DayOfWeek.Sunday, "Domingo");
 
     private static readonly IDictionary<DayOfWeek, DayOfWeekEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<DayOfWeek, DayOfWeekEnum>
+        {
+            {DayOfWeek.Monday, Monday},
+            {DayOfWeek.Tuesday, Tuesday},
+            {DayOfWeek.Wednesday, Wednesday},
+            {DayOfWeek.Thursday, Thursday},
+            {DayOfWeek.Friday, Friday},
+            {DayOfWeek.Saturday, Saturday},
+            {DayOfWeek.Sunday, Sunday},
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, DayOfWeekEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

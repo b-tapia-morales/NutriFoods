@@ -18,7 +18,13 @@ public class UnitEnum : SmartEnum<UnitEnum>
         new(nameof(KiloCalories), (int) Unit.KiloCalories, Unit.KiloCalories, "KCal");
 
     private static readonly IDictionary<Unit, UnitEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<Unit, UnitEnum>
+        {
+            {Unit.Grams, Grams},
+            {Unit.Milligrams, Milligrams},
+            {Unit.Micrograms, Micrograms},
+            {Unit.KiloCalories, KiloCalories}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, UnitEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

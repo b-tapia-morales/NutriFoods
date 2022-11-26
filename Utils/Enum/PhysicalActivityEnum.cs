@@ -19,7 +19,13 @@ public class PhysicalActivityEnum : SmartEnum<PhysicalActivityEnum>
         new(nameof(Active), (int) PhysicalActivity.Active, PhysicalActivity.Active, "Activa", 1.00);
 
     private static readonly IDictionary<PhysicalActivity, PhysicalActivityEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<PhysicalActivity, PhysicalActivityEnum>
+        {
+            {PhysicalActivity.VerySedentary, VerySedentary},
+            {PhysicalActivity.Sedentary, Sedentary},
+            {PhysicalActivity.Moderate, Moderate},
+            {PhysicalActivity.Active, Active}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, PhysicalActivityEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

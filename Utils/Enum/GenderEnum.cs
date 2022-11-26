@@ -12,7 +12,11 @@ public class GenderEnum : SmartEnum<GenderEnum>
         new(nameof(Female), (int) Gender.Female, Gender.Female, "Female");
 
     private static readonly IDictionary<Gender, GenderEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<Gender, GenderEnum>
+        {
+            {Gender.Male, Male},
+            {Gender.Female, Female}
+        }.ToImmutableDictionary();
 
     public static readonly IDictionary<string, GenderEnum> ReadableNameDictionary =
         TokenDictionary.ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value,

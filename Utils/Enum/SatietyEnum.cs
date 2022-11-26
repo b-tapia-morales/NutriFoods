@@ -18,7 +18,13 @@ public class SatietyEnum : SmartEnum<SatietyEnum>
         new(nameof(Filling), (int) Satiety.Filling, Satiety.Filling, "Contundente");
 
     private static readonly IDictionary<Satiety, SatietyEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<Satiety, SatietyEnum>
+        {
+            {Satiety.None, None},
+            {Satiety.Light, Light},
+            {Satiety.Normal, Normal},
+            {Satiety.Filling, Filling}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, SatietyEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

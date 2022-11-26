@@ -15,7 +15,12 @@ public class IntendedUseEnum : SmartEnum<IntendedUseEnum>
         new(nameof(GainWeight), (int) IntendedUse.GainWeight, IntendedUse.GainWeight, "Subir de peso");
 
     private static readonly IDictionary<IntendedUse, IntendedUseEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<IntendedUse, IntendedUseEnum>
+        {
+            {IntendedUse.LoseWeight, LoseWeight},
+            {IntendedUse.MaintainWeight, MaintainWeight},
+            {IntendedUse.GainWeight, GainWeight}
+        };
 
     private static readonly IDictionary<string, IntendedUseEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

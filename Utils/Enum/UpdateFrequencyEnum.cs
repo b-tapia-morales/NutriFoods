@@ -12,7 +12,11 @@ public class UpdateFrequencyEnum : SmartEnum<UpdateFrequencyEnum>
         new(nameof(Monthly), (int) UpdateFrequency.Monthly, UpdateFrequency.Monthly, "Mensualmente");
 
     private static readonly IDictionary<UpdateFrequency, UpdateFrequencyEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<UpdateFrequency, UpdateFrequencyEnum>
+        {
+            {UpdateFrequency.Weekly, Weekly},
+            {UpdateFrequency.Monthly, Monthly}
+        }.ToImmutableDictionary();
 
     private static readonly IDictionary<string, UpdateFrequencyEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);

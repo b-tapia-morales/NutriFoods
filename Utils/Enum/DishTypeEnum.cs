@@ -39,7 +39,21 @@ public class DishTypeEnum : SmartEnum<DishTypeEnum>
         new(nameof(Sandwich), (int) DishType.Sandwich, DishType.Sandwich, "Sándwich");
 
     private static readonly IDictionary<DishType, DishTypeEnum> TokenDictionary =
-        List.ToImmutableDictionary(e => e.Token, e => e);
+        new Dictionary<DishType, DishTypeEnum>
+        {
+            {DishType.None, None},
+            {DishType.Entree, Entree},
+            {DishType.MainDish, MainDish},
+            {DishType.Dessert, Dessert},
+            {DishType.Appetizer, Appetizer},
+            {DishType.Beverage, Beverage},
+            {DishType.Salad, Salad},
+            {DishType.Soup, Soup},
+            {DishType.Pastries, Pastries},
+            {DishType.Bread, Bread},
+            {DishType.Sandwich, Sandwich}
+        }.ToImmutableDictionary();
+
 
     private static readonly IDictionary<string, DishTypeEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
