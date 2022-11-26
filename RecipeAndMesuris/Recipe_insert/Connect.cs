@@ -79,7 +79,6 @@ public static class Connect
                 $"SELECT id FROM nutrifoods.ingredient WHERE lower(nutrifoods.ingredient.name) ='{nameIngredient[1].ToLower()}';";
             NpgsqlCommand comand = new NpgsqlCommand(queryIngredient, instance);
             var result = comand.ExecuteScalar();
-
             if (!nameIngredient[2].Equals("") )
             {
                 var measuresPath = Path.Combine(directory, "RecipeAndMesuris", "Recipe_insert", "Ingredient",
@@ -89,6 +88,7 @@ public static class Connect
                 {
                     string lineMeasury = fileMeasures.ReadLine() ?? throw new InvalidOperationException();
                     string[] data = lineMeasury.Split(";");
+                    Console.WriteLine($"INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams) VALUES ({result},'{data[0]}',{data[1]})ON CONFLICT DO NOTHING;");
                     string queryMeasury =
                         $"INSERT INTO nutrifoods.ingredient_measure (ingredient_id, name, grams) VALUES ({result},'{data[0]}',{data[1]})ON CONFLICT DO NOTHING;";
                     NpgsqlCommand commandMeasury = new NpgsqlCommand(queryMeasury, instance);

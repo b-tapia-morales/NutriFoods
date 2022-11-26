@@ -1,6 +1,7 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using API.Dto;
+using API.Genetic;
 using API.Ingredients;
 using API.MealPlans;
 using API.Recipes;
@@ -15,22 +16,37 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
+using RecipeAndMesuris.Recipe_insert;
 using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-
+/*
 DatabaseInitialization.Initialize();
+AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
 
+var reg = new GeneticAlgorithm(4,1800);
+reg.GetRegimen();
+
+
+DatabaseInitialization.Initialize();
+AbridgedRetrieval.RetrieveFromApi();
+Connect.InsertMeasuris();
+Connect.InsertRecipe();
+Connect.InsertRecipeIngredient();
+NutrientCalculation.Calculate();
+
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
 
-builder.Services.AddCors();
 builder.Services.AddFluentValidation();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -49,7 +65,8 @@ builder.Services
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IMealPlanService, MealPlanService>();
+    .AddScoped<IMealPlanService, MealPlanService>()
+    .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
     .AddControllers()
@@ -58,29 +75,24 @@ builder.Services
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    })
-    .AddFluentValidation();
+    });
 
-builder.Services
-    .AddEndpointsApiExplorer()
-    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
-    .AddFluentValidation()
-    .AddSwaggerGen(options =>
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
+builder.Services.AddFluentValidationRulesToSwagger();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
-        options.SwaggerDoc("v1", new OpenApiInfo
-        {
-            Version = "v1",
-            Title = "NutriFoods",
-            Description = "The official API for the NutriFoods project"
-        });
-        options.AddFluentValidationRulesScoped();
-    })
-    .AddFluentValidationRulesToSwagger();
-
-builder.Services
-    .AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-    .AddCertificate();
-
+        Version = "v1",
+        Title = "NutriFoods",
+        Description = "The official API for the NutriFoods project"
+    });
+    options.AddFluentValidationRulesScoped();
+});
 
 var app = builder.Build();
 
@@ -97,15 +109,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseCors(options => options
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-);
-
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.Run();
