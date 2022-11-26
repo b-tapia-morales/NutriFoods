@@ -1,7 +1,6 @@
 ﻿using API.Dto;
 using API.Genetic;
 using AutoMapper;
-using Domain.Models;
 using Utils.Enum;
 using Utils.Nutrition;
 
