@@ -89,13 +89,13 @@ public class PossibleRegime
         return 0;
     }
 
-    public void DataString()
+    public void ShowPhenotypes()
     {
         foreach (var recipe in Recipes.MenuRecipes)
         {
             Console.Write($"{recipe.Recipe.Id} ");
         }
 
-        Console.Write($"F = {Fitness}");
+        Console.WriteLine($"F = {Fitness}");
     }
 }
