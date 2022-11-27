@@ -21,12 +21,12 @@ public static class BodyMassIndex
 
     internal static double TraditionalMethod(double weight, int height)
     {
-        return Math.Round(weight / Math.Pow(height, 2), 2);
+        return Math.Round(weight / Math.Pow(height * 1E-2, 2), 2);
     }
 
     internal static double ProposedMethod(double weight, int height)
     {
-        return 1.3 * Math.Round(weight / Math.Pow(height, 2.5), 2);
+        return Math.Round(1.3 * (weight / Math.Pow(height * 1E-2, 2.5)), 2);
     }
 }
 
