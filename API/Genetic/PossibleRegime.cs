@@ -55,33 +55,33 @@ public class PossibleRegime
         Recipes.ProteinsTotal = proteins;
     }
 
-    public void CalculateFitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories,
-        double userValueFats, double marginOfError)
+    public void CalculateFitness(double energy, double carbohydrates, double lipids, double proteins,
+        double marginOfError)
     {
-        Fitness = FitnessResult(userValueKilocalories, Recipes.EnergyTotal, marginOfError) +
-                  FitnessResult(userValueProteins, Recipes.ProteinsTotal, marginOfError) +
-                  FitnessResult(userValueFats, Recipes.LipidsTotal, marginOfError) +
-                  FitnessResult(userValueCarbohydrates, Recipes.CarbohydratesTotal, marginOfError);
+        Fitness = FitnessResult(energy, Recipes.EnergyTotal, marginOfError) +
+                  FitnessResult(carbohydrates, Recipes.CarbohydratesTotal, marginOfError) +
+                  FitnessResult(lipids, Recipes.LipidsTotal, marginOfError) +
+                  FitnessResult(proteins, Recipes.ProteinsTotal, marginOfError);
     }
 
-    private static int FitnessResult(double userValue, double cantMicroNutrients, double marginOfError)
+    private static int FitnessResult(double actualValue, double objectiveValue, double marginOfError)
     {
-        if ((userValue * (1 - (marginOfError / 2)) <= cantMicroNutrients) &&
-            (userValue * (1 + (marginOfError / 2)) >= cantMicroNutrients))
+        if ((actualValue * (1 - (marginOfError / 2)) <= objectiveValue) &&
+            (actualValue * (1 + (marginOfError / 2)) >= objectiveValue))
         {
-            return 2;
+            return +2;
         }
 
-        if (((userValue * (1 - marginOfError) <= cantMicroNutrients) &&
-             (userValue * (1 - (marginOfError / 2)) > cantMicroNutrients)) ||
-            ((userValue * (1 + (marginOfError / 2)) < cantMicroNutrients) &&
-             (userValue * (1 + marginOfError) >= cantMicroNutrients)))
+        if ((actualValue * (1 - marginOfError) <= objectiveValue) &&
+            (actualValue * (1 - (marginOfError / 2)) > objectiveValue) ||
+            (actualValue * (1 + (marginOfError / 2)) < objectiveValue) &&
+            (actualValue * (1 + marginOfError) >= objectiveValue))
         {
-            return 0;
+            return +0;
         }
 
-        if (userValue * (1 - marginOfError) > cantMicroNutrients ||
-            userValue * (1 + marginOfError) < cantMicroNutrients)
+        if (actualValue * (1 - marginOfError) > objectiveValue ||
+            actualValue * (1 + marginOfError) < objectiveValue)
         {
             return -2;
         }
