@@ -54,7 +54,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PhysicalActivity, opt => opt.MapFrom(src => src.PhysicalActivity.ReadableName));
         CreateMap<UserData, UserDataDto>()
             .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString()))
-            .ForMember(dest => dest.GenderEnum, opt => opt.MapFrom(src => src.Gender.ReadableName))
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ReadableName))
             .ForMember(dest => dest.Diet, opt => opt.MapFrom(src => src.Diet!.ReadableName))
             .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
             .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName));
