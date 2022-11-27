@@ -9,8 +9,8 @@ public interface IGeneticAlgorithm
     IList<PossibleRegime> Solutions { get; }
     IList<PossibleRegime> Winners { get; }
 
-    void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates, double userValueProteins,
-        double userValurFats, double marginOfError);
+    void CalculatePopulationFitness(double energy, double carbohydrates, double lipids, double proteins,
+        double marginOfError);
 
     void GenerateInitialPopulation(int recipesAmount, int solutionsAmount, IList<MenuRecipeDto> totalRecipes);
 

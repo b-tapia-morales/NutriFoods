@@ -24,14 +24,14 @@ public class Regime : IGeneticAlgorithm
         Winners.Clear();
         var recipes = GetUniverseRecipes();
         GenerateInitialPopulation(recipesAmount, solutionsAmount, recipes);
-        CalculatePopulationFitness(energy, carbohydrates, proteins, lipids, marginOfError);
+        CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         var i = 0;
         while (!SolutionExists())
         {
             Selection();
             Crossover(solutionsAmount);
             Mutation(recipes, recipesAmount, solutionsAmount);
-            CalculatePopulationFitness(energy, carbohydrates, proteins, lipids, marginOfError);
+            CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
             i++;
         }
 
@@ -41,14 +41,13 @@ public class Regime : IGeneticAlgorithm
         return Solutions.First(p => p.Fitness == 8).Recipes;
     }
 
-    public void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates, double userValueProteins,
-        double userValurFats, double marginOfError)
+    public void CalculatePopulationFitness(double energy, double carbohydrates, double lipids, double proteins,
+        double marginOfError)
     {
         foreach (var possibleRegime in Solutions)
         {
             possibleRegime.MacroNutrientCalculation();
-            possibleRegime.CalculateFitness(userValueCarbohydrates, userValueProteins, energyTotal, userValurFats,
-                marginOfError);
+            possibleRegime.CalculateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         }
     }
 
