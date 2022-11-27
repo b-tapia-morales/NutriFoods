@@ -1,5 +1,4 @@
 using API.Dto;
-using API.Recipes;
 
 namespace API.Genetic;
 
