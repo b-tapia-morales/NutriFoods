@@ -71,6 +71,8 @@ public class UserRepository : IUserRepository
             .ThenInclude(e => e.Nutrient)
             .ThenInclude(e => e.Subtype)
             .ThenInclude(e => e.Type)
-            .Include(e => e.UserBodyMetrics);
+            .Include(e => e.UserData)
+            .Include(e => e.UserBodyMetrics)
+            .Include(e => e.UserAllergies);
     }
 }
