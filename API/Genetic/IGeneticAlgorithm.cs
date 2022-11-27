@@ -10,21 +10,22 @@ public interface IGeneticAlgorithm
     IList<PossibleRegime> Winners { get; }
 
     void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates, double userValueProteins,
-        double userValurFats);
+        double userValurFats, double marginOfError);
 
     void GenerateInitialPopulation(int recipesAmount, int solutionsAmount, IList<MenuRecipeDto> totalRecipes);
 
-    DailyMenuDto GenerateSolution(int recipesAmount, double energy, double carbohydrates,
-        double lipids, double proteins, int solutionsAmount = 20);
+    DailyMenuDto GenerateSolution(int recipesAmount, double energy, double carbohydrates, double lipids,
+        double proteins, int solutionsAmount = 20, double marginOfError = 0.08);
 
-    DailyMenuDto GenerateSolution(int recipesAmount, double energy, int solutionsAmount = 20)
+    DailyMenuDto GenerateSolution(int recipesAmount, double energy, int solutionsAmount = 20,
+        double marginOfError = 0.08)
     {
         var (carbohydrates, lipids, proteins) = EnergyDistribution.Calculate(energy);
-        return GenerateSolution(recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount);
+        return GenerateSolution(recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount, marginOfError);
     }
 
     DailyMenuDto GenerateCustomSolution(int recipesAmount, double energy, double carbsPercent, double fatsPercent,
-        double proteinsPercent, int solutionsAmount = 20)
+        double proteinsPercent, int solutionsAmount = 20, double marginOfError = 0.08)
     {
         carbsPercent = Math.Round(carbsPercent, 2);
         fatsPercent = Math.Round(fatsPercent, 2);
@@ -39,7 +40,7 @@ public interface IGeneticAlgorithm
             throw new ArgumentException("The sum of the percentages do not equal to one");
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energy, carbsPercent, fatsPercent, proteinsPercent);
-        return GenerateSolution(recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount);
+        return GenerateSolution(recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount, marginOfError);
     }
 
     void Selection();

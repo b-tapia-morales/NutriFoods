@@ -18,20 +18,20 @@ public class Regime : IGeneticAlgorithm
     }
 
     public DailyMenuDto GenerateSolution(int recipesAmount, double energy, double carbohydrates,
-        double lipids, double proteins, int solutionsAmount = 20)
+        double lipids, double proteins, int solutionsAmount = 20, double marginOfError = 0.08)
     {
         Solutions.Clear();
         Winners.Clear();
         var recipes = GetUniverseRecipes();
         GenerateInitialPopulation(recipesAmount, solutionsAmount, recipes);
-        CalculatePopulationFitness(energy, carbohydrates, proteins, lipids);
+        CalculatePopulationFitness(energy, carbohydrates, proteins, lipids, marginOfError);
         var i = 0;
         while (!SolutionExists())
         {
             Selection();
             Crossover(solutionsAmount);
             Mutation(recipes, recipesAmount, solutionsAmount);
-            CalculatePopulationFitness(energy, carbohydrates, proteins, lipids);
+            CalculatePopulationFitness(energy, carbohydrates, proteins, lipids, marginOfError);
             i++;
         }
 
@@ -42,12 +42,13 @@ public class Regime : IGeneticAlgorithm
     }
 
     public void CalculatePopulationFitness(double energyTotal, double userValueCarbohydrates, double userValueProteins,
-        double userValurFats)
+        double userValurFats, double marginOfError)
     {
         foreach (var possibleRegime in Solutions)
         {
             possibleRegime.MacroNutrientCalculation();
-            possibleRegime.CalculateFitness(userValueCarbohydrates, userValueProteins, energyTotal, userValurFats);
+            possibleRegime.CalculateFitness(userValueCarbohydrates, userValueProteins, energyTotal, userValurFats,
+                marginOfError);
         }
     }
 

@@ -5,7 +5,6 @@ namespace API.Genetic;
 public class PossibleRegime
 {
     public DailyMenuDto Recipes { get; }
-    private const double Percent = 0.08;
     public int Fitness { get; private set; }
 
     public PossibleRegime(IList<MenuRecipeDto> menuRecipe)
@@ -57,32 +56,32 @@ public class PossibleRegime
     }
 
     public void CalculateFitness(double userValueCarbohydrates, double userValueProteins, double userValueKilocalories,
-        double userValueFats)
+        double userValueFats, double marginOfError)
     {
-        Fitness = FitnessResult(userValueKilocalories, Recipes.EnergyTotal) +
-                  FitnessResult(userValueProteins, Recipes.ProteinsTotal) +
-                  FitnessResult(userValueFats, Recipes.LipidsTotal) +
-                  FitnessResult(userValueCarbohydrates, Recipes.CarbohydratesTotal);
+        Fitness = FitnessResult(userValueKilocalories, Recipes.EnergyTotal, marginOfError) +
+                  FitnessResult(userValueProteins, Recipes.ProteinsTotal, marginOfError) +
+                  FitnessResult(userValueFats, Recipes.LipidsTotal, marginOfError) +
+                  FitnessResult(userValueCarbohydrates, Recipes.CarbohydratesTotal, marginOfError);
     }
 
-    private static int FitnessResult(double userValue, double cantMicroNutrients)
+    private static int FitnessResult(double userValue, double cantMicroNutrients, double marginOfError)
     {
-        if ((userValue * (1 - (Percent / 2)) <= cantMicroNutrients) &&
-            (userValue * (1 + (Percent / 2)) >= cantMicroNutrients))
+        if ((userValue * (1 - (marginOfError / 2)) <= cantMicroNutrients) &&
+            (userValue * (1 + (marginOfError / 2)) >= cantMicroNutrients))
         {
             return 2;
         }
 
-        if (((userValue * (1 - Percent) <= cantMicroNutrients) &&
-             (userValue * (1 - (Percent / 2)) > cantMicroNutrients)) ||
-            ((userValue * (1 + (Percent / 2)) < cantMicroNutrients) &&
-             (userValue * (1 + Percent) >= cantMicroNutrients)))
+        if (((userValue * (1 - marginOfError) <= cantMicroNutrients) &&
+             (userValue * (1 - (marginOfError / 2)) > cantMicroNutrients)) ||
+            ((userValue * (1 + (marginOfError / 2)) < cantMicroNutrients) &&
+             (userValue * (1 + marginOfError) >= cantMicroNutrients)))
         {
             return 0;
         }
 
-        if (userValue * (1 - Percent) > cantMicroNutrients ||
-            userValue * (1 + Percent) < cantMicroNutrients)
+        if (userValue * (1 - marginOfError) > cantMicroNutrients ||
+            userValue * (1 + marginOfError) < cantMicroNutrients)
         {
             return -2;
         }
