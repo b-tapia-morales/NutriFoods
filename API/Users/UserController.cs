@@ -37,70 +37,16 @@ public class UserController
         return user;
     }
 
-    [HttpGet]
-    [Route("find-by-username")]
-    public async Task<ActionResult<UserDto>> FindByUsername([Required] string username, [Required] string password)
-    {
-        var user = new UserDto
-        {
-            Username = username,
-            Password = password
-        };
-        var validationResult = await _userValidator.ValidateAsync(user);
-        if (!validationResult.IsValid)
-        {
-            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary(), null, null,
-                400));
-        }
-
-        user = await _repository.FindByUsername(username, password);
-        if (user == null)
-        {
-            return new NotFoundObjectResult("There's no user with the specified username and password provided.");
-        }
-
-        return user;
-    }
-
-    [HttpGet]
-    [Route("find-by-email")]
-    public async Task<ActionResult<UserDto>> FindByEmail([Required] string email, [Required] string password)
-    {
-        var user = new UserDto
-        {
-            Email = email,
-            Password = password
-        };
-        var validationResult = await _userValidator.ValidateAsync(user);
-        if (!validationResult.IsValid)
-        {
-            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
-        }
-
-        user = await _repository.FindByEmail(email, password);
-        if (user == null)
-        {
-            return new NotFoundObjectResult("There's no user with the specified key");
-        }
-
-        return user;
-    }
-
     [HttpPut]
     [Route("save-user")]
     public async Task<ActionResult<UserDto>> SaveUser([Required] string username, [Required] string email,
-        [Required] string password, [Required] string birthDate, [Required] GenderToken gender, string? name = "",
-        string? lastName = "")
+        [Required] string apiKey)
     {
         var user = new UserDto
         {
             Username = username,
             Email = email,
-            Password = password,
-            Birthdate = birthDate,
-            Gender = Gender.FromToken(gender).ReadableName,
-            Name = string.IsNullOrWhiteSpace(name) ? null : name,
-            LastName = string.IsNullOrWhiteSpace(lastName) ? null : lastName,
+            ApiKey = apiKey
         };
         var validationResult = await _userValidator.ValidateAsync(user);
         if (!validationResult.IsValid)
@@ -108,9 +54,7 @@ public class UserController
             return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
-        var dateValue = DateOnly.ParseExact(birthDate, DateOnlyUtils.AllowedFormats, null);
-        user =
-            await _repository.SaveUser(username, email, password, name, lastName, dateValue, Gender.FromToken(gender));
+        user = await _repository.Save(username, email, apiKey);
         if (user == null)
         {
             return new BadRequestObjectResult(
@@ -122,15 +66,15 @@ public class UserController
 
     [HttpPut]
     [Route("save-metrics")]
-    public async Task<ActionResult<UserDto>> SaveUser([Required] string apiKey, [Required] int height,
-        [Required] double weight, [Required] PhysicalActivityToken physicalActivity)
+    public async Task<ActionResult<UserDto>> SaveMetrics([Required] string apiKey, [Required] int height,
+        [Required] double weight, [Required] PhysicalActivity physicalActivity)
     {
         var bodyMetricDto = new UserBodyMetricDto
         {
             Height = height,
             Weight = weight,
             BodyMassIndex = BodyMassIndex.Calculate(weight, height),
-            PhysicalActivity = PhysicalActivity.FromToken(physicalActivity).ReadableName
+            PhysicalActivity = PhysicalActivityEnum.FromToken(physicalActivity).ReadableName
         };
         var validationResult = await _userBodyMetricValidator.ValidateAsync(bodyMetricDto);
         if (!validationResult.IsValid)
@@ -139,7 +83,7 @@ public class UserController
         }
 
         var user = await _repository.SaveBodyMetrics(apiKey, height, weight,
-            PhysicalActivity.FromToken(physicalActivity));
+            PhysicalActivityEnum.FromToken(physicalActivity));
         if (user == null)
         {
             return new NotFoundObjectResult("There's no user with the specified key");

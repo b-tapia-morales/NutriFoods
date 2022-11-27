@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using API.Dto;
 using API.Genetic;
 using API.Ingredients;
-using API.MealPlans;
 using API.Recipes;
 using API.Users;
 using Domain.DatabaseInitialization;
@@ -16,12 +15,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Recipe_insert;
 using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
+using Utils.Enum;
 
 
-/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
@@ -29,25 +27,12 @@ Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
 
-var reg = new GeneticAlgorithm(4,1800);
-reg.GetRegimen();
-
-
-DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
-Connect.InsertMeasuris();
-Connect.InsertRecipe();
-Connect.InsertRecipeIngredient();
-NutrientCalculation.Calculate();
-
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddFluentValidation();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -65,7 +50,6 @@ builder.Services
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IMealPlanService, MealPlanService>()
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services

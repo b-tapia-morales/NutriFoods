@@ -19,45 +19,20 @@ public class UserRepository : IUserRepository
         _mapper = mapper;
     }
 
-    public async Task<UserDto?> Find(string apiKey)
-    {
-        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
+    public async Task<UserDto?> Find(string apiKey) =>
+        await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
             .FirstOrDefaultAsync(e => e.ApiKey.Equals(apiKey));
-        return user;
-    }
 
-    public async Task<UserDto?> FindByUsername(string username, string password)
+    public async Task<UserDto?> Save(string username, string email, string apiKey)
     {
         var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
-            .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(username));
-        if (user == null) return null;
-        return PasswordEncryption.Verify(password, user.Password) ? user : null;
-    }
-
-    public async Task<UserDto?> FindByEmail(string email, string password)
-    {
-        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
-            .FirstOrDefaultAsync(e => e.Email.ToLower().Equals(email));
-        if (user == null) return null;
-        return PasswordEncryption.Verify(password, user.Password) ? user : null;
-    }
-
-    public async Task<UserDto?> SaveUser(string username, string email, string password, string? name, string? lastName,
-        DateOnly birthDate, Gender gender)
-    {
-        var user = await _mapper.ProjectTo<UserDto>(_context.UserProfiles)
             .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(username) || e.Email.ToLower().Equals(email));
         if (user != null) return null;
         var newUser = new UserProfile
         {
             Username = username,
             Email = email,
-            ApiKey = ApiKeyGenerator.Generate(),
-            Password = PasswordEncryption.Hash(password),
-            Name = name ?? string.Empty,
-            LastName = lastName ?? string.Empty,
-            Birthdate = birthDate,
-            Gender = gender,
+            ApiKey = apiKey,
             JoinedOn = DateTime.Now.ToLocalTime()
         };
         _context.UserProfiles.Add(newUser);
@@ -65,7 +40,7 @@ public class UserRepository : IUserRepository
         return _mapper.Map<UserProfile, UserDto>(newUser);
     }
 
-    public async Task<UserDto?> SaveBodyMetrics(string apiKey, int height, double weight, PhysicalActivity level)
+    public async Task<UserDto?> SaveBodyMetrics(string apiKey, int height, double weight, PhysicalActivityEnum level)
     {
         var user = await Find(apiKey);
         if (user == null) return null;
@@ -88,9 +63,8 @@ public class UserRepository : IUserRepository
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
         return users
-            .Include(e => e.Diet)
             .Include(e => e.MealPlan)
-            .ThenInclude(e => e!.DailyMealPlans)
+            .ThenInclude(e => e.DailyMealPlans)
             .ThenInclude(e => e.DailyMenus)
             .ThenInclude(e => e.MenuRecipes)
             .ThenInclude(e => e.Recipe)
