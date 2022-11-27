@@ -13,13 +13,15 @@ public class UserController
 {
     private readonly IUserRepository _repository;
     private readonly IValidator<UserDto> _userValidator;
+    private readonly IValidator<UserDataDto> _userDataValidator;
     private readonly IValidator<UserBodyMetricDto> _userBodyMetricValidator;
 
     public UserController(IUserRepository repository, IValidator<UserDto> userValidator,
-        IValidator<UserBodyMetricDto> userBodyMetricValidator)
+        IValidator<UserDataDto> userDataValidator, IValidator<UserBodyMetricDto> userBodyMetricValidator)
     {
         _repository = repository;
         _userValidator = userValidator;
+        _userDataValidator = userDataValidator;
         _userBodyMetricValidator = userBodyMetricValidator;
     }
 
@@ -28,12 +30,7 @@ public class UserController
     public async Task<ActionResult<UserDto>> Find(string apiKey)
     {
         var user = await _repository.Find(apiKey);
-        if (user == null)
-        {
-            return new NotFoundObjectResult("There's no user with the specified key");
-        }
-
-        return user;
+        return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
     }
 
     [HttpPut]
@@ -54,16 +51,41 @@ public class UserController
         }
 
         user = await _repository.Save(username, email, apiKey);
-        if (user == null)
-        {
-            return new BadRequestObjectResult(
-                "Can't register user because there's a user already using the provided credentials");
-        }
 
-        return user;
+        return user == null
+            ? new BadRequestObjectResult(
+                "Can't register user because there's a user already using the provided credentials")
+            : user;
     }
 
     [HttpPut]
+    [Route("save-data")]
+    public async Task<ActionResult<UserDto>> SavePersonalData([Required] string apiKey, string birthdate, Gender gender,
+        string? name = "", string? lastName = "", Diet diet = Diet.None, IntendedUse intendedUse = IntendedUse.None,
+        UpdateFrequency updateFrequency = UpdateFrequency.None)
+    {
+        var userData = new UserDataDto
+        {
+            Name = name ?? string.Empty,
+            LastName = lastName ?? string.Empty,
+            Birthdate = birthdate,
+            Gender = GenderEnum.FromToken(gender).ReadableName,
+            Diet = DietEnum.FromToken(diet).ReadableName,
+            IntendedUse = IntendedUseEnum.FromToken(intendedUse).ReadableName,
+            UpdateFrequency = UpdateFrequencyEnum.FromToken(updateFrequency).ReadableName
+        };
+        var validationResult = await _userDataValidator.ValidateAsync(userData);
+        if (!validationResult.IsValid)
+        {
+            return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
+        }
+
+        var user = await _repository.SavePersonalData(apiKey, userData);
+
+        return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
+    }
+
+    [HttpPost]
     [Route("save-metrics")]
     public async Task<ActionResult<UserDto>> SaveMetrics([Required] string apiKey, [Required] int height,
         [Required] double weight, [Required] PhysicalActivity physicalActivity)
@@ -81,13 +103,8 @@ public class UserController
             return new BadRequestObjectResult(Results.ValidationProblem(validationResult.ToDictionary()));
         }
 
-        var user = await _repository.SaveBodyMetrics(apiKey, height, weight,
-            PhysicalActivityEnum.FromToken(physicalActivity));
-        if (user == null)
-        {
-            return new NotFoundObjectResult("There's no user with the specified key");
-        }
+        var user = await _repository.SaveBodyMetrics(apiKey, bodyMetricDto);
 
-        return user;
+        return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
     }
 }
