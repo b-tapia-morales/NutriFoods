@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class NutrientSubtype
+public sealed class NutrientSubtype
 {
     public NutrientSubtype() => Nutrients = new HashSet<Nutrient>();
 
@@ -9,6 +9,6 @@ public class NutrientSubtype
     public bool ProvidesEnergy { get; set; }
     public int TypeId { get; set; }
 
-    public virtual NutrientType Type { get; set; } = null!;
-    public virtual ICollection<Nutrient> Nutrients { get; set; }
+    public NutrientType Type { get; set; } = null!;
+    public ICollection<Nutrient> Nutrients { get; set; }
 }

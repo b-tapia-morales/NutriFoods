@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class TertiaryGroup
+public sealed class TertiaryGroup
 {
     public TertiaryGroup() => Ingredients = new HashSet<Ingredient>();
 
@@ -8,6 +8,6 @@ public class TertiaryGroup
     public string Name { get; set; } = null!;
     public int SecondaryGroupId { get; set; }
 
-    public virtual SecondaryGroup SecondaryGroup { get; set; } = null!;
-    public virtual ICollection<Ingredient> Ingredients { get; set; }
+    public SecondaryGroup SecondaryGroup { get; set; } = null!;
+    public ICollection<Ingredient> Ingredients { get; set; }
 }

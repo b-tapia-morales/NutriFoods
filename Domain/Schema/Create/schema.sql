@@ -254,22 +254,29 @@ CREATE TABLE IF NOT EXISTS menu_recipe
 
 CREATE TABLE IF NOT EXISTS user_profile
 (
-    id               UUID DEFAULT gen_random_uuid(),
-    username         VARCHAR(64) NOT NULL,
-    email            TEXT        NOT NULL,
-    password         TEXT        NOT NULL,
-    api_key          TEXT        NOT NULL,
-    name             VARCHAR(64),
-    last_name        VARCHAR(64),
-    birthdate        DATE        NOT NULL,
-    gender           INTEGER     NOT NULL,
-    joined_on        TIMESTAMP   NOT NULL,
-    diet             INTEGER,
-    update_frequency INTEGER,
-    meal_plan_id     INTEGER,
+    id           UUID DEFAULT gen_random_uuid(),
+    username     VARCHAR(64) NOT NULL,
+    email        TEXT        NOT NULL,
+    api_key      TEXT        NOT NULL,
+    joined_on    TIMESTAMP   NOT NULL,
+    meal_plan_id INTEGER,
     UNIQUE (username),
     UNIQUE (email),
     FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id),
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_data
+(
+    id               UUID    NOT NULL,
+    name             VARCHAR(64),
+    last_name        VARCHAR(64),
+    birthdate        DATE    NOT NULL,
+    gender           INTEGER NOT NULL,
+    diet             INTEGER,
+    intended_use     INTEGER,
+    update_frequency INTEGER,
+    FOREIGN KEY (id) REFERENCES user_profile (id),
     PRIMARY KEY (id)
 );
 

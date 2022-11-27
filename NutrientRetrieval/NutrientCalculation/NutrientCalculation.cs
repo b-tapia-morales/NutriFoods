@@ -55,7 +55,7 @@ public static class NutrientCalculation
                     RecipeId = recipe.Id,
                     NutrientId = pair.Key,
                     Quantity = pair.Value,
-                    UnitEnum = UnitEnum.FromValue(unitDictionary[pair.Key])
+                    Unit = UnitEnum.FromValue(unitDictionary[pair.Key])
                 });
         }
 

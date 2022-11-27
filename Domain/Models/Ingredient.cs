@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class Ingredient
+public sealed class Ingredient
 {
     public Ingredient()
     {
@@ -17,10 +17,10 @@ public class Ingredient
     public bool ContainsGluten { get; set; }
     public int TertiaryGroupId { get; set; }
 
-    public virtual TertiaryGroup TertiaryGroup { get; set; } = null!;
-    public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; }
-    public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; }
-    public virtual ICollection<IngredientSynonym> IngredientSynonyms { get; set; }
-    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; }
-    public virtual ICollection<UserAllergy> UserAllergies { get; set; }
+    public TertiaryGroup TertiaryGroup { get; set; } = null!;
+    public ICollection<IngredientMeasure> IngredientMeasures { get; set; }
+    public ICollection<IngredientNutrient> IngredientNutrients { get; set; }
+    public ICollection<IngredientSynonym> IngredientSynonyms { get; set; }
+    public ICollection<RecipeQuantity> RecipeQuantities { get; set; }
+    public ICollection<UserAllergy> UserAllergies { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class MealPlan
+public sealed class MealPlan
 {
     public MealPlan()
     {
@@ -14,6 +14,6 @@ public class MealPlan
     public double LipidsTarget { get; set; }
     public double ProteinsTarget { get; set; }
 
-    public virtual ICollection<DailyMealPlan> DailyMealPlans { get; set; }
-    public virtual ICollection<UserProfile> UserProfiles { get; set; }
+    public ICollection<DailyMealPlan> DailyMealPlans { get; set; }
+    public ICollection<UserProfile> UserProfiles { get; set; }
 }

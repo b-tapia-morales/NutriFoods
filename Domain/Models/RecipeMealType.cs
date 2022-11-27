@@ -2,11 +2,11 @@
 
 namespace Domain.Models;
 
-public class RecipeMealType
+public sealed class RecipeMealType
 {
     public int Id { get; set; }
     public int RecipeId { get; set; }
-    public MealType MealType { get; set; } = null!;
+    public MealTypeEnum MealType { get; set; } = null!;
 
-    public virtual Recipe Recipe { get; set; } = null!;
+    public Recipe Recipe { get; set; } = null!;
 }

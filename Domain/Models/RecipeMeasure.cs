@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class RecipeMeasure
+public sealed class RecipeMeasure
 {
     public int Id { get; set; }
     public int RecipeId { get; set; }
@@ -9,6 +9,6 @@ public class RecipeMeasure
     public int Numerator { get; set; }
     public int Denominator { get; set; }
 
-    public virtual IngredientMeasure IngredientMeasure { get; set; } = null!;
-    public virtual Recipe Recipe { get; set; } = null!;
+    public IngredientMeasure IngredientMeasure { get; set; } = null!;
+    public Recipe Recipe { get; set; } = null!;
 }

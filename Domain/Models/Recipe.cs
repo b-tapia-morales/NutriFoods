@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public class Recipe
+public sealed class Recipe
 {
     public Recipe()
     {
@@ -21,12 +21,12 @@ public class Recipe
     public int? Portions { get; set; }
     public int? PreparationTime { get; set; }
 
-    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; }
-    public virtual ICollection<RecipeDiet> RecipeDiets { get; set; }
-    public virtual ICollection<RecipeDishType> RecipeDishTypes { get; set; }
-    public virtual ICollection<RecipeMealType> RecipeMealTypes { get; set; }
-    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; }
-    public virtual ICollection<RecipeNutrient> RecipeNutrients { get; set; }
-    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; }
-    public virtual ICollection<RecipeStep> RecipeSteps { get; set; }
+    public ICollection<MenuRecipe> MenuRecipes { get; set; }
+    public ICollection<RecipeDiet> RecipeDiets { get; set; }
+    public ICollection<RecipeDishType> RecipeDishTypes { get; set; }
+    public ICollection<RecipeMealType> RecipeMealTypes { get; set; }
+    public ICollection<RecipeMeasure> RecipeMeasures { get; set; }
+    public ICollection<RecipeNutrient> RecipeNutrients { get; set; }
+    public ICollection<RecipeQuantity> RecipeQuantities { get; set; }
+    public ICollection<RecipeStep> RecipeSteps { get; set; }
 }
