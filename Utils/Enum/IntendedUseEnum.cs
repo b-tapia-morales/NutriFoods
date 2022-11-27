@@ -5,6 +5,9 @@ namespace Utils.Enum;
 
 public class IntendedUseEnum : SmartEnum<IntendedUseEnum>
 {
+    public static readonly IntendedUseEnum None =
+        new(nameof(None), (int) IntendedUse.None, IntendedUse.None, string.Empty);
+
     public static readonly IntendedUseEnum LoseWeight =
         new(nameof(LoseWeight), (int) IntendedUse.LoseWeight, IntendedUse.LoseWeight, "Perder peso");
 
@@ -17,6 +20,7 @@ public class IntendedUseEnum : SmartEnum<IntendedUseEnum>
     private static readonly IDictionary<IntendedUse, IntendedUseEnum> TokenDictionary =
         new Dictionary<IntendedUse, IntendedUseEnum>
         {
+            {IntendedUse.None, None},
             {IntendedUse.LoseWeight, LoseWeight},
             {IntendedUse.MaintainWeight, MaintainWeight},
             {IntendedUse.GainWeight, GainWeight}
@@ -42,6 +46,7 @@ public class IntendedUseEnum : SmartEnum<IntendedUseEnum>
 
 public enum IntendedUse
 {
+    None = 0,
     LoseWeight = 1,
     MaintainWeight = 2,
     GainWeight = 3

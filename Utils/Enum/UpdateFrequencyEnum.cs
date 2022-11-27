@@ -5,6 +5,9 @@ namespace Utils.Enum;
 
 public class UpdateFrequencyEnum : SmartEnum<UpdateFrequencyEnum>
 {
+    public static readonly UpdateFrequencyEnum None =
+        new(nameof(None), (int) UpdateFrequency.None, UpdateFrequency.None, string.Empty);
+
     public static readonly UpdateFrequencyEnum Weekly =
         new(nameof(Weekly), (int) UpdateFrequency.Weekly, UpdateFrequency.Weekly, "Semanalmente");
 
@@ -14,6 +17,7 @@ public class UpdateFrequencyEnum : SmartEnum<UpdateFrequencyEnum>
     private static readonly IDictionary<UpdateFrequency, UpdateFrequencyEnum> TokenDictionary =
         new Dictionary<UpdateFrequency, UpdateFrequencyEnum>
         {
+            {UpdateFrequency.None, None},
             {UpdateFrequency.Weekly, Weekly},
             {UpdateFrequency.Monthly, Monthly}
         }.ToImmutableDictionary();
@@ -38,6 +42,7 @@ public class UpdateFrequencyEnum : SmartEnum<UpdateFrequencyEnum>
 
 public enum UpdateFrequency
 {
+    None = 0,
     Weekly = 1,
     Monthly = 2
 }
