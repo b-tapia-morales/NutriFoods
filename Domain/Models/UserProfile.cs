@@ -20,5 +20,5 @@ public sealed class UserProfile
 
     public ICollection<UserBodyMetric> UserBodyMetrics { get; } = new List<UserBodyMetric>();
 
-    public UserData? UserDatum { get; set; }
+    public UserData? UserData { get; set; }
 }

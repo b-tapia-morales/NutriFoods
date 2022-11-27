@@ -580,7 +580,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("name");
             entity.Property(e => e.UpdateFrequency).HasColumnName("update_frequency");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.UserDatum)
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.UserData)
                 .HasForeignKey<UserData>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("user_data_id_fkey");
