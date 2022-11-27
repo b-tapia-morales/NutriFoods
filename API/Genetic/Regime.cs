@@ -5,40 +5,13 @@ namespace API.Genetic;
 
 public class Regime : IGeneticAlgorithm
 {
-    private readonly IRecipeRepository _repository;
     private readonly Random _random = new(Environment.TickCount);
-    public IList<PossibleRegime> Solutions { get; }
-    public IList<PossibleRegime> Winners { get; }
+    public IList<PossibleRegime> Solutions { get; } = new List<PossibleRegime>();
+    public IList<PossibleRegime> Winners { get; } = new List<PossibleRegime>();
 
-    public Regime(IRecipeRepository recipeRepository)
+    public IList<MenuRecipeDto> GenerateTotalPopulation(IEnumerable<RecipeDto> recipes)
     {
-        _repository = recipeRepository;
-        Solutions = new List<PossibleRegime>();
-        Winners = new List<PossibleRegime>();
-    }
-
-    public DailyMenuDto GenerateSolution(int recipesAmount, double energy, double carbohydrates,
-        double lipids, double proteins, int solutionsAmount = 20, double marginOfError = 0.08)
-    {
-        Solutions.Clear();
-        Winners.Clear();
-        var recipes = GetUniverseRecipes();
-        GenerateInitialPopulation(recipesAmount, solutionsAmount, recipes);
-        CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
-        var i = 0;
-        while (!SolutionExists())
-        {
-            Selection();
-            Crossover(solutionsAmount);
-            Mutation(recipes, recipesAmount, solutionsAmount);
-            CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
-            i++;
-        }
-
-        Console.WriteLine("Generaciones : " + i);
-        String();
-
-        return Solutions.First(p => p.Fitness == 8).Recipes;
+        return recipes.Select(r => new MenuRecipeDto {Recipe = r, Portions = 1}).ToList();
     }
 
     public void CalculatePopulationFitness(double energy, double carbohydrates, double lipids, double proteins,
@@ -51,16 +24,15 @@ public class Regime : IGeneticAlgorithm
         }
     }
 
-    public void GenerateInitialPopulation(int recipesAmount, int solutionsAmount,
-        IList<MenuRecipeDto> totalRecipes)
+    public void GenerateInitialPopulation(int recipesAmount, int solutionsAmount, IList<MenuRecipeDto> menus)
     {
         for (var i = 0; i < solutionsAmount; i++)
         {
             var listRecipe = new List<MenuRecipeDto>(recipesAmount);
             for (var j = 0; j < recipesAmount; j++)
             {
-                var rand = _random.Next(0, totalRecipes.Count);
-                listRecipe.Add(totalRecipes[rand]);
+                var rand = _random.Next(0, menus.Count);
+                listRecipe.Add(menus[rand]);
             }
 
             var pr = new PossibleRegime(listRecipe);
@@ -123,7 +95,7 @@ public class Regime : IGeneticAlgorithm
         }
     }
 
-    public void Mutation(IList<MenuRecipeDto> totalRecipes, int recipesAmount, int solutionsAmount)
+    public void Mutation(IList<MenuRecipeDto> menus, int recipesAmount, int solutionsAmount)
     {
         if (_random.NextDouble() > 0.4) return;
         var numberMutation = _random.Next(1, Solutions.Count);
@@ -131,30 +103,23 @@ public class Regime : IGeneticAlgorithm
         {
             var changePosition = _random.Next(0, solutionsAmount);
             var changeIndexRegime = _random.Next(0, recipesAmount);
-            var rateChangeRecipe = _random.Next(0, totalRecipes.Count);
-            var changeRecipe = totalRecipes[rateChangeRecipe];
+            var rateChangeRecipe = _random.Next(0, menus.Count);
+            var changeRecipe = menus[rateChangeRecipe];
             Solutions[changePosition] = NewMutation(changeIndexRegime, changeRecipe, changePosition);
         }
     }
-
 
     public bool SolutionExists()
     {
         return Solutions.Any(r => r.Fitness == 8);
     }
 
-    private IList<MenuRecipeDto> GetUniverseRecipes()
-    {
-        return _repository.FindAll().Result.Select(r => new MenuRecipeDto {Recipe = r, Portions = 1}).ToList();
-    }
-
-    private void String()
+    public void ShowPopulation()
     {
         Console.WriteLine();
         foreach (var solution in Solutions)
         {
-            solution.DataString();
-            Console.WriteLine();
+            solution.ShowPhenotypes();
         }
 
         Console.WriteLine();
