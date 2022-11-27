@@ -5,7 +5,6 @@ using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
-using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -13,9 +12,6 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.AbridgedRetrieval;
-using NutrientRetrieval.NutrientCalculation;
-using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
@@ -47,6 +43,7 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 
 builder.Services
     .AddScoped<IValidator<UserDto>, UserValidator>()
+    .AddScoped<IValidator<UserDataDto>, UserDataValidator>()
     .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
@@ -54,6 +51,8 @@ builder.Services
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
+    .AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters()
     .AddControllers()
     .AddJsonOptions(options =>
     {
@@ -63,6 +62,7 @@ builder.Services
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
