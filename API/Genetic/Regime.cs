@@ -6,9 +6,9 @@ namespace API.Genetic;
 public class Regime : IGeneticAlgorithm
 {
     private readonly IRecipeRepository _repository;
-    private readonly Random _r = new Random(Environment.TickCount);
-    public IList<PossibleRegime> Solutions { get; private set; }
-    public IList<PossibleRegime> Winners { get; private set; }
+    private readonly Random _random = new(Environment.TickCount);
+    public IList<PossibleRegime> Solutions { get; }
+    public IList<PossibleRegime> Winners { get; }
 
     public Regime(IRecipeRepository recipeRepository)
     {
@@ -17,28 +17,25 @@ public class Regime : IGeneticAlgorithm
         Winners = new List<PossibleRegime>();
     }
 
-    public DailyMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal,
-        double carbohydratesPercentage,
-        double lipidsPercentage, double proteinsPercentage)
+    public DailyMenuDto GenerateSolution(int recipesAmount, double energy, double carbohydrates,
+        double lipids, double proteins, int solutionsAmount = 20)
     {
         Solutions.Clear();
         Winners.Clear();
         var recipes = GetUniverseRecipes();
-        GenerateInitialPopulation(recipeAmount, solutionsAmount, recipes);
-        CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
-            lipidsPercentage);
-        var ite = 0;
-        while (!SolutionExist())
+        GenerateInitialPopulation(recipesAmount, solutionsAmount, recipes);
+        CalculatePopulationFitness(energy, carbohydrates, proteins, lipids);
+        var i = 0;
+        while (!SolutionExists())
         {
             Selection();
             Crossover(solutionsAmount);
-            Mutation(recipes, recipeAmount, solutionsAmount);
-            CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
-                lipidsPercentage);
-            ite++;
+            Mutation(recipes, recipesAmount, solutionsAmount);
+            CalculatePopulationFitness(energy, carbohydrates, proteins, lipids);
+            i++;
         }
 
-        Console.WriteLine("Generaciones : " + ite);
+        Console.WriteLine("Generaciones : " + i);
         String();
 
         return Solutions.First(p => p.Fitness == 8).Recipes;
@@ -54,15 +51,15 @@ public class Regime : IGeneticAlgorithm
         }
     }
 
-    public void GenerateInitialPopulation(int cantRecipes, int cantSolutions,
+    public void GenerateInitialPopulation(int recipesAmount, int solutionsAmount,
         IList<MenuRecipeDto> totalRecipes)
     {
-        for (var i = 0; i < cantSolutions; i++)
+        for (var i = 0; i < solutionsAmount; i++)
         {
-            var listRecipe = new List<MenuRecipeDto>(cantRecipes);
-            for (var j = 0; j < cantRecipes; j++)
+            var listRecipe = new List<MenuRecipeDto>(recipesAmount);
+            for (var j = 0; j < recipesAmount; j++)
             {
-                var rand = _r.Next(0, totalRecipes.Count);
+                var rand = _random.Next(0, totalRecipes.Count);
                 listRecipe.Add(totalRecipes[rand]);
             }
 
@@ -74,12 +71,12 @@ public class Regime : IGeneticAlgorithm
     public void Selection()
     {
         var rangeMax = Solutions.Count / 2;
-        var cantTournament = _r.Next(2, rangeMax);
+        var cantTournament = _random.Next(2, rangeMax);
         Winners.Clear();
         for (var i = 0; i < cantTournament;)
         {
-            var fighter1 = _r.Next(0, Solutions.Count);
-            var fighter2 = _r.Next(0, Solutions.Count);
+            var fighter1 = _random.Next(0, Solutions.Count);
+            var fighter2 = _random.Next(0, Solutions.Count);
 
             if (fighter1 == fighter2) continue;
             var win = Solutions[fighter1].Fitness > Solutions[fighter2].Fitness
@@ -93,16 +90,16 @@ public class Regime : IGeneticAlgorithm
 
     public void Crossover(int solutionsAmount)
     {
-        var probability = _r.NextDouble();
+        var probability = _random.NextDouble();
         if (probability >= 0.8) return;
         var sonsNew = new List<PossibleRegime>();
         for (var i = 0; i < solutionsAmount;)
         {
-            var father1 = Winners[_r.Next(0, Winners.Count)];
-            var father2 = Solutions[_r.Next(0, Solutions.Count)];
+            var father1 = Winners[_random.Next(0, Winners.Count)];
+            var father2 = Solutions[_random.Next(0, Solutions.Count)];
 
-            var indexGenFather1 = _r.Next(0, father1.Recipes.MenuRecipes.Count);
-            var indexGenFather2 = _r.Next(0, father2.Recipes.MenuRecipes.Count);
+            var indexGenFather1 = _random.Next(0, father1.Recipes.MenuRecipes.Count);
+            var indexGenFather2 = _random.Next(0, father2.Recipes.MenuRecipes.Count);
 
             var gen1 = father1.Recipes.MenuRecipes[indexGenFather1];
             var gen2 = father2.Recipes.MenuRecipes[indexGenFather2];
@@ -128,20 +125,20 @@ public class Regime : IGeneticAlgorithm
 
     public void Mutation(IList<MenuRecipeDto> totalRecipes, int recipesAmount, int solutionsAmount)
     {
-        if (_r.NextDouble() > 0.4) return;
-        var numberMutation = _r.Next(1, Solutions.Count);
+        if (_random.NextDouble() > 0.4) return;
+        var numberMutation = _random.Next(1, Solutions.Count);
         for (var i = 0; i < numberMutation; i++)
         {
-            var changePosition = _r.Next(0, solutionsAmount);
-            var changeIndexRegime = _r.Next(0, recipesAmount);
-            var rateChangeRecipe = _r.Next(0, totalRecipes.Count);
+            var changePosition = _random.Next(0, solutionsAmount);
+            var changeIndexRegime = _random.Next(0, recipesAmount);
+            var rateChangeRecipe = _random.Next(0, totalRecipes.Count);
             var changeRecipe = totalRecipes[rateChangeRecipe];
             Solutions[changePosition] = NewMutation(changeIndexRegime, changeRecipe, changePosition);
         }
     }
 
 
-    public bool SolutionExist()
+    public bool SolutionExists()
     {
         return Solutions.Any(r => r.Fitness == 8);
     }
