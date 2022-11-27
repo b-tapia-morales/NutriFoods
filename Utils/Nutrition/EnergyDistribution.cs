@@ -17,12 +17,12 @@ public static class EnergyDistribution
 
 public sealed class Macronutrient : SmartEnum<Macronutrient>
 {
-    public static readonly Macronutrient
-        Carbohydrates = new(nameof(Carbohydrates), 1, "Carbohidratos", 0.6, 0.45, 0.65, 4);
+    public static readonly Macronutrient Carbohydrates =
+        new(nameof(Carbohydrates), 1, "Carbohidratos", 0.6, 0.45, 0.65, 4);
 
     public static readonly Macronutrient Lipids = new(nameof(Lipids), 2, "Lípidos", 0.25, 0.2, 0.35, 9);
-    public static readonly Macronutrient Proteins = new(nameof(Proteins), 1, "Proteínas", 0.15, 0.1, 0.35, 4);
-    public static readonly Macronutrient Alcohol = new(nameof(Alcohol), 1, "Alcohol", null, null, null, 7);
+    public static readonly Macronutrient Proteins = new(nameof(Proteins), 3, "Proteínas", 0.15, 0.1, 0.35, 4);
+    public static readonly Macronutrient Alcohol = new(nameof(Alcohol), 4, "Alcohol", null, null, null, 7);
 
     public string ReadableName { get; }
     public double? DefaultPercent { get; }
