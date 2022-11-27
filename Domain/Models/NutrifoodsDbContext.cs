@@ -14,57 +14,57 @@ public class NutrifoodsDbContext : DbContext
     {
     }
 
-    public virtual DbSet<DailyMealPlan> DailyMealPlans { get; set; }
+    public virtual DbSet<DailyMealPlan> DailyMealPlans { get; set; } = null!;
 
-    public virtual DbSet<DailyMenu> DailyMenus { get; set; }
+    public virtual DbSet<DailyMenu> DailyMenus { get; set; } = null!;
 
-    public virtual DbSet<Ingredient> Ingredients { get; set; }
+    public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
 
-    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; }
+    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; } = null!;
 
-    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; }
+    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; } = null!;
 
-    public virtual DbSet<IngredientSynonym> IngredientSynonyms { get; set; }
+    public virtual DbSet<IngredientSynonym> IngredientSynonyms { get; set; } = null!;
 
-    public virtual DbSet<MealPlan> MealPlans { get; set; }
+    public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
 
-    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; }
+    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; } = null!;
 
-    public virtual DbSet<Nutrient> Nutrients { get; set; }
+    public virtual DbSet<Nutrient> Nutrients { get; set; } = null!;
 
-    public virtual DbSet<NutrientSubtype> NutrientSubtypes { get; set; }
+    public virtual DbSet<NutrientSubtype> NutrientSubtypes { get; set; } = null!;
 
-    public virtual DbSet<NutrientType> NutrientTypes { get; set; }
+    public virtual DbSet<NutrientType> NutrientTypes { get; set; } = null!;
 
-    public virtual DbSet<PrimaryGroup> PrimaryGroups { get; set; }
+    public virtual DbSet<PrimaryGroup> PrimaryGroups { get; set; } = null!;
 
-    public virtual DbSet<Recipe> Recipes { get; set; }
+    public virtual DbSet<Recipe> Recipes { get; set; } = null!;
 
-    public virtual DbSet<RecipeDiet> RecipeDiets { get; set; }
+    public virtual DbSet<RecipeDiet> RecipeDiets { get; set; } = null!;
 
-    public virtual DbSet<RecipeDishType> RecipeDishTypes { get; set; }
+    public virtual DbSet<RecipeDishType> RecipeDishTypes { get; set; } = null!;
 
-    public virtual DbSet<RecipeMealType> RecipeMealTypes { get; set; }
+    public virtual DbSet<RecipeMealType> RecipeMealTypes { get; set; } = null!;
 
-    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; }
+    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; } = null!;
 
-    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; }
+    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; } = null!;
 
-    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; }
+    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public virtual DbSet<RecipeStep> RecipeSteps { get; set; }
+    public virtual DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
 
-    public virtual DbSet<SecondaryGroup> SecondaryGroups { get; set; }
+    public virtual DbSet<SecondaryGroup> SecondaryGroups { get; set; } = null!;
 
-    public virtual DbSet<TertiaryGroup> TertiaryGroups { get; set; }
+    public virtual DbSet<TertiaryGroup> TertiaryGroups { get; set; } = null!;
 
-    public virtual DbSet<UserAllergy> UserAllergies { get; set; }
+    public virtual DbSet<UserAllergy> UserAllergies { get; set; } = null!;
 
-    public virtual DbSet<UserBodyMetric> UserBodyMetrics { get; set; }
+    public virtual DbSet<UserBodyMetric> UserBodyMetrics { get; set; } = null!;
 
-    public virtual DbSet<UserData> UserData { get; set; }
+    public virtual DbSet<UserData> UserData { get; set; } = null!;
 
-    public virtual DbSet<UserProfile> UserProfiles { get; set; }
+    public virtual DbSet<UserProfile> UserProfiles { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
@@ -322,7 +322,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.ToTable("recipe", "nutrifoods");
 
-            entity.HasIndex(e => new {e.Name, e.Author}, "recipe_name_author_key").IsUnique();
+            entity.HasIndex(e => new { e.Name, e.Author }, "recipe_name_author_key").IsUnique();
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Author)
