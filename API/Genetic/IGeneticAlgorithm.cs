@@ -6,8 +6,8 @@ namespace API.Genetic;
 
 public interface IGeneticAlgorithm
 {
-    IList<PossibleRegime> Solutions { get; }
-    IList<PossibleRegime> Winners { get; }
+    IList<Chromosome> Solutions { get; }
+    IList<Chromosome> Winners { get; }
 
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, int recipesAmount, double energy,
         double carbohydrates, double lipids, double proteins, int solutionsAmount = 20, double marginOfError = 0.08)

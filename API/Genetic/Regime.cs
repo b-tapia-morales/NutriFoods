@@ -6,8 +6,8 @@ namespace API.Genetic;
 public class Regime : IGeneticAlgorithm
 {
     private readonly Random _random = new(Environment.TickCount);
-    public IList<PossibleRegime> Solutions { get; } = new List<PossibleRegime>();
-    public IList<PossibleRegime> Winners { get; } = new List<PossibleRegime>();
+    public IList<Chromosome> Solutions { get; } = new List<Chromosome>();
+    public IList<Chromosome> Winners { get; } = new List<Chromosome>();
 
     public IList<MenuRecipeDto> GenerateTotalPopulation(IEnumerable<RecipeDto> recipes)
     {
@@ -19,7 +19,7 @@ public class Regime : IGeneticAlgorithm
     {
         foreach (var possibleRegime in Solutions)
         {
-            possibleRegime.MacroNutrientCalculation();
+            possibleRegime.AggregateMacronutrients();
             possibleRegime.CalculateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         }
     }
@@ -35,7 +35,7 @@ public class Regime : IGeneticAlgorithm
                 listRecipe.Add(menus[rand]);
             }
 
-            var pr = new PossibleRegime(listRecipe);
+            var pr = new Chromosome(listRecipe);
             Solutions.Add(pr);
         }
     }
@@ -64,7 +64,7 @@ public class Regime : IGeneticAlgorithm
     {
         var probability = _random.NextDouble();
         if (probability >= 0.8) return;
-        var sonsNew = new List<PossibleRegime>();
+        var sonsNew = new List<Chromosome>();
         for (var i = 0; i < solutionsAmount;)
         {
             var father1 = Winners[_random.Next(0, Winners.Count)];
@@ -125,19 +125,19 @@ public class Regime : IGeneticAlgorithm
         Console.WriteLine();
     }
 
-    private PossibleRegime NewMutation(int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto, int changePosition)
+    private Chromosome NewMutation(int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto, int changePosition)
     {
         var newRecipes = Solutions[changePosition].Recipes.MenuRecipes
             .Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
 
-        var pr = new PossibleRegime(newRecipes);
+        var pr = new Chromosome(newRecipes);
         return pr;
     }
 
-    private static PossibleRegime NewChromosome(PossibleRegime father, MenuRecipeDto gen, int indexFather)
+    private static Chromosome NewChromosome(Chromosome father, MenuRecipeDto gen, int indexFather)
     {
         var newChromosomal = father.Recipes.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
-        var pr = new PossibleRegime(newChromosomal);
+        var pr = new Chromosome(newChromosomal);
 
         return pr;
     }

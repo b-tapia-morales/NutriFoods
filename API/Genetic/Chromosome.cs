@@ -2,12 +2,12 @@ using API.Dto;
 
 namespace API.Genetic;
 
-public class PossibleRegime
+public class Chromosome
 {
     public DailyMenuDto Recipes { get; }
     public int Fitness { get; private set; }
 
-    public PossibleRegime(IList<MenuRecipeDto> menuRecipe)
+    public Chromosome(IList<MenuRecipeDto> menuRecipe)
     {
         Recipes = new DailyMenuDto
         {
@@ -21,7 +21,7 @@ public class PossibleRegime
     }
 
 
-    public void MacroNutrientCalculation()
+    public void AggregateMacronutrients()
     {
         double carbohydrates = 0;
         double lipids = 0;
