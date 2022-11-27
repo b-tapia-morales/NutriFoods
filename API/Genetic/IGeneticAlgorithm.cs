@@ -54,8 +54,8 @@ public interface IGeneticAlgorithm
         if (carbsPercent > Carbohydrates.MaxPercent || fatsPercent > Lipids.MaxPercent ||
             proteinsPercent > Proteins.MaxPercent)
             throw new ArgumentException("One of the percentages is above the threshold");
-        if (Math.Abs(1 - (carbsPercent + fatsPercent + proteinsPercent)) >= 1e-1)
-            throw new ArgumentException("The sum of the percentages do not equal to one");
+        if (Math.Abs(1 - (carbsPercent + fatsPercent + proteinsPercent)) >= 1e-2)
+            throw new ArgumentException("The sum of the percentages does not equal to one");
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energy, carbsPercent, fatsPercent, proteinsPercent);
         return GenerateSolution(recipes, recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount,
