@@ -17,7 +17,6 @@ using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
 using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
-using Utils.Enum;
 
 
 DatabaseInitialization.Initialize();

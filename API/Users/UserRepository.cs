@@ -2,7 +2,6 @@ using API.Dto;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils;
 using Utils.Enum;
 using Utils.Nutrition;
 
@@ -63,7 +62,7 @@ public class UserRepository : IUserRepository
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
         return users
-            .Include(e => e.MealPlan)
+            .Include(e => e.MealPlan!)
             .ThenInclude(e => e.DailyMealPlans)
             .ThenInclude(e => e.DailyMenus)
             .ThenInclude(e => e.MenuRecipes)
