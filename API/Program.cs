@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using API.DailyMenus;
 using API.Dto;
 using API.Genetic;
 using API.Ingredients;
@@ -48,6 +49,7 @@ builder.Services
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
+    .AddScoped<IDailyMenuService, DailyMenuService>()
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
