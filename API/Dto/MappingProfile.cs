@@ -42,8 +42,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.RecipeDishTypes.Select(e => e.DishTypeEnum.ReadableName)));
 
-        /*
-         CreateMap<MenuRecipe, MenuRecipeDto>();
+        CreateMap<MenuRecipe, MenuRecipeDto>();
         CreateMap<DailyMenu, DailyMenuDto>()
             .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealTypeEnum.ReadableName))
             .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.SatietyEnum.ReadableName));
@@ -52,14 +51,12 @@ public class MappingProfile : Profile
         CreateMap<MealPlan, MealPlanDto>();
         CreateMap<UserBodyMetric, UserBodyMetricDto>()
             .ForMember(dest => dest.PhysicalActivity, opt => opt.MapFrom(src => src.PhysicalActivityEnum.ReadableName));
-        */
-        /*
-         CreateMap<UserProfile, UserDto>()
-            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src..ToString()))
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ReadableName))
+
+        CreateMap<UserData, UserDataDto>()
+            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString()))
+            .ForMember(dest => dest.GenderEnum, opt => opt.MapFrom(src => src.GenderEnum.ReadableName))
             .ForMember(dest => dest.Diet, opt => opt.MapFrom(src => src.Diet!.ReadableName))
-            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName))
-            .ForMember(dest => dest.BodyMetrics, opt => opt.MapFrom(src => src.UserBodyMetrics));
-            */
+            .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
+            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName));
     }
 }
