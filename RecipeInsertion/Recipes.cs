@@ -39,8 +39,6 @@ public static class Recipes
                 PreparationTime = recipe.PreparationTime
             });
         }
-
-        // iria cuando esten por tipo de almuerzo
         context.SaveChanges();
     }
 
@@ -148,6 +146,7 @@ public static class Recipes
         }
         catch (Exception e)
         {
+            Console.WriteLine($"{dataRecipe.NameIngredients}");
             //if (dataRecipe.NameIngredients.Contains("hiel "))
             //Console.WriteLine($"error de id de ingrediente");
         }

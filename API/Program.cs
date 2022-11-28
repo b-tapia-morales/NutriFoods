@@ -3,7 +3,6 @@ using System.Text.Json.Serialization;
 using API.Dto;
 using API.Genetic;
 using API.Ingredients;
-using API.MealPlans;
 using API.Recipes;
 using API.Users;
 using Domain.DatabaseInitialization;
@@ -16,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Recipe_insert;
 using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -30,13 +28,12 @@ Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
 
 
-
 /*
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddFluentValidation();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -50,14 +47,17 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 
 builder.Services
     .AddScoped<IValidator<UserDto>, UserValidator>()
+    .AddScoped<IValidator<UserDataDto>, UserDataValidator>()
     .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IMealPlanService, MealPlanService>()
+    .AddScoped<IDailyMenuService, DailyMenuService>()
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
+    .AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters()
     .AddControllers()
     .AddJsonOptions(options =>
     {
@@ -67,6 +67,7 @@ builder.Services
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
