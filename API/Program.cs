@@ -1,5 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using API.DailyMealPlans;
 using API.DailyMenus;
 using API.Dto;
 using API.Genetic;
@@ -39,8 +40,7 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
                 opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-    }
-);
+    }, ServiceLifetime.Singleton);
 
 builder.Services
     .AddScoped<IValidator<UserDto>, UserValidator>()
@@ -50,6 +50,7 @@ builder.Services
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
     .AddScoped<IDailyMenuService, DailyMenuService>()
+    .AddScoped<IDailyMealPlanService, DailyMealPlanService>()
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
