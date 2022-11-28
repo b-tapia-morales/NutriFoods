@@ -23,10 +23,10 @@ public class Chromosome
 
     public void AggregateMacronutrients()
     {
+        double energy = 0;
         double carbohydrates = 0;
         double lipids = 0;
         double proteins = 0;
-        double energy = 0;
         foreach (var recipesMenu in Recipes.MenuRecipes)
         {
             foreach (var nutrient in recipesMenu.Recipe.Nutrients)
@@ -39,11 +39,11 @@ public class Chromosome
                     case 2:
                         carbohydrates += nutrient.Quantity;
                         break;
-                    case 63:
-                        proteins += nutrient.Quantity;
-                        break;
                     case 12:
                         lipids += nutrient.Quantity;
+                        break;
+                    case 63:
+                        proteins += nutrient.Quantity;
                         break;
                 }
             }
@@ -64,24 +64,24 @@ public class Chromosome
                   FitnessResult(proteins, Recipes.ProteinsTotal, marginOfError);
     }
 
-    private static int FitnessResult(double actualValue, double objectiveValue, double marginOfError)
+    private static int FitnessResult(double objectiveValue, double menuValue, double marginOfError)
     {
-        if ((actualValue * (1 - (marginOfError / 2)) <= objectiveValue) &&
-            (actualValue * (1 + (marginOfError / 2)) >= objectiveValue))
+        if ((objectiveValue * (1 - (marginOfError / 2)) <= menuValue) &&
+            (objectiveValue * (1 + (marginOfError / 2)) >= menuValue))
         {
-            return +2;
+            return 2;
         }
 
-        if ((actualValue * (1 - marginOfError) <= objectiveValue) &&
-            (actualValue * (1 - (marginOfError / 2)) > objectiveValue) ||
-            (actualValue * (1 + (marginOfError / 2)) < objectiveValue) &&
-            (actualValue * (1 + marginOfError) >= objectiveValue))
+        if (((objectiveValue * (1 - marginOfError) <= menuValue) &&
+             (objectiveValue * (1 - (marginOfError / 2)) > menuValue)) ||
+            ((objectiveValue * (1 + (marginOfError / 2)) < menuValue) &&
+             (objectiveValue * (1 + marginOfError) >= menuValue)))
         {
-            return +0;
+            return 0;
         }
 
-        if (actualValue * (1 - marginOfError) > objectiveValue ||
-            actualValue * (1 + marginOfError) < objectiveValue)
+        if (objectiveValue * (1 - marginOfError) > menuValue ||
+            objectiveValue * (1 + marginOfError) < menuValue)
         {
             return -2;
         }
