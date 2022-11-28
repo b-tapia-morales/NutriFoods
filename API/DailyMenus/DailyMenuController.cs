@@ -7,11 +7,11 @@ namespace API.DailyMenus;
 
 [ApiController]
 [Route("api/v1/daily-meals")]
-public class DailyMealController
+public class DailyMenuController
 {
     private readonly IDailyMenuService _dailyMenuService;
 
-    public DailyMealController(IDailyMenuService dailyMenuService)
+    public DailyMenuController(IDailyMenuService dailyMenuService)
     {
         _dailyMenuService = dailyMenuService;
     }
