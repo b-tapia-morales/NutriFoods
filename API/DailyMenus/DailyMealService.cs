@@ -2,6 +2,7 @@ using API.Dto;
 using API.Genetic;
 using API.Recipes;
 using Utils.Enum;
+using Utils.Nutrition;
 using static Utils.Nutrition.Macronutrient;
 
 namespace API.DailyMenus;
@@ -21,8 +22,11 @@ public class DailyMenuService : IDailyMenuService
         double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None)
     {
         var recipes = await _recipeRepository.FindAll();
-        var dailyMenu = await Task.FromResult(_geneticAlgorithm.GenerateSolution(recipes, 3, energyTarget, carbsPercent,
-            fatsPercent, proteinsPercent));
+        var (carbohydrates, lipids, proteins) =
+            EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
+        var dailyMenu =
+            await Task.FromResult(
+                _geneticAlgorithm.GenerateSolution(recipes, 3, energyTarget, carbohydrates, lipids, proteins));
         dailyMenu.MealType = MealTypeEnum.FromToken(mealType).ReadableName;
         dailyMenu.Satiety = SatietyEnum.FromToken(satiety).ReadableName;
         return dailyMenu;
