@@ -29,6 +29,10 @@ public class DailyMenuService : IDailyMenuService
                 _geneticAlgorithm.GenerateSolution(recipes, 3, energyTarget, carbohydrates, lipids, proteins));
         dailyMenu.MealType = MealTypeEnum.FromToken(mealType).ReadableName;
         dailyMenu.Satiety = SatietyEnum.FromToken(satiety).ReadableName;
+        dailyMenu.EnergyTotal = CalculateNutrientTotal(dailyMenu, 1);
+        dailyMenu.CarbohydratesTotal = CalculateNutrientTotal(dailyMenu, 2);
+        dailyMenu.LipidsTotal = CalculateNutrientTotal(dailyMenu, 12);
+        dailyMenu.ProteinsTotal = CalculateNutrientTotal(dailyMenu, 63);
         return dailyMenu;
     }
 
@@ -37,5 +41,11 @@ public class DailyMenuService : IDailyMenuService
     {
         return await GenerateDailyMenu(energyTarget, Carbohydrates.DefaultPercent.GetValueOrDefault(),
             Lipids.DefaultPercent.GetValueOrDefault(), Proteins.DefaultPercent.GetValueOrDefault(), mealType, satiety);
+    }
+
+    private static double CalculateNutrientTotal(DailyMenuDto dailyMenu, int nutrientId)
+    {
+        return dailyMenu.MenuRecipes.Sum(e =>
+            e.Portions * e.Recipe.Nutrients.First(r => r.Nutrient.Id == nutrientId).Quantity);
     }
 }
