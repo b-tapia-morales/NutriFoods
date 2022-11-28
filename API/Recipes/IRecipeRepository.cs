@@ -5,6 +5,8 @@ namespace API.Recipes;
 public interface IRecipeRepository
 {
     Task<List<RecipeDto>> FindAll();
+    
+    Task<List<RecipeDto>> FindAny();
 
     Task<RecipeDto> FindByName(string name);
 

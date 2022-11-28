@@ -21,7 +21,7 @@ public class DailyMenuService : IDailyMenuService
     public async Task<DailyMenuDto> GenerateDailyMenu(double energyTarget, double carbsPercent, double fatsPercent,
         double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None)
     {
-        var recipes = await _recipeRepository.FindAll();
+        var recipes = await _recipeRepository.FindAny();
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
         var dailyMenu =
@@ -46,6 +46,6 @@ public class DailyMenuService : IDailyMenuService
     private static double CalculateNutrientTotal(DailyMenuDto dailyMenu, int nutrientId)
     {
         return dailyMenu.MenuRecipes.Sum(e =>
-            e.Portions * e.Recipe.Nutrients.First(r => r.Nutrient.Id == nutrientId).Quantity);
+            e.Portions * e.Recipe.Nutrients.FirstOrDefault(r => r.Nutrient.Id == nutrientId)!.Quantity);
     }
 }
