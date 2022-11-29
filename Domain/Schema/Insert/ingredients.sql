@@ -495,6 +495,9 @@ VALUES ('Sal', false, false, 23),
         ('Jugo de coco', false, false, 2),
         ('Jugo de maracuyá', false, false, 2),
         ('Semillas de chía', false, false, 8),
-        ('Semillas de girasol', false, false, 8)
-        
+        ('Semillas de girasol', false, false, 8),
+        ('Té', false, false, 24),
+        ('Anacardos', false, false, 15),
+        ('Salami', true, false, 12)
+
 ;
