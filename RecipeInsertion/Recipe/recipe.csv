@@ -652,7 +652,6 @@ Sopa de Tomate;gourmet;https://www.gourmet.cl/recetas/sopa-de-tomate/;;
 Tortilla de Espinaca;gourmet;https://www.gourmet.cl/recetas/tortilla-de-espinaca/;30;
 Hamburguesas de Soya;gourmet;https://www.gourmet.cl/recetas/hamburguesa-carne-vegetal/;40;6
 Mousse de Tres Chocolates;gourmet;https://www.gourmet.cl/recetas/mousse-tres-chocolates/;90;6 
-Aperol Spritz;gourmet;https://www.gourmet.cl/recetas/aperol-spritz/;5;
 Vaina Chilena;gourmet;https://www.gourmet.cl/recetas/vaina/;5;2
 Tequila sunrise;gourmet;https://www.gourmet.cl/recetas/tequila-sunrise/;5;2
 Pollo Relleno con Champiñones;gourmet;https://www.gourmet.cl/recetas/pollo-relleno-2/;50;3
@@ -995,4 +994,170 @@ Hot Cakes de Cereal;nestle;https://www.recetasnestle.cl/recetas/hot-cakes-de-cer
 Hallullas;nestle;https://www.recetasnestle.cl/recetas/hallullas;40;10
 Chocolate Caliente;nestle;https://www.recetasnestle.cl/recetas/chocolate-caliente-de-la-abuela;20;5
 Milk Shake de Frambuesa;nestle;https://www.recetasnestle.cl/recetas/milk-shake-de-frambuesa;11;6
-Omelette de Jamón de Pavo;nestle;https://www.recetasnestle.cl/recetas/omelette-de-jamon-de-pavo;10;5 
+Omelette de Jamón de Pavo;nestle;https://www.recetasnestle.cl/recetas/omelette-de-jamon-de-pavo;10;5
+Desayuno bajo en carbos sencillo con huevos fritos y yogur;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-desayuno-sencillo-con-huevos-fritos-y-yogur;13;1
+Panqueque low-carb de plátano y arándanos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-panqueque-banana-arandanos;15;1
+Panqueques bajos en carbos de queso ricota y limón;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-panqueques-de-ricota-y-limon;35;5
+Huevos rancheros bajos en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-huevos-rancheros;30;1
+Upma bajo en carbos (desayuno de la India);DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-upma;25;2
+Picadillo de berenjena con huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-picadillo-de-berenjena-y-huevos;20;4
+Wraps de desayuno altos en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/wraps-de-desayuno-altos-en-proteinas;20;4
+Smoothie de jengibre bajo en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-smoothie-de-jengibre;5;2
+Panqueques bajos en carbos de monstruos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-panqueques-de-monstruos;40;4
+Deliciosos huevos rancheros low carb;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-deliciosos-huevos-rancheros;25;4
+Granola baja en carbos de jengibre y regaliz;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-granola-de-jengibre-y-regaliz;25;8
+Café batido sin lácteos (Dalgona);DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-cafe-batido-sin-lacteos;5;2
+Smoothie de espinacas y aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-smoothie-de-espinacas-y-aguacate;5;2
+Exquisito smoothie de lima alto en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/alto-en-proteinas-exquisito-smoothie-de-lima;6;2
+Tazón de desayuno con requesón;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-tazon-de-desayuno-con-requeson;3;1
+Buñuelos de colinabo low carb con aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-bunuelos-de-colinabo-con-aguacate;30;4
+Muesli bajo en carbos con yogur y frambuesas;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-muesli;40;4
+Torrijas bajas en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-torrijas;75;6
+Panqueques crocantes de almendras y sin huevo;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-panqueques-crocantes-bajos-en-carbos-de-almendras-y-sin-huevo;15;2
+Tortilla española low-carb;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-tortilla-espanola;20;2
+Yogur con mermelada;DietDoctor;https://www.dietdoctor.com/es/recetas/yogur-con-mermelada;5;2
+Granola dorada baja en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-granola-dorada;70;20
+Buñuelos de calabacín y tocino, con huevo y mayonesa de aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-frituras-calabacin-y-bacon;35;2
+Tortilla con jalapeños;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-tortilla-con-jalapenos;40;6
+Tortitas de proteína y yogur griego;DietDoctor;https://www.dietdoctor.com/es/recetas/tortitas-de-proteina-y-yogur-griego;15;2
+Cereales keto de desayuno;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cereales-de-desayuno;30;6
+Picadillo keto de coliflor con huevos y chiles poblanos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-picadillo-coliflor-huevos-chiles-poblanos;25;2
+Bocadillo de pepinillo;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-bocadillo-de-pepinillo;10;4
+Plato combinado mediterráneo y vegetariano;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-plato-combinado-mediterraneo-vegetariano;5;2
+Crema de coco baja en carbos con bayas;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-crema-de-coco-con-bayas;5;1
+Smoothie de fresas bajo en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-smoothie-de-fresas;5;2
+Waffles de banana bajos en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-waffles-de-platano;30;8
+Pudín de chía;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-chia-pudin;5;1
+Batido de proteínas de vainilla low carb y vegano;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-batido-de-proteinas-de-vainilla-vegano;10;1
+Batido de chocolate y almendras alto en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/alto-en-proteinas-smoothie-de-chocolate-y-almendras;5;1
+Quichata low-carb;DietDoctor;https://www.dietdoctor.com/es/recetas/quichata-low-carb;40;4
+Sándwich keto de salmón ahumado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-sandwich-de-salmon-ahumado;15;2
+Pizza keto de desayuno;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-pizza-de-desayuno;40;4
+Pan keto sin frutos secos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-pan-sin-frutos-secos;50;20
+Waffles keto con huevo, queso y panceta;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-waffles-de-maiz-huevo-queso-tocino;15;8
+Desayuno low-carb sencillo con huevos fritos y verduras;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-desayuno-sencillo-con-huevos-fritos-y-verduras;12;1
+Batido de arándanos bajo en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-batido-de-arandano;5;2
+Batido de frambuesas y chocolate alto en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/batido-de-frambuesas-y-chocolate-alto-en-proteinas;5;1
+Huevos revueltos keto en una taza;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-en-una-taza;3;1
+Café con hielo keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cafe-con-hielo;5;1
+Crepes cetogénicas;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-crepes;15;4
+Gachas keto de desayuno;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-gachas;10;1
+Waffles keto de queso y huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-waffles-de-queso-y-huevos;8;4
+Huevos revueltos con espinacas y salmón ahumado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-con-espinacas-y-salmon-ahumado;8;1
+Huevos benedictinos keto sobre lecho de aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-benedictinos-sobre-lecho-de-aguacate;15;4
+Huevos asados con salsa cremosa de estragón y cebollino;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-asados-salsa-cremosa-estragon;25;2
+Huevos de desayuno con mantequilla;DietDoctor;https://www.dietdoctor.com/es/recetas/huevos-de-desayuno-con-mantequilla;5;1
+Revuelto mexicano de desayuno sin huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/revuelto-mexicano-de-desayuno-sin-huevos;20;4
+Revuelto mexicano low carb sin huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/revuelto-mexicano-low-carb-sin-huevos;20;4
+Huevos revueltos keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos;5;1
+Tabla de tapas keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-tapas-de-desayuno;5;4
+Huevos benedictinos keto con pan de taza;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-benedictinos-con-pan-de-taza;30;2
+Sándwiches de ensalada;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-sandwiches-de-ensalada;5;1
+Frituras de colinabo low-carb con bacon;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-frituras-de-colinabo-con-tocino;30;4
+Omelette keto de queso;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelette-de-queso-crujiente;13;1
+Sándwich keto de desayuno sin pan;DietDoctor;https://www.dietdoctor.com/es/recetas/cetogenico-sandwich-de-desayuno-sin-pan;15;2
+Omelette keto con jamón y pimiento;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelet-con-jamon-y-pimientos;30;2
+Taco omelette keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-taco-omelette;10;2
+Desayuno keto sencillo con huevos fritos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-desayuno-sencillo-con-huevos-fritos;10;1
+Mantequilla de huevo;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-mantequilla-de-huevo;15;2
+Waffles keto con mantequilla de arándanos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-waffles-con-mantequilla-de-arandanos;15;4
+Huevos fritos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-fritos;10;2
+Huevos revueltos con albahaca y mantequilla;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-con-albahaca-y-mantequilla;10;1
+Desayuno keto con huevos fritos, tomate y queso;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-desayuno-con-huevos-fritos-tomate-y-queso;15;1
+Pimientos rellenos de pollo al curry;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-pimientos-rellenos-pollo-curry;15;4
+Huevos rellenos de primavera;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-rellenos-primavera;45;6
+Buñuelos keto de colinabo con salmón ahumado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-bunuelos-de-colinabo-con-salmon-ahumado;30;4
+Aguacates asados keto rellenos de huevo;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-aguacates-asados-keto-rellenos-de-huevo;45;2
+Ensalada keto de atún con alcaparras;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-ensalada-de-atun-con-alcaparras;5;4
+Mantequilla de huevo con salmón ahumado y aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-mantequilla-de-huevo-con-salmon-y-aguacate;20;2
+Gachas keto de coco;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-gachas-de-coco;10;1
+Huevos en tazas de jamón;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-rapidos-en-tazas-de-jamon;20;3
+Huevos revueltos con queso blanco;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-con-queso-blanco;20;2
+Omelette keto de verduras de primavera y queso de cabra;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelette-de-verduras-de-primavera-y-queso-de-cabra;25;2
+Dosa keto;DietDoctor;https://www.dietdoctor.com/es/recetas/dosa-keto;25;2
+Tazones de huevos asados con chorizo y queso feta;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-tazones-con-huevos-asados-con-chorizo-y-queso-feta;15;1
+Tostada de aguacate con virutas de huevo en pan de taza proteico;DietDoctor;https://www.dietdoctor.com/es/recetas/aguacate-con-virutas-de-huevo-en-pan-de-taza-proteico;10;1
+Tortitas de proteína;DietDoctor;https://www.dietdoctor.com/es/recetas/tortitas-de-proteina;15;2
+Bol de desayuno keto alto en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/bol-de-desayuno-keto-alto-en-proteinas;5;1
+Ensalada keto de atún con alcaparras;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-ensalada-atun-alcaparras;5;4
+Gachas de avena low-carb;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-gachas;5;1
+Latte sin lácteos keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-latte-sin-lacteos;5;2
+Panqueques keto con frutos rojos y nata montada;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panqueques-con-bayas-y-crema-batida;25;4
+Espárragos keto dorados en mantequilla con huevos cremosos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-esparragos-dorados-en-mantequilla-con-huevos-cremosos;25;4
+Frittata cetogénica con champiñones y queso;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-frittata-cetogenica-con-champinones-y-queso;55;4
+Tortilla keto tres quesos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-frittata-tres-quesos;40;4
+Panqueques bajos en carbohidratos con arándanos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-panqueques-con-arandanos;15;4
+Huevos revueltos mexicanos keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-mexicanos;15;2
+Chai latte cetogénico;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-chai-latte;5;2
+Café antibalas para la dieta keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cafe-a-prueba-de-balas;5;1
+Plato keto de salami y queso brie;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-plato-de-salami-y-queso-brie;5;2
+Plato keto de fiambre y aguacate;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-plato-de-pavo-con-aguacate-y-queso;5;2
+Tortilla keto italiana de desayuno;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cazuela-italiana-de-desayuno;60;4
+Cazuela keto de huevos con forma de ojos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cazuela-de-huevos-con-forma-de-ojo;60;4
+Frittata keto con espinaca y panceta;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-frittata-espinaca-tocino;45;4
+Col rizada con bacon crujiente y huevos fritos;DietDoctor;https://www.dietdoctor.com/es/recetas/bajo-en-carbos-tocino-crocante-y-col-rizada-con-huevos-fritos;15;2
+Huevos cocidos con mayonesa y espárragos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-cocidos-con-mayonesa;10;2
+Omelette keto con champiñones;DietDoctor;https://www.dietdoctor.com/es/recetas/cetogenica-omelet-con-champinones;15;1
+Tortilla de salmón ahumado y espárragos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-tortilla-salmon-ahumado-esparragos;40;4
+Aguacate relleno de atún;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-aguacate-relleno-atun;15;2
+Tortilla al horno con bacon y champiñones;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-tortilla-desayuno-bacon-champinones;55;4
+Sándwiches de lechuga;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-sandwiches-keto-de-lechuga;20;2
+Cazuela keto y vegetariana de desayuno;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cazuela-vegetariana-de-desayuno;50;4
+Café keto de especia de calabaza;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cafe-de-especia-de-calabaza;5;1
+Tostadas francesas cetogénicas;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-tostadas-francesas;10;2
+Panqueques veganos de mantequilla de almendra y chia;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panqueques-mantequilla-almendra-chia;15;2
+Bocadillo de pavo y queso brie con lechuga;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-bocadillo-pavo-queso-brie-lechuga;5;1
+Panecillos keto con salsa de carne;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panecillos-con-salsa-de-carne;35;8
+Gratinado keto de col rizada, champiñones y queso cheddar;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-gratinado-de-col-rizada-champinones-y-queso-cheddar;40;4
+Huevos revueltos con chorizo;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-huevos-revueltos-con-chorizo;30;2
+Tostada de champiñones con huevos pochados;DietDoctor;https://www.dietdoctor.com/es/recetas/tostada-de-champinones-con-huevos-pochados;30;2
+Omelette verde picante;DietDoctor;https://www.dietdoctor.com/es/recetas/omelette-verde-picante;15;1
+Hash browns de coliflor bajos en carbohidratos;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-hash-browns-de-coliflor;30;4
+Bacon con huevos al estilo keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panceta-y-huevos-al-estilo-clasico;10;4
+Tortilla cetogénica de queso de cabra y champiñones;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-frittata-de-queso-cabra-y-champinones;30;2
+Huevos cupcakes keto para llevar;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-llevar;25;6
+Aguacates rellenos keto con salmón ahumado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-aguacates-rellenos-con-salmon-ahumado;5;2
+Muffins de huevo keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-muffins-de-huevo;25;6
+Café cetogénico con canela;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cafe-con-canela;5;2
+Sencillo plato keto de panceta y huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-plato-de-tocino-y-huevos;15;2
+Panqueques keto de coco;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panqueques-de-coco;40;4
+Huevos revueltos con verduras;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-revueltos-con-verduras;20;1
+Champiñones rellenos cetogénicos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-champinones-rellenos;40;4
+Omelette de queso keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelet-queso;15;2
+Plato keto de caballa y huevos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-plato-de-caballa-y-huevos;15;2
+Omelette keto de mariscos;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelette-de-mariscos;20;2
+Montaditos keto;DietDoctor;https://www.dietdoctor.com/es/recetas/montaditos-low-carb;15;4
+Omelette keto asada de panceta;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelet-asada-de-tocino;25;2
+Caldo de huesos a fuego lento: ¡de tres formas!;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-caldo-de-huesos-con-coccion-lento;1460;4
+Panqueque keto al horno con bacon y cebolla;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panqueque-al-horno-con-bacon-y-cebolla;40;4
+Omelette de salmón ahumado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelette-de-salmon-ahumado;15;1
+Desayuno vegetariano alto en proteínas con queso, huevos y espinacas;DietDoctor;https://www.dietdoctor.com/es/recetas/alto-en-proteinas-desayuno-vegetariano-con-queso-huevos-y-espinacas;7;1
+Muffins de huevo de 3 ingredientes;DietDoctor;https://www.dietdoctor.com/es/recetas/muffins-de-huevo-de-3-ingredientes;7;1
+Tortilla con nata agria y cebolla morada;DietDoctor;https://www.dietdoctor.com/es/recetas/tortilla-con-nata-agria-y-cebolla-morada;6;1
+Café con crema cetogénico;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-cafe-con-crema;5;1
+Té helado;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-te-con-hielo;130;2
+Los deliciosos panqueques keto de Maria;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-panqueques-de-maria;20;1
+Revuelto de tofu keto y vegano;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-revuelto-vegano-de-tofu;20;2
+Yogur de coco en Instant Pot;DietDoctor;https://www.dietdoctor.com/es/recetas/yogur-de-coco-en-instant-pot;735;6
+Croque madame keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-croque-madame;25;2
+Croque monsieur keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-croque-monsieur;20;2
+Desayuno de huevos revueltos con espinacas y queso feta;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-desayuno-de-huevos-revueltos-con-espinacas-y-queso-feta;15;2
+Huevos keto con aguacate y velas de bacon;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-con-aguacate-y-velas-de-tocino;25;2
+Omelette caprese keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-omelet-caprese;20;2
+Gofres de desayuno keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-waffles-desayuno;25;4
+Bol de desayuno con huevo y bacon;DietDoctor;https://www.dietdoctor.com/es/recetas/bol-de-desayuno-con-huevo-y-bacon;10;2
+Queso envuelto en panceta;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-queso-halloumi-envuelto-en-tocino;20;2
+Huevos rellenos keto;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-rellenos;15;4
+Quiche keto de brócoli y panceta, sin masa;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-quiche-brocoli-panceta-sin-masa;40;4
+Salmón ahumado con aguacate y berros;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-salmon-ahumado-con-aguacate-y-berros;10;2
+Desayuno alto en proteínas con lomo, huevos y espinacas;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-desayuno-alto-en-proteinas-con-lomo-huevos-y-espinacas;10;1
+Huevos al horno keto;DietDoctor;https://www.dietdoctor.com/es/recetas/low-carb-huevos-al-horno;25;1
+Muffins keto de pastel de carne;DietDoctor;https://www.dietdoctor.com/es/recetas/muffins-keto-de-pastel-de-carne;30;6
+Huevos fritos keto con col rizada y carne de cerdo;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-huevos-fritos-con-col-rizada-y-carne-de-cerdo;20;2
+Mini-quiches keto con jamón;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-mini-quiches-con-jamon;25;4
+Hamburguesa de desayuno alta en proteína;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-hamburguesa-de-desayuno-de-pavo-alta-en-proteina;30;2
+Tortilla al estilo bagel;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-tortilla-al-estilo-bagel;10;1
+Omelette abierta con queso;DietDoctor;https://www.dietdoctor.com/es/recetas/omelette-abierta-con-queso;10;1
+Salmón curado keto con huevos revueltos y cebollino;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-salmon-curado-con-huevos-revueltos-y-cebollinos;10;1
+Hamburguesas de pavo y manzana con col rizada;DietDoctor;https://www.dietdoctor.com/es/recetas/keto-hamburguesas-de-pavo-y-manzana-con-col-rizada;15;2
+Desayuno de hamburguesa de pavo alta en proteínas;DietDoctor;https://www.dietdoctor.com/es/recetas/desayuno-de-hamburguesa-de-pavo-alta-en-proteinas;20;2

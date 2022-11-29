@@ -116,37 +116,44 @@ public static class Recipes
             }
             else
             {
-                var idMeasures = units.Find(u =>
-                    u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
-                switch (dataRecipe.Quantity.Length)
+                try
                 {
-                    case 1 or 2:
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
-                            dataRecipe.Quantity, "0", "0");
-                        break;
-                    case 3:
+                    var idMeasures = units.Find(u =>
+                        u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
+                    switch (dataRecipe.Quantity.Length)
                     {
-                        var numerator = dataRecipe.Quantity[0].ToString();
-                        var denominator = dataRecipe.Quantity[2].ToString();
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator,
-                            denominator);
-                        break;
+                        case 1 or 2:
+                            InsertMeasuresWhitIngredient(context, idRecipe, idMeasures,
+                                dataRecipe.Quantity, "0", "0");
+                            break;
+                        case 3:
+                        {
+                            var numerator = dataRecipe.Quantity[0].ToString();
+                            var denominator = dataRecipe.Quantity[2].ToString();
+                            InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator,
+                                denominator);
+                            break;
+                        }
+                        default:
+                        {
+                            var integerPart = dataRecipe.Quantity[0].ToString();
+                            var numerator = dataRecipe.Quantity[2].ToString();
+                            var denominator = dataRecipe.Quantity[4].ToString();
+                            InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator,
+                                denominator);
+                            break;
+                        }
                     }
-                    default:
-                    {
-                        var integerPart = dataRecipe.Quantity[0].ToString();
-                        var numerator = dataRecipe.Quantity[2].ToString();
-                        var denominator = dataRecipe.Quantity[4].ToString();
-                        InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator,
-                            denominator);
-                        break;
-                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine($"  Units      {dataRecipe.NameIngredients} {dataRecipe.Units} {path}");
                 }
             }
         }
         catch (Exception e)
         {
-            Console.WriteLine($"{dataRecipe.NameIngredients}");
+            Console.WriteLine($"{dataRecipe.NameIngredients} {path}");
             //if (dataRecipe.NameIngredients.Contains("hiel "))
             //Console.WriteLine($"error de id de ingrediente");
         }
