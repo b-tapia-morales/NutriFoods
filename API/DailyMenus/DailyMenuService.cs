@@ -46,6 +46,6 @@ public class DailyMenuService : IDailyMenuService
     private static double CalculateNutrientTotal(DailyMenuDto dailyMenu, int nutrientId)
     {
         return dailyMenu.MenuRecipes.Sum(e =>
-            e.Portions * e.Recipe.Nutrients.FirstOrDefault(r => r.Nutrient.Id == nutrientId)!.Quantity);
+            e.Portions * e.Recipe.Nutrients.First(r => r.Nutrient.Id == nutrientId).Quantity);
     }
 }
