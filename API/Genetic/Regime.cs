@@ -5,69 +5,73 @@ namespace API.Genetic;
 public class Regime : IGeneticAlgorithm
 {
     private readonly Random _random = new(Environment.TickCount);
-    public IList<Chromosome> Solutions { get; } = new List<Chromosome>();
-    public IList<Chromosome> Winners { get; } = new List<Chromosome>();
 
-    public IList<MenuRecipeDto> GenerateTotalPopulation(IEnumerable<RecipeDto> recipes)
+    public IList<MenuRecipeDto> GenerateUniverse(IEnumerable<RecipeDto> recipes)
     {
         return recipes.Select(r => new MenuRecipeDto {Recipe = r, Portions = 1}).ToList();
     }
 
-    public void CalculatePopulationFitness(double energy, double carbohydrates, double lipids, double proteins,
-        double marginOfError)
+    public void GenerateInitialPopulation(IList<MenuRecipeDto> universe, IList<Chromosome> population,
+        int chromosomeSize, int populationSize)
     {
-        foreach (var possibleRegime in Solutions)
+        for (var i = 0; i < populationSize; i++)
+        {
+            var listRecipe = new List<MenuRecipeDto>(chromosomeSize);
+            for (var j = 0; j < chromosomeSize; j++)
+            {
+                var rand = _random.Next(0, universe.Count);
+                listRecipe.Add(universe[rand]);
+            }
+
+            var pr = new Chromosome(listRecipe);
+            population.Add(pr);
+        }
+    }
+    
+    public void CalculatePopulationFitness(IList<Chromosome> population, double energy, double carbohydrates,
+        double lipids, double proteins, double marginOfError)
+    {
+        foreach (var possibleRegime in population)
         {
             possibleRegime.AggregateMacronutrients();
             possibleRegime.CalculateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         }
     }
-
-    public void GenerateInitialPopulation(int recipesAmount, int solutionsAmount, IList<MenuRecipeDto> menus)
+    
+    public bool SolutionExists(IList<Chromosome> population)
     {
-        for (var i = 0; i < solutionsAmount; i++)
-        {
-            var listRecipe = new List<MenuRecipeDto>(recipesAmount);
-            for (var j = 0; j < recipesAmount; j++)
-            {
-                var rand = _random.Next(0, menus.Count);
-                listRecipe.Add(menus[rand]);
-            }
-
-            var pr = new Chromosome(listRecipe);
-            Solutions.Add(pr);
-        }
+        return population.Any(r => r.Fitness == 8);
     }
 
-    public void Selection()
+    public void Selection(IList<Chromosome> population, IList<Chromosome> winners)
     {
-        var rangeMax = Solutions.Count / 2;
+        var rangeMax = population.Count / 2;
         var cantTournament = _random.Next(2, rangeMax);
-        Winners.Clear();
+        winners.Clear();
         for (var i = 0; i < cantTournament;)
         {
-            var fighter1 = _random.Next(0, Solutions.Count);
-            var fighter2 = _random.Next(0, Solutions.Count);
+            var fighter1 = _random.Next(0, population.Count);
+            var fighter2 = _random.Next(0, population.Count);
 
             if (fighter1 == fighter2) continue;
-            var win = Solutions[fighter1].Fitness > Solutions[fighter2].Fitness
-                ? Solutions[fighter1]
-                : Solutions[fighter2];
-            var exist = Winners.Any(s => s.Recipes.MenuRecipes.SequenceEqual(win.Recipes.MenuRecipes));
-            if (!exist) Winners.Add(win);
+            var win = population[fighter1].Fitness > population[fighter2].Fitness
+                ? population[fighter1]
+                : population[fighter2];
+            var exist = winners.Any(s => s.Recipes.MenuRecipes.SequenceEqual(win.Recipes.MenuRecipes));
+            if (!exist) winners.Add(win);
             i++;
         }
     }
 
-    public void Crossover(int solutionsAmount)
+    public void Crossover(IList<Chromosome> population, IList<Chromosome> winners, int populationSize)
     {
         var probability = _random.NextDouble();
         if (probability >= 0.8) return;
         var sonsNew = new List<Chromosome>();
-        for (var i = 0; i < solutionsAmount;)
+        for (var i = 0; i < populationSize;)
         {
-            var father1 = Winners[_random.Next(0, Winners.Count)];
-            var father2 = Solutions[_random.Next(0, Solutions.Count)];
+            var father1 = winners[_random.Next(0, winners.Count)];
+            var father2 = population[_random.Next(0, population.Count)];
 
             var indexGenFather1 = _random.Next(0, father1.Recipes.MenuRecipes.Count);
             var indexGenFather2 = _random.Next(0, father2.Recipes.MenuRecipes.Count);
@@ -87,36 +91,32 @@ public class Regime : IGeneticAlgorithm
             i += 2;
         }
 
-        Solutions.Clear();
+        population.Clear();
         foreach (var newSon in sonsNew)
         {
-            Solutions.Add(newSon);
+            population.Add(newSon);
         }
     }
 
-    public void Mutation(IList<MenuRecipeDto> menus, int recipesAmount, int solutionsAmount)
+    public void Mutation(IList<MenuRecipeDto> menus, IList<Chromosome> population, int chromosomeSize,
+        int populationSize)
     {
         if (_random.NextDouble() > 0.4) return;
-        var numberMutation = _random.Next(1, Solutions.Count);
+        var numberMutation = _random.Next(1, population.Count);
         for (var i = 0; i < numberMutation; i++)
         {
-            var changePosition = _random.Next(0, solutionsAmount);
-            var changeIndexRegime = _random.Next(0, recipesAmount);
+            var changePosition = _random.Next(0, populationSize);
+            var changeIndexRegime = _random.Next(0, chromosomeSize);
             var rateChangeRecipe = _random.Next(0, menus.Count);
             var changeRecipe = menus[rateChangeRecipe];
-            Solutions[changePosition] = NewMutation(changeIndexRegime, changeRecipe, changePosition);
+            population[changePosition] = NewMutation(population, changeIndexRegime, changeRecipe, changePosition);
         }
     }
 
-    public bool SolutionExists()
-    {
-        return Solutions.Any(r => r.Fitness == 8);
-    }
-
-    public void ShowPopulation()
+    public void ShowPopulation(IList<Chromosome> population)
     {
         Console.WriteLine();
-        foreach (var solution in Solutions)
+        foreach (var solution in population)
         {
             solution.ShowPhenotypes();
         }
@@ -124,9 +124,10 @@ public class Regime : IGeneticAlgorithm
         Console.WriteLine();
     }
 
-    private Chromosome NewMutation(int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto, int changePosition)
+    private Chromosome NewMutation(IList<Chromosome> solutions, int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto,
+        int changePosition)
     {
-        var newRecipes = Solutions[changePosition].Recipes.MenuRecipes
+        var newRecipes = solutions[changePosition].Recipes.MenuRecipes
             .Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
 
         var pr = new Chromosome(newRecipes);

@@ -26,7 +26,7 @@ public class DailyMenuService : IDailyMenuService
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
         var dailyMenu =
             await Task.FromResult(
-                _geneticAlgorithm.GenerateSolution(recipes, 3, energyTarget, carbohydrates, lipids, proteins));
+                _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins, 3));
         dailyMenu.MealType = MealTypeEnum.FromToken(mealType).ReadableName;
         dailyMenu.Satiety = SatietyEnum.FromToken(satiety).ReadableName;
         dailyMenu.EnergyTotal = CalculateNutrientTotal(dailyMenu, 1);

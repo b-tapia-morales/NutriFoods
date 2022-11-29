@@ -6,44 +6,41 @@ namespace API.Genetic;
 
 public interface IGeneticAlgorithm
 {
-    IList<Chromosome> Solutions { get; }
-    IList<Chromosome> Winners { get; }
-
-    DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, int recipesAmount, double energy,
-        double carbohydrates, double lipids, double proteins, int solutionsAmount = 20, double marginOfError = 0.08)
+    DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, double carbohydrates, double lipids,
+        double proteins, int chromosomeSize = 3, double marginOfError = 0.08, int populationSize = 20)
     {
-        Solutions.Clear();
-        Winners.Clear();
-        var menus = GenerateTotalPopulation(recipes);
-        GenerateInitialPopulation(recipesAmount, solutionsAmount, menus);
-        CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
+        var population = new List<Chromosome>();
+        var winners = new List<Chromosome>();
+        var menus = GenerateUniverse(recipes);
+        GenerateInitialPopulation(menus, population, chromosomeSize, populationSize);
+        CalculatePopulationFitness(population, energy, carbohydrates, lipids, proteins, marginOfError);
         var i = 0;
-        while (!SolutionExists())
+        while (!SolutionExists(population))
         {
-            Selection();
-            Crossover(solutionsAmount);
-            Mutation(menus, recipesAmount, solutionsAmount);
-            CalculatePopulationFitness(energy, carbohydrates, lipids, proteins, marginOfError);
+            Selection(population, winners);
+            Crossover(population, winners, populationSize);
+            Mutation(menus, population, chromosomeSize, populationSize);
+            CalculatePopulationFitness(population, energy, carbohydrates, lipids, proteins, marginOfError);
             i++;
         }
 
         Console.WriteLine("Generaciones : " + i);
-        ShowPopulation();
+        ShowPopulation(population);
 
-        return Solutions.First(p => p.Fitness == 8).Recipes;
+        return population.First(p => p.Fitness == 8).Recipes;
     }
 
-    DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, int recipesAmount, double energy,
-        int solutionsAmount = 20, double marginOfError = 0.08)
+    DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, int chromosomeSize = 3,
+        double marginOfError = 0.08, int populationSize = 20)
     {
         var (carbohydrates, lipids, proteins) = EnergyDistribution.Calculate(energy);
-        return GenerateSolution(recipes, recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount,
-            marginOfError);
+        return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize, marginOfError,
+            populationSize);
     }
 
-    DailyMenuDto GenerateCustomSolution(IEnumerable<RecipeDto> recipes, int recipesAmount, double energy,
-        double carbsPercent, double fatsPercent, double proteinsPercent, int solutionsAmount = 20,
-        double marginOfError = 0.08)
+    DailyMenuDto GenerateCustomSolution(IEnumerable<RecipeDto> recipes, double energy, double carbsPercent,
+        double fatsPercent, double proteinsPercent, int chromosomeSize = 3, double marginOfError = 0.08,
+        int populationSize = 20)
     {
         carbsPercent = Math.Round(carbsPercent, 2);
         fatsPercent = Math.Round(fatsPercent, 2);
@@ -58,24 +55,25 @@ public interface IGeneticAlgorithm
             throw new ArgumentException("The sum of the percentages does not equal to one");
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energy, carbsPercent, fatsPercent, proteinsPercent);
-        return GenerateSolution(recipes, recipesAmount, energy, carbohydrates, lipids, proteins, solutionsAmount,
-            marginOfError);
+        return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize: chromosomeSize,
+            marginOfError: marginOfError, populationSize: populationSize);
     }
 
-    IList<MenuRecipeDto> GenerateTotalPopulation(IEnumerable<RecipeDto> recipes);
+    IList<MenuRecipeDto> GenerateUniverse(IEnumerable<RecipeDto> recipes);
 
-    void GenerateInitialPopulation(int recipesAmount, int solutionsAmount, IList<MenuRecipeDto> menus);
+    void GenerateInitialPopulation(IList<MenuRecipeDto> universe, IList<Chromosome> population, int chromosomeSize,
+        int populationSize);
 
-    void CalculatePopulationFitness(double energy, double carbohydrates, double lipids, double proteins,
-        double marginOfError);
+    void CalculatePopulationFitness(IList<Chromosome> population, double energy, double carbohydrates, double lipids,
+        double proteins, double marginOfError);
 
-    bool SolutionExists();
+    bool SolutionExists(IList<Chromosome> population);
 
-    void Selection();
+    void Selection(IList<Chromosome> population, IList<Chromosome> winners);
 
-    void Crossover(int solutionsAmount);
+    void Crossover(IList<Chromosome> population, IList<Chromosome> winners, int populationSize);
 
-    void Mutation(IList<MenuRecipeDto> menus, int recipesAmount, int solutionsAmount);
+    void Mutation(IList<MenuRecipeDto> menus, IList<Chromosome> population, int chromosomeSize, int populationSize);
 
-    void ShowPopulation();
+    void ShowPopulation(IList<Chromosome> population);
 }
