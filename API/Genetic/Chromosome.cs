@@ -20,51 +20,30 @@ public class Chromosome
         Fitness = 0;
     }
 
-
     public void AggregateMacronutrients()
     {
-        double energy = 0;
-        double carbohydrates = 0;
-        double lipids = 0;
-        double proteins = 0;
-        foreach (var recipesMenu in Recipes.MenuRecipes)
-        {
-            foreach (var nutrient in recipesMenu.Recipe.Nutrients)
-            {
-                switch (nutrient.Nutrient.Id)
-                {
-                    case 1:
-                        energy += nutrient.Quantity;
-                        break;
-                    case 2:
-                        carbohydrates += nutrient.Quantity;
-                        break;
-                    case 12:
-                        lipids += nutrient.Quantity;
-                        break;
-                    case 63:
-                        proteins += nutrient.Quantity;
-                        break;
-                }
-            }
-        }
-
-        Recipes.CarbohydratesTotal = carbohydrates;
-        Recipes.EnergyTotal = energy;
-        Recipes.LipidsTotal = lipids;
-        Recipes.ProteinsTotal = proteins;
+        Recipes.EnergyTotal = AggregateMacronutrients(Recipes, 1);
+        Recipes.CarbohydratesTotal = AggregateMacronutrients(Recipes, 2);
+        Recipes.LipidsTotal = AggregateMacronutrients(Recipes, 12);
+        Recipes.ProteinsTotal = AggregateMacronutrients(Recipes, 63);
     }
 
-    public void CalculateFitness(double energy, double carbohydrates, double lipids, double proteins,
+    public void UpdateFitness(double energy, double carbohydrates, double lipids, double proteins,
         double marginOfError)
     {
-        Fitness = FitnessResult(energy, Recipes.EnergyTotal, marginOfError) +
-                  FitnessResult(carbohydrates, Recipes.CarbohydratesTotal, marginOfError) +
-                  FitnessResult(lipids, Recipes.LipidsTotal, marginOfError) +
-                  FitnessResult(proteins, Recipes.ProteinsTotal, marginOfError);
+        Fitness = CalculateFitness(energy, Recipes.EnergyTotal, marginOfError) +
+                  CalculateFitness(carbohydrates, Recipes.CarbohydratesTotal, marginOfError) +
+                  CalculateFitness(lipids, Recipes.LipidsTotal, marginOfError) +
+                  CalculateFitness(proteins, Recipes.ProteinsTotal, marginOfError);
     }
 
-    private static int FitnessResult(double objectiveValue, double menuValue, double marginOfError)
+    private static double AggregateMacronutrients(DailyMenuDto dailyMenu, int nutrientId) =>
+        dailyMenu.MenuRecipes
+            .SelectMany(e => e.Recipe.Nutrients)
+            .Where(e => e.Nutrient.Id == nutrientId)
+            .Sum(e => e.Quantity);
+
+    private static int CalculateFitness(double objectiveValue, double menuValue, double marginOfError)
     {
         if ((objectiveValue * (1 - (marginOfError / 2)) <= menuValue) &&
             (objectiveValue * (1 + (marginOfError / 2)) >= menuValue))

@@ -34,7 +34,7 @@ public class Regime : IGeneticAlgorithm
         foreach (var possibleRegime in population)
         {
             possibleRegime.AggregateMacronutrients();
-            possibleRegime.CalculateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
+            possibleRegime.UpdateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         }
     }
     
