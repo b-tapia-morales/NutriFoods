@@ -4,12 +4,12 @@ namespace API.Genetic;
 
 public class Chromosome
 {
-    public DailyMenuDto Recipes { get; }
+    public DailyMenuDto DailyMenu { get; }
     public int Fitness { get; private set; }
 
     public Chromosome(IList<MenuRecipeDto> menuRecipe)
     {
-        Recipes = new DailyMenuDto
+        DailyMenu = new DailyMenuDto
         {
             EnergyTotal = 0,
             CarbohydratesTotal = 0,
@@ -22,19 +22,19 @@ public class Chromosome
 
     public void AggregateMacronutrients()
     {
-        Recipes.EnergyTotal = AggregateMacronutrients(Recipes, 1);
-        Recipes.CarbohydratesTotal = AggregateMacronutrients(Recipes, 2);
-        Recipes.LipidsTotal = AggregateMacronutrients(Recipes, 12);
-        Recipes.ProteinsTotal = AggregateMacronutrients(Recipes, 63);
+        DailyMenu.EnergyTotal = AggregateMacronutrients(DailyMenu, 1);
+        DailyMenu.CarbohydratesTotal = AggregateMacronutrients(DailyMenu, 2);
+        DailyMenu.LipidsTotal = AggregateMacronutrients(DailyMenu, 12);
+        DailyMenu.ProteinsTotal = AggregateMacronutrients(DailyMenu, 63);
     }
 
     public void UpdateFitness(double energy, double carbohydrates, double lipids, double proteins,
         double marginOfError)
     {
-        Fitness = CalculateFitness(energy, Recipes.EnergyTotal, marginOfError) +
-                  CalculateFitness(carbohydrates, Recipes.CarbohydratesTotal, marginOfError) +
-                  CalculateFitness(lipids, Recipes.LipidsTotal, marginOfError) +
-                  CalculateFitness(proteins, Recipes.ProteinsTotal, marginOfError);
+        Fitness = CalculateFitness(energy, DailyMenu.EnergyTotal, marginOfError) +
+                  CalculateFitness(carbohydrates, DailyMenu.CarbohydratesTotal, marginOfError) +
+                  CalculateFitness(lipids, DailyMenu.LipidsTotal, marginOfError) +
+                  CalculateFitness(proteins, DailyMenu.ProteinsTotal, marginOfError);
     }
 
     private static double AggregateMacronutrients(DailyMenuDto dailyMenu, int nutrientId) =>
@@ -70,7 +70,7 @@ public class Chromosome
 
     public void ShowPhenotypes()
     {
-        foreach (var recipe in Recipes.MenuRecipes)
+        foreach (var recipe in DailyMenu.MenuRecipes)
         {
             Console.Write($"{recipe.Recipe.Id} ");
         }

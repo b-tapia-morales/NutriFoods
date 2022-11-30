@@ -57,7 +57,7 @@ public class Regime : IGeneticAlgorithm
             var win = population[fighter1].Fitness > population[fighter2].Fitness
                 ? population[fighter1]
                 : population[fighter2];
-            var exist = winners.Any(s => s.Recipes.MenuRecipes.SequenceEqual(win.Recipes.MenuRecipes));
+            var exist = winners.Any(s => s.DailyMenu.MenuRecipes.SequenceEqual(win.DailyMenu.MenuRecipes));
             if (!exist) winners.Add(win);
             i++;
         }
@@ -73,15 +73,15 @@ public class Regime : IGeneticAlgorithm
             var father1 = winners[_random.Next(0, winners.Count)];
             var father2 = population[_random.Next(0, population.Count)];
 
-            var indexGenFather1 = _random.Next(0, father1.Recipes.MenuRecipes.Count);
-            var indexGenFather2 = _random.Next(0, father2.Recipes.MenuRecipes.Count);
+            var indexGenFather1 = _random.Next(0, father1.DailyMenu.MenuRecipes.Count);
+            var indexGenFather2 = _random.Next(0, father2.DailyMenu.MenuRecipes.Count);
 
-            var gen1 = father1.Recipes.MenuRecipes[indexGenFather1];
-            var gen2 = father2.Recipes.MenuRecipes[indexGenFather2];
+            var gen1 = father1.DailyMenu.MenuRecipes[indexGenFather1];
+            var gen2 = father2.DailyMenu.MenuRecipes[indexGenFather2];
 
             if (gen1.Recipe.Id == gen2.Recipe.Id) continue;
-            if (father1.Recipes.MenuRecipes.Any(r => r.Recipe.Id == gen2.Recipe.Id) ||
-                father2.Recipes.MenuRecipes.Any(r => r.Recipe.Id == gen1.Recipe.Id)) continue;
+            if (father1.DailyMenu.MenuRecipes.Any(r => r.Recipe.Id == gen2.Recipe.Id) ||
+                father2.DailyMenu.MenuRecipes.Any(r => r.Recipe.Id == gen1.Recipe.Id)) continue;
 
             var newChromosome1 = NewChromosome(father1, gen2, indexGenFather1);
             var newChromosome2 = NewChromosome(father2, gen1, indexGenFather2);
@@ -127,7 +127,7 @@ public class Regime : IGeneticAlgorithm
     private Chromosome NewMutation(IList<Chromosome> solutions, int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto,
         int changePosition)
     {
-        var newRecipes = solutions[changePosition].Recipes.MenuRecipes
+        var newRecipes = solutions[changePosition].DailyMenu.MenuRecipes
             .Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
 
         var pr = new Chromosome(newRecipes);
@@ -136,7 +136,7 @@ public class Regime : IGeneticAlgorithm
 
     private static Chromosome NewChromosome(Chromosome father, MenuRecipeDto gen, int indexFather)
     {
-        var newChromosomal = father.Recipes.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
+        var newChromosomal = father.DailyMenu.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
         var pr = new Chromosome(newChromosomal);
 
         return pr;
