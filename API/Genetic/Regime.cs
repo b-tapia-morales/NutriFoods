@@ -1,5 +1,6 @@
 using API.Dto;
 using API.Recipes;
+using Domain.Models;
 
 namespace API.Genetic;
 
@@ -18,11 +19,11 @@ public class Regime : IGeneticAlgorithm
     }
 
     public MealMenuDto GenerateSolution(int recipeAmount, int solutionsAmount, double energyTotal, double carbohydratesPercentage,
-        double lipidsPercentage, double proteinsPercentage)
+        double lipidsPercentage, double proteinsPercentage, MealType mealType)
     {
         Solutions.Clear();
         Winners.Clear();
-        var recipes = GetUniverseRecipes();
+        var recipes = GetUniverseRecipes(mealType.Id);
         GenerateInitialPopulation(recipeAmount, solutionsAmount, recipes);
         CalculatePopulationFitness(energyTotal, carbohydratesPercentage, proteinsPercentage,
             lipidsPercentage);
@@ -144,7 +145,7 @@ public class Regime : IGeneticAlgorithm
         return Solutions.Any(r => r.Fitness == 8);
     }
 
-    private IList<MealMenuRecipeDto> GetUniverseRecipes()
+    private IList<MealMenuRecipeDto> GetUniverseRecipes(int mealTypeId)
     {
         return _repository.FindAll().Result.Select(r => new MealMenuRecipeDto() { Recipe = r, Quantity = 1 }).ToList();
     }

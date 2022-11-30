@@ -30,6 +30,7 @@ public class MealPlanService : IMealPlanService
         var denominator = values.Sum(e => e.Value);
         var mealPlan = MapToMealPlan(mealsPerDay, energyTarget, carbohydratesTarget, lipidsTarget, proteinsTarget);
         var mealMenus = new List<MealMenuDto>();
+        var mealtype = new MealType {Id = 1,Name = "unnombre"};
         timeMeasure.Start();
         foreach (var satiety in values)
         {
@@ -38,7 +39,7 @@ public class MealPlanService : IMealPlanService
             var ratio = (numerator / denominator) * energyTarget;
             var energy = EnergyDistribution.Calculate(ratio);
             var mealPlanSolution = _regime.GenerateSolution(3, 20,
-                ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins);
+                ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins, mealtype);
             mealMenus.Add(mealPlanSolution);
             
         }

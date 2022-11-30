@@ -16,7 +16,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NutrientRetrieval.AbridgedRetrieval;
 using NutrientRetrieval.NutrientCalculation;
-using RecipeAndMesuris.Recipe_insert;
 using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
@@ -28,19 +27,7 @@ Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
-
-var reg = new GeneticAlgorithm(4,1800);
-reg.GetRegimen();
-
-
-DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
-Connect.InsertMeasuris();
-Connect.InsertRecipe();
-Connect.InsertRecipeIngredient();
-NutrientCalculation.Calculate();
 */
-
 
 
 var builder = WebApplication.CreateBuilder(args);
