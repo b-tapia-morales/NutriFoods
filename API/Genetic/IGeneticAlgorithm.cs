@@ -7,7 +7,7 @@ namespace API.Genetic;
 public interface IGeneticAlgorithm
 {
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, double carbohydrates, double lipids,
-        double proteins, int chromosomeSize = 3, double marginOfError = 0.07, int populationSize = 20)
+        double proteins, int chromosomeSize = 3, double marginOfError = 0.07, int populationSize = 25)
     {
         var population = new List<Chromosome>();
         var winners = new List<Chromosome>();
@@ -34,7 +34,7 @@ public interface IGeneticAlgorithm
     }
 
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, int chromosomeSize = 3,
-        double marginOfError = 0.07, int populationSize = 20)
+        double marginOfError = 0.07, int populationSize = 25)
     {
         var (carbohydrates, lipids, proteins) = EnergyDistribution.Calculate(energy);
         return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize, marginOfError,
@@ -43,7 +43,7 @@ public interface IGeneticAlgorithm
 
     DailyMenuDto GenerateCustomSolution(IEnumerable<RecipeDto> recipes, double energy, double carbsPercent,
         double fatsPercent, double proteinsPercent, int chromosomeSize = 3, double marginOfError = 0.07,
-        int populationSize = 20)
+        int populationSize = 25)
     {
         carbsPercent = Math.Round(carbsPercent, 2);
         fatsPercent = Math.Round(fatsPercent, 2);
@@ -58,8 +58,8 @@ public interface IGeneticAlgorithm
             throw new ArgumentException("The sum of the percentages does not equal to one");
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energy, carbsPercent, fatsPercent, proteinsPercent);
-        return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize: chromosomeSize,
-            marginOfError: marginOfError, populationSize: populationSize);
+        return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize, marginOfError,
+            populationSize);
     }
 
     IList<MenuRecipeDto> GenerateUniverse(IEnumerable<RecipeDto> recipes);
