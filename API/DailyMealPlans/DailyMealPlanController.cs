@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using API.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enum;
@@ -18,18 +19,23 @@ public class DailyMealPlanController
 
     [HttpGet]
     [Route("default-parameters")]
-    public async Task<ActionResult<DailyMealPlanDto>> GenerateDailyMealPlan([Required] double energyTarget,
+    public ActionResult<DailyMealPlanDto> GenerateDailyMealPlan([Required] double energyTarget,
         [Required] Satiety breakfast, [Required] Satiety lunch, [Required] Satiety dinner, bool? includeBrunch = false,
         bool? includeLinner = false)
     {
+        var timer = new Stopwatch();
+        timer.Start();
         var mealConfigurations = new List<(MealTypeEnum MealType, SatietyEnum Satiety)>
         {
             (MealTypeEnum.Breakfast, SatietyEnum.FromToken(breakfast)),
-            (MealTypeEnum.None, includeBrunch.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
+            (MealTypeEnum.Snack, includeBrunch.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
             (MealTypeEnum.Lunch, SatietyEnum.FromToken(lunch)),
-            (MealTypeEnum.None, includeLinner.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
+            (MealTypeEnum.Snack, includeLinner.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
             (MealTypeEnum.Dinner, SatietyEnum.FromToken(dinner)),
         };
-        return await _dailyMealPlanService.GenerateDailyMealPlan(energyTarget, mealConfigurations);
+        var dailyMealPlan = _dailyMealPlanService.GenerateDailyMealPlan(energyTarget, mealConfigurations);
+        timer.Stop();
+        Console.WriteLine($"Tiempo transcurrido total: {timer.Elapsed.Milliseconds} [ms]");
+        return dailyMealPlan;
     }
 }

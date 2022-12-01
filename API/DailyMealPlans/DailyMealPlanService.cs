@@ -13,12 +13,10 @@ public class DailyMealPlanService : IDailyMealPlanService
         _dailyMenuService = dailyMenuService;
     }
 
-    public async Task<DailyMealPlanDto> GenerateDailyMealPlan(double energyTarget,
+    public DailyMealPlanDto GenerateDailyMealPlan(double energyTarget,
         ICollection<(MealTypeEnum MealType, SatietyEnum Satiety)> mealConfigurations)
     {
-        var concurrentTasks = BuildTasks(energyTarget, mealConfigurations);
-        var results = await Task.WhenAll(concurrentTasks);
-        var dailyMenus = results.ToList();
+        var dailyMenus = GenerateDailyMenus(energyTarget, mealConfigurations).ToList();
         return new DailyMealPlanDto
         {
             DailyMenus = dailyMenus,
@@ -29,7 +27,7 @@ public class DailyMealPlanService : IDailyMealPlanService
         };
     }
 
-    private IEnumerable<Task<DailyMenuDto>> BuildTasks(double energyTarget,
+    private IEnumerable<DailyMenuDto> GenerateDailyMenus(double energyTarget,
         ICollection<(MealTypeEnum MealType, SatietyEnum Satiety)> mealConfigurations)
     {
         var denominator = mealConfigurations.Sum(e => e.Satiety.Value);
@@ -38,7 +36,9 @@ public class DailyMealPlanService : IDailyMealPlanService
             if (satiety == SatietyEnum.None) continue;
             var numerator = (double) satiety.Value;
             var mealEnergyTarget = energyTarget * (numerator / denominator);
-            yield return _dailyMenuService.GenerateDailyMenu(mealEnergyTarget, mealType.Token, satiety.Token);
+            var recipesAmount = mealType == MealTypeEnum.Snack ? 2 : 3;
+            yield return _dailyMenuService
+                .GenerateDailyMenu(mealEnergyTarget, mealType.Token, satiety.Token, recipesAmount).Result;
         }
     }
 }

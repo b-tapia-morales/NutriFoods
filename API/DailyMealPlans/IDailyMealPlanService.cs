@@ -5,6 +5,6 @@ namespace API.DailyMealPlans;
 
 public interface IDailyMealPlanService
 {
-    public Task<DailyMealPlanDto> GenerateDailyMealPlan(double energyTarget,
+    public DailyMealPlanDto GenerateDailyMealPlan(double energyTarget,
         ICollection<(MealTypeEnum MealType, SatietyEnum Satiety)> mealConfigurations);
 }
