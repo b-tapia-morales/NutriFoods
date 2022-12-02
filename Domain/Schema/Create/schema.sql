@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS ingredient
     id                SERIAL,
     name              VARCHAR(64) NOT NULL,
     is_animal         BOOLEAN     NOT NULL,
-    contains_gluten   BOOLEAN     NOT NULL,
+    contains_gluten   BOOLEAN     NOT NULL DEFAULT FALSE,
     tertiary_group_id INTEGER     NOT NULL,
     UNIQUE (name),
     FOREIGN KEY (tertiary_group_id) REFERENCES tertiary_group (id),
@@ -109,10 +109,10 @@ CREATE INDEX ingredient_nutrient_idx ON ingredient_nutrient USING btree (quantit
 CREATE TABLE IF NOT EXISTS ingredient_measure
 (
     id            SERIAL,
-    ingredient_id INTEGER               NOT NULL,
-    name          VARCHAR(64)           NOT NULL,
-    grams         DOUBLE PRECISION      NOT NULL,
-    is_default    BOOLEAN DEFAULT FALSE NOT NULL,
+    ingredient_id INTEGER          NOT NULL,
+    name          VARCHAR(64)      NOT NULL,
+    grams         DOUBLE PRECISION NOT NULL,
+    is_default    BOOLEAN          NOT NULL DEFAULT FALSE,
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
     PRIMARY KEY (id)
 );
@@ -227,19 +227,48 @@ CREATE TABLE IF NOT EXISTS daily_meal_plan
     PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS daily_meal_plan_nutrient
+(
+    id                 SERIAL,
+    daily_meal_plan_id INTEGER          NOT NULL,
+    nutrient_id        INTEGER          NOT NULL,
+    quantity           DOUBLE PRECISION NOT NULL,
+    unit               INTEGER          NOT NULL,
+    dri_percentage     DOUBLE PRECISION,
+    FOREIGN KEY (daily_meal_plan_id) REFERENCES daily_meal_plan (id),
+    FOREIGN KEY (nutrient_id) REFERENCES nutrient (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX daily_meal_plan_nutrient_idx ON daily_meal_plan_nutrient USING btree (quantity);
+
 CREATE TABLE IF NOT EXISTS daily_menu
 (
     id                  SERIAL,
-    daily_meal_plan     INTEGER,
+    daily_meal_plan_id  INTEGER,
     meal_type           INTEGER          NOT NULL,
     satiety             INTEGER          NOT NULL,
     energy_total        DOUBLE PRECISION NOT NULL,
     carbohydrates_total DOUBLE PRECISION NOT NULL,
     lipids_total        DOUBLE PRECISION NOT NULL,
     proteins_total      DOUBLE PRECISION NOT NULL,
-    FOREIGN KEY (daily_meal_plan) REFERENCES daily_meal_plan (id),
+    FOREIGN KEY (daily_meal_plan_id) REFERENCES daily_meal_plan (id),
     PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS daily_menu_nutrient
+(
+    id            SERIAL,
+    daily_menu_id INTEGER          NOT NULL,
+    nutrient_id   INTEGER          NOT NULL,
+    quantity      DOUBLE PRECISION NOT NULL,
+    unit          INTEGER          NOT NULL,
+    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id),
+    FOREIGN KEY (nutrient_id) REFERENCES nutrient (id),
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX daily_menu_nutrient_idx ON daily_menu_nutrient USING btree (quantity);
 
 CREATE TABLE IF NOT EXISTS menu_recipe
 (
