@@ -20,15 +20,15 @@ using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
-
+/*
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
+*/
 
-/*
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -102,4 +102,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();*/
+app.Run();
