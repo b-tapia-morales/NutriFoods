@@ -38,7 +38,7 @@ public class MealPlanService : IMealPlanService
             var numerator = (double)satiety.Value;
             var ratio = (numerator / denominator) * energyTarget;
             var energy = EnergyDistribution.Calculate(ratio);
-            var mealPlanSolution = _regime.GenerateSolution(3, 20,
+            var mealPlanSolution = _regime.GenerateSolution(3, 25,
                 ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins, mealtype);
             mealMenus.Add(mealPlanSolution);
             
