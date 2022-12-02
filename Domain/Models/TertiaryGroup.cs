@@ -2,12 +2,13 @@
 
 public sealed class TertiaryGroup
 {
-    public TertiaryGroup() => Ingredients = new HashSet<Ingredient>();
-
     public int Id { get; set; }
+
     public string Name { get; set; } = null!;
+
     public int SecondaryGroupId { get; set; }
 
+    public ICollection<Ingredient> Ingredients { get; } = new List<Ingredient>();
+
     public SecondaryGroup SecondaryGroup { get; set; } = null!;
-    public ICollection<Ingredient> Ingredients { get; set; }
 }

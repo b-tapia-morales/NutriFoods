@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class UserData
+public sealed class UserDatum
 {
     public Guid Id { get; set; }
 

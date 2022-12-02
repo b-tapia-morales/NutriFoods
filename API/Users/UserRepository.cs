@@ -46,7 +46,7 @@ public class UserRepository : IUserRepository
     {
         var user = await Find(apiKey);
         if (user == null) return null;
-        var userData = new UserData
+        var userData = new UserDatum
         {
             Id = user.Id,
             Name = userDataDto.Name,
@@ -85,7 +85,7 @@ public class UserRepository : IUserRepository
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
         return users
-            .Include(e => e.UserData!)
+            .Include(e => e.UserDatum!)
             .Include(e => e.UserBodyMetrics)
             .Include(e => e.MealPlan!)
             .ThenInclude(e => e.DailyMealPlans)
