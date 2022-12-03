@@ -9,7 +9,9 @@ Fitness: <color:#C678DD><i>int
 +Chromosome(menuRecipe: <color:#C678DD><i>List<MenuRecipe></i></color>)
 .. Métodos públicos ..
 +AggregateMacronutrients()
-+UpdateFitness(energy: <color:#C678DD><i>double</i></color>, carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, marginOfError: <color:#C678DD><i>double)
++UpdateFitness(energy: <color:#C678DD><i>double</i></color>, 
+carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, 
+marginOfError: <color:#C678DD><i>double</i></color>)
 +ShowPhenotypes()
 .. Métodos privados ..
 -{static}AggregateMacronutrients(dailyMenu: <color:#C678DD><i>DailyMenu</i></color>, nutrientId: <color:#C678DD><i>int</i></color>): <b>double</b>
@@ -23,7 +25,7 @@ carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>d
 chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu</b>
 +GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
 chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
-+GenerateSolution(List<Recipe>: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
++GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
 carbsPercent: <color:#C678DD><i>int</i></color>, fatsPercent: <color:#C678DD><i>int</i></color>, proteinsPercent: <color:#C678DD><i>int</i></color>,
 chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
 .. Métodos intermedios ..
