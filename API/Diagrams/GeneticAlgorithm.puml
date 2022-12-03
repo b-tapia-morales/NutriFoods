@@ -1,0 +1,49 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Chromosome
+{
+DailyMenu: DailyMenu
+Fitness: int
+.. Constructor ..
++Chromosome(menuRecipe: List<MenuRecipe>)
+.. Métodos públicos ..
++AggregateMacronutrients()
++UpdateFitness(energy: double, carbohydrates: double, lipids: double, proteins: double, marginOfError: double)
++ShowPhenotypes()
+.. Métodos privados ..
+-{static}AggregateMacronutrients(dailyMenu: DailyMenu, nutrientId: int): double
+-{static}CalculateFitness(objectiveValue: double, menuValue: double, marginOfError: double): int
+}
+
+interface IGeneticAlgorithm {
+.. Overloads de método principal ..
++GenerateSolution(recipes: List<Recipe>, energy: double,
+carbohydrates: double, lipids: double, proteins: double,
+chromosomeSize: int, marginOfError: double, populationSize: int): DailyMenu
++GenerateSolution(recipes: List<Recipe>, energy: double,
+chromosomeSize: int, marginOfError: double, populationSize: int): DailyMenu
++GenerateSolution(List<Recipe>: List<Recipe>, energy: double,
+carbsPercent: int, fatsPercent: int, proteinsPercent: int,
+chromosomeSize: int, marginOfError: int, populationSize: int): DailyMenu
+.. Métodos intermedios ..
++GenerateUniverse(recipes: List<Recipe>): List<MenuRecipe>
++GenerateInitialPopulation(universe: List<MenuRecipe>, population: List<Chromosome>,
+chromosomeSize: int, populationSize: int)
++CalculatePopulationFitness(population: List<Chromosome>, energy: double,
+carbohydrates: double, lipids: double, proteins: double, marginOfError: double)
++SolutionExists(population: List<Chromosome>): bool
++Selection(population: List<Chromosome>, winners: List<Chromosome>)
++Crossover(population: List<Chromosome>, winners: List<Chromosome>,
+populationSize: int)
++Mutation(universe: List<MenuRecipe>, population: List<Chromosome>,
+chromosomeSize: int, populationSize: int)
++ShowPopulation(population: List<Chromosome>)
+}
+
+class GeneticAlgorithm
+
+IGeneticAlgorithm <|-- GeneticAlgorithm
+IGeneticAlgorithm - Chromosome: Usa >
+
+@enduml
