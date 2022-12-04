@@ -22,7 +22,7 @@ public class DailyMenuService : IDailyMenuService
         double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None,
         int recipesAmount = 3)
     {
-        var recipes = await _recipeRepository.FindAny();
+        var recipes = await _recipeRepository.FindWithPortions();
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
         var dailyMenu =
