@@ -20,8 +20,8 @@ public class DailyMealPlanController
     [HttpGet]
     [Route("default-parameters")]
     public ActionResult<DailyMealPlanDto> GenerateDailyMealPlan([Required] double energyTarget,
-        [Required] Satiety breakfast, [Required] Satiety lunch, [Required] Satiety dinner, bool? includeBrunch = false,
-        bool? includeLinner = false)
+        [Required] bool isLunchFilling, [Required] Satiety breakfast, [Required] Satiety dinner,
+        bool? includeBrunch = false, bool? includeLinner = false, DayOfTheWeek? dayOfWeek = DayOfTheWeek.None)
     {
         var timer = new Stopwatch();
         timer.Start();
@@ -29,11 +29,13 @@ public class DailyMealPlanController
         {
             (MealTypeEnum.Breakfast, SatietyEnum.FromToken(breakfast)),
             (MealTypeEnum.Snack, includeBrunch.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
-            (MealTypeEnum.Lunch, SatietyEnum.FromToken(lunch)),
+            (MealTypeEnum.Lunch, SatietyEnum.FromToken(isLunchFilling ? Satiety.Filling : Satiety.Normal)),
             (MealTypeEnum.Snack, includeLinner.GetValueOrDefault() ? SatietyEnum.Light : SatietyEnum.None),
             (MealTypeEnum.Dinner, SatietyEnum.FromToken(dinner)),
         };
-        var dailyMealPlan = _dailyMealPlanService.GenerateDailyMealPlan(energyTarget, mealConfigurations);
+        var dailyMealPlan =
+            _dailyMealPlanService.GenerateDailyMealPlan(energyTarget, mealConfigurations,
+                dayOfWeek ?? DayOfTheWeek.None);
         timer.Stop();
         Console.WriteLine($"Tiempo transcurrido total: {timer.Elapsed.Milliseconds} [ms]");
         return dailyMealPlan;
