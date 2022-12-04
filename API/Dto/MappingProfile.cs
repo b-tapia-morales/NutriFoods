@@ -44,9 +44,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Diets,
                 opt => opt.MapFrom(src => src.RecipeDiets.Select(e => e.Diet.ReadableName)));
 
+
+        CreateMap<MenuRecipe, MenuRecipeDto>();
         CreateMap<DailyMenuNutrient, DailyMenuNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
-        CreateMap<MenuRecipe, MenuRecipeDto>();
         CreateMap<DailyMenu, DailyMenuDto>()
             .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
             .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.ReadableName))
@@ -67,5 +68,5 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
             .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName));
         CreateMap<UserProfile, UserDto>();
-}
+    }
 }

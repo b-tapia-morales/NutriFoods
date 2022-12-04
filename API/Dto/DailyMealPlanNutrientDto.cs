@@ -6,5 +6,4 @@ public class DailyMealPlanNutrientDto
     public string Unit { get; set; } = string.Empty;
     public double? DriPercentage { get; set; }
     public NutrientDto Nutrient { get; set; } = null!;
-
 }
