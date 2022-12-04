@@ -8,7 +8,7 @@ public sealed class DailyMealPlan
 
     public int? MealPlanId { get; set; }
 
-    public DayOfWeekEnum DayOfTheWeek { get; set; } = null!;
+    public DayOfTheWeekEnum DayOfTheWeek { get; set; } = null!;
 
     public double EnergyTotal { get; set; }
 

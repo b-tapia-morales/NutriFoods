@@ -53,10 +53,15 @@ public class DishTypeEnum : SmartEnum<DishTypeEnum>
             {DishType.Bread, Bread},
             {DishType.Sandwich, Sandwich}
         }.ToImmutableDictionary();
-
-
+    
     private static readonly IDictionary<string, DishTypeEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
+    
+    public static IReadOnlyCollection<DishTypeEnum> Values { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).ToList();
+
+    public static IReadOnlyCollection<DishTypeEnum> NonNullValues { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).Skip(1).ToList();
 
     public DishTypeEnum(string name, int value, DishType token, string readableName) : base(name, value)
     {
@@ -66,7 +71,7 @@ public class DishTypeEnum : SmartEnum<DishTypeEnum>
 
     public DishType Token { get; }
     public string ReadableName { get; }
-
+    
     public static DishTypeEnum? FromReadableName(string name) =>
         ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
 

@@ -29,6 +29,12 @@ public class SatietyEnum : SmartEnum<SatietyEnum>
     private static readonly IDictionary<string, SatietyEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
 
+    public static IReadOnlyCollection<SatietyEnum> Values { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).ToList();
+
+    public static IReadOnlyCollection<SatietyEnum> NonNullValues { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).Skip(1).ToList();
+    
     public SatietyEnum(string name, int value, Satiety token, string readableName) : base(name, value)
     {
         Token = token;

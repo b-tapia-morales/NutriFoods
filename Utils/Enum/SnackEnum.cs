@@ -25,6 +25,12 @@ public class SnackEnum : SmartEnum<SnackEnum>
     private static readonly IDictionary<string, SnackEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
 
+    public static IReadOnlyCollection<SnackEnum> Values { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).ToList();
+
+    public static IReadOnlyCollection<SnackEnum> NonNullValues { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).Skip(1).ToList();
+    
     public SnackEnum(string name, int value, Snack token, string readableName) : base(name, value)
     {
         Token = token;

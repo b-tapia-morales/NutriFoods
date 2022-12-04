@@ -703,7 +703,7 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(v => v.Value, v => DishTypeEnum.FromValue(v));
 
         modelBuilder.Entity<DailyMealPlan>().Property(e => e.DayOfTheWeek)
-            .HasConversion(v => v.Value, v => DayOfWeekEnum.FromValue(v));
+            .HasConversion(v => v.Value, v => DayOfTheWeekEnum.FromValue(v));
         modelBuilder.Entity<DailyMealPlanNutrient>().Property(e => e.Unit)
             .HasConversion(v => v.Value, v => UnitEnum.FromValue(v));
         modelBuilder.Entity<DailyMenu>().Property(e => e.Satiety)

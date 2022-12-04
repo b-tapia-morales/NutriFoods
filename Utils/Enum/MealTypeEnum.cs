@@ -33,6 +33,12 @@ public class MealTypeEnum : SmartEnum<MealTypeEnum>
     private static readonly IDictionary<string, MealTypeEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
 
+    public static IReadOnlyCollection<MealTypeEnum> Values { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).ToList();
+
+    public static IReadOnlyCollection<MealTypeEnum> NonNullValues { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).Skip(1).ToList();
+
     public MealTypeEnum(string name, int value, MealType token, string readableName) : base(name, value)
     {
         Token = token;

@@ -50,6 +50,12 @@ public class DietEnum : SmartEnum<DietEnum>
 
     private static readonly IDictionary<string, DietEnum> ReadableNameDictionary = TokenDictionary
         .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, StringComparer.InvariantCultureIgnoreCase);
+    
+    public static IReadOnlyCollection<DietEnum> Values { get; } = 
+        TokenDictionary.Values.OrderBy(e => e.Value).ToList();
+
+    public static IReadOnlyCollection<DietEnum> NonNullValues { get; } =
+        TokenDictionary.Values.OrderBy(e => e.Value).Skip(1).ToList();
 
     public DietEnum(string name, int value, Diet token, string readableName) : base(name, value)
     {
