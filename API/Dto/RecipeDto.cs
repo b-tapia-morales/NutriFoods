@@ -14,4 +14,5 @@ public class RecipeDto
     public ICollection<RecipeNutrientDto> Nutrients { get; set; } = null!;
     public ICollection<string> MealTypes { get; set; } = null!;
     public ICollection<string> DishTypes { get; set; } = null!;
+    public ICollection<string> Diets { get; set; } = null!;
 }
