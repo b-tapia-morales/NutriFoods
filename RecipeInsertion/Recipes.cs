@@ -4,6 +4,7 @@ using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using RecipeInsertion.Mapping;
 using Utils.Csv;
+using Utils.Enum;
 
 namespace RecipeInsertion;
 
@@ -18,7 +19,7 @@ public static class Recipes
     private static readonly string FilePathIngredient = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Ingredient", "ingredient.csv");
 
-    private static readonly string[] MealType = { "Desayunos", "Cenas" };
+    private static readonly string[] MealType = {"Desayunos", "Cenas"};
 
     public static void RecipeInsert()
     {
@@ -39,6 +40,7 @@ public static class Recipes
                 PreparationTime = recipe.PreparationTime
             });
         }
+
         context.SaveChanges();
     }
 
@@ -93,8 +95,9 @@ public static class Recipes
     }
 
     private static string RemoveAccents(this string text) =>
-        new string(text.Normalize(NormalizationForm.FormD).Where(
-                c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray()
+        new string(text.Normalize(NormalizationForm.FormD)
+            .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray()
         ).Normalize(NormalizationForm.FormC);
 
 
@@ -145,17 +148,15 @@ public static class Recipes
                         }
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     Console.WriteLine($"  Units      {dataRecipe.NameIngredients} {dataRecipe.Units} {path}");
                 }
             }
         }
-        catch (Exception e)
+        catch (Exception)
         {
             Console.WriteLine($"{dataRecipe.NameIngredients} {path}");
-            //if (dataRecipe.NameIngredients.Contains("hiel "))
-            //Console.WriteLine($"error de id de ingrediente");
         }
     }
 
@@ -174,7 +175,7 @@ public static class Recipes
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            context.Add(new RecipeMealType { RecipeId = idRecipe, MealTypeId = type });
+            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe, pathDataRecipe);
@@ -192,7 +193,7 @@ public static class Recipes
             var dataStep = File.ReadAllLines(pathDataRecipesStep);
             for (var i = 0; i < dataStep.Length; i++)
             {
-                context.Add(new RecipeStep { Recipe = idRecipe, Step = i + 1, Description = dataStep[i] });
+                context.Add(new RecipeStep {Recipe = idRecipe, Step = i + 1, Description = dataStep[i]});
             }
         }
     }
