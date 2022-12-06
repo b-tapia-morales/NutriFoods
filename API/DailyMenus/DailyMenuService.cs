@@ -27,8 +27,11 @@ public class DailyMenuService : IDailyMenuService
             : _recipeRepository.FindByMealType(mealType));
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
-        var recipesAmount = RecipeDistribution.CalculateRecipesAmount(energyTarget, carbohydrates, lipids, proteins,
-            MealTypeEnum.FromToken(mealType));
+        var fromToken = mealType is MealType.None or MealType.Snack
+            ? MealTypeEnum.None
+            : MealTypeEnum.FromToken(mealType);
+        var recipesAmount =
+            RecipeDistribution.CalculateRecipesAmount(energyTarget, carbohydrates, lipids, proteins, fromToken);
         var dailyMenu =
             await Task.FromResult(
                 _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins,
