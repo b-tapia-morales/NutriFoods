@@ -5,28 +5,26 @@ public static class DistributionRecipes
     private static readonly ICollection<double> AverageBreakfasts = AverageMacronutrients(0);
     private static readonly ICollection<double> AverageLunch = AverageMacronutrients(1);
     private static readonly ICollection<double> AverageDinner = AverageMacronutrients(2);
+    private static readonly ICollection<double> AverageBrunch = AverageMacronutrients(3);
 
     public static int GetAmountOfRecipes(double energy, double carbohydrates, double lipids, double proteins,
         int kindOfFood)
     {
-        switch (kindOfFood)
+        return kindOfFood switch
         {
-            case 1:
-                return GetAmountRecipes(AverageBreakfasts, energy, carbohydrates, lipids, proteins);
-            case 2:
-                return GetAmountRecipes(AverageLunch, energy, carbohydrates, lipids, proteins);
-            case 3:
-                return GetAmountRecipes(AverageDinner, energy, carbohydrates, lipids, proteins);
-        }
-
-        return 0;
+            1 => GetAmountRecipes(AverageBreakfasts, energy, carbohydrates, lipids, proteins),
+            2 => GetAmountRecipes(AverageLunch, energy, carbohydrates, lipids, proteins),
+            3 => GetAmountRecipes(AverageDinner, energy, carbohydrates, lipids, proteins),
+            4 => GetAmountRecipes(AverageBrunch,energy,carbohydrates,lipids,proteins),
+            _ => 0
+        };
     }
 
     private static ICollection<double> AverageMacronutrients(int kindOfFood)
     {
         var pathAvereage = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
             "RecipeInsertion", "DataRecipes", "avereageMacronutrients.csv");
-
+ 
         var averages = File.ReadAllLines(pathAvereage).Select(x => x.Split(";")).ToList();
 
         var energyAverage = Convert.ToDouble(averages[kindOfFood][0]);
