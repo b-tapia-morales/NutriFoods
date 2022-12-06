@@ -22,7 +22,7 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
-    private static readonly string[] MealType = { "Desayunos", "Cenas" };
+    private static readonly string[] MealType = {"Desayunos", "Cenas"};
 
     public static void RecipeInsert()
     {
@@ -164,7 +164,7 @@ public static class Recipes
             var nameRecipe = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
 
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
-            context.Add(new RecipeMealType { RecipeId = idRecipe, MealTypeId = type });
+            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
 
             if (repeated.Any(x => x.Name.ToLower().Equals(nameRecipe)))
             {
