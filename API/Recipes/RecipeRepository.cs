@@ -49,7 +49,8 @@ public class RecipeRepository : IRecipeRepository
         await using var context = new NutrifoodsDbContext();
         return await _mapper.ProjectTo<RecipeDto>(
                 IncludeSubfields(context.Recipes)
-                    .Where(e => e.RecipeMealTypes.Any(x => x.MealType == MealTypeEnum.FromToken(mealType))))
+                    .Where(e => e.Portions != null &&
+                                e.RecipeMealTypes.Any(x => x.MealType == MealTypeEnum.FromToken(mealType))))
             .ToListAsync();
     }
 
@@ -58,7 +59,8 @@ public class RecipeRepository : IRecipeRepository
         await using var context = new NutrifoodsDbContext();
         return await _mapper.ProjectTo<RecipeDto>(
                 IncludeSubfields(context.Recipes)
-                    .Where(e => e.RecipeDishTypes.Any(x => x.DishType == DishTypeEnum.FromToken(dishType))))
+                    .Where(e => e.Portions != null &&
+                                e.RecipeDishTypes.Any(x => x.DishType == DishTypeEnum.FromToken(dishType))))
             .ToListAsync();
     }
 
