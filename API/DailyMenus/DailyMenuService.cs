@@ -22,12 +22,15 @@ public class DailyMenuService : IDailyMenuService
         double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None,
         int recipesAmount = 3)
     {
-        var recipes = await _recipeRepository.FindWithPortions();
+        var recipes = await (mealType is MealType.None or MealType.Snack
+            ? _recipeRepository.FindWithPortions()
+            : _recipeRepository.FindByMealType(mealType));
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
         var dailyMenu =
             await Task.FromResult(
-                _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins, recipesAmount));
+                _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins,
+                    recipesAmount));
         dailyMenu.MealType = MealTypeEnum.FromToken(mealType).ReadableName;
         dailyMenu.Satiety = SatietyEnum.FromToken(satiety).ReadableName;
         dailyMenu.EnergyTotal = CalculateNutrientTotal(dailyMenu, 1);
@@ -41,7 +44,8 @@ public class DailyMenuService : IDailyMenuService
         Satiety satiety = Satiety.None, int recipesAmount = 3)
     {
         return await GenerateDailyMenu(energyTarget, Carbohydrates.DefaultPercent.GetValueOrDefault(),
-            Lipids.DefaultPercent.GetValueOrDefault(), Proteins.DefaultPercent.GetValueOrDefault(), mealType, satiety, recipesAmount);
+            Lipids.DefaultPercent.GetValueOrDefault(), Proteins.DefaultPercent.GetValueOrDefault(), mealType, satiety,
+            recipesAmount);
     }
 
     private static double CalculateNutrientTotal(DailyMenuDto dailyMenu, int nutrientId)
