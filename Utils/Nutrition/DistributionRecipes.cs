@@ -24,7 +24,7 @@ public static class DistributionRecipes
     {
         var pathAvereage = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
             "RecipeInsertion", "DataRecipes", "avereageMacronutrients.csv");
-
+ 
         var averages = File.ReadAllLines(pathAvereage).Select(x => x.Split(";")).ToList();
 
         var energyAverage = Convert.ToDouble(averages[kindOfFood][0]);
