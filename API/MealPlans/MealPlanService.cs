@@ -30,19 +30,23 @@ public class MealPlanService : IMealPlanService
         var denominator = values.Sum(e => e.Value);
         var mealPlan = MapToMealPlan(mealsPerDay, energyTarget, carbohydratesTarget, lipidsTarget, proteinsTarget);
         var mealMenus = new List<MealMenuDto>();
-        var mealtype = new MealType {Id = 1,Name = "unnombre"};
+        var mealtype = new MealType { Id = 1, Name = "unnombre" };
         timeMeasure.Start();
+        var ite = 1;
         foreach (var satiety in values)
         {
             if (satiety == Satiety.None) continue;
             var numerator = (double)satiety.Value;
             var ratio = (numerator / denominator) * energyTarget;
             var energy = EnergyDistribution.Calculate(ratio);
-            var mealPlanSolution = _regime.GenerateSolution(3, 20,
+            var amountRecipes =
+                DistributionRecipes.GetAmountOfRecipes(ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins, ite);
+            var mealPlanSolution = _regime.GenerateSolution(amountRecipes, 25,
                 ratio, energy.Carbohydrates, energy.Lipids, energy.Proteins, mealtype);
             mealMenus.Add(mealPlanSolution);
-            
+            ite++;
         }
+
         timeMeasure.Stop();
         Console.WriteLine($"Tiempo de ejecucion : {timeMeasure.Elapsed.TotalMilliseconds} ms");
         mealPlan.MealMenus = mealMenus;
