@@ -7,6 +7,7 @@ using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
+using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -14,11 +15,14 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NutrientRetrieval.AbridgedRetrieval;
+using NutrientRetrieval.NutrientCalculation;
+using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
 /*
- DatabaseInitialization.Initialize();
+DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
 Recipes.RecipeMeasures();
