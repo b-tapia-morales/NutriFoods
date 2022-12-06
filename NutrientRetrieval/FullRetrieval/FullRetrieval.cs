@@ -1,8 +1,5 @@
 using Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Food;
-using NutrientRetrieval.Request;
 using NutrientRetrieval.Translation;
 using Utils.Enum;
 
@@ -50,7 +47,7 @@ public class FullRetrieval : IFoodRetrieval<Food>
                 IngredientId = ingredientId,
                 NutrientId = nutrientId,
                 Quantity = foodNutrient.Amount,
-                Unit = Unit.FromValue(code)
+                Unit = UnitEnum.FromValue(code)
             });
         }
     }

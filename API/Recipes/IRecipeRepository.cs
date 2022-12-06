@@ -1,4 +1,5 @@
 using API.Dto;
+using Utils.Enum;
 
 namespace API.Recipes;
 
@@ -6,20 +7,28 @@ public interface IRecipeRepository
 {
     Task<List<RecipeDto>> FindAll();
 
+    Task<List<RecipeDto>> FindWithPortions();
+
+    Task<List<RecipeDto>> FindExcludeById(IList<int> ids);
+
     Task<RecipeDto> FindByName(string name);
 
     Task<RecipeDto> FindById(int id);
 
+    Task<List<RecipeDto>> FindByMealType(MealType mealType);
+
+    Task<List<RecipeDto>> FindByDishType(DishType dishType);
+
     Task<List<RecipeDto>> GetVegetarianRecipes();
 
     Task<List<RecipeDto>> GetOvoVegetarianRecipes();
-    
+
     Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
-    
+
     Task<List<RecipeDto>> GetLactoVegetarianRecipes();
-    
+
     Task<List<RecipeDto>> GetPollotarianRecipes();
-    
+
     Task<List<RecipeDto>> GetPescetarianRecipes();
 
     Task<List<RecipeDto>> GetPolloPescetarianRecipes();

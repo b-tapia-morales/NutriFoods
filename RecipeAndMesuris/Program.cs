@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using RecipeAndMesuris.Normalization;
-using RecipeAndMesuris.Recipe_insert;
+﻿using RecipeAndMesuris.Normalization;
 
 //Connect.InsertMeasuris();
 //Connect.InsertRecipeIngredient();

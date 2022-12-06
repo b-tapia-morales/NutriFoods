@@ -15,7 +15,6 @@ public interface IFoodRetrieval<in T> where T : class, IFood
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = NutrientDictionary.CreateDictionaryIds();
         var foodsDictionary = DataCentral.RetrieveByList<T>(format).Result.ToDictionary(e => e.Key, e => e.Value);
-        Console.WriteLine(foodsDictionary.Count);
         foreach (var pair in foodsDictionary)
         {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);

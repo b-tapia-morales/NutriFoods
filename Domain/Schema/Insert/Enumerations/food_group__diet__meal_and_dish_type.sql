@@ -61,6 +61,7 @@ VALUES ('Fruta entera', 1),
        ('Algas', 20)
 ON CONFLICT DO NOTHING;
 
+/*
 INSERT INTO meal_type (name)
 VALUES
     -- Hora del día
@@ -96,3 +97,4 @@ VALUES ('Ovo-Vegetariana'),
        ('Sin Gluten'),
        ('Keto')
 ON CONFLICT DO NOTHING;
+*/

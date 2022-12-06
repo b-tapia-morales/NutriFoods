@@ -4,6 +4,7 @@ using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using RecipeInsertion.Mapping;
 using Utils.Csv;
+using Utils.Enum;
 
 namespace RecipeInsertion;
 
@@ -21,7 +22,7 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
-    private static readonly string[] MealType = { "Desayunos", "Cenas" };
+    private static readonly string[] MealType = {"Desayunos", "Cenas"};
 
     public static void RecipeInsert()
     {
@@ -97,8 +98,9 @@ public static class Recipes
     }
 
     private static string RemoveAccents(this string text) =>
-        new string(text.Normalize(NormalizationForm.FormD).Where(
-                c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark).ToArray()
+        new string(text.Normalize(NormalizationForm.FormD)
+            .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark)
+            .ToArray()
         ).Normalize(NormalizationForm.FormC);
 
 
@@ -162,7 +164,7 @@ public static class Recipes
             var nameRecipe = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
 
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
-            context.Add(new RecipeMealType { RecipeId = idRecipe, MealTypeId = type });
+            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
 
             if (repeated.Any(x => x.Name.ToLower().Equals(nameRecipe)))
             {
@@ -173,6 +175,7 @@ public static class Recipes
 
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
+            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe);
@@ -190,7 +193,7 @@ public static class Recipes
             var dataStep = File.ReadAllLines(pathDataRecipesStep);
             for (var i = 0; i < dataStep.Length; i++)
             {
-                context.Add(new RecipeStep { Recipe = idRecipe, Step = i + 1, Description = dataStep[i] });
+                context.Add(new RecipeStep {Recipe = idRecipe, Step = i + 1, Description = dataStep[i]});
             }
         }
     }

@@ -1,11 +1,14 @@
-﻿namespace Domain.Models;
+﻿using Utils.Enum;
 
-public class RecipeMealType
+namespace Domain.Models;
+
+public sealed class RecipeMealType
 {
     public int Id { get; set; }
-    public int RecipeId { get; set; }
-    public int MealTypeId { get; set; }
 
-    public virtual MealType MealType { get; set; } = null!;
-    public virtual Recipe Recipe { get; set; } = null!;
+    public int RecipeId { get; set; }
+
+    public MealTypeEnum MealType { get; set; } = null!;
+
+    public Recipe Recipe { get; set; } = null!;
 }

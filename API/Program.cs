@@ -1,9 +1,10 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using API.DailyMealPlans;
+using API.DailyMenus;
 using API.Dto;
 using API.Genetic;
 using API.Ingredients;
-using API.MealPlans;
 using API.Recipes;
 using API.Users;
 using Domain.DatabaseInitialization;
@@ -34,7 +35,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddFluentValidation();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -43,19 +44,22 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
         if (!optionsBuilder.IsConfigured)
             optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
                 opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-    }
-);
+    }, ServiceLifetime.Singleton);
 
 builder.Services
     .AddScoped<IValidator<UserDto>, UserValidator>()
+    .AddScoped<IValidator<UserDataDto>, UserDataValidator>()
     .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IMealPlanService, MealPlanService>()
+    .AddScoped<IDailyMenuService, DailyMenuService>()
+    .AddScoped<IDailyMealPlanService, DailyMealPlanService>()
     .AddScoped<IGeneticAlgorithm, Regime>();
 
 builder.Services
+    .AddFluentValidationAutoValidation()
+    .AddFluentValidationClientsideAdapters()
     .AddControllers()
     .AddJsonOptions(options =>
     {
@@ -65,6 +69,7 @@ builder.Services
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 

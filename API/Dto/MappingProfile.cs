@@ -1,6 +1,4 @@
-using System.Globalization;
 using API.Dto.Abridged;
-using API.Genetic;
 using AutoMapper;
 using Domain.Models;
 
@@ -10,40 +8,65 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        CreateMap<Diet, DietDto>();
-        CreateMap<DishType, DishTypeDto>();
-        CreateMap<MealType, MealTypeDto>();
         CreateMap<NutrientType, NutrientTypeDto>();
         CreateMap<NutrientSubtype, NutrientSubtypeDto>();
         CreateMap<Nutrient, NutrientDto>()
-            .ForMember(dest => dest.Essentiality, opt => opt.MapFrom(src => src.Essentiality.Display));
+            .ForMember(dest => dest.Essentiality, opt => opt.MapFrom(src => src.Essentiality.ReadableName));
+
         CreateMap<PrimaryGroup, PrimaryGroupDto>();
         CreateMap<SecondaryGroup, SecondaryGroupDto>();
         CreateMap<TertiaryGroup, TertiaryGroupDto>();
+
         CreateMap<IngredientNutrient, IngredientNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.Display));
+            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
         CreateMap<IngredientMeasure, IngredientMeasureDto>();
         CreateMap<IngredientMeasure, IngredientMeasureAbridged>();
-        CreateMap<Ingredient, IngredientDto>();
+        CreateMap<Ingredient, IngredientDto>()
+            .ForMember(dest => dest.Synonyms, opt => opt.MapFrom(src => src.IngredientSynonyms.Select(e => e.Name)))
+            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.IngredientNutrients));
         CreateMap<Ingredient, IngredientAbridged>();
+
         CreateMap<RecipeMeasure, RecipeMeasureDto>();
         CreateMap<RecipeQuantity, RecipeQuantityDto>();
         CreateMap<RecipeNutrient, RecipeNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.Display));
+            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
         CreateMap<RecipeStep, RecipeStepDto>();
-        CreateMap<Recipe, RecipeDto>();
-        CreateMap<MealMenuRecipe, MealMenuRecipeDto>();
-        CreateMap<MealMenu, MealMenuDto>()
-            .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.MealMenuRecipes))
-            .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.Display));
+        CreateMap<Recipe, RecipeDto>()
+            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
+            .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
+            .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.RecipeNutrients))
+            .ForMember(dest => dest.MealTypes,
+                opt => opt.MapFrom(src => src.RecipeMealTypes.Select(e => e.MealType.ReadableName)))
+            .ForMember(dest => dest.DishTypes,
+                opt => opt.MapFrom(src => src.RecipeDishTypes.Select(e => e.DishType.ReadableName)))
+            .ForMember(dest => dest.Diets,
+                opt => opt.MapFrom(src => src.RecipeDiets.Select(e => e.Diet.ReadableName)));
+
+
+        CreateMap<MenuRecipe, MenuRecipeDto>();
+        CreateMap<DailyMenuNutrient, DailyMenuNutrientDto>()
+            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
+        CreateMap<DailyMenu, DailyMenuDto>()
+            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
+            .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.ReadableName))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMenuNutrients));
+        CreateMap<DailyMealPlanNutrient, DailyMealPlanNutrientDto>()
+            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
+        CreateMap<DailyMealPlan, DailyMealPlanDto>()
+            .ForMember(dest => dest.DayOfTheWeek, opt => opt.MapFrom(src => src.DayOfTheWeek.ReadableName))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMealPlanNutrients));
         CreateMap<MealPlan, MealPlanDto>();
+
         CreateMap<UserBodyMetric, UserBodyMetricDto>()
-            .ForMember(dest => dest.PhysicalActivityLevel,
-                opt => opt.MapFrom(src => src.PhysicalActivityLevel.Display));
-        CreateMap<UserProfile, UserDto>()
+            .ForMember(dest => dest.PhysicalActivity, opt => opt.MapFrom(src => src.PhysicalActivity.ReadableName));
+        CreateMap<UserDatum, UserDataDto>()
             .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString()))
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.Display))
-            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.Display))
-            .ForMember(dest => dest.BodyMetrics, opt => opt.MapFrom(src => src.UserBodyMetrics));
+            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ReadableName))
+            .ForMember(dest => dest.Diet, opt => opt.MapFrom(src => src.Diet!.ReadableName))
+            .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
+            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName));
+        CreateMap<UserProfile, UserDto>();
     }
 }

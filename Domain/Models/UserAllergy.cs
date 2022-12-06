@@ -1,11 +1,14 @@
 ﻿namespace Domain.Models;
 
-public class UserAllergy
+public sealed class UserAllergy
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
+    public Guid Id { get; set; }
+
+    public Guid UserId { get; set; }
+
     public int IngredientId { get; set; }
 
-    public virtual Ingredient Ingredient { get; set; } = null!;
-    public virtual UserProfile User { get; set; } = null!;
+    public Ingredient Ingredient { get; set; } = null!;
+
+    public UserProfile User { get; set; } = null!;
 }

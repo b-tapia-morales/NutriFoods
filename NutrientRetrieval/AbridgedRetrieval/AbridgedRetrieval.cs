@@ -1,8 +1,5 @@
 using Domain.Models;
-using Microsoft.EntityFrameworkCore;
-using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Food;
-using NutrientRetrieval.Request;
 using Utils.Enum;
 
 namespace NutrientRetrieval.AbridgedRetrieval;
@@ -51,7 +48,7 @@ public class AbridgedRetrieval : IFoodRetrieval<Food>
                 IngredientId = ingredientId,
                 NutrientId = nutrientId,
                 Quantity = foodNutrient.Amount,
-                Unit = Unit.FromValue(code)
+                Unit = UnitEnum.FromValue(code)
             });
         }
     }

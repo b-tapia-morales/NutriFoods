@@ -7,6 +7,5 @@ public class RecipeMeasureDto
     public int IntegerPart { get; set; }
     public int Numerator { get; set; }
     public int Denominator { get; set; }
-    public string Description { get; set; } = string.Empty;
     public IngredientMeasureAbridged IngredientMeasure { get; set; } = null!;
 }
