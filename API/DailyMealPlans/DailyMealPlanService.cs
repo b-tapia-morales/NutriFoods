@@ -37,9 +37,8 @@ public class DailyMealPlanService : IDailyMealPlanService
             if (satiety == SatietyEnum.None) continue;
             var numerator = (double) satiety.Value;
             var mealEnergyTarget = energyTarget * (numerator / denominator);
-            var recipesAmount = mealType == MealTypeEnum.Snack ? 2 : 3;
             yield return _dailyMenuService
-                .GenerateDailyMenu(mealEnergyTarget, mealType.Token, satiety.Token, recipesAmount).Result;
+                .GenerateDailyMenu(mealEnergyTarget, mealType.Token, satiety.Token).Result;
         }
     }
 }

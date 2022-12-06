@@ -1,6 +1,7 @@
 using API.Dto;
 using API.Genetic;
 using API.Recipes;
+using Utils.Averages;
 using Utils.Enum;
 using Utils.Nutrition;
 using static Utils.Nutrition.Macronutrient;
@@ -19,14 +20,15 @@ public class DailyMenuService : IDailyMenuService
     }
 
     public async Task<DailyMenuDto> GenerateDailyMenu(double energyTarget, double carbsPercent, double fatsPercent,
-        double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None,
-        int recipesAmount = 3)
+        double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None)
     {
         var recipes = await (mealType is MealType.None or MealType.Snack
             ? _recipeRepository.FindWithPortions()
             : _recipeRepository.FindByMealType(mealType));
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
+        var recipesAmount = RecipeDistribution.CalculateRecipesAmount(energyTarget, carbohydrates, lipids, proteins,
+            MealTypeEnum.FromToken(mealType));
         var dailyMenu =
             await Task.FromResult(
                 _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins,
@@ -41,11 +43,10 @@ public class DailyMenuService : IDailyMenuService
     }
 
     public async Task<DailyMenuDto> GenerateDailyMenu(double energyTarget, MealType mealType = MealType.None,
-        Satiety satiety = Satiety.None, int recipesAmount = 3)
+        Satiety satiety = Satiety.None)
     {
         return await GenerateDailyMenu(energyTarget, Carbohydrates.DefaultPercent.GetValueOrDefault(),
-            Lipids.DefaultPercent.GetValueOrDefault(), Proteins.DefaultPercent.GetValueOrDefault(), mealType, satiety,
-            recipesAmount);
+            Lipids.DefaultPercent.GetValueOrDefault(), Proteins.DefaultPercent.GetValueOrDefault(), mealType, satiety);
     }
 
     private static double CalculateNutrientTotal(DailyMenuDto dailyMenu, int nutrientId)
