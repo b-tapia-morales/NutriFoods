@@ -67,6 +67,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Diet, opt => opt.MapFrom(src => src.Diet!.ReadableName))
             .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
             .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName));
-        CreateMap<UserProfile, UserDto>();
+        CreateMap<UserProfile, UserDto>()
+            .ForMember(dest => dest.UserData, opt => opt.MapFrom(src => src.UserDatum));
     }
 }
