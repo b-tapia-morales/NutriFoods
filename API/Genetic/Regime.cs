@@ -16,18 +16,17 @@ public class Regime : IGeneticAlgorithm
     {
         for (var i = 0; i < populationSize; i++)
         {
-            var listRecipe = new List<MenuRecipeDto>(chromosomeSize);
+            var recipes = new List<MenuRecipeDto>(chromosomeSize);
             for (var j = 0; j < chromosomeSize; j++)
             {
                 var rand = _random.Next(0, universe.Count);
-                listRecipe.Add(universe[rand]);
+                recipes.Add(universe[rand]);
             }
 
-            var pr = new Chromosome(listRecipe);
-            population.Add(pr);
+            population.Add(new Chromosome(recipes));
         }
     }
-    
+
     public void CalculatePopulationFitness(IList<Chromosome> population, double energy, double carbohydrates,
         double lipids, double proteins, double marginOfError)
     {
@@ -37,7 +36,7 @@ public class Regime : IGeneticAlgorithm
             possibleRegime.UpdateFitness(energy, carbohydrates, lipids, proteins, marginOfError);
         }
     }
-    
+
     public bool SolutionExists(IList<Chromosome> population)
     {
         return population.Any(r => r.Fitness == 8);
@@ -124,21 +123,17 @@ public class Regime : IGeneticAlgorithm
         Console.WriteLine();
     }
 
-    private Chromosome NewMutation(IList<Chromosome> solutions, int changeIndexRegime, MenuRecipeDto mealMenuRecipeDto,
-        int changePosition)
+    private static Chromosome NewMutation(IList<Chromosome> solutions, int changeIndexRegime,
+        MenuRecipeDto mealMenuRecipeDto, int changePosition)
     {
         var newRecipes = solutions[changePosition].DailyMenu.MenuRecipes
             .Select((t, i) => i != changeIndexRegime ? t : mealMenuRecipeDto).ToList();
-
-        var pr = new Chromosome(newRecipes);
-        return pr;
+        return new Chromosome(newRecipes);
     }
 
     private static Chromosome NewChromosome(Chromosome father, MenuRecipeDto gen, int indexFather)
     {
-        var newChromosomal = father.DailyMenu.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
-        var pr = new Chromosome(newChromosomal);
-
-        return pr;
+        var newChromosome = father.DailyMenu.MenuRecipes.Select((t, i) => i == indexFather ? gen : t).ToList();
+        return new Chromosome(newChromosome);
     }
 }

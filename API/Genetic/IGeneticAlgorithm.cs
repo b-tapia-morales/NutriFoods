@@ -7,7 +7,7 @@ namespace API.Genetic;
 public interface IGeneticAlgorithm
 {
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, double carbohydrates, double lipids,
-        double proteins, int chromosomeSize = 3, double marginOfError = 0.07, int populationSize = 25)
+        double proteins, int chromosomeSize = 3, double marginOfError = 0.07, int populationSize = 60)
     {
         var population = new List<Chromosome>();
         var winners = new List<Chromosome>();
@@ -34,7 +34,7 @@ public interface IGeneticAlgorithm
     }
 
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, int chromosomeSize = 3,
-        double marginOfError = 0.07, int populationSize = 25)
+        double marginOfError = 0.07, int populationSize = 60)
     {
         var (carbohydrates, lipids, proteins) = EnergyDistribution.Calculate(energy);
         return GenerateSolution(recipes, energy, carbohydrates, lipids, proteins, chromosomeSize, marginOfError,
@@ -43,7 +43,7 @@ public interface IGeneticAlgorithm
 
     DailyMenuDto GenerateCustomSolution(IEnumerable<RecipeDto> recipes, double energy, double carbsPercent,
         double fatsPercent, double proteinsPercent, int chromosomeSize = 3, double marginOfError = 0.07,
-        int populationSize = 25)
+        int populationSize = 60)
     {
         carbsPercent = Math.Round(carbsPercent, 2);
         fatsPercent = Math.Round(fatsPercent, 2);
