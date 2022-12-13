@@ -49,7 +49,7 @@ public class UnitEnum : SmartEnum<UnitEnum>
     public string ReadableName { get; }
 
     public static UnitEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static UnitEnum FromToken(Unit token) => TokenDictionary[token];
 }

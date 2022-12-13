@@ -67,7 +67,7 @@ public class DietEnum : SmartEnum<DietEnum>
     public string ReadableName { get; }
 
     public static DietEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static DietEnum FromToken(Diet token) => TokenDictionary[token];
 }

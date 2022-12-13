@@ -73,7 +73,7 @@ public class DishTypeEnum : SmartEnum<DishTypeEnum>
     public string ReadableName { get; }
     
     public static DishTypeEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static DishTypeEnum FromToken(DishType token) => TokenDictionary[token];
 }

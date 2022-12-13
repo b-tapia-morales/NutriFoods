@@ -41,7 +41,7 @@ public class SnackEnum : SmartEnum<SnackEnum>
     public string ReadableName { get; }
 
     public static SnackEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static SnackEnum FromToken(Snack token) => TokenDictionary[token];
 }

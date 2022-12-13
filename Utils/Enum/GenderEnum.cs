@@ -42,7 +42,7 @@ public class GenderEnum : SmartEnum<GenderEnum>
     public string ReadableName { get; }
 
     public static GenderEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static GenderEnum FromToken(Gender token) => TokenDictionary[token];
 }

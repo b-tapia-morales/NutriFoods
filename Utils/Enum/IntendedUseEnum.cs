@@ -45,7 +45,7 @@ public class IntendedUseEnum : SmartEnum<IntendedUseEnum>
     public string ReadableName { get; }
 
     public static IntendedUseEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static IntendedUseEnum FromToken(IntendedUse token) => TokenDictionary[token];
 }

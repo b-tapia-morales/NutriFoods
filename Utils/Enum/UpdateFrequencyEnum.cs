@@ -41,7 +41,7 @@ public class UpdateFrequencyEnum : SmartEnum<UpdateFrequencyEnum>
     public string ReadableName { get; }
 
     public static UpdateFrequencyEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static UpdateFrequencyEnum FromToken(UpdateFrequency token) => TokenDictionary[token];
 }

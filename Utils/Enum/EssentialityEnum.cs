@@ -45,7 +45,7 @@ public class EssentialityEnum : SmartEnum<EssentialityEnum>
     public string ReadableName { get; }
 
     public static EssentialityEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static EssentialityEnum FromToken(Essentiality token) => TokenDictionary[token];
 }

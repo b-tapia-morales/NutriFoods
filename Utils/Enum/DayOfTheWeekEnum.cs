@@ -61,7 +61,7 @@ public class DayOfTheWeekEnum : SmartEnum<DayOfTheWeekEnum>
     public string ReadableName { get; }
 
     public static DayOfTheWeekEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static DayOfTheWeekEnum FromToken(DayOfTheWeek token) => TokenDictionary[token];
 }

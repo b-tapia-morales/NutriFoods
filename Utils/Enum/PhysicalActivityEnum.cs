@@ -53,7 +53,7 @@ public class PhysicalActivityEnum : SmartEnum<PhysicalActivityEnum>
     public double Multiplier { get; }
 
     public static PhysicalActivityEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static PhysicalActivityEnum FromToken(PhysicalActivity token) => TokenDictionary[token];
 }

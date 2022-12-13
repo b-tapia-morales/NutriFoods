@@ -49,7 +49,7 @@ public class MealTypeEnum : SmartEnum<MealTypeEnum>
     public string ReadableName { get; }
 
     public static MealTypeEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static MealTypeEnum FromToken(MealType token) => TokenDictionary[token];
 }

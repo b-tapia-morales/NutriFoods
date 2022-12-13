@@ -45,7 +45,7 @@ public class SatietyEnum : SmartEnum<SatietyEnum>
     public string ReadableName { get; }
 
     public static SatietyEnum? FromReadableName(string name) =>
-        ReadableNameDictionary.ContainsKey(name) ? ReadableNameDictionary[name] : null;
+        ReadableNameDictionary.TryGetValue(name, out var value) ? value : null;
 
     public static SatietyEnum FromToken(Satiety token) => TokenDictionary[token];
 }
