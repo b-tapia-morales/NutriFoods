@@ -54,7 +54,7 @@ Recognized formats are:
 
         // Gender
         RuleFor(e => e.Gender)
-            .Must(e => GenderEnum.FromReadableName(e) != null)
+            .Must(e => GenderEnum.FromReadableName(e!) != null)
             .WithMessage(e =>
                 JsonConvert.ToString($@"
 Provided argument “{e}” does not correspond to a valid gender value.
@@ -63,7 +63,7 @@ Recognized values are:
 
         // Diet
         When(e => e.Diet != null, () => RuleFor(e => e.Diet)
-            .Must(e => DietEnum.FromReadableName(e) != null)
+            .Must(e => DietEnum.FromReadableName(e!) != null)
             .WithMessage(e =>
                 JsonConvert.ToString($@"
 Provided argument “{e}” does not correspond to a valid diet value.
@@ -72,7 +72,7 @@ Recognized values are:
 
         // Intended Use
         When(e => e.IntendedUse != null, () => RuleFor(e => e.IntendedUse)
-            .Must(e => IntendedUseEnum.FromReadableName(e) != null)
+            .Must(e => IntendedUseEnum.FromReadableName(e!) != null)
             .WithMessage(e =>
                 JsonConvert.ToString($@"
 Provided argument “{e}” does not correspond to a valid intended use value.
@@ -81,7 +81,7 @@ Recognized values are:
 
         // Update frequency
         When(e => e.UpdateFrequency != null, () => RuleFor(e => e.UpdateFrequency)
-            .Must(e => UpdateFrequencyEnum.FromReadableName(e) != null)
+            .Must(e => UpdateFrequencyEnum.FromReadableName(e!) != null)
             .WithMessage(e =>
                 JsonConvert.ToString($@"
 Provided argument “{e}” does not correspond to a valid update frequency value.
