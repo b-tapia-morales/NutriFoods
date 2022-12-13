@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using API.Dto;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Utils.Date;
 using Utils.Enum;
 using Utils.Nutrition;
 
@@ -30,7 +31,15 @@ public class UserController
     public async Task<ActionResult<UserDto>> Find(string apiKey)
     {
         var user = await _repository.Find(apiKey);
-        return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
+        if (user == null) return new NotFoundObjectResult("There's no user with the specified key");
+        var personalData = user.UserData;
+        var bodyMetrics = user.UserBodyMetrics.MaxBy(e => e.AddedOn);
+        user.TotalMetabolicRate = personalData == null || bodyMetrics == null
+            ? null
+            : TotalMetabolicRate.Calculate(GenderEnum.FromReadableName(personalData.Gender)!, bodyMetrics.Weight,
+                bodyMetrics.Height, DateOnlyUtils.Difference(DateOnly.Parse(personalData.Birthdate), Interval.Years),
+                PhysicalActivityEnum.FromReadableName(bodyMetrics.PhysicalActivity)!);
+        return user;
     }
 
     [HttpPut]
