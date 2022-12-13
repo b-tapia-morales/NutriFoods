@@ -55,7 +55,7 @@ builder.Services
     .AddScoped<IUserRepository, UserRepository>()
     .AddScoped<IDailyMenuService, DailyMenuService>()
     .AddScoped<IDailyMealPlanService, DailyMealPlanService>()
-    .AddScoped<IGeneticAlgorithm, Regime>();
+    .AddScoped<IGeneticAlgorithm, GeneticAlgorithm>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
