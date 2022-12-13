@@ -45,27 +45,21 @@ public class Chromosome
 
     private static int CalculateFitness(double objectiveValue, double menuValue, double marginOfError)
     {
-        if ((objectiveValue * (1 - (marginOfError / 2)) <= menuValue) &&
-            (objectiveValue * (1 + (marginOfError / 2)) >= menuValue))
-        {
-            return 2;
-        }
+        if (objectiveValue * (1 - marginOfError / 2) <= menuValue &&
+            objectiveValue * (1 + marginOfError / 2) >= menuValue)
+            return +2;
 
-        if (((objectiveValue * (1 - marginOfError) <= menuValue) &&
-             (objectiveValue * (1 - (marginOfError / 2)) > menuValue)) ||
-            ((objectiveValue * (1 + (marginOfError / 2)) < menuValue) &&
-             (objectiveValue * (1 + marginOfError) >= menuValue)))
-        {
-            return 0;
-        }
+        if (objectiveValue * (1 - marginOfError) <= menuValue &&
+            objectiveValue * (1 - marginOfError / 2) > menuValue ||
+            objectiveValue * (1 + marginOfError / 2) < menuValue &&
+            objectiveValue * (1 + marginOfError) >= menuValue)
+            return +0;
 
         if (objectiveValue * (1 - marginOfError) > menuValue ||
             objectiveValue * (1 + marginOfError) < menuValue)
-        {
             return -2;
-        }
 
-        return 0;
+        return +0;
     }
 
     public void ShowPhenotypes()
