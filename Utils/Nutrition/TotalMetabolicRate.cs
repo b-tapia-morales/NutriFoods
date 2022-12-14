@@ -5,14 +5,14 @@ namespace Utils.Nutrition;
 
 public static class TotalMetabolicRate
 {
-    public static double Calculate(Gender gender, double weight, int height, int age, PhysicalActivity level)
+    public static double Calculate(GenderEnum gender, double weight, int height, int age, PhysicalActivityEnum level)
     {
         var multiplier = level.Multiplier;
         return BasalMetabolicRate.Calculate(gender, weight, height, age) * (1 + multiplier);
     }
 
-    public static double Calculate(CalculationMethod method, Gender gender, double weight, int height, int age,
-        PhysicalActivity level)
+    public static double Calculate(CalculationMethod method, GenderEnum gender, double weight, int height, int age,
+        PhysicalActivityEnum level)
     {
         var multiplier = 1.00 + level.Multiplier;
         return multiplier * BasalMetabolicRate.Calculate(method, gender, weight, height, age);
@@ -21,12 +21,12 @@ public static class TotalMetabolicRate
 
 public static class BasalMetabolicRate
 {
-    public static double Calculate(Gender gender, double weight, int height, int age)
+    public static double Calculate(GenderEnum gender, double weight, int height, int age)
     {
         return HarrisBenedictEquation(gender, weight, height, age);
     }
 
-    public static double Calculate(CalculationMethod method, Gender gender, double weight, int height, int age)
+    public static double Calculate(CalculationMethod method, GenderEnum gender, double weight, int height, int age)
     {
         return method switch
         {

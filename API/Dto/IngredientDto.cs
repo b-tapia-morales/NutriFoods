@@ -7,6 +7,7 @@ public class IngredientDto
     public bool IsAnimal { get; set; }
     public bool ContainsGluten { get; set; }
     public TertiaryGroupDto TertiaryGroup { get; set; } = null!;
-    public IEnumerable<IngredientMeasureDto> IngredientMeasures { get; set; } = null!;
-    public IEnumerable<IngredientNutrientDto> IngredientNutrients { get; set; } = null!;
+    public ICollection<string> Synonyms { get; set; } = null!;
+    public ICollection<IngredientMeasureDto> Measures { get; set; } = null!;
+    public ICollection<IngredientNutrientDto> Nutrients { get; set; } = null!;
 }

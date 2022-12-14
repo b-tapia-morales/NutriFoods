@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Chromosome
+{
+DailyMenu: <color:#C678DD><i>DailyMenu
+Fitness: <color:#C678DD><i>int
+.. Constructor ..
++Chromosome(menuRecipe: <color:#C678DD><i>List<MenuRecipe></i></color>)
+.. Métodos públicos ..
++AggregateMacronutrients()
++UpdateFitness(energy: <color:#C678DD><i>double</i></color>, 
+carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, 
+marginOfError: <color:#C678DD><i>double</i></color>)
++ShowPhenotypes()
+.. Métodos privados ..
+-{static}AggregateMacronutrients(dailyMenu: <color:#C678DD><i>DailyMenu</i></color>, nutrientId: <color:#C678DD><i>int</i></color>): <b>double</b>
+-{static}CalculateFitness(objectiveValue: <color:#C678DD><i>double</i></color>, menuValue: <color:#C678DD><i>double</i></color>, marginOfError: <color:#C678DD><i>double</i></color>): <b>int</b>
+}
+
+interface IGeneticAlgorithm {
+.. Overloads de método principal ..
++GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
+carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>,
+chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu</b>
++GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
+chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
++GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
+carbsPercent: <color:#C678DD><i>int</i></color>, fatsPercent: <color:#C678DD><i>int</i></color>, proteinsPercent: <color:#C678DD><i>int</i></color>,
+chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
+.. Métodos intermedios ..
++GenerateUniverse(recipes: <color:#C678DD><i>List<Recipe></i></color>): <b>List<MenuRecipe></b>
++GenerateInitialPopulation(universe: <color:#C678DD><i>List<MenuRecipe></i></color>, population: <color:#C678DD><i>List<Chromosome></i></color>,
+chromosomeSize: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>)
++CalculatePopulationFitness(population: <color:#C678DD><i>List<Chromosome></i></color>, energy: <color:#C678DD><i>double</i></color>,
+carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, marginOfError: <color:#C678DD><i>double</i></color>)
++SolutionExists(population: <color:#C678DD><i>List<Chromosome></i></color>): <b>bool</b>
++Selection(population: <color:#C678DD><i>List<Chromosome></i></color>, winners: <color:#C678DD><i>List<Chromosome></i></color>)
++Crossover(population: <color:#C678DD><i>List<Chromosome></i></color>, winners: <color:#C678DD><i>List<Chromosome></i></color>,
+populationSize: <color:#C678DD><i>int</i></color>)
++Mutation(universe: <color:#C678DD><i>List<MenuRecipe></i></color>, population: <color:#C678DD><i>List<Chromosome></i></color>,
+chromosomeSize: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>)
++ShowPopulation(population: <color:#C678DD><i>List<Chromosome></i></color>)
+}
+
+class GeneticAlgorithm
+
+IGeneticAlgorithm <|-- GeneticAlgorithm
+IGeneticAlgorithm - Chromosome: Usa >
+
+@enduml

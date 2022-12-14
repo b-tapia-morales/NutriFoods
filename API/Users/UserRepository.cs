@@ -2,9 +2,7 @@ using API.Dto;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils;
 using Utils.Enum;
-using Utils.Nutrition;
 
 namespace API.Users;
 
@@ -21,85 +19,82 @@ public class UserRepository : IUserRepository
 
     public async Task<UserDto?> Find(string apiKey)
     {
-        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
-            .FirstOrDefaultAsync(e => e.ApiKey.Equals(apiKey));
-        return user;
+        return await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles)
+                .Where(e => e.ApiKey.Equals(apiKey)))
+            .FirstOrDefaultAsync();
     }
 
-    public async Task<UserDto?> FindByUsername(string username, string password)
+    public async Task<UserDto?> Save(string username, string email, string apiKey)
     {
-        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
-            .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(username));
-        if (user == null) return null;
-        return PasswordEncryption.Verify(password, user.Password) ? user : null;
-    }
-
-    public async Task<UserDto?> FindByEmail(string email, string password)
-    {
-        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles))
-            .FirstOrDefaultAsync(e => e.Email.ToLower().Equals(email));
-        if (user == null) return null;
-        return PasswordEncryption.Verify(password, user.Password) ? user : null;
-    }
-
-    public async Task<UserDto?> SaveUser(string username, string email, string password, string? name, string? lastName,
-        DateOnly birthDate, Gender gender)
-    {
-        var user = await _mapper.ProjectTo<UserDto>(_context.UserProfiles)
-            .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(username) || e.Email.ToLower().Equals(email));
+        var user = await _mapper.ProjectTo<UserDto>(IncludeSubfields(_context.UserProfiles)
+                .Where(e => e.Username.ToLower().Equals(username) || e.Email.ToLower().Equals(email)))
+            .FirstOrDefaultAsync();
         if (user != null) return null;
         var newUser = new UserProfile
         {
             Username = username,
             Email = email,
-            ApiKey = ApiKeyGenerator.Generate(),
-            Password = PasswordEncryption.Hash(password),
-            Name = name ?? string.Empty,
-            LastName = lastName ?? string.Empty,
-            Birthdate = birthDate,
-            Gender = gender,
-            JoinedOn = DateTime.Now.ToLocalTime()
+            ApiKey = apiKey,
+            JoinedOn = DateTime.UtcNow.ToLocalTime()
         };
         _context.UserProfiles.Add(newUser);
         await _context.SaveChangesAsync();
         return _mapper.Map<UserProfile, UserDto>(newUser);
     }
 
-    public async Task<UserDto?> SaveBodyMetrics(string apiKey, int height, double weight, PhysicalActivity level,
-        double? muscleMassPercentage)
+    public async Task<UserDto?> SavePersonalData(string apiKey, UserDataDto userDataDto)
+    {
+        var user = await Find(apiKey);
+        if (user == null) return null;
+        var userData = new UserDatum
+        {
+            Id = user.Id,
+            Name = userDataDto.Name,
+            LastName = userDataDto.LastName,
+            Birthdate = DateOnly.Parse(userDataDto.Birthdate),
+            Gender = GenderEnum.FromReadableName(userDataDto.Gender) ?? throw new InvalidOperationException(),
+            IntendedUse = IntendedUseEnum.FromReadableName(userDataDto.IntendedUse!),
+            UpdateFrequency = UpdateFrequencyEnum.FromReadableName(userDataDto.UpdateFrequency!),
+            Diet = DietEnum.FromReadableName(userDataDto.Diet!)
+        };
+        _context.UserData.Add(userData);
+        await _context.SaveChangesAsync();
+        return await Find(apiKey);
+    }
+
+    public async Task<UserDto?> SaveBodyMetrics(string apiKey, UserBodyMetricDto userBodyMetricDto)
     {
         var user = await Find(apiKey);
         if (user == null) return null;
         var bodyMetric = new UserBodyMetric
         {
             UserId = user.Id,
-            Height = height,
-            Weight = weight,
-            BodyMassIndex = BodyMassIndex.Calculate(weight, height),
-            PhysicalActivityLevel = level,
-            MuscleMassPercentage = muscleMassPercentage,
-            AddedOn = DateTime.Now.ToLocalTime()
+            Height = userBodyMetricDto.Height,
+            Weight = userBodyMetricDto.Weight,
+            BodyMassIndex = userBodyMetricDto.BodyMassIndex,
+            PhysicalActivity = PhysicalActivityEnum.FromReadableName(userBodyMetricDto.PhysicalActivity) ??
+                               throw new InvalidOperationException(),
+            AddedOn = DateTime.UtcNow.ToLocalTime()
         };
         _context.UserBodyMetrics.Add(bodyMetric);
         await _context.SaveChangesAsync();
-        var bodyMetricDto = _mapper.Map<UserBodyMetric, UserBodyMetricDto>(bodyMetric);
-        user.BodyMetrics.Add(bodyMetricDto);
-        return user;
+        user.UserBodyMetrics.Add(userBodyMetricDto);
+        return await Find(apiKey);
     }
 
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
-        return users.Include(e => e.Diet)
-            .Include(e => e.MealPlan)
-            .ThenInclude(e => e!.MealMenus)
-            .ThenInclude(e => e.MealMenuRecipes)
-            .ThenInclude(e => e.Recipe.RecipeNutrients)
-            .ThenInclude(e => e.Nutrient.Subtype.Type)
-            .Include(e => e.MealPlan)
-            .ThenInclude(e => e!.MealMenus)
-            .ThenInclude(e => e.MealMenuRecipes)
-            .ThenInclude(e => e.Recipe.RecipeMeasures)
-            .ThenInclude(e => e.IngredientMeasure.Ingredient)
-            .Include(e => e.UserBodyMetrics);
+        return users
+            .Include(e => e.UserDatum!)
+            .Include(e => e.UserBodyMetrics)
+            .Include(e => e.MealPlan!)
+            .ThenInclude(e => e.DailyMealPlans)
+            .ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe)
+            .ThenInclude(e => e.RecipeNutrients)
+            .ThenInclude(e => e.Nutrient)
+            .ThenInclude(e => e.Subtype)
+            .ThenInclude(e => e.Type);
     }
 }

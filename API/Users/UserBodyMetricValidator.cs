@@ -21,11 +21,12 @@ public class UserBodyMetricValidator : AbstractValidator<UserBodyMetricDto>
             .WithMessage(e =>
                 JsonConvert.ToString(
                     $"User's BMI is not within the allowed range (User's BMI: {Math.Round(e.BodyMassIndex, 2)} - Allowed BMI range: 16.00 - 34.99)."));
-        RuleFor(e => e.PhysicalActivityLevel)
-            .Must(e => PhysicalActivity.ReadOnlyDictionary.ContainsKey(e))
+        RuleFor(e => e.PhysicalActivity)
+            .Must(e => PhysicalActivityEnum.FromReadableName(e) != null)
             .WithMessage(e =>
-                JsonConvert.ToString(
-                    $"Provided argument “{e}” does not correspond to a valid physical activity value.\nRecognized values are:\n{string.Join('\n', PhysicalActivity.List)}"));
-        
+                JsonConvert.ToString($@"
+Provided argument “{e}” does not correspond to a valid physical activity value.
+Recognized values are:
+{string.Join('\n', PhysicalActivityEnum.List)}"));
     }
 }
