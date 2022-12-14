@@ -82,16 +82,19 @@ public class UserRepository : IUserRepository
         return await Find(apiKey);
     }
 
-    private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users) =>
-        users
+    private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
+    {
+        return users
             .Include(e => e.UserDatum!)
             .Include(e => e.UserBodyMetrics)
             .Include(e => e.MealPlan!)
             .ThenInclude(e => e.DailyMealPlans)
             .ThenInclude(e => e.DailyMenus)
-            .ThenInclude(e => e.Recipes)
+            .ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe)
             .ThenInclude(e => e.RecipeNutrients)
             .ThenInclude(e => e.Nutrient)
             .ThenInclude(e => e.Subtype)
             .ThenInclude(e => e.Type);
+    }
 }

@@ -42,9 +42,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.RecipeDishTypes.Select(e => e.DishType.ReadableName)))
             .ForMember(dest => dest.Diets,
-                opt => opt.MapFrom(src => src.RecipeDiets.Select(e => e.Diet.ReadableName)))
-            .ReverseMap();
+                opt => opt.MapFrom(src => src.RecipeDiets.Select(e => e.Diet.ReadableName)));
 
+
+        CreateMap<MenuRecipe, MenuRecipeDto>();
         CreateMap<DailyMenuNutrient, DailyMenuNutrientDto>()
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName));
         CreateMap<DailyMenu, DailyMenuDto>()
