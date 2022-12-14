@@ -231,4 +231,17 @@ public class RecipeController
 
         return await _repository.FilterByProteins(lower, upper);
     }
+
+    [HttpGet]
+    [Route("macronutrient-distribution")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByMacronutrientDistribution(
+        [FromQuery] int energyLimit, [FromQuery] int carbohydratesLimit, [FromQuery] int lipidsLimit,
+        [FromQuery] int proteinsLimit)
+    {
+        if (energyLimit < 0 || carbohydratesLimit < 0 || lipidsLimit < 0 || proteinsLimit < 0)
+            return new BadRequestObjectResult("No value can be a negative integer");
+
+        return await _repository.FilterByMacronutrientDistribution(energyLimit, carbohydratesLimit, lipidsLimit,
+            proteinsLimit);
+    }
 }
