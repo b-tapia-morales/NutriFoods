@@ -14,8 +14,6 @@ public sealed class Recipe
 
     public int? PreparationTime { get; set; }
 
-    public ICollection<MenuRecipe> MenuRecipes { get; } = new List<MenuRecipe>();
-
     public ICollection<RecipeDiet> RecipeDiets { get; } = new List<RecipeDiet>();
 
     public ICollection<RecipeDishType> RecipeDishTypes { get; } = new List<RecipeDishType>();
@@ -29,4 +27,6 @@ public sealed class Recipe
     public ICollection<RecipeQuantity> RecipeQuantities { get; } = new List<RecipeQuantity>();
 
     public ICollection<RecipeStep> RecipeSteps { get; } = new List<RecipeStep>();
+
+    public ICollection<DailyMenu> DailyMenus { get; } = new List<DailyMenu>();
 }

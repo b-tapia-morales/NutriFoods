@@ -24,5 +24,5 @@ public sealed class DailyMenu
 
     public ICollection<DailyMenuNutrient> DailyMenuNutrients { get; } = new List<DailyMenuNutrient>();
 
-    public ICollection<MenuRecipe> MenuRecipes { get; } = new List<MenuRecipe>();
+    public ICollection<Recipe> Recipes { get; } = new List<Recipe>();
 }
