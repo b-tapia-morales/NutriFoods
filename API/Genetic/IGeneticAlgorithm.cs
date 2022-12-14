@@ -15,7 +15,8 @@ public interface IGeneticAlgorithm
         GenerateInitialPopulation(menus, population, chromosomeSize, populationSize);
         CalculatePopulationFitness(population, energy, carbohydrates, lipids, proteins, marginOfError);
         var i = 0;
-        while (!SolutionExists(population))
+        Console.WriteLine($"Bucle {chromosomeSize}");
+        while (!SolutionExists(population,i))
         {
             Selection(population, winners);
             Crossover(population, winners, populationSize);
@@ -70,7 +71,7 @@ public interface IGeneticAlgorithm
     void CalculatePopulationFitness(IList<Chromosome> population, double energy, double carbohydrates, double lipids,
         double proteins, double marginOfError);
 
-    bool SolutionExists(IList<Chromosome> population);
+    bool SolutionExists(IList<Chromosome> population,int iteration);
 
     void Selection(IList<Chromosome> population, IList<Chromosome> winners);
 

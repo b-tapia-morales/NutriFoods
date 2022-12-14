@@ -37,9 +37,9 @@ public class GeneticAlgorithm : IGeneticAlgorithm
         }
     }
 
-    public bool SolutionExists(IList<Chromosome> population)
+    public bool SolutionExists(IList<Chromosome> population, int iteration)
     {
-        return population.Any(r => r.Fitness == 8);
+        return iteration > 50000 || population.Any(r => r.Fitness == 8);
     }
 
     public void Selection(IList<Chromosome> population, IList<Chromosome> winners)
