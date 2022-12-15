@@ -47,6 +47,6 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 
-    Task<List<RecipeDto>> FilterByMacronutrientDistribution(int energyLimit, int carbohydratesLimit, int lipidsLimit,
-        int proteinsLimit);
+    Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energyLimit, double carbohydratesLimit, double lipidsLimit,
+        double proteinsLimit);
 }

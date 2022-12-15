@@ -164,7 +164,6 @@ public static class Recipes
             var nameRecipe = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
 
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
-            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
 
             if (repeated.Any(x => x.Name.ToLower().Equals(nameRecipe)))
             {
@@ -186,11 +185,18 @@ public static class Recipes
     private static void InsertRecipeSteps(string pathSteps, List<Recipe> recipes, DbContext context)
     {
         var dataRecipesSteps = Directory.GetFiles(pathSteps, "*.csv", SearchOption.AllDirectories);
+        var repeated = RowRetrieval.RetrieveRows<Repeated, RecipeMapping>(FilePathRecipeRepeated).ToList();
         foreach (var pathDataRecipesStep in dataRecipesSteps)
         {
             var nameRecipe = pathDataRecipesStep.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
             var dataStep = File.ReadAllLines(pathDataRecipesStep);
+            if (repeated.Any(x => x.Name.ToLower().Equals(nameRecipe)))
+            {
+                var recipeRepeated = repeated.Find(x => x.Name.ToLower().Equals(nameRecipe));
+                if (recipeRepeated!.AddedAmount > 0) continue;
+                recipeRepeated.AddedAmount++;
+            }
             for (var i = 0; i < dataStep.Length; i++)
             {
                 context.Add(new RecipeStep {Recipe = idRecipe, Step = i + 1, Description = dataStep[i]});
