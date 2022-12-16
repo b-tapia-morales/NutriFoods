@@ -1,4 +1,5 @@
 using Utils.Csv;
+using Utils.Enum;
 
 namespace Utils.Averages;
 
@@ -26,13 +27,12 @@ public static class RecipeDistribution
     {
         var averageAmount = (energy / mealTypeRow.Energy + carbohydrates / mealTypeRow.Carbohydrates +
                              lipids / mealTypeRow.Lipids + proteins / mealTypeRow.Proteins) / 4;
-        var recipesAmount = (int)Math.Round(averageAmount);
         return mealTypeRow.MealTypeValue switch
         {
-            1 => RecipesAmount(energy, 875, 632, averageAmount),
-            2 => RecipesAmount(energy, 530, 450,averageAmount),
-            3 => RecipesAmount(energy, 565, 616,averageAmount),
-            _ => recipesAmount < 2 ? 2 : recipesAmount
+            1 => RecipesAmount(energy, 870, 550, averageAmount, mealTypeRow),
+            2 => RecipesAmount(energy, 900, 450, averageAmount, mealTypeRow),
+            3 => RecipesAmount(energy, 565, 616, averageAmount, mealTypeRow),
+            _ => RecipesAmount(energy, 240, 50, averageAmount, mealTypeRow)
         };
     }
 
@@ -45,9 +45,24 @@ public static class RecipeDistribution
         return limits;
     }
 
-    private static int RecipesAmount(double energy, double limitTwo, double limitsThree, double averageAmount)
+    private static int RecipesAmount(double energy, double limitTwo, double limitsThree, double averageAmount,
+        MealTypeRow mealType)
     {
-        if (energy <= limitTwo && energy > limitsThree) return 2;
+        if (energy <= limitTwo && energy > limitsThree)
+        {
+            switch (mealType.MealTypeValue)
+            {
+                case 2 when (energy >= 845 && energy <= 860) || (energy >= 600 && energy <= 610):
+                case 1 when energy >= 551 && energy <= 860:
+                case 0 when energy <= 240 && energy > 160:
+                    return 3;
+                case 0 when (energy <= 160):
+                    return 4;
+                default:
+                    return 2;
+            }
+        }
+
         if (energy <= limitsThree) return 3;
         var recipesAmount = (int)Math.Round(averageAmount);
         return recipesAmount < 2 ? 2 : recipesAmount;

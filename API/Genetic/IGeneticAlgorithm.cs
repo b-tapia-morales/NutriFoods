@@ -26,7 +26,7 @@ public interface IGeneticAlgorithm
         }
 
         Console.WriteLine("Generaciones : " + i);
-        ShowPopulation(population);
+        //ShowPopulation(population);
 
         return population
             .Where(e => e.Fitness == 8)

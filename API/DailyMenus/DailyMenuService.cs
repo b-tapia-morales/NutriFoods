@@ -1,6 +1,7 @@
 using API.Dto;
 using API.Genetic;
 using API.Recipes;
+using Microsoft.OpenApi.Extensions;
 using Utils.Averages;
 using Utils.Enum;
 using Utils.Nutrition;
@@ -22,18 +23,16 @@ public class DailyMenuService : IDailyMenuService
     public async Task<DailyMenuDto> GenerateDailyMenu(double energyTarget, double carbsPercent, double fatsPercent,
         double proteinsPercent, MealType mealType = MealType.None, Satiety satiety = Satiety.None)
     {
-        /*var recipes = await (mealType is MealType.None or MealType.Snack
-            ? _recipeRepository.FindWithPortions()
-            : _recipeRepository.FindByMealType(mealType));*/
         var (carbohydrates, lipids, proteins) =
             EnergyDistribution.Calculate(energyTarget, carbsPercent, fatsPercent, proteinsPercent);
         var recipes = await RecipesToPopulation(mealType, energyTarget, carbohydrates, lipids, proteins);
-        Console.WriteLine(recipes.Count);
+
         var fromToken = mealType is MealType.None or MealType.Snack
             ? MealTypeEnum.None
             : MealTypeEnum.FromToken(mealType);
         var recipesAmount =
             RecipeDistribution.CalculateRecipesAmount(energyTarget, carbohydrates, lipids, proteins, fromToken);
+        Console.WriteLine($"{mealType.GetDisplayName()} {energyTarget}");
         var dailyMenu =
             await Task.FromResult(
                 _geneticAlgorithm.GenerateSolution(recipes, energyTarget, carbohydrates, lipids, proteins,
@@ -66,17 +65,19 @@ public class DailyMenuService : IDailyMenuService
         var data = RecipeDistribution.CalculateDistributionLimits(energyTarget, carbohydrates, lipids, proteins);
         return mealType switch
         {
-            MealType.Breakfast => RecipesToPopulationMealType(mealType, energyTarget, 875, data.EnergyLimits,
+            MealType.Breakfast => RecipesToPopulationMealType(mealType, energyTarget, 550, data.EnergyLimits,
                 data.CarbohydratesLimits, data.LipidsLimits, data.ProteinsLimits),
             MealType.Lunch => RecipesToPopulationMealType(mealType, energyTarget, 530, data.EnergyLimits,
                 data.CarbohydratesLimits, data.LipidsLimits, data.ProteinsLimits),
             MealType.Dinner => RecipesToPopulationMealType(mealType, energyTarget, 615, data.EnergyLimits,
                 data.CarbohydratesLimits, data.LipidsLimits, data.ProteinsLimits),
-            _ => _recipeRepository.FindWithPortions()
+            _ => _recipeRepository.FilterByMacronutrientDistribution(data.EnergyLimits, data.CarbohydratesLimits,
+                data.LipidsLimits, data.ProteinsLimits)
         };
     }
 
-    private async Task<List<RecipeDto>> RecipesToPopulationMealType(MealType mealType, double energyTarget, double limits,
+    private async Task<List<RecipeDto>> RecipesToPopulationMealType(MealType mealType, double energyTarget,
+        double limits,
         double energyLimits, double carbohydratesLimits, double lipidsLimits, double proteinsLimits)
     {
         if (energyTarget <= limits)
