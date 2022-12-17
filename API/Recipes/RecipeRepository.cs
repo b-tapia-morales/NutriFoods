@@ -165,8 +165,8 @@ public class RecipeRepository : IRecipeRepository
         return await FilterByNutrientQuantity(63, lowerBound, upperBound);
     }
 
-    public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(int energyLimit, int carbohydratesLimit, int
-        lipidsLimit, int proteinsLimit)
+    public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energyLimit, double carbohydratesLimit, double
+        lipidsLimit, double proteinsLimit)
     {
         await using var context = new NutrifoodsDbContext();
         return await _mapper.ProjectTo<RecipeDto>(
