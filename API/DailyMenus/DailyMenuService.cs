@@ -71,8 +71,8 @@ public class DailyMenuService : IDailyMenuService
                 data.CarbohydratesLimits, data.LipidsLimits, data.ProteinsLimits),
             MealType.Dinner => RecipesToPopulationMealType(mealType, energyTarget, 615, data.EnergyLimits,
                 data.CarbohydratesLimits, data.LipidsLimits, data.ProteinsLimits),
-            _ => _recipeRepository.FilterByMacronutrientDistribution(data.EnergyLimits, data.CarbohydratesLimits,
-                data.LipidsLimits, data.ProteinsLimits)
+            _ => RecipesToPopulationMealType(mealType, energyTarget, 350, data.EnergyLimits, data.CarbohydratesLimits,
+                data.LipidsLimits,data.ProteinsLimits)
         };
     }
 
