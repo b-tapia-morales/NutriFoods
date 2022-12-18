@@ -55,8 +55,8 @@ public static class RecipeDistribution
                 case 2 when (energy >= 730 && energy <= 980) || (energy >= 600 && energy <= 610):
                 case 1 when energy >= 548 && energy <= 870:
                 case 0 when energy <= 355 && energy > 170:
-                case 3 when energy <= 740 && energy > 670 || energy <= 390 && energy > 305 ||
-                            energy > 410 && energy <= 435 || energy >= 520 && energy < 545:
+                case 3 when energy <= 740 && energy > 610 || energy <= 390 && energy > 305 ||
+                            energy > 390 && energy <= 435 || energy >= 520 && energy < 545:
                     return 3;
                 case 0 when energy <= 170 && energy > 145:
                     return 4;
