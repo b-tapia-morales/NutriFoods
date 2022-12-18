@@ -30,7 +30,7 @@ public static class RecipeDistribution
         return mealTypeRow.MealTypeValue switch
         {
             1 => RecipesAmount(energy, 870, 550, averageAmount, mealTypeRow),
-            2 => RecipesAmount(energy, 900, 450, averageAmount, mealTypeRow),
+            2 => RecipesAmount(energy, 980, 450, averageAmount, mealTypeRow),
             3 => RecipesAmount(energy, 740, 300, averageAmount, mealTypeRow),
             _ => RecipesAmount(energy, 390, 50, averageAmount, mealTypeRow)
         };
@@ -52,13 +52,13 @@ public static class RecipeDistribution
         {
             switch (mealType.MealTypeValue)
             {
-                case 2 when (energy >= 845 && energy <= 860) || (energy >= 600 && energy <= 610):
-                case 1 when energy >= 551 && energy <= 870:
-                case 0 when energy <= 390 && energy > 163:
+                case 2 when (energy >= 730 && energy <= 980) || (energy >= 600 && energy <= 610):
+                case 1 when energy >= 548 && energy <= 870:
+                case 0 when energy <= 355 && energy > 170:
                 case 3 when energy <= 740 && energy > 670 || energy <= 390 && energy > 305 ||
-                            energy > 421 && energy <= 435 || energy <= 535 && energy > 545:
+                            energy > 410 && energy <= 435 || energy >= 520 && energy < 545:
                     return 3;
-                case 0 when energy <= 163 && energy > 145:
+                case 0 when energy <= 170 && energy > 145:
                     return 4;
                 case 0 when energy <= 145 && energy > 130:
                     return 5;
