@@ -277,14 +277,16 @@ public class NutrifoodsDbContext : DbContext
 
         modelBuilder.Entity<MenuRecipe>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("menu_recipe_pkey");
+            entity.HasKey(e => new {e.Id, e.RecipeId}).HasName("menu_recipe_pkey");
 
             entity.ToTable("menu_recipe", "nutrifoods");
 
-            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("id");
+            entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
             entity.Property(e => e.DailyMenuId).HasColumnName("daily_menu_id");
             entity.Property(e => e.Portions).HasColumnName("portions");
-            entity.Property(e => e.RecipeId).HasColumnName("recipe_id");
 
             entity.HasOne(d => d.DailyMenu).WithMany(p => p.MenuRecipes)
                 .HasForeignKey(d => d.DailyMenuId)

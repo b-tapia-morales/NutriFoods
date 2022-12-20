@@ -11,4 +11,6 @@ public interface IUserRepository
     public Task<UserDto?> SavePersonalData(string apiKey, UserDataDto userDataDto);
 
     public Task<UserDto?> SaveBodyMetrics(string apiKey, UserBodyMetricDto userBodyMetricDto);
+
+    public Task<UserDto?> SaveMealPlan(string apiKey, MealPlanDto mealPlanDto);
 }
