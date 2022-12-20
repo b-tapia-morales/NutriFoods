@@ -5,7 +5,9 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Csv;
 using Utils.Enum;
+using static Utils.Csv.DelimiterToken;
 
 namespace NutrientRetrieval.NutrientCalculation;
 
@@ -33,12 +35,15 @@ public static class NutrientCalculation
 
     public static void Calculate()
     {
+        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+        var path = Path.Combine(directory, "NutrientRetrieval", "Files", "CommonNutrientIDs.csv");
         var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
             .UseNpgsql(ConnectionString,
                 builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
             .Options;
         using var context = new NutrifoodsDbContext(options);
-        var unitDictionary = RetrieveNutrientIds();
+        var unitDictionary = RowRetrieval.RetrieveRows<NutrientUnitRow, NutrientUnitMapping>(path, Semicolon, true)
+            .ToDictionary(e => e.NutriFoodsId, e => e.Unit);
         var gramDictionary = new Dictionary<int, double>();
         var idSet = unitDictionary.Keys.ToImmutableHashSet();
         var recipes = IncludeSubfields(context.Recipes).Where(e => e.Portions is > 0);
