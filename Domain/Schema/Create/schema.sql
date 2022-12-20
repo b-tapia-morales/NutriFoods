@@ -273,12 +273,12 @@ CREATE INDEX daily_menu_nutrient_idx ON daily_menu_nutrient USING btree (quantit
 CREATE TABLE IF NOT EXISTS menu_recipe
 (
     id            SERIAL,
-    daily_menu_id INTEGER NOT NULL,
     recipe_id     INTEGER NOT NULL,
     portions      INTEGER NOT NULL,
+    daily_menu_id INTEGER NOT NULL,
     FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id),
     FOREIGN KEY (recipe_id) REFERENCES recipe (id),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id, recipe_id)
 );
 
 CREATE TABLE IF NOT EXISTS user_profile
