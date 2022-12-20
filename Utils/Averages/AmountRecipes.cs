@@ -22,7 +22,7 @@ public class AmountRecipes
             var amountRecipe = new AmountRecipes
             {
                 MealTypeValue = int.Parse(line[0]),
-                RangesAmount = rangesAmount,
+                RangesAmount = rangesAmount
             };
             amountRecipes.Add(amountRecipe);
         }
