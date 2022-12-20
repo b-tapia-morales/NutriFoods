@@ -16,7 +16,7 @@ public interface IGeneticAlgorithm
         CalculatePopulationFitness(population, energy, carbohydrates, lipids, proteins, marginOfError);
         var i = 0;
         Console.WriteLine($"Bucle {chromosomeSize}");
-        while (!SolutionExists(population,i))
+        while (!SolutionExists(population, i))
         {
             Selection(population, winners);
             Crossover(population, winners, populationSize);
@@ -28,10 +28,16 @@ public interface IGeneticAlgorithm
         Console.WriteLine("Generaciones : " + i);
         //ShowPopulation(population);
 
-        return population
+        var dailyMenu = population
             .Where(e => e.Fitness == 8)
             .MinBy(e => Math.Abs(e.DailyMenu.EnergyTotal - energy) / energy)!
             .DailyMenu;
+        var menuRecipes = dailyMenu.MenuRecipes
+            .GroupBy(e => e.Recipe.Id)
+            .Select(e => new MenuRecipeDto {Recipe = e.First().Recipe, Portions = e.Count()})
+            .ToList();
+        dailyMenu.MenuRecipes = menuRecipes;
+        return dailyMenu;
     }
 
     DailyMenuDto GenerateSolution(IEnumerable<RecipeDto> recipes, double energy, int chromosomeSize = 3,
@@ -71,7 +77,7 @@ public interface IGeneticAlgorithm
     void CalculatePopulationFitness(IList<Chromosome> population, double energy, double carbohydrates, double lipids,
         double proteins, double marginOfError);
 
-    bool SolutionExists(IList<Chromosome> population,int iteration);
+    bool SolutionExists(IList<Chromosome> population, int iteration);
 
     void Selection(IList<Chromosome> population, IList<Chromosome> winners);
 
