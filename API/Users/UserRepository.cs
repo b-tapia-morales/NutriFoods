@@ -82,6 +82,77 @@ public class UserRepository : IUserRepository
         return await Find(apiKey);
     }
 
+    public async Task<UserDto?> SaveMealPlan(string apiKey, MealPlanDto mealPlanDto)
+    {
+        var user = await Find(apiKey);
+        if (user == null) return null;
+        var mealPlan = new MealPlan
+        {
+            EnergyTarget = mealPlanDto.EnergyTarget,
+            CarbohydratesTarget = mealPlanDto.CarbohydratesTarget,
+            LipidsTarget = mealPlanDto.LipidsTarget,
+            ProteinsTarget = mealPlanDto.ProteinsTarget
+        };
+        _context.MealPlans.Add(mealPlan);
+        await _context.SaveChangesAsync();
+        await SaveDailyMenus(mealPlan.Id, mealPlanDto.DailyMealPlans);
+        user.MealPlan = mealPlanDto;
+        return user;
+    }
+
+    private async Task SaveDailyMenus(int id, IEnumerable<DailyMealPlanDto> dailyMealPlans)
+    {
+        foreach (var mealPlan in dailyMealPlans)
+        {
+            var dailyMealPlan = new DailyMealPlan
+            {
+                MealPlanId = id,
+                DayOfTheWeek = DayOfTheWeekEnum.FromReadableName(mealPlan.DayOfTheWeek) ?? DayOfTheWeekEnum.None,
+                EnergyTotal = mealPlan.EnergyTotal,
+                CarbohydratesTotal = mealPlan.CarbohydratesTotal,
+                LipidsTotal = mealPlan.LipidsTotal,
+                ProteinsTotal = mealPlan.ProteinsTotal
+            };
+            _context.DailyMealPlans.Add(dailyMealPlan);
+            await _context.SaveChangesAsync();
+            await SaveDailyMealPlans(dailyMealPlan.Id, mealPlan.DailyMenus);
+        }
+    }
+
+    private async Task SaveDailyMealPlans(int id, IEnumerable<DailyMenuDto> dailyMenus)
+    {
+        foreach (var menu in dailyMenus)
+        {
+            var dailyMenu = new DailyMenu
+            {
+                DailyMealPlanId = id,
+                MealType = MealTypeEnum.FromReadableName(menu.MealType) ?? MealTypeEnum.None,
+                Satiety = SatietyEnum.FromReadableName(menu.Satiety) ?? SatietyEnum.None,
+                EnergyTotal = menu.EnergyTotal,
+                CarbohydratesTotal = menu.CarbohydratesTotal,
+                LipidsTotal = menu.LipidsTotal,
+                ProteinsTotal = menu.ProteinsTotal
+            };
+            _context.DailyMenus.Add(dailyMenu);
+            await _context.SaveChangesAsync();
+            await SaveMenuRecipes(dailyMenu.Id, menu.MenuRecipes);
+        }
+    }
+
+    private async Task SaveMenuRecipes(int id, IEnumerable<MenuRecipeDto> menuRecipes)
+    {
+        foreach (var recipe in menuRecipes)
+        {
+            var menuRecipe = new MenuRecipe
+            {
+                RecipeId = recipe.Recipe.Id,
+                DailyMenuId = id
+            };
+            _context.MenuRecipes.Add(menuRecipe);
+            await _context.SaveChangesAsync();
+        }
+    }
+
     private static IQueryable<UserProfile> IncludeSubfields(IQueryable<UserProfile> users)
     {
         return users

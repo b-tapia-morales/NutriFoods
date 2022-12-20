@@ -116,4 +116,13 @@ public class UserController
 
         return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
     }
+
+    [HttpPost]
+    [Route("save-meal-plan")]
+    public async Task<ActionResult<UserDto>> SaveMealPlan([Required] string apiKey, [FromBody] MealPlanDto mealPlanDto)
+    {
+        var user = await _repository.SaveMealPlan(apiKey, mealPlanDto);
+
+        return user == null ? new NotFoundObjectResult("There's no user with the specified key") : user;
+    }
 }
