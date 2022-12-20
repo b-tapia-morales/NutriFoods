@@ -1,7 +1,4 @@
 using System.Collections.Immutable;
-using System.Globalization;
-using System.Text;
-using CsvHelper;
 using CsvHelper.Configuration;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -109,23 +106,6 @@ public static class NutrientCalculation
             0 => ((double) numerator / denominator) * grams,
             _ => (integerPart + ((double) numerator / denominator)) * grams
         };
-    }
-
-    public static IReadOnlyDictionary<int, int> RetrieveNutrientIds()
-    {
-        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-        var path = Path.Combine(directory, "NutrientRetrieval", "Files", "CommonNutrientIDs.csv");
-        var configuration = new CsvConfiguration(CultureInfo.InvariantCulture)
-        {
-            Encoding = Encoding.UTF8,
-            Delimiter = ";",
-            HasHeaderRecord = true
-        };
-
-        using var textReader = new StreamReader(path, Encoding.UTF8);
-        using var csv = new CsvReader(textReader, configuration);
-        csv.Context.RegisterClassMap<NutrientUnitMapping>();
-        return csv.GetRecords<NutrientUnitRow>().ToDictionary(record => record.NutriFoodsId, record => record.Unit);
     }
 }
 
