@@ -11,6 +11,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
@@ -35,11 +36,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
-    {
-        if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
-                opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-    }, ServiceLifetime.Singleton);
+{
+    if (!optionsBuilder.IsConfigured)
+        optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
+            opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
+}, ServiceLifetime.Singleton);
 
 builder.Services
     .AddScoped<IValidator<UserDto>, UserValidator>()
@@ -65,6 +66,7 @@ builder.Services
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
+builder.Services.AddMvc(options => { options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute()); });
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
