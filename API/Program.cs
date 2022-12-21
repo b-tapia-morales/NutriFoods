@@ -1,4 +1,3 @@
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using API.DailyMealPlans;
 using API.DailyMenus;
@@ -7,7 +6,6 @@ using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
-using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -15,9 +13,6 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.AbridgedRetrieval;
-using NutrientRetrieval.NutrientCalculation;
-using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
@@ -61,10 +56,10 @@ builder.Services
     .AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters()
     .AddControllers()
+    .AddNewtonsoftJson()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
