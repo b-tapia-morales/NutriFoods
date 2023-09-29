@@ -66,10 +66,7 @@ builder.Services
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllersWithViews(options =>
-{
-    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-});
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
