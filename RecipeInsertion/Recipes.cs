@@ -22,7 +22,10 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
-    private static readonly string[] MealType = {"Desayunos", "Cenas"};
+    private static readonly string FilePathRecipeSinonimous = Path.Combine(Directory.GetParent(
+        Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "sinonimous.csv");
+
+    private static readonly string[] MealType = { "Desayunos", "Cenas" };
 
     public static void RecipeInsert()
     {
@@ -54,7 +57,7 @@ public static class Recipes
         var nameIngredient = File.ReadAllLines(FilePathIngredient);
         foreach (var name in nameIngredient)
         {
-            var id = ingredients.Find(x => x.Name.Equals(name))!.Id;
+            var id = ingredients.Find(x => x.Name.ToLower().Equals(name.ToLower()))!.Id;
             var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
                 "RecipeInsertion", "Measures", $"{name}.csv");
             var measuresIngredient = RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
@@ -107,8 +110,9 @@ public static class Recipes
     private static void InsertDataRecipe(DbContext context, DataRecipe dataRecipe, List<Ingredient> ingredients,
         List<IngredientMeasure> units, int idRecipe)
     {
+        var name = SinonimousIngredientAux(dataRecipe.NameIngredients);
         var idIngredient =
-            ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(dataRecipe.NameIngredients))!.Id;
+            ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(name))!.Id;
         if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
         {
             context.Add(new RecipeQuantity
@@ -174,7 +178,7 @@ public static class Recipes
 
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
+            context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe);
@@ -197,9 +201,10 @@ public static class Recipes
                 if (recipeRepeated!.AddedAmount > 0) continue;
                 recipeRepeated.AddedAmount++;
             }
+
             for (var i = 0; i < dataStep.Length; i++)
             {
-                context.Add(new RecipeStep {Recipe = idRecipe, Step = i + 1, Description = dataStep[i]});
+                context.Add(new RecipeStep { Recipe = idRecipe, Step = i + 1, Description = dataStep[i] });
             }
         }
     }
@@ -215,5 +220,12 @@ public static class Recipes
             Numerator = int.Parse(numerator),
             Denominator = int.Parse(denominator)
         });
+    }
+
+    private static string SinonimousIngredientAux(string name)
+    {
+        var listSinonimous = File.ReadAllLines(FilePathRecipeSinonimous).Select(e => e.Split(","));
+        var nameIngredient = listSinonimous.ToList().Find(x => x[1].Equals(name));
+        return nameIngredient != null ? nameIngredient[0] : name;
     }
 }
