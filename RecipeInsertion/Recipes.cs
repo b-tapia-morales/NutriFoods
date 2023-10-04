@@ -22,10 +22,12 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
-    private static readonly string FilePathRecipeSinonimous = Path.Combine(Directory.GetParent(
+    private static readonly string FilePathRecipeSynonyms = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "sinonimous.csv");
 
     private static readonly string[] MealType = { "Desayunos", "Cenas" };
+
+    private static readonly Dictionary<string, List<string>> DictionarySynonyms = GetDictionary();
 
     public static void RecipeInsert()
     {
@@ -110,7 +112,7 @@ public static class Recipes
     private static void InsertDataRecipe(DbContext context, DataRecipe dataRecipe, List<Ingredient> ingredients,
         List<IngredientMeasure> units, int idRecipe)
     {
-        var name = SinonimousIngredientAux(dataRecipe.NameIngredients);
+        var name = SynonymousIngredientAux(dataRecipe.NameIngredients).ToLower();
         var idIngredient =
             ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(name))!.Id;
         if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
@@ -222,10 +224,26 @@ public static class Recipes
         });
     }
 
-    private static string SinonimousIngredientAux(string name)
+    private static Dictionary<string, List<string>> GetDictionary()
     {
-        var listSinonimous = File.ReadAllLines(FilePathRecipeSinonimous).Select(e => e.Split(","));
-        var nameIngredient = listSinonimous.ToList().Find(x => x[1].Equals(name));
-        return nameIngredient != null ? nameIngredient[0] : name;
+        var listSinonimous = File.ReadAllLines(FilePathRecipeSynonyms).Select(e => e.Split(","));
+        var diccionarySinonimous = new Dictionary<string, List<string>>();
+        foreach (var listSinonimou in listSinonimous)
+        {
+            var sinonimous = listSinonimou[1].Split(";").ToList();
+            diccionarySinonimous.Add(listSinonimou[0], sinonimous);
+        }
+
+        return diccionarySinonimous;
+    }
+
+    private static string SynonymousIngredientAux(string name)
+    {
+        foreach (var (key, _) in DictionarySynonyms.Where(keyValuePair => keyValuePair.Value.Contains(name)))
+        {
+            return key;
+        }
+
+        return name;
     }
 }

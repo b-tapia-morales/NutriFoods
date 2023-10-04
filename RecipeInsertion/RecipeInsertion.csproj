@@ -244,6 +244,10 @@
       <Content Include="Measures\Yema de huevo.csv" />
       <Content Include="Measures\Zanahoria.csv" />
       <Content Include="Measures\Zapallo butternut.csv" />
+      <None Remove="Measures\Anato.csv" />
+      <Content Include="Measures\Anato.csv">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
