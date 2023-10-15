@@ -6,7 +6,7 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
 {
     public static readonly Nutrient None =
         new(nameof(None), (int)NutrientToken.None, "", "", false, null);
-    
+
     public static readonly Nutrient Energy =
         new(nameof(Energy), (int)NutrientToken.Energy, "Energía", "", true, null);
 

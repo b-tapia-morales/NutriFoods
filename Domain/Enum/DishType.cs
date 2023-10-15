@@ -18,7 +18,7 @@ public class DishType : SmartEnum<DishType>, IEnum<DishType, DishTypeToken>
 
     public static readonly DishType Bread =
         new(nameof(Bread), (int)DishTypeToken.Bread, "Pan");
-    
+
     public static readonly DishType MainDish =
         new(nameof(MainDish), (int)DishTypeToken.MainDish, "Plato principal");
 
@@ -33,7 +33,7 @@ public class DishType : SmartEnum<DishType>, IEnum<DishType, DishTypeToken>
 
     public static readonly DishType Sandwich =
         new(nameof(Sandwich), (int)DishTypeToken.Sandwich, "Sándwich");
-    
+
     public static readonly DishType Soup =
         new(nameof(Soup), (int)DishTypeToken.Soup, "Sopa");
 
@@ -42,8 +42,7 @@ public class DishType : SmartEnum<DishType>, IEnum<DishType, DishTypeToken>
 
     public static readonly DishType Vegan =
         new(nameof(Vegan), (int)DishTypeToken.Vegan, "Vegano");
-    
-    
+
     public DishType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }

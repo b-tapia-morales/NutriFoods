@@ -15,7 +15,7 @@ public class Frequency : SmartEnum<Frequency>, IEnum<Frequency, FrequencyToken>
 
     public static readonly Frequency Sometimes =
         new(nameof(Sometimes), (int)FrequencyToken.Sometimes, "Ocasionalmente");
-    
+
     public static readonly Frequency Often =
         new(nameof(Often), (int)FrequencyToken.Often, "Casi siempre");
 

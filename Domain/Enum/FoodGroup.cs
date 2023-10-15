@@ -82,7 +82,8 @@ public class FoodGroup : SmartEnum<FoodGroup>, IHierarchicalEnum<FoodGroup, Food
         new(nameof(DressingsAndSauces), (int)FoodGroupToken.DressingsAndSauces, "Aderezos y salsas", false, Other);
 
     public static readonly FoodGroup SeasoningsAndSpices =
-        new(nameof(SeasoningsAndSpices), (int)FoodGroupToken.SeasoningsAndSpices, "Condimentos y especias", false, Other);
+        new(nameof(SeasoningsAndSpices), (int)FoodGroupToken.SeasoningsAndSpices, "Condimentos y especias", false,
+            Other);
 
     public static readonly FoodGroup Algae =
         new(nameof(Algae), (int)FoodGroupToken.Algae, "Algas", false, Other);
