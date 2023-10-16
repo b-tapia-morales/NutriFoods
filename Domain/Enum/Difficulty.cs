@@ -19,7 +19,6 @@ public class Difficulty : SmartEnum<Difficulty>, IEnum<Difficulty, DifficultyTok
     private Difficulty(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Difficulty> Values() => List;
 }
 
 public enum DifficultyToken

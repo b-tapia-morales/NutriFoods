@@ -24,7 +24,6 @@ public class IntendedUse : SmartEnum<IntendedUse>, IEnum<IntendedUse, IntendedUs
         ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<IntendedUse> Values() => List;
 }
 
 public enum IntendedUseToken

@@ -16,7 +16,6 @@ public class Gender : SmartEnum<Gender>, IEnum<Gender, GenderToken>
 
     public Gender(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Gender> Values() => List;
 }
 
 public enum GenderToken

@@ -32,7 +32,6 @@ public class Day : SmartEnum<Day>, IEnum<Day, DayToken>
     private Day(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Day> Values() => List;
 
     public DayOfWeek ToDayOfWeek() =>
         this == None ? throw new ArgumentException("Value can't be 'None'") : (DayOfWeek)(Value - 1);

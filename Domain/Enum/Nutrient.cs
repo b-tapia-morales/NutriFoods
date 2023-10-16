@@ -93,8 +93,6 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
     public string OptionalName { get; }
     public bool IsTopCategory { get; }
     public Nutrient? Category { get; }
-
-    public static IReadOnlyCollection<Nutrient> Values() => List;
 }
 
 public enum NutrientToken

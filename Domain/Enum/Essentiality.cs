@@ -20,7 +20,6 @@ public class Essentiality : SmartEnum<Essentiality>, IEnum<Essentiality, Essenti
         ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Essentiality> Values() => List;
 }
 
 public enum EssentialityToken

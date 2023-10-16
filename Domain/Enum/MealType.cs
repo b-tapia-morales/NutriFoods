@@ -22,8 +22,6 @@ public class MealType : SmartEnum<MealType>, IEnum<MealType, MealTypeToken>
     private MealType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-
-    public static IReadOnlyCollection<MealType> Values() => List;
 }
 
 public enum MealTypeToken

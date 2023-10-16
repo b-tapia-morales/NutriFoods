@@ -31,7 +31,6 @@ public class PhysicalActivity : SmartEnum<PhysicalActivity>, IEnum<PhysicalActiv
     public string ReadableName { get; }
     public double LowerRatio { get; }
     public double UpperRatio { get; }
-    public static IReadOnlyCollection<PhysicalActivity> Values() => List;
 }
 
 public enum PhysicalActivityToken

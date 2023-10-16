@@ -62,7 +62,6 @@ public class Region : SmartEnum<Region>, IEnum<Region, RegionToken>
 
     public string Abbreviation { get; }
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Region> Values() => List;
 }
 
 public enum RegionToken

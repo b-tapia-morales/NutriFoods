@@ -138,8 +138,6 @@ public class FoodGroup : SmartEnum<FoodGroup>, IHierarchicalEnum<FoodGroup, Food
     public string ReadableName { get; }
     public bool IsTopCategory { get; }
     public FoodGroup? Category { get; }
-
-    public static IReadOnlyCollection<FoodGroup> Values() => List;
 }
 
 public enum FoodGroupToken

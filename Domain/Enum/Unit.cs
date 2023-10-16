@@ -22,7 +22,6 @@ public class Unit : SmartEnum<Unit>, IEnum<Unit, UnitToken>
     public Unit(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Unit> Values() => List;
 }
 
 public enum UnitToken

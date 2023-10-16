@@ -2,7 +2,7 @@ using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
 
-public class Province : SmartEnum<Province>, IEnum<Province, ProvinceToken>
+public class Province : SmartEnum<Province>, IEnum<Province, ProvinceToken>, IComposableEnum<Province, Region>
 {
     public static readonly Province None =
         new(nameof(None), (int)ProvinceToken.None, "", "", null!);
@@ -173,8 +173,8 @@ public class Province : SmartEnum<Province>, IEnum<Province, ProvinceToken>
         new(nameof(TierraDelFuego), (int)ProvinceToken.TierraDelFuego, "Tierra del Fuego", "Porvenir",
             Region.Magallanes);
 
-    public static readonly Province AntarticaChilena =
-        new(nameof(AntarticaChilena), (int)ProvinceToken.AntarticaChilena, "Antártica Chilena",
+    public static readonly Province Antartica =
+        new(nameof(Antartica), (int)ProvinceToken.Antartica, "Antártica Chilena",
             "Puerto Williams", Region.Magallanes);
 
     private Province(string name, int value, string readableName, string capital, Region region) : base(name, value)
@@ -187,7 +187,7 @@ public class Province : SmartEnum<Province>, IEnum<Province, ProvinceToken>
     public string ReadableName { get; }
     public string Capital { get; }
     public Region Region { get; }
-    public static IReadOnlyCollection<Province> Values() => List;
+    Region IComposableEnum<Province, Region>.Category => Region;
 }
 
 public enum ProvinceToken
@@ -247,5 +247,5 @@ public enum ProvinceToken
     UltimaEsperanza,
     Magallanes,
     TierraDelFuego,
-    AntarticaChilena
+    Antartica
 }

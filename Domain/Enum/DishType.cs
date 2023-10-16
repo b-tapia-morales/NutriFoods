@@ -46,8 +46,6 @@ public class DishType : SmartEnum<DishType>, IEnum<DishType, DishTypeToken>
     public DishType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-
-    public static IReadOnlyCollection<DishType> Values() => List;
 }
 
 public enum DishTypeToken

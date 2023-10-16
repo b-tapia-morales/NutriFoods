@@ -25,7 +25,6 @@ public class Frequency : SmartEnum<Frequency>, IEnum<Frequency, FrequencyToken>
     private Frequency(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
-    public static IReadOnlyCollection<Frequency> Values() => List;
 }
 
 public enum FrequencyToken
