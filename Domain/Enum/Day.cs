@@ -46,5 +46,5 @@ public enum DayToken
     Wednesday,
     Thursday,
     Friday,
-    Saturday,
+    Saturday
 }
