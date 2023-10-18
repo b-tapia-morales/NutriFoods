@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
