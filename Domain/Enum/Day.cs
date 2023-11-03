@@ -32,8 +32,10 @@ public class Day : SmartEnum<Day>, IEnum<Day, DayToken>
 
     public string ReadableName { get; }
 
-    public DayOfWeek ToDayOfWeek() =>
-        this == None ? throw new ArgumentException("Value can't be 'None'") : (DayOfWeek)(Value - 1);
+    public static DayOfWeek ToDayOfWeek(Day day) =>
+        day == None ? throw new ArgumentException("Value can't be 'None'") : (DayOfWeek)(day.Value - 1);
+
+    public static Day ToDay(DayOfWeek dayOfWeek) => FromValue((int)dayOfWeek + 1);
 }
 
 public enum DayToken
