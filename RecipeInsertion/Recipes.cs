@@ -22,7 +22,7 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
-    private static readonly string[] MealType = {"Desayunos", "Cenas"};
+    private static readonly string[] MealType = { "Desayunos", "Cenas" };
 
     public static void RecipeInsert()
     {
@@ -40,7 +40,7 @@ public static class Recipes
                 Author = recipe.Author,
                 Url = recipe.Url,
                 Portions = recipe.Portions,
-                PreparationTime = recipe.PreparationTime
+                Time = recipe.Time
             });
         }
 
@@ -165,7 +165,7 @@ public static class Recipes
 
             var idRecipe = recipes.Find(x => x.Name.ToLower().Equals(nameRecipe))!.Id;
 
-            if (repeated.Any(x => x.Name.ToLower().Equals(nameRecipe)))
+            if (repeated.Exists(x => x.Name.ToLower().Equals(nameRecipe)))
             {
                 var recipeRepeated = repeated.Find(x => x.Name.ToLower().Equals(nameRecipe));
                 if (recipeRepeated!.AddedAmount > 0) continue;
@@ -174,7 +174,7 @@ public static class Recipes
 
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            context.Add(new RecipeMealType {RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type)});
+            context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe);
@@ -197,9 +197,10 @@ public static class Recipes
                 if (recipeRepeated!.AddedAmount > 0) continue;
                 recipeRepeated.AddedAmount++;
             }
+
             for (var i = 0; i < dataStep.Length; i++)
             {
-                context.Add(new RecipeStep {Recipe = idRecipe, Step = i + 1, Description = dataStep[i]});
+                context.Add(new RecipeStep { RecipeId = idRecipe, Number = i + 1, Description = dataStep[i] });
             }
         }
     }
