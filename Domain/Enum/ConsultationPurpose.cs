@@ -2,24 +2,24 @@ using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
 
-public class Purpose : SmartEnum<Purpose>, IEnum<Purpose, PurposeToken>
+public class ConsultationPurpose : SmartEnum<ConsultationPurpose>, IEnum<ConsultationPurpose, PurposeToken>
 {
-    public static readonly Purpose None =
+    public static readonly ConsultationPurpose None =
         new(nameof(None), (int)PurposeToken.None, string.Empty);
 
-    public static readonly Purpose Lose =
+    public static readonly ConsultationPurpose Lose =
         new(nameof(Lose), (int)PurposeToken.Lose, "Perder peso");
 
-    public static readonly Purpose Maintain =
+    public static readonly ConsultationPurpose Maintain =
         new(nameof(Maintain), (int)PurposeToken.Maintain, "Mantener peso");
 
-    public static readonly Purpose Gain =
+    public static readonly ConsultationPurpose Gain =
         new(nameof(Gain), (int)PurposeToken.Gain, "Subir de peso");
 
-    public static readonly Purpose EatHealthier =
+    public static readonly ConsultationPurpose EatHealthier =
         new(nameof(EatHealthier), (int)PurposeToken.EatHealthier, "Comer más saludablemente");
 
-    public Purpose(string name, int value, string readableName) : base(name, value) =>
+    private ConsultationPurpose(string name, int value, string readableName) : base(name, value) =>
         ReadableName = readableName;
 
     public string ReadableName { get; }
