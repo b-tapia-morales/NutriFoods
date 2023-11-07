@@ -19,7 +19,7 @@ public class PhysicalActivity : SmartEnum<PhysicalActivity>, IEnum<PhysicalActiv
     public static readonly PhysicalActivity VeryActive =
         new(nameof(VeryActive), (int)PhysicalActivityToken.VeryActive, "Muy activa", 1.9, 2.5);
 
-    public PhysicalActivity(string name, int value, string readableName, double lowerRatio, double upperRatio) :
+    private PhysicalActivity(string name, int value, string readableName, double lowerRatio, double upperRatio) :
         base(name, value)
     {
         ReadableName = readableName;

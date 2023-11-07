@@ -19,7 +19,7 @@ public class Unit : SmartEnum<Unit>, IEnum<Unit, UnitToken>
     public static readonly Unit KiloCalories =
         new(nameof(KiloCalories), (int)UnitToken.KiloCalories, "KCal");
 
-    public Unit(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+    private Unit(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
 }

@@ -43,7 +43,7 @@ public class DishType : SmartEnum<DishType>, IEnum<DishType, DishTypeToken>
     public static readonly DishType Vegan =
         new(nameof(Vegan), (int)DishTypeToken.Vegan, "Vegano");
 
-    public DishType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+    private DishType(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
 }

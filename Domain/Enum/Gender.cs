@@ -13,7 +13,7 @@ public class Gender : SmartEnum<Gender>, IEnum<Gender, GenderToken>
     public static readonly Gender Female =
         new(nameof(Female), (int)GenderToken.Female, "Femenino");
 
-    public Gender(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+    private Gender(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
     public string ReadableName { get; }
 }
 
