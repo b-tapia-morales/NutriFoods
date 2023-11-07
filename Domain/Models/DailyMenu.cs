@@ -1,4 +1,4 @@
-﻿using Utils.Enum;
+﻿using Domain.Enum;
 
 namespace Domain.Models;
 
@@ -6,23 +6,17 @@ public sealed class DailyMenu
 {
     public int Id { get; set; }
 
-    public int? DailyMealPlanId { get; set; }
+    public int DailyPlanId { get; set; }
 
-    public MealTypeEnum MealType { get; set; } = null!;
+    public int IntakePercentage { get; set; }
 
-    public SatietyEnum Satiety { get; set; } = null!;
+    public MealType MealType { get; set; } = null!;
 
-    public double EnergyTotal { get; set; }
+    public string Hour { get; set; } = null!;
 
-    public double CarbohydratesTotal { get; set; }
+    public ICollection<DailyMenuNutrient> DailyMenuNutrients { get; set; } = new List<DailyMenuNutrient>();
 
-    public double LipidsTotal { get; set; }
+    public DailyPlan DailyPlan { get; set; } = null!;
 
-    public double ProteinsTotal { get; set; }
-
-    public DailyMealPlan? DailyMealPlan { get; set; }
-
-    public ICollection<DailyMenuNutrient> DailyMenuNutrients { get; } = new List<DailyMenuNutrient>();
-
-    public ICollection<MenuRecipe> MenuRecipes { get; } = new List<MenuRecipe>();
+    public ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
 }

@@ -1,6 +1,4 @@
-﻿using Utils.Enum;
-
-namespace Domain.Models;
+﻿namespace Domain.Models;
 
 public sealed class DailyMenuNutrient
 {
@@ -8,13 +6,11 @@ public sealed class DailyMenuNutrient
 
     public int DailyMenuId { get; set; }
 
-    public int NutrientId { get; set; }
+    public int Nutrient { get; set; }
 
     public double Quantity { get; set; }
 
-    public UnitEnum Unit { get; set; } = null!;
+    public int Unit { get; set; }
 
     public DailyMenu DailyMenu { get; set; } = null!;
-
-    public Nutrient Nutrient { get; set; } = null!;
 }

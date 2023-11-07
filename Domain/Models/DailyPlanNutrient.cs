@@ -2,9 +2,11 @@
 
 namespace Domain.Models;
 
-public sealed class IngredientNutrient
+public sealed class DailyPlanNutrient
 {
     public int Id { get; set; }
+
+    public int DailyPlanId { get; set; }
 
     public Nutrient Nutrient { get; set; } = null!;
 
@@ -12,7 +14,7 @@ public sealed class IngredientNutrient
 
     public Unit Unit { get; set; } = null!;
 
-    public int IngredientId { get; set; }
+    public double? ErrorMargin { get; set; }
 
-    public Ingredient Ingredient { get; set; } = null!;
+    public DailyPlan DailyPlan { get; set; } = null!;
 }
