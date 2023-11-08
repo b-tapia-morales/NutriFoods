@@ -174,7 +174,7 @@ public static class Recipes
 
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
+            // context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe);

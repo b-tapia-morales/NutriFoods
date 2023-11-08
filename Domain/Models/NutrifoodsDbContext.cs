@@ -792,6 +792,8 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<MealPlan>().Ignore(e => e.Consultations);
 
         // Ingredient
+        builder.Entity<Ingredient>().Property(e => e.FoodGroup)
+            .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));
         builder.Entity<IngredientNutrient>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Unit.FromValue(e));
         builder.Entity<IngredientNutrient>().Property(e => e.Nutrient)
@@ -812,6 +814,8 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
 
         // Meal Plan
+        builder.Entity<DailyPlan>().Property(e => e.Day)
+            .HasConversion(e => e.Value, e => Day.FromValue(e));
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(e => e.Value, e => PhysicalActivity.FromValue(e));
         builder.Entity<DailyPlanTarget>().Property(e => e.Unit)
@@ -826,6 +830,10 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
         builder.Entity<DailyMenu>().Property(e => e.MealType)
             .HasConversion(e => e.Value, e => MealType.FromValue(e));
+        builder.Entity<DailyMenuNutrient>().Property(e => e.Nutrient)
+            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
+        builder.Entity<DailyMenuNutrient>().Property(e => e.Unit)
+            .HasConversion(e => e.Value, e => Unit.FromValue(e));
 
         // User
         builder.Entity<PersonalInfo>().Property(e => e.BiologicalSex)
