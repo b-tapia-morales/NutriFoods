@@ -8,7 +8,7 @@ public sealed class DailyPlan
 
     public int MealPlanId { get; set; }
 
-    public int Day { get; set; }
+    public Day Day { get; set; } = null!;
 
     public PhysicalActivity PhysicalActivityLevel { get; set; } = null!;
 

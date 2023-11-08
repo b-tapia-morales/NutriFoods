@@ -1,4 +1,6 @@
-﻿namespace Domain.Models;
+﻿using Domain.Enum;
+
+namespace Domain.Models;
 
 public sealed class Ingredient
 {
@@ -10,7 +12,7 @@ public sealed class Ingredient
 
     public bool IsAnimal { get; set; }
 
-    public int FoodGroup { get; set; }
+    public FoodGroup FoodGroup { get; set; } = null!;
 
     public ICollection<IngredientMeasure> IngredientMeasures { get; set; } = new List<IngredientMeasure>();
 
