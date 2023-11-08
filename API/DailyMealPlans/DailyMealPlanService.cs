@@ -13,14 +13,14 @@ public class DailyMealPlanService : IDailyMealPlanService
         _dailyMenuService = dailyMenuService;
     }
 
-    public DailyMealPlanDto GenerateDailyMealPlan(double energyTarget,
+    public DailyPlanDto GenerateDailyMealPlan(double energyTarget,
         ICollection<(MealTypeEnum MealType, SatietyEnum Satiety)> mealConfigurations, DayOfTheWeek dayOfTheWeek)
     {
         var dailyMenus = GenerateDailyMenus(energyTarget, mealConfigurations).ToList();
-        return new DailyMealPlanDto
+        return new DailyPlanDto
         {
             DayOfTheWeek = DayOfTheWeekEnum.FromToken(dayOfTheWeek).ReadableName,
-            DailyMenus = dailyMenus,
+            Menus = dailyMenus,
             EnergyTotal = dailyMenus.Sum(e => e.EnergyTotal),
             CarbohydratesTotal = dailyMenus.Sum(e => e.CarbohydratesTotal),
             LipidsTotal = dailyMenus.Sum(e => e.LipidsTotal),

@@ -19,7 +19,7 @@ public class DailyMealPlanController
 
     [HttpGet]
     [Route("default-parameters")]
-    public ActionResult<DailyMealPlanDto> GenerateDailyMealPlan([Required] double energyTarget,
+    public ActionResult<DailyPlanDto> GenerateDailyMealPlan([Required] double energyTarget,
         [Required] bool isLunchFilling, [Required] Satiety breakfast, [Required] Satiety dinner,
         bool? includeBrunch = false, bool? includeLinner = false, DayOfTheWeek? dayOfWeek = DayOfTheWeek.None)
     {

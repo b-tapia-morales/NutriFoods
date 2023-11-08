@@ -95,12 +95,12 @@ public class UserRepository : IUserRepository
         };
         _context.MealPlans.Add(mealPlan);
         await _context.SaveChangesAsync();
-        await SaveDailyMenus(mealPlan.Id, mealPlanDto.DailyMealPlans);
+        await SaveDailyMenus(mealPlan.Id, mealPlanDto.Plans);
         user.MealPlan = mealPlanDto;
         return user;
     }
 
-    private async Task SaveDailyMenus(int id, IEnumerable<DailyMealPlanDto> dailyMealPlans)
+    private async Task SaveDailyMenus(int id, IEnumerable<DailyPlanDto> dailyMealPlans)
     {
         foreach (var mealPlan in dailyMealPlans)
         {
@@ -115,7 +115,7 @@ public class UserRepository : IUserRepository
             };
             _context.DailyMealPlans.Add(dailyMealPlan);
             await _context.SaveChangesAsync();
-            await SaveDailyMealPlans(dailyMealPlan.Id, mealPlan.DailyMenus);
+            await SaveDailyMealPlans(dailyMealPlan.Id, mealPlan.Menus);
         }
     }
 
@@ -123,7 +123,7 @@ public class UserRepository : IUserRepository
     {
         foreach (var menu in dailyMenus)
         {
-            var dailyMenu = new DailyMenu
+            var dailyMenu = new DailyMenuDto
             {
                 DailyMealPlanId = id,
                 MealType = MealTypeEnum.FromReadableName(menu.MealType) ?? MealTypeEnum.None,
