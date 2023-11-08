@@ -1,13 +1,13 @@
-﻿namespace API.Dto;
+﻿using Domain.Enum;
+using Domain.Models;
 
-public class DailyMenuDto
+namespace API.Dto;
+
+public sealed class DailyMenuDto
 {
-    public string MealType { get; set; } = null!;
-    public string Satiety { get; set; } = null!;
-    public double EnergyTotal { get; set; }
-    public double CarbohydratesTotal { get; set; }
-    public double LipidsTotal { get; set; }
-    public double ProteinsTotal { get; set; }
-    public IList<DailyMenuNutrientDto> Nutrients { get; set; } = null!;
-    public IList<MenuRecipeDto> MenuRecipes { get; set; } = null!;
+    public int IntakePercentage { get; set; }
+    public string MealType { get; set; } = string.Empty;
+    public string Hour { get; set; } = string.Empty;
+    public ICollection<DailyMenuNutrientDto> Nutrients { get; set; } = new List<DailyMenuNutrientDto>();
+    public ICollection<MenuRecipeDto> Recipes { get; set; } = new List<MenuRecipeDto>();
 }
