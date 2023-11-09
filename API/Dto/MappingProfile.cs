@@ -2,15 +2,13 @@ using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
-using static System.DateTime;
-using static System.TimeZoneInfo;
+using EatingSymptom = Domain.Models.EatingSymptom;
+using HarmfulHabit = Domain.Models.HarmfulHabit;
 
 namespace API.Dto;
 
 public class MappingProfile : Profile
 {
-    private const string DateTimeFormat = "YYYY/mm/dd HH:mm";
-
     public MappingProfile()
     {
         // Ingredient
@@ -60,6 +58,19 @@ public class MappingProfile : Profile
                     (src.DishTypes ?? Array.Empty<DishType>()).Select(e => e.ReadableName).ToList()))
             .ReverseMap();
 
+        // Recipe Abridged
+        CreateMap<Recipe, RecipeAbridged>()
+            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
+            .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
+            .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
+            .ForMember(dest => dest.MealTypes, opt => opt
+                .MapFrom(src =>
+                    (src.MealTypes ?? Array.Empty<MealType>()).Select(e => e.ReadableName).ToList()))
+            .ForMember(dest => dest.DishTypes,
+                opt => opt.MapFrom(src =>
+                    (src.DishTypes ?? Array.Empty<DishType>()).Select(e => e.ReadableName).ToList()))
+            .ReverseMap();
+
         // Meal Plan
         CreateMap<MenuRecipe, MenuRecipeDto>()
             .ReverseMap();
@@ -90,82 +101,81 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Menus, opt => opt.MapFrom(src => src.DailyMenus))
             .ReverseMap();
         CreateMap<MealPlan, MealPlanDto>()
-            .ForMember(dest => dest.CreatedOn,
-                opt => opt.MapFrom(src =>
-                    src.CreatedOn ?? ConvertTime(Now, FindSystemTimeZoneById("Pacific Standard Time"))))
+            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
             .ForMember(dest => dest.Plans, opt => opt.MapFrom(src => src.DailyPlans))
             .ReverseMap();
-        /*
-        CreateMap<IngredientNutrient, IngredientNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
+
+        // Clinical Anamnesis
+        CreateMap<Medication, MedicationDto>()
+            .ForMember(e => e.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
+            .ForMember(e => e.AdministrationTimes, opt => opt.MapFrom(src => src.AdministrationTimes.ToList()))
+            .ForMember(e => e.Adherence, opt => opt.MapFrom(src => src.Adherence.ReadableName))
             .ReverseMap();
-        CreateMap<IngredientMeasure, IngredientMeasureDto>()
+        CreateMap<Disease, DiseaseDto>()
+            .ForMember(e => e.InheritanceType, opt => opt.MapFrom(src => src.InheritanceType.ReadableName))
             .ReverseMap();
-        CreateMap<IngredientMeasure, IngredientMeasureAbridged>()
+        CreateMap<ClinicalSign, ClinicalSignDto>()
             .ReverseMap();
-        CreateMap<Ingredient, IngredientDto>()
-            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.IngredientNutrients))
-            .ReverseMap();
-        CreateMap<Ingredient, IngredientAbridged>()
+        CreateMap<ClinicalAnamnesis, ClinicalAnamnesisDto>()
+            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
             .ReverseMap();
 
-        CreateMap<RecipeMeasure, RecipeMeasureDto>()
+        // Nutritional Anamnesis
+        CreateMap<HarmfulHabit, HarmfulHabitDto>()
             .ReverseMap();
-        CreateMap<RecipeQuantity, RecipeQuantityDto>()
+        CreateMap<EatingSymptom, EatingSymptomDto>()
             .ReverseMap();
-        CreateMap<RecipeNutrient, RecipeNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
+        CreateMap<AdverseFoodReaction, AdverseFoodReactionDto>()
+            .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
+            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ReverseMap();
-        CreateMap<RecipeStep, RecipeStepDto>()
+        CreateMap<FoodConsumption, FoodConsumptionDto>()
+            .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
+            .ForMember(dest => dest.Frequency, opt => opt.MapFrom(src => src.Frequency.ReadableName))
             .ReverseMap();
-        CreateMap<Recipe, RecipeDto>()
-            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
-            .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
-            .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.RecipeNutrients))
-            .ForMember(dest => dest.MealTypes,
-                opt => opt.MapFrom(src => src.RecipeMealTypes.Select(e => e.MealType.ReadableName)))
-            .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.RecipeDishTypes.Select(e => e.DishType.ReadableName)))
-            .ForMember(dest => dest.Diets,
-                opt => opt.MapFrom(src => src.RecipeDiets.Select(e => e.Diet.ReadableName)))
+        CreateMap<NutritionalAnamnesis, NutritionalAnamnesisDto>()
+            .ForMember(dest => dest.CreatedOn,
+                opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.LastUpdated,
+                opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
             .ReverseMap();
 
-
-        CreateMap<MenuRecipe, MenuRecipeDto>()
-            .ReverseMap();
-        CreateMap<DailyMenuNutrient, DailyMenuNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
-            .ReverseMap();
-        CreateMap<DailyMenu, DailyMenuDto>()
-            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
-            .ForMember(dest => dest.Satiety, opt => opt.MapFrom(src => src.Satiety.ReadableName))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMenuNutrients))
-            .ReverseMap();
-        CreateMap<DailyMealPlanNutrient, DailyMealPlanNutrientDto>()
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
-            .ReverseMap();
-        CreateMap<DailyMealPlan, DailyMealPlanDto>()
-            .ForMember(dest => dest.DayOfTheWeek, opt => opt.MapFrom(src => src.DayOfTheWeek.ReadableName))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMealPlanNutrients))
-            .ReverseMap();
-        CreateMap<MealPlan, MealPlanDto>()
+        // Anthropometry
+        CreateMap<Anthropometry, AnthropometryDto>()
+            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
             .ReverseMap();
 
-        CreateMap<UserBodyMetric, UserBodyMetricDto>()
-            .ForMember(dest => dest.PhysicalActivity, opt => opt.MapFrom(src => src.PhysicalActivity.ReadableName))
+        // Consultation
+        CreateMap<Consultation, ConsultationDto>()
+            .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
+            .ForMember(dest => dest.Purpose, opt => opt.MapFrom(src => src.Purpose.ReadableName))
+            .ForMember(dest => dest.RegisteredOn,
+                opt => opt.MapFrom(src => (src.RegisteredOn ?? GetPacificStandardDate()).ToString("YYYY/mm/dd")))
             .ReverseMap();
-        CreateMap<UserDatum, UserDataDto>()
-            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString()))
-            .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ReadableName))
-            .ForMember(dest => dest.Diet, opt => opt.MapFrom(src => src.Diet!.ReadableName))
-            .ForMember(dest => dest.IntendedUse, opt => opt.MapFrom(src => src.IntendedUse!.ReadableName))
-            .ForMember(dest => dest.UpdateFrequency, opt => opt.MapFrom(src => src.UpdateFrequency!.ReadableName))
+        
+        // Patient
+        CreateMap<PersonalInfo, PersonalInfoDto>()
+            .ForMember(dest => dest.BiologicalSex, opt => opt.MapFrom(src => src.BiologicalSex.ReadableName))
+            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString("YYYY/mm/dd")))
             .ReverseMap();
-        CreateMap<UserProfile, UserDto>()
-            .ForMember(dest => dest.UserData, opt => opt.MapFrom(src => src.UserDatum))
+        CreateMap<ContactInfo, ContactInfoDto>()
             .ReverseMap();
-            */
+        CreateMap<Address, AddressDto>()
+            .ForMember(dest => dest.Province, opt => opt.MapFrom(src => src.Province.ReadableName))
+            .ReverseMap();
+        CreateMap<Patient, PatientDto>()
+            .ReverseMap();
+        
+        // Nutritionist
+        CreateMap<Nutritionist, NutritionistDto>()
+            .ReverseMap();
     }
+
+    private static DateTime GetPacificStandardTime() =>
+        TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
+
+    private static DateOnly GetPacificStandardDate() =>
+        DateOnly.FromDateTime(GetPacificStandardTime());
 }

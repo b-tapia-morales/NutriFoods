@@ -1,7 +1,9 @@
-﻿namespace API.Dto;
+﻿using API.Dto.Abridged;
+
+namespace API.Dto;
 
 public class MenuRecipeDto
 {
-    public RecipeDto Recipe { get; set; } = null!;
+    public RecipeAbridged Recipe { get; set; } = null!;
     public int Portions { get; set; }
 }

@@ -1,6 +1,6 @@
 namespace API.Dto.Abridged;
 
-public class IngredientMeasureAbridged
+public sealed class IngredientMeasureAbridged
 {
     public string Name { get; set; } = string.Empty;
     public double Grams { get; set; }

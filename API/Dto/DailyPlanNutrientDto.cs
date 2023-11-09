@@ -1,12 +1,9 @@
-﻿using Domain.Enum;
-using Domain.Models;
-
-namespace API.Dto;
+﻿namespace API.Dto;
 
 public sealed class DailyPlanNutrientDto
 {
-    public string Nutrient { get; set; } = string.Empty;
+    public string Nutrient { get; set; } = null!;
     public double Quantity { get; set; }
-    public string Unit { get; set; } = string.Empty;
+    public string Unit { get; set; } = null!;
     public double? ErrorMargin { get; set; }
 }

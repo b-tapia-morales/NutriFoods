@@ -7,5 +7,5 @@ public class MealPlanDto
 {
     public int MealsPerDay { get; set; }
     public DateTime? CreatedOn { get; set; } = ConvertTime(Now, FindSystemTimeZoneById("Pacific Standard Time"));
-    public ICollection<DailyPlanDto> Plans { get; set; } = new List<DailyPlanDto>();
+    public ICollection<DailyPlanDto> Plans { get; set; } = null!;
 }
