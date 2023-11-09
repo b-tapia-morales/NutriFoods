@@ -6,7 +6,7 @@ public sealed class AdverseFoodReaction
 {
     public Guid Id { get; set; }
 
-    public int FoodGroup { get; set; }
+    public FoodGroup FoodGroup { get; set; } = null!;
 
     public FoodReactionType Type { get; set; } = null!;
 

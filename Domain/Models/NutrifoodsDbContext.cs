@@ -850,6 +850,8 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => IngestibleType.FromValue(e));
         builder.Entity<Medication>().Property(e => e.Adherence)
             .HasConversion(e => e.Value, e => Frequency.FromValue(e));
+        builder.Entity<AdverseFoodReaction>().Property(e => e.FoodGroup)
+            .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => FoodReactionType.FromValue(e));
         builder.Entity<FoodConsumption>().Property(e => e.FoodGroup)
