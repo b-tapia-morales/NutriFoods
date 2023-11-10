@@ -220,9 +220,9 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
     public static readonly Nutrient N3Docosahexaenoic =
         new(nameof(N3Docosahexaenoic), (int)NutrientToken.N3Docosahexaenoic, "Ácido 3-docosahexaenoico", "", false,
             Polyunsaturated);
-    
+
     public static readonly Nutrient Trans =
-        new(nameof(Trans), (int)NutrientToken.Trans, "Ácidos grasos trans, total", "", false, null);
+        new(nameof(Trans), (int)NutrientToken.Trans, "Ácidos grasos trans, total", "", true, null);
 
     public static readonly Nutrient TransMonoenoic =
         new(nameof(TransMonoenoic), (int)NutrientToken.TransMonoenoic, "Ácido 3-docosapentaenoico", "", false, Trans);
@@ -230,6 +230,157 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
     public static readonly Nutrient TransPolinoic =
         new(nameof(TransPolinoic), (int)NutrientToken.TransPolinoic, "Ácido 3-docosahexaenoico", "", false, Trans);
 
+    public static readonly Nutrient Proteins =
+        new(nameof(Proteins), (int)NutrientToken.Proteins, "Proteína, total", "", true, null);
+
+    public static readonly Nutrient Tryptophan =
+        new(nameof(Tryptophan), (int)NutrientToken.Tryptophan, "Triptófano", "", false, Proteins);
+
+    public static readonly Nutrient Threonine =
+        new(nameof(Threonine), (int)NutrientToken.Threonine, "Treonina", "", false, Proteins);
+
+    public static readonly Nutrient Isoleucine =
+        new(nameof(Isoleucine), (int)NutrientToken.Isoleucine, "Isoleucina", "", false, Proteins);
+
+    public static readonly Nutrient Leucine =
+        new(nameof(Leucine), (int)NutrientToken.Leucine, "Leucina", "", false, Proteins);
+
+    public static readonly Nutrient Lysine =
+        new(nameof(Lysine), (int)NutrientToken.Lysine, "Lisina", "", false, Proteins);
+
+    public static readonly Nutrient Methionine =
+        new(nameof(Methionine), (int)NutrientToken.Methionine, "Metionina", "", false, Proteins);
+
+    public static readonly Nutrient Cystine =
+        new(nameof(Cystine), (int)NutrientToken.Cystine, "Cistina", "", false, Proteins);
+
+    public static readonly Nutrient Phenylalanine =
+        new(nameof(Phenylalanine), (int)NutrientToken.Phenylalanine, "Fenilalanina", "", false, Proteins);
+
+    public static readonly Nutrient Tyrosine =
+        new(nameof(Tyrosine), (int)NutrientToken.Tyrosine, "Tirosina", "", false, Proteins);
+
+    public static readonly Nutrient Valine =
+        new(nameof(Valine), (int)NutrientToken.Valine, "Valina", "", false, Proteins);
+
+    public static readonly Nutrient Arginine =
+        new(nameof(Arginine), (int)NutrientToken.Arginine, "Arginina", "", false, Proteins);
+
+    public static readonly Nutrient Histidine =
+        new(nameof(Histidine), (int)NutrientToken.Histidine, "Histidina", "", false, Proteins);
+
+    public static readonly Nutrient Alanine =
+        new(nameof(Alanine), (int)NutrientToken.Alanine, "Alanina", "", false, Proteins);
+
+    public static readonly Nutrient AsparticAcid =
+        new(nameof(AsparticAcid), (int)NutrientToken.AsparticAcid, "Ácido aspártico", "", false, Proteins);
+
+    public static readonly Nutrient GlutamicAcid =
+        new(nameof(GlutamicAcid), (int)NutrientToken.GlutamicAcid, "Ácido glutámico", "", false, Proteins);
+
+    public static readonly Nutrient Glycine =
+        new(nameof(Glycine), (int)NutrientToken.Glycine, "Glicina", "", false, Proteins);
+
+    public static readonly Nutrient Proline =
+        new(nameof(Proline), (int)NutrientToken.Proline, "Prolina", "", false, Proteins);
+
+    public static readonly Nutrient Serine =
+        new(nameof(Serine), (int)NutrientToken.Serine, "Serina", "", false, Proteins);
+
+    public static readonly Nutrient Vitamins =
+        new(nameof(Vitamins), (int)NutrientToken.Vitamins, "Vitamina", "", false, null);
+
+    public static readonly Nutrient VitaminA =
+        new(nameof(VitaminA), (int)NutrientToken.VitaminA, "Vitamina A", "", true, Vitamins);
+
+    public static readonly Nutrient AlphaCarotene =
+        new(nameof(AlphaCarotene), (int)NutrientToken.AlphaCarotene, "α-caroteno", "Alfa-caroteno", false, VitaminA);
+
+    public static readonly Nutrient BetaCarotene =
+        new(nameof(BetaCarotene), (int)NutrientToken.BetaCarotene, "β-caroteno", "Beta-caroteno", false, VitaminA);
+
+    public static readonly Nutrient BetaCryptoxanthin =
+        new(nameof(BetaCryptoxanthin), (int)NutrientToken.BetaCryptoxanthin, "β-criptoxantina", "Beta-criptoxantina",
+            false, VitaminA);
+
+    public static readonly Nutrient LuteinZeaxanthin =
+        new(nameof(LuteinZeaxanthin), (int)NutrientToken.LuteinZeaxanthin, "Luteína + Zeaxantina", "", false, VitaminA);
+
+    public static readonly Nutrient Lycopene =
+        new(nameof(Lycopene), (int)NutrientToken.Lycopene, "Licopeno", "", false, VitaminA);
+
+    public static readonly Nutrient Retinol =
+        new(nameof(Retinol), (int)NutrientToken.Retinol, "Retinol", "", false, VitaminA);
+
+    public static readonly Nutrient VitaminB1 =
+        new(nameof(VitaminB1), (int)NutrientToken.VitaminB1, "Vitamina B1", "Tiamina", false, Vitamins);
+
+    public static readonly Nutrient VitaminB2 =
+        new(nameof(VitaminB2), (int)NutrientToken.VitaminB2, "Vitamina B2", "Riboflavina", false, Vitamins);
+
+    public static readonly Nutrient VitaminB3 =
+        new(nameof(VitaminB3), (int)NutrientToken.VitaminB3, "Vitamina B3", "Niacina", false, Vitamins);
+
+    public static readonly Nutrient VitaminB5 =
+        new(nameof(VitaminB5), (int)NutrientToken.VitaminB5, "Vitamina B5", "Ácido pantoténico", false,
+            Vitamins);
+
+    public static readonly Nutrient VitaminB6 =
+        new(nameof(VitaminB6), (int)NutrientToken.VitaminB6, "Vitamina B6", "", false, Vitamins);
+
+    public static readonly Nutrient VitaminB9 =
+        new(nameof(VitaminB9), (int)NutrientToken.VitaminB9, "Vitamina B9", "Folato", true, Vitamins);
+
+    public static readonly Nutrient FolateFood =
+        new(nameof(FolateFood), (int)NutrientToken.FolateFood, "Folato, alimento", "", false, VitaminB9);
+
+    public static readonly Nutrient FolicAcid =
+        new(nameof(FolicAcid), (int)NutrientToken.FolicAcid, "Ácido fólico", "", false, VitaminB9);
+
+    public static readonly Nutrient VitaminB12 =
+        new(nameof(VitaminB12), (int)NutrientToken.VitaminB12, "Vitamina B12", "Cobalamina", true, Vitamins);
+
+    public static readonly Nutrient VitaminB12Added =
+        new(nameof(VitaminB12Added), (int)NutrientToken.VitaminB12Added, "Vitamina B12, añadida", "", false,
+            VitaminB12);
+
+    public static readonly Nutrient VitaminC =
+        new(nameof(VitaminC), (int)NutrientToken.VitaminC, "Ácido ascórbico", "Vitamina C", false, Vitamins);
+
+    public static readonly Nutrient VitaminD =
+        new(nameof(VitaminD), (int)NutrientToken.VitaminD, "Vitamina D", "", true, Vitamins);
+
+    public static readonly Nutrient VitaminD2 =
+        new(nameof(VitaminD2), (int)NutrientToken.VitaminD2, "Vitamina D2", "", false, VitaminD);
+
+    public static readonly Nutrient VitaminD3 =
+        new(nameof(VitaminD3), (int)NutrientToken.VitaminD3, "Vitamina D3", "", false, VitaminD);
+
+    public static readonly Nutrient VitaminE =
+        new(nameof(VitaminE), (int)NutrientToken.VitaminE, "Vitamina E", "", false, Vitamins);
+
+    public static readonly Nutrient VitaminEAdded =
+        new(nameof(VitaminEAdded), (int)NutrientToken.VitaminEAdded, "Vitamina E, añadida", "", false, VitaminE);
+
+    public static readonly Nutrient VitaminK =
+        new(nameof(VitaminK), (int)NutrientToken.VitaminK, "Vitamina K", "", true, Vitamins);
+
+    public static readonly Nutrient VitaminK1 =
+        new(nameof(VitaminK1), (int)NutrientToken.VitaminK1, "Vitamina K1", "Filoquinona", false, VitaminK);
+
+    public static readonly Nutrient VitaminK2 =
+        new(nameof(VitaminK2), (int)NutrientToken.VitaminK2, "Vitamina K2", "Menaquinona", false, VitaminK);
+
+    public static readonly Nutrient Dihydrophylloquinone =
+        new(nameof(Dihydrophylloquinone), (int)NutrientToken.Dihydrophylloquinone, "Dihidrofiloquinona", "", false,
+            VitaminK);
+
+    public static readonly Nutrient Betaine =
+        new(nameof(Betaine), (int)NutrientToken.Betaine, "Betaína", "", false, Vitamins);
+
+    public static readonly Nutrient Choline =
+        new(nameof(Choline), (int)NutrientToken.Choline, "Colina", "", false, Vitamins);
+    
     public static readonly Nutrient Minerals =
         new(nameof(Minerals), (int)NutrientToken.Minerals, "Minerales", "", false, null);
 
@@ -265,6 +416,39 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
 
     public static readonly Nutrient Fluoride =
         new(nameof(Fluoride), (int)NutrientToken.Fluoride, "Fluoruro", "F", false, Minerals);
+    
+    public static readonly Nutrient Sterols =
+        new(nameof(Sterols), (int)NutrientToken.Sterols, "Esteroles", "", true, null);
+
+    public static readonly Nutrient Cholesterol =
+        new(nameof(Cholesterol), (int)NutrientToken.Cholesterol, "Colesterol", "", false, Sterols);
+
+    public static readonly Nutrient Stigmasterol =
+        new(nameof(Stigmasterol), (int)NutrientToken.Stigmasterol, "Estigmasterol", "", false, Sterols);
+
+    public static readonly Nutrient Campesterol =
+        new(nameof(Campesterol), (int)NutrientToken.Campesterol, "Campesterol", "Campestanol", false, Sterols);
+
+    public static readonly Nutrient BetaSitosterol =
+        new(nameof(BetaSitosterol), (int)NutrientToken.BetaSitosterol, "β-sitosterol", "Beta-sitosterol", false, Sterols);
+    
+    public static readonly Nutrient Alcohol =
+        new(nameof(Alcohol), (int)NutrientToken.Alcohol, "Alcohol etílico", "", false, null);
+    
+    public static readonly Nutrient Other =
+        new(nameof(Other), (int)NutrientToken.Other, "Otros", "", false, null);
+
+    public static readonly Nutrient Water =
+        new(nameof(Water), (int)NutrientToken.Water, "Agua", "", false, Other);
+
+    public static readonly Nutrient Ash =
+        new(nameof(Ash), (int)NutrientToken.Ash, "Ceniza", "", false, Other);
+
+    public static readonly Nutrient Caffeine =
+        new(nameof(Caffeine), (int)NutrientToken.Caffeine, "Cafeína", "", false, Other);
+
+    public static readonly Nutrient Theobromine =
+        new(nameof(Theobromine), (int)NutrientToken.Theobromine, "Teobromina", "", false, Other);
 
     private Nutrient(string name, int value, string readableName, string optionalName, bool isTotal,
         Nutrient? category) : base(name, value)
@@ -286,8 +470,10 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
 public enum NutrientToken
 {
     None,
+
     // Energy
     Energy,
+
     // Carbohydrates
     Carbohydrates,
     Fiber,
@@ -299,8 +485,10 @@ public enum NutrientToken
     Maltose,
     Galactose,
     Starch,
+
     // Fatty Acids
     FattyAcids,
+
     // Saturated Fatty Acids
     Saturated,
     Butanoic,
@@ -317,6 +505,7 @@ public enum NutrientToken
     Eicosanoic,
     Docosanoic,
     Tetracosanoic,
+
     // Monounsaturated Fatty Acids
     Monounsaturated,
     Tetradecenoic,
@@ -331,6 +520,7 @@ public enum NutrientToken
     Docosenoic,
     CisDocosenoic,
     CisTetracosenoic,
+
     // Polyunsaturated Fatty Acids
     Polyunsaturated,
     Octadecadienoic,
@@ -351,10 +541,83 @@ public enum NutrientToken
     Eicosapentaenoic,
     N3Docosapentaenoic,
     N3Docosahexaenoic,
+
     // Trans Fatty Acids
     Trans,
     TransMonoenoic,
     TransPolinoic,
+
+    // Proteins
+    Proteins,
+    Tryptophan,
+    Threonine,
+    Isoleucine,
+    Leucine,
+    Lysine,
+    Methionine,
+    Cystine,
+    Phenylalanine,
+    Tyrosine,
+    Valine,
+    Arginine,
+    Histidine,
+    Alanine,
+    AsparticAcid,
+    GlutamicAcid,
+    Glycine,
+    Proline,
+    Serine,
+
+    // Vitaminas
+    Vitamins,
+
+    // Vitamina A
+    VitaminA,
+    AlphaCarotene,
+    BetaCarotene,
+    BetaCryptoxanthin,
+    LuteinZeaxanthin,
+    Lycopene,
+    Retinol,
+
+    // Vitaminas B1-B6
+    VitaminB1,
+    VitaminB2,
+    VitaminB3,
+    VitaminB5,
+    VitaminB6,
+
+    // Vitamina B9
+    VitaminB9,
+    FolateFood,
+    FolicAcid,
+
+    // Vitamina B12
+    VitaminB12,
+    VitaminB12Added,
+
+    // Vitamina C
+    VitaminC,
+
+    // Vitamina D
+    VitaminD,
+    VitaminD2,
+    VitaminD3,
+
+    // Vitamina E
+    VitaminE,
+    VitaminEAdded,
+
+    // Vitamina K
+    VitaminK,
+    VitaminK1,
+    VitaminK2,
+    Dihydrophylloquinone,
+
+    // Otras vitaminas
+    Betaine,
+    Choline,
+
     // Minerals
     Minerals,
     Calcium,
@@ -368,4 +631,21 @@ public enum NutrientToken
     Manganese,
     Selenium,
     Fluoride,
+    
+    // Esteroles
+    Sterols,
+    Cholesterol,
+    Stigmasterol,
+    Campesterol,
+    BetaSitosterol,
+    
+    // Alcohol
+    Alcohol,
+    
+    // Otros
+    Other,
+    Water,
+    Ash,
+    Caffeine,
+    Theobromine
 }
