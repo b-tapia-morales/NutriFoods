@@ -1,8 +1,8 @@
 FoodDataCentralName;FoodDataCentralId;NutriFoodsName;NutriFoodsId
-Energy;208;Energía;1
+Energy;208;Energía, total;1
 Carbohydrate, by difference;205;Carbohidratos, total;2
 Fiber, total dietary;291;Fibra;3
-Sugars, Total NLEA;269;Azúcares, total;4
+Sugars, Total NLEA;269;Azúcares;4
 Sucrose;210;Sucrosa;5
 Glucose;211;Glucosa;6
 Fructose;212;Fructosa;7
@@ -43,7 +43,7 @@ Fatty acids, total polyunsaturated;646;Ácidos grasos poliinsaturados, total;41
 PUFA 18:2;618;Ácido octadecadienoico;42
 PUFA 18:2 n-6 c,c;675;Ácido cis-octadecadienoico;43
 PUFA 18:2 i;1;Ácido i-octadecadienoico;44
-PUFA 18:2 c;670;Ácido conjugated-octadecadienoico;45
+PUFA 18:2 c;670;Ácido octadecadienoico conjugado;45
 PUFA 18:3;619;Ácido octadecatrienoico;46
 PUFA 18:3 n-3 c,c,c (ALA);851;Ácido cis3-octadecatrienoico;47
 PUFA 18:3 n-6 c,c,c;685;Ácido cis6-octadecatrienoico;48
@@ -59,8 +59,8 @@ PUFA 20:5 n-3 (EPA);629;Ácido eicosapentaenoico;57
 PUFA 22:5 n-3 (DPA);631;Ácido 3-docosapentaenoico;58
 PUFA 22:6 n-3 (DHA);621;Ácido 3-docosahexaenoico;59
 Fatty acids, total trans;605;Ácidos grasos trans, total;60
-Fatty acids, total trans-monoenoic;693;Ácido trans-monoenoico, total;61
-Fatty acids, total trans-polyenoic;695;Ácido trans-polinoico, total;62
+Fatty acids, total trans-monoenoic;693;Ácido trans-monoenoico;61
+Fatty acids, total trans-polyenoic;695;Ácido trans-polinoico;62
 Protein;203;Proteína, total;63
 Tryptophan;501;Triptófano;64
 Threonine;502;Treonina;65
@@ -80,42 +80,51 @@ Glutamic acid;515;Ácido glutámico;78
 Glycine;516;Glicina;79
 Proline;517;Prolina;80
 Serine;518;Serina;81
-Vitamin C, total ascorbic acid;401;Ácido ascórbico;82
-Thiamin;404;Tiamina;83
-Riboflavin;405;Riboflavina;84
-Niacin;406;Niacina;85
-Pantothenic acid;410;Ácido pantoténico;86
-Vitamin B-6;415;Vitamina B6;87
-Folate, total;417;Folato, total;88
-Folic acid;431;Ácido fólico;89
-Folate, food;432;Folato, alimento;90
-Folate, DFE;435;Folato, DFE;91
-Choline, total;421;Colina;92
-Betaine;454;Betaína;93
-Vitamin B-12;418;Vitamina B12;94
-Vitamin B-12, added;578;Vitamina B12, añadida;95
-Vitamin A, RAE;320;Vitamina A;96
-Retinol;319;Retinol;97
-Vitamin D (D2 + D3);328;Vitamina D;98
-Vitamin E (alpha-tocopherol);323;Vitamina E;99
-Vitamin K (Dihydrophylloquinone);429;Vitamina K;100
-Calcium, Ca;301;Calcio;101
-Iron, Fe;303;Hierro;102
-Magnesium, Mg;304;Magnesio;103
-Phosphorus, P;305;Fósforo;104
-Potassium, K;306;Potasio;105
-Sodium, Na;307;Sodio;106
-Zinc, Zn;309;Zinc;107
-Copper, Cu;312;Cobre;108
-Manganese, Mn;315;Manganeso;109
-Selenium, Se;317;Selenio;110
-Fluoride, F;313;Fluoruro;111
-Cholesterol;601;Colesterol;112
-Stigmasterol;638;Estigmasterol;113
-Campesterol;639;Campesterol;114
-Beta-sitosterol;641;Beta-sitosterol;115
-Alcohol, ethyl;221;Alcohol etílico;116
-Water;255;Agua;117
-Ash;207;Ceniza;118
-Caffeine;262;Cafeína;119
-Theobromine;263;Teobromina;120
+Vitamin A, RAE;320;Vitamina A;83
+Carotene, alpha;322;α-caroteno;84
+Carotene, beta;321;β-caroteno;85
+Cryptoxanthin, beta;334;β-criptoxantina;86
+Lutein + zeaxanthin;338;Luteína + Zeaxantina;87
+Lycopene;337;Licopeno;88
+Retinol;319;Retinol;89
+Thiamin;404;Vitamina B1;90
+Riboflavin;405;Vitamina B2;91
+Niacin;406;Niacina;92
+Pantothenic acid;410;Vitamina B5;93
+Vitamin B-6;415;Vitamina B6;94
+Folate, total;417;Vitamina B9;95
+Folate, food;432;Folato, alimento;96
+Folic acid;431;Ácido fólico;97
+Vitamin B-12;418;Vitamina B12;98
+Vitamin B-12, added;578;Vitamina B12, añadida;99
+Vitamin C, total ascorbic acid;401;Vitamina C;100
+Vitamin D (D2 + D3);328;Vitamina D;101
+Vitamin D2 (ergocalciferol);325;Vitamina D2;102
+Vitamin D3 (cholecalciferol);326;Vitamina D3;103
+Vitamin E (alpha-tocopherol);323;Vitamina E;104
+Vitamin E, added;573;Vitamina E, añadida;105
+Vitamin K (phylloquinone);430;Vitamina K1;106
+Vitamin K (Menaquinone-4);428;Vitamina K2;107
+Vitamin K (Dihydrophylloquinone);429;Vitamina dK;108
+Betaine;454;Betaína;109
+Choline, total;421;Colina;110
+Calcium, Ca;301;Calcio;112
+Iron, Fe;303;Hierro;113
+Magnesium, Mg;304;Magnesio;114
+Phosphorus, P;305;Fósforo;115
+Potassium, K;306;Potasio;116
+Sodium, Na;307;Sodio;117
+Zinc, Zn;309;Zinc;118
+Copper, Cu;312;Cobre;119
+Manganese, Mn;315;Manganeso;120
+Selenium, Se;317;Selenio;121
+Fluoride, F;313;Fluoruro;122
+Cholesterol;601;Colesterol;124
+Stigmasterol;638;Estigmasterol;125
+Campesterol;639;Campesterol;126
+Beta-sitosterol;641;Beta-sitosterol;127
+Alcohol, ethyl;221;Alcohol etílico;128
+Water;255;Agua;130
+Ash;207;Ceniza;131
+Caffeine;262;Cafeína;132
+Theobromine;263;Teobromina;133
