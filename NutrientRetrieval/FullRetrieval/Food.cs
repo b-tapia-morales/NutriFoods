@@ -1,8 +1,11 @@
 using NutrientRetrieval.Food;
 
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable ClassNeverInstantiated.Global
+
 namespace NutrientRetrieval.FullRetrieval;
 
-public class Food : IFood
+public class Food : IFood<FoodNutrient>
 {
     public int FdcId { get; set; }
     public string Description { get; set; } = null!;
@@ -10,31 +13,32 @@ public class Food : IFood
     public FoodPortion[] FoodPortions { get; set; } = null!;
     public int NdbNumber { get; set; }
 
-    int IFood.FdcId() => FdcId;
-
-    string IFood.Description() => Description;
-
     public override string ToString()
     {
-        return $@"
-{FdcId}
-{Description}
-{NdbNumber}
-{string.Join(Environment.NewLine, (IEnumerable<FoodPortion>) FoodPortions)}";
+        return $"""
+                {FdcId}
+                {Description}
+                {NdbNumber}
+                {string.Join(Environment.NewLine, (IEnumerable<FoodPortion>)FoodPortions)}
+                """;
     }
 }
 
-public class FoodNutrient
+public class FoodNutrient : IFoodNutrient
 {
     public Nutrient Nutrient { get; set; } = null!;
     public double Amount { get; set; }
 
-    public override string ToString()
-    {
-        return $@"
-{Nutrient}
-{Amount}";
-    }
+    string IFoodNutrient.Number => Nutrient.Number;
+    string IFoodNutrient.Name => Nutrient.Name;
+    double IFoodNutrient.Amount => Amount;
+    string IFoodNutrient.UnitName => Nutrient.UnitName;
+
+    public override string ToString() =>
+        $"""
+         {Nutrient}
+         {Amount}
+         """;
 }
 
 public class Nutrient
@@ -44,14 +48,13 @@ public class Nutrient
     public string Name { get; set; } = null!;
     public string UnitName { get; set; } = null!;
 
-    public override string ToString()
-    {
-        return $@"
-{Id}
-{Number}
-{Name}
-{UnitName}";
-    }
+    public override string ToString() =>
+        $"""
+         {Id}
+         {Number}
+         {Name}
+         {UnitName}
+         """;
 }
 
 public class FoodPortion
@@ -60,11 +63,10 @@ public class FoodPortion
     public double Amount { get; set; }
     public string Modifier { get; set; } = null!;
 
-    public override string ToString()
-    {
-        return $@"
-{Modifier}
-{Amount}
-{GramWeight}";
-    }
+    public override string ToString() =>
+        $"""
+         {Modifier}
+         {Amount}
+         {GramWeight}
+         """;
 }

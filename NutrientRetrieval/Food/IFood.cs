@@ -1,8 +1,8 @@
 namespace NutrientRetrieval.Food;
 
-public interface IFood
+public interface IFood<out T> where T : class, IFoodNutrient
 {
-    int FdcId();
-
-    string Description();
+    int FdcId { get; }
+    string Description { get; }
+    T[] FoodNutrients { get; }
 }
