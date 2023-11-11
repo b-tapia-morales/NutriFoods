@@ -2,7 +2,7 @@ FoodDataCentralName;FoodDataCentralId;NutriFoodsName;NutriFoodsId
 Energy;208;Energía, total;1
 Carbohydrate, by difference;205;Carbohidratos, total;2
 Fiber, total dietary;291;Fibra;3
-Sugars, Total NLEA;269;Azúcares;4
+Sugars, total including NLEA;269;Azúcares;4
 Sucrose;210;Sucrosa;5
 Glucose;211;Glucosa;6
 Fructose;212;Fructosa;7
