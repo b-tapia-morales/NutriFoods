@@ -17,7 +17,7 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
         new(nameof(Fiber), (int)NutrientToken.Fiber, "Fibra", "", false, Carbohydrates);
 
     public static readonly Nutrient Sugars =
-        new(nameof(Sugars), (int)NutrientToken.Sugars, "Azúcares", "", true, Carbohydrates);
+        new(nameof(Sugars), (int)NutrientToken.Sugars, "Azúcares, total", "", true, Carbohydrates);
 
     public static readonly Nutrient Sucrose =
         new(nameof(Sucrose), (int)NutrientToken.Sucrose, "Sucrosa", "Sacarosa", false, Sugars);
@@ -225,10 +225,10 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
         new(nameof(Trans), (int)NutrientToken.Trans, "Ácidos grasos trans, total", "", true, null);
 
     public static readonly Nutrient TransMonoenoic =
-        new(nameof(TransMonoenoic), (int)NutrientToken.TransMonoenoic, "Ácido 3-docosapentaenoico", "", false, Trans);
+        new(nameof(TransMonoenoic), (int)NutrientToken.TransMonoenoic, "Ácido trans-monoenoico", "", false, Trans);
 
     public static readonly Nutrient TransPolinoic =
-        new(nameof(TransPolinoic), (int)NutrientToken.TransPolinoic, "Ácido 3-docosahexaenoico", "", false, Trans);
+        new(nameof(TransPolinoic), (int)NutrientToken.TransPolinoic, "Ácido trans-polinoico", "", false, Trans);
 
     public static readonly Nutrient Proteins =
         new(nameof(Proteins), (int)NutrientToken.Proteins, "Proteína, total", "", true, null);
@@ -345,42 +345,38 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
             VitaminB12);
 
     public static readonly Nutrient VitaminC =
-        new(nameof(VitaminC), (int)NutrientToken.VitaminC, "Ácido ascórbico", "Vitamina C", false, Vitamins);
+        new(nameof(VitaminC), (int)NutrientToken.VitaminC, "Vitamina C", "Ácido ascórbico", false, Vitamins);
 
     public static readonly Nutrient VitaminD =
         new(nameof(VitaminD), (int)NutrientToken.VitaminD, "Vitamina D", "", true, Vitamins);
 
     public static readonly Nutrient VitaminD2 =
-        new(nameof(VitaminD2), (int)NutrientToken.VitaminD2, "Vitamina D2", "", false, VitaminD);
+        new(nameof(VitaminD2), (int)NutrientToken.VitaminD2, "Vitamina D2", "Ergocalciferol", false, VitaminD);
 
     public static readonly Nutrient VitaminD3 =
-        new(nameof(VitaminD3), (int)NutrientToken.VitaminD3, "Vitamina D3", "", false, VitaminD);
+        new(nameof(VitaminD3), (int)NutrientToken.VitaminD3, "Vitamina D3", "Cholecalciferol", false, VitaminD);
 
     public static readonly Nutrient VitaminE =
-        new(nameof(VitaminE), (int)NutrientToken.VitaminE, "Vitamina E", "", false, Vitamins);
+        new(nameof(VitaminE), (int)NutrientToken.VitaminE, "Vitamina E", "α-tocoferol", false, Vitamins);
 
     public static readonly Nutrient VitaminEAdded =
         new(nameof(VitaminEAdded), (int)NutrientToken.VitaminEAdded, "Vitamina E, añadida", "", false, VitaminE);
 
-    public static readonly Nutrient VitaminK =
-        new(nameof(VitaminK), (int)NutrientToken.VitaminK, "Vitamina K", "", true, Vitamins);
-
     public static readonly Nutrient VitaminK1 =
-        new(nameof(VitaminK1), (int)NutrientToken.VitaminK1, "Vitamina K1", "Filoquinona", false, VitaminK);
+        new(nameof(VitaminK1), (int)NutrientToken.VitaminK1, "Vitamina K1", "Filoquinona", false, Vitamins);
 
     public static readonly Nutrient VitaminK2 =
-        new(nameof(VitaminK2), (int)NutrientToken.VitaminK2, "Vitamina K2", "Menaquinona", false, VitaminK);
-
-    public static readonly Nutrient Dihydrophylloquinone =
-        new(nameof(Dihydrophylloquinone), (int)NutrientToken.Dihydrophylloquinone, "Dihidrofiloquinona", "", false,
-            VitaminK);
+        new(nameof(VitaminK2), (int)NutrientToken.VitaminK2, "Vitamina K2", "Menaquinona-4", false, Vitamins);
+    
+    public static readonly Nutrient VitaminDk =
+        new(nameof(VitaminDk), (int)NutrientToken.VitaminDk, "Vitamina dK", "Dihidrofiloquinona", true, Vitamins);
 
     public static readonly Nutrient Betaine =
         new(nameof(Betaine), (int)NutrientToken.Betaine, "Betaína", "", false, Vitamins);
 
     public static readonly Nutrient Choline =
         new(nameof(Choline), (int)NutrientToken.Choline, "Colina", "", false, Vitamins);
-    
+
     public static readonly Nutrient Minerals =
         new(nameof(Minerals), (int)NutrientToken.Minerals, "Minerales", "", false, null);
 
@@ -416,7 +412,7 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
 
     public static readonly Nutrient Fluoride =
         new(nameof(Fluoride), (int)NutrientToken.Fluoride, "Fluoruro", "F", false, Minerals);
-    
+
     public static readonly Nutrient Sterols =
         new(nameof(Sterols), (int)NutrientToken.Sterols, "Esteroles", "", true, null);
 
@@ -430,11 +426,12 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
         new(nameof(Campesterol), (int)NutrientToken.Campesterol, "Campesterol", "Campestanol", false, Sterols);
 
     public static readonly Nutrient BetaSitosterol =
-        new(nameof(BetaSitosterol), (int)NutrientToken.BetaSitosterol, "β-sitosterol", "Beta-sitosterol", false, Sterols);
-    
+        new(nameof(BetaSitosterol), (int)NutrientToken.BetaSitosterol, "β-sitosterol", "Beta-sitosterol", false,
+            Sterols);
+
     public static readonly Nutrient Alcohol =
         new(nameof(Alcohol), (int)NutrientToken.Alcohol, "Alcohol etílico", "", false, null);
-    
+
     public static readonly Nutrient Other =
         new(nameof(Other), (int)NutrientToken.Other, "Otros", "", false, null);
 
@@ -609,10 +606,9 @@ public enum NutrientToken
     VitaminEAdded,
 
     // Vitamina K
-    VitaminK,
     VitaminK1,
     VitaminK2,
-    Dihydrophylloquinone,
+    VitaminDk,
 
     // Otras vitaminas
     Betaine,
@@ -631,17 +627,17 @@ public enum NutrientToken
     Manganese,
     Selenium,
     Fluoride,
-    
+
     // Esteroles
     Sterols,
     Cholesterol,
     Stigmasterol,
     Campesterol,
     BetaSitosterol,
-    
+
     // Alcohol
     Alcohol,
-    
+
     // Otros
     Other,
     Water,
