@@ -19,6 +19,12 @@ public interface IEnum<out T, TEnum>
 
     static IReadOnlyCollection<T> NonNullValues() => Values().Skip(1).ToImmutableList();
 
+    static IReadOnlyDictionary<int, T> ValueDictionary() =>
+        Values().ToImmutableSortedDictionary(e => e.Value, e => e);
+
+    static IReadOnlyDictionary<string, T> NameDictionary() =>
+        Values().ToImmutableSortedDictionary(e => e.Name, e => e);
+
     static IReadOnlyDictionary<TEnum, T> TokenDictionary() =>
         Tokens.Zip(Values(), (k, v) => new { Key = k, Value = v })
             .ToImmutableSortedDictionary(e => e.Key, e => e.Value);
