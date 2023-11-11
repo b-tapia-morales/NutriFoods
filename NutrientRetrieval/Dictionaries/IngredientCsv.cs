@@ -1,5 +1,8 @@
 using CsvHelper.Configuration;
 
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable ClassNeverInstantiated.Global
+
 namespace NutrientRetrieval.Dictionaries;
 
 public sealed class IngredientRow
