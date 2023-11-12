@@ -85,7 +85,7 @@
       <Content Include="Measures\Ciboulette.csv" />
       <Content Include="Measures\Cilantro.csv" />
       <Content Include="Measures\Clavo de olor.csv" />
-      <Content Include="Measures\Cobertura de chocolate semiamargo.csv" />
+      <Content Include="Measures\Cobertura de chocolate semi-amargo.csv" />
       <Content Include="Measures\coco.csv" />
       <Content Include="Measures\Cola de langostino.csv" />
       <Content Include="Measures\colapez.csv" />
@@ -260,7 +260,7 @@
       <None Update="Measures\Alga nori.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
-      <None Update="Measures\Arroz arboreo.csv">
+      <None Update="Measures\Arroz arbóreo.csv">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="Measures\Ostiones.csv">
