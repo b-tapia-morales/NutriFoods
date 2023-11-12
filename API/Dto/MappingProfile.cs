@@ -52,10 +52,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.RecipeNutrients))
             .ForMember(dest => dest.MealTypes, opt => opt
                 .MapFrom(src =>
-                    (src.MealTypes ?? Array.Empty<MealType>()).Select(e => e.ReadableName).ToList()))
+                    (src.MealTypes ?? Array.Empty<MealTypes>()).Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src =>
-                    (src.DishTypes ?? Array.Empty<DishType>()).Select(e => e.ReadableName).ToList()))
+                    (src.DishTypes ?? Array.Empty<DishTypes>()).Select(e => e.ReadableName).ToList()))
             .ReverseMap();
 
         // Recipe Abridged
@@ -65,10 +65,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
             .ForMember(dest => dest.MealTypes, opt => opt
                 .MapFrom(src =>
-                    (src.MealTypes ?? Array.Empty<MealType>()).Select(e => e.ReadableName).ToList()))
+                    (src.MealTypes ?? Array.Empty<MealTypes>()).Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src =>
-                    (src.DishTypes ?? Array.Empty<DishType>()).Select(e => e.ReadableName).ToList()))
+                    (src.DishTypes ?? Array.Empty<DishTypes>()).Select(e => e.ReadableName).ToList()))
             .ReverseMap();
 
         // Meal Plan
@@ -79,7 +79,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ReverseMap();
         CreateMap<DailyMenu, DailyMenuDto>()
-            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
+            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealTypes.ReadableName))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMenuNutrients))
             .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MenuRecipes))
             .ReverseMap();

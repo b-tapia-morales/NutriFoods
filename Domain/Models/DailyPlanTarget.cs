@@ -8,13 +8,13 @@ public class DailyPlanTarget
 
     public int DailyPlanId { get; set; }
 
-    public Nutrient Nutrient { get; set; } = null!;
+    public Nutrients Nutrient { get; set; } = null!;
 
     public double Quantity { get; set; }
 
-    public Unit Unit { get; set; } = null!;
+    public Units Unit { get; set; } = null!;
 
-    public ThresholdType ThresholdType { get; set; } = null!;
+    public ThresholdTypes ThresholdType { get; set; } = null!;
 
     public DailyPlan DailyPlan { get; set; } = null!;
 }

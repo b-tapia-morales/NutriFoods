@@ -2,21 +2,21 @@ using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
 
-public class IngestibleType : SmartEnum<IngestibleType>, IEnum<IngestibleType, IngestibleToken>
+public class IngestibleTypes : SmartEnum<IngestibleTypes>, IEnum<IngestibleTypes, IngestibleToken>
 {
-    public static readonly IngestibleType None =
+    public static readonly IngestibleTypes None =
         new(nameof(None), (int)IngestibleToken.None, string.Empty);
 
-    public static readonly IngestibleType Pharmaceutical =
+    public static readonly IngestibleTypes Pharmaceutical =
         new(nameof(Pharmaceutical), (int)IngestibleToken.Pharmaceutical, "Fármaco");
 
-    public static readonly IngestibleType Vitamin =
+    public static readonly IngestibleTypes Vitamin =
         new(nameof(Vitamin), (int)IngestibleToken.Vitamin, "Vitamina");
 
-    public static readonly IngestibleType Supplement =
+    public static readonly IngestibleTypes Supplement =
         new(nameof(Supplement), (int)IngestibleToken.Supplement, "Suplemento dietético");
 
-    private IngestibleType(string name, int value, string readableName) : base(name, value) =>
+    private IngestibleTypes(string name, int value, string readableName) : base(name, value) =>
         ReadableName = readableName;
 
     public string ReadableName { get; }

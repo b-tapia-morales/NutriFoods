@@ -12,7 +12,7 @@ public class Ingredient
 
     public bool IsAnimal { get; set; }
 
-    public FoodGroup FoodGroup { get; set; } = null!;
+    public FoodGroups FoodGroup { get; set; } = null!;
 
     public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; } = new List<IngredientMeasure>();
 

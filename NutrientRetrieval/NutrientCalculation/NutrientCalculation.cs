@@ -46,7 +46,7 @@ public static class NutrientCalculation
 
             foreach (var pair in gramDictionary)
             {
-                var nutrient = Nutrient.FromValue(pair.Key);
+                var nutrient = Nutrients.FromValue(pair.Key);
                 context.Add(new RecipeNutrient
                 {
                     RecipeId = recipe.Id,

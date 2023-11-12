@@ -6,9 +6,9 @@ public class Consultation
 {
     public Guid Id { get; set; }
 
-    public ConsultationType Type { get; set; } = null!;
+    public ConsultationTypes Type { get; set; } = null!;
 
-    public ConsultationPurpose Purpose { get; set; } = null!;
+    public ConsultationPurposes Purpose { get; set; } = null!;
 
     public DateOnly? RegisteredOn { get; set; }
 

@@ -2,40 +2,40 @@ using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
 
-public class Day : SmartEnum<Day>, IEnum<Day, DayToken>
+public class Days : SmartEnum<Days>, IEnum<Days, DayToken>
 {
-    public static readonly Day None =
+    public static readonly Days None =
         new(nameof(None), (int)DayToken.None, string.Empty);
 
-    public static readonly Day Sunday =
+    public static readonly Days Sunday =
         new(nameof(Sunday), (int)DayToken.Sunday, "Domingo");
 
-    public static readonly Day Monday =
+    public static readonly Days Monday =
         new(nameof(Monday), (int)DayToken.Monday, "Lunes");
 
-    public static readonly Day Tuesday =
+    public static readonly Days Tuesday =
         new(nameof(Tuesday), (int)DayToken.Tuesday, "Martes");
 
-    public static readonly Day Wednesday =
+    public static readonly Days Wednesday =
         new(nameof(Wednesday), (int)DayToken.Wednesday, "Miércoles");
 
-    public static readonly Day Thursday =
+    public static readonly Days Thursday =
         new(nameof(Thursday), (int)DayToken.Thursday, "Jueves");
 
-    public static readonly Day Friday =
+    public static readonly Days Friday =
         new(nameof(Friday), (int)DayToken.Friday, "Viernes");
 
-    public static readonly Day Saturday =
+    public static readonly Days Saturday =
         new(nameof(Saturday), (int)DayToken.Saturday, "Sábado");
 
-    private Day(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+    private Days(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
 
-    public static DayOfWeek ToDayOfWeek(Day day) =>
+    public static DayOfWeek ToDayOfWeek(Days day) =>
         day == None ? throw new ArgumentException("Value can't be 'None'") : (DayOfWeek)(day.Value - 1);
 
-    public static Day ToDay(DayOfWeek dayOfWeek) => FromValue((int)dayOfWeek + 1);
+    public static Days ToDay(DayOfWeek dayOfWeek) => FromValue((int)dayOfWeek + 1);
 }
 
 public enum DayToken

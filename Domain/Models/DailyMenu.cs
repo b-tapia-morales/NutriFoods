@@ -10,7 +10,7 @@ public class DailyMenu
 
     public int IntakePercentage { get; set; }
 
-    public MealType MealType { get; set; } = null!;
+    public MealTypes MealTypes { get; set; } = null!;
 
     public string Hour { get; set; } = null!;
 

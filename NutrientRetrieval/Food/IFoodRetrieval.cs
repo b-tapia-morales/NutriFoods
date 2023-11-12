@@ -5,7 +5,6 @@ using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Request;
 using Utils.Csv;
 using static Utils.Csv.DelimiterToken;
-using Unit = Domain.Enum.Unit;
 
 namespace NutrientRetrieval.Food;
 
@@ -52,7 +51,7 @@ public interface IFoodRetrieval<in TFood, TNutrient>
             if (!dictionary.ContainsKey(fdcNutrientId)) continue;
 
             var nutrientId = dictionary[fdcNutrientId];
-            var nutrient = Nutrient.FromValue(nutrientId);
+            var nutrient = Nutrients.FromValue(nutrientId);
             context.IngredientNutrients.Add(new IngredientNutrient
             {
                 IngredientId = ingredientId,

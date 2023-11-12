@@ -8,13 +8,13 @@ public class Ingestible
 
     public string Name { get; set; } = null!;
 
-    public IngestibleType Type { get; set; } = null!;
+    public IngestibleTypes Type { get; set; } = null!;
 
     public string[] AdministrationTimes { get; set; } = null!;
 
     public int? Dosage { get; set; }
 
-    public Frequency Adherence { get; set; } = null!;
+    public Frequencies Adherence { get; set; } = null!;
 
     public string? Observations { get; set; }
 

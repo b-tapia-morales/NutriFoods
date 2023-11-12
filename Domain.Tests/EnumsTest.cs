@@ -12,7 +12,7 @@ public sealed class EnumsTest
     [Fact]
     public void ValuesPreserveOrder()
     {
-        var values = IEnum<DishType, DishTypeToken>.Values();
+        var values = IEnum<DishTypes, DishToken>.Values();
         _output.WriteLine(string.Join(", ", values));
         Assert.DoesNotContain(false, values.Zip(values.Skip(1), (a, b) => a.Value < b.Value));
     }
@@ -20,15 +20,15 @@ public sealed class EnumsTest
     [Fact]
     public void ValuesSkipNulls()
     {
-        var values = IEnum<DishType, DishTypeToken>.NonNullValues();
+        var values = IEnum<DishTypes, DishToken>.NonNullValues();
         _output.WriteLine(string.Join(", ", values));
-        Assert.All(values, e => Assert.NotEqual(e, DishType.None));
+        Assert.All(values, e => Assert.NotEqual(e, DishTypes.None));
     }
 
     [Fact]
     public void TokenDictionaryPreservesOrder()
     {
-        var dictionary = IEnum<DishType, DishTypeToken>.TokenDictionary();
+        var dictionary = IEnum<DishTypes, DishToken>.TokenDictionary();
         _output.WriteLine(string.Join(", ", dictionary));
         Assert.DoesNotContain(false, dictionary.Zip(dictionary.Skip(1), (a, b) => a.Value < b.Value));
     }
@@ -36,9 +36,9 @@ public sealed class EnumsTest
     [Fact]
     public void ValuesAreFilterable()
     {
-        var values = IHierarchicalEnum<Nutrient, NutrientToken>.ByCategory(Nutrient.Minerals);
+        var values = IHierarchicalEnum<Nutrients, NutrientToken>.ByCategory(Nutrients.Minerals);
         _output.WriteLine(string.Join(", ", values));
-        Assert.All(values, e => Assert.Equal(e.Category, Nutrient.Minerals));
+        Assert.All(values, e => Assert.Equal(e.Category, Nutrients.Minerals));
         Assert.DoesNotContain(false, values.Zip(values.Skip(1), (a, b) => a.Value < b.Value));
     }
 }

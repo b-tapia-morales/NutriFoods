@@ -8,9 +8,9 @@ public class DailyPlan
 
     public int MealPlanId { get; set; }
 
-    public Day Day { get; set; } = null!;
+    public Days Day { get; set; } = null!;
 
-    public PhysicalActivity PhysicalActivityLevel { get; set; } = null!;
+    public PhysicalActivities PhysicalActivityLevel { get; set; } = null!;
 
     public double PhysicalActivityFactor { get; set; }
 

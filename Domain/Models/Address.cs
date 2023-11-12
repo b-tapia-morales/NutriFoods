@@ -12,7 +12,7 @@ public class Address
 
     public int? PostalCode { get; set; }
 
-    public Province Province { get; set; } = null!;
+    public Provinces Province { get; set; } = null!;
 
     public Patient IdNavigation { get; set; } = null!;
 }

@@ -271,7 +271,7 @@ public partial class NutrifoodsDbContext : DbContext
                 .HasMaxLength(8)
                 .HasColumnName("hour");
             entity.Property(e => e.IntakePercentage).HasColumnName("intake_percentage");
-            entity.Property(e => e.MealType).HasColumnName("meal_type");
+            entity.Property(e => e.MealTypes).HasColumnName("meal_type");
 
             entity.HasOne(d => d.DailyPlan).WithMany(p => p.DailyMenus)
                 .HasForeignKey(d => d.DailyPlanId)
@@ -793,68 +793,68 @@ public partial class NutrifoodsDbContext : DbContext
 
         // Ingredient
         builder.Entity<Ingredient>().Property(e => e.FoodGroup)
-            .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));
+            .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<IngredientNutrient>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Unit.FromValue(e));
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<IngredientNutrient>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
 
         // Recipe
         builder.Entity<Recipe>().Property(e => e.Difficulty)
-            .HasConversion(e => (e ?? Difficulty.None).Value, e => Difficulty.FromValue(e));
+            .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
         builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasConversion(e => e.Select(x => x.Value), e => e.Select(MealType.FromValue).ToArray());
+            .HasConversion(e => e.Select(x => x.Value), e => e.Select(MealTypes.FromValue).ToArray());
         builder.Entity<Recipe>().Property(e => e.DishTypes)
-            .HasConversion(e => e.Select(x => x.Value), e => e.Select(DishType.FromValue).ToArray());
+            .HasConversion(e => e.Select(x => x.Value), e => e.Select(DishTypes.FromValue).ToArray());
         builder.Entity<RecipeNutrient>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Unit.FromValue(e));
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<RecipeNutrient>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
 
         // Meal Plan
         builder.Entity<DailyPlan>().Property(e => e.Day)
-            .HasConversion(e => e.Value, e => Day.FromValue(e));
+            .HasConversion(e => e.Value, e => Days.FromValue(e));
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
-            .HasConversion(e => e.Value, e => PhysicalActivity.FromValue(e));
+            .HasConversion(e => e.Value, e => PhysicalActivities.FromValue(e));
         builder.Entity<DailyPlanTarget>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Unit.FromValue(e));
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<DailyPlanTarget>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
         builder.Entity<DailyPlanTarget>().Property(e => e.ThresholdType)
-            .HasConversion(e => e.Value, e => ThresholdType.FromValue(e));
+            .HasConversion(e => e.Value, e => ThresholdTypes.FromValue(e));
         builder.Entity<DailyPlanNutrient>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Unit.FromValue(e));
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<DailyPlanNutrient>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
-        builder.Entity<DailyMenu>().Property(e => e.MealType)
-            .HasConversion(e => e.Value, e => MealType.FromValue(e));
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
+        builder.Entity<DailyMenu>().Property(e => e.MealTypes)
+            .HasConversion(e => e.Value, e => MealTypes.FromValue(e));
         builder.Entity<DailyMenuNutrient>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrient.FromValue(e));
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
         builder.Entity<DailyMenuNutrient>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Unit.FromValue(e));
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
 
         // User
         builder.Entity<PersonalInfo>().Property(e => e.BiologicalSex)
-            .HasConversion(e => e.Value, e => Gender.FromValue(e));
+            .HasConversion(e => e.Value, e => BiologicalSexes.FromValue(e));
         builder.Entity<Address>().Property(e => e.Province)
-            .HasConversion(e => e.Value, e => Province.FromValue(e));
+            .HasConversion(e => e.Value, e => Provinces.FromValue(e));
         builder.Entity<Consultation>().Property(e => e.Type)
-            .HasConversion(e => e.Value, e => ConsultationType.FromValue(e));
+            .HasConversion(e => e.Value, e => ConsultationTypes.FromValue(e));
         builder.Entity<Consultation>().Property(e => e.Purpose)
-            .HasConversion(e => e.Value, e => ConsultationPurpose.FromValue(e));
+            .HasConversion(e => e.Value, e => ConsultationPurposes.FromValue(e));
         builder.Entity<Disease>().Property(e => e.InheritanceType)
-            .HasConversion(e => e.Value, e => InheritanceType.FromValue(e));
+            .HasConversion(e => e.Value, e => InheritanceTypes.FromValue(e));
         builder.Entity<Ingestible>().Property(e => e.Type)
-            .HasConversion(e => e.Value, e => IngestibleType.FromValue(e));
+            .HasConversion(e => e.Value, e => IngestibleTypes.FromValue(e));
         builder.Entity<Ingestible>().Property(e => e.Adherence)
-            .HasConversion(e => e.Value, e => Frequency.FromValue(e));
+            .HasConversion(e => e.Value, e => Frequencies.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.FoodGroup)
-            .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));
+            .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.Type)
-            .HasConversion(e => e.Value, e => FoodReactionType.FromValue(e));
+            .HasConversion(e => e.Value, e => FoodReactions.FromValue(e));
         builder.Entity<FoodConsumption>().Property(e => e.FoodGroup)
-            .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));
+            .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<FoodConsumption>().Property(e => e.Frequency)
-            .HasConversion(e => e.Value, e => Frequency.FromValue(e));
+            .HasConversion(e => e.Value, e => Frequencies.FromValue(e));
     }
 }

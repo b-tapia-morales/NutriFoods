@@ -16,11 +16,11 @@ public class Recipe
 
     public int? Time { get; set; }
 
-    public Difficulty? Difficulty { get; set; }
+    public Difficulties? Difficulty { get; set; }
 
-    public MealType[] MealTypes { get; set; } = null!;
+    public MealTypes[] MealTypes { get; set; } = null!;
 
-    public DishType[] DishTypes { get; set; } = null!;
+    public DishTypes[] DishTypes { get; set; } = null!;
 
     public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
 

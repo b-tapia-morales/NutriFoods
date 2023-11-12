@@ -39,7 +39,7 @@ public class NutrientMappingTest
     {
         var names = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsName);
-        var keys = IEnum<Nutrient, NutrientToken>.TokenDictionary().Values.Select(e => e.ReadableName)
+        var keys = IEnum<Nutrients, NutrientToken>.TokenDictionary().Values.Select(e => e.ReadableName)
             .ToImmutableHashSet();
         Assert.All(names, e => Assert.Contains(e, keys));
     }

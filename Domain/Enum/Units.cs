@@ -2,24 +2,24 @@ using Ardalis.SmartEnum;
 
 namespace Domain.Enum;
 
-public class Unit : SmartEnum<Unit>, IEnum<Unit, UnitToken>
+public class Units : SmartEnum<Units>, IEnum<Units, UnitToken>
 {
-    public static readonly Unit None =
+    public static readonly Units None =
         new(nameof(None), (int)UnitToken.None, string.Empty);
 
-    public static readonly Unit Grams =
+    public static readonly Units Grams =
         new(nameof(Grams), (int)UnitToken.Grams, "g");
 
-    public static readonly Unit Milligrams =
+    public static readonly Units Milligrams =
         new(nameof(Milligrams), (int)UnitToken.Milligrams, "mg");
 
-    public static readonly Unit Micrograms =
+    public static readonly Units Micrograms =
         new(nameof(Micrograms), (int)UnitToken.Micrograms, "µg");
 
-    public static readonly Unit KiloCalories =
+    public static readonly Units KiloCalories =
         new(nameof(KiloCalories), (int)UnitToken.KiloCalories, "KCal");
 
-    private Unit(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
+    private Units(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
     public string ReadableName { get; }
 }

@@ -12,7 +12,7 @@ public class PersonalInfo
 
     public string LastNames { get; set; } = null!;
 
-    public Gender BiologicalSex { get; set; } = null!;
+    public BiologicalSexes BiologicalSex { get; set; } = null!;
 
     public DateOnly Birthdate { get; set; }
 
