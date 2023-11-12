@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class ClinicalSign
+public class ClinicalSign
 {
     public Guid Id { get; set; }
 

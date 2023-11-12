@@ -106,7 +106,7 @@ public class MappingProfile : Profile
             .ReverseMap();
 
         // Clinical Anamnesis
-        CreateMap<Medication, MedicationDto>()
+        CreateMap<Ingestible, IngestibleDto>()
             .ForMember(e => e.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ForMember(e => e.AdministrationTimes, opt => opt.MapFrom(src => src.AdministrationTimes.ToList()))
             .ForMember(e => e.Adherence, opt => opt.MapFrom(src => src.Adherence.ReadableName))

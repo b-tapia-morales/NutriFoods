@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class EatingSymptom
+public class EatingSymptom
 {
     public Guid Id { get; set; }
 

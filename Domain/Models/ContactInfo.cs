@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class ContactInfo
+public class ContactInfo
 {
     public Guid Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class ClinicalAnamnesis
+public class ClinicalAnamnesis
 {
     public Guid Id { get; set; }
 
@@ -8,11 +8,11 @@ public sealed class ClinicalAnamnesis
 
     public DateTime? LastUpdated { get; set; }
 
-    public ICollection<ClinicalSign> ClinicalSigns { get; set; } = new List<ClinicalSign>();
+    public virtual ICollection<ClinicalSign> ClinicalSigns { get; set; } = new List<ClinicalSign>();
 
-    public ICollection<Disease> Diseases { get; set; } = new List<Disease>();
+    public virtual ICollection<Disease> Diseases { get; set; } = new List<Disease>();
+    
+    public virtual ICollection<Ingestible> Ingestibles { get; set; } = new List<Ingestible>();
 
     public Consultation IdNavigation { get; set; } = null!;
-
-    public ICollection<Medication> Medications { get; set; } = new List<Medication>();
 }

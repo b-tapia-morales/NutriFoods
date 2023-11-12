@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class DailyPlanTarget
+public class DailyPlanTarget
 {
     public int Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class MealPlan
+public class MealPlan
 {
     public int Id { get; set; }
 
@@ -8,7 +8,7 @@ public sealed class MealPlan
 
     public DateTime? CreatedOn { get; set; }
 
-    public ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
+    public virtual ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
 
-    public ICollection<DailyPlan> DailyPlans { get; set; } = new List<DailyPlan>();
+    public virtual ICollection<DailyPlan> DailyPlans { get; set; } = new List<DailyPlan>();
 }

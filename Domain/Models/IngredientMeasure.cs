@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class IngredientMeasure
+public class IngredientMeasure
 {
     public int Id { get; set; }
 
@@ -14,5 +14,5 @@ public sealed class IngredientMeasure
 
     public Ingredient Ingredient { get; set; } = null!;
 
-    public ICollection<RecipeMeasure> RecipeMeasures { get; set; } = new List<RecipeMeasure>();
+    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = new List<RecipeMeasure>();
 }

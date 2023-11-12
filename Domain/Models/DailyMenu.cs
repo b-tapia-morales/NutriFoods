@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class DailyMenu
+public class DailyMenu
 {
     public int Id { get; set; }
 
@@ -14,9 +14,9 @@ public sealed class DailyMenu
 
     public string Hour { get; set; } = null!;
 
-    public ICollection<DailyMenuNutrient> DailyMenuNutrients { get; set; } = new List<DailyMenuNutrient>();
+    public virtual ICollection<DailyMenuNutrient> DailyMenuNutrients { get; set; } = new List<DailyMenuNutrient>();
+
+    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
 
     public DailyPlan DailyPlan { get; set; } = null!;
-
-    public ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
 }

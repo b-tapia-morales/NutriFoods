@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class Medication
+public class Ingestible
 {
     public Guid Id { get; set; }
 
@@ -20,5 +20,5 @@ public sealed class Medication
 
     public Guid ClinicalAnamnesisId { get; set; }
 
-    public ClinicalAnamnesis ClinicalAnamnesis { get; set; } = null!;
+    public virtual ClinicalAnamnesis ClinicalAnamnesis { get; set; } = null!;
 }

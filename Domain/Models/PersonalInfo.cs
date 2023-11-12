@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class PersonalInfo
+public class PersonalInfo
 {
     public Guid Id { get; set; }
 

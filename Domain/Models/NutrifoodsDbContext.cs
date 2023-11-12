@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Models;
 
-public class NutrifoodsDbContext : DbContext
+public partial class NutrifoodsDbContext : DbContext
 {
     public NutrifoodsDbContext()
     {
@@ -14,67 +14,67 @@ public class NutrifoodsDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Address> Addresses { get; set; } = null!;
+    public virtual DbSet<Address> Addresses { get; set; }
 
-    public virtual DbSet<AdverseFoodReaction> AdverseFoodReactions { get; set; } = null!;
+    public virtual DbSet<AdverseFoodReaction> AdverseFoodReactions { get; set; }
 
-    public virtual DbSet<Anthropometry> Anthropometries { get; set; } = null!;
+    public virtual DbSet<Anthropometry> Anthropometries { get; set; }
 
-    public virtual DbSet<ClinicalAnamnesis> ClinicalAnamneses { get; set; } = null!;
+    public virtual DbSet<ClinicalAnamnesis> ClinicalAnamneses { get; set; }
 
-    public virtual DbSet<ClinicalSign> ClinicalSigns { get; set; } = null!;
+    public virtual DbSet<ClinicalSign> ClinicalSigns { get; set; }
 
-    public virtual DbSet<Consultation> Consultations { get; set; } = null!;
+    public virtual DbSet<Consultation> Consultations { get; set; }
 
-    public virtual DbSet<ContactInfo> ContactInfos { get; set; } = null!;
+    public virtual DbSet<ContactInfo> ContactInfos { get; set; }
 
-    public virtual DbSet<DailyMenu> DailyMenus { get; set; } = null!;
+    public virtual DbSet<DailyMenu> DailyMenus { get; set; }
 
-    public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; } = null!;
+    public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; }
 
-    public virtual DbSet<DailyPlan> DailyPlans { get; set; } = null!;
+    public virtual DbSet<DailyPlan> DailyPlans { get; set; }
 
-    public virtual DbSet<DailyPlanNutrient> DailyPlanNutrients { get; set; } = null!;
+    public virtual DbSet<DailyPlanNutrient> DailyPlanNutrients { get; set; }
 
-    public virtual DbSet<DailyPlanTarget> DailyPlanTargets { get; set; } = null!;
+    public virtual DbSet<DailyPlanTarget> DailyPlanTargets { get; set; }
 
-    public virtual DbSet<Disease> Diseases { get; set; } = null!;
+    public virtual DbSet<Disease> Diseases { get; set; }
 
-    public virtual DbSet<EatingSymptom> EatingSymptoms { get; set; } = null!;
+    public virtual DbSet<EatingSymptom> EatingSymptoms { get; set; }
 
-    public virtual DbSet<FoodConsumption> FoodConsumptions { get; set; } = null!;
+    public virtual DbSet<FoodConsumption> FoodConsumptions { get; set; }
 
-    public virtual DbSet<HarmfulHabit> HarmfulHabits { get; set; } = null!;
+    public virtual DbSet<HarmfulHabit> HarmfulHabits { get; set; }
 
-    public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
+    public virtual DbSet<Ingestible> Ingestibles { get; set; }
 
-    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; } = null!;
+    public virtual DbSet<Ingredient> Ingredients { get; set; }
 
-    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; } = null!;
+    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; }
 
-    public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
+    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; }
 
-    public virtual DbSet<Medication> Medications { get; set; } = null!;
+    public virtual DbSet<MealPlan> MealPlans { get; set; }
 
-    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; } = null!;
+    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; }
 
-    public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; } = null!;
+    public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; }
 
-    public virtual DbSet<Nutritionist> Nutritionists { get; set; } = null!;
+    public virtual DbSet<Nutritionist> Nutritionists { get; set; }
 
-    public virtual DbSet<Patient> Patients { get; set; } = null!;
+    public virtual DbSet<Patient> Patients { get; set; }
 
-    public virtual DbSet<PersonalInfo> PersonalInfos { get; set; } = null!;
+    public virtual DbSet<PersonalInfo> PersonalInfos { get; set; }
 
-    public virtual DbSet<Recipe> Recipes { get; set; } = null!;
+    public virtual DbSet<Recipe> Recipes { get; set; }
 
-    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; } = null!;
+    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; }
 
-    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; } = null!;
+    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; }
 
-    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; } = null!;
+    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; }
 
-    public virtual DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
+    public virtual DbSet<RecipeStep> RecipeSteps { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
@@ -178,7 +178,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("last_updated");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.ClinicalAnamnesi)
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.ClinicalAnamnesis)
                 .HasForeignKey<ClinicalAnamnesis>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("clinical_anamnesis_id_fkey");
@@ -440,6 +440,36 @@ public class NutrifoodsDbContext : DbContext
                 .HasConstraintName("harmful_habit_nutritional_anamnesis_fkey");
         });
 
+        modelBuilder.Entity<Ingestible>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("ingestible_pkey");
+
+            entity.ToTable("ingestible", "nutrifoods");
+
+            entity.Property(e => e.Id)
+                .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
+                .HasColumnName("id");
+            entity.Property(e => e.Adherence).HasColumnName("adherence");
+            entity.Property(e => e.AdministrationTimes)
+                .HasDefaultValueSql("ARRAY[]::character varying[]")
+                .HasColumnType("character varying(8)[]")
+                .HasColumnName("administration_times");
+            entity.Property(e => e.ClinicalAnamnesisId).HasColumnName("clinical_anamnesis_id");
+            entity.Property(e => e.Dosage).HasColumnName("dosage");
+            entity.Property(e => e.Name)
+                .HasMaxLength(64)
+                .HasColumnName("name");
+            entity.Property(e => e.Observations)
+                .HasDefaultValueSql("''::text")
+                .HasColumnName("observations");
+            entity.Property(e => e.Type).HasColumnName("type");
+
+            entity.HasOne(d => d.ClinicalAnamnesis).WithMany(p => p.Ingestibles)
+                .HasForeignKey(d => d.ClinicalAnamnesisId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ingestible_clinical_anamnesis_id_fkey");
+        });
+
         modelBuilder.Entity<Ingredient>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("ingredient_pkey");
@@ -518,36 +548,6 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.MealsPerDay).HasColumnName("meals_per_day");
         });
 
-        modelBuilder.Entity<Medication>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("medication_pkey");
-
-            entity.ToTable("medication", "nutrifoods");
-
-            entity.Property(e => e.Id)
-                .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
-                .HasColumnName("id");
-            entity.Property(e => e.Adherence).HasColumnName("adherence");
-            entity.Property(e => e.AdministrationTimes)
-                .HasDefaultValueSql("ARRAY[]::character varying[]")
-                .HasColumnType("character varying(8)[]")
-                .HasColumnName("administration_times");
-            entity.Property(e => e.ClinicalAnamnesisId).HasColumnName("clinical_anamnesis_id");
-            entity.Property(e => e.Dosage).HasColumnName("dosage");
-            entity.Property(e => e.Name)
-                .HasMaxLength(64)
-                .HasColumnName("name");
-            entity.Property(e => e.Observations)
-                .HasDefaultValueSql("''::text")
-                .HasColumnName("observations");
-            entity.Property(e => e.Type).HasColumnName("type");
-
-            entity.HasOne(d => d.ClinicalAnamnesis).WithMany(p => p.Medications)
-                .HasForeignKey(d => d.ClinicalAnamnesisId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("medication_clinical_anamnesis_id_fkey");
-        });
-
         modelBuilder.Entity<MenuRecipe>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("menu_recipe_pkey");
@@ -588,7 +588,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("last_updated");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.NutritionalAnamnesi)
+            entity.HasOne(d => d.IdNavigation).WithOne(p => p.NutritionalAnamnesis)
                 .HasForeignKey<NutritionalAnamnesis>(d => d.Id)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("nutritional_anamnesis_id_fkey");
@@ -803,11 +803,9 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulty.None).Value, e => Difficulty.FromValue(e));
         builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasConversion(e => (e ?? Array.Empty<MealType>()).Select(x => x.Value),
-                e => e.Select(MealType.FromValue).ToArray());
+            .HasConversion(e => e.Select(x => x.Value), e => e.Select(MealType.FromValue).ToArray());
         builder.Entity<Recipe>().Property(e => e.DishTypes)
-            .HasConversion(e => (e ?? Array.Empty<DishType>()).Select(x => x.Value),
-                e => e.Select(DishType.FromValue).ToArray());
+            .HasConversion(e => e.Select(x => x.Value), e => e.Select(DishType.FromValue).ToArray());
         builder.Entity<RecipeNutrient>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Unit.FromValue(e));
         builder.Entity<RecipeNutrient>().Property(e => e.Nutrient)
@@ -846,9 +844,9 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => ConsultationPurpose.FromValue(e));
         builder.Entity<Disease>().Property(e => e.InheritanceType)
             .HasConversion(e => e.Value, e => InheritanceType.FromValue(e));
-        builder.Entity<Medication>().Property(e => e.Type)
+        builder.Entity<Ingestible>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => IngestibleType.FromValue(e));
-        builder.Entity<Medication>().Property(e => e.Adherence)
+        builder.Entity<Ingestible>().Property(e => e.Adherence)
             .HasConversion(e => e.Value, e => Frequency.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.FoodGroup)
             .HasConversion(e => e.Value, e => FoodGroup.FromValue(e));

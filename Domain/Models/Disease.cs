@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class Disease
+public class Disease
 {
     public Guid Id { get; set; }
 

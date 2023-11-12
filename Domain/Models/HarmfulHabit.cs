@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class HarmfulHabit
+public class HarmfulHabit
 {
     public Guid Id { get; set; }
 

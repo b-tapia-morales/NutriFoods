@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class RecipeNutrient
+public class RecipeNutrient
 {
     public int Id { get; set; }
 

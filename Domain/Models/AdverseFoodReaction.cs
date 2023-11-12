@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class AdverseFoodReaction
+public class AdverseFoodReaction
 {
     public Guid Id { get; set; }
 

@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class Nutritionist
+public class Nutritionist
 {
     public Guid Id { get; set; }
 
@@ -12,5 +12,5 @@ public sealed class Nutritionist
 
     public DateTime JoinedOn { get; set; }
 
-    public ICollection<Patient> Patients { get; set; } = new List<Patient>();
+    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
 }

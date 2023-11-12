@@ -2,21 +2,21 @@
 
 namespace Domain.Models;
 
-public sealed class Ingredient
+public class Ingredient
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
-    public string[]? Synonyms { get; set; }
+    public string[] Synonyms { get; set; } = null!;
 
     public bool IsAnimal { get; set; }
 
     public FoodGroup FoodGroup { get; set; } = null!;
 
-    public ICollection<IngredientMeasure> IngredientMeasures { get; set; } = new List<IngredientMeasure>();
+    public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; } = new List<IngredientMeasure>();
 
-    public ICollection<IngredientNutrient> IngredientNutrients { get; set; } = new List<IngredientNutrient>();
+    public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; } = new List<IngredientNutrient>();
 
-    public ICollection<RecipeQuantity> RecipeQuantities { get; set; } = new List<RecipeQuantity>();
+    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = new List<RecipeQuantity>();
 }

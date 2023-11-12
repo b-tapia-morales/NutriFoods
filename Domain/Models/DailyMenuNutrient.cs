@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class DailyMenuNutrient
+public class DailyMenuNutrient
 {
     public int Id { get; set; }
 

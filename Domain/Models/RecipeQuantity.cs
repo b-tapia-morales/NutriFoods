@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class RecipeQuantity
+public class RecipeQuantity
 {
     public int Id { get; set; }
 

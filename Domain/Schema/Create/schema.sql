@@ -1,11 +1,11 @@
 SET SEARCH_PATH = "nutrifoods";
 
+DROP SCHEMA IF EXISTS nutrifoods CASCADE;
+
 DROP EXTENSION IF EXISTS btree_gist;
 DROP EXTENSION IF EXISTS "uuid-ossp";
 DROP EXTENSION IF EXISTS pg_trgm;
 DROP EXTENSION IF EXISTS fuzzystrmatch;
-
-DROP SCHEMA IF EXISTS nutrifoods CASCADE;
 
 CREATE SCHEMA IF NOT EXISTS nutrifoods;
 
@@ -20,10 +20,10 @@ CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 CREATE TABLE IF NOT EXISTS ingredient
 (
     id         SERIAL,
-    name       VARCHAR(64) NOT NULL,
-    synonyms   VARCHAR(64) ARRAY DEFAULT ARRAY []::VARCHAR[],
-    is_animal  BOOLEAN     NOT NULL,
-    food_group INTEGER     NOT NULL,
+    name       VARCHAR(64)       NOT NULL,
+    synonyms   VARCHAR(64) ARRAY NOT NULL DEFAULT ARRAY []::VARCHAR[],
+    is_animal  BOOLEAN           NOT NULL,
+    food_group INTEGER           NOT NULL,
     UNIQUE (name),
     PRIMARY KEY (id)
 );
@@ -55,14 +55,14 @@ CREATE TABLE IF NOT EXISTS ingredient_nutrient
 CREATE TABLE IF NOT EXISTS recipe
 (
     id         SERIAL,
-    name       VARCHAR(64) NOT NULL,
-    author     VARCHAR(64) NOT NULL,
-    url        TEXT        NOT NULL,
-    portions   INTEGER     NOT NULL,
+    name       VARCHAR(64)   NOT NULL,
+    author     VARCHAR(64)   NOT NULL,
+    url        TEXT          NOT NULL,
+    portions   INTEGER,
     time       INTEGER,
     difficulty INTEGER,
-    meal_types INTEGER ARRAY DEFAULT ARRAY []::INTEGER[],
-    dish_types INTEGER ARRAY DEFAULT ARRAY []::INTEGER[],
+    meal_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
+    dish_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
     UNIQUE (url),
     PRIMARY KEY (id)
 );
@@ -290,7 +290,7 @@ CREATE TABLE IF NOT EXISTS disease
     FOREIGN KEY (clinical_anamnesis_id) REFERENCES clinical_anamnesis (id)
 );
 
-CREATE TABLE IF NOT EXISTS medication
+CREATE TABLE IF NOT EXISTS ingestible
 (
     id                    UUID                      DEFAULT uuid_generate_v4(),
     name                  VARCHAR(64)      NOT NULL,

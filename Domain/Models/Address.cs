@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class Address
+public class Address
 {
     public Guid Id { get; set; }
 

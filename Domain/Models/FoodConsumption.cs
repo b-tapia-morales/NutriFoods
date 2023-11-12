@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class FoodConsumption
+public class FoodConsumption
 {
     public Guid Id { get; set; }
 

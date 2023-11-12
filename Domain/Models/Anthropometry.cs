@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class Anthropometry
+public class Anthropometry
 {
     public Guid Id { get; set; }
 

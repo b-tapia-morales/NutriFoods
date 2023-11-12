@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class Patient
+public class Patient
 {
     public Guid Id { get; set; }
 
@@ -10,7 +10,7 @@ public sealed class Patient
 
     public Address? Address { get; set; }
 
-    public ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
+    public virtual ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
 
     public ContactInfo? ContactInfo { get; set; }
 

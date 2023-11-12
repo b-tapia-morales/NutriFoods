@@ -2,7 +2,7 @@
 
 namespace Domain.Models;
 
-public sealed class Consultation
+public class Consultation
 {
     public Guid Id { get; set; }
 
@@ -18,11 +18,11 @@ public sealed class Consultation
 
     public Anthropometry? Anthropometry { get; set; }
 
-    public ClinicalAnamnesis? ClinicalAnamnesi { get; set; }
+    public ClinicalAnamnesis? ClinicalAnamnesis { get; set; }
 
     public MealPlan? MealPlan { get; set; }
 
-    public NutritionalAnamnesis? NutritionalAnamnesi { get; set; }
+    public NutritionalAnamnesis? NutritionalAnamnesis { get; set; }
 
     public Patient Patient { get; set; } = null!;
 }
