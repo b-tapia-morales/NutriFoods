@@ -83,9 +83,6 @@ public class FoodGroup : SmartEnum<FoodGroup>, IHierarchicalEnum<FoodGroup, Food
     public static readonly FoodGroup Algae =
         new(nameof(Algae), (int)FoodGroupToken.Algae, "Algas", Other);
 
-    public static readonly FoodGroup Cheese =
-        new(nameof(Cheese), (int)FoodGroupToken.Cheese, "Queso", Dairy);
-
     public static readonly FoodGroup Fish =
         new(nameof(Fish), (int)FoodGroupToken.Fish, "Pescados", Seafood);
 
@@ -115,6 +112,9 @@ public class FoodGroup : SmartEnum<FoodGroup>, IHierarchicalEnum<FoodGroup, Food
 
     public static readonly FoodGroup Yogurt =
         new(nameof(Yogurt), (int)FoodGroupToken.Yogurt, "Yogurt", MilkAndYogurt);
+    
+    public static readonly FoodGroup Cheese =
+        new(nameof(Cheese), (int)FoodGroupToken.Cheese, "Queso", Dairy);
 
     public static readonly FoodGroup Sweets =
         new(nameof(Sweets), (int)FoodGroupToken.Sweets, "Dulces", Sugars);
@@ -163,7 +163,6 @@ public enum FoodGroupToken
     DressingsAndSauces,
     SeasoningsAndSpices,
     Algae,
-    Cheese,
     Fish,
     Shellfish,
     Meat,
@@ -174,6 +173,7 @@ public enum FoodGroupToken
     Soy,
     Milk,
     Yogurt,
+    Cheese,
     Sweets,
     SaltySnacks
 }

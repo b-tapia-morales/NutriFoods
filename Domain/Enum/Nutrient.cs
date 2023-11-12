@@ -446,7 +446,7 @@ public class Nutrient : SmartEnum<Nutrient>, IHierarchicalEnum<Nutrient, Nutrien
             Milligrams, Sterols);
 
     public static readonly Nutrient BetaSitosterol =
-        new(nameof(BetaSitosterol), (int)NutrientToken.BetaSitosterol, "β-sitosterol", "Beta-sitosterol", false,
+        new(nameof(BetaSitosterol), (int)NutrientToken.BetaSitosterol, "Beta-sitosterol", "β-sitosterol", false,
             Milligrams, Sterols);
 
     public static readonly Nutrient Alcohol =
