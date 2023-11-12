@@ -51,22 +51,14 @@ public interface IFoodRetrieval<in TFood, TNutrient>
             var fdcNutrientId = foodNutrient.Number;
             if (!dictionary.ContainsKey(fdcNutrientId)) continue;
 
-            var unit = foodNutrient.UnitName switch
-            {
-                "g" or "G" => Unit.Grams,
-                "mg" or "MG" => Unit.Micrograms,
-                "µg" or "UG" => Unit.Milligrams,
-                "kcal" or "KCAL" => Unit.KiloCalories,
-                _ => throw new ArgumentException("Unit is not recognized")
-            };
-
             var nutrientId = dictionary[fdcNutrientId];
+            var nutrient = Nutrient.FromValue(nutrientId);
             context.IngredientNutrients.Add(new IngredientNutrient
             {
                 IngredientId = ingredientId,
-                Nutrient = Nutrient.FromValue(nutrientId),
+                Nutrient = nutrient,
                 Quantity = foodNutrient.Amount,
-                Unit = unit
+                Unit = nutrient.Unit
             });
         }
     }
