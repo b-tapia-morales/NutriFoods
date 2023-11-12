@@ -114,7 +114,7 @@ VALUES
     ('Carne de cerdo', find_ingredient_id('Cerdo')),
     -- Ají --
     ('Chile', find_ingredient_id('Ají')),
-    ('Ají en vaina', find_ingredient_id('Cerdo')),
+    ('Ají en vaina', find_ingredient_id('Ají')),
 
     -- Anchoa --
     ('Anchoveta', find_ingredient_id('Anchoa')),
