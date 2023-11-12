@@ -27,7 +27,7 @@ public static class Recipes
 
     private static readonly string[] MealType = { "Desayunos", "Cenas" };
 
-    private static readonly Dictionary<string, List<string>> DictionarySynonyms = GetDictionary();
+    private static readonly Dictionary<string, List<string>> DictionarySynonyms = GetDictionarySynonyms();
 
     public static void RecipeInsert()
     {
@@ -47,6 +47,33 @@ public static class Recipes
                 Portions = recipe.Portions,
                 PreparationTime = recipe.PreparationTime
             });
+        }
+
+        context.SaveChanges();
+    }
+
+    public static void IngredientSynonyms()
+    {
+        var synonymsIngredient = GetDictionarySynonyms();
+        using var context = Context();
+        var ingredients = context.Ingredients.ToList();
+        var lista = new List<string>();
+        foreach (var par in synonymsIngredient)
+        {
+            var idIngredient =
+                ingredients.Find(i => i.Name.ToLower().RemoveAccents().Equals(par.Key.ToLower().RemoveAccents()))!.Id;
+            if (par.Value[0].Equals("none")) continue;
+            foreach (var synonyms in par.Value)
+            {
+                context.Add(new IngredientSynonym
+                    {
+                        IngredientId = idIngredient,
+                        Name = synonyms
+                    }
+                );
+                if(lista.Contains(synonyms)) Console.WriteLine(synonyms);
+                lista.Add(synonyms);
+            }
         }
 
         context.SaveChanges();
@@ -224,7 +251,7 @@ public static class Recipes
         });
     }
 
-    private static Dictionary<string, List<string>> GetDictionary()
+    private static Dictionary<string, List<string>> GetDictionarySynonyms()
     {
         var listSinonimous = File.ReadAllLines(FilePathRecipeSynonyms).Select(e => e.Split(","));
         var diccionarySinonimous = new Dictionary<string, List<string>>();

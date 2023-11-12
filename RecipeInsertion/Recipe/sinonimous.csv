@@ -2,7 +2,7 @@ Sal,none
 Pimienta negra,pimienta
 Aceite de oliva,aceite;oro liquido
 Cebolla,none
-Ajo,ajete;cebollino;chalote;puerro silvestre
+Ajo,ajete;chalote;puerro silvestre;cebollino
 Huevo,none
 Tomate,jitomate
 Mantequilla,none
@@ -12,14 +12,14 @@ Cilantro,culantro;coriandro
 Aceite,aceite de maravilla;aceite de girasol
 Sal de mar,none
 Mayonesa,mayo;mahonesa
-Palta,abacate;aguacate;avocado
+Palta,abacate;aguacate;avocado;aguacates
 Albahaca,basilico;albaca;alhabega
 Perejil,none
 Comino,none
-Pimiento rojo,pimiento;morron rojo;Pimenton rojo
+Pimiento rojo,pimiento;morron rojo;Pimenton rojo;pimenton
 Crema,crema de leche;nata
 Pure de papas,none
-Jugo de limón,zumo de limon
+Jugo de limón,zumo de limon;jugo de lima
 Oregano,none
 Queso parmesano,parmesano
 Lechuga,none
@@ -28,13 +28,13 @@ Pimienta blanca,none
 Leche semidescremada,none
 Zapallo italiano,zapallito;calabacita;calabacin
 Espinaca,none
-Champiñón,callampa;hongo;seta
+Champiñón,callampa;hongo;seta;hongos;setas;champinones cremini
 Azúcar,none
 Mostaza,jaramago;jenape;Savora
 Ají color,paprika
 Queso,none
 Berenjena,none
-Cebollín,cebolleta;cebolla larga
+Cebollín,cebolleta;cebolla larga;cebollines
 Ajo en polvo,none
 Tomate cherry,tomate cherri;tomate cereza;tomate pasa;tomate uva
 Almendras,none
@@ -43,18 +43,18 @@ Tomillo,none
 Brócoli,brecol;broculi
 Choclo,chocolo;elote;jojoto
 Espárrago,esparraguera
-Vinagre manzana,none
+Vinagre de manzana,none
 Jengibre,kion
 Apio,celery
 Leche evaporada,none
-Papa,patata;patatera
+Papa,patata;patatera;patatas;
 Merkén,merquen
 Manzana,none
-Pechuga de pollo,filete de pollo
+Pechuga de pollo,filete de pollo;pollo;pollo molido;pechugas de pollo
 Vinagre,none
-Garbanzo,none
+Garbanzos,none
 Atún,tonina;toñina
-Vainilla,esencia de vainilla
+Vainilla,esencia de vainilla;extracto de vainilla
 Aceite de coco,none
 Leche,none
 Queso mozzarella,mozzarella
@@ -67,17 +67,17 @@ Pepino,cohombro
 Porotos verdes,ejote;chaucha;habichuelas;judias verde
 Aceituna negra,none
 Sésamo,semillas de sesamo
-Linaza,semillas de linaza;lino
-Polvo de hornear,polvo leudante;impulsor
+Linaza,semillas de linaza;lino;semilla de lino
+Polvo de hornear,polvo leudante;impulsor;polvo para hornear
 Canela,canela en rama
-Zapallo,calabaza;calabacera
-Curry,curri
+Zapallo,calabaza;calabacera;calabaza asada
+Curry,curri;curry en polvo
 Nuez moscada,none
 Queso cheddar,cheddar;chedar
 Salsa de tomate,salsa roja;Salsa de jitomate
 Harina de almendra,none
 Pimiento verde,morron verde;pimenton verde
-Ciboulette,cebolla de verdeo;cebollano;cebollino;ajo cebollino
+Ciboulette,cebolla de verdeo;cebollano;ajo cebollino
 Queso cabra,queso de cabra;queso blanco;queso de leche de cabra
 Vinagre balsámico,aceto;aceto balsamico
 Laurel,lauro
@@ -111,23 +111,23 @@ Cerdo,chancho;coche;cochino;cocho;cuche;cuchi;cuino;cuto;gorrino;marrano;puerco;
 Eritritol,edulcorante
 Harina de garbanzos,none
 Cuscús,none
-Ají,chile;aji en vaina;pimiento
+Ají,chile;aji en vaina
 Palmito,chonta;corazon;jabato
 Pan,none
 Anchoa,anchoveta;bocarte;boqueron
 Frutilla,fresa
-Poroto,alubia;coraota;frejol;frijol;haba;habichuela;judia
+Porotos,alubia;coraota;frejol;frijol;haba;habichuela;judia;frijoles
 Mote,maiz mote;trigo mote
-Pasa,pasa de uva;pansa;uva pasa
+Pasas,pasa de uva;pansa;uva pasa
 Ají verde,chile verde
 Miel de maple,jarabe de arce;sirope de arce
 Maicena,almidon de maiz;maizena;fecula de maiz
-Jugo naranja,none
+Jugo de naranja,none
 Cacao en polvo,cacao
 Granada,none
 Tomate en tarro,none
 Estragón,dragoncillo;tarragón
-Poroto granado,chaucha;ejote;judia verde;vainica;vainita
+Porotos granados,judia verde;vainica;vainita
 Ají en polvo,none
 Vino tinto,vino
 Ají rojo,none
@@ -149,7 +149,7 @@ Ketchup,catchup;catsup
 Piña,anana
 Plátano,banana;cambur;guineo
 Arándano,cranberries
-Yogurt,yogur;yogurt con eneldo
+Yogurt,yogur;yogurt con eneldo;yogur desnatado
 Cochayuyo,chicoria del mar;mochoco;yuyo
 Acelga,none
 Quinoa,quinoa roja;quinua
@@ -165,7 +165,7 @@ Castañas,none
 Dátiles,datil
 Tomate pera,tomate roma
 Cebolla chalota,echalote
-Papa camote,papa dulce;patata dulce;camote;moniato;boniato
+Papa camote,papa dulce;patata dulce;camote;moniato;boniato;batata
 Ciruela,none
 Damasco turco,none
 Higo,none
@@ -215,7 +215,7 @@ Mandarina,naranja mandarina;tangerina;tanjorona
 Bacalao,abadejo
 Rábano,none
 Chuleta de cerdo,chuleta de chancho;chuleta kayser
-Uva,none
+Uvas,none
 Pasta sin gluten,none
 Carne de cordero,none
 Rabo de ternera,Rabo de toro;Cola de ternera;Cola de toro
@@ -236,9 +236,9 @@ Salsa de caramelo,none
 Galletas,none
 Ostiones,ostion
 Berries,frutos rojos;frutos del bosque
-Ralladura de limón,Ralladura de lima
+Ralladura de limón,ralladura de lima
 Marraqueta,pan frances;pan batido
-Clavo de olor,none
+Clavo de olor,clavo
 Machas,none
 Plateada,tapa de asado;tapa de lomo alto
 Jerez,none
@@ -249,8 +249,8 @@ Panqueque,tortita;panqueca;hotcake;celestino;panqueque celestino
 Ralladura de naranja,cascara de naranja
 Fondant,none
 Chancaca,panela;papelon;piloncillo;tapadulce
-Duraznos,melocoton
-Peras,none
+Durazno,melocoton
+Pera,none
 Moras,zarzamoras;murras
 Galletas de champaña,none
 Pulpo,cola;pólipo
@@ -264,7 +264,7 @@ Lomo vetado,bife ancho;lomo alto
 Trutros cortos,tuto corto
 Cerveza,none
 Congrio,none
-Champiñones ostra,seta ostra
+Champiñones ostra,seta ostra;hongos ostra
 Coñac,none
 Pisco,agua ardiente
 Café,none
@@ -281,7 +281,7 @@ Anís,none
 Salsa barbecue,salsa barbacoa
 Asiento,none
 Dientes de dragón,brotes de soya;brotes de soja
-Champiñones de París,none
+Champiñones de París,champiñon paris;champiñones pari
 Ron,none
 Nutella,crema de avellana
 Huesillo,durazno deshidratado
@@ -298,11 +298,11 @@ Licor,none
 Esencia de cola de mono,cola de mono
 Salsa de frambuesa,none
 Compota de manzana,salsa de manzana;pure de manzana
-Cacao amargo,cacao
+Cacao amargo,none
 Higo deshidratado,none
 Berro,none
 Colapez,cola de pescado;colapi;colapizzo;ictiocola
-Masa filo,none
+Masa filo,hojaldre
 Merluza austral,none
 Salsa teriyaki,none
 Polenta,none
@@ -336,7 +336,7 @@ Pan ciabatta,ciabatta
 Asado de tira,tira de asado;tira de costilla;costilla cargada
 Cerveza oscura,cerveza negra
 Tallarines,taglierini;spaguetti
-Pimienta cayenna,pimienta de cayenna
+Pimienta cayenna,pimienta de cayenna;pimienta de cayena
 Malaya,matambre;sobrebarriga
 Pasta penne,none
 Osobuco,ossobuco
@@ -346,7 +346,7 @@ Charqui,none
 Fideos cabello,cabellitos de angel
 Tallarines de arroz,none
 Locos,none
-Lámina de lasaña,none
+Láminas de lasaña,none
 Masa de hoja,none
 Callampas deshidratadas,callampas secas
 Salsa de ostras,none
@@ -355,8 +355,8 @@ Sobrecostilla,asado
 Champiñones shiitake,none
 Filete de corvina,none
 Arroz silvestre,none
-Champiñones portobello,none
-Congrio coloradon,none
+Champiñones portobello,hongos portobello,hongo portobello
+Congrio colorado,none
 Cabeza de congrio,none
 Cabeza de pescado,none
 Pierna de cordero,none
@@ -366,7 +366,7 @@ Tomate deshidratado,tomate seco
 Tilapia,none
 Merlot,vino merlot
 Pavo,none
-Reinetas,none
+Reineta,none
 Brotes de arveja,Brotes de guisante;Brotes de alverja;Brotes de chícharo
 Salsa de champiñón,salsa de setas
 Choros zapato,none
@@ -399,7 +399,7 @@ Queso roquefort,none
 Canelon,none
 Jamón serrano,none
 Alga nori,nori
-Harina integral,none
+Harina integral,harina blanca integral
 Azúcar flor,azucar en polvo
 Pechuga de pato,none
 Mantequilla de maní,none
@@ -453,5 +453,5 @@ Jugo de maracuya,none
 Semillas de chía,chia
 Semillas de girasol,none
 Té,none
-Anacardos,none
+Anacardos,ananacartos
 Salami,none

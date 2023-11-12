@@ -23,7 +23,7 @@ public interface IFoodRetrieval<in T> where T : class, IFood
         foreach (var pair in foodsDictionary)
         {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            InsertMeasures(context, pair.Key, pair.Value);
+            //InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();

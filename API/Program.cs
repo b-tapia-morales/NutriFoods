@@ -25,6 +25,7 @@ using Swashbuckle.AspNetCore.Swagger;
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
+Recipes.IngredientSynonyms();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
@@ -105,7 +106,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true) // allow any origin
+                    .AllowCredentials()); // allow credentials
 app.MapControllers();
 
 app.Run();
