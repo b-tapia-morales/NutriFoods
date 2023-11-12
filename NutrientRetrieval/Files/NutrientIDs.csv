@@ -2,7 +2,7 @@ FoodDataCentralName;FoodDataCentralId;NutriFoodsName;NutriFoodsId
 Energy;208;Energía, total;1
 Carbohydrate, by difference;205;Carbohidratos, total;2
 Fiber, total dietary;291;Fibra;3
-Sugars, total including NLEA;269;Azúcares;4
+Sugars, total including NLEA;269;Azúcares, total;4
 Sucrose;210;Sucrosa;5
 Glucose;211;Glucosa;6
 Fructose;212;Fructosa;7
@@ -81,15 +81,15 @@ Glycine;516;Glicina;79
 Proline;517;Prolina;80
 Serine;518;Serina;81
 Vitamin A, RAE;320;Vitamina A;83
-Carotene, alpha;322;α-caroteno;84
-Carotene, beta;321;β-caroteno;85
-Cryptoxanthin, beta;334;β-criptoxantina;86
+Carotene, alpha;322;Alfa-caroteno;84
+Carotene, beta;321;Beta-caroteno;85
+Cryptoxanthin, beta;334;Beta-criptoxantina;86
 Lutein + zeaxanthin;338;Luteína + Zeaxantina;87
 Lycopene;337;Licopeno;88
 Retinol;319;Retinol;89
 Thiamin;404;Vitamina B1;90
 Riboflavin;405;Vitamina B2;91
-Niacin;406;Niacina;92
+Niacin;406;Vitamina B3;92
 Pantothenic acid;410;Vitamina B5;93
 Vitamin B-6;415;Vitamina B6;94
 Folate, total;417;Vitamina B9;95
