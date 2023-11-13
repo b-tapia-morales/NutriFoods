@@ -6,6 +6,7 @@ using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
 using API.Users;
+using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -14,6 +15,9 @@ using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NutrientRetrieval.AbridgedRetrieval;
+using NutrientRetrieval.NutrientCalculation;
+using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 
@@ -21,6 +25,7 @@ using Swashbuckle.AspNetCore.Swagger;
 DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Recipes.RecipeInsert();
+Recipes.IngredientSynonyms();
 Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
@@ -66,10 +71,7 @@ builder.Services
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllersWithViews(options =>
-{
-    options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-});
+builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
@@ -104,7 +106,11 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
+app.UseCors(x => x
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .SetIsOriginAllowed(origin => true) // allow any origin
+                    .AllowCredentials()); // allow credentials
 app.MapControllers();
 
 app.Run();

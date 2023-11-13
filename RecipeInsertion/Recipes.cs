@@ -22,7 +22,12 @@ public static class Recipes
     private static readonly string FilePathRecipeRepeated = Path.Combine(Directory.GetParent(
         Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "repeated.csv");
 
+    private static readonly string FilePathRecipeSynonyms = Path.Combine(Directory.GetParent(
+        Directory.GetCurrentDirectory())!.FullName, "RecipeInsertion", "Recipe", "sinonimous.csv");
+
     private static readonly string[] MealType = { "Desayunos", "Cenas" };
+
+    private static readonly Dictionary<string, List<string>> DictionarySynonyms = GetDictionarySynonyms();
 
     public static void RecipeInsert()
     {
@@ -47,6 +52,33 @@ public static class Recipes
         context.SaveChanges();
     }
 
+    public static void IngredientSynonyms()
+    {
+        var synonymsIngredient = GetDictionarySynonyms();
+        using var context = Context();
+        var ingredients = context.Ingredients.ToList();
+        var lista = new List<string>();
+        foreach (var par in synonymsIngredient)
+        {
+            var idIngredient =
+                ingredients.Find(i => i.Name.ToLower().RemoveAccents().Equals(par.Key.ToLower().RemoveAccents()))!.Id;
+            if (par.Value[0].Equals("none")) continue;
+            foreach (var synonyms in par.Value)
+            {
+                context.Add(new IngredientSynonym
+                    {
+                        IngredientId = idIngredient,
+                        Name = synonyms
+                    }
+                );
+                if(lista.Contains(synonyms)) Console.WriteLine(synonyms);
+                lista.Add(synonyms);
+            }
+        }
+
+        context.SaveChanges();
+    }
+
     public static void RecipeMeasures()
     {
         using var context = Context();
@@ -54,7 +86,7 @@ public static class Recipes
         var nameIngredient = File.ReadAllLines(FilePathIngredient);
         foreach (var name in nameIngredient)
         {
-            var id = ingredients.Find(x => x.Name.Equals(name))!.Id;
+            var id = ingredients.Find(x => x.Name.ToLower().Equals(name.ToLower()))!.Id;
             var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
                 "RecipeInsertion", "Measures", $"{name}.csv");
             var measuresIngredient = RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
@@ -107,8 +139,9 @@ public static class Recipes
     private static void InsertDataRecipe(DbContext context, DataRecipe dataRecipe, List<Ingredient> ingredients,
         List<IngredientMeasure> units, int idRecipe)
     {
+        var name = SynonymousIngredientAux(dataRecipe.NameIngredients).ToLower();
         var idIngredient =
-            ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(dataRecipe.NameIngredients))!.Id;
+            ingredients.Find(i => RemoveAccents(i.Name).ToLower().Equals(name))!.Id;
         if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
         {
             context.Add(new RecipeQuantity
@@ -174,7 +207,7 @@ public static class Recipes
 
             var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            // context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
+            context.Add(new RecipeMealType { RecipeId = idRecipe, MealType = MealTypeEnum.FromValue(type) });
             foreach (var dataRecipe in recipe)
             {
                 InsertDataRecipe(context, dataRecipe, ingredients, units, idRecipe);
@@ -200,7 +233,7 @@ public static class Recipes
 
             for (var i = 0; i < dataStep.Length; i++)
             {
-                context.Add(new RecipeStep { RecipeId = idRecipe, Number = i + 1, Description = dataStep[i] });
+                context.Add(new RecipeStep { Recipe = idRecipe, Step = i + 1, Description = dataStep[i] });
             }
         }
     }
@@ -216,5 +249,28 @@ public static class Recipes
             Numerator = int.Parse(numerator),
             Denominator = int.Parse(denominator)
         });
+    }
+
+    private static Dictionary<string, List<string>> GetDictionarySynonyms()
+    {
+        var listSinonimous = File.ReadAllLines(FilePathRecipeSynonyms).Select(e => e.Split(","));
+        var diccionarySinonimous = new Dictionary<string, List<string>>();
+        foreach (var listSinonimou in listSinonimous)
+        {
+            var sinonimous = listSinonimou[1].Split(";").ToList();
+            diccionarySinonimous.Add(listSinonimou[0], sinonimous);
+        }
+
+        return diccionarySinonimous;
+    }
+
+    private static string SynonymousIngredientAux(string name)
+    {
+        foreach (var (key, _) in DictionarySynonyms.Where(keyValuePair => keyValuePair.Value.Contains(name)))
+        {
+            return key;
+        }
+
+        return name;
     }
 }
