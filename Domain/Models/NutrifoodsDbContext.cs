@@ -1,5 +1,6 @@
 ﻿using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Domain.Models;
 
@@ -803,9 +804,9 @@ public partial class NutrifoodsDbContext : DbContext
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
         builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasConversion(e => e.Select(x => x.Value), e => e.Select(MealTypes.FromValue).ToArray());
+            .HasPostgresArrayConversion(e => e.Value, e => MealTypes.FromValue(e));
         builder.Entity<Recipe>().Property(e => e.DishTypes)
-            .HasConversion(e => e.Select(x => x.Value), e => e.Select(DishTypes.FromValue).ToArray());
+            .HasPostgresArrayConversion(e => e.Value, e => DishTypes.FromValue(e));
         builder.Entity<RecipeNutrient>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<RecipeNutrient>().Property(e => e.Nutrient)
