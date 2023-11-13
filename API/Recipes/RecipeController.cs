@@ -45,7 +45,7 @@ public class RecipeController
     }
 
     [HttpGet]
-    [Route("by-meal-type")]
+    [Route("meal-type/{mealType}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByMealType(MealToken mealType)
     {
         var value = IEnum<MealTypes, MealToken>.FromToken(mealType);
@@ -53,7 +53,7 @@ public class RecipeController
     }
 
     [HttpGet]
-    [Route("by-dish-type")]
+    [Route("dish-type/{dishType}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByDishType(DishToken dishType)
     {
         var value = IEnum<DishTypes, DishToken>.FromToken(dishType);
@@ -61,7 +61,7 @@ public class RecipeController
     }
 
     [HttpGet]
-    [Route("vegetarian")]
+    [Route("diet/{diet}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindVegetarianRecipes(DietToken diet)
     {
         var value = IEnum<Diets, DietToken>.FromToken(diet);
