@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace API.Dto;
+﻿namespace API.Dto;
 
 public sealed class ConsultationDto
 {

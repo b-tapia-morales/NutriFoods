@@ -4,9 +4,10 @@ namespace Utils.Date;
 
 public static class DateOnlyUtils
 {
-    public static readonly string[] AllowedFormats = {"yyyy-mm-dd", "yyyy-m-d"};
+    public static readonly string[] AllowedFormats = { "yyyy-mm-dd", "yyyy-m-d" };
 
-    public static DateTime ToDateTime(DateOnly date) => new(date.Year, date.Month, date.Day, 0, 0, 0);
+    public static DateTime ToDateTime(DateOnly date) =>
+        new(date.Year, date.Month, date.Day, 0, 0, 0, DateTimeKind.Local);
 
     public static DateOnly ToDateOnly(DateTime dateTime) => DateOnly.FromDateTime(dateTime);
 
@@ -21,7 +22,7 @@ public static class DateOnlyUtils
             {
                 Days => end.Subtract(start).Days,
                 Months => (end.Year - start.Year) * 12 + end.Month - start.Month,
-                MonthsAverage => (int) (end.Subtract(start).Days / (365.25 / 12)),
+                MonthsAverage => (int)(end.Subtract(start).Days / (365.25 / 12)),
                 Years => (end.Year - start.Year - 1) +
                          (end.Month > start.Month || (end.Month == start.Month && end.Day >= start.Day)
                              ? 1
