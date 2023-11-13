@@ -1,7 +1,6 @@
 using System.Collections.Immutable;
-using System.Reflection;
 using Domain.Enum;
-using NutrientRetrieval.NutrientCalculation;
+using NutrientRetrieval.Mapping.Nutrient;
 using Utils.Csv;
 using static Utils.Csv.DelimiterToken;
 

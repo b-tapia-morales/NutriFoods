@@ -1,12 +1,13 @@
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using NutrientRetrieval.Dictionaries;
+using NutrientRetrieval.Food;
+using NutrientRetrieval.Mapping.Nutrient;
 using NutrientRetrieval.Request;
 using Utils.Csv;
 using static Utils.Csv.DelimiterToken;
 
-namespace NutrientRetrieval.Food;
+namespace NutrientRetrieval.Retrieval;
 
 public interface IFoodRetrieval<in TFood, TNutrient>
     where TFood : class, IFood<TNutrient>
@@ -14,25 +15,28 @@ public interface IFoodRetrieval<in TFood, TNutrient>
 {
     const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+    
+    const string ProjectDirectory = "NutrientRetrieval";
+    const string FileDirectory = "Files";
+    const string FileName = "IngredientIDs.csv";
 
     string Format { get; }
 
     void RetrieveFromApi()
     {
-        var directory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-        var path = Path.Combine(directory, "NutrientRetrieval", "Files", "NutrientIDs.csv");
+        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var absolutePath = Path.Combine(baseDirectory, ProjectDirectory, FileDirectory, FileName);
         var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
             .UseNpgsql(ConnectionString)
             .Options;
         using var context = new NutrifoodsDbContext(options);
-        var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(path, Semicolon, true)
+        var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(absolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
         var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(Format).Result
             .ToDictionary(e => e.Key, e => e.Value);
         foreach (var pair in foodsDictionary)
         {
             InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-            InsertMeasures(context, pair.Key, pair.Value);
         }
 
         context.SaveChanges();
@@ -48,7 +52,8 @@ public interface IFoodRetrieval<in TFood, TNutrient>
         foreach (var foodNutrient in food.FoodNutrients)
         {
             var fdcNutrientId = foodNutrient.Number;
-            if (!dictionary.ContainsKey(fdcNutrientId)) continue;
+            if (!dictionary.ContainsKey(fdcNutrientId))
+                continue;
 
             var nutrientId = dictionary[fdcNutrientId];
             var nutrient = Nutrients.FromValue(nutrientId);

@@ -1,8 +1,9 @@
-using CsvHelper.Configuration;
-
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace NutrientRetrieval.NutrientCalculation;
+using CsvHelper.Configuration;
+
+namespace NutrientRetrieval.Mapping.Nutrient;
 
 public sealed class NutrientMapping : ClassMap<NutrientRow>
 {

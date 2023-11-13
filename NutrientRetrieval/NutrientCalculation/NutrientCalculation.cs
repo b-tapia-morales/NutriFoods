@@ -2,8 +2,8 @@ using System.Collections.Immutable;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using NutrientRetrieval.Mapping.Nutrient;
 using Utils.Csv;
-using Utils.Enum;
 using static Utils.Csv.DelimiterToken;
 
 namespace NutrientRetrieval.NutrientCalculation;
@@ -19,16 +19,20 @@ public static class NutrientCalculation
                 builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
             .Options;
 
-    private static readonly string Directory =
-        System.IO.Directory.GetParent(System.IO.Directory.GetCurrentDirectory())!.FullName;
+    private const string ProjectDirectory = "NutrientRetrieval";
+    private const string FileDirectory = "Files";
+    private const string FileName = "IngredientIDs.csv";
 
-    private static readonly string Path =
-        System.IO.Path.Combine(Directory, "NutrientRetrieval", "Files", "NutrientIDs.csv");
+    private static readonly string
+        BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+    private static readonly string
+        AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
     public static void Calculate()
     {
         // Retrieves all the unique NutriFoods Nutrient IDs from the CSV file and stores them into a Set.
-        var nutrientIds = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(Path, Semicolon, true)
+        var nutrientIds = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsId).ToImmutableSortedSet();
         // Creates a dictionary that associates the NutriFoods Nutrient ID with the sum of all Nutrients with the same
         // ID present in the Ingredient

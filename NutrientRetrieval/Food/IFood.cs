@@ -6,3 +6,11 @@ public interface IFood<out T> where T : class, IFoodNutrient
     string Description { get; }
     T[] FoodNutrients { get; }
 }
+
+public interface IFoodNutrient
+{
+    string Number { get; }
+    string Name { get; }
+    double Amount { get; }
+    string UnitName { get; }
+}

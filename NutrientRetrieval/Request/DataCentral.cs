@@ -1,12 +1,12 @@
+// ReSharper disable MemberCanBePrivate.Global
+
 using Newtonsoft.Json;
-using NutrientRetrieval.Dictionaries;
 using NutrientRetrieval.Food;
+using NutrientRetrieval.Mapping.Ingredient;
 using Utils.Csv;
 using Utils.Enumerable;
 using static Utils.Csv.DelimiterToken;
 using JsonException = Newtonsoft.Json.JsonException;
-
-// ReSharper disable MemberCanBePrivate.Global
 
 namespace NutrientRetrieval.Request;
 
@@ -19,9 +19,10 @@ public static class DataCentral
     private const string FileDirectory = "Files";
     private const string FileName = "IngredientIDs.csv";
 
-    private static readonly string FilePath =
-        Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName, ProjectDirectory, FileDirectory,
-            FileName);
+    private static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+    private static readonly string AbsolutePath =
+        Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
     private static readonly HttpClient Client = new();
 
@@ -40,7 +41,7 @@ public static class DataCentral
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(FilePath, Semicolon, true)
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath, Semicolon, true)
             .Where(e => e.FoodDataCentralId != null)
             .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId.GetValueOrDefault());
         var tasks = dictionary.Select(e => FetchItem<TFood, TNutrient>(e.Key, e.Value, format));
@@ -55,7 +56,7 @@ public static class DataCentral
         // Takes all the CSV rows, filters those which have no corresponding FoodDataCentral Id, removes duplicate Ids,
         // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
         // and values respectively.
-        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(FilePath, Semicolon, true)
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath, Semicolon, true)
             .Where(e => e.FoodDataCentralId != null)
             .DistinctBy(e => e.FoodDataCentralId)
             .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);

@@ -1,9 +1,8 @@
-using NutrientRetrieval.Food;
-
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
-namespace NutrientRetrieval.FullRetrieval;
+namespace NutrientRetrieval.Food.Full;
 
 public class Food : IFood<FoodNutrient>
 {

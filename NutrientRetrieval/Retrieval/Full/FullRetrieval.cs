@@ -1,16 +1,19 @@
 using Domain.Models;
-using NutrientRetrieval.Food;
+using NutrientRetrieval.Food.Full;
 using NutrientRetrieval.Translation;
 
-namespace NutrientRetrieval.FullRetrieval;
+namespace NutrientRetrieval.Retrieval.Full;
 
-public class FullRetrieval : IFoodRetrieval<Food, FoodNutrient>
+public class FullRetrieval : IFoodRetrieval<Food.Full.Food, FoodNutrient>
 {
     public string Format => "full";
 
-    public void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food food)
+    private static readonly IFoodRetrieval<Food.Full.Food, FoodNutrient> Instance = new FullRetrieval();
+
+    public void InsertMeasures(NutrifoodsDbContext context, int ingredientId, Food.Full.Food food)
     {
-        if (food.FoodPortions.Length == 0) return;
+        if (food.FoodPortions.Length == 0)
+            return;
 
         var untranslatedString = string.Join(Environment.NewLine, food.FoodPortions.Select(e =>
         {
@@ -38,4 +41,6 @@ public class FullRetrieval : IFoodRetrieval<Food, FoodNutrient>
             context.IngredientMeasures.Add(ingredientMeasure);
         }
     }
+
+    public static void RetrieveFromApi() => Instance.RetrieveFromApi();
 }

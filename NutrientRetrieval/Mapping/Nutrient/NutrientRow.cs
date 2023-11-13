@@ -1,6 +1,7 @@
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace NutrientRetrieval.NutrientCalculation;
+namespace NutrientRetrieval.Mapping.Nutrient;
 
 public sealed class NutrientRow
 {
