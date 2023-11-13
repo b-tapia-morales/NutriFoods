@@ -7,7 +7,7 @@ public static class DatabaseInitialization
     private const string ConnectionString =
         "Server=localhost;Port=5432;User Id=nutrifoods_dev;Password=MVmYneLqe91$;Database=nutrifoods_db";
 
-    private static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    private static readonly string BaseDirectory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
     private static readonly string DomainDirectory = Path.Combine(BaseDirectory, "Domain");
     private static readonly string SchemaDirectory = Path.Combine(DomainDirectory, "Schema");
     private static readonly string CreateDirectory = Path.Combine(SchemaDirectory, "Create");

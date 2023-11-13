@@ -19,12 +19,10 @@ public static class DataCentral
     private const string FileDirectory = "Files";
     private const string FileName = "IngredientIDs.csv";
 
-    private static readonly string BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    private static readonly string BaseDirectory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
 
     private static readonly string AbsolutePath =
         Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
-
-    private static readonly HttpClient Client = new();
 
     public static async Task<Dictionary<int, TFood>> PerformRequest<TFood, TNutrient>(string format,
         RequestMethod method = RequestMethod.Multiple)
@@ -41,7 +39,7 @@ public static class DataCentral
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath, Semicolon, true)
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
             .Where(e => e.FoodDataCentralId != null)
             .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId.GetValueOrDefault());
         var tasks = dictionary.Select(e => FetchItem<TFood, TNutrient>(e.Key, e.Value, format));
@@ -56,7 +54,7 @@ public static class DataCentral
         // Takes all the CSV rows, filters those which have no corresponding FoodDataCentral Id, removes duplicate Ids,
         // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
         // and values respectively.
-        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath, Semicolon, true)
+        var dictionary = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
             .Where(e => e.FoodDataCentralId != null)
             .DistinctBy(e => e.FoodDataCentralId)
             .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);
@@ -81,7 +79,8 @@ public static class DataCentral
         var path = $"https://api.nal.usda.gov/fdc/v1/food/{foodDataCentralId}?format={format}&api_key={ApiKey}";
         var uri = new Uri(path);
 
-        var response = await Client.GetAsync(uri);
+        using var client = new HttpClient();
+        var response = await client.GetAsync(uri);
         var serialized = await response.Content.ReadAsStringAsync();
         var food = JsonConvert.DeserializeObject<TFood>(serialized) ?? throw new JsonException();
 
@@ -99,9 +98,12 @@ public static class DataCentral
         var path = $"https://api.nal.usda.gov/fdc/v1/foods?{ids}&format={format}&api_key={ApiKey}";
         var uri = new Uri(path);
 
-        var response = await Client.GetAsync(uri);
+        using var client = new HttpClient();
+        var response = await client.GetAsync(uri);
         var serialized = await response.Content.ReadAsStringAsync();
         var list = JsonConvert.DeserializeObject<List<TFood>>(serialized) ?? throw new JsonException();
+        
+        Console.WriteLine(string.Join(Environment.NewLine, list));
 
         // The resulting list can be converted into a named tuple using the food item's Id as a key to retrieve from the dictionary its corresponding NutriFoods' Id .
         return list.Select(e => (dictionary[e.FdcId], e));

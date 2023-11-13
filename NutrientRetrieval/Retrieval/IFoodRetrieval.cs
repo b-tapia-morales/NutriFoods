@@ -18,13 +18,13 @@ public interface IFoodRetrieval<in TFood, TNutrient>
     
     const string ProjectDirectory = "NutrientRetrieval";
     const string FileDirectory = "Files";
-    const string FileName = "IngredientIDs.csv";
+    const string FileName = "NutrientIDs.csv";
 
     string Format { get; }
 
     void RetrieveFromApi()
     {
-        var baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var baseDirectory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         var absolutePath = Path.Combine(baseDirectory, ProjectDirectory, FileDirectory, FileName);
         var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
             .UseNpgsql(ConnectionString)

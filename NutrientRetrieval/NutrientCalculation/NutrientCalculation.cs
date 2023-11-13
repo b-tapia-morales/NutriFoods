@@ -23,11 +23,11 @@ public static class NutrientCalculation
     private const string FileDirectory = "Files";
     private const string FileName = "IngredientIDs.csv";
 
-    private static readonly string
-        BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+    private static readonly string BaseDirectory =
+        Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
 
-    private static readonly string
-        AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
+    private static readonly string AbsolutePath =
+        Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
     public static void Calculate()
     {
