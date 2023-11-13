@@ -19,12 +19,6 @@ public interface IEnum<out T, TEnum>
 
     static IReadOnlyCollection<T> NonNullValues() => Values().Skip(1).ToImmutableList();
 
-    static IReadOnlyDictionary<int, T> ValueDictionary() =>
-        Values().ToImmutableSortedDictionary(e => e.Value, e => e);
-
-    static IReadOnlyDictionary<string, T> NameDictionary() =>
-        Values().ToImmutableSortedDictionary(e => e.Name, e => e);
-
     static IReadOnlyDictionary<TEnum, T> TokenDictionary() =>
         Tokens.Zip(Values(), (k, v) => new { Key = k, Value = v })
             .ToImmutableSortedDictionary(e => e.Key, e => e.Value);
@@ -32,11 +26,18 @@ public interface IEnum<out T, TEnum>
     static IReadOnlyDictionary<string, T> ReadableNameDictionary() =>
         TokenDictionary().ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value, InvariantCultureIgnoreCase);
 
+    static IReadOnlyDictionary<T, TEnum> ReverseTokenDictionary() =>
+        Tokens.Zip(Values(), (k, v) => new { Key = k, Value = v })
+            .ToImmutableSortedDictionary(e => e.Value, e => e.Key);
+
     static T FromToken(TEnum token) =>
         TokenDictionary().TryGetValue(token, out var value) ? value : throw new KeyNotFoundException();
 
     static T FromReadableName(string readableName) =>
         ReadableNameDictionary().TryGetValue(readableName, out var value) ? value : throw new KeyNotFoundException();
+
+    static TEnum ToToken(T value) =>
+        ReverseTokenDictionary().TryGetValue(value, out var token) ? token : throw new KeyNotFoundException();
 }
 
 public interface IComposableEnum<out TSelf, out TOther>
