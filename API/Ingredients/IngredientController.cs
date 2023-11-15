@@ -6,20 +6,13 @@ namespace API.Ingredients;
 
 [ApiController]
 [Route("api/v1/ingredients")]
-public class IngredientController
+public class IngredientController(IIngredientRepository repository)
 {
-    private readonly IIngredientRepository _repository;
-
-    public IngredientController(IIngredientRepository repository)
-    {
-        _repository = repository;
-    }
-
     [HttpGet]
     [Route("")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindAll()
     {
-        return await _repository.FindAll();
+        return await repository.FindAll();
     }
 
     [HttpGet]
@@ -29,7 +22,7 @@ public class IngredientController
         if (string.IsNullOrWhiteSpace(name))
             return new BadRequestObjectResult("Parameter can't be an empty or whitespace string");
 
-        var ingredient = await _repository.FindByName(name.ToLower());
+        var ingredient = await repository.FindByName(name.ToLower());
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
 
@@ -40,7 +33,7 @@ public class IngredientController
         if (id < 0)
             return new BadRequestObjectResult($"Parameter can't be a negative integer (Value provided was: {id})");
 
-        var ingredient = await _repository.FindById(id);
+        var ingredient = await repository.FindById(id);
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
 
@@ -49,6 +42,6 @@ public class IngredientController
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByFoodGroup(FoodGroupToken foodGroup)
     {
         var value = IEnum<FoodGroups, FoodGroupToken>.FromToken(foodGroup);
-        return await (value == FoodGroups.None ? _repository.FindAll() : _repository.FindByFoodGroup(value));
+        return await (value == FoodGroups.None ? repository.FindAll() : repository.FindByFoodGroup(value));
     }
 }
