@@ -4,13 +4,12 @@ using Domain.Enum;
 using FluentValidation;
 using Newtonsoft.Json;
 using Utils.Date;
-using Utils.Enum;
+using static System.Globalization.CultureInfo;
 
 namespace API.Users;
 
 public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
 {
-    
     public PersonalInfoValidator()
     {
         // Name
@@ -19,8 +18,8 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
             .WithMessage(e =>
                 JsonConvert.ToString(
                     $"""
-                     Argument for name must be a non-empty string of a length of two characters minimum.
-                     Provided argument “{e.Names}” has a length of {e.Names!.Length}.
+                     Argument for names must be a non-empty string of a length of two characters minimum.
+                     Provided argument “{e.Names}” has a length of {e.Names.Length}.
                      """)
             );
 
@@ -31,15 +30,15 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
                 JsonConvert.ToString(
                     $"""
                      Argument for name must be a non-empty string of a length of two characters minimum.
-                     Provided argument “{e.LastNames}” has a length of {e.LastNames!.Length}.
+                     Provided argument “{e.LastNames}” has a length of {e.LastNames.Length}.
                      """)
             );
 
         // Birthdate
         RuleFor(e => e.Birthdate).Custom((str, context) =>
         {
-            if (!DateOnly.TryParseExact(str, DateOnlyUtils.AllowedFormats, CultureInfo.InvariantCulture,
-                    DateTimeStyles.None, out var date))
+            if (!DateOnly.TryParseExact(str, DateOnlyUtils.AllowedFormats, InvariantCulture, DateTimeStyles.None,
+                    out var date))
             {
                 context.AddFailure(JsonConvert.ToString(
                     $"""
@@ -75,7 +74,7 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
                     $"""
                      Provided argument “{e}” does not correspond to a valid gender value.
                      Recognized values are:
-                     {string.Join('\n', GenderEnum.List)}
+                     {string.Join('\n', IEnum<BiologicalSexes, BiologicalSexToken>.NonNullValues())}
                      """)
             );
     }
