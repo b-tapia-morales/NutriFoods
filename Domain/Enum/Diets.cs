@@ -8,6 +8,10 @@ public class Diets : SmartEnum<Diets>, IEnum<Diets, DietToken>
     public static readonly Diets None =
         new(nameof(None), (int)DietToken.None, string.Empty, Array.Empty<FoodGroups>());
 
+    public static readonly Diets Vegetarian =
+        new(nameof(Vegetarian), (int)DietToken.Vegetarian, "Vegano",
+            new[] { Fish, Shellfish, Meat, Poultry, Eggs, Milk, Yogurt, Cheese });
+
     public static readonly Diets OvoVegetarian =
         new(nameof(OvoVegetarian), (int)DietToken.OvoVegetarian, "Ovovegetariano",
             new[] { Fish, Shellfish, Meat, Poultry, Milk, Yogurt, Cheese });
@@ -21,7 +25,7 @@ public class Diets : SmartEnum<Diets>, IEnum<Diets, DietToken>
             new[] { Fish, Shellfish, Meat, Poultry });
 
     public static readonly Diets Vegan =
-        new(nameof(Vegan), (int)DietToken.Vegan, "Vegano", Array.Empty<FoodGroups>());
+        new(nameof(Vegan), (int)DietToken.Vegan, "Vegano", Vegetarian.InconsumableGroups);
 
     public static readonly Diets Pollotarian =
         new(nameof(Pollotarian), (int)DietToken.Pollotarian, "Pollotariano",
@@ -49,6 +53,7 @@ public class Diets : SmartEnum<Diets>, IEnum<Diets, DietToken>
 public enum DietToken
 {
     None,
+    Vegetarian,
     OvoVegetarian,
     LactoVegetarian,
     OvoLactoVegetarian,
