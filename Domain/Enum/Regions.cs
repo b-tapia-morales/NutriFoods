@@ -4,7 +4,7 @@ using Ardalis.SmartEnum;
 
 public class Regions : SmartEnum<Regions>, IEnum<Regions, RegionToken>
 {
-    public static readonly Regions None = new(nameof(None), 0, string.Empty, string.Empty);
+    public static readonly Regions None = new(nameof(None), (int)RegionToken.None, string.Empty, string.Empty);
 
     public static readonly Regions AricaParinacota =
         new(nameof(AricaParinacota), (int)RegionToken.AricaParinacota, "Arica y Parinacota", "AP");
@@ -66,6 +66,7 @@ public class Regions : SmartEnum<Regions>, IEnum<Regions, RegionToken>
 
 public enum RegionToken
 {
+    None,
     AricaParinacota,
     Tarapaca,
     Antofagasta,
