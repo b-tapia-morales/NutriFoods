@@ -8,7 +8,7 @@ public class Ingredient
 
     public string Name { get; set; } = null!;
 
-    public string[] Synonyms { get; set; } = null!;
+    public List<string> Synonyms { get; set; } = null!;
 
     public bool IsAnimal { get; set; }
 
