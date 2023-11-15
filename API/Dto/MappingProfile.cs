@@ -1,9 +1,6 @@
 using API.Dto.Abridged;
 using AutoMapper;
-using Domain.Enum;
 using Domain.Models;
-using EatingSymptom = Domain.Models.EatingSymptom;
-using HarmfulHabit = Domain.Models.HarmfulHabit;
 
 namespace API.Dto;
 
@@ -19,8 +16,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ReverseMap();
         CreateMap<Ingredient, IngredientDto>()
-            .ForMember(dest => dest.Synonyms,
-                opt => opt.MapFrom(src => (src.Synonyms ?? Array.Empty<string>()).ToList()))
+            .ForMember(dest => dest.Synonyms, opt => opt.MapFrom(src => src.Synonyms.ToList()))
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.IngredientNutrients))
@@ -28,8 +24,7 @@ public class MappingProfile : Profile
 
         // Ingredient Abridged
         CreateMap<Ingredient, IngredientAbridged>()
-            .ForMember(dest => dest.Synonyms,
-                opt => opt.MapFrom(src => (src.Synonyms ?? Array.Empty<string>()).ToList()))
+            .ForMember(dest => dest.Synonyms, opt => opt.MapFrom(src => src.Synonyms.ToList()))
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ReverseMap();
         CreateMap<IngredientMeasure, IngredientMeasureAbridged>()
@@ -50,12 +45,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
             .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.RecipeNutrients))
-            .ForMember(dest => dest.MealTypes, opt => opt
-                .MapFrom(src =>
-                    (src.MealTypes ?? Array.Empty<MealTypes>()).Select(e => e.ReadableName).ToList()))
+            .ForMember(dest => dest.MealTypes,
+                opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src =>
-                    (src.DishTypes ?? Array.Empty<DishTypes>()).Select(e => e.ReadableName).ToList()))
+                opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap();
 
         // Recipe Abridged
@@ -63,12 +56,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
             .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
             .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.MealTypes, opt => opt
-                .MapFrom(src =>
-                    (src.MealTypes ?? Array.Empty<MealTypes>()).Select(e => e.ReadableName).ToList()))
+            .ForMember(dest => dest.MealTypes, 
+                opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src =>
-                    (src.DishTypes ?? Array.Empty<DishTypes>()).Select(e => e.ReadableName).ToList()))
+                opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap();
 
         // Meal Plan
@@ -154,7 +145,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.RegisteredOn,
                 opt => opt.MapFrom(src => (src.RegisteredOn ?? GetPacificStandardDate()).ToString("YYYY/mm/dd")))
             .ReverseMap();
-        
+
         // Patient
         CreateMap<PersonalInfo, PersonalInfoDto>()
             .ForMember(dest => dest.BiologicalSex, opt => opt.MapFrom(src => src.BiologicalSex.ReadableName))
@@ -167,7 +158,7 @@ public class MappingProfile : Profile
             .ReverseMap();
         CreateMap<Patient, PatientDto>()
             .ReverseMap();
-        
+
         // Nutritionist
         CreateMap<Nutritionist, NutritionistDto>()
             .ReverseMap();
