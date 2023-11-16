@@ -14,5 +14,5 @@ public class Address
 
     public Provinces Province { get; set; } = null!;
 
-    public Patient IdNavigation { get; set; } = null!;
+    public virtual Patient IdNavigation { get; set; } = null!;
 }

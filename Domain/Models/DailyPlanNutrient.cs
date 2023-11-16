@@ -16,5 +16,5 @@ public class DailyPlanNutrient
 
     public double? ErrorMargin { get; set; }
 
-    public DailyPlan DailyPlan { get; set; } = null!;
+    public virtual DailyPlan DailyPlan { get; set; } = null!;
 }

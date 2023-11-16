@@ -56,7 +56,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
             .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
             .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.MealTypes, 
+            .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
@@ -69,8 +69,13 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ReverseMap();
+        CreateMap<DailyMenuTarget, DailyMenuTargetDto>()
+            .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
+            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
+            .ForMember(dest => dest.ThresholdType, opt => opt.MapFrom(src => src.ThresholdType.ReadableName))
+            .ReverseMap();
         CreateMap<DailyMenu, DailyMenuDto>()
-            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealTypes.ReadableName))
+            .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.DailyMenuNutrients))
             .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MenuRecipes))
             .ReverseMap();

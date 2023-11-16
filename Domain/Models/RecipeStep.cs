@@ -10,5 +10,5 @@ public class RecipeStep
 
     public string Description { get; set; } = null!;
 
-    public Recipe Recipe { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; } = null!;
 }

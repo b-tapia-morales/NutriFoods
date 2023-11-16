@@ -10,5 +10,5 @@ public class ContactInfo
 
     public string Email { get; set; } = null!;
 
-    public Patient IdNavigation { get; set; } = null!;
+    public virtual Patient IdNavigation { get; set; } = null!;
 }

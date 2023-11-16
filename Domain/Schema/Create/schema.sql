@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS ingredient_nutrient
 CREATE TABLE IF NOT EXISTS recipe
 (
     id         SERIAL,
-    name       VARCHAR(64)   NOT NULL,
+    name       TEXT          NOT NULL,
     author     VARCHAR(64)   NOT NULL,
     url        TEXT          NOT NULL,
     portions   INTEGER,
@@ -167,6 +167,18 @@ CREATE TABLE IF NOT EXISTS daily_menu
     hour              VARCHAR(8) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
+);
+
+CREATE TABLE IF NOT EXISTS daily_menu_target
+(
+    id             SERIAL,
+    daily_menu_id  INTEGER NOT NULL,
+    nutrient       INTEGER NOT NULL,
+    quantity       FLOAT   NOT NULL,
+    unit           INTEGER NOT NULL,
+    threshold_type INTEGER NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id)
 );
 
 CREATE TABLE IF NOT EXISTS daily_menu_nutrient

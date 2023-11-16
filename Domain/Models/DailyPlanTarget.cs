@@ -16,5 +16,5 @@ public class DailyPlanTarget
 
     public ThresholdTypes ThresholdType { get; set; } = null!;
 
-    public DailyPlan DailyPlan { get; set; } = null!;
+    public virtual DailyPlan DailyPlan { get; set; } = null!;
 }

@@ -14,5 +14,5 @@ public class ClinicalAnamnesis
     
     public virtual ICollection<Ingestible> Ingestibles { get; set; } = new List<Ingestible>();
 
-    public Consultation IdNavigation { get; set; } = null!;
+    public virtual Consultation IdNavigation { get; set; } = null!;
 }

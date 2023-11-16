@@ -10,7 +10,7 @@ public class RecipeQuantity
 
     public double Grams { get; set; }
 
-    public Ingredient Ingredient { get; set; } = null!;
+    public virtual Ingredient Ingredient { get; set; } = null!;
 
-    public Recipe Recipe { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; } = null!;
 }

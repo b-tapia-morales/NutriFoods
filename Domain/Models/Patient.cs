@@ -12,9 +12,9 @@ public class Patient
 
     public virtual ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
 
-    public ContactInfo? ContactInfo { get; set; }
+    public virtual ContactInfo? ContactInfo { get; set; }
 
-    public Nutritionist Nutritionist { get; set; } = null!;
+    public virtual Nutritionist Nutritionist { get; set; } = null!;
 
-    public PersonalInfo? PersonalInfo { get; set; }
+    public virtual PersonalInfo? PersonalInfo { get; set; }
 }

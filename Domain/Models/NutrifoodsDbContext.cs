@@ -1,6 +1,7 @@
-﻿using Domain.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Domain.Models;
 
@@ -32,6 +33,8 @@ public class NutrifoodsDbContext : DbContext
     public virtual DbSet<DailyMenu> DailyMenus { get; set; } = null!;
 
     public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; } = null!;
+
+    public virtual DbSet<DailyMenuTarget> DailyMenuTargets { get; set; } = null!;
 
     public virtual DbSet<DailyPlan> DailyPlans { get; set; } = null!;
 
@@ -272,7 +275,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasMaxLength(8)
                 .HasColumnName("hour");
             entity.Property(e => e.IntakePercentage).HasColumnName("intake_percentage");
-            entity.Property(e => e.MealTypes).HasColumnName("meal_type");
+            entity.Property(e => e.MealType).HasColumnName("meal_type");
 
             entity.HasOne(d => d.DailyPlan).WithMany(p => p.DailyMenus)
                 .HasForeignKey(d => d.DailyPlanId)
@@ -296,6 +299,25 @@ public class NutrifoodsDbContext : DbContext
                 .HasForeignKey(d => d.DailyMenuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("daily_menu_nutrient_daily_menu_id_fkey");
+        });
+
+        modelBuilder.Entity<DailyMenuTarget>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("daily_menu_target_pkey");
+
+            entity.ToTable("daily_menu_target", "nutrifoods");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.DailyMenuId).HasColumnName("daily_menu_id");
+            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
+            entity.Property(e => e.Unit).HasColumnName("unit");
+
+            entity.HasOne(d => d.DailyMenu).WithMany(p => p.DailyMenuTargets)
+                .HasForeignKey(d => d.DailyMenuId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("daily_menu_target_daily_menu_id_fkey");
         });
 
         modelBuilder.Entity<DailyPlan>(entity =>
@@ -688,9 +710,7 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.MealTypes)
                 .HasDefaultValueSql("ARRAY[]::integer[]")
                 .HasColumnName("meal_types");
-            entity.Property(e => e.Name)
-                .HasMaxLength(64)
-                .HasColumnName("name");
+            entity.Property(e => e.Name).HasColumnName("name");
             entity.Property(e => e.Portions).HasColumnName("portions");
             entity.Property(e => e.Time).HasColumnName("time");
             entity.Property(e => e.Url).HasColumnName("url");
@@ -827,8 +847,14 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<DailyPlanNutrient>().Property(e => e.Nutrient)
             .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
-        builder.Entity<DailyMenu>().Property(e => e.MealTypes)
+        builder.Entity<DailyMenu>().Property(e => e.MealType)
             .HasConversion(e => e.Value, e => MealTypes.FromValue(e));
+        builder.Entity<DailyMenuTarget>().Property(e => e.Unit)
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
+        builder.Entity<DailyMenuTarget>().Property(e => e.Nutrient)
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
+        builder.Entity<DailyMenuTarget>().Property(e => e.ThresholdType)
+            .HasConversion(e => e.Value, e => ThresholdTypes.FromValue(e));
         builder.Entity<DailyMenuNutrient>().Property(e => e.Nutrient)
             .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
         builder.Entity<DailyMenuNutrient>().Property(e => e.Unit)

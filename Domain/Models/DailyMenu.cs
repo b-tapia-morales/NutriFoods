@@ -10,13 +10,15 @@ public class DailyMenu
 
     public int IntakePercentage { get; set; }
 
-    public MealTypes MealTypes { get; set; } = null!;
+    public MealTypes MealType { get; set; } = null!;
 
     public string Hour { get; set; } = null!;
 
     public virtual ICollection<DailyMenuNutrient> DailyMenuNutrients { get; set; } = new List<DailyMenuNutrient>();
+    
+    public virtual ICollection<DailyMenuTarget> DailyMenuTargets { get; set; } = new List<DailyMenuTarget>();
 
     public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
 
-    public DailyPlan DailyPlan { get; set; } = null!;
+    public virtual DailyPlan DailyPlan { get; set; } = null!;
 }

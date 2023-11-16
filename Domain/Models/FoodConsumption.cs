@@ -12,5 +12,5 @@ public class FoodConsumption
 
     public Guid NutritionalAnamnesis { get; set; }
 
-    public NutritionalAnamnesis NutritionalAnamnesesNavigation { get; set; } = null!;
+    public virtual NutritionalAnamnesis NutritionalAnamnesesNavigation { get; set; } = null!;
 }

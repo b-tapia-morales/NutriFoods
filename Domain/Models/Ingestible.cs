@@ -10,7 +10,7 @@ public class Ingestible
 
     public IngestibleTypes Type { get; set; } = null!;
 
-    public string[] AdministrationTimes { get; set; } = null!;
+    public List<string> AdministrationTimes { get; set; } = null!;
 
     public int? Dosage { get; set; }
 

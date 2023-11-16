@@ -16,5 +16,5 @@ public class PersonalInfo
 
     public DateOnly Birthdate { get; set; }
 
-    public Patient IdNavigation { get; set; } = null!;
+    public virtual Patient IdNavigation { get; set; } = null!;
 }

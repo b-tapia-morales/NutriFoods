@@ -18,5 +18,5 @@ public class Anthropometry
 
     public DateTime? LastUpdated { get; set; }
 
-    public Consultation IdNavigation { get; set; } = null!;
+    public virtual Consultation IdNavigation { get; set; } = null!;
 }

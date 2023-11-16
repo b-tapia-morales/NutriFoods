@@ -22,5 +22,5 @@ public class DailyPlan
 
     public virtual ICollection<DailyPlanTarget> DailyPlanTargets { get; set; } = new List<DailyPlanTarget>();
 
-    public MealPlan MealPlan { get; set; } = null!;
+    public virtual MealPlan MealPlan { get; set; } = null!;
 }

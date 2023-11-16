@@ -12,5 +12,5 @@ public class Disease
 
     public Guid ClinicalAnamnesisId { get; set; }
 
-    public ClinicalAnamnesis ClinicalAnamnesis { get; set; } = null!;
+    public virtual ClinicalAnamnesis ClinicalAnamnesis { get; set; } = null!;
 }

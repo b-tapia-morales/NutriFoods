@@ -12,7 +12,7 @@ public class IngredientMeasure
 
     public int IngredientId { get; set; }
 
-    public Ingredient Ingredient { get; set; } = null!;
+    public virtual Ingredient Ingredient { get; set; } = null!;
 
     public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = new List<RecipeMeasure>();
 }

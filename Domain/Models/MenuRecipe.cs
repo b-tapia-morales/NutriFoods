@@ -10,7 +10,7 @@ public class MenuRecipe
 
     public int Portions { get; set; }
 
-    public DailyMenu DailyMenu { get; set; } = null!;
+    public virtual DailyMenu DailyMenu { get; set; } = null!;
 
-    public Recipe Recipe { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; } = null!;
 }

@@ -14,5 +14,5 @@ public class IngredientNutrient
 
     public int IngredientId { get; set; }
 
-    public Ingredient Ingredient { get; set; } = null!;
+    public virtual Ingredient Ingredient { get; set; } = null!;
 }

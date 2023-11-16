@@ -16,13 +16,13 @@ public class Consultation
 
     public Guid PatientId { get; set; }
 
-    public Anthropometry? Anthropometry { get; set; }
+    public virtual Anthropometry? Anthropometry { get; set; }
 
-    public ClinicalAnamnesis? ClinicalAnamnesis { get; set; }
+    public virtual ClinicalAnamnesis? ClinicalAnamnesis { get; set; }
 
-    public MealPlan? MealPlan { get; set; }
+    public virtual MealPlan? MealPlan { get; set; }
 
-    public NutritionalAnamnesis? NutritionalAnamnesis { get; set; }
+    public virtual NutritionalAnamnesis? NutritionalAnamnesis { get; set; }
 
-    public Patient Patient { get; set; } = null!;
+    public virtual Patient Patient { get; set; } = null!;
 }
