@@ -26,9 +26,9 @@ public class Units : SmartEnum<Units>, IEnum<Units, UnitToken>
 
 public enum UnitToken
 {
-    None = 0,
-    Grams = 1,
-    Milligrams = 2,
-    Micrograms = 3,
-    KiloCalories = 4
+    None,
+    Grams,
+    Milligrams,
+    Micrograms,
+    KiloCalories
 }
