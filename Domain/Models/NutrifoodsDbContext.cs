@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Domain.Models;
 
-public partial class NutrifoodsDbContext : DbContext
+public class NutrifoodsDbContext : DbContext
 {
     public NutrifoodsDbContext()
     {
@@ -15,67 +15,67 @@ public partial class NutrifoodsDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Address> Addresses { get; set; }
+    public virtual DbSet<Address> Addresses { get; set; } = null!;
 
-    public virtual DbSet<AdverseFoodReaction> AdverseFoodReactions { get; set; }
+    public virtual DbSet<AdverseFoodReaction> AdverseFoodReactions { get; set; } = null!;
 
-    public virtual DbSet<Anthropometry> Anthropometries { get; set; }
+    public virtual DbSet<Anthropometry> Anthropometries { get; set; } = null!;
 
-    public virtual DbSet<ClinicalAnamnesis> ClinicalAnamneses { get; set; }
+    public virtual DbSet<ClinicalAnamnesis> ClinicalAnamneses { get; set; } = null!;
 
-    public virtual DbSet<ClinicalSign> ClinicalSigns { get; set; }
+    public virtual DbSet<ClinicalSign> ClinicalSigns { get; set; } = null!;
 
-    public virtual DbSet<Consultation> Consultations { get; set; }
+    public virtual DbSet<Consultation> Consultations { get; set; } = null!;
 
-    public virtual DbSet<ContactInfo> ContactInfos { get; set; }
+    public virtual DbSet<ContactInfo> ContactInfos { get; set; } = null!;
 
-    public virtual DbSet<DailyMenu> DailyMenus { get; set; }
+    public virtual DbSet<DailyMenu> DailyMenus { get; set; } = null!;
 
-    public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; }
+    public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; } = null!;
 
-    public virtual DbSet<DailyPlan> DailyPlans { get; set; }
+    public virtual DbSet<DailyPlan> DailyPlans { get; set; } = null!;
 
-    public virtual DbSet<DailyPlanNutrient> DailyPlanNutrients { get; set; }
+    public virtual DbSet<DailyPlanNutrient> DailyPlanNutrients { get; set; } = null!;
 
-    public virtual DbSet<DailyPlanTarget> DailyPlanTargets { get; set; }
+    public virtual DbSet<DailyPlanTarget> DailyPlanTargets { get; set; } = null!;
 
-    public virtual DbSet<Disease> Diseases { get; set; }
+    public virtual DbSet<Disease> Diseases { get; set; } = null!;
 
-    public virtual DbSet<EatingSymptom> EatingSymptoms { get; set; }
+    public virtual DbSet<EatingSymptom> EatingSymptoms { get; set; } = null!;
 
-    public virtual DbSet<FoodConsumption> FoodConsumptions { get; set; }
+    public virtual DbSet<FoodConsumption> FoodConsumptions { get; set; } = null!;
 
-    public virtual DbSet<HarmfulHabit> HarmfulHabits { get; set; }
+    public virtual DbSet<HarmfulHabit> HarmfulHabits { get; set; } = null!;
 
-    public virtual DbSet<Ingestible> Ingestibles { get; set; }
+    public virtual DbSet<Ingestible> Ingestibles { get; set; } = null!;
 
-    public virtual DbSet<Ingredient> Ingredients { get; set; }
+    public virtual DbSet<Ingredient> Ingredients { get; set; } = null!;
 
-    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; }
+    public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; } = null!;
 
-    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; }
+    public virtual DbSet<IngredientNutrient> IngredientNutrients { get; set; } = null!;
 
-    public virtual DbSet<MealPlan> MealPlans { get; set; }
+    public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
 
-    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; }
+    public virtual DbSet<MenuRecipe> MenuRecipes { get; set; } = null!;
 
-    public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; }
+    public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; } = null!;
 
-    public virtual DbSet<Nutritionist> Nutritionists { get; set; }
+    public virtual DbSet<Nutritionist> Nutritionists { get; set; } = null!;
 
-    public virtual DbSet<Patient> Patients { get; set; }
+    public virtual DbSet<Patient> Patients { get; set; } = null!;
 
-    public virtual DbSet<PersonalInfo> PersonalInfos { get; set; }
+    public virtual DbSet<PersonalInfo> PersonalInfos { get; set; } = null!;
 
-    public virtual DbSet<Recipe> Recipes { get; set; }
+    public virtual DbSet<Recipe> Recipes { get; set; } = null!;
 
-    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; }
+    public virtual DbSet<RecipeMeasure> RecipeMeasures { get; set; } = null!;
 
-    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; }
+    public virtual DbSet<RecipeNutrient> RecipeNutrients { get; set; } = null!;
 
-    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; }
+    public virtual DbSet<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public virtual DbSet<RecipeStep> RecipeSteps { get; set; }
+    public virtual DbSet<RecipeStep> RecipeSteps { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
         optionsBuilder.UseNpgsql("Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$",
