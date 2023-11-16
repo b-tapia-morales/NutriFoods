@@ -59,7 +59,7 @@ public static class DataCentral
             .DistinctBy(e => e.FoodDataCentralId)
             .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);
         // Partitions the dictionary into a list of Key-Pairs of 20 items each.
-        var pairs = EnumerableUtils.Partition(dictionary, MaxItemsPerRequest);
+        var pairs = dictionary.Partition(MaxItemsPerRequest);
         // Converts each list of Key-Pairs into a Task which performs the retrieval from FoodDataCentral.
         // This is done so each request can be performed concurrently.
         var tasks = pairs.Select(e => FetchList<TFood, TNutrient>(new Dictionary<int, int>(e), format));

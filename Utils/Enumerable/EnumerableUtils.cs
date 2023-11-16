@@ -1,8 +1,10 @@
+using System.Text;
+
 namespace Utils.Enumerable;
 
 public static class EnumerableUtils
 {
-    public static IEnumerable<IEnumerable<T>> Partition<T>(IEnumerable<T> source, int size)
+    public static IEnumerable<IEnumerable<T>> Partition<T>(this IEnumerable<T> source, int size)
     {
         var partition = new List<T>(size);
         var counter = 0;
@@ -21,4 +23,9 @@ public static class EnumerableUtils
         if (counter != 0)
             yield return partition;
     }
+
+    public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ",") =>
+        string.Join($"{delimiter} ", source);
+
+    public static void WriteToConsole<T>(this IEnumerable<T> source) => Console.WriteLine(source.ToJoinedString());
 }
