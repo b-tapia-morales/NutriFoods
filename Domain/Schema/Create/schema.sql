@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS ingredient_measure
     grams         FLOAT       NOT NULL,
     is_default    BOOLEAN     NOT NULL,
     ingredient_id INTEGER     NOT NULL,
-    UNIQUE (name, ingredient_id),
     PRIMARY KEY (id),
     FOREIGN KEY (ingredient_id) REFERENCES ingredient (id)
 );

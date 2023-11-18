@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Domain.Models;
 
@@ -519,9 +520,6 @@ public class NutrifoodsDbContext : DbContext
 
             entity.ToTable("ingredient_measure", "nutrifoods");
 
-            entity.HasIndex(e => new { e.Name, e.IngredientId }, "ingredient_measure_name_ingredient_id_key")
-                .IsUnique();
-
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Grams).HasColumnName("grams");
             entity.Property(e => e.IngredientId).HasColumnName("ingredient_id");
@@ -824,9 +822,20 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
         builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => MealTypes.FromValue(e));
-        builder.Entity<Recipe>().Property(e => e.DishTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => DishTypes.FromValue(e));
+            .HasPostgresArrayConversion(e => e.Value, e => MealTypes.FromValue(e))
+            .Metadata
+            .SetValueComparer(new ValueComparer<List<MealTypes>>(
+                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
+                c => c.ToList()));
+        builder.Entity<Recipe>()
+            .Property(e => e.DishTypes)
+            .HasPostgresArrayConversion(e => e.Value, e => DishTypes.FromValue(e))
+            .Metadata
+            .SetValueComparer(new ValueComparer<List<DishTypes>>(
+                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
+                c => c.ToList()));
         builder.Entity<RecipeNutrient>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<RecipeNutrient>().Property(e => e.Nutrient)
