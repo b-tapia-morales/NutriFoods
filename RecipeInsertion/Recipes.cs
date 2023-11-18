@@ -82,7 +82,7 @@ public static class Recipes
         {
             var ingredient =
                 ingredients.Find(e =>
-                    string.Equals(e.Name.RemoveAccents(), name.RemoveAccents(), CurrentCultureIgnoreCase));
+                    string.Equals(e.Name.Standardize(), name.Standardize()));
 
             if (ingredient == null)
                 continue;
@@ -101,7 +101,11 @@ public static class Recipes
         var nameIngredient = File.ReadAllLines(IngredientsPath);
         foreach (var name in nameIngredient)
         {
-            var id = ingredients.Find(x => x.Name.ToLower().Equals(name.ToLower()))!.Id;
+            var ingredient = ingredients.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
+            if (ingredient == null)
+                continue;
+
+            var id = ingredient.Id;
             var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
                 "RecipeInsertion", "Measures", $"{name}.csv");
             var measuresIngredient = RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
@@ -142,34 +146,41 @@ public static class Recipes
     }
 
     private static void InsertDataRecipe(DbContext context, DataRecipe dataRecipe, List<Ingredient> ingredients,
-        List<IngredientMeasure> units, int idRecipe)
+        List<IngredientMeasure> units, int recipeId)
     {
-        var name = SynonymousIngredientAux(dataRecipe.NameIngredients).ToLower();
-        var idIngredient =
-            ingredients.Find(i => i.Name.RemoveAccents().ToLower().Equals(name))!.Id;
+        var name = SynonymousIngredientAux(dataRecipe.NameIngredients).Standardize();
+        var ingredient = ingredients.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
+        if (ingredient == null)
+            return;
+
+        var ingredientId = ingredient.Id;
         if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
         {
             context.Add(new RecipeQuantity
             {
-                RecipeId = idRecipe,
-                IngredientId = idIngredient,
+                RecipeId = recipeId,
+                IngredientId = ingredientId,
                 Grams = double.Parse(dataRecipe.Quantity)
             });
             return;
         }
 
-        var idMeasures = units.Find(u =>
-            u.Name.ToLower().Equals(dataRecipe.Units) && u.IngredientId == idIngredient)!.Id;
+        var measure = units.Find(e =>
+            string.Equals(e.Name.Standardize(), dataRecipe.Units.Standardize()) && e.IngredientId == ingredientId);
+        if (measure == null)
+            return;
+
+        var measureId = measure.Id;
         switch (dataRecipe.Quantity.Length)
         {
             case 1 or 2:
-                InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, dataRecipe.Quantity, "0", "0");
+                InsertMeasuresWhitIngredient(context, recipeId, measureId, dataRecipe.Quantity, "0", "0");
                 break;
             case 3:
             {
                 var numerator = dataRecipe.Quantity[0].ToString();
                 var denominator = dataRecipe.Quantity[2].ToString();
-                InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, "0", numerator, denominator);
+                InsertMeasuresWhitIngredient(context, recipeId, measureId, "0", numerator, denominator);
                 break;
             }
             default:
@@ -177,7 +188,7 @@ public static class Recipes
                 var integerPart = dataRecipe.Quantity[0].ToString();
                 var numerator = dataRecipe.Quantity[2].ToString();
                 var denominator = dataRecipe.Quantity[4].ToString();
-                InsertMeasuresWhitIngredient(context, idRecipe, idMeasures, integerPart, numerator, denominator);
+                InsertMeasuresWhitIngredient(context, recipeId, measureId, integerPart, numerator, denominator);
                 break;
             }
         }
@@ -192,20 +203,25 @@ public static class Recipes
         foreach (var pathDataRecipe in dataRecipes)
         {
             var name = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-            var id = recipes.Find(x => x.Name.ToLower().Equals(name))!.Id;
 
-            if (repeated.Exists(x => x.Name.ToLower().Equals(name)))
+            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
+            if (recipe == null)
+                continue;
+
+            var recipeId = recipe.Id;
+            if (repeated.Exists(
+                    e => string.Equals(e.Name.Standardize(), name.Standardize())))
             {
-                var repeatedRecipe = repeated.Find(x => x.Name.ToLower().Equals(name));
+                var repeatedRecipe = repeated.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
                 if (repeatedRecipe!.AddedAmount > 0)
                     continue;
                 repeatedRecipe.AddedAmount++;
             }
 
-            var recipe = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, Comma)
+            var ingredientData = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            foreach (var dataRecipe in recipe)
-                InsertDataRecipe(context, dataRecipe, ingredients, units, id);
+            foreach (var data in ingredientData)
+                InsertDataRecipe(context, data, ingredients, units, recipeId);
         }
     }
 
@@ -216,11 +232,15 @@ public static class Recipes
         foreach (var pathDataRecipesStep in dataRecipesSteps)
         {
             var name = pathDataRecipesStep.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-            var id = recipes.Find(x => x.Name.ToLower().Equals(name))!.Id;
+            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
+            if (recipe == null || recipe.RecipeSteps.Count > 0)
+                continue;
+            
+            var id = recipe.Id;
             var step = File.ReadAllLines(pathDataRecipesStep);
-            if (repeated.Exists(x => x.Name.ToLower().Equals(name)))
+            if (repeated.Exists(e => string.Equals(e.Name.Standardize(), name.Standardize())))
             {
-                var recipeRepeated = repeated.Find(x => x.Name.ToLower().Equals(name));
+                var recipeRepeated = repeated.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
                 if (recipeRepeated!.AddedAmount > 0)
                     continue;
                 recipeRepeated.AddedAmount++;
@@ -237,15 +257,15 @@ public static class Recipes
         foreach (var file in files)
         {
             var name = file.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-            var recipe = recipes.Find(x => string.Equals(x.Name.ToLower(), name));
+            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
             if (recipe == null)
                 continue;
 
-            var mealTypes = MealTypesDict.Where(e => file.ToLower().Contains(e.Key.ToLower())).Select(e => e.Value).ToList();
+            var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var mealType in mealTypes)
                 recipe.MealTypes.Add(mealType);
 
-            var dishTypes = DishTypesDict.Where(e => file.ToLower().Contains(e.Key.ToLower())).Select(e => e.Value);
+            var dishTypes = DishTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var dishType in dishTypes)
                 recipe.DishTypes.Add(dishType);
         }
@@ -274,7 +294,7 @@ public static class Recipes
         {
             var ingredient = row[0];
             var synonyms = row[1].Split(";").Select(e => e.Capitalize()).ToList();
-            if (string.Equals(synonyms[0], "none", InvariantCultureIgnoreCase))
+            if (string.Equals(synonyms[0], "None"))
                 continue;
 
             dictionary.Add(ingredient, synonyms);
