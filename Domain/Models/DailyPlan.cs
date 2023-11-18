@@ -1,4 +1,6 @@
-﻿using Domain.Enum;
+﻿// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
+
+using Domain.Enum;
 
 namespace Domain.Models;
 
@@ -16,11 +18,11 @@ public class DailyPlan
 
     public int AdjustmentFactor { get; set; }
 
-    public virtual ICollection<DailyMenu> DailyMenus { get; set; } = new List<DailyMenu>();
+    public virtual ICollection<DailyMenu> DailyMenus { get; set; } = null!;
 
-    public virtual ICollection<DailyPlanNutrient> DailyPlanNutrients { get; set; } = new List<DailyPlanNutrient>();
+    public virtual ICollection<NutritionalTarget> NutritionalTargets { get; set; } = null!;
 
-    public virtual ICollection<DailyPlanTarget> DailyPlanTargets { get; set; } = new List<DailyPlanTarget>();
-
+    public virtual ICollection<NutritionalValue> NutritionalValues { get; set; } = null!;
+    
     public virtual MealPlan MealPlan { get; set; } = null!;
 }

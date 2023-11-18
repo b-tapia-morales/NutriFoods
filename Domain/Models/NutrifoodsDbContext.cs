@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain.Enum;
+﻿using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -33,15 +31,7 @@ public class NutrifoodsDbContext : DbContext
 
     public virtual DbSet<DailyMenu> DailyMenus { get; set; } = null!;
 
-    public virtual DbSet<DailyMenuNutrient> DailyMenuNutrients { get; set; } = null!;
-
-    public virtual DbSet<DailyMenuTarget> DailyMenuTargets { get; set; } = null!;
-
     public virtual DbSet<DailyPlan> DailyPlans { get; set; } = null!;
-
-    public virtual DbSet<DailyPlanNutrient> DailyPlanNutrients { get; set; } = null!;
-
-    public virtual DbSet<DailyPlanTarget> DailyPlanTargets { get; set; } = null!;
 
     public virtual DbSet<Disease> Diseases { get; set; } = null!;
 
@@ -64,6 +54,10 @@ public class NutrifoodsDbContext : DbContext
     public virtual DbSet<MenuRecipe> MenuRecipes { get; set; } = null!;
 
     public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; } = null!;
+
+    public virtual DbSet<NutritionalTarget> NutritionalTargets { get; set; } = null!;
+
+    public virtual DbSet<NutritionalValue> NutritionalValues { get; set; } = null!;
 
     public virtual DbSet<Nutritionist> Nutritionists { get; set; } = null!;
 
@@ -282,43 +276,44 @@ public class NutrifoodsDbContext : DbContext
                 .HasForeignKey(d => d.DailyPlanId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("daily_menu_daily_plan_id_fkey");
-        });
 
-        modelBuilder.Entity<DailyMenuNutrient>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("daily_menu_nutrient_pkey");
+            entity.HasMany(d => d.NutritionalTargets).WithMany(p => p.DailyMenus)
+                .UsingEntity<Dictionary<string, object>>(
+                    "DailyMenuNutritionalTarget",
+                    r => r.HasOne<NutritionalTarget>().WithMany()
+                        .HasForeignKey("NutritionalTargetId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_menu_nutritional_target_nutritional_target_id_fkey"),
+                    l => l.HasOne<DailyMenu>().WithMany()
+                        .HasForeignKey("DailyMenuId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_menu_nutritional_target_daily_menu_id_fkey"),
+                    j =>
+                    {
+                        j.HasKey("DailyMenuId", "NutritionalTargetId").HasName("daily_menu_nutritional_target_pkey");
+                        j.ToTable("daily_menu_nutritional_target", "nutrifoods");
+                        j.IndexerProperty<int>("DailyMenuId").HasColumnName("daily_menu_id");
+                        j.IndexerProperty<int>("NutritionalTargetId").HasColumnName("nutritional_target_id");
+                    });
 
-            entity.ToTable("daily_menu_nutrient", "nutrifoods");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DailyMenuId).HasColumnName("daily_menu_id");
-            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-            entity.Property(e => e.Unit).HasColumnName("unit");
-
-            entity.HasOne(d => d.DailyMenu).WithMany(p => p.DailyMenuNutrients)
-                .HasForeignKey(d => d.DailyMenuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("daily_menu_nutrient_daily_menu_id_fkey");
-        });
-
-        modelBuilder.Entity<DailyMenuTarget>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("daily_menu_target_pkey");
-
-            entity.ToTable("daily_menu_target", "nutrifoods");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DailyMenuId).HasColumnName("daily_menu_id");
-            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-            entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
-            entity.Property(e => e.Unit).HasColumnName("unit");
-
-            entity.HasOne(d => d.DailyMenu).WithMany(p => p.DailyMenuTargets)
-                .HasForeignKey(d => d.DailyMenuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("daily_menu_target_daily_menu_id_fkey");
+            entity.HasMany(d => d.NutritionalValues).WithMany(p => p.DailyMenus)
+                .UsingEntity<Dictionary<string, object>>(
+                    "DailyMenuNutritionalValue",
+                    r => r.HasOne<NutritionalValue>().WithMany()
+                        .HasForeignKey("NutritionalValueId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_menu_nutritional_value_nutritional_value_id_fkey"),
+                    l => l.HasOne<DailyMenu>().WithMany()
+                        .HasForeignKey("DailyMenuId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_menu_nutritional_value_daily_menu_id_fkey"),
+                    j =>
+                    {
+                        j.HasKey("DailyMenuId", "NutritionalValueId").HasName("daily_menu_nutritional_value_pkey");
+                        j.ToTable("daily_menu_nutritional_value", "nutrifoods");
+                        j.IndexerProperty<int>("DailyMenuId").HasColumnName("daily_menu_id");
+                        j.IndexerProperty<int>("NutritionalValueId").HasColumnName("nutritional_value_id");
+                    });
         });
 
         modelBuilder.Entity<DailyPlan>(entity =>
@@ -338,44 +333,44 @@ public class NutrifoodsDbContext : DbContext
                 .HasForeignKey(d => d.MealPlanId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("daily_plan_meal_plan_id_fkey");
-        });
 
-        modelBuilder.Entity<DailyPlanNutrient>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("daily_plan_nutrient_pkey");
+            entity.HasMany(d => d.NutritionalTargets).WithMany(p => p.DailyPlans)
+                .UsingEntity<Dictionary<string, object>>(
+                    "DailyPlanNutritionalTarget",
+                    r => r.HasOne<NutritionalTarget>().WithMany()
+                        .HasForeignKey("NutritionalTargetId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_plan_nutritional_target_nutritional_target_id_fkey"),
+                    l => l.HasOne<DailyPlan>().WithMany()
+                        .HasForeignKey("DailyPlanId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_plan_nutritional_target_daily_plan_id_fkey"),
+                    j =>
+                    {
+                        j.HasKey("DailyPlanId", "NutritionalTargetId").HasName("daily_plan_nutritional_target_pkey");
+                        j.ToTable("daily_plan_nutritional_target", "nutrifoods");
+                        j.IndexerProperty<int>("DailyPlanId").HasColumnName("daily_plan_id");
+                        j.IndexerProperty<int>("NutritionalTargetId").HasColumnName("nutritional_target_id");
+                    });
 
-            entity.ToTable("daily_plan_nutrient", "nutrifoods");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DailyPlanId).HasColumnName("daily_plan_id");
-            entity.Property(e => e.ErrorMargin).HasColumnName("error_margin");
-            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-            entity.Property(e => e.Unit).HasColumnName("unit");
-
-            entity.HasOne(d => d.DailyPlan).WithMany(p => p.DailyPlanNutrients)
-                .HasForeignKey(d => d.DailyPlanId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("daily_plan_nutrient_daily_plan_id_fkey");
-        });
-
-        modelBuilder.Entity<DailyPlanTarget>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("daily_plan_target_pkey");
-
-            entity.ToTable("daily_plan_target", "nutrifoods");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.DailyPlanId).HasColumnName("daily_plan_id");
-            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
-            entity.Property(e => e.Quantity).HasColumnName("quantity");
-            entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
-            entity.Property(e => e.Unit).HasColumnName("unit");
-
-            entity.HasOne(d => d.DailyPlan).WithMany(p => p.DailyPlanTargets)
-                .HasForeignKey(d => d.DailyPlanId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("daily_plan_target_daily_plan_id_fkey");
+            entity.HasMany(d => d.NutritionalValues).WithMany(p => p.DailyPlans)
+                .UsingEntity<Dictionary<string, object>>(
+                    "DailyPlanNutritionalValue",
+                    r => r.HasOne<NutritionalValue>().WithMany()
+                        .HasForeignKey("NutritionalValueId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_plan_nutritional_value_nutritional_value_id_fkey"),
+                    l => l.HasOne<DailyPlan>().WithMany()
+                        .HasForeignKey("DailyPlanId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("daily_plan_nutritional_value_daily_plan_id_fkey"),
+                    j =>
+                    {
+                        j.HasKey("DailyPlanId", "NutritionalValueId").HasName("daily_plan_nutritional_value_pkey");
+                        j.ToTable("daily_plan_nutritional_value", "nutrifoods");
+                        j.IndexerProperty<int>("DailyPlanId").HasColumnName("daily_plan_id");
+                        j.IndexerProperty<int>("NutritionalValueId").HasColumnName("nutritional_value_id");
+                    });
         });
 
         modelBuilder.Entity<Disease>(entity =>
@@ -615,6 +610,32 @@ public class NutrifoodsDbContext : DbContext
                 .HasConstraintName("nutritional_anamnesis_id_fkey");
         });
 
+        modelBuilder.Entity<NutritionalTarget>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("nutritional_target_pkey");
+
+            entity.ToTable("nutritional_target", "nutrifoods");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
+            entity.Property(e => e.Unit).HasColumnName("unit");
+        });
+
+        modelBuilder.Entity<NutritionalValue>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("nutritional_value_pkey");
+
+            entity.ToTable("nutritional_value", "nutrifoods");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.ErrorMargin).HasColumnName("error_margin");
+            entity.Property(e => e.Nutrient).HasColumnName("nutrient");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Unit).HasColumnName("unit");
+        });
+
         modelBuilder.Entity<Nutritionist>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("nutritionist_pkey");
@@ -809,6 +830,8 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<IngredientMeasure>().Ignore(e => e.RecipeMeasures);
         builder.Entity<Recipe>().Ignore(e => e.MenuRecipes);
         builder.Entity<MealPlan>().Ignore(e => e.Consultations);
+        builder.Entity<NutritionalValue>().Ignore(e => e.DailyPlans).Ignore(e => e.DailyMenus);
+        builder.Entity<NutritionalTarget>().Ignore(e => e.DailyPlans).Ignore(e => e.DailyMenus);
 
         // Ingredient
         builder.Entity<Ingredient>().Property(e => e.FoodGroup)
@@ -842,16 +865,22 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
 
         // Meal Plan
+        builder.Entity<NutritionalValue>().Property(e => e.Unit)
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
+        builder.Entity<NutritionalValue>().Property(e => e.Nutrient)
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
+
+        builder.Entity<NutritionalTarget>().Property(e => e.Unit)
+            .HasConversion(e => e.Value, e => Units.FromValue(e));
+        builder.Entity<NutritionalTarget>().Property(e => e.Nutrient)
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
+        builder.Entity<NutritionalTarget>().Property(e => e.Nutrient)
+            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
+
         builder.Entity<DailyPlan>().Property(e => e.Day)
             .HasConversion(e => e.Value, e => Days.FromValue(e));
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(e => e.Value, e => PhysicalActivities.FromValue(e));
-        builder.Entity<DailyPlanTarget>().Property(e => e.Unit)
-            .HasConversion(e => e.Value, e => Units.FromValue(e));
-        builder.Entity<DailyPlanTarget>().Property(e => e.Nutrient)
-            .HasConversion(e => e.Value, e => Nutrients.FromValue(e));
-        builder.Entity<DailyPlanTarget>().Property(e => e.ThresholdType)
-            .HasConversion(e => e.Value, e => ThresholdTypes.FromValue(e));
         builder.Entity<DailyPlanNutrient>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Units.FromValue(e));
         builder.Entity<DailyPlanNutrient>().Property(e => e.Nutrient)

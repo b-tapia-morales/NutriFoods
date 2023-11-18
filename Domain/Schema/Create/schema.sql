@@ -113,6 +113,26 @@ CREATE TABLE IF NOT EXISTS recipe_nutrient
     FOREIGN KEY (recipe_id) REFERENCES recipe (id)
 );
 
+CREATE TABLE IF NOT EXISTS nutritional_target
+(
+    id             SERIAL,
+    nutrient       INTEGER NOT NULL,
+    quantity       FLOAT   NOT NULL,
+    unit           INTEGER NOT NULL,
+    threshold_type INTEGER NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS nutritional_value
+(
+    id           SERIAL,
+    nutrient     INTEGER NOT NULL,
+    quantity     FLOAT   NOT NULL,
+    unit         INTEGER NOT NULL,
+    error_margin FLOAT   NOT NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE IF NOT EXISTS meal_plan
 (
     id            SERIAL,
@@ -133,28 +153,22 @@ CREATE TABLE IF NOT EXISTS daily_plan
     FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_plan_target
+CREATE TABLE IF NOT EXISTS daily_plan_nutritional_target
 (
-    id             SERIAL,
-    daily_plan_id  INTEGER NOT NULL,
-    nutrient       INTEGER NOT NULL,
-    quantity       FLOAT   NOT NULL,
-    unit           INTEGER NOT NULL,
-    threshold_type INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
+    daily_plan_id         INTEGER NOT NULL,
+    nutritional_target_id INTEGER NOT NULL,
+    PRIMARY KEY (daily_plan_id, nutritional_target_id),
+    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id),
+    FOREIGN KEY (nutritional_target_id) REFERENCES nutritional_target (id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_plan_nutrient
+CREATE TABLE IF NOT EXISTS daily_plan_nutritional_value
 (
-    id            SERIAL,
-    daily_plan_id INTEGER NOT NULL,
-    nutrient      INTEGER NOT NULL,
-    quantity      FLOAT   NOT NULL,
-    unit          INTEGER NOT NULL,
-    error_margin  FLOAT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
+    daily_plan_id        INTEGER NOT NULL,
+    nutritional_value_id INTEGER NOT NULL,
+    PRIMARY KEY (daily_plan_id, nutritional_value_id),
+    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id),
+    FOREIGN KEY (nutritional_value_id) REFERENCES nutritional_value (id)
 );
 
 CREATE TABLE IF NOT EXISTS daily_menu
@@ -168,27 +182,22 @@ CREATE TABLE IF NOT EXISTS daily_menu
     FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_menu_target
+CREATE TABLE IF NOT EXISTS daily_menu_nutritional_target
 (
-    id             SERIAL,
-    daily_menu_id  INTEGER NOT NULL,
-    nutrient       INTEGER NOT NULL,
-    quantity       FLOAT   NOT NULL,
-    unit           INTEGER NOT NULL,
-    threshold_type INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id)
+    daily_menu_id         INTEGER NOT NULL,
+    nutritional_target_id INTEGER NOT NULL,
+    PRIMARY KEY (daily_menu_id, nutritional_target_id),
+    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id),
+    FOREIGN KEY (nutritional_target_id) REFERENCES nutritional_target (id)
 );
 
-CREATE TABLE IF NOT EXISTS daily_menu_nutrient
+CREATE TABLE IF NOT EXISTS daily_menu_nutritional_value
 (
-    id            SERIAL,
-    daily_menu_id INTEGER NOT NULL,
-    nutrient      INTEGER NOT NULL,
-    quantity      FLOAT   NOT NULL,
-    unit          INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id)
+    daily_menu_id        INTEGER NOT NULL,
+    nutritional_value_id INTEGER NOT NULL,
+    PRIMARY KEY (daily_menu_id, nutritional_value_id),
+    FOREIGN KEY (daily_menu_id) REFERENCES daily_menu (id),
+    FOREIGN KEY (nutritional_value_id) REFERENCES nutritional_value (id)
 );
 
 CREATE TABLE IF NOT EXISTS menu_recipe
