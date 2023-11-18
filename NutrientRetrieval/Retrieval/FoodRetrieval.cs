@@ -14,22 +14,29 @@ public static class FoodRetrieval
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
 
+    private static readonly DbContextOptions<NutrifoodsDbContext> Options =
+        new DbContextOptionsBuilder<NutrifoodsDbContext>()
+            .UseNpgsql(ConnectionString,
+                builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            .Options;
+
     private const string ProjectDirectory = "NutrientRetrieval";
     private const string FileDirectory = "Files";
     private const string FileName = "NutrientIDs.csv";
+
+    private static readonly string BaseDirectory =
+        Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
+
+    private static readonly string
+        AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
     public static void RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
         var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
-        var baseDirectory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-        var absolutePath = Path.Combine(baseDirectory, ProjectDirectory, FileDirectory, FileName);
-        var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
-            .UseNpgsql(ConnectionString)
-            .Options;
-        using var context = new NutrifoodsDbContext(options);
-        var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(absolutePath, Semicolon, true)
+        using var context = new NutrifoodsDbContext(Options);
+        var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
         var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(format).Result
             .ToDictionary(e => e.Key, e => e.Value);
