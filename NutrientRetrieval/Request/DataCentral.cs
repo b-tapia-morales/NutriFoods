@@ -5,7 +5,6 @@ using NutrientRetrieval.Food;
 using NutrientRetrieval.Mapping.Ingredient;
 using Utils.Csv;
 using Utils.Enumerable;
-using static Utils.Csv.DelimiterToken;
 using JsonException = Newtonsoft.Json.JsonException;
 
 namespace NutrientRetrieval.Request;
@@ -102,8 +101,6 @@ public static class DataCentral
         var response = await client.GetAsync(uri);
         var serialized = await response.Content.ReadAsStringAsync();
         var list = JsonConvert.DeserializeObject<List<TFood>>(serialized) ?? throw new JsonException();
-        
-        Console.WriteLine(string.Join(Environment.NewLine, list));
 
         // The resulting list can be converted into a named tuple using the food item's Id as a key to retrieve from the dictionary its corresponding NutriFoods' Id .
         return list.Select(e => (dictionary[e.FdcId], e));

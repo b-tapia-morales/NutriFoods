@@ -21,4 +21,6 @@ public static class StringExtensions
                 str.Normalize(FormD)
                     .Where(c => CharUnicodeInfo.GetUnicodeCategory(c) != NonSpacingMark)
             ).Normalize(FormC);
+
+    public static string Standardize(this string str) => str.Trim().ToLower().RemoveAccents();
 }
