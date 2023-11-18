@@ -1,3 +1,5 @@
+using API.Dto.Abridged;
+
 namespace API.Dto;
 
 public class IngredientDto
