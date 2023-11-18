@@ -9,21 +9,20 @@ using static Utils.Csv.DelimiterToken;
 
 namespace NutrientRetrieval.Retrieval;
 
-public interface IFoodRetrieval<in TFood, TNutrient>
-    where TFood : class, IFood<TNutrient>
-    where TNutrient : class, IFoodNutrient
+public static class FoodRetrieval
 {
-    const string ConnectionString =
+    private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
-    
-    const string ProjectDirectory = "NutrientRetrieval";
-    const string FileDirectory = "Files";
-    const string FileName = "NutrientIDs.csv";
 
-    string Format { get; }
+    private const string ProjectDirectory = "NutrientRetrieval";
+    private const string FileDirectory = "Files";
+    private const string FileName = "NutrientIDs.csv";
 
-    void RetrieveFromApi()
+    public static void RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
+        where TFood : class, IFood<TNutrient>
+        where TNutrient : class, IFoodNutrient
     {
+        var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
         var baseDirectory = Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
         var absolutePath = Path.Combine(baseDirectory, ProjectDirectory, FileDirectory, FileName);
         var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
@@ -32,20 +31,18 @@ public interface IFoodRetrieval<in TFood, TNutrient>
         using var context = new NutrifoodsDbContext(options);
         var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(absolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
-        var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(Format).Result
+        var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(format).Result
             .ToDictionary(e => e.Key, e => e.Value);
         foreach (var pair in foodsDictionary)
-        {
-            InsertNutrients(context, nutrientsDictionary, pair.Key, pair.Value);
-        }
+            InsertNutrients<TFood, TNutrient>(context, nutrientsDictionary, pair.Key, pair.Value);
 
         context.SaveChanges();
     }
 
-    void InsertMeasures(NutrifoodsDbContext context, int ingredientId, TFood food);
-
-    void InsertNutrients(NutrifoodsDbContext context, IReadOnlyDictionary<string, int> dictionary, int ingredientId,
-        TFood food)
+    private static void InsertNutrients<TFood, TNutrient>(NutrifoodsDbContext context,
+        IReadOnlyDictionary<string, int> dictionary, int ingredientId, TFood food)
+        where TFood : class, IFood<TNutrient>
+        where TNutrient : class, IFoodNutrient
     {
         if (food.FoodNutrients.Length == 0) return;
 
@@ -66,4 +63,10 @@ public interface IFoodRetrieval<in TFood, TNutrient>
             });
         }
     }
+}
+
+public enum RetrievalMethod
+{
+    Abridged,
+    Full
 }
