@@ -21,7 +21,7 @@ public static class NutrientCalculation
 
     private const string ProjectDirectory = "NutrientRetrieval";
     private const string FileDirectory = "Files";
-    private const string FileName = "IngredientIDs.csv";
+    private const string FileName = "NutrientIDs.csv";
 
     private static readonly string BaseDirectory =
         Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
@@ -73,8 +73,8 @@ public static class NutrientCalculation
             foreach (var ingredientNutrient in quantity.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.Nutrient)))
             {
-                var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;
                 var nutrientId = ingredientNutrient.Nutrient;
+                var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;
                 if (!dictionary.TryAdd(nutrientId, nutrientGrams))
                     dictionary[nutrientId] += nutrientGrams;
             }
@@ -91,23 +91,22 @@ public static class NutrientCalculation
             foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.IngredientNutrients.Where(e =>
                          nutrientIds.Contains(e.Nutrient)))
             {
-                var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;
                 var nutrientId = ingredientNutrient.Nutrient;
+                var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;
                 if (!dictionary.TryAdd(nutrientId, nutrientGrams))
                     dictionary[nutrientId] += nutrientGrams;
             }
         }
     }
 
-    private static double CalculateGrams(double grams, int integerPart, int numerator, int denominator)
-    {
-        return integerPart switch
+    private static double CalculateGrams(double grams, int integerPart, int numerator, int denominator) =>
+        (integerPart, numerator, denominator) switch
         {
-            > 0 when numerator is 0 || denominator is 0 => integerPart * grams,
-            0 => ((double)numerator / denominator) * grams,
+            (_, _, 0) => 0,
+            (_, 0, _) => integerPart * grams,
+            (0, _, _) => ((double)numerator / denominator) * grams,
             _ => (integerPart + ((double)numerator / denominator)) * grams
         };
-    }
 
     private static IEnumerable<Recipe> IncludeSubfields(IQueryable<Recipe> recipes) =>
         recipes
