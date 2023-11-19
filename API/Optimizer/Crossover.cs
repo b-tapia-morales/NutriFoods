@@ -1,4 +1,3 @@
-using API.Dto;
 using Ardalis.SmartEnum;
 using Domain.Enum;
 using Utils.Enumerable;
@@ -19,8 +18,8 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
                 var i = 0;
                 while (i < populationSize)
                 {
-                    var firstChromosome = winners[RandomNumber(winners.Count)];
-                    var secondChromosome = population[RandomNumber(population.Count)];
+                    var firstChromosome = winners.RandomItem();
+                    var secondChromosome = population.RandomItem();
                     var (j, k) = RandomDistinctNumbers(chromosomeSize);
                     var firstGen = firstChromosome.Recipes[j];
                     var secondGen = secondChromosome.Recipes[k];

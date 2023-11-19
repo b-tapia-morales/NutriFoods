@@ -1,13 +1,13 @@
 using API.Dto;
 using Domain.Enum;
-using static Domain.Enum.IEnum<Domain.Enum.ThresholdTypes, Domain.Enum.ThresholdToken>;
+using static Domain.Enum.NutrientExtensions;
 
 namespace API.Optimizer;
 
 public class Chromosome
 {
-    public IList<RecipeDto> Recipes { get; set; }
-    public int Fitness { get; set; }
+    public IList<RecipeDto> Recipes { get; }
+    public int Fitness { get; private set; }
 
     public Chromosome(IList<RecipeDto> recipes) => Recipes = recipes;
 
@@ -16,20 +16,23 @@ public class Chromosome
         var fitness = 0;
         foreach (var target in targets)
         {
-            var isMacronutrient = GeneticOptimizer.Macronutrients.Contains(target.Nutrient);
-            var quantity = CalculateNutritionalValue(Recipes, target.Nutrient);
-            fitness += CalculateFitness(target.ThresholdType, target.Quantity, quantity, errorMargin, isMacronutrient);
+            var nutrient = IEnum<Nutrients, NutrientToken>.FromReadableName(target.Nutrient);
+            var quantity = target.Quantity;
+            var threshold = IEnum<ThresholdTypes, ThresholdToken>.FromReadableName(target.ThresholdType);
+            var isMacronutrient = Macronutrients.Contains(nutrient);
+            var sum = CalculateNutritionalValue(Recipes, nutrient);
+            fitness += CalculateFitness(threshold, quantity, sum, errorMargin, isMacronutrient);
         }
 
         Fitness = fitness;
     }
 
-    private static double CalculateNutritionalValue(IList<RecipeDto> recipes, string nutrient) =>
-        recipes.SelectMany(e => e.Nutrients).Where(e => e.Nutrient == nutrient).Sum(e => e.Quantity);
+    private static double CalculateNutritionalValue(IList<RecipeDto> recipes, Nutrients nutrient) =>
+        recipes.SelectMany(e => e.Nutrients).Where(e => e.Nutrient == nutrient.ReadableName).Sum(e => e.Quantity);
 
-    private static int CalculateFitness(string thresholdType, double targetValue, double actualValue,
+    private static int CalculateFitness(ThresholdTypes threshold, double targetValue, double actualValue,
         double errorMargin, bool isMacronutrient) =>
-        FromReadableName(thresholdType).Formula(targetValue, actualValue, errorMargin, isMacronutrient);
+        threshold.Formula(targetValue, actualValue, errorMargin, isMacronutrient);
 }
 
 public static class ChromosomeExtensions

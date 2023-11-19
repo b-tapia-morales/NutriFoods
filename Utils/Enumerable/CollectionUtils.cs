@@ -1,14 +1,16 @@
+using static Utils.MathUtils;
+
 namespace Utils.Enumerable;
 
 public static class CollectionUtils
 {
-    public static int RandomIndex<T>(this ICollection<T> collection) =>
+    public static int RandomIndex<T>(this IList<T> collection) =>
         collection.Count == 0
             ? throw new ArgumentException("Collection cannot be empty")
-            : MathUtils.RandomNumber(collection.Count);
+            : RandomNumber(collection.Count);
 
-    public static T RandomItem<T>(this ICollection<T> collection) =>
-        collection.ElementAt(collection.RandomIndex());
+    public static T RandomItem<T>(this IList<T> collection) =>
+        collection[collection.RandomIndex()];
 
     public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> newItems)
     {

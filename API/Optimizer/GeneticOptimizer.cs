@@ -1,11 +1,11 @@
-using System.Collections.Immutable;
 using API.Dto;
 using Domain.Enum;
+using Utils.Enumerable;
 using static API.Optimizer.CrossoverToken;
 using static API.Optimizer.MutationToken;
 using static API.Optimizer.SelectionToken;
+using static Domain.Enum.NutrientExtensions;
 using static Domain.Enum.Nutrients;
-using static Utils.MathUtils;
 
 namespace API.Optimizer;
 
@@ -16,13 +16,8 @@ public static class GeneticOptimizer
     private const int PopulationSize = 60;
     private const int MaxIterations = 25_000;
 
-    public static readonly IReadOnlySet<string> Macronutrients = new HashSet<string>
-    {
-        Carbohydrates.ReadableName, FattyAcids.ReadableName, Proteins.ReadableName
-    };
-
-    public static IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe,
-        ICollection<NutritionalTargetDto> targets,
+    public static IList<RecipeDto> GenerateSolution(
+        IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
         int populationSize = PopulationSize, int maxIterations = MaxIterations)
@@ -42,8 +37,8 @@ public static class GeneticOptimizer
         return population.OrderByDescending(e => e.Fitness).First().Recipes;
     }
 
-    public static IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe,
-        ICollection<NutritionalTargetDto> targets,
+    public static IList<RecipeDto> GenerateSolution(
+        IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
         double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
         int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
@@ -57,7 +52,10 @@ public static class GeneticOptimizer
     }
 
     private static int CalculateMaximumFitness(ICollection<NutritionalTargetDto> targets) =>
-        targets.Select(e => Macronutrients.Contains(e.Nutrient) ? +2 : +1).Sum();
+        targets
+            .Select(e => IEnum<Nutrients, NutrientToken>.FromReadableName(e.Nutrient))
+            .Select(e => Macronutrients.Contains(e) ? +2 : +1)
+            .Sum();
 
     private static IList<Chromosome> GenerateInitialPopulation(IList<RecipeDto> universe, int chromosomeSize,
         int populationSize)
@@ -68,7 +66,7 @@ public static class GeneticOptimizer
             var recipes = new RecipeDto[chromosomeSize];
             for (var j = 0; j < chromosomeSize; j++)
             {
-                recipes[j] = universe[RandomNumber(universe.Count)];
+                recipes[j] = universe.RandomItem();
             }
 
             population[i] = new Chromosome(recipes);

@@ -1,7 +1,6 @@
 using API.Dto;
 using Ardalis.SmartEnum;
 using Domain.Enum;
-using Utils;
 using Utils.Enumerable;
 using static Utils.MathUtils;
 
