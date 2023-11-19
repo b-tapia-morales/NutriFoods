@@ -17,11 +17,11 @@ public class Chromosome
         foreach (var target in targets)
         {
             var nutrient = IEnum<Nutrients, NutrientToken>.FromReadableName(target.Nutrient);
-            var quantity = target.Quantity;
+            var targetValue = target.Quantity;
             var threshold = IEnum<ThresholdTypes, ThresholdToken>.FromReadableName(target.ThresholdType);
             var isMacronutrient = Macronutrients.Contains(nutrient);
-            var sum = CalculateNutritionalValue(Recipes, nutrient);
-            fitness += CalculateFitness(threshold, quantity, sum, errorMargin, isMacronutrient);
+            var actualValue = CalculateNutritionalValue(Recipes, nutrient);
+            fitness += CalculateFitness(threshold, targetValue, actualValue, errorMargin, isMacronutrient);
         }
 
         Fitness = fitness;
