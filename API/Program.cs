@@ -1,25 +1,14 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
-using API.DailyMealPlans;
-using API.DailyMenus;
-using API.Dto;
-using API.Genetic;
 using API.Ingredients;
 using API.Recipes;
-using API.Users;
-using Domain.DatabaseInitialization;
 using Domain.Models;
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.AbridgedRetrieval;
-using NutrientRetrieval.NutrientCalculation;
-using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
-
 
 /*
 DatabaseInitialization.Initialize();
@@ -30,7 +19,6 @@ Recipes.RecipeMeasures();
 Recipes.InsertionOfRecipeData();
 NutrientCalculation.Calculate();
 */
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -48,15 +36,8 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 }, ServiceLifetime.Singleton);
 
 builder.Services
-    .AddScoped<IValidator<UserDto>, UserValidator>()
-    .AddScoped<IValidator<UserDataDto>, UserDataValidator>()
-    .AddScoped<IValidator<UserBodyMetricDto>, UserBodyMetricValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
-    .AddScoped<IRecipeRepository, RecipeRepository>()
-    .AddScoped<IUserRepository, UserRepository>()
-    .AddScoped<IDailyMenuService, DailyMenuService>()
-    .AddScoped<IDailyMealPlanService, DailyMealPlanService>()
-    .AddScoped<IGeneticAlgorithm, GeneticAlgorithm>();
+    .AddScoped<IRecipeRepository, RecipeRepository>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
@@ -66,7 +47,7 @@ builder.Services
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
 
@@ -94,12 +75,9 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(config =>
+    app.UseSwaggerUI(config => config.ConfigObject.AdditionalItems["syntaxHighlight"] = new Dictionary<string, object>
     {
-        config.ConfigObject.AdditionalItems["syntaxHighlight"] = new Dictionary<string, object>
-        {
-            ["activated"] = false
-        };
+        ["activated"] = false
     });
 }
 
@@ -107,10 +85,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 app.UseCors(x => x
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .SetIsOriginAllowed(origin => true) // allow any origin
-                    .AllowCredentials()); // allow credentials
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    .SetIsOriginAllowed(_ => true) // allow any origin
+    .AllowCredentials()); // allow credentials
 app.MapControllers();
 
 app.Run();
