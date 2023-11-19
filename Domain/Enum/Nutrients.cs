@@ -1,4 +1,6 @@
+using System.Collections.Immutable;
 using Ardalis.SmartEnum;
+using static Domain.Enum.Nutrients;
 using static Domain.Enum.Units;
 
 namespace Domain.Enum;
@@ -666,4 +668,47 @@ public enum NutrientToken
     Ash,
     Caffeine,
     Theobromine
+}
+
+public static class NutrientExtensions
+{
+    public static IReadOnlySet<Nutrients> Macronutrients { get; } = new HashSet<Nutrients>
+    {
+        Energy, Carbohydrates, FattyAcids, Proteins
+    };
+
+    public static IReadOnlySet<Nutrients> CaloricNutrients { get; } = new HashSet<Nutrients>
+    {
+        Carbohydrates, FattyAcids, Proteins, Alcohol
+    };
+
+    public static IReadOnlyDictionary<Nutrients, int> CalorieFactorsDict { get; } = new Dictionary<Nutrients, int>
+    {
+        [Carbohydrates] = 4,
+        [FattyAcids] = 9,
+        [Proteins] = 4,
+        [Alcohol] = 7
+    };
+
+    public static IReadOnlyDictionary<Nutrients, double> GramFactorsDict { get; } =
+        CalorieFactorsDict.ToDictionary(e => e.Key, e => (1d / e.Value));
+
+    public static IReadOnlyDictionary<Nutrients, double> CaloricNutrientValues
+        (double carbohydrates, double fattyAcids, double proteins) =>
+        new Dictionary<Nutrients, double>
+        {
+            [Carbohydrates] = carbohydrates * GramFactorsDict[Carbohydrates],
+            [FattyAcids] = fattyAcids * GramFactorsDict[FattyAcids],
+            [Proteins] = proteins * GramFactorsDict[Proteins],
+        };
+
+    public static IReadOnlyDictionary<Nutrients, double> CaloricNutrientValues
+        (double carbohydrates, double fattyAcids, double proteins, double alcohol) =>
+        new Dictionary<Nutrients, double>
+        {
+            [Carbohydrates] = carbohydrates * GramFactorsDict[Carbohydrates],
+            [FattyAcids] = fattyAcids * GramFactorsDict[FattyAcids],
+            [Proteins] = proteins * GramFactorsDict[Proteins],
+            [Alcohol] = alcohol * GramFactorsDict[Alcohol]
+        };
 }

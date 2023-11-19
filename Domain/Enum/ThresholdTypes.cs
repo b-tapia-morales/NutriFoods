@@ -5,7 +5,10 @@ namespace Domain.Enum;
 public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, ThresholdToken>
 {
     public static readonly ThresholdTypes None =
-        new(nameof(None), (int)ThresholdToken.None, "Ninguno",
+        new(nameof(None), (int)ThresholdToken.None, string.Empty, (_, _, _, _) => 0);
+
+    public static readonly ThresholdTypes WithinRange =
+        new(nameof(WithinRange), (int)ThresholdToken.WithinRange, "Lo más exacto posible",
             (targetValue, actualValue, errorMargin, isMacronutrient) =>
             {
                 var divisor = isMacronutrient ? +1 : +2;
@@ -49,6 +52,7 @@ public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, T
 public enum ThresholdToken
 {
     None,
+    WithinRange,
     AtLeast,
     AtMost
 }
