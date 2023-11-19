@@ -9,7 +9,7 @@ using static Utils.MathUtils;
 
 namespace API.Optimizer;
 
-public interface IOptimizer
+public static class GeneticOptimizer
 {
     private const double ErrorMargin = 0.1;
     private const int ChromosomeSize = 3;
@@ -21,14 +21,15 @@ public interface IOptimizer
         Carbohydrates.ReadableName, FattyAcids.ReadableName, Proteins.ReadableName
     };
 
-    IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
+    public static IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe,
+        ICollection<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
         int populationSize = PopulationSize, int maxIterations = MaxIterations)
     {
+        var maxFitness = CalculateMaximumFitness(targets);
         var population = GenerateInitialPopulation(universe, chromosomeSize, populationSize);
         var winners = new List<Chromosome>();
-        var maxFitness = CalculateMaximumFitness(targets);
         CalculatePopulationFitness(population, targets, errorMargin);
         for (var i = 0; i < maxIterations || !SolutionExists(population, maxFitness); i++)
         {
@@ -36,16 +37,17 @@ public interface IOptimizer
             crossover.Method(population, winners, chromosomeSize, populationSize);
             mutation.Method(population, universe, chromosomeSize, populationSize);
             CalculatePopulationFitness(population, targets, errorMargin);
-            i++;
         }
 
-        return ImmutableList<RecipeDto>.Empty;
+        return population.OrderByDescending(e => e.Fitness).First().Recipes;
     }
 
-    IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
-        double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize,
-        int maxIterations = MaxIterations, SelectionToken selectionMethod = Tournament,
-        CrossoverToken crossoverMethod = OnePoint, MutationToken mutationMethod = RandomPoints)
+    public static IList<RecipeDto> GenerateSolution(IList<RecipeDto> universe,
+        ICollection<NutritionalTargetDto> targets,
+        double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
+        int populationSize = PopulationSize, int maxIterations = MaxIterations,
+        SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
+        MutationToken mutationMethod = RandomPoints)
     {
         var selection = IEnum<Selection, SelectionToken>.FromToken(selectionMethod);
         var crossover = IEnum<Crossover, CrossoverToken>.FromToken(crossoverMethod);
@@ -54,10 +56,10 @@ public interface IOptimizer
             errorMargin, chromosomeSize, populationSize, maxIterations);
     }
 
-    bool SolutionExists(IList<Chromosome> population, int maximumFitness) =>
-        population.Any(e => e.Fitness == maximumFitness);
+    private static int CalculateMaximumFitness(ICollection<NutritionalTargetDto> targets) =>
+        targets.Select(e => Macronutrients.Contains(e.Nutrient) ? +2 : +1).Sum();
 
-    IList<Chromosome> GenerateInitialPopulation(IList<RecipeDto> universe, int chromosomeSize,
+    private static IList<Chromosome> GenerateInitialPopulation(IList<RecipeDto> universe, int chromosomeSize,
         int populationSize)
     {
         var population = new Chromosome[populationSize];
@@ -75,13 +77,13 @@ public interface IOptimizer
         return population;
     }
 
-    void CalculatePopulationFitness(ICollection<Chromosome> population,
+    private static void CalculatePopulationFitness(ICollection<Chromosome> population,
         ICollection<NutritionalTargetDto> targets, double errorMargin)
     {
         foreach (var chromosome in population)
             chromosome.CalculateFitness(targets, errorMargin);
     }
 
-    int CalculateMaximumFitness(ICollection<NutritionalTargetDto> targets) =>
-        targets.Select(e => Macronutrients.Contains(e.Nutrient) ? +2 : +1).Sum();
+    private static bool SolutionExists(IList<Chromosome> population, int maximumFitness) =>
+        population.Any(e => e.Fitness == maximumFitness);
 }

@@ -16,7 +16,7 @@ public class Chromosome
         var fitness = 0;
         foreach (var target in targets)
         {
-            var isMacronutrient = IOptimizer.Macronutrients.Contains(target.Nutrient);
+            var isMacronutrient = GeneticOptimizer.Macronutrients.Contains(target.Nutrient);
             var quantity = CalculateNutritionalValue(Recipes, target.Nutrient);
             fitness += CalculateFitness(target.ThresholdType, target.Quantity, quantity, errorMargin, isMacronutrient);
         }
