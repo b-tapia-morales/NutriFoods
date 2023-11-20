@@ -27,10 +27,8 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
                         secondChromosome.Recipes.Any(e => e == firstGen))
                         continue;
 
-                    firstChromosome.ExchangeGen(secondGen, j);
-                    secondChromosome.ExchangeGen(firstGen, k);
-                    newPopulation.Add(firstChromosome);
-                    newPopulation.Add(secondChromosome);
+                    newPopulation.Add(firstChromosome.MutateChromosome(secondGen, j));
+                    newPopulation.Add(secondChromosome.MutateChromosome(firstGen, k));
                     i += 2;
                 }
 

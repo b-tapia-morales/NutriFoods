@@ -1,16 +1,14 @@
+// ReSharper disable ClassNeverInstantiated.Global
+
 using API.Dto;
-using Domain.Enum;
-using static API.Optimizer.CrossoverToken;
-using static API.Optimizer.IEvolutionaryOptimizer;
-using static API.Optimizer.MutationToken;
-using static API.Optimizer.SelectionToken;
+using static API.Optimizer.IEvolutionaryOptimizer<API.Optimizer.GeneticOptimizer>;
 
 namespace API.Optimizer;
 
-public class GeneticOptimizer : IEvolutionaryOptimizer
+public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
 {
-    public static IList<RecipeDto> GenerateSolution(
-        IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
+    public static IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
+        IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
         int populationSize = PopulationSize, int maxIterations = MaxIterations)
@@ -28,19 +26,5 @@ public class GeneticOptimizer : IEvolutionaryOptimizer
         }
 
         return population.OrderByDescending(e => e.Fitness).First().Recipes;
-    }
-
-    public static IList<RecipeDto> GenerateSolution(
-        IList<RecipeDto> universe, ICollection<NutritionalTargetDto> targets,
-        double errorMargin = ErrorMargin, int chromosomeSize = ChromosomeSize,
-        int populationSize = PopulationSize, int maxIterations = MaxIterations,
-        SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
-        MutationToken mutationMethod = RandomPoints)
-    {
-        var selection = IEnum<Selection, SelectionToken>.FromToken(selectionMethod);
-        var crossover = IEnum<Crossover, CrossoverToken>.FromToken(crossoverMethod);
-        var mutation = IEnum<Mutation, MutationToken>.FromToken(mutationMethod);
-        return GenerateSolution(universe, targets, selection, crossover, mutation,
-            errorMargin, chromosomeSize, populationSize, maxIterations);
     }
 }

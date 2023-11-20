@@ -12,27 +12,32 @@ public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
         new(nameof(RandomPoints), (int)MutationToken.RandomPoints, "Puntos al azar",
             (population, universe, chromosomeSize, populationSize) =>
             {
-                if (RandomProbability() > 0.4)
+                if (RandomProbability() >= 0.6)
                     return;
 
-                for (var i = 0; i < RandomNumber(1, populationSize); i++)
+                var i = 0;
+                while (i < RandomNumber(1, populationSize))
                 {
-                    var index = RandomNumber(populationSize);
-                    var crossoverPoint = RandomNumber(chromosomeSize);
+                    var chromosome = population.RandomItem();
                     var gen = universe.RandomItem();
-                    population[index].ExchangeGen(gen, crossoverPoint);
+                    var crossoverPoint = RandomNumber(chromosomeSize);
+                    if (chromosome.Recipes[crossoverPoint] == gen)
+                        continue;
+
+                    chromosome.ExchangeGen(gen, crossoverPoint);
+                    i++;
                 }
             });
 
     private Mutation(string name, int value, string readableName,
-        Action<IList<Chromosome>, IList<RecipeDto>, int, int> method) : base(name, value)
+        Action<IList<Chromosome>, IReadOnlyList<RecipeDto>, int, int> method) : base(name, value)
     {
         ReadableName = readableName;
         Method = method;
     }
 
     public string ReadableName { get; }
-    public Action<IList<Chromosome>, IList<RecipeDto>, int, int> Method { get; }
+    public Action<IList<Chromosome>, IReadOnlyList<RecipeDto>, int, int> Method { get; }
 }
 
 public enum MutationToken

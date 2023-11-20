@@ -11,7 +11,7 @@ public class Chromosome
 
     public Chromosome(IList<RecipeDto> recipes) => Recipes = recipes;
 
-    public void CalculateFitness(ICollection<NutritionalTargetDto> targets, double errorMargin)
+    public void CalculateFitness(IReadOnlyList<NutritionalTargetDto> targets, double errorMargin)
     {
         var fitness = 0;
         foreach (var target in targets)
@@ -39,4 +39,7 @@ public static class ChromosomeExtensions
 {
     public static void ExchangeGen(this Chromosome chromosome, RecipeDto gen, int crossoverPoint) =>
         chromosome.Recipes[crossoverPoint] = gen;
+
+    public static Chromosome MutateChromosome(this Chromosome chromosome, RecipeDto gen, int crossoverPoint) =>
+        new(new List<RecipeDto>(chromosome.Recipes.Select((e, i) => i == crossoverPoint ? gen : e)));
 }
