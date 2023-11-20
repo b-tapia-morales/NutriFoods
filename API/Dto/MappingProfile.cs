@@ -61,6 +61,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap();
+        CreateMap<RecipeDto, RecipeAbridged>()
+            .ReverseMap();
 
         // Nutritional values and targets
         CreateMap<NutritionalValue, NutritionalValueDto>()
