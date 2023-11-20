@@ -1,16 +1,15 @@
 ﻿// ReSharper disable ArrangeRedundantParentheses
 // ReSharper disable MemberCanBePrivate.Global
 
+using static System.Math;
+
 namespace Utils;
 
 public static class MathUtils
 {
-    private static readonly Random Random = new();
+    private static readonly Random Random = new(Environment.TickCount);
 
-    public static int Gcd(this IEnumerable<int> numbers)
-    {
-        return numbers.Aggregate(Gcd);
-    }
+    public static int Gcd(this IEnumerable<int> numbers) => numbers.Aggregate(Gcd);
 
     public static int Gcd(int a, int b)
     {
@@ -18,8 +17,8 @@ public static class MathUtils
         {
             if (a == 0 || b == 0)
                 return a | b;
-            a = Math.Min(a, b);
-            b = Math.Max(a, b) % Math.Min(a, b);
+            a = Min(a, b);
+            b = Max(a, b) % Min(a, b);
         }
     }
 
@@ -45,15 +44,17 @@ public static class MathUtils
     public static (int X, int Y) RandomRange(int minValue, int maxValue)
     {
         var (x, y) = RandomDistinctNumbers(minValue, maxValue);
-        return (Math.Min(x, y), Math.Max(x, y));
+        return (Min(x, y), Max(x, y));
     }
 
     public static (int X, int Y) RandomRange(int maxValue) => RandomRange(0, maxValue);
 
     public static double RandomProbability() => Random.NextDouble();
 
-    public static double RelativeError(double actualValue, double targetValue, int decimalPlaces = 2)
+    public static double RelativeError(double actualValue, double targetValue, bool useAbsolute = true,
+        int decimalPlaces = 2)
     {
-        return Math.Round((Math.Abs(actualValue - targetValue) / actualValue) * 100, decimalPlaces);
+        var error = Round((actualValue - targetValue) / actualValue * 100, decimalPlaces);
+        return useAbsolute ? Abs(error) : error;
     }
 }
