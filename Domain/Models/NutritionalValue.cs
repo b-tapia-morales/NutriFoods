@@ -1,6 +1,4 @@
-﻿// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
-
-using Domain.Enum;
+﻿using Domain.Enum;
 
 namespace Domain.Models;
 
@@ -14,9 +12,13 @@ public class NutritionalValue
 
     public Units Unit { get; set; } = null!;
 
-    public double ErrorMargin { get; set; }
+    public double? DailyValue { get; set; }
 
-    public virtual ICollection<DailyMenu> DailyMenus { get; set; } = new List<DailyMenu>();
+    public virtual ICollection<DailyMenu> DailyMenus { get; set; } = null!;
 
-    public virtual ICollection<DailyPlan> DailyPlans { get; set; } = new List<DailyPlan>();
+    public virtual ICollection<DailyPlan> DailyPlans { get; set; } = null!;
+
+    public virtual ICollection<Ingredient> Ingredients { get; set; } = null!;
+
+    public virtual ICollection<Recipe> Recipes { get; set; } = null!;
 }

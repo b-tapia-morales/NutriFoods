@@ -1,6 +1,4 @@
-﻿// ReSharper disable ClassWithVirtualMembersNeverInherited.Global
-
-using Domain.Enum;
+﻿using Domain.Enum;
 
 namespace Domain.Models;
 

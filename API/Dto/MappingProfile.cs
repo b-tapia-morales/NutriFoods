@@ -8,43 +8,40 @@ public class MappingProfile : Profile
 {
     public MappingProfile()
     {
-        // Ingredient
-        CreateMap<IngredientMeasure, IngredientMeasureDto>()
-            .ReverseMap();
-        CreateMap<IngredientNutrient, IngredientNutrientDto>()
+        // Nutritional Value
+        CreateMap<NutritionalValue, NutritionalValueDto>()
             .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ReverseMap();
+
+        // Ingredient
+        CreateMap<IngredientMeasure, IngredientMeasureDto>()
+            .ReverseMap();
         CreateMap<Ingredient, IngredientDto>()
-            .ForMember(dest => dest.Synonyms, opt => opt.MapFrom(src => src.Synonyms.ToList()))
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.IngredientNutrients))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.NutritionalValues))
             .ReverseMap();
 
         // Ingredient Abridged
         CreateMap<Ingredient, IngredientAbridged>()
-            .ForMember(dest => dest.Synonyms, opt => opt.MapFrom(src => src.Synonyms.ToList()))
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ReverseMap();
         CreateMap<IngredientMeasure, IngredientMeasureAbridged>()
             .ReverseMap();
 
+        // Recipes
         CreateMap<RecipeMeasure, RecipeMeasureDto>()
             .ReverseMap();
         CreateMap<RecipeQuantity, RecipeQuantityDto>()
             .ReverseMap();
         CreateMap<RecipeStep, RecipeStepDto>()
             .ReverseMap();
-        CreateMap<RecipeNutrient, RecipeNutrientDto>()
-            .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
-            .ReverseMap();
         CreateMap<Recipe, RecipeDto>()
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
             .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
             .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.RecipeNutrients))
+            .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.NutritionalValues))
             .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
@@ -64,11 +61,7 @@ public class MappingProfile : Profile
         CreateMap<RecipeDto, RecipeAbridged>()
             .ReverseMap();
 
-        // Nutritional values and targets
-        CreateMap<NutritionalValue, NutritionalValueDto>()
-            .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
-            .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
-            .ReverseMap();
+        // Nutritional Target
         CreateMap<NutritionalTarget, NutritionalTargetDto>()
             .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))

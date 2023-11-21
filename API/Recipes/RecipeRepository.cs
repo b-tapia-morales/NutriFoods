@@ -120,10 +120,10 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
     {
         await using var context = new NutrifoodsDbContext();
         var recipes = await context.Recipes.AsQueryable().IncludeSubfields()
-            .Where(e => e.RecipeNutrients.Any(x => x.Nutrient == Energy && x.Quantity <= energy))
-            .Where(e => e.RecipeNutrients.Any(x => x.Nutrient == Carbohydrates && x.Quantity <= carbohydrates))
-            .Where(e => e.RecipeNutrients.Any(x => x.Nutrient == FattyAcids && x.Quantity <= fattyAcids))
-            .Where(e => e.RecipeNutrients.Any(x => x.Nutrient == Proteins && x.Quantity <= proteins))
+            .Where(e => e.NutritionalValues.Any(x => x.Nutrient == Energy && x.Quantity <= energy))
+            .Where(e => e.NutritionalValues.Any(x => x.Nutrient == Carbohydrates && x.Quantity <= carbohydrates))
+            .Where(e => e.NutritionalValues.Any(x => x.Nutrient == FattyAcids && x.Quantity <= fattyAcids))
+            .Where(e => e.NutritionalValues.Any(x => x.Nutrient == Proteins && x.Quantity <= proteins))
             .ToListAsync();
         return mapper.Map<List<RecipeDto>>(recipes);
     }
@@ -132,7 +132,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
     {
         await using var context = new NutrifoodsDbContext();
         var recipes = await context.Recipes.AsQueryable().IncludeSubfields()
-            .Where(e => e.RecipeNutrients.Any(x =>
+            .Where(e => e.NutritionalValues.Any(x =>
                 x.Nutrient == nutrient && x.Quantity >= lowerBound && x.Quantity <= upperBound))
             .ToListAsync();
         return mapper.Map<List<RecipeDto>>(recipes);
@@ -143,8 +143,8 @@ public static class RecipeExtensions
 {
     public static IQueryable<Recipe> IncludeSubfields(this IQueryable<Recipe> recipes) =>
         recipes
+            .Include(e => e.NutritionalValues)
             .Include(e => e.RecipeSteps)
-            .Include(e => e.RecipeNutrients)
             .Include(e => e.RecipeMeasures)
             .ThenInclude(e => e.IngredientMeasure)
             .ThenInclude(e => e.Ingredient)

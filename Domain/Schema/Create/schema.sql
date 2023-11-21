@@ -17,6 +17,18 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
 CREATE EXTENSION IF NOT EXISTS fuzzystrmatch;
 
+CREATE TABLE IF NOT EXISTS nutritional_value
+(
+    id          SERIAL,
+    nutrient    INTEGER NOT NULL,
+    quantity    FLOAT   NOT NULL,
+    unit        INTEGER NOT NULL,
+    daily_value FLOAT,
+    PRIMARY KEY (id)
+);
+
+CREATE INDEX IF NOT EXISTS nutritional_value_idx ON nutritional_value USING btree (nutrient, quantity);
+
 CREATE TABLE IF NOT EXISTS ingredient
 (
     id         SERIAL,
@@ -41,14 +53,11 @@ CREATE TABLE IF NOT EXISTS ingredient_measure
 
 CREATE TABLE IF NOT EXISTS ingredient_nutrient
 (
-    id            SERIAL,
-    nutrient      INTEGER NOT NULL,
-    quantity      FLOAT   NOT NULL,
-    unit          INTEGER NOT NULL,
-    ingredient_id INTEGER NOT NULL,
-    UNIQUE (nutrient, ingredient_id),
-    PRIMARY KEY (id),
-    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id)
+    ingredient_id        INTEGER NOT NULL,
+    nutritional_value_id INTEGER NOT NULL,
+    PRIMARY KEY (ingredient_id, nutritional_value_id),
+    FOREIGN KEY (ingredient_id) REFERENCES ingredient (id),
+    FOREIGN KEY (nutritional_value_id) REFERENCES nutritional_value (id)
 );
 
 CREATE TABLE IF NOT EXISTS recipe
@@ -103,33 +112,23 @@ CREATE TABLE IF NOT EXISTS recipe_quantity
 
 CREATE TABLE IF NOT EXISTS recipe_nutrient
 (
-    id        SERIAL,
-    nutrient  INTEGER NOT NULL,
-    quantity  FLOAT   NOT NULL,
-    unit      INTEGER NOT NULL,
-    recipe_id INTEGER NOT NULL,
-    UNIQUE (recipe_id, nutrient),
-    PRIMARY KEY (id),
-    FOREIGN KEY (recipe_id) REFERENCES recipe (id)
+    recipe_id            INTEGER NOT NULL,
+    nutritional_value_id INTEGER NOT NULL,
+    PRIMARY KEY (recipe_id, nutritional_value_id),
+    FOREIGN KEY (recipe_id) REFERENCES recipe (id),
+    FOREIGN KEY (nutritional_value_id) REFERENCES nutritional_value (id)
 );
 
 CREATE TABLE IF NOT EXISTS nutritional_target
 (
-    id             SERIAL,
-    nutrient       INTEGER NOT NULL,
-    quantity       FLOAT   NOT NULL,
-    unit           INTEGER NOT NULL,
-    threshold_type INTEGER NOT NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE IF NOT EXISTS nutritional_value
-(
-    id           SERIAL,
-    nutrient     INTEGER NOT NULL,
-    quantity     FLOAT   NOT NULL,
-    unit         INTEGER NOT NULL,
-    error_margin FLOAT   NOT NULL,
+    id                SERIAL,
+    nutrient          INTEGER NOT NULL,
+    expected_quantity FLOAT   NOT NULL,
+    actual_quantity   FLOAT,
+    expected_error    FLOAT   NOT NULL,
+    actual_error      FLOAT,
+    unit              INTEGER NOT NULL,
+    threshold_type    INTEGER NOT NULL,
     PRIMARY KEY (id)
 );
 

@@ -18,7 +18,7 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public ICollection<RecipeMeasureDto> Measures { get; set; } = null!;
     public ICollection<RecipeQuantityDto> Quantities { get; set; } = null!;
     public ICollection<RecipeStepDto> Steps { get; set; } = null!;
-    public ICollection<RecipeNutrientDto> Nutrients { get; set; } = null!;
+    public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
 
     public override bool Equals(object? obj)
     {

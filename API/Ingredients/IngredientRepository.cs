@@ -29,7 +29,7 @@ public class IngredientRepository(NutrifoodsDbContext context, IMapper mapper) :
     {
         return ingredients
             .Include(e => e.IngredientMeasures)
-            .Include(e => e.IngredientNutrients)
+            .Include(e => e.NutritionalValues)
             .AsNoTracking();
     }
 }

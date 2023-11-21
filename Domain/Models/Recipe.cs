@@ -22,13 +22,13 @@ public class Recipe
 
     public List<DishTypes> DishTypes { get; set; } = null!;
 
-    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = new List<MenuRecipe>();
+    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = null!;
 
-    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = new List<RecipeMeasure>();
+    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = null!;
 
-    public virtual ICollection<RecipeNutrient> RecipeNutrients { get; set; } = new List<RecipeNutrient>();
+    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = new List<RecipeQuantity>();
+    public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = null!;
 
-    public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = new List<RecipeStep>();
+    public virtual ICollection<NutritionalValue> NutritionalValues { get; set; } = null!;
 }

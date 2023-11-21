@@ -14,9 +14,9 @@ public class Ingredient
 
     public FoodGroups FoodGroup { get; set; } = null!;
 
-    public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; } = new List<IngredientMeasure>();
+    public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; } = null!;
 
-    public virtual ICollection<IngredientNutrient> IngredientNutrients { get; set; } = new List<IngredientNutrient>();
+    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = new List<RecipeQuantity>();
+    public virtual ICollection<NutritionalValue> NutritionalValues { get; set; } = null!;
 }

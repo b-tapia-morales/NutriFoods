@@ -17,7 +17,7 @@ public class Chromosome
         foreach (var target in targets)
         {
             var nutrient = IEnum<Nutrients, NutrientToken>.FromReadableName(target.Nutrient);
-            var targetValue = target.Quantity;
+            var targetValue = target.ExpectedQuantity;
             var threshold = IEnum<ThresholdTypes, ThresholdToken>.FromReadableName(target.ThresholdType);
             var isMacronutrient = Macronutrients.Contains(nutrient);
             var actualValue = CalculateNutritionalValue(Recipes, nutrient);
