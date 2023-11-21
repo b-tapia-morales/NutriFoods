@@ -1,4 +1,3 @@
-using System.Collections.Immutable;
 using Ardalis.SmartEnum;
 using static Domain.Enum.Nutrients;
 using static Domain.Enum.Units;
@@ -14,10 +13,11 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Energy), (int)NutrientToken.Energy, "Energía, total", "", true, KiloCalories, null);
 
     public static readonly Nutrients Carbohydrates =
-        new(nameof(Carbohydrates), (int)NutrientToken.Carbohydrates, "Carbohidratos, total", "", true, Grams, null);
+        new(nameof(Carbohydrates), (int)NutrientToken.Carbohydrates, "Carbohidratos, total", "", true, Grams, null,
+            275);
 
     public static readonly Nutrients Fiber =
-        new(nameof(Fiber), (int)NutrientToken.Fiber, "Fibra", "", false, Grams, Carbohydrates);
+        new(nameof(Fiber), (int)NutrientToken.Fiber, "Fibra", "", false, Grams, Carbohydrates, 28);
 
     public static readonly Nutrients Sugars =
         new(nameof(Sugars), (int)NutrientToken.Sugars, "Azúcares, total", "", true, Grams, Carbohydrates);
@@ -44,11 +44,11 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Starch), (int)NutrientToken.Starch, "Almidón", "Fécula", false, Grams, Carbohydrates);
 
     public static readonly Nutrients FattyAcids =
-        new(nameof(FattyAcids), (int)NutrientToken.FattyAcids, "Ácidos grasos, total", "", true, Grams, null);
+        new(nameof(FattyAcids), (int)NutrientToken.FattyAcids, "Ácidos grasos, total", "", true, Grams, null, 78);
 
     public static readonly Nutrients Saturated =
         new(nameof(Saturated), (int)NutrientToken.Saturated, "Ácidos grasos saturados, total", "", true,
-            Grams, FattyAcids);
+            Grams, FattyAcids, 20);
 
     public static readonly Nutrients Butanoic =
         new(nameof(Butanoic), (int)NutrientToken.Butanoic, "Ácido butanoico", "Ácido butírico", false,
@@ -242,7 +242,7 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(TransPolinoic), (int)NutrientToken.TransPolinoic, "Ácido trans-polinoico", "", false, Grams, Trans);
 
     public static readonly Nutrients Proteins =
-        new(nameof(Proteins), (int)NutrientToken.Proteins, "Proteína, total", "", true, Grams, null);
+        new(nameof(Proteins), (int)NutrientToken.Proteins, "Proteína, total", "", true, Grams, null, 50);
 
     public static readonly Nutrients Tryptophan =
         new(nameof(Tryptophan), (int)NutrientToken.Tryptophan, "Triptófano", "", false, Grams, Proteins);
@@ -302,7 +302,7 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Vitamins), (int)NutrientToken.Vitamins, "Vitamina", "", false, Units.None, null);
 
     public static readonly Nutrients VitaminA =
-        new(nameof(VitaminA), (int)NutrientToken.VitaminA, "Vitamina A", "", true, Micrograms, Vitamins);
+        new(nameof(VitaminA), (int)NutrientToken.VitaminA, "Vitamina A", "", true, Micrograms, Vitamins, 900);
 
     public static readonly Nutrients AlphaCarotene =
         new(nameof(AlphaCarotene), (int)NutrientToken.AlphaCarotene, "Alfa-caroteno", "α-caroteno", false,
@@ -310,7 +310,7 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
 
     public static readonly Nutrients BetaCarotene =
         new(nameof(BetaCarotene), (int)NutrientToken.BetaCarotene, "Beta-caroteno", "β-caroteno", false,
-            Units.None, VitaminA);
+            Micrograms, VitaminA);
 
     public static readonly Nutrients BetaCryptoxanthin =
         new(nameof(BetaCryptoxanthin), (int)NutrientToken.BetaCryptoxanthin, "Beta-criptoxantina", "β-criptoxantina",
@@ -327,23 +327,25 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Retinol), (int)NutrientToken.Retinol, "Retinol", "", false, Micrograms, VitaminA);
 
     public static readonly Nutrients VitaminB1 =
-        new(nameof(VitaminB1), (int)NutrientToken.VitaminB1, "Vitamina B1", "Tiamina", false, Milligrams, Vitamins);
+        new(nameof(VitaminB1), (int)NutrientToken.VitaminB1, "Vitamina B1", "Tiamina", false, Milligrams, Vitamins,
+            1.2);
 
     public static readonly Nutrients VitaminB2 =
-        new(nameof(VitaminB2), (int)NutrientToken.VitaminB2, "Vitamina B2", "Riboflavina", false, Milligrams, Vitamins);
+        new(nameof(VitaminB2), (int)NutrientToken.VitaminB2, "Vitamina B2", "Riboflavina", false, Milligrams, Vitamins,
+            1.3);
 
     public static readonly Nutrients VitaminB3 =
-        new(nameof(VitaminB3), (int)NutrientToken.VitaminB3, "Vitamina B3", "Niacina", false, Milligrams, Vitamins);
+        new(nameof(VitaminB3), (int)NutrientToken.VitaminB3, "Vitamina B3", "Niacina", false, Milligrams, Vitamins, 16);
 
     public static readonly Nutrients VitaminB5 =
         new(nameof(VitaminB5), (int)NutrientToken.VitaminB5, "Vitamina B5", "Ácido pantoténico", false,
-            Milligrams, Vitamins);
+            Milligrams, Vitamins, 5);
 
     public static readonly Nutrients VitaminB6 =
-        new(nameof(VitaminB6), (int)NutrientToken.VitaminB6, "Vitamina B6", "", false, Milligrams, Vitamins);
+        new(nameof(VitaminB6), (int)NutrientToken.VitaminB6, "Vitamina B6", "", false, Milligrams, Vitamins, 1.7);
 
     public static readonly Nutrients VitaminB9 =
-        new(nameof(VitaminB9), (int)NutrientToken.VitaminB9, "Vitamina B9", "Folato", true, Micrograms, Vitamins);
+        new(nameof(VitaminB9), (int)NutrientToken.VitaminB9, "Vitamina B9", "Folato", true, Micrograms, Vitamins, 400);
 
     public static readonly Nutrients FolateFood =
         new(nameof(FolateFood), (int)NutrientToken.FolateFood, "Folato, alimento", "", false, Micrograms, VitaminB9);
@@ -353,7 +355,7 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
 
     public static readonly Nutrients VitaminB12 =
         new(nameof(VitaminB12), (int)NutrientToken.VitaminB12, "Vitamina B12", "Cobalamina", true,
-            Micrograms, Vitamins);
+            Micrograms, Vitamins, 2.4);
 
     public static readonly Nutrients VitaminB12Added =
         new(nameof(VitaminB12Added), (int)NutrientToken.VitaminB12Added, "Vitamina B12, añadida", "", false,
@@ -361,10 +363,10 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
 
     public static readonly Nutrients VitaminC =
         new(nameof(VitaminC), (int)NutrientToken.VitaminC, "Vitamina C", "Ácido ascórbico", false,
-            Milligrams, Vitamins);
+            Milligrams, Vitamins, 90);
 
     public static readonly Nutrients VitaminD =
-        new(nameof(VitaminD), (int)NutrientToken.VitaminD, "Vitamina D", "", true, Micrograms, Vitamins);
+        new(nameof(VitaminD), (int)NutrientToken.VitaminD, "Vitamina D", "", true, Micrograms, Vitamins, 20);
 
     public static readonly Nutrients VitaminD2 =
         new(nameof(VitaminD2), (int)NutrientToken.VitaminD2, "Vitamina D2", "Ergocalciferol", false,
@@ -375,7 +377,8 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
             Micrograms, VitaminD);
 
     public static readonly Nutrients VitaminE =
-        new(nameof(VitaminE), (int)NutrientToken.VitaminE, "Vitamina E", "α-tocoferol", false, Milligrams, Vitamins);
+        new(nameof(VitaminE), (int)NutrientToken.VitaminE, "Vitamina E", "α-tocoferol", false, Milligrams, Vitamins,
+            15);
 
     public static readonly Nutrients VitaminEAdded =
         new(nameof(VitaminEAdded), (int)NutrientToken.VitaminEAdded, "Vitamina E, añadida", "", false,
@@ -396,40 +399,40 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Betaine), (int)NutrientToken.Betaine, "Betaína", "", false, Milligrams, Vitamins);
 
     public static readonly Nutrients Choline =
-        new(nameof(Choline), (int)NutrientToken.Choline, "Colina", "", false, Milligrams, Vitamins);
+        new(nameof(Choline), (int)NutrientToken.Choline, "Colina", "", false, Milligrams, Vitamins, 2300);
 
     public static readonly Nutrients Minerals =
         new(nameof(Minerals), (int)NutrientToken.Minerals, "Minerales", "", false, Units.None, null);
 
     public static readonly Nutrients Calcium =
-        new(nameof(Calcium), (int)NutrientToken.Calcium, "Calcio", "Ca", false, Milligrams, Minerals);
+        new(nameof(Calcium), (int)NutrientToken.Calcium, "Calcio", "Ca", false, Milligrams, Minerals, 1300);
 
     public static readonly Nutrients Iron =
-        new(nameof(Iron), (int)NutrientToken.Iron, "Hierro", "Fe", false, Milligrams, Minerals);
+        new(nameof(Iron), (int)NutrientToken.Iron, "Hierro", "Fe", false, Milligrams, Minerals, 18);
 
     public static readonly Nutrients Magnesium =
-        new(nameof(Magnesium), (int)NutrientToken.Magnesium, "Magnesio", "Mg", false, Milligrams, Minerals);
+        new(nameof(Magnesium), (int)NutrientToken.Magnesium, "Magnesio", "Mg", false, Milligrams, Minerals, 420);
 
     public static readonly Nutrients Phosphorus =
-        new(nameof(Phosphorus), (int)NutrientToken.Phosphorus, "Fósforo", "P", false, Milligrams, Minerals);
+        new(nameof(Phosphorus), (int)NutrientToken.Phosphorus, "Fósforo", "P", false, Milligrams, Minerals, 1250);
 
     public static readonly Nutrients Potassium =
-        new(nameof(Potassium), (int)NutrientToken.Potassium, "Potasio", "K", false, Milligrams, Minerals);
+        new(nameof(Potassium), (int)NutrientToken.Potassium, "Potasio", "K", false, Milligrams, Minerals, 4700);
 
     public static readonly Nutrients Sodium =
-        new(nameof(Sodium), (int)NutrientToken.Sodium, "Sodio", "Na", false, Milligrams, Minerals);
+        new(nameof(Sodium), (int)NutrientToken.Sodium, "Sodio", "Na", false, Milligrams, Minerals, 2300);
 
     public static readonly Nutrients Zinc =
-        new(nameof(Zinc), (int)NutrientToken.Zinc, "Zinc", "Zn", false, Milligrams, Minerals);
+        new(nameof(Zinc), (int)NutrientToken.Zinc, "Zinc", "Zn", false, Milligrams, Minerals, 11);
 
     public static readonly Nutrients Copper =
-        new(nameof(Copper), (int)NutrientToken.Copper, "Cobre", "Cu", false, Milligrams, Minerals);
+        new(nameof(Copper), (int)NutrientToken.Copper, "Cobre", "Cu", false, Milligrams, Minerals, 0.9);
 
     public static readonly Nutrients Manganese =
-        new(nameof(Manganese), (int)NutrientToken.Manganese, "Manganeso", "Mn", false, Milligrams, Minerals);
+        new(nameof(Manganese), (int)NutrientToken.Manganese, "Manganeso", "Mn", false, Milligrams, Minerals, 2.3);
 
     public static readonly Nutrients Selenium =
-        new(nameof(Selenium), (int)NutrientToken.Selenium, "Selenio", "Se", false, Micrograms, Minerals);
+        new(nameof(Selenium), (int)NutrientToken.Selenium, "Selenio", "Se", false, Micrograms, Minerals, 55);
 
     public static readonly Nutrients Fluoride =
         new(nameof(Fluoride), (int)NutrientToken.Fluoride, "Fluoruro", "F", false, Micrograms, Minerals);
@@ -438,7 +441,7 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Sterols), (int)NutrientToken.Sterols, "Esteroles", "", true, Units.None, null);
 
     public static readonly Nutrients Cholesterol =
-        new(nameof(Cholesterol), (int)NutrientToken.Cholesterol, "Colesterol", "", false, Milligrams, Sterols);
+        new(nameof(Cholesterol), (int)NutrientToken.Cholesterol, "Colesterol", "", false, Milligrams, Sterols, 300);
 
     public static readonly Nutrients Stigmasterol =
         new(nameof(Stigmasterol), (int)NutrientToken.Stigmasterol, "Estigmasterol", "", false, Milligrams, Sterols);
@@ -470,22 +473,22 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(Theobromine), (int)NutrientToken.Theobromine, "Teobromina", "", false, Milligrams, Other);
 
     private Nutrients(string name, int value, string readableName, string alternativeName, bool isTotal,
-        Units unit, Nutrients? category) : base(name, value)
+        Units unit, Nutrients? category, double? dailyValue = null) : base(name, value)
     {
         ReadableName = readableName;
         AlternativeName = alternativeName;
         IsTotal = isTotal;
-        Category = category;
-        IsTopCategory = category == null;
         Unit = unit;
+        Category = category;
+        DailyValue = dailyValue;
     }
 
     public string ReadableName { get; }
     public string AlternativeName { get; }
-    public bool IsTopCategory { get; }
     public bool IsTotal { get; }
-    public Nutrients? Category { get; }
     public Units Unit { get; }
+    public Nutrients? Category { get; }
+    public double? DailyValue { get; }
 }
 
 public enum NutrientToken

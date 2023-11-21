@@ -126,12 +126,10 @@ public class FoodGroups : SmartEnum<FoodGroups>, IHierarchicalEnum<FoodGroups, F
         base(name, value)
     {
         ReadableName = readableName;
-        IsTopCategory = category == null;
         Category = category;
     }
 
     public string ReadableName { get; }
-    public bool IsTopCategory { get; }
     public FoodGroups? Category { get; }
 }
 

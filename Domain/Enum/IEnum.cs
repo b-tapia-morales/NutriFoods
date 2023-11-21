@@ -54,11 +54,7 @@ public interface IHierarchicalEnum<out T, TEnum> : IEnum<T, TEnum>
     where T : SmartEnum<T>, IHierarchicalEnum<T, TEnum>
     where TEnum : struct, System.Enum
 {
-    bool IsTopCategory { get; }
     T? Category { get; }
-
-    static IReadOnlyCollection<T> TopCategories() =>
-        Values().Where(e => e.IsTopCategory).ToImmutableList();
 
     static IReadOnlyCollection<T> ByCategory(T category) =>
         Values().Where(e => e.Category != null && e.Category == category).ToImmutableList();
