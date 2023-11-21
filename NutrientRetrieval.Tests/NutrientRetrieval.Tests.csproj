@@ -25,6 +25,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\NutrientRetrieval\NutrientRetrieval.csproj" />
+      <ProjectReference Include="..\RecipeInsertion\RecipeInsertion.csproj" />
     </ItemGroup>
 
 </Project>
