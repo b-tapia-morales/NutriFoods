@@ -1,13 +1,13 @@
-﻿using Domain.Enum;
+using System.Collections.Immutable;
+using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using RecipeInsertion.Mapping;
 using Utils.Csv;
+using Utils.Enumerable;
 using Utils.String;
-using static System.StringComparison;
 using static Domain.Enum.DishTypes;
 using static Domain.Enum.MealTypes;
-using static Utils.Csv.DelimiterToken;
 
 namespace RecipeInsertion;
 
@@ -16,27 +16,28 @@ public static class Recipes
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
 
+    private static readonly DbContextOptions<NutrifoodsDbContext> Options =
+        new DbContextOptionsBuilder<NutrifoodsDbContext>()
+            .UseNpgsql(ConnectionString,
+                builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            .Options;
+
     private static readonly string BaseDirectory =
         Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
 
     private static readonly string ProjectDirectory = Path.Combine(BaseDirectory, "RecipeInsertion");
-
     private static readonly string RecipesPath = Path.Combine(ProjectDirectory, "Recipe", "recipe.csv");
-
-    private static readonly string IngredientsPath = Path.Combine(ProjectDirectory, "Ingredient", "ingredient.csv");
-
-    private static readonly string RepeatedRecipesPath = Path.Combine(ProjectDirectory, "Recipe", "repeated.csv");
-
-    private static readonly string SynonymsPath = Path.Combine(ProjectDirectory, "Recipe", "synonyms.csv");
-
-    private static readonly string MeasuresPath = Path.Combine(ProjectDirectory, "DataRecipes", "Ingredient");
-
+    private static readonly string IngredientMeasuresPath = Path.Combine(ProjectDirectory, "Measures");
+    private static readonly string RecipeMeasuresPath = Path.Combine(ProjectDirectory, "DataRecipes", "Ingredient");
     private static readonly string StepsPath = Path.Combine(ProjectDirectory, "DataRecipes", "Steps");
 
     private static readonly Dictionary<string, MealTypes> MealTypesDict = new()
     {
+        ["Desayunos"] = Breakfast,
+        ["Ensaladas"] = Lunch,
+        ["Entradas"] = Lunch,
+        ["PlatosFondo"] = Lunch,
         ["Cenas"] = Dinner,
-        ["Desayunos"] = Breakfast
     };
 
     private static readonly Dictionary<string, DishTypes> DishTypesDict = new()
@@ -48,217 +49,105 @@ public static class Recipes
         ["Vegano"] = Vegan
     };
 
-    private static readonly Dictionary<string, List<string>> DictionarySynonyms = GetDictionarySynonyms();
-
-    public static void RecipeInsert()
+    public static void BatchInsert()
     {
-        using var context = Context();
-
-        var recipes = RowRetrieval
-            .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, Semicolon, true)
+        var mappings = RowRetrieval
+            .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
             .DistinctBy(e => e.Url);
-
-        foreach (var recipe in recipes)
-        {
-            context.Add(new Recipe
-            {
-                Name = recipe.Name,
-                Author = recipe.Author,
-                Url = recipe.Url,
-                Portions = recipe.Portions,
-                Time = recipe.Time
-            });
-        }
-
-        context.SaveChanges();
+        using var context = new NutrifoodsDbContext(Options);
+        InsertRecipes(context, mappings);
+        var ingredients = IncludeSubfields(context.Ingredients).ToList();
+        var recipes = IncludeSubfields(context.Recipes).ToList();
+        var measures = IncludeSubfields(context.IngredientMeasures).ToList();
+        var ingredientsDict = IngredientDictionary(ingredients).AsReadOnly();
+        var recipesDict = RecipeDictionary(recipes).AsReadOnly();
+        var measuresDict = MeasureDictionary(measures).AsReadOnly();
+        InsertEnumValues(context, recipesDict);
+        InsertSteps(context, recipesDict);
+        InsertRecipeMeasures(context, recipesDict, ingredientsDict, measuresDict);
     }
 
-    public static void IngredientSynonyms()
+    private static void InsertRecipeMeasures(DbContext context,
+        IReadOnlyDictionary<string, Recipe> recipesDict, IDictionary<string, Ingredient> ingredientsDict,
+        IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict)
     {
-        var dictionary = GetDictionarySynonyms();
-        using var context = Context();
-        var ingredients = context.Ingredients.ToList();
-        foreach (var (name, synonyms) in dictionary)
+        var paths = Directory.GetFiles(RecipeMeasuresPath, "*.csv", SearchOption.AllDirectories);
+        var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        foreach (var path in paths)
         {
-            var ingredient =
-                ingredients.Find(e =>
-                    string.Equals(e.Name.Standardize(), name.Standardize()));
+            var name = path.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
 
-            if (ingredient == null)
+            if (!recipesDict.TryGetValue(name, out var recipe) || usedRecipes.Contains(name))
                 continue;
 
-            foreach (var synonym in synonyms)
-                ingredient.Synonyms.Add(synonym);
+            var recipeId = recipe.Id;
+
+            var recipeIngredients = RowRetrieval
+                .RetrieveRows<RecipeIngredient, RecipeIngredientMapping>(path, DelimiterToken.Comma)
+                .Where(x => !x.Quantity.Equals("x") && !x.IngredientName.Equals("agua"));
+            foreach (var recipeIngredient in recipeIngredients)
+                InsertRecipeMeasure(context, recipeIngredient, ingredientsDict, measuresDict, recipeId);
+            
+            usedRecipes.Add(name);
         }
-
+        
         context.SaveChanges();
     }
 
-    public static void RecipeMeasures()
+    private static void InsertRecipeMeasure(DbContext context, RecipeIngredient data,
+        IDictionary<string, Ingredient> ingredientsDict,
+        IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict, int recipeId)
     {
-        using var context = Context();
-        var ingredients = context.Ingredients.ToList();
-        var nameIngredient = File.ReadAllLines(IngredientsPath);
-        foreach (var name in nameIngredient)
-        {
-            var ingredient = ingredients.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-            if (ingredient == null)
-                continue;
-
-            var id = ingredient.Id;
-            var path = Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory())!.FullName,
-                "RecipeInsertion", "Measures", $"{name}.csv");
-            var measuresIngredient = RowRetrieval.RetrieveRows<IngredientMeasure, MeasuresMapping>(path);
-            foreach (var measure in measuresIngredient)
-            {
-                context.Add(new IngredientMeasure
-                {
-                    IngredientId = id,
-                    Name = measure.Name,
-                    Grams = measure.Grams
-                });
-            }
-        }
-
-        context.SaveChanges();
-    }
-
-    public static void InsertionOfRecipeData()
-    {
-        using var context = Context();
-        var ingredients = context.Ingredients.ToList();
-        var recipes = context.Recipes.ToList();
-        var units = context.IngredientMeasures.ToList();
-        InsertRecipeIngredientMeasures(context, recipes, ingredients, units);
-        InsertRecipeSteps(context, recipes);
-        InsertTypes(context, recipes);
-        context.SaveChanges();
-    }
-
-    private static NutrifoodsDbContext Context()
-    {
-        var options = new DbContextOptionsBuilder<NutrifoodsDbContext>()
-            .UseNpgsql(ConnectionString,
-                builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
-            .Options;
-        var context = new NutrifoodsDbContext(options);
-        return context;
-    }
-
-    private static void InsertDataRecipe(DbContext context, DataRecipe dataRecipe, List<Ingredient> ingredients,
-        List<IngredientMeasure> units, int recipeId)
-    {
-        var name = SynonymousIngredientAux(dataRecipe.NameIngredients).Standardize();
-        var ingredient = ingredients.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-        if (ingredient == null)
+        if (!ingredientsDict.TryGetValue(data.IngredientName, out var ingredient))
             return;
 
         var ingredientId = ingredient.Id;
-        if (dataRecipe.Units.Equals("g") || dataRecipe.Units.Equals("ml") || dataRecipe.Units.Equals("cc"))
+        if (data.MeasureName.Equals("g") || data.MeasureName.Equals("ml") || data.MeasureName.Equals("cc"))
         {
             context.Add(new RecipeQuantity
             {
                 RecipeId = recipeId,
                 IngredientId = ingredientId,
-                Grams = double.Parse(dataRecipe.Quantity)
+                Grams = double.Parse(data.Quantity)
             });
             return;
         }
 
-        var measure = units.Find(e =>
-            string.Equals(e.Name.Standardize(), dataRecipe.Units.Standardize()) && e.IngredientId == ingredientId);
-        if (measure == null)
+        if (!measuresDict.TryGetValue((data.MeasureName.Format().Standardize(), data.IngredientName.Standardize()),
+                out var measure))
             return;
 
         var measureId = measure.Id;
-        switch (dataRecipe.Quantity.Length)
+        switch (data.Quantity.Length)
         {
             case 1 or 2:
-                InsertMeasuresWhitIngredient(context, recipeId, measureId, dataRecipe.Quantity, "0", "0");
+                InsertMeasure(context, recipeId, measureId, data.Quantity, "0", "0");
                 break;
             case 3:
             {
-                var numerator = dataRecipe.Quantity[0].ToString();
-                var denominator = dataRecipe.Quantity[2].ToString();
-                InsertMeasuresWhitIngredient(context, recipeId, measureId, "0", numerator, denominator);
+                var numerator = data.Quantity[0].ToString();
+                var denominator = data.Quantity[2].ToString();
+                InsertMeasure(context, recipeId, measureId, "0", numerator, denominator);
                 break;
             }
             default:
             {
-                var integerPart = dataRecipe.Quantity[0].ToString();
-                var numerator = dataRecipe.Quantity[2].ToString();
-                var denominator = dataRecipe.Quantity[4].ToString();
-                InsertMeasuresWhitIngredient(context, recipeId, measureId, integerPart, numerator, denominator);
+                var integerPart = data.Quantity[0].ToString();
+                var numerator = data.Quantity[2].ToString();
+                var denominator = data.Quantity[4].ToString();
+                InsertMeasure(context, recipeId, measureId, integerPart, numerator, denominator);
                 break;
             }
         }
     }
 
-
-    private static void InsertRecipeIngredientMeasures(DbContext context, List<Recipe> recipes,
-        List<Ingredient> ingredients, List<IngredientMeasure> units)
+    private static void InsertEnumValues(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
     {
-        var dataRecipes = Directory.GetFiles(MeasuresPath, "*.csv", SearchOption.AllDirectories);
-        var repeated = RowRetrieval.RetrieveRows<Repeated, RecipeMapping>(RepeatedRecipesPath).ToList();
-        foreach (var pathDataRecipe in dataRecipes)
+        var paths = Directory.GetFiles(RecipeMeasuresPath, "*.csv", SearchOption.AllDirectories);
+        foreach (var file in paths)
         {
-            var name = pathDataRecipe.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-
-            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-            if (recipe == null)
-                continue;
-
-            var recipeId = recipe.Id;
-            if (repeated.Exists(
-                    e => string.Equals(e.Name.Standardize(), name.Standardize())))
-            {
-                var repeatedRecipe = repeated.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-                if (repeatedRecipe!.AddedAmount > 0)
-                    continue;
-                repeatedRecipe.AddedAmount++;
-            }
-
-            var ingredientData = RowRetrieval.RetrieveRows<DataRecipe, RecipeDataMapping>(pathDataRecipe, Comma)
-                .Where(x => !x.Quantity.Equals("x") && !x.NameIngredients.Equals("agua"));
-            foreach (var data in ingredientData)
-                InsertDataRecipe(context, data, ingredients, units, recipeId);
-        }
-    }
-
-    private static void InsertRecipeSteps(DbContext context, List<Recipe> recipes)
-    {
-        var dataRecipesSteps = Directory.GetFiles(StepsPath, "*.csv", SearchOption.AllDirectories);
-        var repeated = RowRetrieval.RetrieveRows<Repeated, RecipeMapping>(RepeatedRecipesPath).ToList();
-        foreach (var pathDataRecipesStep in dataRecipesSteps)
-        {
-            var name = pathDataRecipesStep.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-            if (recipe == null || recipe.RecipeSteps.Count > 0)
-                continue;
-            
-            var id = recipe.Id;
-            var step = File.ReadAllLines(pathDataRecipesStep);
-            if (repeated.Exists(e => string.Equals(e.Name.Standardize(), name.Standardize())))
-            {
-                var recipeRepeated = repeated.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-                if (recipeRepeated!.AddedAmount > 0)
-                    continue;
-                recipeRepeated.AddedAmount++;
-            }
-
-            for (var i = 0; i < step.Length; i++)
-                context.Add(new RecipeStep { RecipeId = id, Number = i + 1, Description = step[i] });
-        }
-    }
-
-    private static void InsertTypes(DbContext context, List<Recipe> recipes)
-    {
-        var files = Directory.GetFiles(MeasuresPath, "*.csv", SearchOption.AllDirectories);
-        foreach (var file in files)
-        {
-            var name = file.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
-            var recipe = recipes.Find(e => string.Equals(e.Name.Standardize(), name.Standardize()));
-            if (recipe == null)
+            var name = file.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
+            if (!recipesDict.TryGetValue(name, out var recipe))
                 continue;
 
             var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
@@ -273,7 +162,51 @@ public static class Recipes
         context.SaveChanges();
     }
 
-    private static void InsertMeasuresWhitIngredient(DbContext context, int recipeId, int measureId, string integerPart,
+    private static void InsertSteps(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
+    {
+        var stepPaths = Directory.GetFiles(StepsPath, "*.csv", SearchOption.AllDirectories);
+        var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        foreach (var stepPath in stepPaths)
+        {
+            var recipeName = stepPath.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
+            if (!recipesDict.TryGetValue(recipeName, out var recipe) || usedRecipes.Contains(recipeName))
+                continue;
+
+            var id = recipe.Id;
+            var step = File.ReadAllLines(stepPath);
+
+            for (var i = 0; i < step.Length; i++)
+                context.Add(new RecipeStep
+                {
+                    RecipeId = id,
+                    Number = i + 1,
+                    Description = step[i]
+                });
+
+            usedRecipes.Add(recipeName);
+        }
+
+        context.SaveChanges();
+    }
+
+    private static void InsertRecipes(DbContext context, IEnumerable<Recipe> mappings)
+    {
+        foreach (var recipe in mappings)
+        {
+            context.Add(new Recipe
+            {
+                Name = recipe.Name,
+                Author = recipe.Author,
+                Url = recipe.Url,
+                Portions = recipe.Portions,
+                Time = recipe.Time
+            });
+        }
+
+        context.SaveChanges();
+    }
+
+    private static void InsertMeasure(DbContext context, int recipeId, int measureId, string integerPart,
         string numerator, string denominator)
     {
         context.Add(new RecipeMeasure
@@ -286,30 +219,52 @@ public static class Recipes
         });
     }
 
-    private static Dictionary<string, List<string>> GetDictionarySynonyms()
+    private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
     {
-        var rows = File.ReadAllLines(SynonymsPath).Select(e => e.Split(","));
-        var dictionary = new Dictionary<string, List<string>>();
-        foreach (var row in rows)
-        {
-            var ingredient = row[0];
-            var synonyms = row[1].Split(";").Select(e => e.Capitalize()).ToList();
-            if (string.Equals(synonyms[0], "None"))
-                continue;
-
-            dictionary.Add(ingredient, synonyms);
-        }
-
-        return dictionary;
+        var ingredientsDict = ingredients
+            .GroupBy(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase)
+            .ToDictionary(e => e.Key, e => e.First(), StringComparer.InvariantCultureIgnoreCase);
+        var synonymsDict = ingredients
+            .SelectMany(e => e.Synonyms.Select(x => (Synonym: x, Ingredient: e)))
+            .GroupBy(e => e.Synonym.Standardize(), StringComparer.InvariantCultureIgnoreCase)
+            .ToDictionary(e => e.Key, e => e.First().Ingredient, StringComparer.InvariantCultureIgnoreCase);
+        return ingredientsDict.Merge(synonymsDict);
     }
 
-    private static string SynonymousIngredientAux(string name)
-    {
-        foreach (var (key, _) in DictionarySynonyms.Where(keyValuePair => keyValuePair.Value.Contains(name)))
-        {
-            return key;
-        }
+    private static IDictionary<(string Measure, string IngredientName), IngredientMeasure> MeasureDictionary(
+        IList<IngredientMeasure> measures) =>
+        measures
+            .GroupBy(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()))
+            .ToDictionary(e => e.Key, e => e.First());
 
-        return name;
-    }
+
+    private static IDictionary<string, Recipe> RecipeDictionary(IList<Recipe> recipes) =>
+        recipes
+            .GroupBy(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase)
+            .ToDictionary(e => e.Key, e => e.First(), StringComparer.InvariantCultureIgnoreCase);
+
+    private static IQueryable<Recipe> IncludeSubfields(this DbSet<Recipe> recipes) =>
+        recipes
+            .AsQueryable()
+            .Include(e => e.NutritionalValues)
+            .Include(e => e.RecipeMeasures)
+            .ThenInclude(e => e.IngredientMeasure)
+            .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.RecipeQuantities)
+            .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.RecipeSteps);
+
+    private static IQueryable<Ingredient> IncludeSubfields(this DbSet<Ingredient> dbSet) =>
+        dbSet
+            .AsQueryable()
+            .Include(e => e.IngredientMeasures)
+            .Include(e => e.NutritionalValues);
+
+    private static IQueryable<IngredientMeasure> IncludeSubfields(this DbSet<IngredientMeasure> dbSet) =>
+        dbSet
+            .AsQueryable()
+            .Include(e => e.Ingredient)
+            .ThenInclude(e => e.NutritionalValues);
 }

@@ -3,9 +3,9 @@ using Domain.Models;
 
 namespace RecipeInsertion.Mapping;
 
-public sealed class MeasuresMapping : ClassMap<IngredientMeasure>
+public sealed class IngredientMeasureMapping : ClassMap<IngredientMeasure>
 {
-    public MeasuresMapping()
+    public IngredientMeasureMapping()
     {
         Map(m => m.Name);
         Map(m => m.Grams);
