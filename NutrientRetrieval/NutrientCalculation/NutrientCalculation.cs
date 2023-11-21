@@ -1,3 +1,6 @@
+// ReSharper disable ArrangeRedundantParentheses
+// ReSharper disable EntityFramework.NPlusOne.IncompleteDataUsage
+
 using System.Collections.Immutable;
 using Domain.Enum;
 using Domain.Models;
@@ -39,7 +42,7 @@ public static class NutrientCalculation
         var gramDictionary = new Dictionary<int, double>();
 
         using var context = new NutrifoodsDbContext(Options);
-        var recipes = IncludeSubfields(context.Recipes).Where(e => e.Portions is > 0);
+        var recipes = IncludeSubfields(context.Recipes).Where(e => e.Portions != null && e.Portions > 0);
 
         foreach (var recipe in recipes)
         {
@@ -51,12 +54,14 @@ public static class NutrientCalculation
             foreach (var pair in gramDictionary)
             {
                 var nutrient = Nutrients.FromValue(pair.Key);
-                context.Add(new RecipeNutrient
+                recipe.NutritionalValues.Add(new NutritionalValue
                 {
-                    RecipeId = recipe.Id,
                     Nutrient = nutrient,
                     Quantity = pair.Value,
-                    Unit = nutrient.Unit
+                    Unit = nutrient.Unit,
+                    DailyValue = nutrient.DailyValue.HasValue
+                        ? Math.Round(pair.Value / nutrient.DailyValue.Value, 2)
+                        : null
                 });
             }
         }
@@ -70,7 +75,7 @@ public static class NutrientCalculation
         foreach (var quantity in recipeQuantities)
         {
             var recipeGrams = quantity.Grams * ratio;
-            foreach (var ingredientNutrient in quantity.Ingredient.IngredientNutrients.Where(e =>
+            foreach (var ingredientNutrient in quantity.Ingredient.NutritionalValues.Where(e =>
                          nutrientIds.Contains(e.Nutrient)))
             {
                 var nutrientId = ingredientNutrient.Nutrient;
@@ -88,7 +93,7 @@ public static class NutrientCalculation
         {
             var recipeGrams = CalculateGrams(measure.IngredientMeasure.Grams, measure.IntegerPart, measure.Numerator,
                 measure.Denominator) * ratio;
-            foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.IngredientNutrients.Where(e =>
+            foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.NutritionalValues.Where(e =>
                          nutrientIds.Contains(e.Nutrient)))
             {
                 var nutrientId = ingredientNutrient.Nutrient;
@@ -102,21 +107,22 @@ public static class NutrientCalculation
     private static double CalculateGrams(double grams, int integerPart, int numerator, int denominator) =>
         (integerPart, numerator, denominator) switch
         {
+            (_, 0, 0) or (_, 0, _) => integerPart * grams,
             (_, _, 0) => 0,
-            (_, 0, _) => integerPart * grams,
             (0, _, _) => ((double)numerator / denominator) * grams,
             _ => (integerPart + ((double)numerator / denominator)) * grams
         };
 
-    private static IEnumerable<Recipe> IncludeSubfields(IQueryable<Recipe> recipes) =>
+    private static IQueryable<Recipe> IncludeSubfields(this DbSet<Recipe> recipes) =>
         recipes
-            .Include(e => e.RecipeNutrients)
+            .AsQueryable()
+            .Include(e => e.NutritionalValues)
             .Include(e => e.RecipeMeasures)
             .ThenInclude(e => e.IngredientMeasure)
             .ThenInclude(e => e.Ingredient)
-            .ThenInclude(e => e.IngredientNutrients)
+            .ThenInclude(e => e.NutritionalValues)
             .Include(e => e.RecipeQuantities)
             .ThenInclude(e => e.Ingredient)
-            .ThenInclude(e => e.IngredientNutrients)
-            .AsNoTracking();
+            .ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.RecipeSteps);
 }

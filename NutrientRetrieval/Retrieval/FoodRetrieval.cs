@@ -36,22 +36,25 @@ public static class FoodRetrieval
     {
         var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
         using var context = new NutrifoodsDbContext(Options);
+        var ingredients = context.Ingredients.AsQueryable().IncludeSubfields();
         var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
         var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(format).Result
             .ToDictionary(e => e.Key, e => e.Value);
         foreach (var pair in foodsDictionary)
-            InsertNutrients<TFood, TNutrient>(context, nutrientsDictionary, pair.Key, pair.Value);
+            InsertNutrients<TFood, TNutrient>(
+                nutrientsDictionary, ingredients.FirstOrDefault(e => e.Id == pair.Key), pair.Value);
 
         context.SaveChanges();
     }
 
-    private static void InsertNutrients<TFood, TNutrient>(NutrifoodsDbContext context,
-        IReadOnlyDictionary<string, int> dictionary, int ingredientId, TFood food)
+    private static void InsertNutrients<TFood, TNutrient>(
+        IReadOnlyDictionary<string, int> dictionary, Ingredient? ingredient, TFood food)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        if (food.FoodNutrients.Length == 0) return;
+        if (ingredient == null || food.FoodNutrients.Length == 0)
+            return;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
@@ -59,17 +62,23 @@ public static class FoodRetrieval
             if (!dictionary.ContainsKey(fdcNutrientId))
                 continue;
 
-            var nutrientId = dictionary[fdcNutrientId];
-            var nutrient = Nutrients.FromValue(nutrientId);
-            context.IngredientNutrients.Add(new IngredientNutrient
+            var nutrient = Nutrients.FromValue(dictionary[fdcNutrientId]);
+            ingredient.NutritionalValues.Add(new NutritionalValue
             {
-                IngredientId = ingredientId,
                 Nutrient = nutrient,
                 Quantity = foodNutrient.Amount,
-                Unit = nutrient.Unit
+                Unit = nutrient.Unit,
+                DailyValue = nutrient.DailyValue.HasValue
+                    ? Math.Round(foodNutrient.Amount / nutrient.DailyValue.Value, 2)
+                    : null
             });
         }
     }
+
+    private static IQueryable<Ingredient> IncludeSubfields(this IQueryable<Ingredient> ingredients) =>
+        ingredients
+            .Include(e => e.IngredientMeasures)
+            .Include(e => e.NutritionalValues);
 }
 
 public enum RetrievalMethod
