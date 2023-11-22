@@ -203,7 +203,7 @@ public static class Recipes
             return;
         }
 
-        InsertMeasure(context, recipeId, measureId, int.Parse(rawQuantity), 1, 1);
+        InsertMeasure(context, recipeId, measureId, int.Parse(rawQuantity), 0, 1);
     }
 
     private static void InsertQuantity(DbContext context, int recipeId, int ingredientId, string quantity) =>
