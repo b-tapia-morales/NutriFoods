@@ -55,19 +55,36 @@ public static class Recipes
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
             .DistinctBy(e => e.Url);
         using var context = new NutrifoodsDbContext(Options);
-        InsertRecipes(context, mappings);
+        InsertAllRecipes(context, mappings);
         var ingredients = IncludeSubfields(context.Ingredients).ToList();
         var recipes = IncludeSubfields(context.Recipes).ToList();
         var measures = IncludeSubfields(context.IngredientMeasures).ToList();
         var ingredientsDict = IngredientDictionary(ingredients).AsReadOnly();
         var recipesDict = RecipeDictionary(recipes).AsReadOnly();
         var measuresDict = MeasureDictionary(measures).AsReadOnly();
-        InsertEnumValues(context, recipesDict);
-        InsertSteps(context, recipesDict);
-        InsertRecipeMeasures(context, recipesDict, ingredientsDict, measuresDict);
+        InsertAllCategories(context, recipesDict);
+        InsertAllSteps(context, recipesDict);
+        InsertAllMeasures(context, recipesDict, ingredientsDict, measuresDict);
     }
 
-    private static void InsertRecipeMeasures(DbContext context,
+    private static void InsertAllRecipes(DbContext context, IEnumerable<Recipe> mappings)
+    {
+        foreach (var recipe in mappings)
+        {
+            context.Add(new Recipe
+            {
+                Name = recipe.Name,
+                Author = recipe.Author,
+                Url = recipe.Url,
+                Portions = recipe.Portions,
+                Time = recipe.Time
+            });
+        }
+
+        context.SaveChanges();
+    }
+
+    private static void InsertAllMeasures(DbContext context,
         IReadOnlyDictionary<string, Recipe> recipesDict, IDictionary<string, Ingredient> ingredientsDict,
         IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict)
     {
@@ -75,7 +92,7 @@ public static class Recipes
         var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
         foreach (var path in paths)
         {
-            var name = path.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
+            var name = path.ExtractFileName().Standardize();
 
             if (!recipesDict.TryGetValue(name, out var recipe) || usedRecipes.Contains(name))
                 continue;
@@ -87,10 +104,10 @@ public static class Recipes
                 .Where(x => !x.Quantity.Equals("x") && !x.IngredientName.Equals("agua"));
             foreach (var recipeIngredient in recipeIngredients)
                 InsertRecipeMeasure(context, recipeIngredient, ingredientsDict, measuresDict, recipeId);
-            
+
             usedRecipes.Add(name);
         }
-        
+
         context.SaveChanges();
     }
 
@@ -104,12 +121,7 @@ public static class Recipes
         var ingredientId = ingredient.Id;
         if (data.MeasureName.Equals("g") || data.MeasureName.Equals("ml") || data.MeasureName.Equals("cc"))
         {
-            context.Add(new RecipeQuantity
-            {
-                RecipeId = recipeId,
-                IngredientId = ingredientId,
-                Grams = double.Parse(data.Quantity)
-            });
+            InsertQuantity(context, recipeId, ingredientId, data.Quantity);
             return;
         }
 
@@ -117,36 +129,15 @@ public static class Recipes
                 out var measure))
             return;
 
-        var measureId = measure.Id;
-        switch (data.Quantity.Length)
-        {
-            case 1 or 2:
-                InsertMeasure(context, recipeId, measureId, data.Quantity, "0", "0");
-                break;
-            case 3:
-            {
-                var numerator = data.Quantity[0].ToString();
-                var denominator = data.Quantity[2].ToString();
-                InsertMeasure(context, recipeId, measureId, "0", numerator, denominator);
-                break;
-            }
-            default:
-            {
-                var integerPart = data.Quantity[0].ToString();
-                var numerator = data.Quantity[2].ToString();
-                var denominator = data.Quantity[4].ToString();
-                InsertMeasure(context, recipeId, measureId, integerPart, numerator, denominator);
-                break;
-            }
-        }
+        ParseMeasure(context, data.Quantity, recipeId, measure.Id);
     }
 
-    private static void InsertEnumValues(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
+    private static void InsertAllCategories(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
     {
         var paths = Directory.GetFiles(RecipeMeasuresPath, "*.csv", SearchOption.AllDirectories);
         foreach (var file in paths)
         {
-            var name = file.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
+            var name = file.ExtractFileName().Standardize();
             if (!recipesDict.TryGetValue(name, out var recipe))
                 continue;
 
@@ -162,13 +153,13 @@ public static class Recipes
         context.SaveChanges();
     }
 
-    private static void InsertSteps(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
+    private static void InsertAllSteps(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
     {
         var stepPaths = Directory.GetFiles(StepsPath, "*.csv", SearchOption.AllDirectories);
         var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
         foreach (var stepPath in stepPaths)
         {
-            var recipeName = stepPath.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "").Standardize();
+            var recipeName = stepPath.ExtractFileName().Standardize();
             if (!recipesDict.TryGetValue(recipeName, out var recipe) || usedRecipes.Contains(recipeName))
                 continue;
 
@@ -189,33 +180,50 @@ public static class Recipes
         context.SaveChanges();
     }
 
-    private static void InsertRecipes(DbContext context, IEnumerable<Recipe> mappings)
+    private static void ParseMeasure(DbContext context, string rawQuantity, int recipeId, int measureId)
     {
-        foreach (var recipe in mappings)
+        rawQuantity = rawQuantity.Trim();
+        if (rawQuantity.Contains(' ') && rawQuantity.Contains('/'))
         {
-            context.Add(new Recipe
-            {
-                Name = recipe.Name,
-                Author = recipe.Author,
-                Url = recipe.Url,
-                Portions = recipe.Portions,
-                Time = recipe.Time
-            });
+            var mixedFraction = rawQuantity.Split(' ');
+            var integerPart = int.Parse(mixedFraction[0]);
+            var fractionalPart = mixedFraction[1].Split('/');
+            var numerator = int.Parse(fractionalPart[0]);
+            var denominator = int.Parse(fractionalPart[1]);
+            InsertMeasure(context, recipeId, measureId, integerPart, numerator, denominator);
+            return;
         }
 
-        context.SaveChanges();
+        if (rawQuantity.Contains('/'))
+        {
+            var fractionalPart = rawQuantity.Split('/');
+            var numerator = int.Parse(fractionalPart[0]);
+            var denominator = int.Parse(fractionalPart[1]);
+            InsertMeasure(context, recipeId, measureId, 0, numerator, denominator);
+            return;
+        }
+
+        InsertMeasure(context, recipeId, measureId, int.Parse(rawQuantity), 1, 1);
     }
 
-    private static void InsertMeasure(DbContext context, int recipeId, int measureId, string integerPart,
-        string numerator, string denominator)
+    private static void InsertQuantity(DbContext context, int recipeId, int ingredientId, string quantity) =>
+        context.Add(new RecipeQuantity
+        {
+            RecipeId = recipeId,
+            IngredientId = ingredientId,
+            Grams = double.Parse(quantity)
+        });
+
+    private static void InsertMeasure(DbContext context, int recipeId, int measureId, int integerPart,
+        int numerator, int denominator)
     {
         context.Add(new RecipeMeasure
         {
             RecipeId = recipeId,
             IngredientMeasureId = measureId,
-            IntegerPart = int.Parse(integerPart),
-            Numerator = int.Parse(numerator),
-            Denominator = int.Parse(denominator)
+            IntegerPart = integerPart,
+            Numerator = numerator,
+            Denominator = denominator
         });
     }
 
@@ -267,4 +275,7 @@ public static class Recipes
             .AsQueryable()
             .Include(e => e.Ingredient)
             .ThenInclude(e => e.NutritionalValues);
+
+    private static string ExtractFileName(this string path) =>
+        path.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
 }
