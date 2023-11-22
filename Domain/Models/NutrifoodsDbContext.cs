@@ -618,6 +618,7 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.Nutrient).HasColumnName("nutrient");
             entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
             entity.Property(e => e.Unit).HasColumnName("unit");
+            entity.Property(e => e.IsPriority).HasColumnName("is_priority");
         });
 
         modelBuilder.Entity<NutritionalValue>(entity =>

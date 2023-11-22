@@ -20,6 +20,8 @@ public class NutritionalTarget
 
     public ThresholdTypes ThresholdType { get; set; } = null!;
 
+    public bool IsPriority { get; set; }
+
     public virtual ICollection<DailyMenu> DailyMenus { get; set; } = null!;
 
     public virtual ICollection<DailyPlan> DailyPlans { get; set; } = null!;

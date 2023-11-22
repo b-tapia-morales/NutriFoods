@@ -129,6 +129,7 @@ CREATE TABLE IF NOT EXISTS nutritional_target
     actual_error      FLOAT,
     unit              INTEGER NOT NULL,
     threshold_type    INTEGER NOT NULL,
+    is_priority       BOOLEAN NOT NULL,
     PRIMARY KEY (id)
 );
 
