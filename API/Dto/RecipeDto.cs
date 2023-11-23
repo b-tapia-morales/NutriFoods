@@ -49,9 +49,8 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
 
 public static class RecipeExtensions
 {
-    public static IList<MenuRecipeDto> ToMenus(this IEnumerable<RecipeDto> recipes, IMapper mapper) =>
+    public static IList<MenuRecipeDto> ToMenus(this IEnumerable<RecipeAbridged> recipes) =>
         recipes
-            .Select(mapper.Map<RecipeAbridged>)
             .GroupBy(e => e.Url)
             .Select(e => new MenuRecipeDto
             {
