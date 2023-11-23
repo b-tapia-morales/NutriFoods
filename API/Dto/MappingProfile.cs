@@ -1,6 +1,7 @@
 using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Models;
+using Utils.Date;
 
 namespace API.Dto;
 
@@ -86,7 +87,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Menus, opt => opt.MapFrom(src => src.DailyMenus))
             .ReverseMap();
         CreateMap<MealPlan, MealPlanDto>()
-            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.CreatedOn,
+                opt => opt.MapFrom(src => src.CreatedOn ?? DateOnlyUtils.CurrentPsTime()))
             .ForMember(dest => dest.Plans, opt => opt.MapFrom(src => src.DailyPlans))
             .ReverseMap();
 
@@ -102,8 +104,10 @@ public class MappingProfile : Profile
         CreateMap<ClinicalSign, ClinicalSignDto>()
             .ReverseMap();
         CreateMap<ClinicalAnamnesis, ClinicalAnamnesisDto>()
-            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
-            .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.CreatedOn,
+                opt => opt.MapFrom(src => src.CreatedOn ?? DateOnlyUtils.CurrentPsTime()))
+            .ForMember(dest => dest.LastUpdated,
+                opt => opt.MapFrom(src => src.LastUpdated ?? DateOnlyUtils.CurrentPsTime()))
             .ReverseMap();
 
         // Nutritional Anamnesis
@@ -121,15 +125,17 @@ public class MappingProfile : Profile
             .ReverseMap();
         CreateMap<NutritionalAnamnesis, NutritionalAnamnesisDto>()
             .ForMember(dest => dest.CreatedOn,
-                opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
+                opt => opt.MapFrom(src => src.CreatedOn ?? DateOnlyUtils.CurrentPsTime()))
             .ForMember(dest => dest.LastUpdated,
-                opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
+                opt => opt.MapFrom(src => src.LastUpdated ?? DateOnlyUtils.CurrentPsTime()))
             .ReverseMap();
 
         // Anthropometry
         CreateMap<Anthropometry, AnthropometryDto>()
-            .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn ?? GetPacificStandardTime()))
-            .ForMember(dest => dest.LastUpdated, opt => opt.MapFrom(src => src.LastUpdated ?? GetPacificStandardTime()))
+            .ForMember(dest => dest.CreatedOn,
+                opt => opt.MapFrom(src => src.CreatedOn ?? DateOnlyUtils.CurrentPsTime()))
+            .ForMember(dest => dest.LastUpdated,
+                opt => opt.MapFrom(src => src.LastUpdated ?? DateOnlyUtils.CurrentPsTime()))
             .ReverseMap();
 
         // Consultation
@@ -137,7 +143,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ForMember(dest => dest.Purpose, opt => opt.MapFrom(src => src.Purpose.ReadableName))
             .ForMember(dest => dest.RegisteredOn,
-                opt => opt.MapFrom(src => (src.RegisteredOn ?? GetPacificStandardDate()).ToString("YYYY/mm/dd")))
+                opt => opt.MapFrom(src => (src.RegisteredOn ?? DateOnlyUtils.CurrentPsDate()).ToString("YYYY/mm/dd")))
             .ReverseMap();
 
         // Patient
@@ -157,10 +163,4 @@ public class MappingProfile : Profile
         CreateMap<Nutritionist, NutritionistDto>()
             .ReverseMap();
     }
-
-    private static DateTime GetPacificStandardTime() =>
-        TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
-
-    private static DateOnly GetPacificStandardDate() =>
-        DateOnly.FromDateTime(GetPacificStandardTime());
 }

@@ -6,15 +6,15 @@ public static class DateOnlyUtils
 {
     public static readonly string[] AllowedFormats = { "yyyy-mm-dd", "yyyy-m-d" };
 
-    public static DateTime ToDateTime(DateOnly date) =>
+    public static DateTime ToDateTime(this DateOnly date) =>
         new(date.Year, date.Month, date.Day, 0, 0, 0, DateTimeKind.Local);
 
-    public static DateOnly ToDateOnly(DateTime dateTime) => DateOnly.FromDateTime(dateTime);
+    public static DateOnly ToDateOnly(this DateTime dateTime) => DateOnly.FromDateTime(dateTime);
 
-    public static int Difference(DateOnly date, Interval interval, bool isAbsolute = true) =>
+    public static int Difference(this DateOnly date, Interval interval, bool isAbsolute = true) =>
         Difference(date, ToDateOnly(DateTime.Now), interval, isAbsolute);
 
-    public static int Difference(DateOnly from, DateOnly to, Interval interval, bool isAbsolute = true)
+    public static int Difference(this DateOnly from, DateOnly to, Interval interval, bool isAbsolute = true)
     {
         var start = ToDateTime(from);
         var end = ToDateTime(to);
@@ -32,6 +32,12 @@ public static class DateOnlyUtils
             ;
         return isAbsolute ? Math.Abs(difference) : difference;
     }
+    
+    public static DateTime CurrentPsTime() =>
+        TimeZoneInfo.ConvertTime(DateTime.Now, TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time"));
+
+    public static DateOnly CurrentPsDate() =>
+        DateOnly.FromDateTime(CurrentPsTime());
 }
 
 public enum Interval
