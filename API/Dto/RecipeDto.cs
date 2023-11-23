@@ -1,5 +1,7 @@
 // ReSharper disable NonReadonlyMemberInGetHashCode
 
+using API.Dto.Abridged;
+using AutoMapper;
 using static System.StringComparison;
 
 namespace API.Dto;
@@ -43,4 +45,18 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public static bool operator ==(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
 
     public static bool operator !=(RecipeDto? x, RecipeDto? y) => !(x == y);
+}
+
+public static class RecipeExtensions
+{
+    public static IList<MenuRecipeDto> ToMenus(this IEnumerable<RecipeDto> recipes, IMapper mapper) =>
+        recipes
+            .Select(mapper.Map<RecipeAbridged>)
+            .GroupBy(e => e.Url)
+            .Select(e => new MenuRecipeDto
+            {
+                Recipe = e.First(),
+                Portions = e.Count()
+            })
+            .ToList();
 }
