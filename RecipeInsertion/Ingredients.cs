@@ -42,7 +42,7 @@ public static class Ingredients
             if (!File.Exists(filePath))
                 continue;
 
-            var measures = RowRetrieval.RetrieveRows<IngredientMeasure, IngredientMeasureMapping>(filePath);
+            var measures = CsvUtils.RetrieveRows<IngredientMeasure, IngredientMeasureMapping>(filePath);
             foreach (var measure in measures)
             {
                 var measureName = measure.Name.Format();

@@ -50,7 +50,7 @@ public static class Recipes
 
     public static void BatchInsert()
     {
-        var mappings = RowRetrieval
+        var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
             .DistinctBy(e => e.Url);
         using var context = new NutrifoodsDbContext(Options);
@@ -98,7 +98,7 @@ public static class Recipes
 
             var recipeId = recipe.Id;
 
-            var recipeIngredients = RowRetrieval
+            var recipeIngredients = CsvUtils
                 .RetrieveRows<RecipeIngredient, RecipeIngredientMapping>(path, DelimiterToken.Comma)
                 .Where(x => !x.Quantity.Equals("x") && !x.IngredientName.Equals("agua"));
             foreach (var recipeIngredient in recipeIngredients)

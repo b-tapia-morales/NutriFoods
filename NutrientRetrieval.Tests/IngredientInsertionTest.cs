@@ -19,7 +19,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
     [Fact]
     public void AllIdsAreUnique()
     {
-        var rows = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
+        var rows = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsId).ToList();
         Assert.True(nutriFoods.Count == nutriFoods.Distinct().Count());
     }
@@ -27,7 +27,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
     [Fact]
     public void AllNamesAreUnique()
     {
-        var rows = RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
+        var rows = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsName).ToList();
         Assert.True(nutriFoods.Count == nutriFoods.Distinct().Count());
     }
@@ -38,7 +38,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
         var scriptNames = new HashSet<string>(Regex.Matches(File.ReadAllText(IngredientScriptPath), "'(.*?)'")
             .Select(e => e.Value.Replace("'", string.Empty)), InvariantCultureIgnoreCase);
         output.WriteLine(scriptNames.Count.ToString());
-        var rowNames = new HashSet<string>(RowRetrieval.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
+        var rowNames = new HashSet<string>(CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
             .Select(e => e.NutriFoodsName), InvariantCultureIgnoreCase);
         output.WriteLine(rowNames.Count.ToString());
         Assert.True(!rowNames.Except(scriptNames).Any());

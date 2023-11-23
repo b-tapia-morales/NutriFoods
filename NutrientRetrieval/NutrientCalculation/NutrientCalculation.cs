@@ -35,7 +35,7 @@ public static class NutrientCalculation
     public static void Calculate()
     {
         // Retrieves all the unique NutriFoods Nutrient IDs from the CSV file and stores them into a Set.
-        var nutrientIds = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var nutrientIds = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsId).ToImmutableSortedSet();
         // Creates a dictionary that associates the NutriFoods Nutrient ID with the sum of all Nutrients with the same
         // ID present in the Ingredient

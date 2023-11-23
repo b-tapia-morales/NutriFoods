@@ -18,7 +18,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllNamesAreUnique()
     {
-        var rows = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var rows = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsName);
         var foodDataCentral = rows.Select(e => e.NutriFoodsName);
@@ -28,7 +28,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllIdsAreUnique()
     {
-        var rows = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var rows = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsId).ToList();
         var foodDataCentral = rows.Select(e => e.NutriFoodsId).ToList();
@@ -39,7 +39,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllIdsMatch()
     {
-        var nutrifoods = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var nutrifoods = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.NutriFoodsId, e => e.NutriFoodsName);
         var enums = IEnum<Nutrients, NutrientToken>.Values().ToDictionary(e => e.Value, e => e.ReadableName);
         var notMatching = new Dictionary<int, string>();
@@ -57,7 +57,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllIdsAreFullyContained()
     {
-        var rows = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var rows = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToList();
         var nutriFoodsIds = rows.Select(e => e.NutriFoodsId).ToImmutableHashSet();
         var enums = IEnum<Nutrients, NutrientToken>.Values();
@@ -74,7 +74,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllNamesAreInEnum()
     {
-        var names = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var names = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsName);
         var keys = IEnum<Nutrients, NutrientToken>.TokenDictionary().Values.Select(e => e.ReadableName)
             .ToImmutableHashSet();

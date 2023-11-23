@@ -37,9 +37,9 @@ public static class FoodRetrieval
         var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
         using var context = new NutrifoodsDbContext(Options);
         var ingredients = context.Ingredients.AsQueryable().IncludeSubfields();
-        var nutrientsDictionary = RowRetrieval.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var nutrientsDictionary = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
-        var foodsDictionary = DataCentral.RetrieveByList<TFood, TNutrient>(format).Result
+        var foodsDictionary = DataCentral.PerformRequest<TFood, TNutrient>(format).Result
             .ToDictionary(e => e.Key, e => e.Value);
         foreach (var pair in foodsDictionary)
             InsertNutrients<TFood, TNutrient>(

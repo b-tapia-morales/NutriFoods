@@ -14,7 +14,7 @@ public class RecipeInsertionTest(ITestOutputHelper output)
     [Fact]
     public void AllUrlsAreUnique()
     {
-        var mappings = RowRetrieval
+        var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
             .ToList();
         var urlDictionary = mappings
@@ -29,7 +29,7 @@ public class RecipeInsertionTest(ITestOutputHelper output)
     [Fact]
     public void AllNamesAreUnique()
     {
-        var mappings = RowRetrieval
+        var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
             .ToHashSet();
         var allMappings = mappings.Select(e => (e.Name, e.Author)).ToHashSet();
