@@ -9,9 +9,9 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
 {
     public static readonly Crossover OnePoint =
         new(nameof(OnePoint), (int)CrossoverToken.OnePoint, "Por un punto",
-            (population, winners, chromosomeSize, populationSize) =>
+            (population, winners, chromosomeSize, populationSize, minProbability) =>
             {
-                if (RandomProbability() >= 0.8)
+                if (RandomProbability() < minProbability)
                     return;
 
                 var newPopulation = new List<Chromosome>();
@@ -36,14 +36,14 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
             });
 
     private Crossover(string name, int value, string readableName,
-        Action<IList<Chromosome>, IList<Chromosome>, int, int> method) : base(name, value)
+        Action<IList<Chromosome>, IList<Chromosome>, int, int, double> method) : base(name, value)
     {
         ReadableName = readableName;
         Method = method;
     }
 
     public string ReadableName { get; }
-    internal Action<IList<Chromosome>, IList<Chromosome>, int, int> Method { get; }
+    internal Action<IList<Chromosome>, IList<Chromosome>, int, int, double> Method { get; }
 }
 
 public enum CrossoverToken
