@@ -15,3 +15,15 @@ public sealed class RecipeAbridged
     public ICollection<RecipeQuantityDto> Quantities { get; set; } = null!;
     public ICollection<RecipeStepDto> Steps { get; set; } = null!;
 }
+
+public static class RecipeAbridgedExtensions
+{
+    public static IEnumerable<MenuRecipeDto> ToMenus(this IEnumerable<RecipeAbridged> recipes) =>
+        recipes
+            .GroupBy(e => e.Url)
+            .Select(e => new MenuRecipeDto
+            {
+                Recipe = e.First(),
+                Portions = e.Count()
+            });
+}

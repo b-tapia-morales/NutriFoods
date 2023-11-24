@@ -2,6 +2,8 @@
 
 using API.Dto.Abridged;
 using AutoMapper;
+using Domain.Enum;
+using Utils;
 using static System.StringComparison;
 
 namespace API.Dto;
@@ -31,7 +33,7 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
 
     public bool Equals(RecipeDto? other)
     {
-        if (ReferenceEquals(this, other)) 
+        if (ReferenceEquals(this, other))
             return true;
         return !ReferenceEquals(null, other) && string.Equals(Url, other.Url, InvariantCulture);
     }
@@ -49,13 +51,15 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
 
 public static class RecipeExtensions
 {
-    public static IList<MenuRecipeDto> ToMenus(this IEnumerable<RecipeAbridged> recipes) =>
+    public static IEnumerable<NutritionalValueDto> ToNutritionalValues(this IEnumerable<RecipeDto> recipes) =>
         recipes
-            .GroupBy(e => e.Url)
-            .Select(e => new MenuRecipeDto
+            .SelectMany(e => e.Nutrients)
+            .GroupBy(e => IEnum<Nutrients, NutrientToken>.FromReadableName(e.Nutrient))
+            .Select(e => new NutritionalValueDto
             {
-                Recipe = e.First(),
-                Portions = e.Count()
-            })
-            .ToList();
+                Nutrient = e.Key.ReadableName,
+                Quantity = e.Sum(x => x.Quantity),
+                Unit = e.Key.Unit.ReadableName,
+                DailyValue = e.Key.DailyValue == null ? null : e.Sum(x => x.Quantity) / e.Key.DailyValue
+            });
 }
