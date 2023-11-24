@@ -7,8 +7,8 @@ namespace API.Optimizer;
 
 public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
 {
-    public static IList<RecipeDto> GenerateSolution(
-        IReadOnlyList<RecipeDto> universe, IReadOnlyList<NutritionalTargetDto> targets,
+    public static IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
+        IReadOnlyCollection<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb)

@@ -10,7 +10,7 @@ public class Chromosome
 
     public Chromosome(IList<RecipeDto> recipes) => Recipes = recipes;
 
-    public void CalculateFitness(IReadOnlyList<NutritionalTargetDto> targets)
+    public void CalculateFitness(IReadOnlyCollection<NutritionalTargetDto> targets)
     {
         var fitness = 0;
         foreach (var target in targets)
