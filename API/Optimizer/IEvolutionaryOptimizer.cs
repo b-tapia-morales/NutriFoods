@@ -29,9 +29,9 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
         MutationToken mutationMethod = RandomPoints,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb)
     {
-        var selection = IEnum<Selection, SelectionToken>.FromToken(selectionMethod);
-        var crossover = IEnum<Crossover, CrossoverToken>.FromToken(crossoverMethod);
-        var mutation = IEnum<Mutation, MutationToken>.FromToken(mutationMethod);
+        var selection = IEnum<Selection, SelectionToken>.ToValue(selectionMethod);
+        var crossover = IEnum<Crossover, CrossoverToken>.ToValue(crossoverMethod);
+        var mutation = IEnum<Mutation, MutationToken>.ToValue(mutationMethod);
         return T.GenerateSolution(universe, targets, selection, crossover, mutation, chromosomeSize,
             populationSize, maxIterations, minCrossoverProb, minMutationProb);
     }

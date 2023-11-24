@@ -54,7 +54,7 @@ public static class RecipeExtensions
     public static IEnumerable<NutritionalValueDto> ToNutritionalValues(this IEnumerable<RecipeDto> recipes) =>
         recipes
             .SelectMany(e => e.Nutrients)
-            .GroupBy(e => IEnum<Nutrients, NutrientToken>.FromReadableName(e.Nutrient))
+            .GroupBy(e => IEnum<Nutrients, NutrientToken>.ToValue(e.Nutrient))
             .Select(e => new NutritionalValueDto
             {
                 Nutrient = e.Key.ReadableName,

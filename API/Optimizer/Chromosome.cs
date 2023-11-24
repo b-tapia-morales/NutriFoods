@@ -15,8 +15,8 @@ public class Chromosome
         var fitness = 0;
         foreach (var target in targets)
         {
-            var nutrient = IEnum<Nutrients, NutrientToken>.FromReadableName(target.Nutrient);
-            var threshold = IEnum<ThresholdTypes, ThresholdToken>.FromReadableName(target.ThresholdType);
+            var nutrient = IEnum<Nutrients, NutrientToken>.ToValue(target.Nutrient);
+            var threshold = IEnum<ThresholdTypes, ThresholdToken>.ToValue(target.ThresholdType);
             var actualQuantity = CalculateNutritionalValue(Recipes, nutrient);
             fitness += CalculateFitness(threshold, target.ExpectedQuantity, actualQuantity, target.ExpectedError,
                 target.IsPriority);

@@ -30,14 +30,21 @@ public interface IEnum<out T, TEnum>
         Tokens.Zip(Values(), (k, v) => new { Key = k, Value = v })
             .ToImmutableSortedDictionary(e => e.Value, e => e.Key);
 
-    static T FromToken(TEnum token) =>
+    static T ToValue(TEnum token) =>
         TokenDictionary().TryGetValue(token, out var value) ? value : throw new KeyNotFoundException();
 
-    static T FromReadableName(string readableName) =>
+    static T ToValue(string readableName) =>
         ReadableNameDictionary().TryGetValue(readableName, out var value) ? value : throw new KeyNotFoundException();
 
     static TEnum ToToken(T value) =>
         ReverseTokenDictionary().TryGetValue(value, out var token) ? token : throw new KeyNotFoundException();
+
+    static TEnum ToToken(string readableName) =>
+        ReadableNameDictionary().TryGetValue(readableName, out var value)
+            ? ToToken(value)
+            : throw new KeyNotFoundException();
+    
+    static string ToReadableName(TEnum token) => ToValue(token).ReadableName;
 }
 
 public interface IComposableEnum<out TSelf, out TOther>

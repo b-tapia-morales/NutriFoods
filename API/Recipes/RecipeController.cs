@@ -41,7 +41,7 @@ public class RecipeController(IRecipeRepository repository)
     [Route("meal-type/{mealType}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByMealType(MealToken mealType)
     {
-        var value = IEnum<MealTypes, MealToken>.FromToken(mealType);
+        var value = IEnum<MealTypes, MealToken>.ToValue(mealType);
         return await (value == MealTypes.None ? repository.FindAll() : repository.FindByMealType(value));
     }
 
@@ -49,7 +49,7 @@ public class RecipeController(IRecipeRepository repository)
     [Route("dish-type/{dishType}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByDishType(DishToken dishType)
     {
-        var value = IEnum<DishTypes, DishToken>.FromToken(dishType);
+        var value = IEnum<DishTypes, DishToken>.ToValue(dishType);
         return await (value == DishTypes.None ? repository.FindAll() : repository.FindByDishType(value));
     }
 
@@ -57,7 +57,7 @@ public class RecipeController(IRecipeRepository repository)
     [Route("diet/{diet}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindVegetarianRecipes(DietToken diet)
     {
-        var value = IEnum<Diets, DietToken>.FromToken(diet);
+        var value = IEnum<Diets, DietToken>.ToValue(diet);
         return await (value == Diets.None ? repository.FindAll() : repository.GetVegetarianRecipes(value));
     }
 

@@ -41,7 +41,7 @@ public class IngredientController(IIngredientRepository repository)
     [Route("primaryGroup/{foodGroup}")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByFoodGroup(FoodGroupToken foodGroup)
     {
-        var value = IEnum<FoodGroups, FoodGroupToken>.FromToken(foodGroup);
+        var value = IEnum<FoodGroups, FoodGroupToken>.ToValue(foodGroup);
         return await (value == FoodGroups.None ? repository.FindAll() : repository.FindByFoodGroup(value));
     }
 }
