@@ -37,20 +37,23 @@ public static class NutrientAverages
         CsvUtils.WriteRows(AbsolutePath, ToStatistics(recipes));
     }
 
-    private static IEnumerable<AveragesRow> ToStatistics(ICollection<Recipe> recipes)
+    private static IEnumerable<AveragesRow> ToStatistics(ICollection<Recipe> universe)
     {
         foreach (var mealType in IEnum<MealTypes, MealToken>.Values())
         {
             if (mealType == MealTypes.Snack)
                 continue;
-            var nutrients = (mealType == MealTypes.None
-                    ? recipes
-                    : recipes.Where(e => e.MealTypes.Contains(mealType)))
+            var recipes = mealType == MealTypes.None
+                ? universe
+                : universe.Where(e => e.MealTypes.Contains(mealType))
+                    .ToList();
+            var nutrients = recipes
                 .SelectMany(e => e.NutritionalValues)
                 .ToList();
             yield return new AveragesRow
             {
                 MealType = mealType.Name,
+                Count = recipes.Count,
                 Energy = nutrients.CalculateAverage(Nutrients.Energy),
                 Carbohydrates = nutrients.CalculateAverage(Nutrients.Carbohydrates),
                 FattyAcids = nutrients.CalculateAverage(Nutrients.FattyAcids),

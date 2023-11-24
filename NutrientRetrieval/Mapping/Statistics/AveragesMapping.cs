@@ -1,10 +1,7 @@
 // ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
 
-using CsvHelper;
 using CsvHelper.Configuration;
-using CsvHelper.TypeConversion;
-using Domain.Enum;
 
 namespace NutrientRetrieval.Mapping.Statistics;
 
