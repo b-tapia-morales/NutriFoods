@@ -41,7 +41,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     {
         var nutrifoods = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.NutriFoodsId, e => e.NutriFoodsName);
-        var enums = IEnum<Nutrients, NutrientToken>.Values().ToDictionary(e => e.Value, e => e.ReadableName);
+        var enums = IEnum<Nutrients, NutrientToken>.Values.ToDictionary(e => e.Value, e => e.ReadableName);
         var notMatching = new Dictionary<int, string>();
         foreach (var (nutrifoodsId, nutrifoodsName) in nutrifoods)
         {
@@ -60,7 +60,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
         var rows = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToList();
         var nutriFoodsIds = rows.Select(e => e.NutriFoodsId).ToImmutableHashSet();
-        var enums = IEnum<Nutrients, NutrientToken>.Values();
+        var enums = IEnum<Nutrients, NutrientToken>.Values;
         var enumsIds = enums.Select(e => e.Value).ToImmutableHashSet();
         output.WriteLine(enums.Select(e => $"{e.Value} : {e.ReadableName}{Environment.NewLine}")
             .ToJoinedString(string.Empty));
@@ -76,7 +76,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     {
         var names = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsName);
-        var keys = IEnum<Nutrients, NutrientToken>.TokenDictionary().Values.Select(e => e.ReadableName)
+        var keys = IEnum<Nutrients, NutrientToken>.TokenDict.Values.Select(e => e.ReadableName)
             .ToImmutableHashSet();
         Assert.All(names, e => Assert.Contains(e, keys));
     }

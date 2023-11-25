@@ -9,7 +9,7 @@ public sealed class EnumsTest(ITestOutputHelper output)
     [Fact]
     public void ValuesPreserveOrder()
     {
-        var values = IEnum<Regions, RegionToken>.Values();
+        var values = IEnum<Regions, RegionToken>.Values;
         output.WriteLine(values.ToJoinedString());
         Assert.DoesNotContain(false, values.Zip(values.Skip(1), (a, b) => a.Value < b.Value));
     }
@@ -17,7 +17,7 @@ public sealed class EnumsTest(ITestOutputHelper output)
     [Fact]
     public void ValuesSkipNulls()
     {
-        var values = IEnum<DishTypes, DishToken>.NonNullValues();
+        var values = IEnum<DishTypes, DishToken>.NonNullValues;
         output.WriteLine(values.ToJoinedString());
         Assert.All(values, e => Assert.NotEqual(e, DishTypes.None));
     }
@@ -25,7 +25,7 @@ public sealed class EnumsTest(ITestOutputHelper output)
     [Fact]
     public void TokenDictionaryPreservesOrder()
     {
-        var dictionary = IEnum<MealTypes, MealToken>.TokenDictionary();
+        var dictionary = IEnum<MealTypes, MealToken>.TokenDict;
         output.WriteLine(dictionary.ToJoinedString());
         Assert.DoesNotContain(false, dictionary.Zip(dictionary.Skip(1), (a, b) => a.Value < b.Value));
     }

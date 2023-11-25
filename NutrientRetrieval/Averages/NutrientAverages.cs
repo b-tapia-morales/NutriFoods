@@ -39,7 +39,7 @@ public static class NutrientAverages
 
     private static IEnumerable<AveragesRow> ToStatistics(ICollection<Recipe> universe)
     {
-        foreach (var mealType in IEnum<MealTypes, MealToken>.Values())
+        foreach (var mealType in IEnum<MealTypes, MealToken>.Values)
         {
             if (mealType == MealTypes.Snack)
                 continue;

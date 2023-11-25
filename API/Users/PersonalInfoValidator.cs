@@ -50,7 +50,7 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
                 return;
             }
 
-            var age = DateOnlyUtils.Difference(date, Interval.Years, false);
+            var age = date.Difference(Interval.Years, false);
             switch (age)
             {
                 case < 0:
@@ -68,13 +68,13 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
 
         // Biological sex
         RuleFor(e => e.BiologicalSex)
-            .Must(e => IEnum<BiologicalSexes, BiologicalSexToken>.ReadableNameDictionary().ContainsKey(e))
+            .Must(e => IEnum<BiologicalSexes, BiologicalSexToken>.ReadableNameDict.ContainsKey(e))
             .WithMessage(e =>
                 JsonConvert.ToString(
                     $"""
                      Provided argument “{e}” does not correspond to a valid gender value.
                      Recognized values are:
-                     {string.Join('\n', IEnum<BiologicalSexes, BiologicalSexToken>.NonNullValues())}
+                     {string.Join('\n', IEnum<BiologicalSexes, BiologicalSexToken>.NonNullValues)}
                      """)
             );
     }
