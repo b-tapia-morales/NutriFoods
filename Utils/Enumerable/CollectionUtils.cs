@@ -1,36 +1,23 @@
 // ReSharper disable MemberCanBePrivate.Global
 
-using static Utils.MathUtils;
+using System.Collections;
 
 namespace Utils.Enumerable;
 
 public static class CollectionUtils
 {
-    public static int RandomIndex<T>(this IList<T> collection) =>
-        collection.Count == 0
-            ? throw new ArgumentException("Collection cannot be empty")
-            : RandomNumber(collection.Count);
-    
-    public static int RandomIndex<T>(this IReadOnlyList<T> collection) =>
-        collection.Count == 0
-            ? throw new ArgumentException("Collection cannot be empty")
-            : RandomNumber(collection.Count);
-
-    public static T RandomItem<T>(this IList<T> collection) =>
-        collection[collection.RandomIndex()];
-    
-    public static T RandomItem<T>(this IReadOnlyList<T> collection) =>
-        collection[collection.RandomIndex()];
-
-    public static void AddRange<T>(this ICollection<T> collection, IEnumerable<T> newItems)
+    public static IReadOnlyCollection<T> AsReadOnly<T>(this ICollection<T> source)
     {
-        foreach (var item in newItems)
-            collection.Add(item);
+        if (source == null) throw new ArgumentNullException(nameof(source));
+        return source as IReadOnlyCollection<T> ?? new ReadOnlyCollectionAdapter<T>(source);
     }
 
-    public static void Copy<T>(this ICollection<T> collection, IEnumerable<T> newItems)
+    private sealed class ReadOnlyCollectionAdapter<T> : IReadOnlyCollection<T>
     {
-        collection.Clear();
-        collection.AddRange(newItems);
+        private readonly ICollection<T> _source;
+        public ReadOnlyCollectionAdapter(ICollection<T> source) => _source = source;
+        public int Count => _source.Count;
+        public IEnumerator<T> GetEnumerator() => _source.GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
