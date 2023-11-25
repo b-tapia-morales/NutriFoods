@@ -4,7 +4,7 @@ namespace API.DailyMenus;
 
 public interface IDailyMenuRepository
 {
-    Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu);
+    DailyMenuDto GenerateMenu(DailyMenuDto dailyMenu);
     
-    Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes);
+    Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu);
 }

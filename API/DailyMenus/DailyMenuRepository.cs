@@ -9,11 +9,23 @@ namespace API.DailyMenus;
 
 public class DailyMenuRepository(IMapper mapper, IRecipeRepository recipeRepository) : IDailyMenuRepository
 {
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu) =>
-        await GenerateMenuAsync(dailyMenu, await recipeRepository.FindAll());
-
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes)
+    public DailyMenuDto GenerateMenu(DailyMenuDto dailyMenu)
     {
+        var recipes = recipeRepository.FindAll().Result;
+        var solution =
+            IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolution(recipes, dailyMenu.Targets.AsReadOnly());
+        var abridgedRecipes = mapper.Map<List<RecipeAbridged>>(solution);
+        var menus = new List<MenuRecipeDto>(abridgedRecipes.ToMenus());
+        var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
+        dailyMenu.Targets.IncludeActualValues(solution);
+        dailyMenu.Nutrients = nutritionalValues;
+        dailyMenu.Recipes = menus;
+        return dailyMenu;
+    }
+
+    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu)
+    {
+        var recipes = await recipeRepository.FindAll();
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly());
