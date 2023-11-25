@@ -696,27 +696,25 @@ public static class NutrientExtensions
     public static IReadOnlyDictionary<Nutrients, double> GramFactors { get; } =
         KCalFactors.ToDictionary(e => e.Key, e => (1d / e.Value));
 
-    public static IReadOnlyDictionary<Nutrients, double> KCalDistributionDict
+    public static IDictionary<Nutrients, double> KCalDistributionDict
         (double carbohydrates, double fattyAcids, double proteins) =>
         new Dictionary<Nutrients, double>
         {
             [Carbohydrates] = carbohydrates * GramFactors[Carbohydrates],
             [FattyAcids] = fattyAcids * GramFactors[FattyAcids],
-            [Proteins] = proteins * GramFactors[Proteins],
+            [Proteins] = proteins * GramFactors[Proteins]
         };
 
-    public static IReadOnlyDictionary<Nutrients, double> KCalDistributionDict
-        (double carbohydrates, double fattyAcids, double proteins, double alcohol) =>
-        new Dictionary<Nutrients, double>
-        {
-            [Carbohydrates] = carbohydrates * GramFactors[Carbohydrates],
-            [FattyAcids] = fattyAcids * GramFactors[FattyAcids],
-            [Proteins] = proteins * GramFactors[Proteins],
-            [Alcohol] = alcohol * GramFactors[Alcohol]
-        };
+    public static IDictionary<Nutrients, double> KCalDistributionDict
+        (double carbohydrates, double fattyAcids, double proteins, double alcohol)
+    {
+        var dict = KCalDistributionDict(carbohydrates, fattyAcids, proteins);
+        dict.Add(Alcohol, alcohol * GramFactors[Proteins]);
+        return dict;
+    }
 
-    public static IReadOnlyDictionary<Nutrients, double> GramsDistributionDict
-        (double energy, int carbohydratesPct, int fattyAcidsPct, int proteinsPct) =>
+    public static IDictionary<Nutrients, double> GramsDistributionDict
+        (double energy, double carbohydratesPct, double fattyAcidsPct, double proteinsPct) =>
         new Dictionary<Nutrients, double>
         {
             [Carbohydrates] = energy * carbohydratesPct * GramFactors[Carbohydrates],
@@ -724,13 +722,11 @@ public static class NutrientExtensions
             [Proteins] = energy * proteinsPct * GramFactors[Proteins]
         };
 
-    public static IReadOnlyDictionary<Nutrients, double> GramsDistributionDict
-        (double energy, int carbohydratesPct, int fattyAcidsPct, int proteinsPct, int alcoholPct) =>
-        new Dictionary<Nutrients, double>
-        {
-            [Carbohydrates] = energy * carbohydratesPct * GramFactors[Carbohydrates],
-            [FattyAcids] = energy * fattyAcidsPct * GramFactors[FattyAcids],
-            [Proteins] = energy * proteinsPct * GramFactors[Proteins],
-            [Alcohol] = energy * alcoholPct * GramFactors[Alcohol]
-        };
+    public static IDictionary<Nutrients, double> GramsDistributionDict
+        (double energy, double carbohydratesPct, double fattyAcidsPct, double proteinsPct, double alcoholPct)
+    {
+        var dict = GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
+        dict.Add(Alcohol, energy * alcoholPct * GramFactors[Proteins]);
+        return dict;
+    }
 }
