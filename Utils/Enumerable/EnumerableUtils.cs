@@ -18,7 +18,7 @@ public static class EnumerableUtils
             counter++;
             if (counter % size != 0)
                 continue;
-            
+
             yield return partition.ToList();
             partition.Clear();
             counter = 0;
@@ -38,5 +38,6 @@ public static class EnumerableUtils
     public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ") =>
         string.Join($"{delimiter}", source);
 
-    public static void WriteToConsole<T>(this IEnumerable<T> source) => Console.WriteLine(source.ToJoinedString());
+    public static void WriteToConsole<T>(this IEnumerable<T> source, string delimiter = ", ") =>
+        Console.WriteLine(source.ToJoinedString(delimiter));
 }
