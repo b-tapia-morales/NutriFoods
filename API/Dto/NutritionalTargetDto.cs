@@ -1,5 +1,6 @@
 ﻿using Domain.Enum;
 using Utils;
+using static Domain.Enum.Nutrients;
 
 namespace API.Dto;
 
@@ -31,11 +32,18 @@ public static class TargetExtensions
         }
     }
 
-    public static IEnumerable<NutritionalTargetDto> DistributionToTargets(double energy, int carbohydratesPct,
-        int fattyAcidsPct, int proteinsPct, int errorMargin)
+    public static IEnumerable<NutritionalTargetDto> DistributionToTargets(
+        IDictionary<Nutrients, double> distributionDict, double energy, double errorMargin)
     {
-        var distributionDict =
-            NutrientExtensions.GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
+        yield return new NutritionalTargetDto
+        {
+            Nutrient = Energy.ReadableName,
+            ExpectedQuantity = energy,
+            ExpectedError = errorMargin,
+            Unit = Energy.Unit.ReadableName,
+            ThresholdType = ThresholdTypes.WithinRange.ReadableName,
+            IsPriority = true
+        };
         foreach (var (nutrient, grams) in distributionDict)
         {
             yield return new NutritionalTargetDto
