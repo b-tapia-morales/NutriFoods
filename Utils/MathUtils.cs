@@ -52,9 +52,9 @@ public static class MathUtils
     public static double RandomProbability() => Random.NextDouble();
 
     public static double RelativeError(double actualValue, double targetValue, bool useAbsolute = true,
-        int decimalPlaces = 2)
+        int decimalPlaces = 4)
     {
-        var error = Round((actualValue - targetValue) / actualValue * 100, decimalPlaces);
+        var error = Round((actualValue - targetValue) / actualValue, decimalPlaces);
         return useAbsolute ? Abs(error) : error;
     }
 }
