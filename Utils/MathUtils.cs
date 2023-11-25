@@ -57,4 +57,8 @@ public static class MathUtils
         var error = Round((actualValue - targetValue) / actualValue, decimalPlaces);
         return useAbsolute ? Abs(error) : error;
     }
+    
+    public static double PercentError(double actualValue, double targetValue, bool useAbsolute = true,
+        int decimalPlaces = 2) =>
+        100 * RelativeError(actualValue, targetValue, useAbsolute, decimalPlaces);
 }
