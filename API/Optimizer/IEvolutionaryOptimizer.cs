@@ -12,7 +12,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
 {
     public const int ChromosomeSize = 3;
     public const int PopulationSize = 60;
-    public const int MaxIterations = 250;
+    public const int MaxIterations = 2_500;
     public const double MinCrossoverProb = 0.2;
     public const double MinMutationProb = 0.6;
 

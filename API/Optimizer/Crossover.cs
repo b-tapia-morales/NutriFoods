@@ -16,7 +16,6 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
 
                 var newPopulation = new List<Chromosome>();
                 var i = 0;
-                Console.WriteLine("Empiezo a hacer cruces");
                 while (i < populationSize)
                 {
                     var firstChromosome = winners.RandomItem();
