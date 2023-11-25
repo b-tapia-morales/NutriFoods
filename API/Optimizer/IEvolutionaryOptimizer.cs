@@ -12,7 +12,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
 {
     public const int ChromosomeSize = 3;
     public const int PopulationSize = 60;
-    public const int MaxIterations = 25_000;
+    public const int MaxIterations = 250;
     public const double MinCrossoverProb = 0.2;
     public const double MinMutationProb = 0.6;
 
@@ -56,31 +56,28 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
     static int CalculateMaximumFitness(IReadOnlyCollection<NutritionalTargetDto> targets) =>
         targets.Select(e => e.IsPriority ? +2 : +1).Sum();
 
-    static IList<Chromosome> GenerateInitialPopulation(IReadOnlyList<RecipeDto> universe, int chromosomeSize,
+    static List<Chromosome> GenerateInitialPopulation(IReadOnlyList<RecipeDto> universe, int chromosomeSize,
         int populationSize)
     {
-        var population = new Chromosome[populationSize];
+        var population = new List<Chromosome>(populationSize);
         for (var i = 0; i < populationSize; i++)
         {
-            var recipes = new RecipeDto[chromosomeSize];
+            var recipes = new List<RecipeDto>(chromosomeSize);
             for (var j = 0; j < chromosomeSize; j++)
             {
-                recipes[j] = universe.RandomItem();
+                recipes.Add(universe.RandomItem());
             }
 
-            population[i] = new Chromosome(recipes);
+            population.Add(new Chromosome(recipes));
         }
 
         return population;
     }
 
-    static void CalculatePopulationFitness(IList<Chromosome> population,
-        IReadOnlyCollection<NutritionalTargetDto> targets)
-    {
-        foreach (var chromosome in population)
-            chromosome.CalculateFitness(targets);
-    }
+    static void CalculatePopulationFitness(List<Chromosome> population,
+        IReadOnlyCollection<NutritionalTargetDto> targets) =>
+        population.ForEach(e => e.CalculateFitness(targets));
 
-    static bool SolutionExists(IList<Chromosome> population, int maximumFitness) =>
-        population.Any(e => e.Fitness == maximumFitness);
+    static bool SolutionExists(List<Chromosome> population, int maximumFitness) =>
+        population.Exists(e => e.Fitness == maximumFitness);
 }

@@ -16,6 +16,7 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
 
                 var newPopulation = new List<Chromosome>();
                 var i = 0;
+                Console.WriteLine("Empiezo a hacer cruces");
                 while (i < populationSize)
                 {
                     var firstChromosome = winners.RandomItem();
@@ -36,14 +37,14 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
             });
 
     private Crossover(string name, int value, string readableName,
-        Action<IList<Chromosome>, IList<Chromosome>, int, int, double> method) : base(name, value)
+        Action<List<Chromosome>, List<Chromosome>, int, int, double> method) : base(name, value)
     {
         ReadableName = readableName;
         Method = method;
     }
 
     public string ReadableName { get; }
-    internal Action<IList<Chromosome>, IList<Chromosome>, int, int, double> Method { get; }
+    internal Action<List<Chromosome>, List<Chromosome>, int, int, double> Method { get; }
 }
 
 public enum CrossoverToken

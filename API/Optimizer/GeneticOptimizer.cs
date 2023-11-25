@@ -1,6 +1,7 @@
 // ReSharper disable ClassNeverInstantiated.Global
 
 using API.Dto;
+using Utils.Enumerable;
 using static API.Optimizer.IEvolutionaryOptimizer<API.Optimizer.GeneticOptimizer>;
 
 namespace API.Optimizer;
@@ -14,6 +15,7 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb)
     {
         var maxFitness = CalculateMaximumFitness(targets);
+        Console.WriteLine(maxFitness);
         var population = GenerateInitialPopulation(universe, chromosomeSize, populationSize);
         var winners = new List<Chromosome>();
         CalculatePopulationFitness(population, targets);
@@ -23,6 +25,7 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
             crossover.Method(population, winners, chromosomeSize, populationSize, minCrossoverProb);
             mutation.Method(population, universe, chromosomeSize, populationSize, minMutationProb);
             CalculatePopulationFitness(population, targets);
+            Console.WriteLine(population.Max(e => e.Fitness));
         }
 
         return population.OrderByDescending(e => e.Fitness).First().Recipes;

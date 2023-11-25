@@ -1,5 +1,6 @@
 using API.Dto;
 using Domain.Enum;
+using Utils.Enumerable;
 
 namespace API.Optimizer;
 
@@ -17,20 +18,19 @@ public class Chromosome
         {
             var nutrient = IEnum<Nutrients, NutrientToken>.ToValue(target.Nutrient);
             var threshold = IEnum<ThresholdTypes, ThresholdToken>.ToValue(target.ThresholdType);
-            var actualQuantity = CalculateNutritionalValue(Recipes, nutrient);
-            fitness += CalculateFitness(threshold, target.ExpectedQuantity, actualQuantity, target.ExpectedError,
+            var actualQuantity = CalculateNutritionalValue(nutrient);
+            fitness += threshold.Formula(target.ExpectedQuantity, actualQuantity, target.ExpectedError,
                 target.IsPriority);
         }
 
         Fitness = fitness;
     }
 
-    private static double CalculateNutritionalValue(IList<RecipeDto> recipes, Nutrients nutrient) =>
-        recipes.SelectMany(e => e.Nutrients).Where(e => e.Nutrient == nutrient.ReadableName).Sum(e => e.Quantity);
-
-    private static int CalculateFitness(ThresholdTypes threshold, double targetValue, double actualValue,
-        double errorMargin, bool isPriority) =>
-        threshold.Formula(targetValue, actualValue, errorMargin, isPriority);
+    private double CalculateNutritionalValue(Nutrients nutrient) =>
+        Recipes
+            .SelectMany(e => e.Nutrients)
+            .Where(e => e.Nutrient == nutrient.ReadableName)
+            .Sum(e => e.Quantity);
 }
 
 public static class ChromosomeExtensions

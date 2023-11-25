@@ -16,7 +16,7 @@ public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
                     return;
 
                 var i = 0;
-                while (i < RandomNumber(1, populationSize))
+                while (i < RandomNumber(2, populationSize))
                 {
                     var chromosome = population.RandomItem();
                     var gen = universe.RandomItem();
@@ -30,14 +30,14 @@ public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
             });
 
     private Mutation(string name, int value, string readableName,
-        Action<IList<Chromosome>, IReadOnlyList<RecipeDto>, int, int, double> method) : base(name, value)
+        Action<List<Chromosome>, IReadOnlyList<RecipeDto>, int, int, double> method) : base(name, value)
     {
         ReadableName = readableName;
         Method = method;
     }
 
     public string ReadableName { get; }
-    public Action<IList<Chromosome>, IReadOnlyList<RecipeDto>, int, int, double> Method { get; }
+    public Action<List<Chromosome>, IReadOnlyList<RecipeDto>, int, int, double> Method { get; }
 }
 
 public enum MutationToken
