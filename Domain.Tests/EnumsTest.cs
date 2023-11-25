@@ -25,7 +25,7 @@ public sealed class EnumsTest(ITestOutputHelper output)
     [Fact]
     public void TokenDictionaryPreservesOrder()
     {
-        var dictionary = IEnum<MealTypes, MealToken>.TokenDict;
+        var dictionary = IEnum<MealTypes, MealToken>.TokenDictionary;
         output.WriteLine(dictionary.ToJoinedString());
         Assert.DoesNotContain(false, dictionary.Zip(dictionary.Skip(1), (a, b) => a.Value < b.Value));
     }

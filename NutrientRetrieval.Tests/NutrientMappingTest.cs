@@ -76,7 +76,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
     {
         var names = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .Select(e => e.NutriFoodsName);
-        var keys = IEnum<Nutrients, NutrientToken>.TokenDict.Values.Select(e => e.ReadableName)
+        var keys = IEnum<Nutrients, NutrientToken>.TokenDictionary.Values.Select(e => e.ReadableName)
             .ToImmutableHashSet();
         Assert.All(names, e => Assert.Contains(e, keys));
     }

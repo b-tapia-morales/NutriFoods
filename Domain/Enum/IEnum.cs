@@ -16,29 +16,29 @@ public interface IEnum<out T, TEnum>
 
     static ImmutableList<T> NonNullValues { get; } = Values.Skip(1).ToImmutableList();
 
-    static ImmutableSortedDictionary<TEnum, T> TokenDict { get; } =
+    static ImmutableSortedDictionary<TEnum, T> TokenDictionary { get; } =
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Key, e => e.Value);
 
-    static ImmutableDictionary<string, T> ReadableNameDict { get; } =
+    static ImmutableDictionary<string, T> ReadableNameDictionary { get; } =
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v })
             .ToImmutableDictionary(e => e.Value.ReadableName, e => e.Value);
 
-    static IReadOnlyDictionary<T, TEnum> ReverseTokenDict { get; } =
+    static IReadOnlyDictionary<T, TEnum> ReverseTokenDictionary { get; } =
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Value, e => e.Key);
 
     string ReadableName { get; }
 
     static T ToValue(TEnum token) =>
-        TokenDict.TryGetValue(token, out var value) ? value : throw new KeyNotFoundException();
+        TokenDictionary.TryGetValue(token, out var value) ? value : throw new KeyNotFoundException();
 
     static T ToValue(string readableName) =>
-        ReadableNameDict.TryGetValue(readableName, out var value) ? value : throw new KeyNotFoundException();
+        ReadableNameDictionary.TryGetValue(readableName, out var value) ? value : throw new KeyNotFoundException();
 
     static TEnum ToToken(T value) =>
-        ReverseTokenDict.TryGetValue(value, out var token) ? token : throw new KeyNotFoundException();
+        ReverseTokenDictionary.TryGetValue(value, out var token) ? token : throw new KeyNotFoundException();
 
     static TEnum ToToken(string readableName) =>
-        ReadableNameDict.TryGetValue(readableName, out var value) ? ToToken(value) : throw new KeyNotFoundException();
+        ReadableNameDictionary.TryGetValue(readableName, out var value) ? ToToken(value) : throw new KeyNotFoundException();
 
     static string ToReadableName(TEnum token) => ToValue(token).ReadableName;
 }

@@ -68,7 +68,7 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
 
         // Biological sex
         RuleFor(e => e.BiologicalSex)
-            .Must(e => IEnum<BiologicalSexes, BiologicalSexToken>.ReadableNameDict.ContainsKey(e))
+            .Must(e => IEnum<BiologicalSexes, BiologicalSexToken>.ReadableNameDictionary.ContainsKey(e))
             .WithMessage(e =>
                 JsonConvert.ToString(
                     $"""
