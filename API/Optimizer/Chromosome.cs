@@ -1,6 +1,7 @@
 using API.Dto;
 using Domain.Enum;
 using Utils.Enumerable;
+using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.Optimizer;
 
@@ -16,7 +17,7 @@ public class Chromosome
         var fitness = 0;
         foreach (var target in targets)
         {
-            var nutrient = IEnum<Nutrients, NutrientToken>.ToValue(target.Nutrient);
+            var nutrient = ToValue(target.Nutrient);
             var threshold = IEnum<ThresholdTypes, ThresholdToken>.ToValue(target.ThresholdType);
             var actualQuantity = CalculateNutritionalValue(nutrient);
             fitness += threshold.Formula(target.ExpectedQuantity, actualQuantity, target.ExpectedError,
@@ -26,11 +27,16 @@ public class Chromosome
         Fitness = fitness;
     }
 
-    private double CalculateNutritionalValue(Nutrients nutrient) =>
-        Recipes
-            .SelectMany(e => e.Nutrients)
-            .Where(e => e.Nutrient == nutrient.ReadableName)
-            .Sum(e => e.Quantity);
+    private double CalculateNutritionalValue(Nutrients nutrient)
+    {
+        var sum = 0.0;
+        foreach (var recipe in Recipes)
+            sum += recipe.Nutrients
+                .Where(recipeNutrient => ToValue(recipeNutrient.Nutrient) == nutrient)
+                .Sum(recipeNutrient => recipeNutrient.Quantity);
+
+        return sum;
+    }
 }
 
 public static class ChromosomeExtensions
