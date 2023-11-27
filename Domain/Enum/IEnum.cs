@@ -47,10 +47,10 @@ public interface IComposableEnum<out TSelf, out TOther>
     where TSelf : SmartEnum<TSelf>, IComposableEnum<TSelf, TOther>
     where TOther : SmartEnum<TOther>
 {
-    protected TOther Category { get; }
+    protected TOther? Category { get; }
 
     static IReadOnlyCollection<TSelf> ByCategory(TOther category) =>
-        SmartEnum<TSelf>.List.Where(e => e.Category == category).ToImmutableList();
+        SmartEnum<TSelf>.List.Where(e => e.Category == category).OrderBy(e => e.Value).ToImmutableList();
 }
 
 public interface IHierarchicalEnum<out T, TEnum> : IEnum<T, TEnum>, IComposableEnum<T, T>
