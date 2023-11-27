@@ -19,20 +19,24 @@ public class ApplicationData : IApplicationData
 
     public ApplicationData()
     {
-        var rows =
-            CsvUtils.RetrieveRows<AveragesRow, AveragesMapping>(AbsolutePath, DelimiterToken.Semicolon, true).ToList();
-        CountDict = CreateDict(rows, e => e.Count);
-        EnergyDict = CreateDict(rows, e => e.Energy);
-        CarbohydratesDict = CreateDict(rows, e => e.Carbohydrates);
-        FattyAcidsDict = CreateDict(rows, e => e.FattyAcids);
-        ProteinsDict = CreateDict(rows, e => e.FattyAcids);
+        Rows = CsvUtils
+            .RetrieveRows<AveragesRow, AveragesMapping>(AbsolutePath, DelimiterToken.Semicolon, true)
+            .ToImmutableList();
+        CountDict = CreateDict(Rows, e => e.Count);
+        EnergyDict = CreateDict(Rows, e => e.Energy);
+        CarbohydratesDict = CreateDict(Rows, e => e.Carbohydrates);
+        FattyAcidsDict = CreateDict(Rows, e => e.FattyAcids);
+        ProteinsDict = CreateDict(Rows, e => e.FattyAcids);
+        DefaultRatio = 5.0 / 7.0;
     }
 
+    public IImmutableList<AveragesRow> Rows { get; }
     public IImmutableDictionary<MealTypes, int> CountDict { get; }
     public IImmutableDictionary<MealTypes, double> EnergyDict { get; }
     public IImmutableDictionary<MealTypes, double> CarbohydratesDict { get; }
     public IImmutableDictionary<MealTypes, double> FattyAcidsDict { get; }
     public IImmutableDictionary<MealTypes, double> ProteinsDict { get; }
+    public double DefaultRatio { get; }
 
     private static IImmutableDictionary<MealTypes, T> CreateDict<T>(IEnumerable<AveragesRow> rows,
         Func<AveragesRow, T> elementSelector) =>
