@@ -27,7 +27,7 @@ public class ApplicationData : IApplicationData
         CarbohydratesDict = CreateDict(Rows, e => e.Carbohydrates);
         FattyAcidsDict = CreateDict(Rows, e => e.FattyAcids);
         ProteinsDict = CreateDict(Rows, e => e.FattyAcids);
-        DefaultRatio = 5.0 / 7.0;
+        DefaultRatio = 4.0 / 7.0;
     }
 
     public IImmutableList<AveragesRow> Rows { get; }
