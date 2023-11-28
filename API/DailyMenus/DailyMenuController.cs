@@ -1,20 +1,20 @@
+using System.ComponentModel.DataAnnotations;
+using API.ApplicationData;
 using API.Dto;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
-using Utils.Enumerable;
 
 namespace API.DailyMenus;
 
 [ApiController]
 [Route("api/v1/daily-menus")]
-public class DailyMenuController(IDailyMenuRepository repository)
+public class DailyMenuController(IDailyMenuRepository repository, IApplicationData applicationData)
 {
-
     [HttpGet]
-    [Route("distribution")]
-    public DailyMenuDto GenerateMenu([FromQuery] MealToken mealToken, [FromQuery] string hour,
-        [FromQuery] double energy, [FromQuery] double carbohydratesPct, [FromQuery] double fattyAcidsPct,
-        [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
+    [Route("by-distribution")]
+    public async Task<DailyMenuDto> GenerateMenuAsync([FromQuery] [Required] MealToken mealToken,
+        [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct, 
+        [FromQuery] double fattyAcidsPct, [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
     {
         var distributionDict =
             NutrientExtensions.GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
@@ -22,36 +22,17 @@ public class DailyMenuController(IDailyMenuRepository repository)
             new List<NutritionalTargetDto>(
                 TargetExtensions.DistributionToTargets(distributionDict, energy, errorMargin));
 
+        var mealType = IEnum<MealTypes, MealToken>.ToValue(mealToken);
         var dailyMenu = new DailyMenuDto
         {
             IntakePercentage = (int)(errorMargin * 100),
-            MealType = IEnum<MealTypes, MealToken>.ToReadableName(mealToken),
+            MealType = mealType.ReadableName,
             Hour = hour,
             Targets = new List<NutritionalTargetDto>(targets)
         };
-        return repository.GenerateMenu(dailyMenu);
-    }
-    
-    [HttpGet]
-    [Route("async")]
-    public async Task<DailyMenuDto> GenerateMenuAsync([FromQuery] MealToken mealToken, [FromQuery] string hour,
-        [FromQuery] double energy, [FromQuery] double carbohydratesPct, [FromQuery] double fattyAcidsPct,
-        [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
-    {
-        var distributionDict =
-            NutrientExtensions.GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
-        var targets =
-            new List<NutritionalTargetDto>(
-                TargetExtensions.DistributionToTargets(distributionDict, energy, errorMargin));
 
-        var dailyMenu = new DailyMenuDto
-        {
-            IntakePercentage = (int)(errorMargin * 100),
-            MealType = IEnum<MealTypes, MealToken>.ToReadableName(mealToken),
-            Hour = hour,
-            Targets = new List<NutritionalTargetDto>(targets)
-        };
-        
-        return await repository.GenerateMenuAsync(dailyMenu);
+        var chromosomeSize = applicationData.RatioPerPortion(mealToken, NutrientToken.Energy, energy);
+        var ratio = applicationData.DefaultRatio;
+        return await repository.GenerateMenuAsync(dailyMenu, mealType, energy, chromosomeSize, ratio);
     }
 }
