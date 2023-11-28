@@ -28,6 +28,36 @@ public static class EnumerableUtils
             yield return partition;
     }
 
+    public static bool IsSorted<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
+    {
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
+
+        var comparer = Comparer<TKey>.Default;
+        using var iterator = source.GetEnumerator();
+        if (!iterator.MoveNext())
+            return true;
+
+        var current = keySelector(iterator.Current);
+
+        while (iterator.MoveNext())
+        {
+            var next = keySelector(iterator.Current);
+            if (comparer.Compare(current, next) > 0)
+                return false;
+
+            current = next;
+        }
+
+        return true;
+    }
+
+    public static bool HasDuplicates<T>(this IEnumerable<T> source)
+    {
+        var set = new HashSet<T>();
+        return source.All(set.Add);
+    }
+
     public static IDictionary<TKey, TValue> Merge<TKey, TValue>(
         this IEnumerable<KeyValuePair<TKey, TValue>> first, IEnumerable<KeyValuePair<TKey, TValue>> second)
         where TKey : notnull =>
@@ -35,8 +65,10 @@ public static class EnumerableUtils
             .GroupBy(kv => kv.Key)
             .ToDictionary(g => g.Key, g => g.First().Value);
 
-    public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ") =>
-        string.Join($"{delimiter}", source);
+    public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ",
+        (string Left, string Right)? enclosure = null) =>
+        string.Join($"{delimiter}",
+            enclosure.HasValue ? source.Select(e => $"{enclosure.Value.Left}{e}{enclosure.Value.Right}") : source);
 
     public static void WriteToConsole<T>(this IEnumerable<T> source, string delimiter = ", ") =>
         Console.WriteLine(source.ToJoinedString(delimiter));
