@@ -4,7 +4,6 @@ using Utils.Enumerable;
 using static API.Optimizer.CrossoverToken;
 using static API.Optimizer.MutationToken;
 using static API.Optimizer.SelectionToken;
-using static Domain.Enum.NutrientExtensions;
 
 namespace API.Optimizer;
 

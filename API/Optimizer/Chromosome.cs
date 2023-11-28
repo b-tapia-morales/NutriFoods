@@ -1,6 +1,5 @@
 using API.Dto;
 using Domain.Enum;
-using Utils.Enumerable;
 using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.Optimizer;

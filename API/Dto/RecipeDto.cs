@@ -1,9 +1,6 @@
 // ReSharper disable NonReadonlyMemberInGetHashCode
 
-using API.Dto.Abridged;
-using AutoMapper;
 using Domain.Enum;
-using Utils;
 using static System.StringComparison;
 
 namespace API.Dto;
