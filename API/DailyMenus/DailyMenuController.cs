@@ -2,20 +2,34 @@ using System.ComponentModel.DataAnnotations;
 using API.ApplicationData;
 using API.Dto;
 using Domain.Enum;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Utils.Enumerable;
 
 namespace API.DailyMenus;
 
 [ApiController]
 [Route("api/v1/daily-menus")]
-public class DailyMenuController(IDailyMenuRepository repository, IApplicationData applicationData)
+public class DailyMenuController(IDailyMenuRepository repository, IApplicationData applicationData,
+    IValidator<DailyMenuQuery> queryValidator)
 {
     [HttpGet]
     [Route("by-distribution")]
-    public async Task<DailyMenuDto> GenerateMenuAsync([FromQuery] [Required] MealToken mealToken,
-        [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct, 
+    public async Task<ActionResult<DailyMenuDto>> GenerateMenuAsync([FromQuery] [Required] MealToken mealToken,
+        [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct,
         [FromQuery] double fattyAcidsPct, [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
     {
+        var validation =
+            new DailyMenuQuery(mealToken, hour, energy, carbohydratesPct, fattyAcidsPct, proteinsPct, errorMargin);
+        var results = await queryValidator.ValidateAsync(validation);
+        if (!results.IsValid)
+            return new BadRequestObjectResult(
+                $"""
+                 Could not perform query because of the following errors:
+                 {results.Errors.Select(e => e.ErrorMessage).ToJoinedString(Environment.NewLine)}
+                 """
+            );
+
         var distributionDict =
             NutrientExtensions.GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
         var targets =
