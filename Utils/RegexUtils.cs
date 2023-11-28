@@ -14,4 +14,9 @@ public static class RegexUtils
 
     public const string PasswordRule =
         "Password must be 8 characters long minimum, and must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
+
+    public const string Hour = "^(?:[0-1][0-9]|2[0-3]):[0-5][0-9]$";
+    
+    public const string HourRule =
+        "Hour must be written in the 24-hour notation in the form hh:mm.";
 }
