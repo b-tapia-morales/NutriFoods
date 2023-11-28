@@ -1,3 +1,7 @@
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedMember.Global
+
 namespace NutrientRetrieval.Translation;
 
 public class TranslationResult

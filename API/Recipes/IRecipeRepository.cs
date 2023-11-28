@@ -1,5 +1,5 @@
 using API.Dto;
-using Utils.Enum;
+using Domain.Enum;
 
 namespace API.Recipes;
 
@@ -9,29 +9,15 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FindWithPortions();
 
-    Task<List<RecipeDto>> FindExcludeById(IList<int> ids);
+    Task<RecipeDto?> FindByName(string name);
 
-    Task<RecipeDto> FindByName(string name);
+    Task<RecipeDto?> FindById(int id);
 
-    Task<RecipeDto> FindById(int id);
+    Task<List<RecipeDto>> FindByMealType(MealTypes mealType);
 
-    Task<List<RecipeDto>> FindByMealType(MealType mealType);
+    Task<List<RecipeDto>> FindByDishType(DishTypes dishType);
 
-    Task<List<RecipeDto>> FindByDishType(DishType dishType);
-
-    Task<List<RecipeDto>> GetVegetarianRecipes();
-
-    Task<List<RecipeDto>> GetOvoVegetarianRecipes();
-
-    Task<List<RecipeDto>> GetOvoLactoVegetarianRecipes();
-
-    Task<List<RecipeDto>> GetLactoVegetarianRecipes();
-
-    Task<List<RecipeDto>> GetPollotarianRecipes();
-
-    Task<List<RecipeDto>> GetPescetarianRecipes();
-
-    Task<List<RecipeDto>> GetPolloPescetarianRecipes();
+    Task<List<RecipeDto>> GetVegetarianRecipes(Diets diet);
 
     Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
 
@@ -43,10 +29,10 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound);
 
-    Task<List<RecipeDto>> FilterByLipids(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByFattyAcids(int lowerBound, int upperBound);
 
     Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound);
 
-    Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energyLimit, double carbohydratesLimit, double lipidsLimit,
-        double proteinsLimit);
+    Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates, double fattyAcids,
+        double proteins);
 }

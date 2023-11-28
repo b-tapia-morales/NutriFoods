@@ -1,26 +1,22 @@
-﻿namespace Domain.Models;
+﻿using Domain.Enum;
 
-public sealed class Ingredient
+namespace Domain.Models;
+
+public class Ingredient
 {
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
 
+    public List<string> Synonyms { get; set; } = null!;
+
     public bool IsAnimal { get; set; }
 
-    public bool ContainsGluten { get; set; }
+    public FoodGroups FoodGroup { get; set; } = null!;
 
-    public int TertiaryGroupId { get; set; }
+    public virtual ICollection<IngredientMeasure> IngredientMeasures { get; set; } = null!;
 
-    public ICollection<IngredientMeasure> IngredientMeasures { get; } = new List<IngredientMeasure>();
+    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public ICollection<IngredientNutrient> IngredientNutrients { get; } = new List<IngredientNutrient>();
-
-    public ICollection<IngredientSynonym> IngredientSynonyms { get; } = new List<IngredientSynonym>();
-
-    public ICollection<RecipeQuantity> RecipeQuantities { get; } = new List<RecipeQuantity>();
-
-    public TertiaryGroup TertiaryGroup { get; set; } = null!;
-
-    public ICollection<UserAllergy> UserAllergies { get; } = new List<UserAllergy>();
+    public virtual ICollection<NutritionalValue> NutritionalValues { get; set; } = null!;
 }

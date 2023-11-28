@@ -3,49 +3,66 @@
 
 class Chromosome
 {
-DailyMenu: <color:#C678DD><i>DailyMenu
-Fitness: <color:#C678DD><i>int
+Recipes: <color:#C678DD><IList<RecipeDto></color>
+Fitness: <color:#C678DD>int</color>
 .. Constructor ..
-+Chromosome(menuRecipe: <color:#C678DD><i>List<MenuRecipe></i></color>)
++Chromosome(recipes: <color:#C678DD>IList<RecipeDto></color>)
 .. Métodos públicos ..
-+AggregateMacronutrients()
-+UpdateFitness(energy: <color:#C678DD><i>double</i></color>, 
-carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, 
-marginOfError: <color:#C678DD><i>double</i></color>)
-+ShowPhenotypes()
-.. Métodos privados ..
--{static}AggregateMacronutrients(dailyMenu: <color:#C678DD><i>DailyMenu</i></color>, nutrientId: <color:#C678DD><i>int</i></color>): <b>double</b>
--{static}CalculateFitness(objectiveValue: <color:#C678DD><i>double</i></color>, menuValue: <color:#C678DD><i>double</i></color>, marginOfError: <color:#C678DD><i>double</i></color>): <b>int</b>
++ CalculateFitness(targets: <color:#C678DD>IReadOnlyList<NutritionalTargetDto></color>)
 }
 
-interface IGeneticAlgorithm {
-.. Overloads de método principal ..
-+GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
-carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>,
-chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu</b>
-+GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
-chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>double</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
-+GenerateSolution(recipes: <color:#C678DD><i>List<Recipe></i></color>, energy: <color:#C678DD><i>double</i></color>,
-carbsPercent: <color:#C678DD><i>int</i></color>, fatsPercent: <color:#C678DD><i>int</i></color>, proteinsPercent: <color:#C678DD><i>int</i></color>,
-chromosomeSize: <color:#C678DD><i>int</i></color>, marginOfError: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>): <b>DailyMenu
-.. Métodos intermedios ..
-+GenerateUniverse(recipes: <color:#C678DD><i>List<Recipe></i></color>): <b>List<MenuRecipe></b>
-+GenerateInitialPopulation(universe: <color:#C678DD><i>List<MenuRecipe></i></color>, population: <color:#C678DD><i>List<Chromosome></i></color>,
-chromosomeSize: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>)
-+CalculatePopulationFitness(population: <color:#C678DD><i>List<Chromosome></i></color>, energy: <color:#C678DD><i>double</i></color>,
-carbohydrates: <color:#C678DD><i>double</i></color>, lipids: <color:#C678DD><i>double</i></color>, proteins: <color:#C678DD><i>double</i></color>, marginOfError: <color:#C678DD><i>double</i></color>)
-+SolutionExists(population: <color:#C678DD><i>List<Chromosome></i></color>): <b>bool</b>
-+Selection(population: <color:#C678DD><i>List<Chromosome></i></color>, winners: <color:#C678DD><i>List<Chromosome></i></color>)
-+Crossover(population: <color:#C678DD><i>List<Chromosome></i></color>, winners: <color:#C678DD><i>List<Chromosome></i></color>,
-populationSize: <color:#C678DD><i>int</i></color>)
-+Mutation(universe: <color:#C678DD><i>List<MenuRecipe></i></color>, population: <color:#C678DD><i>List<Chromosome></i></color>,
-chromosomeSize: <color:#C678DD><i>int</i></color>, populationSize: <color:#C678DD><i>int</i></color>)
-+ShowPopulation(population: <color:#C678DD><i>List<Chromosome></i></color>)
+interface IEvolutionaryOptimizer {
+.. Métodos principales ..
++GenerateSolution(universe: <color:#C678DD>IReadOnlyList<RecipeDto></color>, targets: <color:#C678DD>IReadOnlyList<NutritionalTargetDto></color>,
+chromosomeSize: <color:#C678DD>int</color>, populationSize: <color:#C678DD>int</color>, maxIterations: <color:#C678DD>int</color>,
+selectionMethod: <color:#C678DD>SelectionToken</color>, crossoverMethod: <color:#C678DD>CrossoverToken</color>, mutationMethod: <color:#C678DD>MutationToken</color>) : <color:#C678DD>IList<RecipeDto></color>
++GenerateSolution(universe: <color:#C678DD>IReadOnlyList<RecipeDto></color>, targets: <color:#C678DD>IReadOnlyList<NutritionalTargetDto></color>,
+chromosomeSize: <color:#C678DD>int</color>, populationSize: <color:#C678DD>int</color>, maxIterations: <color:#C678DD>int</color>,
+selection: <color:#C678DD>Selection</color>, crossover: <color:#C678DD>Crossover</color>, mutation: <color:#C678DD>Mutation</color>) : <color:#C678DD>Task<IList<RecipeDto>></color>
+.. Versiones asincrónicas ..
++GenerateSolutionAsync(universe: <color:#C678DD>IReadOnlyList<RecipeDto></color>, targets: <color:#C678DD>IReadOnlyList<NutritionalTargetDto></color>,
+chromosomeSize: <color:#C678DD>int</color>, populationSize: <color:#C678DD>int</color>, maxIterations: <color:#C678DD>int</color>,
+selectionMethod: <color:#C678DD>SelectionToken</color>, crossoverMethod: <color:#C678DD>CrossoverToken</color>, mutationMethod: <color:#C678DD>MutationToken</color>) : <color:#C678DD>IList<RecipeDto></color>
++GenerateSolutionAsync(universe: <color:#C678DD>IReadOnlyList<RecipeDto></color>, targets: <color:#C678DD>IReadOnlyList<NutritionalTargetDto></color>,
+chromosomeSize: <color:#C678DD>int</color>, populationSize: <color:#C678DD>int</color>, maxIterations: <color:#C678DD>int</color>,
+selection: <color:#C678DD>Selection</color>, crossover: <color:#C678DD>Crossover</color>, mutation: <color:#C678DD>Mutation</color>) : <color:#C678DD>IList<RecipeDto></color>
 }
 
-class GeneticAlgorithm
+enum Selection {
+.. Propiedades ..
+Name: <color:#C678DD>string</color>
+Value: <color:#C678DD>int</color>
+ReadableName: <color:#C678DD>string</color>
+Method: <color:#C678DD>Action<IList<Chromosome>, IList<Chromosome>></color>
+.. Variables estáticas ..
++ {static} Tournament: <color:#C678DD>Selection</color>
+}
 
-IGeneticAlgorithm <|-- GeneticAlgorithm
-IGeneticAlgorithm - Chromosome: Usa >
+enum Crossover {
+.. Propiedades ..
+Name: <color:#C678DD>string</color>
+Value: <color:#C678DD>int</color>
+ReadableName: <color:#C678DD>string</color>
+Method: <color:#C678DD>Action<IList<Chromosome>, IList<Chromosome>, int, int, double></color>
+.. Variables estáticas ..
++ {static} OnePoint: <color:#C678DD>Crossover</color>
+}
+
+enum Mutation {
+.. Propiedades ..
+Name: <color:#C678DD>string</color>
+Value: <color:#C678DD>int</color>
+ReadableName: <color:#C678DD>string</color>
+Method: <color:#C678DD>Action<IList<Chromosome>, IList<Chromosome>, int, int, double></color>
+.. Variables estáticas ..
++ {static} AtRandom: <color:#C678DD>Mutation</color>
+}
+
+IEvolutionaryOptimizer <|-- GeneticOptimizer
+IEvolutionaryOptimizer ^-- Chromosome: Uses
+IEvolutionaryOptimizer ^-- Selection: Uses
+IEvolutionaryOptimizer ^-- Crossover: Uses
+IEvolutionaryOptimizer ^-- Mutation: Uses
+
 
 @enduml

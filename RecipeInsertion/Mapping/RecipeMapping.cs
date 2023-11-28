@@ -10,7 +10,7 @@ public sealed class RecipeMapping : ClassMap<Recipe>
         Map(p => p.Name).Index(0);
         Map(p => p.Author).Index(1);
         Map(p => p.Url).Index(2).Optional();
-        Map(p => p.PreparationTime).Index(3).Optional();
+        Map(p => p.Time).Index(3).Optional();
         Map(p => p.Portions).Index(4).Optional();
     }
 }

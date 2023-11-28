@@ -1,6 +1,8 @@
-﻿namespace Domain.Models;
+﻿using Domain.Enum;
 
-public sealed class Recipe
+namespace Domain.Models;
+
+public class Recipe
 {
     public int Id { get; set; }
 
@@ -8,25 +10,25 @@ public sealed class Recipe
 
     public string Author { get; set; } = null!;
 
-    public string? Url { get; set; }
+    public string Url { get; set; } = null!;
 
     public int? Portions { get; set; }
 
-    public int? PreparationTime { get; set; }
+    public int? Time { get; set; }
 
-    public ICollection<MenuRecipe> MenuRecipes { get; } = new List<MenuRecipe>();
+    public Difficulties? Difficulty { get; set; }
 
-    public ICollection<RecipeDiet> RecipeDiets { get; } = new List<RecipeDiet>();
+    public List<MealTypes> MealTypes { get; set; } = null!;
 
-    public ICollection<RecipeDishType> RecipeDishTypes { get; } = new List<RecipeDishType>();
+    public List<DishTypes> DishTypes { get; set; } = null!;
 
-    public ICollection<RecipeMealType> RecipeMealTypes { get; } = new List<RecipeMealType>();
+    public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = null!;
 
-    public ICollection<RecipeMeasure> RecipeMeasures { get; } = new List<RecipeMeasure>();
+    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = null!;
 
-    public ICollection<RecipeNutrient> RecipeNutrients { get; } = new List<RecipeNutrient>();
+    public virtual ICollection<RecipeQuantity> RecipeQuantities { get; set; } = null!;
 
-    public ICollection<RecipeQuantity> RecipeQuantities { get; } = new List<RecipeQuantity>();
+    public virtual ICollection<RecipeStep> RecipeSteps { get; set; } = null!;
 
-    public ICollection<RecipeStep> RecipeSteps { get; } = new List<RecipeStep>();
+    public virtual ICollection<NutritionalValue> NutritionalValues { get; set; } = null!;
 }

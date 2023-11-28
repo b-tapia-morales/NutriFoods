@@ -13,7 +13,7 @@ public static class RecipeDistribution
         "RecipeInsertion", "DataRecipes", "RecipeAmount.csv");
 
     private static readonly ICollection<MealTypeRow> MealTypeAverages =
-        RowRetrieval.RetrieveRows<MealTypeRow, MealTypeMapping>(FilePathAverage).ToList();
+        CsvUtils.RetrieveRows<MealTypeRow, MealTypeMapping>(FilePathAverage).ToList();
 
     private static readonly IEnumerable<AmountRecipes> RangesAmountRecipes = AmountRecipes.GetAmount(FilePathAmount);
 

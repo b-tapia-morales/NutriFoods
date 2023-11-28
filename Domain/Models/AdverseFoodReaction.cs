@@ -1,0 +1,16 @@
+﻿using Domain.Enum;
+
+namespace Domain.Models;
+
+public class AdverseFoodReaction
+{
+    public Guid Id { get; set; }
+
+    public FoodGroups FoodGroup { get; set; } = null!;
+
+    public FoodReactions Type { get; set; } = null!;
+
+    public Guid NutritionalAnamnesis { get; set; }
+
+    public virtual NutritionalAnamnesis NutritionalAnamnesesNavigation { get; set; } = null!;
+}

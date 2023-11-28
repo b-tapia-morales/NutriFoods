@@ -1,25 +1,18 @@
 using API.Dto;
+using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
-using Utils.Enum;
 
 namespace API.Recipes;
 
 [ApiController]
 [Route("api/v1/recipes")]
-public class RecipeController
+public class RecipeController(IRecipeRepository repository)
 {
-    private readonly IRecipeRepository _repository;
-
-    public RecipeController(IRecipeRepository repository)
-    {
-        _repository = repository;
-    }
-
     [HttpGet]
     [Route("")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll()
     {
-        return await _repository.FindAll();
+        return await repository.FindAll();
     }
 
     [HttpGet]
@@ -29,14 +22,8 @@ public class RecipeController
         if (string.IsNullOrWhiteSpace(name))
             return new BadRequestObjectResult("Parameter can't be an empty or whitespace string");
 
-        try
-        {
-            return await _repository.FindByName(name.ToLower());
-        }
-        catch (InvalidOperationException)
-        {
-            return new RecipeDto();
-        }
+        var recipe = await repository.FindByName(name);
+        return recipe == null ? new NotFoundResult() : recipe;
     }
 
     [HttpGet]
@@ -46,84 +33,32 @@ public class RecipeController
         if (id < 0)
             return new BadRequestObjectResult($"Parameter can't be a negative integer (Value provided was: {id})");
 
-        try
-        {
-            return await _repository.FindById(id);
-        }
-        catch (InvalidOperationException)
-        {
-            return new RecipeDto();
-        }
+        var recipe = await repository.FindById(id);
+        return recipe == null ? new NotFoundResult() : recipe;
     }
 
     [HttpGet]
-    [Route("by-meal-type")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByMealType(MealType mealType)
+    [Route("meal-type/{mealType}")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByMealType(MealToken mealType)
     {
-        return await (mealType == MealType.None ? _repository.FindAll() : _repository.FindByMealType(mealType));
+        var value = IEnum<MealTypes, MealToken>.ToValue(mealType);
+        return await (value == MealTypes.None ? repository.FindAll() : repository.FindByMealType(value));
     }
 
     [HttpGet]
-    [Route("by-dish-type")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByDishType(DishType dishType)
+    [Route("dish-type/{dishType}")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindByDishType(DishToken dishType)
     {
-        return await (dishType == DishType.None ? _repository.FindAll() : _repository.FindByDishType(dishType));
+        var value = IEnum<DishTypes, DishToken>.ToValue(dishType);
+        return await (value == DishTypes.None ? repository.FindAll() : repository.FindByDishType(value));
     }
 
     [HttpGet]
-    [Route("exclude-by-id")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindExcludeById([FromQuery] IList<int> ids)
+    [Route("diet/{diet}")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindVegetarianRecipes(DietToken diet)
     {
-        return await _repository.FindExcludeById(ids);
-    }
-
-    [HttpGet]
-    [Route("vegetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetVegetarianRecipes()
-    {
-        return await _repository.GetVegetarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("ovo-vegetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetOvoVegetarianRecipes()
-    {
-        return await _repository.GetOvoVegetarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("lacto-vegetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetLactoVegetarianRecipes()
-    {
-        return await _repository.GetLactoVegetarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("ovo-lacto-vegetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetOvoLactoVegetarianRecipes()
-    {
-        return await _repository.GetOvoLactoVegetarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("pollotarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPollotarianRecipes()
-    {
-        return await _repository.GetPollotarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("pescetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPescetarianRecipes()
-    {
-        return await _repository.GetPescetarianRecipes();
-    }
-
-    [HttpGet]
-    [Route("pollo-pescetarian")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> GetPolloPescetarianRecipes()
-    {
-        return await _repository.GetPolloPescetarianRecipes();
+        var value = IEnum<Diets, DietToken>.ToValue(diet);
+        return await (value == Diets.None ? repository.FindAll() : repository.GetVegetarianRecipes(value));
     }
 
     [HttpGet]
@@ -139,7 +74,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum prep time must be lower or equal to minimum prep time (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByPreparationTime(lower, upper);
+        return await repository.FilterByPreparationTime(lower, upper);
     }
 
     [HttpGet]
@@ -150,7 +85,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Parameter can't be a negative integer (Value provided was: {portions})");
 
-        return await _repository.FilterByPortions(portions);
+        return await repository.FilterByPortions(portions);
     }
 
     [HttpGet]
@@ -167,7 +102,7 @@ public class RecipeController
                 $"Maximum portions must be lower or equal to minimum portions (Values provided were {lower} and {upper} respectively)");
 
         Console.WriteLine($"{lower} - {upper}");
-        return await _repository.FilterByPortions(lower, upper);
+        return await repository.FilterByPortions(lower, upper);
     }
 
     [HttpGet]
@@ -182,7 +117,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum energy must be lower or equal to minimum energy (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByEnergy(lower, upper);
+        return await repository.FilterByEnergy(lower, upper);
     }
 
     [HttpGet]
@@ -198,22 +133,22 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum carbohydrates must be lower or equal to minimum carbohydrates (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByCarbohydrates(lower, upper);
+        return await repository.FilterByCarbohydrates(lower, upper);
     }
 
     [HttpGet]
-    [Route("lipids")]
+    [Route("fatty-acids")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByLipids([FromQuery] int lower, [FromQuery] int upper)
     {
         if (lower < 0 || upper < 0)
             return new BadRequestObjectResult(
-                $"Neither value can be a negative integer (Values provided were: minimum lipids = {lower}, maximum lipids = {upper})");
+                $"Neither value can be a negative integer (Values provided were: minimum = {lower}, maximum = {upper})");
 
         if (lower > upper)
             return new BadRequestObjectResult(
-                $"Maximum lipids must be lower or equal to minimum lipids (Values provided were {lower} and {upper} respectively)");
+                $"Maximum fatty acids must be lower or equal to minimum fatty acids (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByLipids(lower, upper);
+        return await repository.FilterByFattyAcids(lower, upper);
     }
 
     [HttpGet]
@@ -229,19 +164,19 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByProteins(lower, upper);
+        return await repository.FilterByProteins(lower, upper);
     }
 
     [HttpGet]
-    [Route("macronutrient-distribution")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByMacronutrientDistribution(
+    [Route("distribution")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByDistribution(
         [FromQuery] int energyLimit, [FromQuery] int carbohydratesLimit, [FromQuery] int lipidsLimit,
         [FromQuery] int proteinsLimit)
     {
         if (energyLimit < 0 || carbohydratesLimit < 0 || lipidsLimit < 0 || proteinsLimit < 0)
             return new BadRequestObjectResult("No value can be a negative integer");
 
-        return await _repository.FilterByMacronutrientDistribution(energyLimit, carbohydratesLimit, lipidsLimit,
+        return await repository.FilterByMacronutrientDistribution(energyLimit, carbohydratesLimit, lipidsLimit,
             proteinsLimit);
     }
 }

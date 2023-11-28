@@ -1,14 +1,14 @@
 ﻿namespace Domain.Models;
 
-public sealed class RecipeStep
+public class RecipeStep
 {
     public int Id { get; set; }
 
-    public int Recipe { get; set; }
+    public int RecipeId { get; set; }
 
-    public int Step { get; set; }
+    public int Number { get; set; }
 
-    public string? Description { get; set; }
+    public string Description { get; set; } = null!;
 
-    public Recipe RecipeNavigation { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; } = null!;
 }

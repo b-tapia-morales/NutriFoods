@@ -1,13 +1,11 @@
 ﻿namespace API.Dto;
 
-public class DailyMenuDto
+public sealed class DailyMenuDto
 {
+    public int IntakePercentage { get; set; }
     public string MealType { get; set; } = null!;
-    public string Satiety { get; set; } = null!;
-    public double EnergyTotal { get; set; }
-    public double CarbohydratesTotal { get; set; }
-    public double LipidsTotal { get; set; }
-    public double ProteinsTotal { get; set; }
-    public IList<DailyMenuNutrientDto> Nutrients { get; set; } = null!;
-    public IList<MenuRecipeDto> MenuRecipes { get; set; } = null!;
+    public string Hour { get; set; } = null!;
+    public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
+    public ICollection<NutritionalTargetDto> Targets { get; set; } = null!;
+    public ICollection<MenuRecipeDto> Recipes { get; set; } = null!;
 }

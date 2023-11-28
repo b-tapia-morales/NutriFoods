@@ -1,6 +1,6 @@
 ﻿namespace Domain.Models;
 
-public sealed class RecipeQuantity
+public class RecipeQuantity
 {
     public int Id { get; set; }
 
@@ -10,7 +10,7 @@ public sealed class RecipeQuantity
 
     public double Grams { get; set; }
 
-    public Ingredient Ingredient { get; set; } = null!;
+    public virtual Ingredient Ingredient { get; set; } = null!;
 
-    public Recipe Recipe { get; set; } = null!;
+    public virtual Recipe Recipe { get; set; } = null!;
 }

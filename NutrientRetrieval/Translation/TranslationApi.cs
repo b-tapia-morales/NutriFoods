@@ -14,7 +14,7 @@ public static class TranslationApi
 
     public static async Task<string?> Translate(string input)
     {
-        object[] body = {new {Text = input}};
+        object[] body = { new { Text = input } };
         var requestBody = JsonConvert.SerializeObject(body);
 
         using var request = new HttpRequestMessage();
@@ -27,6 +27,6 @@ public static class TranslationApi
         var response = await Client.SendAsync(request);
         var content = await response.Content.ReadAsStringAsync();
         var array = JsonConvert.DeserializeObject<TranslationResult[]>(content);
-        return array!.First().Translations.First().Text;
+        return array![0].Translations[0].Text;
     }
 }
