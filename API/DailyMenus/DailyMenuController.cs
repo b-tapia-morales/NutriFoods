@@ -11,11 +11,30 @@ namespace API.DailyMenus;
 [ApiController]
 [Route("api/v1/daily-menus")]
 public class DailyMenuController(IDailyMenuRepository repository, IApplicationData applicationData,
-    IValidator<DailyMenuQuery> queryValidator)
+    IValidator<DailyMenuQuery> queryValidator, IValidator<DailyMenuDto> jsonValidator)
 {
     [HttpGet]
+    public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromBody] DailyMenuDto dailyMenu)
+    {
+        var results = await jsonValidator.ValidateAsync(dailyMenu);
+        if (!results.IsValid)
+            return new BadRequestObjectResult(
+                $"""
+                 Could not perform query because of the following errors:
+                 {results.Errors.Select(e => e.ErrorMessage).ToJoinedString(Environment.NewLine)}
+                 """
+            );
+
+        var chromosomeSize = applicationData.RatioPerPortion(IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType),
+            NutrientToken.Energy,
+            dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity);
+
+        return await repository.GenerateMenu(dailyMenu, chromosomeSize);
+    }
+
+    [HttpGet]
     [Route("by-distribution")]
-    public async Task<ActionResult<DailyMenuDto>> GenerateMenuAsync([FromQuery] [Required] MealToken mealToken,
+    public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromQuery, Required] MealToken mealToken,
         [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct,
         [FromQuery] double fattyAcidsPct, [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
     {
@@ -46,7 +65,6 @@ public class DailyMenuController(IDailyMenuRepository repository, IApplicationDa
         };
 
         var chromosomeSize = applicationData.RatioPerPortion(mealToken, NutrientToken.Energy, energy);
-        var ratio = applicationData.DefaultRatio;
-        return await repository.GenerateMenuAsync(dailyMenu, mealType, energy, chromosomeSize, ratio);
+        return await repository.GenerateMenu(dailyMenu, chromosomeSize);
     }
 }

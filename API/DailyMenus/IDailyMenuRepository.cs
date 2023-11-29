@@ -5,6 +5,5 @@ namespace API.DailyMenus;
 
 public interface IDailyMenuRepository
 {
-    Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, MealTypes mealType, double energy, int chromosomeSize,
-        double ratio);
+    Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, int chromosomeSize);
 }

@@ -4,17 +4,13 @@ using API.ApplicationData;
 using API.DailyMenus;
 using API.Ingredients;
 using API.Recipes;
-using Domain.DatabaseInitialization;
 using Domain.Models;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.Averages;
-using NutrientRetrieval.NutrientCalculation;
-using NutrientRetrieval.Retrieval.Abridged;
-using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 #if DEBUG
@@ -42,6 +38,7 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 }, ServiceLifetime.Singleton);
 
 builder.Services
+    .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()

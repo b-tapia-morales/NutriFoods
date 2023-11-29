@@ -11,14 +11,13 @@ namespace API.DailyMenus;
 public class DailyMenuRepository
     (IMapper mapper, IRecipeRepository recipeRepository) : IDailyMenuRepository
 {
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, MealTypes mealType, double energy,
-        int chromosomeSize, double ratio)
+    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, int chromosomeSize)
     {
         var recipes = await recipeRepository.FindAll();
         return await GenerateMenuAsync(dailyMenu, recipes.AsReadOnly(), chromosomeSize);
     }
 
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes,
+    private async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes,
         int chromosomeSize)
     {
         var solution =
