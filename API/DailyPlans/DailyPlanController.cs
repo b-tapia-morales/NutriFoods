@@ -1,5 +1,7 @@
 // ReSharper disable ConvertToPrimaryConstructor
+// ReSharper disable ClassNeverInstantiated.Global
 
+using System.Collections.Concurrent;
 using System.ComponentModel.DataAnnotations;
 using API.DailyMenus;
 using API.Dto;
@@ -25,37 +27,51 @@ public class DailyPlanController
 
     [HttpGet]
     [Route("by-distribution")]
-    public async Task<DailyPlanDto> GeneratePlan([FromQuery] [Required] DayToken day,
-        [FromQuery] [Required] double basalMetabolicRate,
-        [FromQuery] [Required] double adjustmentFactor,
-        [FromQuery] [Required] PhysicalActivityToken activityLevel,
-        [FromQuery] [Required] double activityFactor,
-        [FromQuery] [Required] IDictionary<string, double> macronutrientDist,
-        [FromQuery] [Required] IDictionary<string, double> mealDist,
-        [FromQuery] [Required] IDictionary<string, string> mealHours)
+    public async Task<DailyPlanDto> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
+    {
+        var recipes = await _recipeRepository.FindAll();
+        var bag = new ConcurrentBag<DailyMenuDto>();
+
+        await Parallel.ForEachAsync(dailyPlan.Menus,
+            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
+
+        dailyPlan.Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList();
+        return dailyPlan;
+    }
+
+
+    [HttpGet]
+    [Route("by-distribution")]
+    public async Task<DailyPlanDto> GeneratePlan([FromQuery, Required] DayToken day,
+        [FromQuery] double basalMetabolicRate,
+        [FromQuery] double adjustmentFactor,
+        [FromQuery] PhysicalActivityToken activityLevel,
+        [FromQuery] double activityFactor,
+        [FromQuery] IDictionary<string, double> macronutrientDist,
+        [FromQuery] IEnumerable<MealConfiguration> mealConfigurations)
     {
         var totalMetabolicRate = (1 + adjustmentFactor) * basalMetabolicRate * activityFactor;
-        var meals = MealTypeExtensions.MainTypes.Select(e => e.ReadableName);
-        var recipes = await _recipeRepository.FindAll();
         var rawMenus = new List<DailyMenuDto>();
-        foreach (var meal in meals)
+        foreach (var configuration in mealConfigurations)
         {
-            var hour = mealHours[meal];
-            var energy = mealDist[meal] * totalMetabolicRate;
+            var mealType = configuration.MealType;
+            var hour = configuration.Hour;
+            var energy = configuration.Percentage * totalMetabolicRate;
             var distributionDict = macronutrientDist.ToDictionary(e => ToValue(e.Key), e => energy * e.Value);
             var targets = TargetExtensions.DistributionToTargets(distributionDict, energy, adjustmentFactor);
             rawMenus.Add(new DailyMenuDto
             {
                 Hour = hour,
                 IntakePercentage = (int)(adjustmentFactor * 100),
-                MealType = meal,
+                MealType = mealType,
                 Targets = new List<NutritionalTargetDto>(targets)
             });
         }
 
-        var dailyMenus = new List<DailyMenuDto>();
+        var recipes = await _recipeRepository.FindAll();
+        var bag = new ConcurrentBag<DailyMenuDto>();
         await Parallel.ForEachAsync(rawMenus,
-            async (dto, _) => { dailyMenus.Add(await _dailyMenuRepository.GenerateMenu(dto, recipes)); });
+            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
 
 
         return new DailyPlanDto
@@ -63,7 +79,14 @@ public class DailyPlanController
             AdjustmentFactor = (int)(adjustmentFactor * 100),
             PhysicalActivityLevel = IEnum<PhysicalActivities, PhysicalActivityToken>.ToReadableName(activityLevel),
             PhysicalActivityFactor = activityFactor,
-            Menus = dailyMenus
+            Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
         };
     }
+}
+
+public class MealConfiguration
+{
+    public string MealType { get; set; } = null!;
+    public string Hour { get; set; } = null!;
+    public double Percentage { get; set; }
 }

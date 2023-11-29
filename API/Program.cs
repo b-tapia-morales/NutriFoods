@@ -11,6 +11,7 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Converters;
 using Swashbuckle.AspNetCore.Swagger;
 
 #if DEBUG
@@ -55,6 +56,7 @@ builder.Services
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
     });
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddControllersWithViews();
