@@ -69,13 +69,13 @@ public class ReadableNameComparer<T, TEnum> : IComparer<string>
 {
     public int Compare(string? x, string? y)
     {
-        var dict = SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value);
         if (ReferenceEquals(x, y))
             return +0;
         if (ReferenceEquals(x, null))
             return -1;
         if (ReferenceEquals(y, null))
             return +1;
+        var dict = SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value);
         if (!dict.TryGetValue(x, out var first) || !dict.TryGetValue(y, out var second))
             throw new KeyNotFoundException();
         return first.CompareTo(second);
