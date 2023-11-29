@@ -1,22 +1,39 @@
+// ReSharper disable ConvertToPrimaryConstructor
+
 using System.ComponentModel.DataAnnotations;
 using API.ApplicationData;
 using API.Dto;
+using API.Recipes;
 using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
+using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
 [ApiController]
 [Route("api/v1/daily-menus")]
-public class DailyMenuController(IDailyMenuRepository repository, IApplicationData applicationData,
-    IValidator<DailyMenuQuery> queryValidator, IValidator<DailyMenuDto> jsonValidator)
+public class DailyMenuController
 {
+    private readonly IDailyMenuRepository _dailyMenuRepository;
+    private readonly IRecipeRepository _recipeRepository;
+    private readonly IValidator<DailyMenuQuery> _queryValidator;
+    private readonly IValidator<DailyMenuDto> _jsonValidator;
+
+    public DailyMenuController(IDailyMenuRepository dailyMenuRepository, IRecipeRepository recipeRepository,
+        IValidator<DailyMenuQuery> queryValidator, IValidator<DailyMenuDto> jsonValidator)
+    {
+        _dailyMenuRepository = dailyMenuRepository;
+        _recipeRepository = recipeRepository;
+        _queryValidator = queryValidator;
+        _jsonValidator = jsonValidator;
+    }
+
     [HttpGet]
     public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromBody] DailyMenuDto dailyMenu)
     {
-        var results = await jsonValidator.ValidateAsync(dailyMenu);
+        var results = await _jsonValidator.ValidateAsync(dailyMenu);
         if (!results.IsValid)
             return new BadRequestObjectResult(
                 $"""
@@ -25,11 +42,7 @@ public class DailyMenuController(IDailyMenuRepository repository, IApplicationDa
                  """
             );
 
-        var chromosomeSize = applicationData.RatioPerPortion(IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType),
-            NutrientToken.Energy,
-            dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity);
-
-        return await repository.GenerateMenu(dailyMenu, chromosomeSize);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, await _recipeRepository.FindAll());
     }
 
     [HttpGet]
@@ -40,7 +53,7 @@ public class DailyMenuController(IDailyMenuRepository repository, IApplicationDa
     {
         var validation =
             new DailyMenuQuery(mealToken, hour, energy, carbohydratesPct, fattyAcidsPct, proteinsPct, errorMargin);
-        var results = await queryValidator.ValidateAsync(validation);
+        var results = await _queryValidator.ValidateAsync(validation);
         if (!results.IsValid)
             return new BadRequestObjectResult(
                 $"""
@@ -55,16 +68,14 @@ public class DailyMenuController(IDailyMenuRepository repository, IApplicationDa
             new List<NutritionalTargetDto>(
                 TargetExtensions.DistributionToTargets(distributionDict, energy, errorMargin));
 
-        var mealType = IEnum<MealTypes, MealToken>.ToValue(mealToken);
         var dailyMenu = new DailyMenuDto
         {
             IntakePercentage = (int)(errorMargin * 100),
-            MealType = mealType.ReadableName,
+            MealType = ToReadableName(mealToken),
             Hour = hour,
             Targets = new List<NutritionalTargetDto>(targets)
         };
 
-        var chromosomeSize = applicationData.RatioPerPortion(mealToken, NutrientToken.Energy, energy);
-        return await repository.GenerateMenu(dailyMenu, chromosomeSize);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, await _recipeRepository.FindAll());
     }
 }

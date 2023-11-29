@@ -1,3 +1,6 @@
+// ReSharper disable ConvertToPrimaryConstructor
+
+using API.ApplicationData;
 using API.Dto;
 using API.Dto.Abridged;
 using API.Optimizer;
@@ -8,22 +11,26 @@ using Utils.Enumerable;
 
 namespace API.DailyMenus;
 
-public class DailyMenuRepository
-    (IMapper mapper, IRecipeRepository recipeRepository) : IDailyMenuRepository
+public class DailyMenuRepository : IDailyMenuRepository
 {
-    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, int chromosomeSize)
+    private readonly IMapper _mapper;
+    private readonly IApplicationData _applicationData;
+
+    public DailyMenuRepository(IMapper mapper, IApplicationData applicationData)
     {
-        var recipes = await recipeRepository.FindAll();
-        return await GenerateMenuAsync(dailyMenu, recipes.AsReadOnly(), chromosomeSize);
+        _mapper = mapper;
+        _applicationData = applicationData;
     }
 
-    private async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes,
-        int chromosomeSize)
+    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes)
     {
+        var mealType = IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType);
+        var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
+        var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize);
-        var abridgedRecipes = mapper.Map<List<RecipeAbridged>>(solution);
+        var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
         var menus = new List<MenuRecipeDto>(abridgedRecipes.ToMenus());
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
