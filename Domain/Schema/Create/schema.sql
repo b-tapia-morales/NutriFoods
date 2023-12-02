@@ -2,6 +2,7 @@ SET SEARCH_PATH = "nutrifoods";
 
 DROP SCHEMA IF EXISTS nutrifoods CASCADE;
 
+DROP EXTENSION IF EXISTS unaccent;
 DROP EXTENSION IF EXISTS btree_gist;
 DROP EXTENSION IF EXISTS "uuid-ossp";
 DROP EXTENSION IF EXISTS pg_trgm;
@@ -12,6 +13,7 @@ CREATE SCHEMA IF NOT EXISTS nutrifoods;
 SET SEARCH_PATH = "nutrifoods";
 SET TIMEZONE = "America/Santiago";
 
+CREATE EXTENSION IF NOT EXISTS unaccent;
 CREATE EXTENSION IF NOT EXISTS btree_gist;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -175,7 +177,7 @@ CREATE TABLE IF NOT EXISTS daily_menu
 (
     id                SERIAL,
     daily_plan_id     INTEGER    NOT NULL,
-    intake_percentage INTEGER    NOT NULL,
+    intake_percentage FLOAT      NOT NULL,
     meal_type         INTEGER    NOT NULL,
     hour              VARCHAR(8) NOT NULL,
     PRIMARY KEY (id),
@@ -386,3 +388,16 @@ CREATE TABLE IF NOT EXISTS anthropometry
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
+
+CREATE OR REPLACE FUNCTION immutable_unaccent(regdictionary, text)
+    RETURNS text
+    LANGUAGE c
+    IMMUTABLE PARALLEL SAFE STRICT AS
+'$libdir/unaccent',
+'unaccent_dict';
+
+CREATE OR REPLACE FUNCTION remove_diacritics(text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN immutable_unaccent(regdictionary 'unaccent', $1);
