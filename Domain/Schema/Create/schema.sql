@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS nutritional_value
     PRIMARY KEY (id)
 );
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS nutritional_value_idx ON nutritional_value USING btree (nutrient, quantity);
+CREATE INDEX IF NOT EXISTS nutritional_value_idx ON nutritional_value USING btree (nutrient, quantity);
 
 CREATE TABLE IF NOT EXISTS ingredient
 (
@@ -418,10 +418,10 @@ CREATE OR REPLACE FUNCTION normalize_str(str text)
     IMMUTABLE PARALLEL SAFE STRICT
 RETURN remove_trailing(indent_punctuation(lower(remove_diacritics(str))));
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
+CREATE INDEX IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
+CREATE INDEX IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
+CREATE INDEX IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
 
-CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));
+CREATE INDEX IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));
