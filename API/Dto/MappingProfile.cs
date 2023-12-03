@@ -86,11 +86,6 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Targets, opt => opt.MapFrom(src => src.NutritionalTargets))
             .ForMember(dest => dest.Menus, opt => opt.MapFrom(src => src.DailyMenus))
             .ReverseMap();
-        CreateMap<MealPlan, MealPlanDto>()
-            .ForMember(dest => dest.CreatedOn,
-                opt => opt.MapFrom(src => src.CreatedOn ?? DateOnlyUtils.CurrentPsTime()))
-            .ForMember(dest => dest.Plans, opt => opt.MapFrom(src => src.DailyPlans))
-            .ReverseMap();
 
         // Clinical Anamnesis
         CreateMap<Ingestible, IngestibleDto>()

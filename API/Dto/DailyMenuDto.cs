@@ -2,7 +2,7 @@
 
 public sealed class DailyMenuDto
 {
-    public int IntakePercentage { get; set; }
+    public double IntakePercentage { get; set; }
     public string MealType { get; set; } = null!;
     public string Hour { get; set; } = null!;
     public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
