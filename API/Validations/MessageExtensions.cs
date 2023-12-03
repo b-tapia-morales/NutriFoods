@@ -1,3 +1,4 @@
+using System.Numerics;
 using Ardalis.SmartEnum;
 using Domain.Enum;
 using Utils.Enumerable;
@@ -6,17 +7,30 @@ namespace API.Validations;
 
 public static class MessageExtensions
 {
-    public static string CalculatedValueMessage(string parameterName) =>
+    public static string CalculatedValue(string parameterName) =>
         $"'{parameterName}' is a calculated value, and must be null by default";
 
-    public static string EmptyCollectionMessage(string collection) =>
+    public static string EmptyCollection(string collection) =>
         $"The collection of {collection} must be empty by default";
     
-    public static string IsNotValidErrorMessage<T, TEnum>(string readableName)
+    public static string NotInEnum<T, TEnum>(string readableName)
         where T : SmartEnum<T>, IEnum<T, TEnum>
         where TEnum : struct, Enum, IConvertible =>
         $"""
          The value '{readableName}' is not a valid choice.
          Valid choices are: {IEnum<T, TEnum>.Values.Select(x => x.ReadableName).ToJoinedString(", ", ("«", "»"))}")
          """;
+    
+    public static string LesserThanAllowed<T>(string parameterName, T actualValue, T min)
+        where T : unmanaged, INumber<T> =>
+        $"The provided {parameterName} ({actualValue}) is smaller than the minimum allowed ({min})";
+    
+    public static string GreaterThanAllowed<T>(string parameterName, T actualValue, T max)
+        where T : unmanaged, INumber<T> =>
+        $"The provided {parameterName} ({actualValue}) is greater than the maximum allowed ({max})";
+    
+    public static string OutsideRange<T>(string parameterName, T actualValue, T min, T max)
+        where T : unmanaged, INumber<T> =>
+        $"The provided {parameterName} ({actualValue}) is not within the expected range [{min}, {max}]";
+    
 }

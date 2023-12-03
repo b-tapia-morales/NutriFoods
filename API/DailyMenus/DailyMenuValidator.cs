@@ -18,13 +18,15 @@ public class DailyMenuValidator : AbstractValidator<DailyMenuDto>
     {
         RuleFor(e => e.Nutrients)
             .Must(e => e.Count == 0)
-            .WithMessage(MessageExtensions.EmptyCollectionMessage("nutritional values"));
+            .WithMessage(MessageExtensions.EmptyCollection("nutritional values"));
         RuleFor(e => e.Recipes)
             .Must(e => e.Count == 0)
-            .WithMessage(MessageExtensions.EmptyCollectionMessage("recipes"));
+            .WithMessage(MessageExtensions.EmptyCollection("recipes"));
+        RuleFor(e => e.IntakePercentage)
+            .InclusiveBetween(0, 1);
         RuleFor(e => e.MealType)
             .Must(e => IEnum<MealTypes, MealToken>.ReadableNameDictionary.ContainsKey(e))
-            .WithMessage(e => MessageExtensions.IsNotValidErrorMessage<MealTypes, MealToken>(e.MealType));
+            .WithMessage(e => MessageExtensions.NotInEnum<MealTypes, MealToken>(e.MealType));
         RuleFor(e => e.Hour)
             .Matches(RegexUtils.Hour)
             .WithMessage(RegexUtils.HourRule);
@@ -59,22 +61,20 @@ public class DailyMenuValidator : AbstractValidator<DailyMenuDto>
                     .WithMessage(t => $"The value '{t.Nutrient}' does not correspond to a valid nutrient.");
                 c.RuleFor(t => t.ActualQuantity)
                     .Must(t => !t.HasValue)
-                    .WithMessage(MessageExtensions.CalculatedValueMessage("ActualQuantity"));
+                    .WithMessage(MessageExtensions.CalculatedValue("ActualQuantity"));
                 c.RuleFor(t => t.ActualError)
                     .Must(t => !t.HasValue)
-                    .WithMessage(MessageExtensions.CalculatedValueMessage("ActualError"));
+                    .WithMessage(MessageExtensions.CalculatedValue("ActualError"));
                 c.RuleFor(t => t.ExpectedError)
                     .GreaterThanOrEqualTo(MinErrorMargin)
                     .WithMessage(e =>
-                        $"The provided error margin ({e.ExpectedError}) is smaller than the minimum allowed ({MinErrorMargin})");
+                        MessageExtensions.LesserThanAllowed("error margin", e.ExpectedError, MinErrorMargin));
                 c.RuleFor(e => e.Unit)
                     .Must(e => IEnum<Units, UnitToken>.ReadableNameDictionary.ContainsKey(e))
-                    .WithMessage(e =>
-                        MessageExtensions.IsNotValidErrorMessage<Units, UnitToken>(e.Unit));
+                    .WithMessage(e => MessageExtensions.NotInEnum<Units, UnitToken>(e.Unit));
                 c.RuleFor(e => e.ThresholdType)
                     .Must(e => IEnum<ThresholdTypes, ThresholdToken>.ReadableNameDictionary.ContainsKey(e))
-                    .WithMessage(e =>
-                        MessageExtensions.IsNotValidErrorMessage<ThresholdTypes, ThresholdToken>(e.ThresholdType));
+                    .WithMessage(e => MessageExtensions.NotInEnum<ThresholdTypes, ThresholdToken>(e.ThresholdType));
             });
     }
 }
