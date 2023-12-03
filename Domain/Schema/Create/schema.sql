@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS nutritional_value
     PRIMARY KEY (id)
 );
 
-CREATE INDEX IF NOT EXISTS nutritional_value_idx ON nutritional_value USING btree (nutrient, quantity);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS nutritional_value_idx ON nutritional_value USING btree (nutrient, quantity);
 
 CREATE TABLE IF NOT EXISTS ingredient
 (
@@ -136,23 +136,14 @@ CREATE TABLE IF NOT EXISTS nutritional_target
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS meal_plan
-(
-    id         SERIAL,
-    created_on TIMESTAMP DEFAULT now(),
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS daily_plan
 (
     id                       SERIAL,
-    meal_plan_id             INTEGER NOT NULL,
     day                      INTEGER NOT NULL,
     physical_activity_level  INTEGER NOT NULL,
     physical_activity_factor FLOAT   NOT NULL,
-    adjustment_factor        INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id)
+    adjustment_factor        FLOAT   NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS daily_plan_nutritional_target
@@ -276,11 +267,18 @@ CREATE TABLE IF NOT EXISTS consultation
     type          INTEGER NOT NULL,
     purpose       INTEGER NOT NULL,
     registered_on DATE DEFAULT now()::DATE,
-    meal_plan_id  INTEGER,
     patient_id    UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id),
     FOREIGN KEY (patient_id) REFERENCES patient (id)
+);
+
+CREATE TABLE IF NOT EXISTS meal_plan
+(
+    consultation_id UUID    NOT NULL,
+    daily_plan_id   INTEGER NOT NULL,
+    PRIMARY KEY (consultation_id, daily_plan_id),
+    FOREIGN KEY (consultation_id) REFERENCES consultation (id),
+    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
 );
 
 CREATE TABLE IF NOT EXISTS clinical_anamnesis
@@ -420,10 +418,10 @@ CREATE OR REPLACE FUNCTION normalize_str(str text)
     IMMUTABLE PARALLEL SAFE STRICT
 RETURN remove_trailing(indent_punctuation(lower(remove_diacritics(str))));
 
-CREATE INDEX IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
+CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
 
-CREATE INDEX IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
+CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
 
-CREATE INDEX IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
+CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
 
-CREATE INDEX IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));
+CREATE INDEX CONCURRENTLY IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));
