@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Domain.Models;
 
-public partial class NutrifoodsDbContext : DbContext
+public class NutrifoodsDbContext : DbContext
 {
     public NutrifoodsDbContext()
     {
@@ -76,6 +76,9 @@ public partial class NutrifoodsDbContext : DbContext
                 opt.UseNetTopologySuite();
                 opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
             });
+
+    [DbFunction("nutrifoods.normalize_str", IsBuiltIn = true)]
+    public static string NormalizeStr(string str) => throw new NotSupportedException();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

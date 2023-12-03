@@ -22,8 +22,8 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
     public async Task<RecipeDto?> FindByName(string name)
     {
         await using var context = new NutrifoodsDbContext();
-        var recipe = await context.Recipes.AsQueryable().IncludeSubfields()
-            .Where(e => e.Name.ToLower().Equals(name.ToLower()))
+        var recipe = await context.Recipes.IncludeSubfields()
+            .Where(e => NutrifoodsDbContext.NormalizeStr(e.Name).Equals(NutrifoodsDbContext.NormalizeStr(name)))
             .FirstAsync();
         return mapper.Map<RecipeDto>(recipe);
     }
@@ -143,12 +143,12 @@ public static class RecipeExtensions
 {
     public static IQueryable<Recipe> IncludeSubfields(this IQueryable<Recipe> recipes) =>
         recipes
+            .AsQueryable()
             .Include(e => e.NutritionalValues)
             .Include(e => e.RecipeSteps)
             .Include(e => e.RecipeMeasures)
             .ThenInclude(e => e.IngredientMeasure)
             .ThenInclude(e => e.Ingredient)
             .Include(e => e.RecipeQuantities)
-            .ThenInclude(e => e.Ingredient)
-            .AsNoTracking();
+            .ThenInclude(e => e.Ingredient);
 }
