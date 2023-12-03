@@ -52,7 +52,8 @@ public static class Recipes
     {
         var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
-            .DistinctBy(e => e.Url);
+            .DistinctBy(e => e.Url)
+            .DistinctBy(e => (e.Name, e.Author));
         using var context = new NutrifoodsDbContext(Options);
         InsertAllRecipes(context, mappings);
         var ingredients = IncludeSubfields(context.Ingredients).ToList();
@@ -157,7 +158,7 @@ public static class Recipes
 
         context.SaveChanges();
     }
-    
+
     private static void ParseRecipeMeasure(DbContext context, RecipeIngredient data,
         IDictionary<string, Ingredient> ingredientsDict,
         IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict, int recipeId)
