@@ -4,6 +4,7 @@ using API.ApplicationData;
 using API.DailyMenus;
 using API.Ingredients;
 using API.Recipes;
+using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -11,16 +12,19 @@ using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Converters;
+using NutrientRetrieval.Averages;
+using NutrientRetrieval.NutrientCalculation;
+using NutrientRetrieval.Retrieval.Abridged;
+using RecipeInsertion;
 using Swashbuckle.AspNetCore.Swagger;
 
 #if DEBUG
-/*DatabaseInitialization.Initialize();
+DatabaseInitialization.Initialize();
 AbridgedRetrieval.RetrieveFromApi();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
 NutrientCalculation.Calculate();
-NutrientAverages.WriteStatistics();*/
+NutrientAverages.WriteStatistics();
 #endif
 
 var builder = WebApplication.CreateBuilder(args);

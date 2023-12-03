@@ -26,7 +26,7 @@ public class DailyPlanController
     }
 
     [HttpGet]
-    [Route("by-distribution")]
+    [Route("")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
     {
         var recipes = await _recipeRepository.FindAll();
