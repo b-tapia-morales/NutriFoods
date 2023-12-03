@@ -74,6 +74,7 @@ CREATE TABLE IF NOT EXISTS recipe
     meal_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
     dish_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
     UNIQUE (url),
+    UNIQUE (name, author),
     PRIMARY KEY (id)
 );
 
@@ -137,9 +138,8 @@ CREATE TABLE IF NOT EXISTS nutritional_target
 
 CREATE TABLE IF NOT EXISTS meal_plan
 (
-    id            SERIAL,
-    meals_per_day INTEGER NOT NULL,
-    created_on    TIMESTAMP DEFAULT now(),
+    id         SERIAL,
+    created_on TIMESTAMP DEFAULT now(),
     PRIMARY KEY (id)
 );
 
@@ -401,3 +401,29 @@ CREATE OR REPLACE FUNCTION remove_diacritics(text)
     LANGUAGE sql
     IMMUTABLE PARALLEL SAFE STRICT
 RETURN immutable_unaccent(regdictionary 'unaccent', $1);
+
+CREATE OR REPLACE FUNCTION indent_punctuation(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN regexp_replace(str, '([:;,.\-])', '\1 ', 'g');
+
+CREATE OR REPLACE FUNCTION remove_trailing(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN regexp_replace(TRIM(BOTH ' ' FROM str), '\s+', ' ', 'g');
+
+CREATE OR REPLACE FUNCTION normalize_str(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN remove_trailing(indent_punctuation(lower(remove_diacritics(str))));
+
+CREATE INDEX IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));
