@@ -8,14 +8,13 @@ public class NutritionalAnamnesis
 
     public DateTime? LastUpdated { get; set; }
 
-    public virtual ICollection<AdverseFoodReaction> AdverseFoodReactions { get; set; } =
-        new List<AdverseFoodReaction>();
+    public virtual ICollection<AdverseFoodReaction> AdverseFoodReactions { get; set; } = null!;
 
-    public virtual ICollection<EatingSymptom> EatingSymptoms { get; set; } = new List<EatingSymptom>();
+    public virtual ICollection<EatingSymptom> EatingSymptoms { get; set; } = null!;
 
-    public virtual ICollection<FoodConsumption> FoodConsumptions { get; set; } = new List<FoodConsumption>();
+    public virtual ICollection<FoodConsumption> FoodConsumptions { get; set; } = null!;
 
-    public virtual ICollection<HarmfulHabit> HarmfulHabits { get; set; } = new List<HarmfulHabit>();
+    public virtual ICollection<HarmfulHabit> HarmfulHabits { get; set; } = null!;
 
-    public Consultation IdNavigation { get; set; } = null!;
+    public virtual Consultation IdNavigation { get; set; } = null!;
 }

@@ -10,7 +10,7 @@ public class Patient
 
     public Address? Address { get; set; }
 
-    public virtual ICollection<Consultation> Consultations { get; set; } = new List<Consultation>();
+    public virtual ICollection<Consultation> Consultations { get; set; } = null!;
 
     public virtual ContactInfo? ContactInfo { get; set; }
 

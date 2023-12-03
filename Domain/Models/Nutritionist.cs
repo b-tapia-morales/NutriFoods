@@ -12,5 +12,5 @@ public class Nutritionist
 
     public DateTime JoinedOn { get; set; }
 
-    public virtual ICollection<Patient> Patients { get; set; } = new List<Patient>();
+    public virtual ICollection<Patient> Patients { get; set; } = null!;
 }
