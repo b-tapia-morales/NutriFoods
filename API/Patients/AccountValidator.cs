@@ -3,7 +3,7 @@ using FluentValidation;
 using Newtonsoft.Json;
 using Utils;
 
-namespace API.Users;
+namespace API.Patients;
 
 public class AccountValidator : AbstractValidator<NutritionistDto>
 {
