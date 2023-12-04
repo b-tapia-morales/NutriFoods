@@ -2,6 +2,7 @@ using API.Dto;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Enumerable;
 using static API.Patients.IPatientRepository;
 
 namespace API.Patients;
@@ -32,15 +33,51 @@ public class PatientRepository : IPatientRepository
         return patientDto;
     }
 
-    public async Task<PatientDto> Add(PatientDto patientDto, ConsultationDto consultationDto)
+    public async Task<PatientDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto)
     {
         await using var context = new NutrifoodsDbContext();
         var consultation = _mapper.Map<Consultation>(consultationDto);
         consultation.PatientId = patientDto.Id;
-        context.Consultations.Add(consultation);
+        await context.Consultations.AddAsync(consultation);
         await context.SaveChangesAsync();
         consultationDto.Id = consultation.Id;
         patientDto.Consultations.Add(consultationDto);
+        return patientDto;
+    }
+
+    public async Task<PatientDto> AddClinicalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+        ClinicalAnamnesisDto clinicalAnamnesisDto)
+    {
+        await using var context = new NutrifoodsDbContext();
+        var clinicalAnamnesis = _mapper.Map<ClinicalAnamnesis>(clinicalAnamnesisDto);
+        clinicalAnamnesis.Id = consultationDto.Id;
+        await context.ClinicalAnamneses.AddAsync(clinicalAnamnesis);
+        await context.SaveChangesAsync();
+        consultationDto.ClinicalAnamnesis = clinicalAnamnesisDto;
+        return patientDto;
+    }
+
+    public async Task<PatientDto> AddNutritionalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+        NutritionalAnamnesisDto nutritionalAnamnesisDto)
+    {
+        await using var context = new NutrifoodsDbContext();
+        var anamnesis = _mapper.Map<NutritionalAnamnesis>(nutritionalAnamnesisDto);
+        anamnesis.Id = consultationDto.Id;
+        await context.NutritionalAnamneses.AddAsync(anamnesis);
+        await context.SaveChangesAsync();
+        consultationDto.NutritionalAnamnesis = nutritionalAnamnesisDto;
+        return patientDto;
+    }
+
+    public async Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
+        AnthropometryDto anthropometryDto)
+    {
+        await using var context = new NutrifoodsDbContext();
+        var anthropometry = _mapper.Map<Anthropometry>(anthropometryDto);
+        anthropometry.Id = consultationDto.Id;
+        await context.Anthropometries.AddAsync(anthropometry);
+        await context.SaveChangesAsync();
+        consultationDto.Anthropometry = anthropometryDto;
         return patientDto;
     }
 }

@@ -13,7 +13,16 @@ public interface IPatientRepository
 
     Task<PatientDto> Create(PatientDto patientDto, Guid nutritionistId);
 
-    Task<PatientDto> Add(PatientDto patientDto, ConsultationDto consultationDto);
+    Task<PatientDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto);
+
+    Task<PatientDto> AddClinicalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+        ClinicalAnamnesisDto clinicalAnamnesisDto);
+    
+    Task<PatientDto> AddNutritionalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+        NutritionalAnamnesisDto nutritionalAnamnesisDto);
+    
+    Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
+        AnthropometryDto anthropometryDto);
 
     static async Task<Patient?> FindBy(Expression<Func<Patient, bool>> predicate)
     {
