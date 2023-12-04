@@ -1,5 +1,4 @@
 using API.Dto;
-using Domain.Enum;
 
 namespace API.DailyMenus;
 

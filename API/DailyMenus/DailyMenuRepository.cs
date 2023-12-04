@@ -4,7 +4,6 @@ using API.ApplicationData;
 using API.Dto;
 using API.Dto.Abridged;
 using API.Optimizer;
-using API.Recipes;
 using AutoMapper;
 using Domain.Enum;
 using Utils.Enumerable;

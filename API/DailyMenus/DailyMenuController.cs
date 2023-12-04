@@ -1,7 +1,6 @@
 // ReSharper disable ConvertToPrimaryConstructor
 
 using System.ComponentModel.DataAnnotations;
-using API.ApplicationData;
 using API.Dto;
 using API.Recipes;
 using Domain.Enum;
