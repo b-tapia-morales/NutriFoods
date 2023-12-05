@@ -7,7 +7,9 @@ using API.DailyMenus;
 using API.Dto;
 using API.Recipes;
 using Domain.Enum;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Utils.Enumerable;
 using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.DailyPlans;
@@ -16,19 +18,34 @@ namespace API.DailyPlans;
 [Route("api/v1/daily-plans")]
 public class DailyPlanController
 {
+    private readonly IValidator<DailyPlanDto> _planValidator;
+    private readonly IValidator<DailyMenuDto> _menuValidator;
     private readonly IDailyMenuRepository _dailyMenuRepository;
     private readonly IRecipeRepository _recipeRepository;
 
-    public DailyPlanController(IRecipeRepository recipeRepository, IDailyMenuRepository dailyMenuRepository)
+    public DailyPlanController(IRecipeRepository recipeRepository, IDailyMenuRepository dailyMenuRepository,
+        IValidator<DailyPlanDto> planValidator, IValidator<DailyMenuDto> menuValidator)
     {
         _dailyMenuRepository = dailyMenuRepository;
+        _planValidator = planValidator;
+        _menuValidator = menuValidator;
         _recipeRepository = recipeRepository;
     }
 
     [HttpGet]
     [Route("")]
-    public async Task<DailyPlanDto> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
+    public async Task<ActionResult<DailyPlanDto>> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
     {
+        var results = await _planValidator.ValidateAsync(dailyPlan);
+        if (!results.IsValid)
+            return new BadRequestObjectResult(
+                $"""
+                 Could not perform query because of the following errors:
+                 {results.Errors.Select(e => e.ErrorMessage).ToJoinedString(Environment.NewLine)}
+                 """
+            );
+        
+        dailyPlan.AddMenuTargets();
         var recipes = await _recipeRepository.FindAll();
         var bag = new ConcurrentBag<DailyMenuDto>();
 
@@ -38,7 +55,6 @@ public class DailyPlanController
         dailyPlan.Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList();
         return dailyPlan;
     }
-
 
     [HttpGet]
     [Route("by-distribution")]
