@@ -29,7 +29,8 @@ public class DailyMenuController
         _jsonValidator = jsonValidator;
     }
 
-    [HttpGet]
+    [HttpPost]
+    [Route("menu")]
     public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromBody] DailyMenuDto dailyMenu)
     {
         var results = await _jsonValidator.ValidateAsync(dailyMenu);
