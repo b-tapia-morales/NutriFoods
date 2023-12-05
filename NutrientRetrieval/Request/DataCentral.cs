@@ -26,7 +26,7 @@ public static class DataCentral
     private static readonly string AbsolutePath =
         Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
-    private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+    private static readonly JsonSerializerSettings Settings = new()
     {
         ContractResolver = new CamelCasePropertyNamesContractResolver(),
         Formatting = Formatting.Indented
