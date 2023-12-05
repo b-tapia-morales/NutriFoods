@@ -1,6 +1,9 @@
+// ReSharper disable ConvertToPrimaryConstructor
 // ReSharper disable MemberCanBePrivate.Global
 
+using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using NutrientRetrieval.Food;
 using NutrientRetrieval.Mapping.Ingredient;
 using Utils.Csv;
@@ -22,6 +25,12 @@ public static class DataCentral
 
     private static readonly string AbsolutePath =
         Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
+
+    private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+    {
+        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+        Formatting = Formatting.Indented
+    };
 
     public static async Task<Dictionary<int, TFood>> PerformRequest<TFood, TNutrient>(string format,
         RequestMethod method = RequestMethod.Multiple)
@@ -91,20 +100,31 @@ public static class DataCentral
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        // Takes the dictionary's keys, appends 'fdcIds' to each one of them, and concatenates them using the '&' delimiter.
-        // FoodDataCentral's Api can take either comma separated parameters, or repeating parameters (the second one is the approach used here).
-        var ids = string.Join('&', dictionary.Select(e => $"fdcIds={e.Key}"));
-        var path = $"https://api.nal.usda.gov/fdc/v1/foods?{ids}&format={format}&api_key={ApiKey}";
+        const string path = $"https://api.nal.usda.gov/fdc/v1/foods?api_key={ApiKey}";
         var uri = new Uri(path);
 
+        var body = JsonConvert.SerializeObject(new FetchOptions(dictionary.Select(e => e.Key), format), Settings);
+        var content = new StringContent(body, Encoding.UTF8, "application/json");
+
         using var client = new HttpClient();
-        var response = await client.GetAsync(uri);
+        var response = await client.PostAsync(uri, content);
         var serialized = await response.Content.ReadAsStringAsync();
         var list = JsonConvert.DeserializeObject<List<TFood>>(serialized) ?? throw new JsonException();
 
-        // The resulting list can be converted into a named tuple using the food item's Id as a key to retrieve from the dictionary its corresponding NutriFoods' Id .
         return list.Select(e => (dictionary[e.FdcId], e));
     }
+}
+
+public class FetchOptions
+{
+    public FetchOptions(IEnumerable<int> fdcIds, string format)
+    {
+        FdcIds = new List<int>(fdcIds);
+        Format = format;
+    }
+
+    public List<int> FdcIds { get; set; }
+    public string Format { get; set; }
 }
 
 public enum RequestMethod
