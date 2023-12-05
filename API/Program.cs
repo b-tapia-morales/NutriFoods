@@ -2,6 +2,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using API.ApplicationData;
 using API.DailyMenus;
+using API.DailyPlans;
+using API.Dto;
 using API.Ingredients;
 using API.Recipes;
 using Domain.DatabaseInitialization;
@@ -20,7 +22,7 @@ using Swashbuckle.AspNetCore.Swagger;
 
 #if DEBUG
 DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
+await AbridgedRetrieval.RetrieveFromApi();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
 NutrientCalculation.Calculate();
@@ -44,6 +46,8 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 
 builder.Services
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
+    .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
+    .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
