@@ -70,7 +70,7 @@ public class DailyMenuController
 
         var dailyMenu = new DailyMenuDto
         {
-            IntakePercentage = (int)(errorMargin * 100),
+            IntakePercentage = errorMargin,
             MealType = ToReadableName(mealToken),
             Hour = hour,
             Targets = new List<NutritionalTargetDto>(targets)

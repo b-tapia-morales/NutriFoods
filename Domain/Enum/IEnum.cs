@@ -67,6 +67,9 @@ public class ReadableNameComparer<T, TEnum> : IComparer<string>
     where T : SmartEnum<T>, IEnum<T, TEnum>
     where TEnum : struct, System.Enum, IConvertible
 {
+    private static readonly IReadOnlyDictionary<string, int> Dictionary =
+        SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value);
+
     public int Compare(string? x, string? y)
     {
         if (ReferenceEquals(x, y))
@@ -75,8 +78,7 @@ public class ReadableNameComparer<T, TEnum> : IComparer<string>
             return -1;
         if (ReferenceEquals(y, null))
             return +1;
-        var dict = SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value);
-        if (!dict.TryGetValue(x, out var first) || !dict.TryGetValue(y, out var second))
+        if (!Dictionary.TryGetValue(x, out var first) || !Dictionary.TryGetValue(y, out var second))
             throw new KeyNotFoundException();
         return first.CompareTo(second);
     }

@@ -30,7 +30,7 @@ public class DailyPlanController
         _planValidator = planValidator;
     }
 
-    [HttpGet]
+    [HttpPost]
     [Route("")]
     public async Task<ActionResult<DailyPlanDto>> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
     {
@@ -60,19 +60,22 @@ public class DailyPlanController
         [FromQuery] double basalMetabolicRate,
         [FromQuery] PhysicalActivityToken activityLevel,
         [FromQuery] double activityFactor,
-        [FromQuery] IDictionary<string, double> macronutrientDist,
-        [FromBody] IEnumerable<MealConfiguration> mealConfigurations,
+        [FromBody] PlanConfiguration planConfiguration,
         [FromQuery] double adjustmentFactor = 1e-1)
     {
         var totalMetabolicRate = (1 + adjustmentFactor) * basalMetabolicRate * activityFactor;
-        var rawMenus = new List<DailyMenuDto>();
-        foreach (var configuration in mealConfigurations)
+        var planDistribution = planConfiguration.Distribution.ToDictionary(e => ToValue(e.Key), e => e.Value);
+        var menus = new List<DailyMenuDto>();
+        foreach (var configuration in planConfiguration.MealConfigurations)
         {
             var energy = configuration.IntakePercentage * totalMetabolicRate;
-            var distributionDict = macronutrientDist.ToDictionary(e => ToValue(e.Key), e => energy * e.Value);
+            var mealDistribution =
+                planDistribution.ToDictionary(e => e.Key,
+                    e => e.Value * energy * NutrientExtensions.GramFactors[e.Key]);
+            Console.WriteLine(string.Join(", ", mealDistribution.Select(e => $"{e.Key} : {e.Value}")));
             var targets =
-                TargetExtensions.DistributionToTargets(distributionDict, totalMetabolicRate, adjustmentFactor);
-            rawMenus.Add(new DailyMenuDto
+                TargetExtensions.DistributionToTargets(mealDistribution, energy, adjustmentFactor);
+            menus.Add(new DailyMenuDto
             {
                 Hour = configuration.Hour,
                 MealType = configuration.MealType,
@@ -81,11 +84,16 @@ public class DailyPlanController
             });
         }
 
-        var recipes = await _recipeRepository.FindAll();
+        var recipes = (await _recipeRepository.FindAll()).AsReadOnly();
+        Console.WriteLine("I'm here");
         var bag = new ConcurrentBag<DailyMenuDto>();
-        await Parallel.ForEachAsync(rawMenus,
-            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
+        ParallelOptions parallelOptions = new()
+        {
+            MaxDegreeOfParallelism = planConfiguration.MealConfigurations.Count
+        };
 
+        await Parallel.ForEachAsync(menus, parallelOptions,
+            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
 
         return new DailyPlanDto
         {
@@ -95,6 +103,12 @@ public class DailyPlanController
             Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
         };
     }
+}
+
+public class PlanConfiguration
+{
+    public IDictionary<string, double> Distribution { get; set; } = null!;
+    public IList<MealConfiguration> MealConfigurations { get; set; } = null!;
 }
 
 public class MealConfiguration
