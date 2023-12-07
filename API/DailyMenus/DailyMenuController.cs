@@ -75,6 +75,8 @@ public class DailyMenuController
             Targets = new List<NutritionalTargetDto>(targets)
         };
 
-        return await _dailyMenuRepository.GenerateMenu(dailyMenu, await _recipeRepository.FindAll());
+        var mealType = ToValue(mealToken);
+        var recipes = await _recipeRepository.FindByMealType(mealType).ConfigureAwait(false);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, recipes).ConfigureAwait(false);
     }
 }

@@ -23,7 +23,7 @@ public class DailyMenuRepository : IDailyMenuRepository
 
     public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes)
     {
-        var mealType = IEnum<MealTypes, MealToken>.ToToken(MealTypes.None);
+        var mealType = IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType);
         var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
         var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
         var solution =

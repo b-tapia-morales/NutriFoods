@@ -61,7 +61,6 @@ public class DailyPlanController
         var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
                                  configuration.ActivityFactor;
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
-        var recipes = (await _recipeRepository.FindAll()).AsReadOnly();
 
         var bag = new ConcurrentBag<DailyMenuDto>();
         ParallelOptions parallelOptions = new()
@@ -69,26 +68,32 @@ public class DailyPlanController
             MaxDegreeOfParallelism = configuration.MealConfigurations.Count
         };
         await Parallel.ForEachAsync(menus, parallelOptions,
-            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
+            async (menu, _) =>
+            {
+                var mealType = IEnum<MealTypes, MealToken>.ToValue(menu.MealType);
+                var recipes = await _recipeRepository.FindByMealType(mealType).ConfigureAwait(false);
+                bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes).ConfigureAwait(false));
+            });
 
-        return new DailyPlanDto
+        var dailyPlan = new DailyPlanDto
         {
-            Day = IEnum<Days, DayToken>.ToReadableName(configuration.Day),
+            Day = configuration.Day,
             AdjustmentFactor = configuration.AdjustmentFactor,
-            PhysicalActivityLevel =
-                IEnum<PhysicalActivities, PhysicalActivityToken>.ToReadableName(configuration.ActivityLevel),
+            PhysicalActivityLevel = configuration.ActivityLevel,
             PhysicalActivityFactor = configuration.ActivityFactor,
             Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
         };
+        dailyPlan.AddMenuTargets();
+        return dailyPlan;
     }
 }
 
 public class PlanConfiguration
 {
-    public DayToken Day { get; set; }
+    public string Day { get; set; } = null!;
     public double BasalMetabolicRate { get; set; }
     public double AdjustmentFactor { get; set; }
-    public PhysicalActivityToken ActivityLevel { get; set; }
+    public string ActivityLevel { get; set; } = null!;
     public double ActivityFactor { get; set; }
     public IDictionary<string, double> Distribution { get; set; } = null!;
     public IList<MealConfiguration> MealConfigurations { get; set; } = null!;
