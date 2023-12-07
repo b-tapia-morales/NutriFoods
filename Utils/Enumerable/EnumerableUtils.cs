@@ -1,7 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using System.Text;
-
 namespace Utils.Enumerable;
 
 public static class EnumerableUtils
@@ -61,8 +57,9 @@ public static class EnumerableUtils
     public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ",
         (string Left, string Right)? enclosure = null) =>
         string.Join($"{delimiter}",
-            enclosure.HasValue ? source.Select(e => $"{enclosure.Value.Left}{e}{enclosure.Value.Right}") : source);
+            enclosure.HasValue ? source.Select(e => $"{enclosure.Value.Left}{e?.ToString()}{enclosure.Value.Right}") : source);
 
-    public static void WriteToConsole<T>(this IEnumerable<T> source, string delimiter = ", ") =>
-        Console.WriteLine(source.ToJoinedString(delimiter));
+    public static void WriteToConsole<T>(this IEnumerable<T> source, string delimiter = ", ",
+        (string Left, string Right)? enclosure = null) =>
+        Console.WriteLine(source.ToJoinedString(delimiter, enclosure));
 }
