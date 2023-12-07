@@ -3,7 +3,6 @@
 using System.Collections.Immutable;
 using Domain.Enum;
 using NutrientRetrieval.Mapping.Statistics;
-using Utils.Enumerable;
 
 namespace API.ApplicationData;
 
@@ -20,7 +19,6 @@ public interface IApplicationData
     int RatioPerPortion(MealToken mealToken, NutrientToken nutrientToken, double quantity)
     {
         var mealType = IEnum<MealTypes, MealToken>.ToValue(mealToken);
-        EnergyDict.WriteToConsole();
         var ratio = nutrientToken switch
         {
             NutrientToken.Energy => quantity / EnergyDict[mealType],

@@ -20,7 +20,8 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
         var population = GenerateInitialPopulation(universe, chromosomeSize, populationSize);
         var winners = new List<Chromosome>();
         CalculatePopulationFitness(population, targets);
-        for (var i = 0; i < maxIterations; i++)
+        int i;
+        for (i = 0; i < maxIterations; i++)
         {
             selection.Method(population, winners);
             crossover.Method(population, winners, chromosomeSize, populationSize, minCrossoverProb);
@@ -31,7 +32,8 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
         }
 
         watch.Stop();
-        Console.WriteLine(watch.Elapsed.Milliseconds);
+        Console.WriteLine($"Total elapsed time: {watch.Elapsed.Milliseconds}");
+        Console.WriteLine($"Total iterations: {i}");
 
         return population.OrderByDescending(e => e.Fitness).First().Recipes;
     }

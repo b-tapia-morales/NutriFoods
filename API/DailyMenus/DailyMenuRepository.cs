@@ -26,7 +26,6 @@ public class DailyMenuRepository : IDailyMenuRepository
         var mealType = IEnum<MealTypes, MealToken>.ToToken(MealTypes.None);
         var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
         var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
-        Console.WriteLine(chromosomeSize);
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
