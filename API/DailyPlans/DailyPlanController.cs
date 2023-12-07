@@ -56,33 +56,28 @@ public class DailyPlanController
 
     [HttpPost]
     [Route("by-distribution")]
-    public async Task<DailyPlanDto> GeneratePlan([FromQuery] [Required] DayToken day,
-        [FromQuery] double basalMetabolicRate,
-        [FromQuery] PhysicalActivityToken activityLevel,
-        [FromQuery] double activityFactor,
-        [FromBody] PlanConfiguration planConfiguration,
-        [FromQuery] double adjustmentFactor = 1e-1)
+    public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
-        var totalMetabolicRate = (1 + adjustmentFactor) * basalMetabolicRate * activityFactor;
-        var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(planConfiguration, totalMetabolicRate,
-            adjustmentFactor));
-
+        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
+                                 configuration.ActivityFactor;
+        var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
         var recipes = (await _recipeRepository.FindAll()).AsReadOnly();
+
         var bag = new ConcurrentBag<DailyMenuDto>();
         ParallelOptions parallelOptions = new()
         {
-            MaxDegreeOfParallelism = planConfiguration.MealConfigurations.Count
+            MaxDegreeOfParallelism = configuration.MealConfigurations.Count
         };
-
         await Parallel.ForEachAsync(menus, parallelOptions,
             async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
 
         return new DailyPlanDto
         {
-            Day = IEnum<Days, DayToken>.ToReadableName(day),
-            AdjustmentFactor = adjustmentFactor,
-            PhysicalActivityLevel = IEnum<PhysicalActivities, PhysicalActivityToken>.ToReadableName(activityLevel),
-            PhysicalActivityFactor = activityFactor,
+            Day = IEnum<Days, DayToken>.ToReadableName(configuration.Day),
+            AdjustmentFactor = configuration.AdjustmentFactor,
+            PhysicalActivityLevel =
+                IEnum<PhysicalActivities, PhysicalActivityToken>.ToReadableName(configuration.ActivityLevel),
+            PhysicalActivityFactor = configuration.ActivityFactor,
             Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
         };
     }
@@ -90,6 +85,11 @@ public class DailyPlanController
 
 public class PlanConfiguration
 {
+    public DayToken Day { get; set; }
+    public double BasalMetabolicRate { get; set; }
+    public double AdjustmentFactor { get; set; }
+    public PhysicalActivityToken ActivityLevel { get; set; }
+    public double ActivityFactor { get; set; }
     public IDictionary<string, double> Distribution { get; set; } = null!;
     public IList<MealConfiguration> MealConfigurations { get; set; } = null!;
 }

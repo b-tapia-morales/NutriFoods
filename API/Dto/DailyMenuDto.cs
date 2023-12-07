@@ -1,5 +1,6 @@
 ﻿using API.DailyPlans;
 using Domain.Enum;
+using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.Dto;
 
@@ -15,25 +16,21 @@ public sealed class DailyMenuDto
 
 public static class DailyMenuExtensions
 {
-    public static IEnumerable<DailyMenuDto> ToMenus(PlanConfiguration planConfiguration,
-        double totalMetabolicRate, double adjustmentFactor)
+    public static IEnumerable<DailyMenuDto> ToMenus(PlanConfiguration planConfiguration, double totalMetabolicRate)
     {
-        var planDistribution =
-            planConfiguration.Distribution.ToDictionary(e => IEnum<Nutrients, NutrientToken>.ToValue(e.Key),
-                e => e.Value);
-        foreach (var configuration in planConfiguration.MealConfigurations)
+        var planDistribution = planConfiguration.Distribution.ToDictionary(e => ToValue(e.Key), e => e.Value);
+        foreach (var mealConfiguration in planConfiguration.MealConfigurations)
         {
-            var energy = configuration.IntakePercentage * totalMetabolicRate;
-            var mealDistribution =
-                planDistribution.ToDictionary(e => e.Key,
-                    e => e.Value * energy * NutrientExtensions.GramFactors[e.Key]);
+            var energy = mealConfiguration.IntakePercentage * totalMetabolicRate;
+            var mealDistribution = planDistribution
+                .ToDictionary(e => e.Key, e => e.Value * energy * NutrientExtensions.GramFactors[e.Key]);
             var targets =
-                TargetExtensions.DistributionToTargets(mealDistribution, energy, adjustmentFactor);
+                TargetExtensions.DistributionToTargets(mealDistribution, energy, planConfiguration.AdjustmentFactor);
             yield return new DailyMenuDto
             {
-                Hour = configuration.Hour,
-                MealType = configuration.MealType,
-                IntakePercentage = configuration.IntakePercentage,
+                Hour = mealConfiguration.Hour,
+                MealType = mealConfiguration.MealType,
+                IntakePercentage = mealConfiguration.IntakePercentage,
                 Targets = new List<NutritionalTargetDto>(targets)
             };
         }
