@@ -3,6 +3,7 @@
 using System.Collections.Immutable;
 using Domain.Enum;
 using NutrientRetrieval.Mapping.Statistics;
+using Utils.Enumerable;
 
 namespace API.ApplicationData;
 
@@ -19,13 +20,15 @@ public interface IApplicationData
     int RatioPerPortion(MealToken mealToken, NutrientToken nutrientToken, double quantity)
     {
         var mealType = IEnum<MealTypes, MealToken>.ToValue(mealToken);
-        return nutrientToken switch
+        EnergyDict.WriteToConsole();
+        var ratio = nutrientToken switch
         {
-            NutrientToken.Energy => (int)(quantity / EnergyDict[mealType]),
-            NutrientToken.Carbohydrates => (int)(quantity / CarbohydratesDict[mealType]),
-            NutrientToken.FattyAcids => (int)(quantity / FattyAcidsDict[mealType]),
-            NutrientToken.Proteins => (int)(quantity / ProteinsDict[mealType]),
+            NutrientToken.Energy => quantity / EnergyDict[mealType],
+            NutrientToken.Carbohydrates => quantity / CarbohydratesDict[mealType],
+            NutrientToken.FattyAcids => quantity / FattyAcidsDict[mealType],
+            NutrientToken.Proteins => quantity / ProteinsDict[mealType],
             _ => throw new ArgumentOutOfRangeException(nameof(nutrientToken), nutrientToken, null)
         };
+        return (int)Math.Round(ratio, 0, MidpointRounding.AwayFromZero);
     }
 }
