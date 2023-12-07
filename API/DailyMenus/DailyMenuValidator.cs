@@ -3,9 +3,6 @@ using API.Validations;
 using Domain.Enum;
 using FluentValidation;
 using Utils;
-using Utils.Enumerable;
-using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
-using static Domain.Enum.NutrientExtensions;
 
 namespace API.DailyMenus;
 

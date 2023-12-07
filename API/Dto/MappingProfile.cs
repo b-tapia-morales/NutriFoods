@@ -3,7 +3,6 @@ using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
-using Utils.Date;
 
 namespace API.Dto;
 

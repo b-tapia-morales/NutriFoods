@@ -3,7 +3,6 @@ using API.Dto;
 using API.Validations;
 using Domain.Enum;
 using FluentValidation;
-using Newtonsoft.Json;
 using Utils.Date;
 using static System.Globalization.CultureInfo;
 

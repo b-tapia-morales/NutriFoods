@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using API.ApplicationData;
 using API.DailyMenus;
 using API.DailyPlans;
@@ -20,7 +19,6 @@ using NutrientRetrieval.Averages;
 using NutrientRetrieval.NutrientCalculation;
 using NutrientRetrieval.Retrieval.Abridged;
 using RecipeInsertion;
-using Swashbuckle.AspNetCore.Swagger;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 #if DEBUG

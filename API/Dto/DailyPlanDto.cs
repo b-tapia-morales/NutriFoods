@@ -1,6 +1,3 @@
-using Domain.Enum;
-using static System.StringComparison;
-
 namespace API.Dto;
 
 public class DailyPlanDto

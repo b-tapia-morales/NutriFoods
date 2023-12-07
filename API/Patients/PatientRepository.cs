@@ -2,7 +2,6 @@ using API.Dto;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils.Enumerable;
 using static API.Patients.IPatientRepository;
 
 namespace API.Patients;
