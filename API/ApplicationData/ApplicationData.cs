@@ -20,13 +20,13 @@ public class ApplicationData : IApplicationData
     public ApplicationData()
     {
         Rows = CsvUtils
-            .RetrieveRows<AveragesRow, AveragesMapping>(AbsolutePath, DelimiterToken.Semicolon, true)
+            .RetrieveRows<AveragesRow, AveragesMapping>(AbsolutePath)
             .ToImmutableList();
         CountDict = CreateDict(Rows, e => e.Count);
         EnergyDict = CreateDict(Rows, e => e.Energy);
         CarbohydratesDict = CreateDict(Rows, e => e.Carbohydrates);
         FattyAcidsDict = CreateDict(Rows, e => e.FattyAcids);
-        ProteinsDict = CreateDict(Rows, e => e.FattyAcids);
+        ProteinsDict = CreateDict(Rows, e => e.Proteins);
         DefaultRatio = 4.0 / 7.0;
     }
 
