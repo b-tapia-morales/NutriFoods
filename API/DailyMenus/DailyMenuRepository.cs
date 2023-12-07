@@ -23,14 +23,13 @@ public class DailyMenuRepository : IDailyMenuRepository
 
     public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes)
     {
-        var mealType = IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType);
+        var mealType = IEnum<MealTypes, MealToken>.ToToken(MealTypes.None);
         var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
         var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
         Console.WriteLine(chromosomeSize);
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
-        Console.WriteLine("I'm here");
         var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
         var menus = new List<MenuRecipeDto>(abridgedRecipes.ToMenus());
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());

@@ -85,7 +85,6 @@ public class DailyPlanController
         }
 
         var recipes = (await _recipeRepository.FindAll()).AsReadOnly();
-        Console.WriteLine("I'm here");
         var bag = new ConcurrentBag<DailyMenuDto>();
         ParallelOptions parallelOptions = new()
         {

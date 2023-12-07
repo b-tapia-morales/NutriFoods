@@ -20,7 +20,6 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
         var population = GenerateInitialPopulation(universe, chromosomeSize, populationSize);
         var winners = new List<Chromosome>();
         CalculatePopulationFitness(population, targets);
-        population.Select(e => e.Fitness).WriteToConsole();
         for (var i = 0; i < maxIterations; i++)
         {
             selection.Method(population, winners);
