@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 
 namespace Utils.Enumerable;
 
@@ -22,4 +22,20 @@ public static class DictionaryUtils
         first.Concat(second)
             .GroupBy(kv => kv.Key)
             .ToDictionary(g => g.Key, g => g.First().Value);
+    
+    public static string ToJoinedString<TKey, TValue>(this IDictionary<TKey, TValue> source, string delimiter = ", ")
+        where TKey : notnull =>
+        $"{{{string.Join($"{delimiter}", source.Select(e => $"{e.Key} : {e.Value}"))}}}";
+    
+    public static string ToJoinedString<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source,
+        string delimiter = ", ") where TKey : notnull =>
+        $"{{{string.Join($"{delimiter}", source.Select(e => $"{e.Key} : {e.Value}"))}}}";
+    
+    public static void WriteToConsole<TKey, TValue>(this IDictionary<TKey, TValue> source, string delimiter = ", ")
+        where TKey : notnull =>
+        Console.WriteLine(source.ToJoinedString(delimiter));
+    
+    public static void WriteToConsole<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> source,
+        string delimiter = ", ") where TKey : notnull =>
+        Console.WriteLine(source.ToJoinedString(delimiter));
 }
