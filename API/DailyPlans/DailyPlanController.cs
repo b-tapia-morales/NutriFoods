@@ -64,25 +64,8 @@ public class DailyPlanController
         [FromQuery] double adjustmentFactor = 1e-1)
     {
         var totalMetabolicRate = (1 + adjustmentFactor) * basalMetabolicRate * activityFactor;
-        var planDistribution = planConfiguration.Distribution.ToDictionary(e => ToValue(e.Key), e => e.Value);
-        var menus = new List<DailyMenuDto>();
-        foreach (var configuration in planConfiguration.MealConfigurations)
-        {
-            var energy = configuration.IntakePercentage * totalMetabolicRate;
-            var mealDistribution =
-                planDistribution.ToDictionary(e => e.Key,
-                    e => e.Value * energy * NutrientExtensions.GramFactors[e.Key]);
-            Console.WriteLine(string.Join(", ", mealDistribution.Select(e => $"{e.Key} : {e.Value}")));
-            var targets =
-                TargetExtensions.DistributionToTargets(mealDistribution, energy, adjustmentFactor);
-            menus.Add(new DailyMenuDto
-            {
-                Hour = configuration.Hour,
-                MealType = configuration.MealType,
-                IntakePercentage = configuration.IntakePercentage,
-                Targets = new List<NutritionalTargetDto>(targets)
-            });
-        }
+        var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(planConfiguration, totalMetabolicRate,
+            adjustmentFactor));
 
         var recipes = (await _recipeRepository.FindAll()).AsReadOnly();
         var bag = new ConcurrentBag<DailyMenuDto>();
@@ -96,6 +79,7 @@ public class DailyPlanController
 
         return new DailyPlanDto
         {
+            Day = IEnum<Days, DayToken>.ToReadableName(day),
             AdjustmentFactor = adjustmentFactor,
             PhysicalActivityLevel = IEnum<PhysicalActivities, PhysicalActivityToken>.ToReadableName(activityLevel),
             PhysicalActivityFactor = activityFactor,
