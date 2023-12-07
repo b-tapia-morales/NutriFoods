@@ -32,8 +32,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
     public async Task<List<RecipeDto>> FindAll()
     {
         await using var context = new NutrifoodsDbContext();
-        var recipes = await context.Recipes.IncludeSubfields()
-            .ToListAsync();
+        var recipes = await context.Recipes.IncludeSubfields().ToListAsync();
         return mapper.Map<List<RecipeDto>>(recipes);
     }
 

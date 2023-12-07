@@ -30,7 +30,8 @@ public class PatientController
 
     [HttpPost]
     [Route("{patientId:guid}/consultation/")]
-    public async Task<ActionResult<PatientDto>> Create(Guid patientId, [FromBody] ConsultationDto consultationDto)
+    public async Task<ActionResult<PatientDto>> Create([FromQuery] Guid patientId,
+        [FromBody] ConsultationDto consultationDto)
     {
         var results = await _consultationValidator.ValidateAsync(consultationDto);
         if (!results.IsValid)

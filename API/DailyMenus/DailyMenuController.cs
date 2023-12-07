@@ -67,7 +67,6 @@ public class DailyMenuController
         var targets =
             new List<NutritionalTargetDto>(
                 TargetExtensions.DistributionToTargets(distributionDict, energy, errorMargin));
-
         var dailyMenu = new DailyMenuDto
         {
             IntakePercentage = errorMargin,
