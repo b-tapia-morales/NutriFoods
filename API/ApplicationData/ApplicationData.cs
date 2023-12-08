@@ -1,44 +1,90 @@
 using System.Collections.Immutable;
+using API.Dto;
+using API.Recipes;
+using AutoMapper;
 using Domain.Enum;
-using NutrientRetrieval.Mapping.Statistics;
-using Utils.Csv;
+using Domain.Models;
+using Microsoft.EntityFrameworkCore;
+using Utils.Enumerable;
+using static System.StringComparison;
 
 namespace API.ApplicationData;
 
 public class ApplicationData : IApplicationData
 {
-    private const string ProjectDirectory = "NutrientRetrieval";
-    private const string FileDirectory = "Files";
-    private const string FileName = "NutrientAverages.csv";
-
-    private static readonly string BaseDirectory =
-        Directory.GetParent(Directory.GetCurrentDirectory())!.FullName;
-
-    private static readonly string AbsolutePath =
-        Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
-
-    public ApplicationData()
+    public ApplicationData(NutrifoodsDbContext context, IMapper mapper)
     {
-        Rows = CsvUtils
-            .RetrieveRows<AveragesRow, AveragesMapping>(AbsolutePath)
-            .ToImmutableList();
-        CountDict = CreateDict(Rows, e => e.Count);
-        EnergyDict = CreateDict(Rows, e => e.Energy);
-        CarbohydratesDict = CreateDict(Rows, e => e.Carbohydrates);
-        FattyAcidsDict = CreateDict(Rows, e => e.FattyAcids);
-        ProteinsDict = CreateDict(Rows, e => e.Proteins);
+        var recipes = FindAll(context, mapper);
+        RecipeDict = new Dictionary<MealTypes, IReadOnlyList<RecipeDto>>
+        {
+            [MealTypes.None] = recipes,
+            [MealTypes.Breakfast] = FindByMealType(recipes, MealTypes.Breakfast),
+            [MealTypes.Lunch] = FindByMealType(recipes, MealTypes.Lunch),
+            [MealTypes.Dinner] = FindByMealType(recipes, MealTypes.Dinner)
+        };
+        CountDict = ToCountDict().ToImmutableDictionary(e => e.Key, e => e.Value);
+        EnergyDict = ToAveragesDict(Nutrients.Energy).ToImmutableDictionary(e => e.Key, e => e.Value);
+        CarbohydratesDict = ToAveragesDict(Nutrients.Carbohydrates).ToImmutableDictionary(e => e.Key, e => e.Value);
+        FattyAcidsDict = ToAveragesDict(Nutrients.FattyAcids).ToImmutableDictionary(e => e.Key, e => e.Value);
+        ProteinsDict = ToAveragesDict(Nutrients.Proteins).ToImmutableDictionary(e => e.Key, e => e.Value);
         DefaultRatio = 4.0 / 7.0;
+        CountDict.WriteToConsole();
+        EnergyDict.WriteToConsole();
+        CarbohydratesDict.WriteToConsole();
+        FattyAcidsDict.WriteToConsole();
+        ProteinsDict.WriteToConsole();
     }
 
-    public IImmutableList<AveragesRow> Rows { get; }
-    public IImmutableDictionary<MealTypes, int> CountDict { get; }
-    public IImmutableDictionary<MealTypes, double> EnergyDict { get; }
-    public IImmutableDictionary<MealTypes, double> CarbohydratesDict { get; }
-    public IImmutableDictionary<MealTypes, double> FattyAcidsDict { get; }
-    public IImmutableDictionary<MealTypes, double> ProteinsDict { get; }
+    public IReadOnlyDictionary<MealTypes, IReadOnlyList<RecipeDto>> RecipeDict { get; }
+    public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
+    public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
+    public IReadOnlyDictionary<MealTypes, double> CarbohydratesDict { get; }
+    public IReadOnlyDictionary<MealTypes, double> FattyAcidsDict { get; }
+    public IReadOnlyDictionary<MealTypes, double> ProteinsDict { get; }
     public double DefaultRatio { get; }
 
-    private static IImmutableDictionary<MealTypes, T> CreateDict<T>(IEnumerable<AveragesRow> rows,
-        Func<AveragesRow, T> elementSelector) =>
-        rows.ToImmutableDictionary(e => MealTypes.FromName(e.MealType), elementSelector);
+    private IEnumerable<KeyValuePair<MealTypes, int>> ToCountDict()
+    {
+        var mealTypes = IEnum<MealTypes, MealToken>.Values;
+        foreach (var mealType in mealTypes)
+        {
+            if (mealType == MealTypes.Snack)
+                continue;
+            var count = RecipeDict[mealType].Count;
+            yield return new KeyValuePair<MealTypes, int>(mealType, count);
+        }
+    }
+
+    private IEnumerable<KeyValuePair<MealTypes, double>> ToAveragesDict(Nutrients nutrient)
+    {
+        var mealTypes = IEnum<MealTypes, MealToken>.Values;
+        foreach (var mealType in mealTypes)
+        {
+            if (mealType == MealTypes.Snack)
+                continue;
+            var average = CalculateAverage(RecipeDict[mealType], nutrient);
+            yield return new KeyValuePair<MealTypes, double>(mealType, average);
+        }
+    }
+
+    private static IReadOnlyList<RecipeDto> FindAll(NutrifoodsDbContext context, IMapper mapper)
+    {
+        var recipes = context.Recipes.IncludeSubfields().AsNoTracking()
+            .Where(e => e.Portions != null && e.Portions > 0 && e.NutritionalValues.Count > 0)
+            .ToList();
+        return mapper
+            .Map<List<RecipeDto>>(recipes)
+            .AsReadOnly();
+    }
+
+    private static IReadOnlyList<RecipeDto> FindByMealType(IEnumerable<RecipeDto> recipes, MealTypes mealType) =>
+        recipes
+            .Where(e => e.MealTypes.Contains(mealType.ReadableName))
+            .ToList()
+            .AsReadOnly();
+
+    private static double CalculateAverage(IEnumerable<RecipeDto> recipes, Nutrients nutrient) =>
+        recipes.SelectMany(e => e.Nutrients)
+            .Where(e => string.Equals(e.Nutrient, nutrient.ReadableName, InvariantCultureIgnoreCase))
+            .Average(e => e.Quantity);
 }

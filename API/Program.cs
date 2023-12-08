@@ -4,7 +4,6 @@ using API.DailyPlans;
 using API.Dto;
 using API.Ingredients;
 using API.Recipes;
-using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -15,19 +14,13 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
-using NutrientRetrieval.Averages;
-using NutrientRetrieval.NutrientCalculation;
-using NutrientRetrieval.Retrieval.Abridged;
-using RecipeInsertion;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
-
 #if DEBUG
 DatabaseInitialization.Initialize();
 await AbridgedRetrieval.RetrieveFromApi();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
 NutrientCalculation.Calculate();
-NutrientAverages.WriteStatistics();
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
@@ -42,16 +35,16 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
     if (!optionsBuilder.IsConfigured)
         optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
             opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-}, ServiceLifetime.Singleton);
+});
 
 builder.Services
+    .AddSingleton<IApplicationData, ApplicationData>()
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
     .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
-    .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
-    .AddSingleton<IApplicationData, ApplicationData>();
+    .AddScoped<IDailyMenuRepository, DailyMenuRepository>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
@@ -88,10 +81,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(config => config.ConfigObject.AdditionalItems["syntaxHighlight"] = new Dictionary<string, object>
-    {
-        ["activated"] = false
-    });
+    app.UseSwaggerUI(config => { config.ConfigObject.AdditionalItems.Add("syntaxHighlight", false); });
 }
 
 app.UseHttpsRedirection();

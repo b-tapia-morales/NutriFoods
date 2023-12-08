@@ -1,6 +1,8 @@
 // ReSharper disable ConvertToPrimaryConstructor
 
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
+using API.ApplicationData;
 using API.Dto;
 using API.Recipes;
 using Domain.Enum;
@@ -15,16 +17,17 @@ namespace API.DailyMenus;
 [Route("api/v1/daily-menus")]
 public class DailyMenuController
 {
+    private readonly IApplicationData _applicationData;
     private readonly IDailyMenuRepository _dailyMenuRepository;
-    private readonly IRecipeRepository _recipeRepository;
     private readonly IValidator<DailyMenuQuery> _queryValidator;
     private readonly IValidator<DailyMenuDto> _jsonValidator;
 
-    public DailyMenuController(IDailyMenuRepository dailyMenuRepository, IRecipeRepository recipeRepository,
+    public DailyMenuController(IApplicationData applicationData,
+        IDailyMenuRepository dailyMenuRepository, IRecipeRepository recipeRepository,
         IValidator<DailyMenuQuery> queryValidator, IValidator<DailyMenuDto> jsonValidator)
     {
+        _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
-        _recipeRepository = recipeRepository;
         _queryValidator = queryValidator;
         _jsonValidator = jsonValidator;
     }
@@ -42,7 +45,8 @@ public class DailyMenuController
                  """
             );
 
-        return await _dailyMenuRepository.GenerateMenu(dailyMenu, await _recipeRepository.FindAll());
+        var mealType = ToValue(dailyMenu.MealType);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, _applicationData.RecipeDict[mealType]);
     }
 
     [HttpGet]
@@ -74,9 +78,7 @@ public class DailyMenuController
             Hour = hour,
             Targets = new List<NutritionalTargetDto>(targets)
         };
-
         var mealType = ToValue(mealToken);
-        var recipes = await _recipeRepository.FindByMealType(mealType).ConfigureAwait(false);
-        return await _dailyMenuRepository.GenerateMenu(dailyMenu, recipes).ConfigureAwait(false);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, _applicationData.RecipeDict[mealType]);
     }
 }
