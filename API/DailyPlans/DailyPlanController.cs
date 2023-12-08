@@ -2,7 +2,6 @@
 // ReSharper disable ClassNeverInstantiated.Global
 
 using System.Collections.Concurrent;
-using System.ComponentModel.DataAnnotations;
 using API.DailyMenus;
 using API.Dto;
 using API.Recipes;
@@ -10,7 +9,6 @@ using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
-using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.DailyPlans;
 

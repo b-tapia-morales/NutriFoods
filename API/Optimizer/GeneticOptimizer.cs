@@ -2,7 +2,6 @@
 
 using System.Diagnostics;
 using API.Dto;
-using Utils.Enumerable;
 using static API.Optimizer.IEvolutionaryOptimizer<API.Optimizer.GeneticOptimizer>;
 
 namespace API.Optimizer;

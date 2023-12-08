@@ -1,5 +1,6 @@
 // ReSharper disable ConvertToPrimaryConstructor
 
+using System.Diagnostics;
 using API.ApplicationData;
 using API.Dto;
 using API.Dto.Abridged;
