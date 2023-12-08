@@ -22,7 +22,7 @@ public class IngredientController(IIngredientRepository repository)
         if (string.IsNullOrWhiteSpace(name))
             return new BadRequestObjectResult("Parameter can't be an empty or whitespace string");
 
-        var ingredient = await repository.FindByName(name.ToLower());
+        var ingredient = await repository.FindByName(name);
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
 

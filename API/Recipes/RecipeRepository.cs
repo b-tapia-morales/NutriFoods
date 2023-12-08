@@ -9,15 +9,22 @@ using static Domain.Models.NutrifoodsDbContext;
 
 namespace API.Recipes;
 
-public class RecipeRepository(IMapper mapper) : IRecipeRepository
+public class RecipeRepository : IRecipeRepository
 {
+    private readonly IMapper _mapper;
+
+    public RecipeRepository(IMapper mapper)
+    {
+        _mapper = mapper;
+    }
+
     public async Task<RecipeDto?> FindById(int id)
     {
         await using var context = new NutrifoodsDbContext();
         var recipe = await context.Recipes.IncludeSubfields()
             .Where(e => e.Id == id)
             .FirstAsync();
-        return mapper.Map<RecipeDto>(recipe);
+        return _mapper.Map<RecipeDto>(recipe);
     }
 
     public async Task<RecipeDto?> FindByName(string name)
@@ -26,14 +33,14 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipe = await context.Recipes.IncludeSubfields()
             .Where(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)))
             .FirstAsync();
-        return mapper.Map<RecipeDto>(recipe);
+        return _mapper.Map<RecipeDto>(recipe);
     }
 
     public async Task<List<RecipeDto>> FindAll()
     {
         await using var context = new NutrifoodsDbContext();
         var recipes = await context.Recipes.IncludeSubfields().ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FindWithPortions()
@@ -42,7 +49,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions > 0)
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FindByMealType(MealTypes mealType)
@@ -51,7 +58,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions > 0 && e.MealTypes.Contains(mealType))
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FindByDishType(DishTypes dishType)
@@ -60,7 +67,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions > 0 && e.DishTypes.Contains(dishType))
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> GetVegetarianRecipes(Diets diet)
@@ -73,7 +80,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
             .Where(e => e.RecipeQuantities.Select(x => x.Ingredient)
                 .All(x => !(diet == Vegan && x.IsAnimal) && !inconsumableGroups.Contains(x.FoodGroup)))
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound)
@@ -82,7 +89,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Time != null && e.Time >= lowerBound && e.Time <= upperBound)
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FilterByPortions(int portions)
@@ -91,7 +98,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions == portions)
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound)
@@ -100,7 +107,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
         var recipes = await context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions >= lowerBound && e.Portions <= upperBound)
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     public async Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound) =>
@@ -125,7 +132,7 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
             .Where(e => e.NutritionalValues.Any(x => x.Nutrient == FattyAcids && x.Quantity <= fattyAcids))
             .Where(e => e.NutritionalValues.Any(x => x.Nutrient == Proteins && x.Quantity <= proteins))
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     private async Task<List<RecipeDto>> FilterByNutrientQuantity(Nutrients nutrient, int lowerBound, int upperBound)
@@ -135,13 +142,13 @@ public class RecipeRepository(IMapper mapper) : IRecipeRepository
             .Where(e => e.NutritionalValues.Any(x =>
                 x.Nutrient == nutrient && x.Quantity >= lowerBound && x.Quantity <= upperBound))
             .ToListAsync();
-        return mapper.Map<List<RecipeDto>>(recipes);
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 }
 
 public static class RecipeExtensions
 {
-    public static IQueryable<Recipe> IncludeSubfields(this IQueryable<Recipe> recipes) =>
+    public static IQueryable<Recipe> IncludeSubfields(this DbSet<Recipe> recipes) =>
         recipes
             .AsQueryable()
             .Include(e => e.NutritionalValues)
