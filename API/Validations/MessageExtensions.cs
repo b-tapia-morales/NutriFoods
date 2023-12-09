@@ -14,6 +14,12 @@ public static class MessageExtensions
          Provided argument “{value}” has a length of {value.Length}.
          """;
 
+    public static string IsNotAMatch(string parameterName, string value, string rule) =>
+        $"""
+         Provided argument “{value}” does not match required validation rules for {parameterName}.
+         {rule}
+         """;
+
     public static string CalculatedValue(string parameterName) =>
         $"'{parameterName}' is a calculated value, and must be null by default";
 
