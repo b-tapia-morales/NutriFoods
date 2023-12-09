@@ -60,8 +60,8 @@ public partial class NutritionistController
         if (dto == null)
             return new NotFoundObjectResult("Could not find an account with the given email");
 
-        if (PasswordEncryption.Verify(password, dto.Password))
-            return new UnauthorizedObjectResult("Could not find an account with the given email");
+        if (!PasswordEncryption.Verify(password, dto.Password))
+            return new UnauthorizedObjectResult("The given password does not match with the account's password");
 
         return dto;
     }
