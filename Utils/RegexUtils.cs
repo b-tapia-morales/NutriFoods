@@ -16,7 +16,14 @@ public static class RegexUtils
         "Password must be 8 characters long minimum, and must contain at least one uppercase letter, one lowercase letter, one number and one special character.";
 
     public const string Hour = "^(?:[0-1][0-9]|2[0-3]):[0-5][0-9]$";
-    
+
     public const string HourRule =
         "Hour must be written in the 24-hour notation in the form hh:mm.";
+
+    public const string RutWithDots = @"^[1-9]\d?(?:\.\d{3}){2}-[Kk\d]$";
+
+    public const string RutWithoutDots = @"^[1-9]\d?(?:\d{3}){2}-[Kk\d]$";
+
+    public const string RutRule =
+        "RUT must have a numeric part, followed by a hyphen, and a verification digit (which can either be a digit or the letter 'K'). Dots are optional.";
 }
