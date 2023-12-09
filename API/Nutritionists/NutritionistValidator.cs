@@ -1,14 +1,13 @@
 using API.Dto;
 using API.Validations;
 using FluentValidation;
-using Newtonsoft.Json;
 using Utils;
 
 namespace API.Nutritionists;
 
-public class AccountValidator : AbstractValidator<NutritionistDto>
+public class NutritionistValidator : AbstractValidator<NutritionistDto>
 {
-    public AccountValidator()
+    public NutritionistValidator()
     {
         // Email
         RuleFor(e => e.Email)

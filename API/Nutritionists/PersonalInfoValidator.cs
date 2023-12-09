@@ -1,20 +1,27 @@
 using System.Globalization;
+using System.Text.RegularExpressions;
 using API.Dto;
 using API.Validations;
 using Domain.Enum;
 using FluentValidation;
+using Utils;
 using Utils.Date;
 using static System.Globalization.CultureInfo;
 
-namespace API.Patients;
+namespace API.Nutritionists;
 
-public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
+public partial class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
 {
     private const int MinAge = 18;
     private const int MaxAge = 60;
 
     public PersonalInfoValidator()
     {
+        // Rut
+        RuleFor(e => e.Rut)
+            .Must(e => RutWithDotsRegex().IsMatch(e) || RutWithoutDotsRegex().IsMatch(e))
+            .WithMessage(e => MessageExtensions.IsNotAMatch("rut", e.Rut, RegexUtils.RutRule));
+
         // Name
         RuleFor(e => e.Names)
             .Must(e => !string.IsNullOrWhiteSpace(e) && e.Length >= 2)
@@ -53,4 +60,10 @@ public class PersonalInfoValidator : AbstractValidator<PersonalInfoDto>
             .Must(e => IEnum<BiologicalSexes, BiologicalSexToken>.ReadableNameDictionary.ContainsKey(e))
             .WithMessage(e => MessageExtensions.NotInEnum<BiologicalSexes, BiologicalSexToken>(e.BiologicalSex));
     }
+
+    [GeneratedRegex(RegexUtils.RutWithDots)]
+    private static partial Regex RutWithDotsRegex();
+
+    [GeneratedRegex(RegexUtils.RutWithoutDots)]
+    private static partial Regex RutWithoutDotsRegex();
 }

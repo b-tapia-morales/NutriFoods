@@ -39,11 +39,18 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 });
 
 builder.Services
+    // Global variables
     .AddScoped<IApplicationData, ApplicationData>()
+    // Validators for daily menu and plan generation
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
     .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
-    .AddScoped<IValidator<NutritionistDto>, AccountValidator>()
+    // Validators for patient and nutritionist
+    .AddScoped<IValidator<NutritionistDto>, NutritionistValidator>()
+    .AddScoped<IValidator<PersonalInfoDto>, PersonalInfoValidator>()
+    .AddScoped<IValidator<ContactInfoDto>, ContactInfoValidator>()
+    .AddScoped<IValidator<PatientDto>, PatientValidator>()
+    // Repositories
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()

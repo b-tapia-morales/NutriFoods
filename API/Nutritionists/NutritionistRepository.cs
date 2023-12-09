@@ -28,10 +28,10 @@ public class NutritionistRepository : INutritionistRepository
 
     public async Task<NutritionistDto?> FindAccount(string email) =>
         _mapper.Map<NutritionistDto>(
-            await FindBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
+            await FindAccountBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
 
     public async Task<NutritionistDto?> FindAccount(Guid id) =>
-        _mapper.Map<NutritionistDto>(await FindBy(_context, e => e.Id == id));
+        _mapper.Map<NutritionistDto>(await FindPatientBy(_context, e => e.Id == id));
 
     public async Task<NutritionistDto> SaveAccount(NutritionistDto dto)
     {
@@ -45,16 +45,19 @@ public class NutritionistRepository : INutritionistRepository
         return dto;
     }
 
+    public async Task<PatientDto?> FindPatient(string rut) =>
+        _mapper.Map<PatientDto>(await FindPatientBy(_context,
+            e => e.PersonalInfo != null && e.PersonalInfo.Rut == rut));
+
     public async Task<NutritionistDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto)
     {
-        await using var context = new NutrifoodsDbContext();
         var patient = new Patient { NutritionistId = nutritionistDto.Id };
-        await context.Patients.AddAsync(patient);
-        await context.SaveChangesAsync();
+        await _context.Patients.AddAsync(patient);
+        await _context.SaveChangesAsync();
         patient.PersonalInfo = _mapper.Map<PersonalInfo>(patientDto.PersonalInfo);
         patient.ContactInfo = _mapper.Map<ContactInfo>(patientDto.ContactInfo);
         patient.Address = _mapper.Map<Address>(patientDto.Address);
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
         patientDto.Id = patient.Id;
         nutritionistDto.Patients.Add(patientDto);
         return nutritionistDto;
@@ -87,5 +90,25 @@ public static class NutritionistExtensions
             .Include(e => e.Patients).ThenInclude(e => e.Consultations)
             .ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
             .Include(e => e.Patients).ThenInclude(e => e.Consultations).ThenInclude(e => e.Anthropometry);
+    }
+
+    public static IQueryable<Patient> IncludeFields(this DbSet<Patient> patients)
+    {
+        return patients
+            .AsQueryable()
+            .Include(e => e.PersonalInfo)
+            .Include(e => e.ContactInfo)
+            .Include(e => e.Address)
+            .Include(e => e.Consultations)
+            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis)
+            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Diseases)
+            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.ClinicalSigns)
+            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Ingestibles)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.HarmfulHabits)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.EatingSymptoms)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
+            .Include(e => e.Consultations).ThenInclude(e => e.Anthropometry);
     }
 }

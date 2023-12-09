@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 using API.Dto;
 using API.Validations;
@@ -6,6 +7,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils;
 using Utils.Enumerable;
+using Utils.Rut;
 
 namespace API.Nutritionists;
 
@@ -13,20 +15,23 @@ namespace API.Nutritionists;
 [Route("api/v1/nutritionists")]
 public partial class NutritionistController
 {
-    private readonly IValidator<NutritionistDto> _accountValidator;
+    private readonly IValidator<NutritionistDto> _nutritionistValidator;
+    private readonly IValidator<PatientDto> _patientValidator;
     private readonly INutritionistRepository _repository;
 
-    public NutritionistController(INutritionistRepository repository, IValidator<NutritionistDto> accountValidator)
+    public NutritionistController(IValidator<NutritionistDto> nutritionistValidator,
+        IValidator<PatientDto> patientValidator, INutritionistRepository repository)
     {
         _repository = repository;
-        _accountValidator = accountValidator;
+        _nutritionistValidator = nutritionistValidator;
+        _patientValidator = patientValidator;
     }
 
     [HttpPost]
     [Route("/sign-up")]
     public async Task<ActionResult<NutritionistDto>> SignUp([FromBody] NutritionistDto dto)
     {
-        var results = await _accountValidator.ValidateAsync(dto);
+        var results = await _nutritionistValidator.ValidateAsync(dto);
         if (!results.IsValid)
             return new BadRequestObjectResult(
                 $"""
@@ -64,6 +69,31 @@ public partial class NutritionistController
             return new UnauthorizedObjectResult("The given password does not match with the account's password");
 
         return dto;
+    }
+
+    [HttpPost]
+    [Route("/nutritionist/{nutritionistId:guid}/patient/")]
+    public async Task<ActionResult<NutritionistDto>> AddPatient(Guid nutritionistId, [FromBody] PatientDto patientDto)
+    {
+        var nutritionistDto = await _repository.FindAccount(nutritionistId);
+        if (nutritionistDto == null)
+            return new NotFoundObjectResult("Could not find an account with the given id");
+
+        var results = await _patientValidator.ValidateAsync(patientDto);
+        if (!results.IsValid)
+            return new BadRequestObjectResult(
+                $"""
+                 Could not perform query because of the following errors:
+                 {results.Errors.Select(e => e.ErrorMessage).ToJoinedString(Environment.NewLine)}
+                 """
+            );
+
+        var rut = RutUtils.FormatRut(patientDto.PersonalInfo!.Rut);
+        if (await _repository.FindPatient(rut) != null)
+            return new ConflictObjectResult($"The rut “{rut}” is already registered by another user");
+
+        patientDto.PersonalInfo!.Rut = rut;
+        return await _repository.AddPatient(nutritionistDto, patientDto);
     }
 
     [GeneratedRegex(RegexUtils.Password)]
