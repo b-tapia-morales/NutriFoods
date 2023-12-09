@@ -26,4 +26,14 @@ public static class RegexUtils
 
     public const string RutRule =
         "RUT must have a numeric part, followed by a hyphen, and a verification digit (which can either be a digit or the letter 'K'). Dots are optional.";
+
+    public const string MobilePhone = @"^9 ?[1-9]\d{3} ?\d{4}$";
+    
+    public const string MobilePhoneRule =
+        "The standard format for a mobile phone conforms to the following pattern: 9 XXXX XXXX. Spaces are optional.";
+    
+    public const string FixedPhone = @"^2 ?[1-9]\d{2} ?\d{3}$";
+    
+    public const string FixedPhoneRule =
+        "The standard format for a fixed phone conforms to the following pattern: 2 XXX XXX. Spaces are optional.";
 }
