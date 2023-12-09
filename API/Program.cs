@@ -3,6 +3,7 @@ using API.DailyMenus;
 using API.DailyPlans;
 using API.Dto;
 using API.Ingredients;
+using API.Nutritionists;
 using API.Recipes;
 using Domain.Models;
 using FluentValidation;
@@ -38,13 +39,15 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 });
 
 builder.Services
-    .AddSingleton<IApplicationData, ApplicationData>()
+    .AddScoped<IApplicationData, ApplicationData>()
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
     .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
+    .AddScoped<IValidator<NutritionistDto>, AccountValidator>()
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
-    .AddScoped<IDailyMenuRepository, DailyMenuRepository>();
+    .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
+    .AddScoped<INutritionistRepository, NutritionistRepository>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
@@ -61,7 +64,14 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
-builder.Services.AddFluentValidationRulesToSwagger();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+        policy.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -75,6 +85,8 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.ConfigureSwaggerGen(options => options.AddEnumsWithValuesFixFilters());
 
+builder.Services.AddFluentValidationRulesToSwagger();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -87,11 +99,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .SetIsOriginAllowed(_ => true) // allow any origin
-    .AllowCredentials()); // allow credentials
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();
