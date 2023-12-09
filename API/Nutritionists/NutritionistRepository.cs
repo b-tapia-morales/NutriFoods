@@ -31,7 +31,7 @@ public class NutritionistRepository : INutritionistRepository
             await FindAccountBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
 
     public async Task<NutritionistDto?> FindAccount(Guid id) =>
-        _mapper.Map<NutritionistDto>(await FindPatientBy(_context, e => e.Id == id));
+        _mapper.Map<NutritionistDto>(await FindAccountBy(_context, e => e.Id == id));
 
     public async Task<NutritionistDto> SaveAccount(NutritionistDto dto)
     {
