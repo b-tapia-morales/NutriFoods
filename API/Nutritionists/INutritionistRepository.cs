@@ -7,11 +7,17 @@ namespace API.Nutritionists;
 
 public interface INutritionistRepository
 {
-    Task<NutritionistDto?> Find(string email, string password);
+    Task<bool> IsEmailTaken(string email);
+
+    Task<bool> IsUsernameTaken(string accountName);
+
+    Task<NutritionistDto?> FindAccount(string email, string password);
     
-    static async Task<Nutritionist?> FindBy(Expression<Func<Nutritionist, bool>> predicate)
-    {
-        await using var context = new NutrifoodsDbContext();
-        return await context.Nutritionists.Where(predicate).FirstAsync();
-    }
+    Task<NutritionistDto?> FindAccount(Guid id);
+
+    Task<NutritionistDto> SaveAccount(NutritionistDto dto);
+
+    static async Task<Nutritionist?> FindBy(
+        NutrifoodsDbContext context, Expression<Func<Nutritionist, bool>> predicate) =>
+        await context.Nutritionists.IncludeFields().Where(predicate).FirstAsync();
 }
