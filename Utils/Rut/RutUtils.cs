@@ -10,7 +10,7 @@ public static class RutUtils
 
     public static string FormatRut(string rut)
     {
-        return string.Concat(Format(rut).Reverse());
+        return string.Concat(Format(NormalizeRut(rut)).Reverse());
 
         IEnumerable<char> Format(string str)
         {

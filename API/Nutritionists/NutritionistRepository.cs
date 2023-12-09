@@ -54,11 +54,12 @@ public class NutritionistRepository : INutritionistRepository
         var patient = new Patient { NutritionistId = nutritionistDto.Id };
         await _context.Patients.AddAsync(patient);
         await _context.SaveChangesAsync();
+        var id = patient.Id;
         patient.PersonalInfo = _mapper.Map<PersonalInfo>(patientDto.PersonalInfo);
         patient.ContactInfo = _mapper.Map<ContactInfo>(patientDto.ContactInfo);
         patient.Address = _mapper.Map<Address>(patientDto.Address);
         await _context.SaveChangesAsync();
-        patientDto.Id = patient.Id;
+        patient.Id = id;
         nutritionistDto.Patients.Add(patientDto);
         return nutritionistDto;
     }

@@ -200,7 +200,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Purpose, opt => opt.MapFrom(src => src.Purpose.ReadableName))
             .ForMember(dest => dest.RegisteredOn,
                 opt => opt.MapFrom(src =>
-                    src.RegisteredOn.HasValue ? src.RegisteredOn.Value.ToString("YYYY/mm/dd") : null))
+                    src.RegisteredOn.HasValue ? src.RegisteredOn.Value.ToString("yyyy-MM-dd") : null))
             .ReverseMap()
             .ForMember(dest => dest.PatientId, opt => opt.Ignore())
             .ForMember(dest => dest.Type,
@@ -214,12 +214,14 @@ public class MappingProfile : Profile
         // Patient
         CreateMap<PersonalInfo, PersonalInfoDto>()
             .ForMember(dest => dest.BiologicalSex, opt => opt.MapFrom(src => src.BiologicalSex.ReadableName))
-            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString("YYYY/mm/dd")))
+            .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString("yyyy-MM-dd")))
             .ReverseMap()
             .ForMember(dest => dest.BiologicalSex,
                 opt => opt.MapFrom(src => IEnum<BiologicalSexes, BiologicalSexToken>.ToValue(src.BiologicalSex)))
             .ForMember(dest => dest.Birthdate,
-                opt => opt.MapFrom(src => DateOnly.Parse(src.Birthdate, CultureInfo.CurrentCulture)));
+                opt => opt.MapFrom(
+                    src => DateOnly.ParseExact(src.Birthdate, "yyyy-MM-dd", CultureInfo.InvariantCulture,
+                        DateTimeStyles.None)));
 
         CreateMap<ContactInfo, ContactInfoDto>()
             .ReverseMap();
