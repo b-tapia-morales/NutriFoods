@@ -11,7 +11,7 @@ public interface INutritionistRepository
 
     Task<bool> IsUsernameTaken(string accountName);
 
-    Task<NutritionistDto?> FindAccount(string email, string password);
+    Task<NutritionistDto?> FindAccount(string email);
     
     Task<NutritionistDto?> FindAccount(Guid id);
 

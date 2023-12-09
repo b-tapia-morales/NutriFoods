@@ -26,9 +26,9 @@ public class NutritionistRepository : INutritionistRepository
         await _context.Nutritionists.IncludeFields()
             .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(accountName.ToLower())) != null;
 
-    public async Task<NutritionistDto?> FindAccount(string email, string password) =>
+    public async Task<NutritionistDto?> FindAccount(string email) =>
         _mapper.Map<NutritionistDto>(
-            await FindBy(_context, e => e.Email.ToLower().Equals(email.ToLower()) && e.Password.Equals(password)));
+            await FindBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
 
     public async Task<NutritionistDto?> FindAccount(Guid id) =>
         _mapper.Map<NutritionistDto>(await FindBy(_context, e => e.Id == id));

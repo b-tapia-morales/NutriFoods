@@ -56,9 +56,12 @@ public partial class NutritionistController
             return new BadRequestObjectResult(MessageExtensions.IsNotAMatch("password", password,
                 RegexUtils.PasswordRule));
 
-        var dto = await _repository.FindAccount(email, password);
+        var dto = await _repository.FindAccount(email);
         if (dto == null)
-            return new NotFoundObjectResult("Could not find an account with the given credentials");
+            return new NotFoundObjectResult("Could not find an account with the given email");
+
+        if (PasswordEncryption.Verify(password, dto.Password))
+            return new UnauthorizedObjectResult("Could not find an account with the given email");
 
         return dto;
     }
