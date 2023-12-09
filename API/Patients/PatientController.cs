@@ -19,18 +19,8 @@ public class PatientController
     }
 
     [HttpPost]
-    [Route("/nutritionist/{nutritionistId:guid}/patient/")]
-    public async Task<ActionResult<PatientDto>> Create(Guid nutritionistId, [FromBody] PatientDto patientDto)
-    {
-        if (await _repository.Find(patientDto.PersonalInfo!.Rut) != null)
-            return new BadRequestObjectResult("");
-
-        return await _repository.Create(patientDto, nutritionistId);
-    }
-
-    [HttpPost]
-    [Route("{patientId:guid}/consultation/")]
-    public async Task<ActionResult<PatientDto>> Create([FromQuery] Guid patientId,
+    [Route("/{patientId:guid}/consultation/")]
+    public async Task<ActionResult<PatientDto>> Create(Guid patientId,
         [FromBody] ConsultationDto consultationDto)
     {
         var results = await _consultationValidator.ValidateAsync(consultationDto);
@@ -50,7 +40,7 @@ public class PatientController
     }
 
     [HttpPost]
-    [Route("{patientId:guid}/consultation/{consultationId:guid}/clinical-anamnesis/")]
+    [Route("/{patientId:guid}/consultation/{consultationId:guid}/clinical-anamnesis/")]
     public async Task<ActionResult<PatientDto>> Create(Guid patientId, Guid consultationId,
         [FromBody] ClinicalAnamnesisDto clinicalAnamnesisDto)
     {
