@@ -15,9 +15,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Nutrient, opt => opt.MapFrom(src => src.Nutrient.ReadableName))
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.Nutrient,
+            .ForMember(dest => dest.Nutrient,
                 opt => opt.MapFrom(src => IEnum<Nutrients, NutrientToken>.ToValue(src.Nutrient)))
-            .ForPath(dest => dest.Unit,
+            .ForMember(dest => dest.Unit,
                 opt => opt.MapFrom(src => IEnum<Units, UnitToken>.ToValue(src.Unit)));
 
         // Ingredient
@@ -29,16 +29,16 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.NutritionalValues))
             .ReverseMap()
-            .ForPath(dest => dest.FoodGroup,
+            .ForMember(dest => dest.FoodGroup,
                 opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)))
-            .ForPath(dest => dest.IngredientMeasures, opt => opt.MapFrom(src => src.Measures))
-            .ForPath(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients));
+            .ForMember(dest => dest.IngredientMeasures, opt => opt.MapFrom(src => src.Measures))
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients));
 
         // Ingredient Abridged
         CreateMap<Ingredient, IngredientAbridged>()
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.FoodGroup,
+            .ForMember(dest => dest.FoodGroup,
                 opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)));
 
         CreateMap<IngredientMeasure, IngredientMeasureAbridged>()
@@ -64,13 +64,13 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap()
-            .ForPath(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
-            .ForPath(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
-            .ForPath(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
-            .ForPath(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
-            .ForPath(dest => dest.MealTypes,
+            .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
+            .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
+            .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
+            .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
-            .ForPath(dest => dest.DishTypes,
+            .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
 
         // Recipe Abridged
@@ -83,12 +83,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap()
-            .ForPath(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
-            .ForPath(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
-            .ForPath(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
-            .ForPath(dest => dest.MealTypes,
+            .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
+            .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
+            .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
+            .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
-            .ForPath(dest => dest.DishTypes,
+            .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
 
         CreateMap<RecipeDto, RecipeAbridged>()
@@ -100,11 +100,11 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Unit, opt => opt.MapFrom(src => src.Unit.ReadableName))
             .ForMember(dest => dest.ThresholdType, opt => opt.MapFrom(src => src.ThresholdType.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.Nutrient,
+            .ForMember(dest => dest.Nutrient,
                 opt => opt.MapFrom(src => IEnum<Nutrients, NutrientToken>.ToValue(src.Nutrient)))
-            .ForPath(dest => dest.Unit,
+            .ForMember(dest => dest.Unit,
                 opt => opt.MapFrom(src => IEnum<Units, UnitToken>.ToValue(src.Unit)))
-            .ForPath(dest => dest.ThresholdType,
+            .ForMember(dest => dest.ThresholdType,
                 opt => opt.MapFrom(src => IEnum<ThresholdTypes, ThresholdToken>.ToValue(src.ThresholdType)));
 
         // Meal Plan
@@ -117,11 +117,11 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.Targets, opt => opt.MapFrom(src => src.NutritionalTargets))
             .ForMember(dest => dest.Recipes, opt => opt.MapFrom(src => src.MenuRecipes))
             .ReverseMap()
-            .ForPath(dest => dest.MealType,
+            .ForMember(dest => dest.MealType,
                 opt => opt.MapFrom(src => IEnum<MealTypes, MealToken>.ToValue(src.MealType)))
-            .ForPath(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
-            .ForPath(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
-            .ForPath(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.Recipes));
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
+            .ForMember(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
+            .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.Recipes));
 
         CreateMap<DailyPlan, DailyPlanDto>()
             .ForMember(dest => dest.Day, opt => opt.MapFrom(src => src.Day.ReadableName))
@@ -136,9 +136,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src =>
                     IEnum<PhysicalActivities, PhysicalActivityToken>.ToValue(src.PhysicalActivityLevel)))
-            .ForPath(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
-            .ForPath(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
-            .ForPath(dest => dest.DailyMenus, opt => opt.MapFrom(src => src.Menus));
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
+            .ForMember(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
+            .ForMember(dest => dest.DailyMenus, opt => opt.MapFrom(src => src.Menus));
 
         // Clinical Anamnesis
         CreateMap<Ingestible, IngestibleDto>()
@@ -173,18 +173,18 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.FoodGroup,
+            .ForMember(dest => dest.FoodGroup,
                 opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)))
-            .ForPath(dest => dest.Type,
+            .ForMember(dest => dest.Type,
                 opt => opt.MapFrom(src => IEnum<FoodReactions, FoodReactionToken>.ToValue(src.Type)));
 
         CreateMap<FoodConsumption, FoodConsumptionDto>()
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ForMember(dest => dest.Frequency, opt => opt.MapFrom(src => src.Frequency.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.FoodGroup,
+            .ForMember(dest => dest.FoodGroup,
                 opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)))
-            .ForPath(dest => dest.Frequency,
+            .ForMember(dest => dest.Frequency,
                 opt => opt.MapFrom(src => IEnum<Frequencies, FrequencyToken>.ToValue(src.Frequency)));
 
         CreateMap<NutritionalAnamnesis, NutritionalAnamnesisDto>()
@@ -202,12 +202,12 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src =>
                     src.RegisteredOn.HasValue ? src.RegisteredOn.Value.ToString("YYYY/mm/dd") : null))
             .ReverseMap()
-            .ForPath(dest => dest.PatientId, opt => opt.Ignore())
-            .ForPath(dest => dest.Type,
+            .ForMember(dest => dest.PatientId, opt => opt.Ignore())
+            .ForMember(dest => dest.Type,
                 opt => opt.MapFrom(src => IEnum<ConsultationTypes, ConsultationTypeToken>.ToValue(src.Type)))
-            .ForPath(dest => dest.Purpose,
+            .ForMember(dest => dest.Purpose,
                 opt => opt.MapFrom(src => IEnum<ConsultationPurposes, ConsultationPurposeToken>.ToValue(src.Purpose)))
-            .ForPath(dest => dest.RegisteredOn,
+            .ForMember(dest => dest.RegisteredOn,
                 opt => opt.MapFrom(
                     src => DateOnly.Parse(src.RegisteredOn ?? string.Empty, CultureInfo.InvariantCulture)));
 
@@ -216,9 +216,9 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.BiologicalSex, opt => opt.MapFrom(src => src.BiologicalSex.ReadableName))
             .ForMember(dest => dest.Birthdate, opt => opt.MapFrom(src => src.Birthdate.ToString("YYYY/mm/dd")))
             .ReverseMap()
-            .ForPath(dest => dest.BiologicalSex,
+            .ForMember(dest => dest.BiologicalSex,
                 opt => opt.MapFrom(src => IEnum<BiologicalSexes, BiologicalSexToken>.ToValue(src.BiologicalSex)))
-            .ForPath(dest => dest.Birthdate,
+            .ForMember(dest => dest.Birthdate,
                 opt => opt.MapFrom(src => DateOnly.Parse(src.Birthdate, CultureInfo.CurrentCulture)));
 
         CreateMap<ContactInfo, ContactInfoDto>()
@@ -227,7 +227,7 @@ public class MappingProfile : Profile
         CreateMap<Address, AddressDto>()
             .ForMember(dest => dest.Province, opt => opt.MapFrom(src => src.Province.ReadableName))
             .ReverseMap()
-            .ForPath(dest => dest.Province,
+            .ForMember(dest => dest.Province,
                 opt => opt.MapFrom(src => IEnum<Provinces, ProvinceToken>.ToValue(src.Province)));
 
         CreateMap<Patient, PatientDto>()
