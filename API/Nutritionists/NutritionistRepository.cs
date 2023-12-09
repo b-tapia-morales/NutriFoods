@@ -38,7 +38,10 @@ public class NutritionistRepository : INutritionistRepository
         var nutritionist = _mapper.Map<Nutritionist>(dto);
         nutritionist.Password = PasswordEncryption.Hash(nutritionist.Password);
         await _context.Nutritionists.AddAsync(nutritionist);
+        await _context.SaveChangesAsync();
         dto.Id = nutritionist.Id;
+        dto.Password = nutritionist.Password;
+        dto.JoinedOn = nutritionist.JoinedOn;
         return dto;
     }
 

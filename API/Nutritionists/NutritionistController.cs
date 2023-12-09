@@ -10,7 +10,7 @@ using Utils.Enumerable;
 namespace API.Nutritionists;
 
 [ApiController]
-[Route("api/v1/nutritionist")]
+[Route("api/v1/nutritionists")]
 public partial class NutritionistController
 {
     private readonly IValidator<NutritionistDto> _accountValidator;
@@ -24,7 +24,7 @@ public partial class NutritionistController
 
     [HttpPost]
     [Route("/sign-up")]
-    public async Task<ActionResult<NutritionistDto>> SignUp([FromBody, Required] NutritionistDto dto)
+    public async Task<ActionResult<NutritionistDto>> SignUp([FromBody] NutritionistDto dto)
     {
         var results = await _accountValidator.ValidateAsync(dto);
         if (!results.IsValid)
@@ -62,7 +62,7 @@ public partial class NutritionistController
 
         return dto;
     }
-    
+
     [GeneratedRegex(RegexUtils.Password)]
     private static partial Regex PasswordValidator();
 }
