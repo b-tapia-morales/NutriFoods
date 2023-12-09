@@ -14,13 +14,12 @@ public static class RutUtils
 
         IEnumerable<char> Format(string str)
         {
-            var span = NormalizeRut(str).AsSpan();
-            yield return span[^1];
+            yield return str[^1];
             yield return '-';
-            var n = span.Length;
+            var n = str.Length;
             for (var i = 0; i < n - 1; i++)
             {
-                yield return span[^(i + 2)];
+                yield return str[^(i + 2)];
                 if ((i + 1) % 3 == 0)
                     yield return '.';
             }
