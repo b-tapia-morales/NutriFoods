@@ -19,19 +19,19 @@ public class NutritionistRepository : INutritionistRepository
     }
 
     public async Task<bool> IsEmailTaken(string email) =>
-        await _context.Nutritionists.IncludeFields()
+        await _context.Nutritionists.IncludeSubfields()
             .FirstOrDefaultAsync(e => e.Email.ToLower().Equals(email.ToLower())) != null;
 
     public async Task<bool> IsUsernameTaken(string accountName) =>
-        await _context.Nutritionists.IncludeFields()
+        await _context.Nutritionists.IncludeSubfields()
             .FirstOrDefaultAsync(e => e.Username.ToLower().Equals(accountName.ToLower())) != null;
 
     public async Task<NutritionistDto?> FindAccount(string email) =>
         _mapper.Map<NutritionistDto>(
-            await FindAccountBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
+            await FindNutritionistBy(_context, e => e.Email.ToLower().Equals(email.ToLower())));
 
     public async Task<NutritionistDto?> FindAccount(Guid id) =>
-        _mapper.Map<NutritionistDto>(await FindAccountBy(_context, e => e.Id == id));
+        _mapper.Map<NutritionistDto>(await FindNutritionistBy(_context, e => e.Id == id));
 
     public async Task<NutritionistDto> SaveAccount(NutritionistDto dto)
     {
@@ -67,7 +67,7 @@ public class NutritionistRepository : INutritionistRepository
 
 public static class NutritionistExtensions
 {
-    public static IQueryable<Nutritionist> IncludeFields(this DbSet<Nutritionist> nutritionists)
+    public static IQueryable<Nutritionist> IncludeSubfields(this DbSet<Nutritionist> nutritionists)
     {
         return nutritionists
             .AsQueryable()
@@ -93,23 +93,5 @@ public static class NutritionistExtensions
             .Include(e => e.Patients).ThenInclude(e => e.Consultations).ThenInclude(e => e.Anthropometry);
     }
 
-    public static IQueryable<Patient> IncludeFields(this DbSet<Patient> patients)
-    {
-        return patients
-            .AsQueryable()
-            .Include(e => e.PersonalInfo)
-            .Include(e => e.ContactInfo)
-            .Include(e => e.Address)
-            .Include(e => e.Consultations)
-            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis)
-            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Diseases)
-            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.ClinicalSigns)
-            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Ingestibles)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.HarmfulHabits)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.EatingSymptoms)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
-            .Include(e => e.Consultations).ThenInclude(e => e.Anthropometry);
-    }
+    
 }
