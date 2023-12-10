@@ -18,6 +18,17 @@ public class PatientController
         _consultationValidator = consultationValidator;
     }
 
+    [HttpGet]
+    [Route("/{patientId:guid}")]
+    public async Task<ActionResult<PatientDto>> FindPatient(Guid patientId)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new BadRequestObjectResult("");
+
+        return patientDto;
+    }
+
     [HttpPost]
     [Route("/{patientId:guid}/consultation/")]
     public async Task<ActionResult<PatientDto>> CreateConsultation(Guid patientId,
@@ -54,7 +65,7 @@ public class PatientController
 
         return await _repository.AddClinicalAnamnesis(patientDto, consultationDto, clinicalAnamnesisDto);
     }
-    
+
     [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/nutritional-anamnesis/")]
     public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
@@ -70,7 +81,7 @@ public class PatientController
 
         return await _repository.AddNutritionalAnamnesis(patientDto, consultationDto, nutritionalAnamnesisDto);
     }
-    
+
     [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/anthropometry/")]
     public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
