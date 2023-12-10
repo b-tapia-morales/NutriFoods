@@ -21,7 +21,10 @@ public static class MessageExtensions
          """;
 
     public static string CalculatedValue(string parameterName) =>
-        $"'{parameterName}' is a calculated value, and must be null by default";
+        $"“{parameterName}” is a calculated value, and must be null by default";
+    
+    public static string NullValue(string parameterName) =>
+        $"“{parameterName}” must be null by default";
 
     public static string EmptyCollection(string collection) =>
         $"The collection of {collection} must be empty by default";
@@ -30,7 +33,7 @@ public static class MessageExtensions
         where T : SmartEnum<T>, IEnum<T, TEnum>
         where TEnum : struct, Enum, IConvertible =>
         $"""
-         The value '{readableName}' is not a valid choice.
+         The value ”{readableName}” is not a valid choice.
          Valid choices are: {IEnum<T, TEnum>.Values.Select(x => x.ReadableName).ToJoinedString(", ", ("«", "»"))}")
          """;
 
@@ -50,6 +53,6 @@ public static class MessageExtensions
         $"""
          Provided argument “{value}” does not correspond to a valid date.
          Recognized formats are:
-         {string.Join('\n', DateOnlyUtils.AllowedFormats)}
+         {DateOnlyUtils.AllowedFormats.ToJoinedString()}
          """;
 }
