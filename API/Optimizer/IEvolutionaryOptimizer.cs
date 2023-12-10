@@ -16,13 +16,13 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
     public const double MinMutationProb = 0.6;
 
     static abstract IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
-        IReadOnlyCollection<NutritionalTargetDto> targets,
+        IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb);
 
     static IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
-        IReadOnlyCollection<NutritionalTargetDto> targets,
+        IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
         MutationToken mutationMethod = RandomPoints,
@@ -36,7 +36,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
     }
 
     static async Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
-        IReadOnlyCollection<NutritionalTargetDto> targets,
+        IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
         MutationToken mutationMethod = RandomPoints,
@@ -45,14 +45,14 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
             maxIterations, selectionMethod, crossoverMethod, mutationMethod, minCrossoverProb, minMutationProb));
 
     static async Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
-        IReadOnlyCollection<NutritionalTargetDto> targets,
+        IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb) =>
         await Task.Run(() => T.GenerateSolution(universe, targets, selection, crossover, mutation,
             chromosomeSize, populationSize, maxIterations, minCrossoverProb, minMutationProb));
 
-    static int CalculateMaximumFitness(IReadOnlyCollection<NutritionalTargetDto> targets) =>
+    static int CalculateMaximumFitness(IReadOnlyList<NutritionalTargetDto> targets) =>
         targets.Select(e => e.IsPriority ? +2 : +1).Sum();
 
     static List<Chromosome> GenerateInitialPopulation(IReadOnlyList<RecipeDto> universe, int chromosomeSize,
@@ -73,8 +73,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
         return population;
     }
 
-    static void CalculatePopulationFitness(List<Chromosome> population,
-        IReadOnlyCollection<NutritionalTargetDto> targets) =>
+    static void CalculatePopulationFitness(List<Chromosome> population, IReadOnlyList<NutritionalTargetDto> targets) =>
         population.ForEach(e => e.CalculateFitness(targets));
 
     static bool SolutionExists(List<Chromosome> population, int maximumFitness) =>
