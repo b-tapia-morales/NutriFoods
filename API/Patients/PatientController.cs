@@ -1,3 +1,4 @@
+using System.Globalization;
 using API.Dto;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -29,8 +30,22 @@ public class PatientController
         return patientDto;
     }
 
+    [HttpGet]
+    [Route("/{patientId:guid}/consultations/")]
+    public async Task<ActionResult<ConsultationDto>> FindLatestConsultation(Guid patientId)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new NotFoundObjectResult($"There's no registered patient with the Id {patientId}");
+
+        if (patientDto.Consultations.Count == 0)
+            return new NotFoundObjectResult($"The patient with the Id {patientId} has no registered consultations");
+
+        return patientDto.Consultations.MaxBy(e => DateOnly.Parse(e.RegisteredOn!, CultureInfo.InvariantCulture))!;
+    }
+
     [HttpPost]
-    [Route("/{patientId:guid}/consultation/")]
+    [Route("/{patientId:guid}/consultations/")]
     public async Task<ActionResult<ConsultationDto>> CreateConsultation(Guid patientId,
         [FromBody] ConsultationDto consultationDto)
     {
@@ -51,7 +66,7 @@ public class PatientController
     }
 
     [HttpPut]
-    [Route("/{patientId:guid}/consultation/{consultationId:guid}/clinical-anamnesis/")]
+    [Route("/{patientId:guid}/consultations/{consultationId:guid}/clinical-anamnesis/")]
     public async Task<ActionResult<ConsultationDto>> AddClinicalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] ClinicalAnamnesisDto clinicalAnamnesisDto)
     {
@@ -67,7 +82,7 @@ public class PatientController
     }
 
     [HttpPut]
-    [Route("/{patientId:guid}/consultation/{consultationId:guid}/nutritional-anamnesis/")]
+    [Route("/{patientId:guid}/consultations/{consultationId:guid}/nutritional-anamnesis/")]
     public async Task<ActionResult<ConsultationDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] NutritionalAnamnesisDto nutritionalAnamnesisDto)
     {
@@ -83,7 +98,7 @@ public class PatientController
     }
 
     [HttpPut]
-    [Route("/{patientId:guid}/consultation/{consultationId:guid}/anthropometry/")]
+    [Route("/{patientId:guid}/consultations/{consultationId:guid}/anthropometry/")]
     public async Task<ActionResult<ConsultationDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] AnthropometryDto anthropometryDto)
     {
