@@ -105,7 +105,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Address)
                 .HasForeignKey<Address>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("address_id_fkey");
         });
 
@@ -124,7 +124,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.AdverseFoodReactions)
                 .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("adverse_food_reaction_nutritional_anamnesis_fkey");
         });
 
@@ -153,7 +153,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Anthropometry)
                 .HasForeignKey<Anthropometry>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("anthropometry_id_fkey");
         });
 
@@ -230,11 +230,11 @@ public class NutrifoodsDbContext : DbContext
                     "MealPlan",
                     r => r.HasOne<DailyPlan>().WithMany()
                         .HasForeignKey("DailyPlanId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("meal_plan_daily_plan_id_fkey"),
                     l => l.HasOne<Consultation>().WithMany()
                         .HasForeignKey("ConsultationId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("meal_plan_consultation_id_fkey"),
                     j =>
                     {
@@ -266,7 +266,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ContactInfo)
                 .HasForeignKey<ContactInfo>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("contact_info_id_fkey");
         });
 
@@ -419,7 +419,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.EatingSymptoms)
                 .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("eating_symptom_nutritional_anamnesis_fkey");
         });
 
@@ -438,7 +438,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.FoodConsumptions)
                 .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("food_consumption_nutritional_anamnesis_fkey");
         });
 
@@ -461,7 +461,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.HarmfulHabits)
                 .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("harmful_habit_nutritional_anamnesis_fkey");
         });
 
@@ -596,7 +596,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.NutritionalAnamnesis)
                 .HasForeignKey<NutritionalAnamnesis>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("nutritional_anamnesis_id_fkey");
         });
 
@@ -673,7 +673,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.Nutritionist).WithMany(p => p.Patients)
                 .HasForeignKey(d => d.NutritionistId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("patient_nutritionist_id_fkey");
         });
 
