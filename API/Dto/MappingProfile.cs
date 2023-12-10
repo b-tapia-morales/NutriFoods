@@ -207,9 +207,7 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => IEnum<ConsultationTypes, ConsultationTypeToken>.ToValue(src.Type)))
             .ForMember(dest => dest.Purpose,
                 opt => opt.MapFrom(src => IEnum<ConsultationPurposes, ConsultationPurposeToken>.ToValue(src.Purpose)))
-            .ForMember(dest => dest.RegisteredOn,
-                opt => opt.MapFrom(
-                    src => DateOnly.Parse(src.RegisteredOn ?? string.Empty, CultureInfo.InvariantCulture)));
+            .ForMember(dest => dest.RegisteredOn, opt => opt.Ignore());
 
         // Patient
         CreateMap<PersonalInfo, PersonalInfoDto>()
