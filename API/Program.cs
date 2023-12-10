@@ -4,6 +4,7 @@ using API.DailyPlans;
 using API.Dto;
 using API.Ingredients;
 using API.Nutritionists;
+using API.Patients;
 using API.Recipes;
 using Domain.Models;
 using FluentValidation;
@@ -45,17 +46,20 @@ builder.Services
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
     .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
-    // Validators for patient and nutritionist
+    // Validators for nutritionist
     .AddScoped<IValidator<NutritionistDto>, NutritionistValidator>()
     .AddScoped<IValidator<PersonalInfoDto>, PersonalInfoValidator>()
     .AddScoped<IValidator<ContactInfoDto>, ContactInfoValidator>()
     .AddScoped<IValidator<AddressDto>, AddressValidator>()
     .AddScoped<IValidator<PatientDto>, PatientValidator>()
+    // Validators for patient
+    .AddScoped<IValidator<ConsultationDto>, ConsultationValidator>()
     // Repositories
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
-    .AddScoped<INutritionistRepository, NutritionistRepository>();
+    .AddScoped<INutritionistRepository, NutritionistRepository>()
+    .AddScoped<IPatientRepository, PatientRepository>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
