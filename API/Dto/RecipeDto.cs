@@ -14,12 +14,12 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public int Portions { get; set; }
     public int? Time { get; set; }
     public string? Difficulty { get; set; }
-    public ICollection<string> MealTypes { get; set; } = null!;
-    public ICollection<string> DishTypes { get; set; } = null!;
-    public ICollection<RecipeMeasureDto> Measures { get; set; } = null!;
-    public ICollection<RecipeQuantityDto> Quantities { get; set; } = null!;
-    public ICollection<RecipeStepDto> Steps { get; set; } = null!;
-    public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
+    public List<string> MealTypes { get; set; } = null!;
+    public List<string> DishTypes { get; set; } = null!;
+    public List<RecipeMeasureDto> Measures { get; set; } = null!;
+    public List<RecipeQuantityDto> Quantities { get; set; } = null!;
+    public List<RecipeStepDto> Steps { get; set; } = null!;
+    public List<NutritionalValueDto> Nutrients { get; set; } = null!;
 
     public override bool Equals(object? obj)
     {

@@ -6,9 +6,9 @@ public class DailyPlanDto
     public string PhysicalActivityLevel { get; set; } = null!;
     public double PhysicalActivityFactor { get; set; }
     public double AdjustmentFactor { get; set; }
-    public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
-    public ICollection<NutritionalTargetDto> Targets { get; set; } = null!;
-    public ICollection<DailyMenuDto> Menus { get; set; } = null!;
+    public List<NutritionalValueDto> Nutrients { get; set; } = null!;
+    public List<NutritionalTargetDto> Targets { get; set; } = null!;
+    public List<DailyMenuDto> Menus { get; set; } = null!;
 }
 
 public static class DailyPlanExtensions

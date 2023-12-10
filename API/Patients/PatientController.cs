@@ -32,6 +32,18 @@ public class PatientController
 
     [HttpGet]
     [Route("/{patientId:guid}/consultations/")]
+    public async Task<ActionResult<IEnumerable<ConsultationDto>>> FindConsultations(Guid patientId)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new NotFoundObjectResult($"There's no registered patient with the Id {patientId}");
+
+        return patientDto.Consultations
+            .OrderByDescending(e => DateOnly.Parse(e.RegisteredOn!, CultureInfo.InvariantCulture)).ToList();
+    }
+
+    [HttpGet]
+    [Route("/{patientId:guid}/consultations/latest")]
     public async Task<ActionResult<ConsultationDto>> FindLatestConsultation(Guid patientId)
     {
         var patientDto = await _repository.FindPatient(patientId);
