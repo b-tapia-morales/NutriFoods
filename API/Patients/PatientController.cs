@@ -31,7 +31,7 @@ public class PatientController
 
     [HttpPost]
     [Route("/{patientId:guid}/consultation/")]
-    public async Task<ActionResult<PatientDto>> CreateConsultation(Guid patientId,
+    public async Task<ActionResult<ConsultationDto>> CreateConsultation(Guid patientId,
         [FromBody] ConsultationDto consultationDto)
     {
         var results = await _consultationValidator.ValidateAsync(consultationDto);
@@ -52,7 +52,7 @@ public class PatientController
 
     [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/clinical-anamnesis/")]
-    public async Task<ActionResult<PatientDto>> AddClinicalAnamnesis(Guid patientId, Guid consultationId,
+    public async Task<ActionResult<ConsultationDto>> AddClinicalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] ClinicalAnamnesisDto clinicalAnamnesisDto)
     {
         var patientDto = await _repository.FindPatient(patientId);
@@ -63,12 +63,12 @@ public class PatientController
         if (consultationDto == null)
             return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
-        return await _repository.AddClinicalAnamnesis(patientDto, consultationDto, clinicalAnamnesisDto);
+        return await _repository.AddClinicalAnamnesis(consultationDto, clinicalAnamnesisDto);
     }
 
     [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/nutritional-anamnesis/")]
-    public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
+    public async Task<ActionResult<ConsultationDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] NutritionalAnamnesisDto nutritionalAnamnesisDto)
     {
         var patientDto = await _repository.FindPatient(patientId);
@@ -79,12 +79,12 @@ public class PatientController
         if (consultationDto == null)
             return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
-        return await _repository.AddNutritionalAnamnesis(patientDto, consultationDto, nutritionalAnamnesisDto);
+        return await _repository.AddNutritionalAnamnesis(consultationDto, nutritionalAnamnesisDto);
     }
 
     [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/anthropometry/")]
-    public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
+    public async Task<ActionResult<ConsultationDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] AnthropometryDto anthropometryDto)
     {
         var patientDto = await _repository.FindPatient(patientId);
@@ -95,6 +95,6 @@ public class PatientController
         if (consultationDto == null)
             return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
-        return await _repository.AddAnthropometry(patientDto, consultationDto, anthropometryDto);
+        return await _repository.AddAnthropometry(consultationDto, anthropometryDto);
     }
 }

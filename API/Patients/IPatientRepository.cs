@@ -14,15 +14,15 @@ public interface IPatientRepository
 
     Task<ConsultationDto?> FindConsultation(Guid id);
 
-    Task<PatientDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto);
+    Task<ConsultationDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto);
 
-    Task<PatientDto> AddClinicalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+    Task<ConsultationDto> AddClinicalAnamnesis(ConsultationDto consultationDto,
         ClinicalAnamnesisDto clinicalAnamnesisDto);
 
-    Task<PatientDto> AddNutritionalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
+    Task<ConsultationDto> AddNutritionalAnamnesis(ConsultationDto consultationDto,
         NutritionalAnamnesisDto nutritionalAnamnesisDto);
 
-    Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
+    Task<ConsultationDto> AddAnthropometry(ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto);
 
     static async Task<Patient?> FindPatientBy(NutrifoodsDbContext context,
