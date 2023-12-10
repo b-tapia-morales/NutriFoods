@@ -28,11 +28,10 @@ public class PatientRepository : IPatientRepository
 
     public async Task<PatientDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto)
     {
-        await using var context = new NutrifoodsDbContext();
         var consultation = _mapper.Map<Consultation>(consultationDto);
         consultation.PatientId = patientDto.Id;
-        await context.Consultations.AddAsync(consultation);
-        await context.SaveChangesAsync();
+        await _context.Consultations.AddAsync(consultation);
+        await _context.SaveChangesAsync();
         consultationDto.Id = consultation.Id;
         patientDto.Consultations.Add(consultationDto);
         return patientDto;
@@ -43,40 +42,94 @@ public class PatientRepository : IPatientRepository
     {
         var consultationId = consultationDto.Id;
         var previousRecord = await _context.ClinicalAnamneses.FirstOrDefaultAsync(e => e.Id == consultationId);
+        DateTime? createdOn = null;
         if (previousRecord != null)
         {
+            createdOn = previousRecord.CreatedOn;
             _context.Remove(previousRecord);
             await _context.SaveChangesAsync();
         }
 
         var clinicalAnamnesis = _mapper.Map<ClinicalAnamnesis>(clinicalAnamnesisDto);
-        clinicalAnamnesis.Id = consultationDto.Id;
+        clinicalAnamnesis.Id = consultationId;
+        if (previousRecord != null)
+        {
+            clinicalAnamnesis.CreatedOn = clinicalAnamnesisDto.CreatedOn = createdOn;
+            consultationDto.ClinicalAnamnesis = clinicalAnamnesisDto;
+            var index = patientDto.Consultations.ToList().FindIndex(e => e.Id == consultationId);
+            patientDto.Consultations.RemoveAt(index);
+            patientDto.Consultations.Insert(index, consultationDto);
+        }
+        else
+            clinicalAnamnesis.LastUpdated = clinicalAnamnesisDto.LastUpdated = null;
 
         await _context.ClinicalAnamneses.AddAsync(clinicalAnamnesis);
         await _context.SaveChangesAsync();
-        consultationDto.ClinicalAnamnesis = clinicalAnamnesisDto;
+
         return patientDto;
     }
 
     public async Task<PatientDto> AddNutritionalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
         NutritionalAnamnesisDto nutritionalAnamnesisDto)
     {
-        var anamnesis = _mapper.Map<NutritionalAnamnesis>(nutritionalAnamnesisDto);
-        anamnesis.Id = consultationDto.Id;
-        _context.NutritionalAnamneses.Update(anamnesis);
+        var consultationId = consultationDto.Id;
+        var previousRecord = await _context.NutritionalAnamneses.FirstOrDefaultAsync(e => e.Id == consultationId);
+        DateTime? createdOn = null;
+        if (previousRecord != null)
+        {
+            createdOn = previousRecord.CreatedOn;
+            _context.Remove(previousRecord);
+            await _context.SaveChangesAsync();
+        }
+
+        var nutritionalAnamnesis = _mapper.Map<NutritionalAnamnesis>(nutritionalAnamnesisDto);
+        nutritionalAnamnesis.Id = consultationId;
+        if (previousRecord != null)
+        {
+            nutritionalAnamnesis.CreatedOn = nutritionalAnamnesisDto.CreatedOn = createdOn;
+            consultationDto.NutritionalAnamnesis = nutritionalAnamnesisDto;
+            var index = patientDto.Consultations.ToList().FindIndex(e => e.Id == consultationId);
+            patientDto.Consultations.RemoveAt(index);
+            patientDto.Consultations.Insert(index, consultationDto);
+        }
+        else
+            nutritionalAnamnesis.LastUpdated = nutritionalAnamnesisDto.LastUpdated = null;
+
+        await _context.NutritionalAnamneses.AddAsync(nutritionalAnamnesis);
         await _context.SaveChangesAsync();
-        consultationDto.NutritionalAnamnesis = nutritionalAnamnesisDto;
+
         return patientDto;
     }
 
     public async Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto)
     {
+        var consultationId = consultationDto.Id;
+        var previousRecord = await _context.NutritionalAnamneses.FirstOrDefaultAsync(e => e.Id == consultationId);
+        DateTime? createdOn = null;
+        if (previousRecord != null)
+        {
+            createdOn = previousRecord.CreatedOn;
+            _context.Remove(previousRecord);
+            await _context.SaveChangesAsync();
+        }
+
         var anthropometry = _mapper.Map<Anthropometry>(anthropometryDto);
-        anthropometry.Id = consultationDto.Id;
-        _context.Anthropometries.Update(anthropometry);
+        anthropometry.Id = consultationId;
+        if (previousRecord != null)
+        {
+            anthropometry.CreatedOn = anthropometryDto.CreatedOn = createdOn;
+            consultationDto.Anthropometry = anthropometryDto;
+            var index = patientDto.Consultations.ToList().FindIndex(e => e.Id == consultationId);
+            patientDto.Consultations.RemoveAt(index);
+            patientDto.Consultations.Insert(index, consultationDto);
+        }
+        else
+            anthropometry.LastUpdated = anthropometryDto.LastUpdated = null;
+
+        await _context.Anthropometries.AddAsync(anthropometry);
         await _context.SaveChangesAsync();
-        consultationDto.Anthropometry = anthropometryDto;
+
         return patientDto;
     }
 }

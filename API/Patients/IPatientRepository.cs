@@ -25,7 +25,7 @@ public interface IPatientRepository
     Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto);
 
-    static async Task<Patient?> FindPatientBy(NutrifoodsDbContext context, 
+    static async Task<Patient?> FindPatientBy(NutrifoodsDbContext context,
         Expression<Func<Patient, bool>> predicate) =>
         await context.Patients.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
 
