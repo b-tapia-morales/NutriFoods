@@ -20,7 +20,7 @@ public class PatientController
 
     [HttpPost]
     [Route("/{patientId:guid}/consultation/")]
-    public async Task<ActionResult<PatientDto>> Create(Guid patientId,
+    public async Task<ActionResult<PatientDto>> CreateConsultation(Guid patientId,
         [FromBody] ConsultationDto consultationDto)
     {
         var results = await _consultationValidator.ValidateAsync(consultationDto);
@@ -32,25 +32,25 @@ public class PatientController
                  """
             );
 
-        var patientDto = await _repository.Find(patientId);
+        var patientDto = await _repository.FindPatient(patientId);
         if (patientDto == null)
             return new BadRequestObjectResult("");
 
         return await _repository.AddConsultation(patientDto, consultationDto);
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("/{patientId:guid}/consultation/{consultationId:guid}/clinical-anamnesis/")]
-    public async Task<ActionResult<PatientDto>> Create(Guid patientId, Guid consultationId,
+    public async Task<ActionResult<PatientDto>> AddClinicalAnamnesis(Guid patientId, Guid consultationId,
         [FromBody] ClinicalAnamnesisDto clinicalAnamnesisDto)
     {
-        var patientDto = await _repository.Find(patientId);
+        var patientDto = await _repository.FindPatient(patientId);
         if (patientDto == null)
-            return new BadRequestObjectResult("");
+            return new NotFoundObjectResult("Fucka you");
 
-        var consultationDto = patientDto.Consultations.FirstOrDefault(e => e.Id == consultationId);
+        var consultationDto = await _repository.FindConsultation(consultationId);
         if (consultationDto == null)
-            return new BadRequestObjectResult("");
+            return new NotFoundObjectResult("Whatsa matta you");
 
         return await _repository.AddClinicalAnamnesis(patientDto, consultationDto, clinicalAnamnesisDto);
     }

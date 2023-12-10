@@ -8,29 +8,23 @@ namespace API.Patients;
 
 public class PatientRepository : IPatientRepository
 {
+    private readonly NutrifoodsDbContext _context;
     private readonly IMapper _mapper;
 
-    public PatientRepository(IMapper mapper) => _mapper = mapper;
-
-    public async Task<PatientDto?> Find(Guid id) =>
-        _mapper.Map<PatientDto>(await FindBy(e => e.Id == id));
-
-    public async Task<PatientDto?> Find(string rut) =>
-        _mapper.Map<PatientDto>(await FindBy(e => e.PersonalInfo!.Rut.Equals(rut)));
-
-    public async Task<PatientDto> Create(PatientDto patientDto, Guid nutritionistId)
+    public PatientRepository(IMapper mapper, NutrifoodsDbContext context)
     {
-        await using var context = new NutrifoodsDbContext();
-        var patient = new Patient { NutritionistId = nutritionistId };
-        await context.Patients.AddAsync(patient);
-        await context.SaveChangesAsync();
-        patient.PersonalInfo = _mapper.Map<PersonalInfo>(patientDto.PersonalInfo);
-        patient.ContactInfo = _mapper.Map<ContactInfo>(patientDto.ContactInfo);
-        patient.Address = _mapper.Map<Address>(patientDto.Address);
-        await context.SaveChangesAsync();
-        patientDto.Id = patient.Id;
-        return patientDto;
+        _context = context;
+        _mapper = mapper;
     }
+
+    public async Task<PatientDto?> FindPatient(Guid id) =>
+        _mapper.Map<PatientDto>(await FindPatientBy(_context, e => e.Id == id));
+
+    public async Task<PatientDto?> FindPatient(string rut) =>
+        _mapper.Map<PatientDto>(await FindPatientBy(_context, e => e.PersonalInfo!.Rut.Equals(rut)));
+
+    public async Task<ConsultationDto?> FindConsultation(Guid id) =>
+        _mapper.Map<ConsultationDto>(await FindConsultationBy(_context, e => e.Id == id));
 
     public async Task<PatientDto> AddConsultation(PatientDto patientDto, ConsultationDto consultationDto)
     {
@@ -47,11 +41,19 @@ public class PatientRepository : IPatientRepository
     public async Task<PatientDto> AddClinicalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
         ClinicalAnamnesisDto clinicalAnamnesisDto)
     {
-        await using var context = new NutrifoodsDbContext();
+        var consultationId = consultationDto.Id;
+        var previousRecord = await _context.ClinicalAnamneses.FirstOrDefaultAsync(e => e.Id == consultationId);
+        if (previousRecord != null)
+        {
+            _context.Remove(previousRecord);
+            await _context.SaveChangesAsync();
+        }
+
         var clinicalAnamnesis = _mapper.Map<ClinicalAnamnesis>(clinicalAnamnesisDto);
         clinicalAnamnesis.Id = consultationDto.Id;
-        await context.ClinicalAnamneses.AddAsync(clinicalAnamnesis);
-        await context.SaveChangesAsync();
+
+        await _context.ClinicalAnamneses.AddAsync(clinicalAnamnesis);
+        await _context.SaveChangesAsync();
         consultationDto.ClinicalAnamnesis = clinicalAnamnesisDto;
         return patientDto;
     }
@@ -59,11 +61,10 @@ public class PatientRepository : IPatientRepository
     public async Task<PatientDto> AddNutritionalAnamnesis(PatientDto patientDto, ConsultationDto consultationDto,
         NutritionalAnamnesisDto nutritionalAnamnesisDto)
     {
-        await using var context = new NutrifoodsDbContext();
         var anamnesis = _mapper.Map<NutritionalAnamnesis>(nutritionalAnamnesisDto);
         anamnesis.Id = consultationDto.Id;
-        await context.NutritionalAnamneses.AddAsync(anamnesis);
-        await context.SaveChangesAsync();
+        _context.NutritionalAnamneses.Update(anamnesis);
+        await _context.SaveChangesAsync();
         consultationDto.NutritionalAnamnesis = nutritionalAnamnesisDto;
         return patientDto;
     }
@@ -71,11 +72,10 @@ public class PatientRepository : IPatientRepository
     public async Task<PatientDto> AddAnthropometry(PatientDto patientDto, ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto)
     {
-        await using var context = new NutrifoodsDbContext();
         var anthropometry = _mapper.Map<Anthropometry>(anthropometryDto);
         anthropometry.Id = consultationDto.Id;
-        await context.Anthropometries.AddAsync(anthropometry);
-        await context.SaveChangesAsync();
+        _context.Anthropometries.Update(anthropometry);
+        await _context.SaveChangesAsync();
         consultationDto.Anthropometry = anthropometryDto;
         return patientDto;
     }
@@ -83,28 +83,46 @@ public class PatientRepository : IPatientRepository
 
 public static class PatientExtensions
 {
-    public static IQueryable<Patient> IncludeSubfields(this DbSet<Patient> dbSet) =>
-        dbSet.AsQueryable()
-            // Patient info
+    public static IQueryable<Patient> IncludeSubfields(this DbSet<Patient> patients)
+    {
+        return patients
+            .AsQueryable()
             .Include(e => e.PersonalInfo)
             .Include(e => e.ContactInfo)
             .Include(e => e.Address)
-            .Include(e => e.Consultations)
-            // Consultations
-            .Include(e => e.Consultations)
             // Clinical anamnesis
-            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis)
+            .Include(e => e.Consultations)
             // Clinical anamnesis - fields
+            .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis)
             .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Diseases)
             .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.ClinicalSigns)
             .Include(e => e.Consultations).ThenInclude(e => e.ClinicalAnamnesis!.Ingestibles)
             // Nutritional anamnesis
             .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis)
             // Nutritional anamnesis - fields
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.EatingSymptoms)
             .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.HarmfulHabits)
-            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.EatingSymptoms)
             .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
+            .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
             // Anthropometry
             .Include(e => e.Consultations).ThenInclude(e => e.Anthropometry);
+    }
+
+    public static IQueryable<Consultation> IncludeSubfields(this DbSet<Consultation> dbSet) =>
+        dbSet.AsQueryable()
+            // Clinical anamnesis
+            .Include(e => e.ClinicalAnamnesis)
+            // Clinical anamnesis - fields
+            .Include(e => e.ClinicalAnamnesis!.Diseases)
+            .Include(e => e.ClinicalAnamnesis!.ClinicalSigns)
+            .Include(e => e.ClinicalAnamnesis!.Ingestibles)
+            // Nutritional anamnesis
+            .Include(e => e.NutritionalAnamnesis)
+            // Nutritional anamnesis - fields
+            .Include(e => e.NutritionalAnamnesis!.EatingSymptoms)
+            .Include(e => e.NutritionalAnamnesis!.HarmfulHabits)
+            .Include(e => e.NutritionalAnamnesis!.FoodConsumptions)
+            .Include(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
+            // Anthropometry
+            .Include(e => e.Anthropometry);
 }
