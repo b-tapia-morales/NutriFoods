@@ -46,12 +46,44 @@ public class PatientController
     {
         var patientDto = await _repository.FindPatient(patientId);
         if (patientDto == null)
-            return new NotFoundObjectResult("Fucka you");
+            return new NotFoundObjectResult($"There's no registered patient with the Id {patientId}");
 
         var consultationDto = await _repository.FindConsultation(consultationId);
         if (consultationDto == null)
-            return new NotFoundObjectResult("Whatsa matta you");
+            return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
         return await _repository.AddClinicalAnamnesis(patientDto, consultationDto, clinicalAnamnesisDto);
+    }
+    
+    [HttpPut]
+    [Route("/{patientId:guid}/consultation/{consultationId:guid}/nutritional-anamnesis/")]
+    public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
+        [FromBody] NutritionalAnamnesisDto nutritionalAnamnesisDto)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new NotFoundObjectResult($"There's no registered patient with the Id {patientId}");
+
+        var consultationDto = await _repository.FindConsultation(consultationId);
+        if (consultationDto == null)
+            return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
+
+        return await _repository.AddNutritionalAnamnesis(patientDto, consultationDto, nutritionalAnamnesisDto);
+    }
+    
+    [HttpPut]
+    [Route("/{patientId:guid}/consultation/{consultationId:guid}/anthropometry/")]
+    public async Task<ActionResult<PatientDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
+        [FromBody] AnthropometryDto anthropometryDto)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new NotFoundObjectResult($"There's no registered patient with the Id {patientId}");
+
+        var consultationDto = await _repository.FindConsultation(consultationId);
+        if (consultationDto == null)
+            return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
+
+        return await _repository.AddAnthropometry(patientDto, consultationDto, anthropometryDto);
     }
 }
