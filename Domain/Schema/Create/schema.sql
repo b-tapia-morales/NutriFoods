@@ -206,11 +206,11 @@ CREATE TABLE IF NOT EXISTS menu_recipe
 
 CREATE TABLE IF NOT EXISTS nutritionist
 (
-    id        UUID        NOT NULL DEFAULT uuid_generate_v4(),
-    username  VARCHAR(50) NOT NULL,
-    email     TEXT        NOT NULL,
-    password  TEXT        NOT NULL,
-    joined_on TIMESTAMP   NOT NULL DEFAULT now(),
+    id        UUID                     NOT NULL DEFAULT uuid_generate_v4(),
+    username  VARCHAR(50)              NOT NULL,
+    email     TEXT                     NOT NULL,
+    password  TEXT                     NOT NULL,
+    joined_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()::TIMESTAMP(0),
     UNIQUE (username),
     UNIQUE (email),
     PRIMARY KEY (id)
@@ -218,9 +218,9 @@ CREATE TABLE IF NOT EXISTS nutritionist
 
 CREATE TABLE IF NOT EXISTS patient
 (
-    id              UUID      NOT NULL DEFAULT uuid_generate_v4(),
-    joined_on       TIMESTAMP NOT NULL DEFAULT now(),
-    nutritionist_id UUID      NOT NULL,
+    id              UUID                     NOT NULL DEFAULT uuid_generate_v4(),
+    joined_on       TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()::TIMESTAMP(0),
+    nutritionist_id UUID                     NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (nutritionist_id) REFERENCES nutritionist (id)
 );
@@ -266,7 +266,7 @@ CREATE TABLE IF NOT EXISTS consultation
     id            UUID DEFAULT uuid_generate_v4(),
     type          INTEGER NOT NULL,
     purpose       INTEGER NOT NULL,
-    registered_on DATE DEFAULT now()::DATE,
+    registered_on DATE DEFAULT now()::TIMESTAMP(0)::DATE,
     patient_id    UUID    NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (patient_id) REFERENCES patient (id)
@@ -284,8 +284,8 @@ CREATE TABLE IF NOT EXISTS meal_plan
 CREATE TABLE IF NOT EXISTS clinical_anamnesis
 (
     id           UUID NOT NULL,
-    created_on   TIMESTAMP DEFAULT now(),
-    last_updated TIMESTAMP DEFAULT now(),
+    created_on   TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
+    last_updated TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
@@ -317,6 +317,7 @@ CREATE TABLE IF NOT EXISTS ingestible
     type                  INTEGER          NOT NULL,
     administration_times  VARCHAR(8) ARRAY NOT NULL DEFAULT ARRAY []::VARCHAR[],
     dosage                INTEGER,
+    unit                  INTEGER,
     adherence             INTEGER          NOT NULL,
     observations          TEXT                      DEFAULT '',
     clinical_anamnesis_id UUID             NOT NULL,
@@ -327,8 +328,8 @@ CREATE TABLE IF NOT EXISTS ingestible
 CREATE TABLE IF NOT EXISTS nutritional_anamnesis
 (
     id           UUID,
-    created_on   TIMESTAMP DEFAULT now(),
-    last_updated TIMESTAMP DEFAULT now()::DATE,
+    created_on   TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
+    last_updated TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
@@ -381,8 +382,8 @@ CREATE TABLE IF NOT EXISTS anthropometry
     bmi                    FLOAT   NOT NULL,
     muscle_mass_percentage FLOAT   NOT NULL,
     waist_circumference    FLOAT   NOT NULL,
-    created_on             TIMESTAMP DEFAULT now()::DATE,
-    last_updated           TIMESTAMP DEFAULT now()::DATE,
+    created_on             TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
+    last_updated           TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP(0),
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
