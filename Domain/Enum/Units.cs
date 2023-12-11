@@ -18,6 +18,12 @@ public class Units : SmartEnum<Units>, IEnum<Units, UnitToken>
 
     public static readonly Units KiloCalories =
         new(nameof(KiloCalories), (int)UnitToken.KiloCalories, "KCal");
+    
+    public static readonly Units Milliliter =
+        new(nameof(Milliliter), (int)UnitToken.Milliliter, "ml");
+    
+    public static readonly Units CubicCentimeter =
+        new(nameof(CubicCentimeter), (int)UnitToken.CubicCentimeter, "cc");
 
     private Units(string name, int value, string readableName) : base(name, value) => ReadableName = readableName;
 
@@ -30,5 +36,7 @@ public enum UnitToken
     Grams,
     Milligrams,
     Micrograms,
-    KiloCalories
+    KiloCalories,
+    Milliliter,
+    CubicCentimeter
 }
