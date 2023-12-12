@@ -35,21 +35,21 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
             populationSize, maxIterations, minCrossoverProb, minMutationProb);
     }
 
-    static async Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
+    static Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
         MutationToken mutationMethod = RandomPoints,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb) =>
-        await Task.Run(() => GenerateSolution(universe, targets, chromosomeSize, populationSize,
+        Task.Run(() => GenerateSolution(universe, targets, chromosomeSize, populationSize,
             maxIterations, selectionMethod, crossoverMethod, mutationMethod, minCrossoverProb, minMutationProb));
 
-    static async Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
+    static Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb) =>
-        await Task.Run(() => T.GenerateSolution(universe, targets, selection, crossover, mutation,
+        Task.Run(() => T.GenerateSolution(universe, targets, selection, crossover, mutation,
             chromosomeSize, populationSize, maxIterations, minCrossoverProb, minMutationProb));
 
     static int CalculateMaximumFitness(IReadOnlyList<NutritionalTargetDto> targets) =>

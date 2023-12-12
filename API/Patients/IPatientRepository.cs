@@ -25,11 +25,11 @@ public interface IPatientRepository
     Task<ConsultationDto> AddAnthropometry(ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto);
 
-    static async Task<Patient?> FindPatientBy(NutrifoodsDbContext context,
+    static Task<Patient?> FindPatientBy(NutrifoodsDbContext context,
         Expression<Func<Patient, bool>> predicate) =>
-        await context.Patients.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
+        context.Patients.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
 
-    static async Task<Consultation?> FindConsultationBy(NutrifoodsDbContext context,
+    static Task<Consultation?> FindConsultationBy(NutrifoodsDbContext context,
         Expression<Func<Consultation, bool>> predicate) =>
-        await context.Consultations.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
+        context.Consultations.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
 }

@@ -18,19 +18,19 @@ public class IngredientRepository : IIngredientRepository
         _mapper = mapper;
     }
 
-    public async Task<List<IngredientDto>> FindAll() =>
-        await _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()).ToListAsync();
+    public Task<List<IngredientDto>> FindAll() =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()).ToListAsync();
 
-    public async Task<IngredientDto?> FindByName(string name) =>
-        await _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
+    public Task<IngredientDto?> FindByName(string name) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
             .FirstAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)));
 
-    public async Task<IngredientDto?> FindById(int id) =>
-        await _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
+    public Task<IngredientDto?> FindById(int id) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
             .FirstAsync(e => e.Id == id);
 
-    public async Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
-        await _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()
+    public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()
             .Where(e => e.FoodGroup == group)
         ).ToListAsync();
 }

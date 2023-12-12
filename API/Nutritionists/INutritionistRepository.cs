@@ -22,11 +22,11 @@ public interface INutritionistRepository
 
     Task<NutritionistDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto);
 
-    static async Task<Nutritionist?> FindNutritionistBy(
+    static Task<Nutritionist?> FindNutritionistBy(
         NutrifoodsDbContext context, Expression<Func<Nutritionist, bool>> predicate) =>
-        await context.Nutritionists.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
+        context.Nutritionists.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
 
-    static async Task<Patient?> FindPatientBy(
+    static Task<Patient?> FindPatientBy(
         NutrifoodsDbContext context, Expression<Func<Patient, bool>> predicate) =>
-        await context.Patients.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
+        context.Patients.IncludeSubfields().Where(predicate).FirstOrDefaultAsync();
 }

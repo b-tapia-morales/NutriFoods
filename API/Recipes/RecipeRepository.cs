@@ -102,17 +102,17 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    public async Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound) =>
-        await FilterByNutrientQuantity(Energy, lowerBound, upperBound);
+    public Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound) =>
+        FilterByNutrientQuantity(Energy, lowerBound, upperBound);
 
-    public async Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound) =>
-        await FilterByNutrientQuantity(Carbohydrates, lowerBound, upperBound);
+    public Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound) =>
+        FilterByNutrientQuantity(Carbohydrates, lowerBound, upperBound);
 
-    public async Task<List<RecipeDto>> FilterByFattyAcids(int lowerBound, int upperBound) =>
-        await FilterByNutrientQuantity(FattyAcids, lowerBound, upperBound);
+    public Task<List<RecipeDto>> FilterByFattyAcids(int lowerBound, int upperBound) =>
+        FilterByNutrientQuantity(FattyAcids, lowerBound, upperBound);
 
-    public async Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
-        await FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
+    public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
+        FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
 
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
         double fattyAcids, double proteins)
