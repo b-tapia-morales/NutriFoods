@@ -165,6 +165,7 @@ public class MappingProfile : Profile
             .ReverseMap();
 
         CreateMap<ClinicalAnamnesis, ClinicalAnamnesisDto>()
+            .ForMember(e => e.Ingestibles, opt => opt.MapFrom(src => src.Ingestibles))
             .ReverseMap();
 
         // Nutritional Anamnesis
