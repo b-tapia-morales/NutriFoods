@@ -11,12 +11,15 @@ namespace API.Patients;
 public class PatientController
 {
     private readonly IValidator<ConsultationDto> _consultationValidator;
+    private readonly IValidator<ClinicalAnamnesisDto> _clinicalAnamnesisValidator;
     private readonly IPatientRepository _repository;
 
-    public PatientController(IPatientRepository repository, IValidator<ConsultationDto> consultationValidator)
+    public PatientController(IPatientRepository repository, IValidator<ConsultationDto> consultationValidator,
+        IValidator<ClinicalAnamnesisDto> clinicalAnamnesisValidator)
     {
-        _repository = repository;
         _consultationValidator = consultationValidator;
+        _clinicalAnamnesisValidator = clinicalAnamnesisValidator;
+        _repository = repository;
     }
 
     [HttpGet]
@@ -90,6 +93,15 @@ public class PatientController
         if (consultationDto == null)
             return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
+        var results = await _clinicalAnamnesisValidator.ValidateAsync(clinicalAnamnesisDto);
+        if (!results.IsValid)
+            return new BadRequestObjectResult(
+                $"""
+                 Could not perform query because of the following errors:
+                 {results.Errors.Select(e => e.ErrorMessage).ToJoinedString(Environment.NewLine)}
+                 """
+            );
+
         return await _repository.AddClinicalAnamnesis(consultationDto, clinicalAnamnesisDto);
     }
 
@@ -111,7 +123,7 @@ public class PatientController
 
     [HttpPut]
     [Route("/{patientId:guid}/consultations/{consultationId:guid}/anthropometry/")]
-    public async Task<ActionResult<ConsultationDto>> AddNutritionalAnamnesis(Guid patientId, Guid consultationId,
+    public async Task<ActionResult<ConsultationDto>> AddAnthropometry(Guid patientId, Guid consultationId,
         [FromBody] AnthropometryDto anthropometryDto)
     {
         var patientDto = await _repository.FindPatient(patientId);

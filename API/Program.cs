@@ -59,6 +59,7 @@ builder.Services
     .AddScoped<IValidator<PatientDto>, PatientValidator>()
     // Validators for patient
     .AddScoped<IValidator<ConsultationDto>, ConsultationValidator>()
+    .AddScoped<IValidator<ClinicalAnamnesisDto>, ClinicalAnamnesisValidator>()
     // Repositories
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
