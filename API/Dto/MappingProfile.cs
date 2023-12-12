@@ -142,10 +142,12 @@ public class MappingProfile : Profile
 
         // Clinical Anamnesis
         CreateMap<Ingestible, IngestibleDto>()
+            .ForMember(e => e.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(e => e.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ForMember(e => e.Adherence, opt => opt.MapFrom(src => src.Adherence.ReadableName))
-            .ForMember(e => e.Unit, opt => opt.MapFrom(src => (src.Unit ?? Units.None).ReadableName))
+            .ForMember(e => e.Unit, opt => opt.MapFrom(src => src.Unit == null ? null : src.Unit.ReadableName))
             .ReverseMap()
+            .ForMember(e => e.Name, opt => opt.MapFrom(src => src.Name))
             .ForMember(dest => dest.Type,
                 opt => opt.MapFrom(src => IEnum<IngestibleTypes, IngestibleToken>.ToValue(src.Type)))
             .ForMember(dest => dest.Adherence,
@@ -165,7 +167,6 @@ public class MappingProfile : Profile
             .ReverseMap();
 
         CreateMap<ClinicalAnamnesis, ClinicalAnamnesisDto>()
-            .ForMember(e => e.Ingestibles, opt => opt.MapFrom(src => src.Ingestibles))
             .ReverseMap();
 
         // Nutritional Anamnesis
