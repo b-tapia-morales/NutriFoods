@@ -144,17 +144,22 @@ public class MappingProfile : Profile
         CreateMap<Ingestible, IngestibleDto>()
             .ForMember(e => e.Type, opt => opt.MapFrom(src => src.Type.ReadableName))
             .ForMember(e => e.Adherence, opt => opt.MapFrom(src => src.Adherence.ReadableName))
+            .ForMember(e => e.Unit, opt => opt.MapFrom(src => (src.Unit ?? Units.None).ReadableName))
             .ReverseMap()
             .ForMember(dest => dest.Type,
                 opt => opt.MapFrom(src => IEnum<IngestibleTypes, IngestibleToken>.ToValue(src.Type)))
             .ForMember(dest => dest.Adherence,
-                opt => opt.MapFrom(src => IEnum<Frequencies, FrequencyToken>.ToValue(src.Adherence)));
+                opt => opt.MapFrom(src => IEnum<Frequencies, FrequencyToken>.ToValue(src.Adherence)))
+            .ForMember(e => e.Unit,
+                opt => opt.MapFrom(src => IEnum<Units, UnitToken>.ToValue(src.Unit ?? string.Empty)));
 
         CreateMap<Disease, DiseaseDto>()
-            .ForMember(e => e.InheritanceType, opt => opt.MapFrom(src => src.InheritanceType.ReadableName))
+            .ForMember(e => e.InheritanceTypes,
+                opt => opt.MapFrom(src => src.InheritanceTypes.Select(e => e.ReadableName).ToList()))
             .ReverseMap()
-            .ForMember(dest => dest.InheritanceType,
-                opt => opt.MapFrom(src => IEnum<InheritanceTypes, InheritanceToken>.ToValue(src.InheritanceType)));
+            .ForMember(dest => dest.InheritanceTypes,
+                opt => opt.MapFrom(
+                    src => src.InheritanceTypes.Select(IEnum<InheritanceTypes, InheritanceToken>.ToValue)));
 
         CreateMap<ClinicalSign, ClinicalSignDto>()
             .ReverseMap();
