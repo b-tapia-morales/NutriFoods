@@ -2,6 +2,7 @@
 // ReSharper disable ClassNeverInstantiated.Global
 
 using System.Collections.Concurrent;
+using API.ApplicationData;
 using API.DailyMenus;
 using API.Dto;
 using API.Recipes;
@@ -16,13 +17,16 @@ namespace API.DailyPlans;
 [Route("api/v1/daily-plans")]
 public class DailyPlanController
 {
+    private readonly IApplicationData _applicationData;
     private readonly IValidator<DailyPlanDto> _planValidator;
     private readonly IDailyMenuRepository _dailyMenuRepository;
     private readonly IRecipeRepository _recipeRepository;
 
-    public DailyPlanController(IDailyMenuRepository dailyMenuRepository, IRecipeRepository recipeRepository,
+    public DailyPlanController(IApplicationData applicationData, IDailyMenuRepository dailyMenuRepository,
+        IRecipeRepository recipeRepository,
         IValidator<DailyPlanDto> planValidator)
     {
+        _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
         _recipeRepository = recipeRepository;
         _planValidator = planValidator;
@@ -42,7 +46,7 @@ public class DailyPlanController
             );
 
         dailyPlan.AddMenuTargets();
-        var recipes = await _recipeRepository.FindAll();
+        var recipes = _applicationData.RecipeDict[MealTypes.None];
         var bag = new ConcurrentBag<DailyMenuDto>();
 
         await Parallel.ForEachAsync(dailyPlan.Menus,
@@ -69,7 +73,7 @@ public class DailyPlanController
             async (menu, _) =>
             {
                 var mealType = IEnum<MealTypes, MealToken>.ToValue(menu.MealType);
-                var recipes = await _recipeRepository.FindByMealType(mealType).ConfigureAwait(false);
+                var recipes = _applicationData.RecipeDict[mealType];
                 bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes).ConfigureAwait(false));
             });
 

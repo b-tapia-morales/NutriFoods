@@ -5,25 +5,23 @@ namespace API.Recipes;
 
 public interface IRecipeRepository
 {
-    Task<List<RecipeDto>> FindAll();
+    Task<List<RecipeDto>> FindAll(int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> FindWithPortions();
-
-    Task<RecipeDto?> FindByName(string name);
+    Task<RecipeDto?> FindByNameAndAuthor(string name, string author);
 
     Task<RecipeDto?> FindById(int id);
 
-    Task<List<RecipeDto>> FindByMealType(MealTypes mealType);
+    Task<List<RecipeDto>> FindByMealType(MealTypes mealType, int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> FindByDishType(DishTypes dishType);
+    Task<List<RecipeDto>> FindByDishType(DishTypes dishType, int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> GetVegetarianRecipes(Diets diet);
+    Task<List<RecipeDto>> GetVegetarianRecipes(Diets diet, int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound, int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> FilterByPortions(int portions);
+    Task<List<RecipeDto>> FilterByPortions(int portions, int pageNumber, int pageSize);
 
-    Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound);
+    Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound, int pageNumber, int pageSize);
 
     Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound);
 

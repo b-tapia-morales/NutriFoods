@@ -9,7 +9,7 @@ public class Diets : SmartEnum<Diets>, IEnum<Diets, DietToken>
         new(nameof(None), (int)DietToken.None, string.Empty, Array.Empty<FoodGroups>());
 
     public static readonly Diets Vegetarian =
-        new(nameof(Vegetarian), (int)DietToken.Vegetarian, "Vegano",
+        new(nameof(Vegetarian), (int)DietToken.Vegetarian, "Vegetariano",
             new[] { Fish, Shellfish, Meat, Poultry, Eggs, Milk, Yogurt, Cheese });
 
     public static readonly Diets OvoVegetarian =

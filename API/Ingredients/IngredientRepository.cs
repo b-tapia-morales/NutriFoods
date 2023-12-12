@@ -1,5 +1,6 @@
 ﻿using API.Dto;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -19,25 +20,25 @@ public class IngredientRepository : IIngredientRepository
     }
 
     public Task<List<IngredientDto>> FindAll() =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()).ToListAsync();
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
+            .ToListAsync();
 
     public Task<IngredientDto?> FindByName(string name) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
-            .FirstAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)));
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
+            .FirstOrDefaultAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)));
 
     public Task<IngredientDto?> FindById(int id) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields())
-            .FirstAsync(e => e.Id == id);
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
+            .FirstOrDefaultAsync(e => e.Id == id);
 
     public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeFields()
-            .Where(e => e.FoodGroup == group)
-        ).ToListAsync();
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields().Where(e => e.FoodGroup == group))
+            .ToListAsync();
 }
 
 public static class IngredientExtensions
 {
-    public static IQueryable<Ingredient> IncludeFields(this DbSet<Ingredient> ingredients)
+    public static IQueryable<Ingredient> IncludeSubfields(this DbSet<Ingredient> ingredients)
     {
         return ingredients
             .AsQueryable()
