@@ -59,7 +59,8 @@ public class NutritionistRepository : INutritionistRepository
         patient.ContactInfo = _mapper.Map<ContactInfo>(patientDto.ContactInfo);
         patient.Address = _mapper.Map<Address>(patientDto.Address);
         await _context.SaveChangesAsync();
-        patient.Id = id;
+        patientDto.Id = id;
+        patientDto.JoinedOn = patient.JoinedOn;
         nutritionistDto.Patients.Add(patientDto);
         return nutritionistDto;
     }
