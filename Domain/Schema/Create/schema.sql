@@ -302,10 +302,10 @@ CREATE TABLE IF NOT EXISTS clinical_sign
 
 CREATE TABLE IF NOT EXISTS disease
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    inheritance_type      INTEGER     NOT NULL,
-    clinical_anamnesis_id UUID        NOT NULL,
+    id                    UUID                   DEFAULT uuid_generate_v4(),
+    name                  VARCHAR(64)   NOT NULL,
+    inheritance_types     INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
+    clinical_anamnesis_id UUID          NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (clinical_anamnesis_id) REFERENCES clinical_anamnesis (id)
 );
@@ -336,42 +336,42 @@ CREATE TABLE IF NOT EXISTS nutritional_anamnesis
 
 CREATE TABLE IF NOT EXISTS harmful_habit
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    observations          TEXT DEFAULT '',
-    nutritional_anamnesis UUID        NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    name                     VARCHAR(64) NOT NULL,
+    observations             TEXT DEFAULT '',
+    nutritional_anamnesis_id UUID        NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS eating_symptom
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    observations          TEXT DEFAULT '',
-    nutritional_anamnesis UUID        NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    name                     VARCHAR(64) NOT NULL,
+    observations             TEXT DEFAULT '',
+    nutritional_anamnesis_id UUID        NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS adverse_food_reaction
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    food_group            INTEGER NOT NULL,
-    type                  INTEGER NOT NULL,
-    nutritional_anamnesis UUID    NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    food_group               INTEGER NOT NULL,
+    type                     INTEGER NOT NULL,
+    nutritional_anamnesis_id UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS food_consumption
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    food_group            INTEGER NOT NULL,
-    frequency             INTEGER NOT NULL,
-    nutritional_anamnesis UUID    NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    food_group               INTEGER NOT NULL,
+    frequency                INTEGER NOT NULL,
+    nutritional_anamnesis_id UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS anthropometry
