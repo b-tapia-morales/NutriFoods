@@ -6,6 +6,7 @@ using API.Ingredients;
 using API.Nutritionists;
 using API.Patients;
 using API.Recipes;
+using Domain.DatabaseInitialization;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -16,7 +17,11 @@ using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
+using NutrientRetrieval.NutrientCalculation;
+using NutrientRetrieval.Retrieval.Abridged;
+using RecipeInsertion;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
+
 #if DEBUG
 DatabaseInitialization.Initialize();
 await AbridgedRetrieval.RetrieveFromApi();

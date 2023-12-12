@@ -8,7 +8,7 @@ public class Disease
 
     public string Name { get; set; } = null!;
 
-    public InheritanceTypes InheritanceType { get; set; } = null!;
+    public List<InheritanceTypes> InheritanceTypes { get; set; } = null!;
 
     public Guid ClinicalAnamnesisId { get; set; }
 

@@ -14,6 +14,8 @@ public class Ingestible
 
     public int? Dosage { get; set; }
 
+    public Units? Unit { get; set; }
+
     public Frequencies Adherence { get; set; } = null!;
 
     public string? Observations { get; set; }

@@ -10,7 +10,7 @@ public class AdverseFoodReaction
 
     public FoodReactions Type { get; set; } = null!;
 
-    public Guid NutritionalAnamnesis { get; set; }
+    public Guid NutritionalAnamnesisId { get; set; }
 
-    public virtual NutritionalAnamnesis NutritionalAnamnesesNavigation { get; set; } = null!;
+    public virtual NutritionalAnamnesis NutritionalAnamnesis { get; set; } = null!;
 }
