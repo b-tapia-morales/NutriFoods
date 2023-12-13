@@ -19,6 +19,7 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
         var population = GenerateInitialPopulation(universe, chromosomeSize, populationSize);
         var winners = new List<Chromosome>();
         CalculatePopulationFitness(population, targets);
+        var globalOptimum = population.Max();
         int i;
         for (i = 0; i < maxIterations; i++)
         {
@@ -26,14 +27,17 @@ public class GeneticOptimizer : IEvolutionaryOptimizer<GeneticOptimizer>
             crossover.Method(population, winners, chromosomeSize, populationSize, minCrossoverProb);
             mutation.Method(population, universe, chromosomeSize, populationSize, minMutationProb);
             CalculatePopulationFitness(population, targets);
-            if (SolutionExists(population, maxFitness))
-                break;
+            var localOptimum = population.Max();
+            if (localOptimum.Fitness < maxFitness)
+                continue;
+            globalOptimum = ChromosomeExtensions.Max(globalOptimum, localOptimum);
+            break;
         }
 
         watch.Stop();
         Console.WriteLine($"Total elapsed time: {watch.Elapsed.Milliseconds}");
         Console.WriteLine($"Total iterations: {i}");
 
-        return population.OrderByDescending(e => e.Fitness).First().Recipes;
+        return globalOptimum.Recipes;
     }
 }

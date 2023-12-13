@@ -45,4 +45,10 @@ public static class ChromosomeExtensions
 
     public static Chromosome MutateChromosome(this Chromosome chromosome, RecipeDto gen, int crossoverPoint) =>
         new(new List<RecipeDto>(chromosome.Recipes.Select((e, i) => i == crossoverPoint ? gen : e)));
+    
+    public static Chromosome Max(this List<Chromosome> population) =>
+        population.MaxBy(e => e.Fitness)!;
+    
+    public static Chromosome Max(Chromosome x, Chromosome y) =>
+        x.Fitness > y.Fitness ? x : y;
 }

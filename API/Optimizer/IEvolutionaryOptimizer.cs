@@ -75,7 +75,4 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
 
     static void CalculatePopulationFitness(List<Chromosome> population, IReadOnlyList<NutritionalTargetDto> targets) =>
         population.ForEach(e => e.CalculateFitness(targets));
-
-    static bool SolutionExists(List<Chromosome> population, int maximumFitness) =>
-        population.Exists(e => e.Fitness >= maximumFitness);
 }
