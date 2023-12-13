@@ -46,7 +46,7 @@ public class DailyPlanController
             );
 
         dailyPlan.AddMenuTargets();
-        var recipes = _applicationData.RecipeDict[MealTypes.None];
+        var recipes = _applicationData.MealRecipesDict[MealTypes.None];
         var bag = new ConcurrentBag<DailyMenuDto>();
 
         await Parallel.ForEachAsync(dailyPlan.Menus,
@@ -73,7 +73,7 @@ public class DailyPlanController
             async (menu, _) =>
             {
                 var mealType = IEnum<MealTypes, MealToken>.ToValue(menu.MealType);
-                var recipes = _applicationData.RecipeDict[mealType];
+                var recipes = _applicationData.MealRecipesDict[mealType];
                 bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes).ConfigureAwait(false));
             });
 

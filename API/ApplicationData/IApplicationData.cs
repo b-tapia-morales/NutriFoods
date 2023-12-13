@@ -7,7 +7,8 @@ namespace API.ApplicationData;
 
 public interface IApplicationData
 {
-    IReadOnlyDictionary<MealTypes, List<RecipeDto>> RecipeDict { get; }
+    IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
+    IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
     IReadOnlyDictionary<MealTypes, double> CarbohydratesDict { get; }
@@ -28,6 +29,4 @@ public interface IApplicationData
         };
         return (int)Math.Round(ratio, 0, MidpointRounding.AwayFromZero);
     }
-    
-    public IReadOnlyList<RecipeDto> ByMealType(MealTypes mealType) => RecipeDict[mealType];
 }

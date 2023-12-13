@@ -25,7 +25,8 @@ public class ApplicationData : IApplicationData
     {
         var context = new NutrifoodsDbContext(Options);
         var recipes = FindAll(context, mapper);
-        RecipeDict = new Dictionary<MealTypes, List<RecipeDto>>
+        RecipeDict = recipes.ToImmutableDictionary(e => e.Id, e => e);
+        MealRecipesDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
             [MealTypes.None] = recipes,
             [MealTypes.Breakfast] = FindByMealType(recipes, MealTypes.Breakfast),
@@ -38,14 +39,10 @@ public class ApplicationData : IApplicationData
         FattyAcidsDict = ToAveragesDict(Nutrients.FattyAcids).ToImmutableDictionary(e => e.Key, e => e.Value);
         ProteinsDict = ToAveragesDict(Nutrients.Proteins).ToImmutableDictionary(e => e.Key, e => e.Value);
         DefaultRatio = 4.0 / 7.0;
-        CountDict.WriteToConsole();
-        EnergyDict.WriteToConsole();
-        CarbohydratesDict.WriteToConsole();
-        FattyAcidsDict.WriteToConsole();
-        ProteinsDict.WriteToConsole();
     }
 
-    public IReadOnlyDictionary<MealTypes, List<RecipeDto>> RecipeDict { get; }
+    public IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
+    public IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
     public IReadOnlyDictionary<MealTypes, double> CarbohydratesDict { get; }
@@ -60,7 +57,7 @@ public class ApplicationData : IApplicationData
         {
             if (mealType == MealTypes.Snack)
                 continue;
-            var count = RecipeDict[mealType].Count;
+            var count = MealRecipesDict[mealType].Count;
             yield return new KeyValuePair<MealTypes, int>(mealType, count);
         }
     }
@@ -72,7 +69,7 @@ public class ApplicationData : IApplicationData
         {
             if (mealType == MealTypes.Snack)
                 continue;
-            var average = CalculateAverage(RecipeDict[mealType], nutrient);
+            var average = CalculateAverage(MealRecipesDict[mealType], nutrient);
             yield return new KeyValuePair<MealTypes, double>(mealType, average);
         }
     }

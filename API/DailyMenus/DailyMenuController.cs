@@ -46,7 +46,7 @@ public class DailyMenuController
             );
 
         var mealType = ToValue(dailyMenu.MealType);
-        return await _dailyMenuRepository.GenerateMenu(dailyMenu, _applicationData.RecipeDict[mealType]);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, _applicationData.MealRecipesDict[mealType]);
     }
 
     [HttpGet]
@@ -80,7 +80,7 @@ public class DailyMenuController
         };
 
         var nutrients = targets.Select(e => e.Nutrient).ToHashSet();
-        var recipes = _applicationData.RecipeDict[ToValue(mealToken)].ToList();
+        var recipes = _applicationData.MealRecipesDict[ToValue(mealToken)].ToList();
         recipes.FilterNutrients(nutrients);
         return await _dailyMenuRepository.GenerateMenu(dailyMenu, recipes.AsReadOnly());
     }
