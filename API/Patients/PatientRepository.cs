@@ -94,7 +94,7 @@ public class PatientRepository : IPatientRepository
         AnthropometryDto anthropometryDto)
     {
         var consultationId = consultationDto.Id;
-        var previousRecord = await _context.NutritionalAnamneses.FirstOrDefaultAsync(e => e.Id == consultationId);
+        var previousRecord = await _context.Anthropometries.FirstOrDefaultAsync(e => e.Id == consultationId);
         DateTime? createdOn = null;
         if (previousRecord != null)
         {
