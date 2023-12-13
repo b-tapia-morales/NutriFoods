@@ -28,6 +28,7 @@ public class DailyPlanRepository : IDailyPlanRepository
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
         var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
         dailyMenu.Recipes = [..abridgedRecipes.ToMenus()];
+        dailyMenu.Targets.IncludeActualValues(solution);
         return dailyMenu;
     }
 }
