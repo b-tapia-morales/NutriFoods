@@ -1,13 +1,11 @@
 // ReSharper disable ConvertToPrimaryConstructor
 
-using System.Diagnostics;
 using API.ApplicationData;
 using API.Dto;
 using API.Dto.Abridged;
 using API.Optimizer;
 using AutoMapper;
 using Domain.Enum;
-using Utils.Enumerable;
 
 namespace API.DailyMenus;
 

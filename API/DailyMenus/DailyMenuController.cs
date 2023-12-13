@@ -1,10 +1,8 @@
 // ReSharper disable ConvertToPrimaryConstructor
 
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using API.ApplicationData;
 using API.Dto;
-using API.Recipes;
 using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +20,11 @@ public class DailyMenuController
     private readonly IValidator<DailyMenuQuery> _queryValidator;
     private readonly IValidator<DailyMenuDto> _jsonValidator;
 
-    public DailyMenuController(IApplicationData applicationData,
-        IDailyMenuRepository dailyMenuRepository, IRecipeRepository recipeRepository,
-        IValidator<DailyMenuQuery> queryValidator, IValidator<DailyMenuDto> jsonValidator)
+    public DailyMenuController(
+        IApplicationData applicationData,
+        IDailyMenuRepository dailyMenuRepository,
+        IValidator<DailyMenuQuery> queryValidator,
+        IValidator<DailyMenuDto> jsonValidator)
     {
         _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
