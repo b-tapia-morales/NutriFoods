@@ -85,7 +85,7 @@ public class DailyPlanController
             PhysicalActivityFactor = configuration.ActivityFactor,
             Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
         };
-        dailyPlan.AddMenuTargets();
+        // dailyPlan.AddMenuTargets();
         return dailyPlan;
     }
 }
