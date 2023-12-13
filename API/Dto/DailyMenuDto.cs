@@ -31,8 +31,15 @@ public static class DailyMenuExtensions
                 Hour = mealConfiguration.Hour,
                 MealType = mealConfiguration.MealType,
                 IntakePercentage = mealConfiguration.IntakePercentage,
-                Targets = new List<NutritionalTargetDto>(targets)
+                Targets = [..targets]
             };
         }
+    }
+
+    public static async IAsyncEnumerable<DailyMenuDto> ToTasks(this List<DailyMenuDto> menus, IDailyPlanRepository repository,
+        IReadOnlyList<RecipeDto> recipes)
+    {
+        foreach (var menu in menus)
+            yield return await repository.GenerateMenus(menu, recipes);
     }
 }

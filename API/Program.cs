@@ -64,6 +64,7 @@ builder.Services
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
+    .AddScoped<IDailyPlanRepository, DailyPlanRepository>()
     .AddScoped<INutritionistRepository, NutritionistRepository>()
     .AddScoped<IPatientRepository, PatientRepository>();
 

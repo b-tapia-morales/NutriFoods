@@ -1,15 +1,17 @@
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ConvertToPrimaryConstructor
 // ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 using System.Collections.Concurrent;
+using System.Threading.Tasks.Dataflow;
 using API.ApplicationData;
-using API.DailyMenus;
 using API.Dto;
 using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
-using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
+using Utils.Parallel;
 
 namespace API.DailyPlans;
 
@@ -19,14 +21,14 @@ public class DailyPlanController
 {
     private readonly IApplicationData _applicationData;
     private readonly IValidator<DailyPlanDto> _planValidator;
-    private readonly IDailyMenuRepository _dailyMenuRepository;
+    private readonly IDailyPlanRepository _dailyPlanRepository;
 
     public DailyPlanController(IApplicationData applicationData,
-        IDailyMenuRepository dailyMenuRepository,
+        IDailyPlanRepository dailyPlanRepository,
         IValidator<DailyPlanDto> planValidator)
     {
         _applicationData = applicationData;
-        _dailyMenuRepository = dailyMenuRepository;
+        _dailyPlanRepository = dailyPlanRepository;
         _planValidator = planValidator;
     }
 
@@ -43,14 +45,17 @@ public class DailyPlanController
                  """
             );
 
-        dailyPlan.AddMenuTargets();
         var recipes = _applicationData.MealRecipesDict[MealTypes.None];
-        var bag = new ConcurrentBag<DailyMenuDto>();
+        recipes.FilterNutrients(dailyPlan.Menus[0].Nutrients.Select(e => e.Nutrient).ToHashSet());
 
-        await Parallel.ForEachAsync(dailyPlan.Menus,
-            async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
+        ParallelOptions parallelOptions = new()
+        {
+            MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded
+        };
+        await Parallel.ForEachAsync(dailyPlan.Menus, parallelOptions,
+            async (menu, _) => { await _dailyPlanRepository.GenerateMenus(menu, recipes); });
 
-        dailyPlan.Menus = bag.OrderBy(e => ToValue(e.MealType)).ToList();
+        dailyPlan.AddMenuTargets();
         return dailyPlan;
     }
 
@@ -58,32 +63,27 @@ public class DailyPlanController
     [Route("/distribution/")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
-        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
-                                 configuration.ActivityFactor;
-        var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
-
-        var bag = new ConcurrentBag<DailyMenuDto>();
-        ParallelOptions parallelOptions = new()
-        {
-            MaxDegreeOfParallelism = configuration.MealConfigurations.Count
-        };
-        await Parallel.ForEachAsync(menus, parallelOptions,
-            async (menu, _) =>
-            {
-                var recipes = _applicationData.MealRecipesDict[ToValue(menu.MealType)];
-                recipes.FilterNutrients(menu.Targets.Select(e => e.Nutrient).ToHashSet());
-                bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes).ConfigureAwait(false));
-            });
-
         var dailyPlan = new DailyPlanDto
         {
             Day = configuration.Day,
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
             PhysicalActivityFactor = configuration.ActivityFactor,
-            Menus = bag.OrderBy(e => ToValue(e.MealType)).ToList()
+            Menus = new()
         };
-        // dailyPlan.AddMenuTargets();
+
+        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
+                                 configuration.ActivityFactor;
+        var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
+
+        var recipes = _applicationData.MealRecipesDict[MealTypes.None];
+        recipes.FilterNutrients(menus.SelectMany(e => e.Targets.Select(t => t.Nutrient)).ToHashSet());
+
+        var queue = new ConcurrentQueue<DailyMenuDto>();
+        var tasks = menus.ToTasks(_dailyPlanRepository, recipes);
+        await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
+
+        dailyPlan.Menus.AddRange(queue);
         return dailyPlan;
     }
 }
