@@ -5,11 +5,11 @@ using System.Collections.Concurrent;
 using API.ApplicationData;
 using API.DailyMenus;
 using API.Dto;
-using API.Recipes;
 using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
+using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyPlans;
 
@@ -20,15 +20,13 @@ public class DailyPlanController
     private readonly IApplicationData _applicationData;
     private readonly IValidator<DailyPlanDto> _planValidator;
     private readonly IDailyMenuRepository _dailyMenuRepository;
-    private readonly IRecipeRepository _recipeRepository;
 
-    public DailyPlanController(IApplicationData applicationData, IDailyMenuRepository dailyMenuRepository,
-        IRecipeRepository recipeRepository,
+    public DailyPlanController(IApplicationData applicationData,
+        IDailyMenuRepository dailyMenuRepository,
         IValidator<DailyPlanDto> planValidator)
     {
         _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
-        _recipeRepository = recipeRepository;
         _planValidator = planValidator;
     }
 
@@ -52,12 +50,12 @@ public class DailyPlanController
         await Parallel.ForEachAsync(dailyPlan.Menus,
             async (menu, _) => { bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes)); });
 
-        dailyPlan.Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList();
+        dailyPlan.Menus = bag.OrderBy(e => ToValue(e.MealType)).ToList();
         return dailyPlan;
     }
 
     [HttpPost]
-    [Route("by-distribution")]
+    [Route("/distribution/")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
         var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
@@ -72,8 +70,8 @@ public class DailyPlanController
         await Parallel.ForEachAsync(menus, parallelOptions,
             async (menu, _) =>
             {
-                var mealType = IEnum<MealTypes, MealToken>.ToValue(menu.MealType);
-                var recipes = _applicationData.MealRecipesDict[mealType];
+                var recipes = _applicationData.MealRecipesDict[ToValue(menu.MealType)];
+                recipes.FilterNutrients(menu.Targets.Select(e => e.Nutrient).ToHashSet());
                 bag.Add(await _dailyMenuRepository.GenerateMenu(menu, recipes).ConfigureAwait(false));
             });
 
@@ -83,7 +81,7 @@ public class DailyPlanController
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
             PhysicalActivityFactor = configuration.ActivityFactor,
-            Menus = bag.OrderBy(e => IEnum<MealTypes, MealToken>.ToValue(e.MealType)).ToList()
+            Menus = bag.OrderBy(e => ToValue(e.MealType)).ToList()
         };
         // dailyPlan.AddMenuTargets();
         return dailyPlan;
