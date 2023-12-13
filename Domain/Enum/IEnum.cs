@@ -68,7 +68,8 @@ public class ReadableNameComparer<T, TEnum> : IComparer<string>
     where TEnum : struct, System.Enum, IConvertible
 {
     private static readonly IReadOnlyDictionary<string, int> Dictionary =
-        SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value);
+        SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value,
+            StringComparer.InvariantCultureIgnoreCase);
 
     public int Compare(string? x, string? y)
     {
