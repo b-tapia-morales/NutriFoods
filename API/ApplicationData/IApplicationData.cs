@@ -7,7 +7,7 @@ namespace API.ApplicationData;
 
 public interface IApplicationData
 {
-    IReadOnlyDictionary<MealTypes, IReadOnlyList<RecipeDto>> RecipeDict { get; }
+    IReadOnlyDictionary<MealTypes, List<RecipeDto>> RecipeDict { get; }
     IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
     IReadOnlyDictionary<MealTypes, double> CarbohydratesDict { get; }

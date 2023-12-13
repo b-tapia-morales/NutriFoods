@@ -46,7 +46,7 @@ builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 
 builder.Services
     // Global variables
-    .AddScoped<IApplicationData, ApplicationData>()
+    .AddSingleton<IApplicationData, ApplicationData>()
     // Validators for daily menu and plan generation
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()

@@ -33,7 +33,7 @@ public class DailyMenuController
     }
 
     [HttpPost]
-    [Route("menu")]
+    [Route("")]
     public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromBody] DailyMenuDto dailyMenu)
     {
         var results = await _jsonValidator.ValidateAsync(dailyMenu);
@@ -50,7 +50,7 @@ public class DailyMenuController
     }
 
     [HttpGet]
-    [Route("by-distribution")]
+    [Route("/distribution/")]
     public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromQuery, Required] MealToken mealToken,
         [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct,
         [FromQuery] double fattyAcidsPct, [FromQuery] double proteinsPct, [FromQuery] double errorMargin)
@@ -76,9 +76,12 @@ public class DailyMenuController
             IntakePercentage = errorMargin,
             MealType = ToReadableName(mealToken),
             Hour = hour,
-            Targets = new List<NutritionalTargetDto>(targets)
+            Targets = [..targets]
         };
-        var mealType = ToValue(mealToken);
-        return await _dailyMenuRepository.GenerateMenu(dailyMenu, _applicationData.RecipeDict[mealType]);
+
+        var nutrients = targets.Select(e => e.Nutrient).ToHashSet();
+        var recipes = _applicationData.RecipeDict[ToValue(mealToken)].ToList();
+        recipes.FilterNutrients(nutrients);
+        return await _dailyMenuRepository.GenerateMenu(dailyMenu, recipes.AsReadOnly());
     }
 }

@@ -59,4 +59,10 @@ public static class RecipeExtensions
                 Unit = e.Key.Unit.ReadableName,
                 DailyValue = e.Key.DailyValue == null ? null : e.Sum(x => x.Quantity) / e.Key.DailyValue
             });
+
+    public static void FilterNutrients(this RecipeDto recipe, ISet<string> nutrients) =>
+        recipe.Nutrients.RemoveAll(e => !nutrients.Contains(e.Nutrient));
+
+    public static void FilterNutrients(this List<RecipeDto> recipes, ISet<string> nutrients) =>
+        recipes.ForEach(e => FilterNutrients(e, nutrients));
 }

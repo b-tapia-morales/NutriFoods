@@ -12,10 +12,20 @@ namespace API.ApplicationData;
 
 public class ApplicationData : IApplicationData
 {
-    public ApplicationData(NutrifoodsDbContext context, IMapper mapper)
+    private const string ConnectionString =
+        "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
+
+    private static readonly DbContextOptions<NutrifoodsDbContext> Options =
+        new DbContextOptionsBuilder<NutrifoodsDbContext>()
+            .UseNpgsql(ConnectionString,
+                builder => builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery))
+            .Options;
+
+    public ApplicationData(IMapper mapper)
     {
+        var context = new NutrifoodsDbContext(Options);
         var recipes = FindAll(context, mapper);
-        RecipeDict = new Dictionary<MealTypes, IReadOnlyList<RecipeDto>>
+        RecipeDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
             [MealTypes.None] = recipes,
             [MealTypes.Breakfast] = FindByMealType(recipes, MealTypes.Breakfast),
@@ -35,7 +45,7 @@ public class ApplicationData : IApplicationData
         ProteinsDict.WriteToConsole();
     }
 
-    public IReadOnlyDictionary<MealTypes, IReadOnlyList<RecipeDto>> RecipeDict { get; }
+    public IReadOnlyDictionary<MealTypes, List<RecipeDto>> RecipeDict { get; }
     public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
     public IReadOnlyDictionary<MealTypes, double> CarbohydratesDict { get; }
@@ -67,21 +77,18 @@ public class ApplicationData : IApplicationData
         }
     }
 
-    private static IReadOnlyList<RecipeDto> FindAll(NutrifoodsDbContext context, IMapper mapper)
+    private static List<RecipeDto> FindAll(NutrifoodsDbContext context, IMapper mapper)
     {
         var recipes = context.Recipes.IncludeSubfields().AsNoTracking()
             .Where(e => e.Portions != null && e.Portions > 0 && e.NutritionalValues.Count > 0)
             .ToList();
-        return mapper
-            .Map<List<RecipeDto>>(recipes)
-            .AsReadOnly();
+        return mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    private static IReadOnlyList<RecipeDto> FindByMealType(IEnumerable<RecipeDto> recipes, MealTypes mealType) =>
+    private static List<RecipeDto> FindByMealType(IEnumerable<RecipeDto> recipes, MealTypes mealType) =>
         recipes
             .Where(e => e.MealTypes.Contains(mealType.ReadableName))
-            .ToList()
-            .AsReadOnly();
+            .ToList();
 
     private static double CalculateAverage(IEnumerable<RecipeDto> recipes, Nutrients nutrient) =>
         recipes.SelectMany(e => e.Nutrients)
