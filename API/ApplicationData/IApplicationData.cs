@@ -16,9 +16,8 @@ public interface IApplicationData
     IReadOnlyDictionary<MealTypes, double> ProteinsDict { get; }
     double DefaultRatio { get; }
 
-    int RatioPerPortion(MealToken mealToken, NutrientToken nutrientToken, double quantity)
+    int RatioPerPortion(MealTypes mealType, NutrientToken nutrientToken, double quantity)
     {
-        var mealType = IEnum<MealTypes, MealToken>.ToValue(mealToken);
         var ratio = nutrientToken switch
         {
             NutrientToken.Energy => quantity / EnergyDict[mealType],

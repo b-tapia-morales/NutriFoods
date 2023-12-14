@@ -6,6 +6,7 @@ using API.Dto.Abridged;
 using API.Optimizer;
 using AutoMapper;
 using Domain.Enum;
+using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
@@ -20,9 +21,9 @@ public class DailyMenuRepository : IDailyMenuRepository
         _applicationData = applicationData;
     }
 
-    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes)
+    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, MealTypes mealType)
     {
-        var mealType = IEnum<MealTypes, MealToken>.ToToken(dailyMenu.MealType);
+        var recipes = _applicationData.MealRecipesDict[mealType].AsReadOnly();
         var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
         var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
         var solution =

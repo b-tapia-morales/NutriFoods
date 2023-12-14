@@ -20,15 +20,11 @@ namespace API.DailyPlans;
 [Route("api/v1/daily-plans")]
 public class DailyPlanController
 {
-    private readonly IApplicationData _applicationData;
     private readonly IValidator<DailyPlanDto> _planValidator;
     private readonly IDailyMenuRepository _dailyMenuRepository;
 
-    public DailyPlanController(IApplicationData applicationData,
-        IDailyMenuRepository dailyMenuRepository,
-        IValidator<DailyPlanDto> planValidator)
+    public DailyPlanController(IDailyMenuRepository dailyMenuRepository, IValidator<DailyPlanDto> planValidator)
     {
-        _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
         _planValidator = planValidator;
     }
@@ -46,17 +42,11 @@ public class DailyPlanController
                  """
             );
 
-        var recipes = _applicationData.MealRecipesDict[MealTypes.None];
-        recipes.FilterNutrients(dailyPlan.Menus[0].Nutrients.Select(e => e.Nutrient).ToHashSet());
+        var queue = new ConcurrentQueue<DailyMenuDto>();
+        var tasks = _dailyMenuRepository.ToTasks(dailyPlan.Menus, false);
+        await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
 
-        ParallelOptions parallelOptions = new()
-        {
-            MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded
-        };
-        await Parallel.ForEachAsync(dailyPlan.Menus, parallelOptions,
-            async (menu, _) => { await _dailyMenuRepository.GenerateMenu(menu, recipes); });
-
-        dailyPlan.AddMenuTargets();
+        dailyPlan.Menus.AddRange(queue);
         return dailyPlan;
     }
 
@@ -77,10 +67,8 @@ public class DailyPlanController
                                  configuration.ActivityFactor;
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
 
-        var recipes = _applicationData.MealRecipesDict[MealTypes.None];
-
         var queue = new ConcurrentQueue<DailyMenuDto>();
-        var tasks = _dailyMenuRepository.ToTasks(menus, recipes);
+        var tasks = _dailyMenuRepository.ToTasks(menus, false);
         await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
 
         dailyPlan.Menus.AddRange(queue);
