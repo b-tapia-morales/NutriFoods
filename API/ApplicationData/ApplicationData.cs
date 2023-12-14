@@ -24,13 +24,13 @@ public class ApplicationData : IApplicationData
     public ApplicationData(IMapper mapper)
     {
         var context = new NutrifoodsDbContext(Options);
-        var recipes = FindAll(context, mapper);
+        RecipeDict = FindAll(context, mapper).ToDictionary(e => e.Id, e => e).AsReadOnly();
         MealRecipesDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
-            [MealTypes.None] = recipes,
-            [MealTypes.Breakfast] = FindByMealType(recipes, MealTypes.Breakfast),
-            [MealTypes.Lunch] = FindByMealType(recipes, MealTypes.Lunch),
-            [MealTypes.Dinner] = FindByMealType(recipes, MealTypes.Dinner)
+            [MealTypes.None] = RecipeDict.Values.ToList(),
+            [MealTypes.Breakfast] = FindByMealType(RecipeDict.Values, MealTypes.Breakfast),
+            [MealTypes.Lunch] = FindByMealType(RecipeDict.Values, MealTypes.Lunch),
+            [MealTypes.Dinner] = FindByMealType(RecipeDict.Values, MealTypes.Dinner)
         };
         CountDict = ToCountDict().ToImmutableDictionary(e => e.Key, e => e.Value);
         EnergyDict = ToAveragesDict(Nutrients.Energy).ToImmutableDictionary(e => e.Key, e => e.Value);
@@ -40,6 +40,7 @@ public class ApplicationData : IApplicationData
         DefaultRatio = 4.0 / 7.0;
     }
 
+    public IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
     public IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
