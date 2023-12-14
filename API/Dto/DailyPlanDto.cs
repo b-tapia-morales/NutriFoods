@@ -36,4 +36,22 @@ public static class DailyPlanExtensions
             }
         }
     }
+
+    public static void AddNutritionalValues(this DailyPlanDto dailyPlan)
+    {
+        foreach (var grouping in dailyPlan.Menus.SelectMany(e => e.Nutrients).GroupBy(e => e.Nutrient))
+        {
+            var nutrient = IEnum<Nutrients, NutrientToken>.ToValue(grouping.Key);
+            var quantity = grouping.Sum(e => e.Quantity);
+            dailyPlan.Nutrients.Add(new NutritionalValueDto
+            {
+                Nutrient = nutrient.ReadableName,
+                Quantity = quantity,
+                Unit = nutrient.Unit.ReadableName,
+                DailyValue = nutrient.DailyValue.HasValue
+                    ? Math.Round(quantity / nutrient.DailyValue.Value, 2)
+                    : null
+            });
+        }
+    }
 }
