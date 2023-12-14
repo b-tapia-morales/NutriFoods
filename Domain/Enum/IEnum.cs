@@ -10,10 +10,10 @@ public interface IEnum<out T, TEnum>
     where T : SmartEnum<T>, IEnum<T, TEnum>
     where TEnum : struct, System.Enum, IConvertible
 {
-    private static readonly IComparer<string> Comparer = new ReadableNameComparer<T, TEnum>();
-
     private static readonly ImmutableList<TEnum> Tokens =
         System.Enum.GetValues<TEnum>().OrderBy(e => e.ToInt32(null)).ToImmutableList();
+
+    static IComparer<string> ReadableNameComparer { get; } = new ReadableNameComparer<T, TEnum>();
 
     static IReadOnlyList<T> Values { get; } = SmartEnum<T>.List.OrderBy(e => e.Value).ToImmutableList();
 
@@ -23,7 +23,7 @@ public interface IEnum<out T, TEnum>
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Key, e => e.Value);
 
     static IReadOnlyDictionary<string, T> ReadableNameDictionary { get; } =
-        Values.ToSortedDictionary(e => e.ReadableName, e => e, Comparer).AsReadOnly();
+        Values.ToSortedDictionary(e => e.ReadableName, e => e, ReadableNameComparer).AsReadOnly();
 
     static IReadOnlyDictionary<T, TEnum> ReverseTokenDictionary { get; } =
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Value, e => e.Key);
