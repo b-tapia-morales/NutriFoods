@@ -42,11 +42,7 @@ public class DailyPlanController
                  """
             );
 
-        var queue = new ConcurrentQueue<DailyMenuDto>();
-        var tasks = _dailyMenuRepository.ToTasks(dailyPlan.Menus, false);
-        await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
-
-        dailyPlan.Menus.AddRange(queue);
+        dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(dailyPlan.Menus, false)];
         return dailyPlan;
     }
 
@@ -59,19 +55,14 @@ public class DailyPlanController
             Day = configuration.Day,
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
-            PhysicalActivityFactor = configuration.ActivityFactor,
-            Menus = []
+            PhysicalActivityFactor = configuration.ActivityFactor
         };
 
         var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
                                  configuration.ActivityFactor;
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
 
-        var queue = new ConcurrentQueue<DailyMenuDto>();
-        var tasks = _dailyMenuRepository.ToTasks(menus, false);
-        await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
-
-        dailyPlan.Menus.AddRange(queue);
+        dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(menus, false)];
         return dailyPlan;
     }
 }

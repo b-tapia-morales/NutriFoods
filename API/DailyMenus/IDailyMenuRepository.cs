@@ -1,6 +1,8 @@
+using System.Collections.Concurrent;
 using API.Dto;
 using Domain.Enum;
-using static Domain.Enum.IEnum<Domain.Enum.MealTypes,Domain.Enum.MealToken>;
+using Utils.Parallel;
+using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
@@ -15,5 +17,13 @@ public interface IDailyMenuRepository
     {
         foreach (var menu in menus)
             yield return await GenerateMenu(menu, useFilter ? ToValue(menu.MealType) : MealTypes.None);
+    }
+
+    async Task<IEnumerable<DailyMenuDto>> Parallelize(List<DailyMenuDto> menus, bool useFilter = true)
+    {
+        var queue = new ConcurrentQueue<DailyMenuDto>();
+        var tasks = ToTasks(menus, useFilter);
+        await tasks.AsyncParallelForEach(e => Task.Run(() => { queue.Enqueue(e); }));
+        return queue;
     }
 }
