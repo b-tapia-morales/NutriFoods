@@ -39,9 +39,9 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
 
     public bool Equals(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
 
-    public override int GetHashCode() => Url.GetHashCode();
+    public override int GetHashCode() => Url.ToLower().GetHashCode();
 
-    public int GetHashCode(RecipeDto recipe) => recipe.Url.GetHashCode();
+    public int GetHashCode(RecipeDto recipe) => recipe.Url.ToLower().GetHashCode();
 
     public static bool operator ==(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
 
@@ -61,10 +61,4 @@ public static class RecipeExtensions
                 Unit = e.Key.Unit.ReadableName,
                 DailyValue = e.Key.DailyValue == null ? null : e.Sum(x => x.Quantity) / e.Key.DailyValue
             });
-
-    public static void FilterNutrients(this RecipeDto recipe, ISet<string> nutrients) =>
-        recipe.Nutrients.RemoveAll(e => !nutrients.Contains(e.Nutrient));
-
-    public static void FilterNutrients(this List<RecipeDto> recipes, ISet<string> nutrients) =>
-        recipes.ForEach(e => FilterNutrients(e, nutrients));
 }
