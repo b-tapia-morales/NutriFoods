@@ -25,7 +25,6 @@ public class ApplicationData : IApplicationData
     {
         var context = new NutrifoodsDbContext(Options);
         var recipes = FindAll(context, mapper);
-        RecipeDict = recipes.ToImmutableDictionary(e => e.Id, e => e);
         MealRecipesDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
             [MealTypes.None] = recipes,
@@ -41,7 +40,6 @@ public class ApplicationData : IApplicationData
         DefaultRatio = 4.0 / 7.0;
     }
 
-    public IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
     public IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
