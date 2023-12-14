@@ -29,11 +29,10 @@ public class DailyMenuRepository : IDailyMenuRepository
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
         var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
-        var menus = new List<MenuRecipeDto>(abridgedRecipes.ToMenus());
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
         dailyMenu.Nutrients = nutritionalValues;
-        dailyMenu.Recipes = menus;
+        dailyMenu.Recipes = [..abridgedRecipes.ToMenus()];
         return dailyMenu;
     }
 }

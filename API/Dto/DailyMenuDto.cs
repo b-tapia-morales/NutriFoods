@@ -35,11 +35,4 @@ public static class DailyMenuExtensions
             };
         }
     }
-
-    public static async IAsyncEnumerable<DailyMenuDto> ToTasks(this List<DailyMenuDto> menus, IDailyPlanRepository repository,
-        IReadOnlyList<RecipeDto> recipes)
-    {
-        foreach (var menu in menus)
-            yield return await repository.GenerateMenus(menu, recipes);
-    }
 }
