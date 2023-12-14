@@ -1,8 +1,10 @@
+using System.Collections.Immutable;
 using System.Globalization;
 using API.Dto.Abridged;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
+using Utils.Enumerable;
 
 namespace API.Dto;
 
@@ -63,6 +65,9 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
+            .ForMember(dest => dest.NutrientDict, opt =>
+                opt.MapFrom(src => src.NutritionalValues.ToSortedDictionary(e => e.Nutrient.ReadableName, e => e,
+                    IEnum<Nutrients, NutrientToken>.ReadableNameComparer)))
             .ReverseMap()
             .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
             .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))

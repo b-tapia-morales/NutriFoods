@@ -1,6 +1,7 @@
 // ReSharper disable NonReadonlyMemberInGetHashCode
 
 using Domain.Enum;
+using Newtonsoft.Json;
 using static System.StringComparison;
 
 namespace API.Dto;
@@ -20,6 +21,7 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public List<RecipeQuantityDto> Quantities { get; set; } = null!;
     public List<RecipeStepDto> Steps { get; set; } = null!;
     public List<NutritionalValueDto> Nutrients { get; set; } = null!;
+    [JsonIgnore] public IReadOnlyDictionary<string, NutritionalValueDto> NutrientDict { get; set; } = null!;
 
     public override bool Equals(object? obj)
     {
@@ -32,7 +34,7 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     {
         if (ReferenceEquals(this, other))
             return true;
-        return !ReferenceEquals(null, other) && string.Equals(Url, other.Url, InvariantCulture);
+        return !ReferenceEquals(null, other) && string.Equals(Url, other.Url, InvariantCultureIgnoreCase);
     }
 
     public bool Equals(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
