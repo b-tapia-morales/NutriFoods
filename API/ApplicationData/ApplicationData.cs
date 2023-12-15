@@ -5,7 +5,6 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils.Enumerable;
 using static System.StringComparison;
 
 namespace API.ApplicationData;
@@ -24,13 +23,14 @@ public class ApplicationData : IApplicationData
     public ApplicationData(IMapper mapper)
     {
         var context = new NutrifoodsDbContext(Options);
-        RecipeDict = FindAll(context, mapper).ToDictionary(e => e.Id, e => e).AsReadOnly();
+        var recipes = FindAll(context);
+        var dtos = mapper.Map<List<RecipeDto>>(recipes);
         MealRecipesDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
-            [MealTypes.None] = RecipeDict.Values.ToList(),
-            [MealTypes.Breakfast] = FindByMealType(RecipeDict.Values, MealTypes.Breakfast),
-            [MealTypes.Lunch] = FindByMealType(RecipeDict.Values, MealTypes.Lunch),
-            [MealTypes.Dinner] = FindByMealType(RecipeDict.Values, MealTypes.Dinner)
+            [MealTypes.None] = dtos,
+            [MealTypes.Breakfast] = FindByMealType(dtos, MealTypes.Breakfast),
+            [MealTypes.Lunch] = FindByMealType(dtos, MealTypes.Lunch),
+            [MealTypes.Dinner] = FindByMealType(dtos, MealTypes.Dinner)
         };
         CountDict = ToCountDict().ToImmutableDictionary(e => e.Key, e => e.Value);
         EnergyDict = ToAveragesDict(Nutrients.Energy).ToImmutableDictionary(e => e.Key, e => e.Value);
@@ -40,7 +40,6 @@ public class ApplicationData : IApplicationData
         DefaultRatio = 4.0 / 7.0;
     }
 
-    public IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
     public IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     public IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     public IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
@@ -73,13 +72,11 @@ public class ApplicationData : IApplicationData
         }
     }
 
-    private static List<RecipeDto> FindAll(NutrifoodsDbContext context, IMapper mapper)
-    {
-        var recipes = context.Recipes.IncludeSubfields().AsNoTracking()
+    private static List<Recipe> FindAll(NutrifoodsDbContext context) =>
+        context.Recipes.IncludeSubfields().AsNoTracking()
             .Where(e => e.Portions != null && e.Portions > 0 && e.NutritionalValues.Count > 0)
+            .AsNoTracking()
             .ToList();
-        return mapper.Map<List<RecipeDto>>(recipes);
-    }
 
     private static List<RecipeDto> FindByMealType(IEnumerable<RecipeDto> recipes, MealTypes mealType) =>
         recipes

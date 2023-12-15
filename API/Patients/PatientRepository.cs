@@ -1,3 +1,4 @@
+using API.ApplicationData;
 using API.Dto;
 using API.Dto.Insertion;
 using AutoMapper;
@@ -9,13 +10,15 @@ namespace API.Patients;
 
 public class PatientRepository : IPatientRepository
 {
+    private readonly IApplicationData _applicationData;
     private readonly NutrifoodsDbContext _context;
     private readonly IMapper _mapper;
 
-    public PatientRepository(NutrifoodsDbContext context, IMapper mapper)
+    public PatientRepository(IApplicationData applicationData, NutrifoodsDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
+        _applicationData = applicationData;
     }
 
     public async Task<PatientDto?> FindPatient(Guid id) =>
@@ -134,6 +137,10 @@ public class PatientRepository : IPatientRepository
         await _context.SaveChangesAsync();
 
         consultationDto.DailyPlans = _mapper.Map<List<DailyPlanDto>>(dailyPlans);
+        foreach (var menuRecipe in consultationDto.DailyPlans.SelectMany(e => e.Menus))
+        {
+        }
+
         return consultationDto;
     }
 }
@@ -162,7 +169,25 @@ public static class PatientExtensions
             .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
             .Include(e => e.Consultations).ThenInclude(e => e.NutritionalAnamnesis!.FoodConsumptions)
             // Anthropometry
-            .Include(e => e.Consultations).ThenInclude(e => e.Anthropometry);
+            .Include(e => e.Consultations).ThenInclude(e => e.Anthropometry)
+            // Daily plans
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.NutritionalTargets)
+            // Daily Menus
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.NutritionalTargets)
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.MenuRecipes)
+            // Recipes
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeMeasures)
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeQuantities)
+            .Include(e => e.Consultations).ThenInclude(e => e.DailyPlans).ThenInclude(e => e.DailyMenus)
+            .ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeSteps);
     }
 
     public static IQueryable<Consultation> IncludeSubfields(this DbSet<Consultation> dbSet) =>
@@ -181,5 +206,18 @@ public static class PatientExtensions
             .Include(e => e.NutritionalAnamnesis!.FoodConsumptions)
             .Include(e => e.NutritionalAnamnesis!.AdverseFoodReactions)
             // Anthropometry
-            .Include(e => e.Anthropometry);
+            .Include(e => e.Anthropometry)
+            // Daily Plans
+            .Include(e => e.DailyPlans).ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.DailyPlans).ThenInclude(e => e.NutritionalTargets)
+            // Daily Menus
+            .Include(e => e.DailyPlans).ThenInclude(e => e.DailyMenus).ThenInclude(e => e.NutritionalValues)
+            .Include(e => e.DailyPlans).ThenInclude(e => e.DailyMenus).ThenInclude(e => e.NutritionalTargets)
+            // Recipes
+            .Include(e => e.DailyPlans).ThenInclude(e => e.DailyMenus).ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeMeasures)
+            .Include(e => e.DailyPlans).ThenInclude(e => e.DailyMenus).ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeQuantities)
+            .Include(e => e.DailyPlans).ThenInclude(e => e.DailyMenus).ThenInclude(e => e.MenuRecipes)
+            .ThenInclude(e => e.Recipe).ThenInclude(e => e.RecipeSteps);
 }

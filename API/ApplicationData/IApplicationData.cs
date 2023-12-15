@@ -2,12 +2,12 @@
 
 using API.Dto;
 using Domain.Enum;
+using Domain.Models;
 
 namespace API.ApplicationData;
 
 public interface IApplicationData
 {
-    IReadOnlyDictionary<int, RecipeDto> RecipeDict { get; }
     IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
     IReadOnlyDictionary<MealTypes, int> CountDict { get; }
     IReadOnlyDictionary<MealTypes, double> EnergyDict { get; }
