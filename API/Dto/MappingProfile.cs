@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using API.Dto.Abridged;
+using API.Dto.Insertion;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
@@ -78,24 +79,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
 
-        // Recipe Abridged
-        CreateMap<Recipe, RecipeAbridged>()
-            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
-            .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
-            .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.MealTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
-            .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
-            .ReverseMap()
-            .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
-            .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
-            .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
-            .ForMember(dest => dest.MealTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
-            .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
-
+        // Recipe abridged
         CreateMap<RecipeDto, RecipeAbridged>()
             .ReverseMap();
 
@@ -248,5 +232,25 @@ public class MappingProfile : Profile
         // Nutritionist
         CreateMap<Nutritionist, NutritionistDto>()
             .ReverseMap();
+
+        CreateMap<MinimalDailyMenu, DailyMenu>()
+            .ForMember(dest => dest.MealType,
+                opt => opt.MapFrom(src => IEnum<MealTypes, MealToken>.ToValue(src.MealType)))
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
+            .ForMember(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
+            .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.Recipes.Select(e => new MenuRecipe
+            {
+                RecipeId = e.RecipeId,
+                Portions = e.Portions,
+            })));
+
+        CreateMap<MinimalDailyPlan, DailyPlan>()
+            .ForMember(dest => dest.Day, opt => opt.MapFrom(src => IEnum<Days, DayToken>.ToValue(src.Day)))
+            .ForMember(dest => dest.PhysicalActivityLevel,
+                opt => opt.MapFrom(src =>
+                    IEnum<PhysicalActivities, PhysicalActivityToken>.ToValue(src.PhysicalActivityLevel)))
+            .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
+            .ForMember(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
+            .ForMember(dest => dest.DailyMenus, opt => opt.MapFrom(src => src.Menus));
     }
 }

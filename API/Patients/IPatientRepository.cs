@@ -1,5 +1,6 @@
 using System.Linq.Expressions;
 using API.Dto;
+using API.Dto.Insertion;
 using API.Nutritionists;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,9 @@ public interface IPatientRepository
 
     Task<ConsultationDto> AddAnthropometry(ConsultationDto consultationDto,
         AnthropometryDto anthropometryDto);
+
+    Task<ConsultationDto> AddDailyPlans(ConsultationDto consultationDto,
+        List<MinimalDailyPlan> minimalDailyPlans);
 
     static Task<Patient?> FindPatientBy(NutrifoodsDbContext context,
         Expression<Func<Patient, bool>> predicate) =>

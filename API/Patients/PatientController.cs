@@ -1,5 +1,6 @@
 using System.Globalization;
 using API.Dto;
+using API.Dto.Insertion;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
@@ -135,5 +136,21 @@ public class PatientController
             return new NotFoundObjectResult($"There's no registered consultation with the Id {consultationId}");
 
         return await _repository.AddAnthropometry(consultationDto, anthropometryDto);
+    }
+
+    [HttpPut]
+    [Route("/{patientId:guid}/consultations/{consultationId:guid}/daily-plans/")]
+    public async Task<ActionResult<ConsultationDto>> AddDailyPlans(Guid patientId, Guid consultationId,
+        [FromBody] List<MinimalDailyPlan> dtos)
+    {
+        var patientDto = await _repository.FindPatient(patientId);
+        if (patientDto == null)
+            return new NotFoundObjectResult($"There's no registered patient with the Id: {patientId}");
+
+        var consultationDto = await _repository.FindConsultation(consultationId);
+        if (consultationDto == null)
+            return new NotFoundObjectResult($"There's no registered consultation with the Id: {consultationId}");
+
+        return await _repository.AddDailyPlans(consultationDto, dtos);
     }
 }

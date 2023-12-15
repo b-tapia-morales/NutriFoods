@@ -1,4 +1,5 @@
 using API.Dto;
+using API.Dto.Insertion;
 using AutoMapper;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ public class PatientRepository : IPatientRepository
     private readonly NutrifoodsDbContext _context;
     private readonly IMapper _mapper;
 
-    public PatientRepository(IMapper mapper, NutrifoodsDbContext context)
+    public PatientRepository(NutrifoodsDbContext context, IMapper mapper)
     {
         _context = context;
         _mapper = mapper;
@@ -114,6 +115,25 @@ public class PatientRepository : IPatientRepository
         await _context.SaveChangesAsync();
 
         consultationDto.Anthropometry = anthropometryDto;
+        return consultationDto;
+    }
+
+    public async Task<ConsultationDto> AddDailyPlans(ConsultationDto consultationDto,
+        List<MinimalDailyPlan> minimalDailyPlans)
+    {
+        var consultationId = consultationDto.Id;
+        var previousRecord = await _context.Consultations.FirstAsync(e => e.Id == consultationId);
+        previousRecord.DailyPlans?.Clear();
+        await _context.SaveChangesAsync();
+
+        var dailyPlans = _mapper.Map<List<DailyPlan>>(minimalDailyPlans);
+
+        previousRecord.DailyPlans ??= new List<DailyPlan>();
+        foreach (var plan in dailyPlans)
+            previousRecord.DailyPlans.Add(plan);
+        await _context.SaveChangesAsync();
+
+        consultationDto.DailyPlans = _mapper.Map<List<DailyPlanDto>>(dailyPlans);
         return consultationDto;
     }
 }
