@@ -50,19 +50,21 @@ public class DailyPlanController
     [Route("/distribution/")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
+        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
+                                 configuration.ActivityFactor;
+
         var dailyPlan = new DailyPlanDto
         {
             Day = configuration.Day,
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
-            PhysicalActivityFactor = configuration.ActivityFactor
+            PhysicalActivityFactor = configuration.ActivityFactor,
+            Targets = [..configuration.ToTargets(totalMetabolicRate)]
         };
 
-        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
-                                 configuration.ActivityFactor;
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
-
         dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(menus, false)];
+
         return dailyPlan;
     }
 }
