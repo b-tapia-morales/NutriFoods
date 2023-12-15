@@ -65,6 +65,9 @@ public class DailyPlanController
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
         dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(menus, false)];
 
+        dailyPlan.AddMenuTargets();
+        dailyPlan.AddNutritionalValues();
+        dailyPlan.AddTargetValues();
         return dailyPlan;
     }
 }
