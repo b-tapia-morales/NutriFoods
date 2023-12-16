@@ -11,7 +11,7 @@ namespace API.DailyPlans;
 public class PlanConfigurationValidator : AbstractValidator<PlanConfiguration>
 {
     private const double Tolerance = 1e-1;
-    private const double MinErrorMargin = 1e-1;
+    private const double MinErrorMargin = 6e-2;
     private const double MinAdjustmentFactor = 6e-2;
     private const double MaxAdjustmentFactor = 1e-1;
 
@@ -46,7 +46,8 @@ public class PlanConfigurationValidator : AbstractValidator<PlanConfiguration>
         RuleFor(e => e.Distribution)
             .Must(e => e.Keys
                 .Select(IEnum<Nutrients, NutrientToken>.ToValue)
-                .SequenceEqual(Macronutrients))
+                .OrderBy(n => n)
+                .SequenceEqual(Macronutrients.Except([Nutrients.Energy]).OrderBy(n => n).ToList()))
             .WithMessage($"""
                           The distribution must only contain the following values:
                           {Macronutrients.Select(t => t.ReadableName).ToJoinedString(", ", ("«", "»"))}

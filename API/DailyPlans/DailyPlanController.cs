@@ -15,10 +15,10 @@ namespace API.DailyPlans;
 [Route("api/v1/daily-plans")]
 public class DailyPlanController
 {
-    private readonly IValidator<DailyPlanDto> _planValidator;
+    private readonly IValidator<PlanConfiguration> _planValidator;
     private readonly IDailyMenuRepository _dailyMenuRepository;
 
-    public DailyPlanController(IDailyMenuRepository dailyMenuRepository, IValidator<DailyPlanDto> planValidator)
+    public DailyPlanController(IDailyMenuRepository dailyMenuRepository, IValidator<PlanConfiguration> planValidator)
     {
         _dailyMenuRepository = dailyMenuRepository;
         _planValidator = planValidator;
@@ -26,9 +26,9 @@ public class DailyPlanController
 
     [HttpPost]
     [Route("")]
-    public async Task<ActionResult<DailyPlanDto>> GeneratePlan([FromBody] DailyPlanDto dailyPlan)
+    public async Task<ActionResult<DailyPlanDto>> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
-        var results = await _planValidator.ValidateAsync(dailyPlan);
+        var results = await _planValidator.ValidateAsync(configuration);
         if (!results.IsValid)
             return new BadRequestObjectResult(
                 $"""
@@ -37,14 +37,6 @@ public class DailyPlanController
                  """
             );
 
-        dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(dailyPlan.Menus, false)];
-        return dailyPlan;
-    }
-
-    [HttpPost]
-    [Route("distribution/")]
-    public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
-    {
         var totalMetabolicRate = (1 + configuration.AdjustmentFactor / 2) * configuration.BasalMetabolicRate *
                                  configuration.ActivityFactor;
 

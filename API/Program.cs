@@ -50,7 +50,7 @@ builder.Services
     // Validators for daily menu and plan generation
     .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
     .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
-    .AddScoped<IValidator<DailyPlanDto>, DailyPlanValidator>()
+    .AddScoped<IValidator<PlanConfiguration>, PlanConfigurationValidator>()
     // Validators for nutritionist
     .AddScoped<IValidator<NutritionistDto>, NutritionistValidator>()
     .AddScoped<IValidator<PersonalInfoDto>, PersonalInfoValidator>()
