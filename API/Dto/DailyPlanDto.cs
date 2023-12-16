@@ -29,7 +29,7 @@ public static class DailyPlanExtensions
             ExpectedQuantity = totalMetabolicRate,
             ExpectedError = configuration.AdjustmentFactor,
             Unit = energy.Unit.ReadableName,
-            ThresholdType = ThresholdTypes.WithinRange.ReadableName,
+            ThresholdType = ThresholdTypes.Exact.ReadableName,
             IsPriority = true
         };
         foreach (var (key, value) in configuration.Distribution)
@@ -41,7 +41,7 @@ public static class DailyPlanExtensions
                 ExpectedQuantity = totalMetabolicRate * value * NutrientExtensions.GramFactors[nutrient],
                 ExpectedError = configuration.AdjustmentFactor,
                 Unit = nutrient.Unit.ReadableName,
-                ThresholdType = ThresholdTypes.WithinRange.ReadableName,
+                ThresholdType = ThresholdTypes.Exact.ReadableName,
                 IsPriority = true
             };
         }
