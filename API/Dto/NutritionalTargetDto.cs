@@ -28,11 +28,14 @@ public static class TargetExtensions
     {
         foreach (var target in targets)
         {
+            var thresholdType = IEnum<ThresholdTypes, ThresholdToken>.ToValue(target.ThresholdType);
             var actualQuantity = solution
                 .SelectMany(e => e.Nutrients)
                 .Where(e => string.Equals(e.Nutrient, target.Nutrient, StringComparison.InvariantCultureIgnoreCase))
                 .Sum(e => e.Quantity);
-            var actualError = MathUtils.RelativeError(actualQuantity, target.ExpectedQuantity);
+            var actualError = thresholdType == ThresholdTypes.Exact
+                ? MathUtils.RelativeError(actualQuantity, target.ExpectedQuantity)
+                : 0;
             target.ActualQuantity = actualQuantity;
             target.ActualError = actualError;
         }
@@ -47,7 +50,7 @@ public static class TargetExtensions
             ExpectedQuantity = energy,
             ExpectedError = errorMargin,
             Unit = Energy.Unit.ReadableName,
-            ThresholdType = ThresholdTypes.WithinRange.ReadableName,
+            ThresholdType = ThresholdTypes.Exact.ReadableName,
             IsPriority = true
         };
         foreach (var (nutrient, grams) in distributionDict)
@@ -58,7 +61,7 @@ public static class TargetExtensions
                 ExpectedQuantity = grams,
                 ExpectedError = errorMargin,
                 Unit = nutrient.Unit.ReadableName,
-                ThresholdType = ThresholdTypes.WithinRange.ReadableName,
+                ThresholdType = ThresholdTypes.Exact.ReadableName,
                 IsPriority = true
             };
         }
@@ -67,18 +70,15 @@ public static class TargetExtensions
     public static IEnumerable<NutritionalTargetDto> ToTargets(
         PlanConfiguration configuration, double intakePercentage)
     {
-        foreach (var target in configuration.Targets)
+        return configuration.Targets.Select(target => new NutritionalTargetDto
         {
-            yield return new NutritionalTargetDto
-            {
-                Nutrient = target.Nutrient,
-                ExpectedQuantity = target.ExpectedQuantity * intakePercentage,
-                ExpectedError = target.ExpectedError,
-                Unit = target.Unit,
-                ThresholdType = target.ThresholdType,
-                IsPriority = target.IsPriority
-            };
-        }
+            Nutrient = target.Nutrient,
+            ExpectedQuantity = target.ExpectedQuantity * intakePercentage,
+            ExpectedError = target.ExpectedError,
+            Unit = target.Unit,
+            ThresholdType = target.ThresholdType,
+            IsPriority = target.IsPriority
+        });
     }
 
     public static void ValidateTargets(this AbstractValidator<NutritionalTargetDto> c, double minErrorMargin)
