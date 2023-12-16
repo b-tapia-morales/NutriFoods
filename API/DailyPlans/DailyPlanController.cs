@@ -45,7 +45,7 @@ public class DailyPlanController
     [Route("/distribution/")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
-        var totalMetabolicRate = (1 + configuration.AdjustmentFactor) * configuration.BasalMetabolicRate *
+        var totalMetabolicRate = (1 + configuration.AdjustmentFactor / 2) * configuration.BasalMetabolicRate *
                                  configuration.ActivityFactor;
 
         var dailyPlan = new DailyPlanDto
