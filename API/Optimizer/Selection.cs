@@ -16,7 +16,7 @@ public class Selection : SmartEnum<Selection>, IEnum<Selection, SelectionToken>
             {
                 var (j, k) = RandomDistinctNumbers(population.Count);
                 var winner = population[j].Fitness > population[k].Fitness ? population[j] : population[k];
-                if (winners.Any(e => e.Recipes.SequenceEqual(winner.Recipes)))
+                if (winners.Any(e => e != winner && e.Recipes.SequenceEqual(winner.Recipes))) 
                     continue;
 
                 winners.Add(winner);
