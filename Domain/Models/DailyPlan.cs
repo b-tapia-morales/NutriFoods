@@ -8,7 +8,7 @@ public class DailyPlan
 {
     public int Id { get; set; }
 
-    public List<Days> Days { get; set; } = null!;
+    public List<Days> Days { get; set; } = new();
 
     public PhysicalActivities PhysicalActivityLevel { get; set; } = null!;
 

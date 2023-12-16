@@ -840,26 +840,16 @@ public class NutrifoodsDbContext : DbContext
         // Recipe
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
-        
+
         builder.Entity<Recipe>()
             .PrimitiveCollection(e => e.MealTypes)
             .ElementType()
-            .HasConversion(typeof(MealTypeConverter))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<MealTypes>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
-        
+            .HasConversion(new MealTypeConverter());
+
         builder.Entity<Recipe>()
             .PrimitiveCollection(e => e.DishTypes)
             .ElementType()
-            .HasConversion(typeof(DishTypeConverter))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<DishTypes>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
+            .HasConversion(new DishTypeConverter());
 
         // Nutritional Target
         builder.Entity<NutritionalTarget>().Property(e => e.Unit)
@@ -873,13 +863,8 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<DailyPlan>()
             .PrimitiveCollection(e => e.Days)
             .ElementType()
-            .HasConversion(typeof(DayConverter))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<Days>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
-        
+            .HasConversion(new DayConverter());
+
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(e => e.Value, e => PhysicalActivities.FromValue(e));
 
@@ -901,12 +886,7 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<Disease>()
             .PrimitiveCollection(e => e.InheritanceTypes)
             .ElementType()
-            .HasConversion(typeof(InheritanceConverter))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<InheritanceTypes>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
+            .HasConversion(new InheritanceConverter());
 
         builder.Entity<Ingestible>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => IngestibleTypes.FromValue(e));
@@ -928,14 +908,13 @@ public class NutrifoodsDbContext : DbContext
 }
 
 internal class MealTypeConverter()
-    : ValueConverter<MealTypes, string>(e => e.ReadableName, s => IEnum<MealTypes, MealToken>.ToValue(s));
+    : ValueConverter<MealTypes, int>(e => e.Value, e => MealTypes.FromValue(e));
 
 internal class DishTypeConverter()
-    : ValueConverter<DishTypes, string>(e => e.ReadableName, s => IEnum<DishTypes, DishToken>.ToValue(s));
+    : ValueConverter<DishTypes, int>(e => e.Value, e => DishTypes.FromValue(e));
 
 internal class InheritanceConverter()
-    : ValueConverter<InheritanceTypes, string>(e => e.ReadableName,
-        s => IEnum<InheritanceTypes, InheritanceToken>.ToValue(s));
+    : ValueConverter<InheritanceTypes, int>(e => e.Value, e => InheritanceTypes.FromValue(e));
 
 internal class DayConverter()
-    : ValueConverter<Days, string>(e => e.ReadableName, s => IEnum<Days, DayToken>.ToValue(s));
+    : ValueConverter<Days, int>(e => e.Value, e => Days.FromValue(e));

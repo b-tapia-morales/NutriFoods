@@ -95,8 +95,11 @@ public static class DailyPlanExtensions
                      .Select(e => (e.Key, e.Sum(x => x.ActualQuantity.GetValueOrDefault()))))
         {
             var target = dailyPlan.Targets.First(e => string.Equals(e.Nutrient, nutrient, InvariantCultureIgnoreCase));
+            var thresholdType = IEnum<ThresholdTypes, ThresholdToken>.ToValue(target.ThresholdType);
             target.ActualQuantity = actualQuantity;
-            target.ActualError = MathUtils.RelativeError(target.ExpectedQuantity, actualQuantity);
+            target.ActualError = thresholdType == ThresholdTypes.Exact
+                ? MathUtils.RelativeError(actualQuantity, target.ExpectedQuantity)
+                : null;
         }
     }
 }
