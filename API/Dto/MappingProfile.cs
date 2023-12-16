@@ -78,7 +78,7 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
-        
+
         // Recipe Abridged
         CreateMap<Recipe, RecipeAbridged>()
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
@@ -131,15 +131,15 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.Recipes));
 
         CreateMap<DailyPlan, DailyPlanDto>()
-            .ForMember(dest => dest.Day, opt => opt.MapFrom(src => src.Day.ReadableName))
+            .ForMember(dest => dest.Days, opt => opt.MapFrom(src => src.Days.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src => src.PhysicalActivityLevel.ReadableName))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.NutritionalValues))
             .ForMember(dest => dest.Targets, opt => opt.MapFrom(src => src.NutritionalTargets))
             .ForMember(dest => dest.Menus, opt => opt.MapFrom(src => src.DailyMenus))
             .ReverseMap()
-            .ForMember(dest => dest.Day,
-                opt => opt.MapFrom(src => IEnum<Days, DayToken>.ToValue(src.Day)))
+            .ForMember(dest => dest.Days,
+                opt => opt.MapFrom(src => src.Days.Select(IEnum<Days, DayToken>.ToValue).ToList()))
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src =>
                     IEnum<PhysicalActivities, PhysicalActivityToken>.ToValue(src.PhysicalActivityLevel)))
@@ -263,7 +263,8 @@ public class MappingProfile : Profile
             })));
 
         CreateMap<MinimalDailyPlan, DailyPlan>()
-            .ForMember(dest => dest.Day, opt => opt.MapFrom(src => IEnum<Days, DayToken>.ToValue(src.Day)))
+            .ForMember(dest => dest.Days,
+                opt => opt.MapFrom(src => src.Days.Select(IEnum<Days, DayToken>.ToValue).ToList()))
             .ForMember(dest => dest.PhysicalActivityLevel,
                 opt => opt.MapFrom(src =>
                     IEnum<PhysicalActivities, PhysicalActivityToken>.ToValue(src.PhysicalActivityLevel)))

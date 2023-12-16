@@ -1,4 +1,6 @@
-﻿using Domain.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models;
 

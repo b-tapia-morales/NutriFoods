@@ -1,6 +1,9 @@
-﻿using Domain.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Models;
 
@@ -139,11 +142,11 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Bmi).HasColumnName("bmi");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.Height).HasColumnName("height");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
             entity.Property(e => e.MuscleMassPercentage).HasColumnName("muscle_mass_percentage");
             entity.Property(e => e.WaistCircumference).HasColumnName("waist_circumference");
@@ -165,10 +168,10 @@ public class NutrifoodsDbContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ClinicalAnamnesis)
@@ -212,7 +215,7 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.PatientId).HasColumnName("patient_id");
             entity.Property(e => e.Purpose).HasColumnName("purpose");
             entity.Property(e => e.RegisteredOn)
-                .HasDefaultValueSql("((now())::timestamp(0) without time zone)::date")
+                .HasDefaultValueSql("((now())::timestamp without time zone)::date")
                 .HasColumnName("registered_on");
             entity.Property(e => e.Type).HasColumnName("type");
 
@@ -332,7 +335,9 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AdjustmentFactor).HasColumnName("adjustment_factor");
-            entity.Property(e => e.Day).HasColumnName("day");
+            entity.Property(e => e.Days)
+                .HasDefaultValueSql("ARRAY[]::integer[]")
+                .HasColumnName("days");
             entity.Property(e => e.PhysicalActivityFactor).HasColumnName("physical_activity_factor");
             entity.Property(e => e.PhysicalActivityLevel).HasColumnName("physical_activity_level");
 
@@ -585,10 +590,10 @@ public class NutrifoodsDbContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.NutritionalAnamnesis)
@@ -644,7 +649,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.JoinedOn)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("joined_on");
             entity.Property(e => e.Password).HasColumnName("password");
             entity.Property(e => e.Username)
@@ -662,7 +667,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
                 .HasColumnName("id");
             entity.Property(e => e.JoinedOn)
-                .HasDefaultValueSql("(now())::timestamp(0) without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("joined_on");
             entity.Property(e => e.NutritionistId).HasColumnName("nutritionist_id");
 
@@ -835,16 +840,21 @@ public class NutrifoodsDbContext : DbContext
         // Recipe
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
-        builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => MealTypes.FromValue(e))
+        
+        builder.Entity<Recipe>()
+            .PrimitiveCollection(e => e.MealTypes)
+            .ElementType()
+            .HasConversion(typeof(MealTypeConverter))
             .Metadata
             .SetValueComparer(new ValueComparer<List<MealTypes>>(
                 (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
                 c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
                 c => c.ToList()));
+        
         builder.Entity<Recipe>()
-            .Property(e => e.DishTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => DishTypes.FromValue(e))
+            .PrimitiveCollection(e => e.DishTypes)
+            .ElementType()
+            .HasConversion(typeof(DishTypeConverter))
             .Metadata
             .SetValueComparer(new ValueComparer<List<DishTypes>>(
                 (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
@@ -860,8 +870,16 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => ThresholdTypes.FromValue(e));
 
         // Daily Plan / Menu
-        builder.Entity<DailyPlan>().Property(e => e.Day)
-            .HasConversion(e => e.Value, e => Days.FromValue(e));
+        builder.Entity<DailyPlan>()
+            .PrimitiveCollection(e => e.Days)
+            .ElementType()
+            .HasConversion(typeof(DayConverter))
+            .Metadata
+            .SetValueComparer(new ValueComparer<List<Days>>(
+                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
+                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
+                c => c.ToList()));
+        
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(e => e.Value, e => PhysicalActivities.FromValue(e));
 
@@ -881,8 +899,9 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => ConsultationPurposes.FromValue(e));
 
         builder.Entity<Disease>()
-            .Property(e => e.InheritanceTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => InheritanceTypes.FromValue(e))
+            .PrimitiveCollection(e => e.InheritanceTypes)
+            .ElementType()
+            .HasConversion(typeof(InheritanceConverter))
             .Metadata
             .SetValueComparer(new ValueComparer<List<InheritanceTypes>>(
                 (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
@@ -900,10 +919,23 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => FoodReactions.FromValue(e));
-        
+
         builder.Entity<FoodConsumption>().Property(e => e.FoodGroup)
             .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<FoodConsumption>().Property(e => e.Frequency)
             .HasConversion(e => e.Value, e => Frequencies.FromValue(e));
     }
 }
+
+internal class MealTypeConverter()
+    : ValueConverter<MealTypes, string>(e => e.ReadableName, s => IEnum<MealTypes, MealToken>.ToValue(s));
+
+internal class DishTypeConverter()
+    : ValueConverter<DishTypes, string>(e => e.ReadableName, s => IEnum<DishTypes, DishToken>.ToValue(s));
+
+internal class InheritanceConverter()
+    : ValueConverter<InheritanceTypes, string>(e => e.ReadableName,
+        s => IEnum<InheritanceTypes, InheritanceToken>.ToValue(s));
+
+internal class DayConverter()
+    : ValueConverter<Days, string>(e => e.ReadableName, s => IEnum<Days, DayToken>.ToValue(s));

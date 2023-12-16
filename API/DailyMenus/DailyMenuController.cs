@@ -15,18 +15,15 @@ namespace API.DailyMenus;
 [Route("api/v1/daily-menus")]
 public class DailyMenuController
 {
-    private readonly IApplicationData _applicationData;
     private readonly IDailyMenuRepository _dailyMenuRepository;
     private readonly IValidator<DailyMenuQuery> _queryValidator;
     private readonly IValidator<DailyMenuDto> _jsonValidator;
 
     public DailyMenuController(
-        IApplicationData applicationData,
         IDailyMenuRepository dailyMenuRepository,
         IValidator<DailyMenuQuery> queryValidator,
         IValidator<DailyMenuDto> jsonValidator)
     {
-        _applicationData = applicationData;
         _dailyMenuRepository = dailyMenuRepository;
         _queryValidator = queryValidator;
         _jsonValidator = jsonValidator;
@@ -49,7 +46,7 @@ public class DailyMenuController
     }
 
     [HttpGet]
-    [Route("/distribution/")]
+    [Route("distribution/")]
     public async Task<ActionResult<DailyMenuDto>> GenerateMenu([FromQuery, Required] MealToken mealToken,
         [FromQuery] string hour, [FromQuery] double energy, [FromQuery] double carbohydratesPct,
         [FromQuery] double fattyAcidsPct, [FromQuery] double proteinsPct, [FromQuery] double errorMargin)

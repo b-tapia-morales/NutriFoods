@@ -33,9 +33,9 @@ public static class TargetExtensions
                 .SelectMany(e => e.Nutrients)
                 .Where(e => string.Equals(e.Nutrient, target.Nutrient, StringComparison.InvariantCultureIgnoreCase))
                 .Sum(e => e.Quantity);
-            var actualError = thresholdType == ThresholdTypes.Exact
+            double? actualError = thresholdType == ThresholdTypes.Exact
                 ? MathUtils.RelativeError(actualQuantity, target.ExpectedQuantity)
-                : 0;
+                : null;
             target.ActualQuantity = actualQuantity;
             target.ActualError = actualError;
         }
@@ -94,7 +94,8 @@ public static class TargetExtensions
             .WithMessage(MessageExtensions.CalculatedValue("ActualError"));
         c.RuleFor(t => t.ExpectedError)
             .GreaterThanOrEqualTo(minErrorMargin)
-            .WithMessage(e => MessageExtensions.LesserThanAllowed("error margin", e.ExpectedError, minErrorMargin));
+            .WithMessage(e =>
+                MessageExtensions.LesserThanAllowed("error margin", e.ExpectedError, minErrorMargin));
         c.RuleFor(e => e.Unit)
             .Must(e => IEnum<Units, UnitToken>.ReadableNameDictionary.ContainsKey(e))
             .WithMessage(e => MessageExtensions.NotInEnum<Units, UnitToken>(e.Unit));

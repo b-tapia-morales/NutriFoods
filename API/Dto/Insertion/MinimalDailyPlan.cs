@@ -5,7 +5,7 @@ namespace API.Dto.Insertion;
 
 public class MinimalDailyPlan
 {
-    public string Day { get; set; } = null!;
+    public List<string> Days { get; set; } = null!;
     public string PhysicalActivityLevel { get; set; } = null!;
     public double PhysicalActivityFactor { get; set; }
     public double AdjustmentFactor { get; set; }

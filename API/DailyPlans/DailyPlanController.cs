@@ -42,7 +42,7 @@ public class DailyPlanController
     }
 
     [HttpPost]
-    [Route("/distribution/")]
+    [Route("distribution/")]
     public async Task<DailyPlanDto> GeneratePlan([FromBody] PlanConfiguration configuration)
     {
         var totalMetabolicRate = (1 + configuration.AdjustmentFactor / 2) * configuration.BasalMetabolicRate *
@@ -50,7 +50,7 @@ public class DailyPlanController
 
         var dailyPlan = new DailyPlanDto
         {
-            Day = configuration.Day,
+            Days = configuration.Days,
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
             PhysicalActivityFactor = configuration.ActivityFactor,
@@ -74,7 +74,7 @@ public class DailyPlanController
 
 public class PlanConfiguration
 {
-    public string Day { get; set; } = null!;
+    public List<string> Days { get; set; } = null!;
     public double BasalMetabolicRate { get; set; }
     public double AdjustmentFactor { get; set; }
     public string ActivityLevel { get; set; } = null!;

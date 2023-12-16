@@ -15,9 +15,12 @@ public class DailyPlanValidator : AbstractValidator<DailyPlanDto>
 
     public DailyPlanValidator()
     {
-        RuleFor(e => e.Day)
-            .Must(e => IEnum<Days, DayToken>.ReadableNameDictionary.ContainsKey(e))
-            .WithMessage(e => MessageExtensions.NotInEnum<Days, DayToken>(e.Day));
+        RuleForEach(e => e.Days)
+            .ChildRules(c =>
+                c.RuleFor(e => e)
+                    .Must(e => IEnum<Days, DayToken>.ReadableNameDictionary.ContainsKey(e))
+                    .WithMessage(MessageExtensions.NotInEnum<Days, DayToken>)
+            );
         RuleFor(e => e.AdjustmentFactor)
             .InclusiveBetween(MinAdjustmentFactor, MaxAdjustmentFactor)
             .WithMessage(e =>

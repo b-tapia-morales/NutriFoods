@@ -1,4 +1,6 @@
-﻿using Domain.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Domain.Enum;
 
 namespace Domain.Models;
 
@@ -6,7 +8,7 @@ public class DailyPlan
 {
     public int Id { get; set; }
 
-    public Days Day { get; set; } = null!;
+    public List<Days> Days { get; set; } = null!;
 
     public PhysicalActivities PhysicalActivityLevel { get; set; } = null!;
 
