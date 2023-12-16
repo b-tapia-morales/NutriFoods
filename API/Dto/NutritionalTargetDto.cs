@@ -1,4 +1,5 @@
-﻿using API.Validations;
+﻿using API.DailyPlans;
+using API.Validations;
 using Domain.Enum;
 using FluentValidation;
 using Utils;
@@ -37,7 +38,7 @@ public static class TargetExtensions
         }
     }
 
-    public static IEnumerable<NutritionalTargetDto> DistributionToTargets(
+    public static IEnumerable<NutritionalTargetDto> MacroDistributionToTargets(
         IDictionary<Nutrients, double> distributionDict, double energy, double errorMargin)
     {
         yield return new NutritionalTargetDto
@@ -59,6 +60,23 @@ public static class TargetExtensions
                 Unit = nutrient.Unit.ReadableName,
                 ThresholdType = ThresholdTypes.WithinRange.ReadableName,
                 IsPriority = true
+            };
+        }
+    }
+
+    public static IEnumerable<NutritionalTargetDto> ToTargets(
+        PlanConfiguration configuration, double intakePercentage)
+    {
+        foreach (var target in configuration.Targets)
+        {
+            yield return new NutritionalTargetDto
+            {
+                Nutrient = target.Nutrient,
+                ExpectedQuantity = target.ExpectedQuantity * intakePercentage,
+                ExpectedError = target.ExpectedError,
+                Unit = target.Unit,
+                ThresholdType = target.ThresholdType,
+                IsPriority = target.IsPriority
             };
         }
     }

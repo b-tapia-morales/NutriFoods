@@ -3,16 +3,11 @@
 // ReSharper disable ClassNeverInstantiated.Global
 // ReSharper disable UnusedAutoPropertyAccessor.Global
 
-using System.Collections.Concurrent;
-using System.Threading.Tasks.Dataflow;
-using API.ApplicationData;
 using API.DailyMenus;
 using API.Dto;
-using Domain.Enum;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 using Utils.Enumerable;
-using Utils.Parallel;
 
 namespace API.DailyPlans;
 
@@ -59,11 +54,16 @@ public class DailyPlanController
             AdjustmentFactor = configuration.AdjustmentFactor,
             PhysicalActivityLevel = configuration.ActivityLevel,
             PhysicalActivityFactor = configuration.ActivityFactor,
-            Targets = [..configuration.ToTargets(totalMetabolicRate)]
+            Menus = [],
+            Targets = [],
+            Nutrients = []
         };
 
+        dailyPlan.Targets.AddRange([..configuration.ToTargets(totalMetabolicRate)]);
+        dailyPlan.Targets.AddRange(configuration.Targets);
+
         var menus = new List<DailyMenuDto>(DailyMenuExtensions.ToMenus(configuration, totalMetabolicRate));
-        dailyPlan.Menus = [..await _dailyMenuRepository.Parallelize(menus, false)];
+        dailyPlan.Menus.AddRange([..await _dailyMenuRepository.Parallelize(menus, false)]);
 
         dailyPlan.AddMenuTargets();
         dailyPlan.AddNutritionalValues();
@@ -81,6 +81,7 @@ public class PlanConfiguration
     public double ActivityFactor { get; set; }
     public IDictionary<string, double> Distribution { get; set; } = null!;
     public IList<MealConfiguration> MealConfigurations { get; set; } = null!;
+    public IList<NutritionalTargetDto> Targets { get; set; } = null!;
 }
 
 public class MealConfiguration

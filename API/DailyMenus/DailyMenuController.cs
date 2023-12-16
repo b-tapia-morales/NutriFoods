@@ -69,7 +69,7 @@ public class DailyMenuController
             NutrientExtensions.GramsDistributionDict(energy, carbohydratesPct, fattyAcidsPct, proteinsPct);
         var targets =
             new List<NutritionalTargetDto>(
-                TargetExtensions.DistributionToTargets(distributionDict, energy, errorMargin));
+                TargetExtensions.MacroDistributionToTargets(distributionDict, energy, errorMargin));
         var dailyMenu = new DailyMenuDto
         {
             IntakePercentage = errorMargin,

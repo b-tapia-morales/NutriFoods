@@ -16,22 +16,26 @@ public sealed class DailyMenuDto
 
 public static class DailyMenuExtensions
 {
-    public static IEnumerable<DailyMenuDto> ToMenus(PlanConfiguration planConfiguration, double totalMetabolicRate)
+    public static IEnumerable<DailyMenuDto> ToMenus(PlanConfiguration configuration, double totalMetabolicRate)
     {
-        var planDistribution = planConfiguration.Distribution.ToDictionary(e => ToValue(e.Key), e => e.Value);
-        foreach (var mealConfiguration in planConfiguration.MealConfigurations)
+        var planDistribution = configuration.Distribution.ToDictionary(e => ToValue(e.Key), e => e.Value);
+        foreach (var mealConfiguration in configuration.MealConfigurations)
         {
             var energy = mealConfiguration.IntakePercentage * totalMetabolicRate;
-            var mealDistribution = planDistribution
+            var macroDistribution = planDistribution
                 .ToDictionary(e => e.Key, e => e.Value * energy * NutrientExtensions.GramFactors[e.Key]);
-            var targets =
-                TargetExtensions.DistributionToTargets(mealDistribution, energy, planConfiguration.AdjustmentFactor);
+            var macroTargets =
+                TargetExtensions
+                    .MacroDistributionToTargets(macroDistribution, energy, configuration.AdjustmentFactor);
+            var microTargets =
+                TargetExtensions
+                    .ToTargets(configuration, mealConfiguration.IntakePercentage);
             yield return new DailyMenuDto
             {
                 Hour = mealConfiguration.Hour,
                 MealType = mealConfiguration.MealType,
                 IntakePercentage = mealConfiguration.IntakePercentage,
-                Targets = [..targets]
+                Targets = [..macroTargets, ..microTargets]
             };
         }
     }

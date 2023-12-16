@@ -69,7 +69,6 @@ public static class DailyPlanExtensions
 
     public static void AddNutritionalValues(this DailyPlanDto dailyPlan)
     {
-        dailyPlan.Nutrients = [];
         foreach (var (nutrientName, actualQuantity) in dailyPlan.Menus
                      .SelectMany(e => e.Nutrients)
                      .GroupBy(e => e.Nutrient)
@@ -90,11 +89,9 @@ public static class DailyPlanExtensions
 
     public static void AddTargetValues(this DailyPlanDto dailyPlan)
     {
-        var macronutrients = NutrientExtensions.Macronutrients;
         foreach (var (nutrient, actualQuantity) in dailyPlan.Menus
                      .SelectMany(e => e.Targets)
                      .GroupBy(e => e.Nutrient)
-                     .Where(e => macronutrients.Contains(ToValue(e.Key)))
                      .Select(e => (e.Key, e.Sum(x => x.ActualQuantity.GetValueOrDefault()))))
         {
             var target = dailyPlan.Targets.First(e => string.Equals(e.Nutrient, nutrient, InvariantCultureIgnoreCase));
