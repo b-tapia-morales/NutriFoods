@@ -1,6 +1,7 @@
 using API.DailyPlans;
 using Domain.Enum;
 using Utils;
+using static System.StringComparison;
 using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.Dto;
@@ -91,12 +92,12 @@ public static class DailyPlanExtensions
     {
         var macronutrients = NutrientExtensions.Macronutrients;
         foreach (var (nutrient, actualQuantity) in dailyPlan.Menus
-                     .SelectMany(e => e.Nutrients)
+                     .SelectMany(e => e.Targets)
                      .GroupBy(e => e.Nutrient)
                      .Where(e => macronutrients.Contains(ToValue(e.Key)))
-                     .Select(e => (e.Key, e.Sum(x => x.Quantity))))
+                     .Select(e => (e.Key, e.Sum(x => x.ActualQuantity.GetValueOrDefault()))))
         {
-            var target = dailyPlan.Targets.First(e => string.Equals(e.Nutrient, nutrient));
+            var target = dailyPlan.Targets.First(e => string.Equals(e.Nutrient, nutrient, InvariantCultureIgnoreCase));
             target.ActualQuantity = actualQuantity;
             target.ActualError = MathUtils.RelativeError(target.ExpectedQuantity, actualQuantity);
         }
