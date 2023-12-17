@@ -122,11 +122,17 @@ public static class Recipes
 
             var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var mealType in mealTypes)
-                recipe.MealTypes.Add(mealType);
+            {
+                if (!recipe.MealTypes.Contains(mealType))
+                    recipe.MealTypes.Add(mealType);
+            }
 
             var dishTypes = DishTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var dishType in dishTypes)
-                recipe.DishTypes.Add(dishType);
+            {
+                if (!recipe.DishTypes.Contains(dishType))
+                    recipe.DishTypes.Add(dishType);
+            }
         }
 
         context.SaveChanges();
