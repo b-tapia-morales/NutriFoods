@@ -36,7 +36,7 @@ public class RecipeInsertionTest(ITestOutputHelper output)
         var distinctByUrl = mappings.DistinctBy(e => new {e.Name, e.Author}).Select(e => (e.Name, e.Author)).ToHashSet();
         output.WriteLine(allMappings.Except(distinctByUrl).ToJoinedString());
         output.WriteLine(distinctByUrl.Except(allMappings).ToJoinedString());
-        Assert.True(!allMappings.Except(distinctByUrl).Any());
-        Assert.True(!distinctByUrl.Except(allMappings).Any());
+        Assert.False(allMappings.Except(distinctByUrl).Any());
+        Assert.False(distinctByUrl.Except(allMappings).Any());
     }
 }

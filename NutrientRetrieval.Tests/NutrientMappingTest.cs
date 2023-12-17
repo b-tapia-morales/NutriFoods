@@ -52,7 +52,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
         }
 
         output.WriteLine(((IDictionary<int, string>)notMatching).ToJoinedString());
-        Assert.True(notMatching.Count == 0);
+        Assert.Empty(notMatching);
     }
 
     [Fact]
@@ -69,7 +69,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
         var exceptB = enumsIds.Except(nutriFoodsIds);
         output.WriteLine(exceptA.ToJoinedString());
         output.WriteLine(exceptB.ToJoinedString());
-        Assert.True(exceptA.Count == 0);
+        Assert.Empty(exceptA);
     }
 
     [Fact]
