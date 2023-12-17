@@ -25,11 +25,15 @@ public static class EnumerableUtils
     }
 
     public static bool IsSorted<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
+        where T : IComparable<T> =>
+        IsSorted(source, keySelector, Comparer<TKey>.Default);
+
+    public static bool IsSorted<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector,
+        IComparer<TKey> comparer)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
 
-        var comparer = Comparer<TKey>.Default;
         using var iterator = source.GetEnumerator();
         if (!iterator.MoveNext())
             return true;
@@ -57,7 +61,9 @@ public static class EnumerableUtils
     public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ",
         (string Left, string Right)? enclosure = null) =>
         string.Join($"{delimiter}",
-            enclosure.HasValue ? source.Select(e => $"{enclosure.Value.Left}{e?.ToString()}{enclosure.Value.Right}") : source);
+            enclosure.HasValue
+                ? source.Select(e => $"{enclosure.Value.Left}{e?.ToString()}{enclosure.Value.Right}")
+                : source);
 
     public static void WriteToConsole<T>(this IEnumerable<T> source, string delimiter = ", ",
         (string Left, string Right)? enclosure = null) =>
