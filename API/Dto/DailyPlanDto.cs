@@ -47,26 +47,6 @@ public static class DailyPlanExtensions
         }
     }
 
-    public static void AddMenuTargets(this DailyPlanDto dailyPlan)
-    {
-        foreach (var menu in dailyPlan.Menus)
-        {
-            var intakePercentage = menu.IntakePercentage;
-            foreach (var target in dailyPlan.Targets)
-            {
-                menu.Targets.Add(new NutritionalTargetDto
-                {
-                    Nutrient = target.Nutrient,
-                    ExpectedQuantity = intakePercentage * target.ExpectedQuantity,
-                    ExpectedError = target.ExpectedError,
-                    Unit = target.Unit,
-                    ThresholdType = target.ThresholdType,
-                    IsPriority = target.IsPriority
-                });
-            }
-        }
-    }
-
     public static void AddNutritionalValues(this DailyPlanDto dailyPlan)
     {
         foreach (var (nutrientName, actualQuantity) in dailyPlan.Menus
