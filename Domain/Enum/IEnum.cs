@@ -36,6 +36,12 @@ public interface IEnum<out T, TEnum>
     static T ToValue(string readableName) =>
         ReadableNameDictionary.TryGetValue(readableName, out var value) ? value : throw new KeyNotFoundException();
 
+    static bool TryGetValue(string readableName, out T? value) =>
+        ReadableNameDictionary.TryGetValue(readableName, out value);
+
+    static bool TryGetValue(TEnum token, out T? value) =>
+        TokenDictionary.TryGetValue(token, out value);
+
     static TEnum ToToken(T value) =>
         ReverseTokenDictionary.TryGetValue(value, out var token) ? token : throw new KeyNotFoundException();
 
@@ -43,6 +49,18 @@ public interface IEnum<out T, TEnum>
         ReadableNameDictionary.TryGetValue(readableName, out var value)
             ? ToToken(value)
             : throw new KeyNotFoundException();
+
+    static bool TryGetToken(T value, out TEnum? token)
+    {
+        token = ReverseTokenDictionary.TryGetValue(value, out var enumValue) ? enumValue : null;
+        return token != null;
+    }
+
+    static bool TryGetToken(string readableName, out TEnum? token)
+    {
+        token = ReadableNameDictionary.TryGetValue(readableName, out var value) ? ToToken(value) : null;
+        return token != null;
+    }
 
     static string ToReadableName(TEnum token) => ToValue(token).ReadableName;
 }
@@ -59,9 +77,7 @@ public interface IComposableEnum<out TSelf, out TOther>
 
 public interface IHierarchicalEnum<out T, TEnum> : IEnum<T, TEnum>, IComposableEnum<T, T>
     where T : SmartEnum<T>, IHierarchicalEnum<T, TEnum>
-    where TEnum : struct, System.Enum, IConvertible
-{
-}
+    where TEnum : struct, System.Enum, IConvertible;
 
 public class ReadableNameComparer<T, TEnum> : IComparer<string>
     where T : SmartEnum<T>, IEnum<T, TEnum>
