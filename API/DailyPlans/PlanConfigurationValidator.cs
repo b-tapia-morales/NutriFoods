@@ -20,7 +20,7 @@ public class PlanConfigurationValidator : AbstractValidator<PlanConfiguration>
         RuleForEach(e => e.Days)
             .ChildRules(c =>
                 c.RuleFor(e => e)
-                    .Must(e => IEnum<Days, DayToken>.ReadableNameDictionary.ContainsKey(e))
+                    .Must(e => IEnum<Days, DayToken>.TryGetValue(e, out _))
                     .WithMessage(MessageExtensions.NotInEnum<Days, DayToken>)
             );
 
@@ -34,7 +34,7 @@ public class PlanConfigurationValidator : AbstractValidator<PlanConfiguration>
                     MinAdjustmentFactor, MaxAdjustmentFactor));
 
         RuleFor(e => e.ActivityLevel)
-            .Must(e => IEnum<PhysicalActivities, PhysicalActivityToken>.ReadableNameDictionary.ContainsKey(e))
+            .Must(e => IEnum<PhysicalActivities, PhysicalActivityToken>.TryGetValue(e, out _))
             .WithMessage(e => MessageExtensions.NotInEnum<PhysicalActivities, PhysicalActivityToken>(e.ActivityLevel));
 
         RuleFor(e => e.ActivityFactor)
@@ -42,6 +42,13 @@ public class PlanConfigurationValidator : AbstractValidator<PlanConfiguration>
             .WithMessage(e =>
                 MessageExtensions.OutsideRange("physical activity factor", e.ActivityFactor,
                     Sedentary.LowerRatio, VeryActive.UpperRatio));
+
+        RuleForEach(e => e.Distribution)
+            .ChildRules(c =>
+                c.RuleFor(e => e)
+                    .Must(e => IEnum<Nutrients, NutrientToken>.TryGetValue(e.Key, out _))
+                    .WithMessage(e => MessageExtensions.NotInEnum<Nutrients, NutrientToken>(e.Key))
+            );
 
         RuleFor(e => e.Distribution)
             .Must(e => e.Keys

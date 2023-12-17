@@ -2,6 +2,7 @@ using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using Ardalis.SmartEnum;
 using Utils.Enumerable;
+using static System.StringComparer;
 
 namespace Domain.Enum;
 
@@ -23,7 +24,7 @@ public interface IEnum<out T, TEnum>
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Key, e => e.Value);
 
     static IReadOnlyDictionary<string, T> ReadableNameDictionary { get; } =
-        Values.ToSortedDictionary(e => e.ReadableName, e => e, ReadableNameComparer).AsReadOnly();
+        Values.ToSortedDictionary(e => e.ReadableName, e => e, new ReadableNameComparer<T, TEnum>()).AsReadOnly();
 
     static IReadOnlyDictionary<T, TEnum> ReverseTokenDictionary { get; } =
         Tokens.Zip(Values, (k, v) => new { Key = k, Value = v }).ToImmutableSortedDictionary(e => e.Value, e => e.Key);
@@ -84,19 +85,16 @@ public class ReadableNameComparer<T, TEnum> : IComparer<string>
     where TEnum : struct, System.Enum, IConvertible
 {
     private static readonly IReadOnlyDictionary<string, int> Dictionary =
-        SmartEnum<T>.List.ToImmutableSortedDictionary(e => e.ReadableName, e => e.Value,
-            StringComparer.InvariantCultureIgnoreCase);
+        SmartEnum<T>.List.ToDictionary(e => e.ReadableName, e => e.Value, InvariantCultureIgnoreCase);
 
     public int Compare(string? x, string? y)
     {
         if (ReferenceEquals(x, y))
             return +0;
-        if (ReferenceEquals(x, null))
+        if (ReferenceEquals(x, null) || !Dictionary.TryGetValue(x, out var first))
             return -1;
-        if (ReferenceEquals(y, null))
+        if (ReferenceEquals(y, null) || !Dictionary.TryGetValue(y, out var second))
             return +1;
-        if (!Dictionary.TryGetValue(x, out var first) || !Dictionary.TryGetValue(y, out var second))
-            throw new KeyNotFoundException();
         return first.CompareTo(second);
     }
 }
