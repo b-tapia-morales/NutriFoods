@@ -69,6 +69,8 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.NutrientDict, opt =>
                 opt.MapFrom(src => src.NutritionalValues.ToSortedDictionary(e => e.Nutrient.ReadableName, e => e,
                     IEnum<Nutrients, NutrientToken>.ReadableNameComparer)))
+            .ForMember(dest => dest.Difficulty,
+                opt => opt.MapFrom(src => (src.Difficulty ?? Difficulties.None).ReadableName))
             .ReverseMap()
             .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
             .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
@@ -77,7 +79,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
             .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
+                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()))
+            .ForMember(dest => dest.Difficulty,
+                opt => opt.MapFrom(src =>
+                    IEnum<Difficulties, DifficultyToken>.ToValue(src.Difficulty ?? string.Empty)));;
 
         // Recipe Abridged
         CreateMap<Recipe, RecipeAbridged>()
@@ -88,6 +93,8 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
             .ForMember(dest => dest.DishTypes,
                 opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
+            .ForMember(dest => dest.Difficulty,
+                opt => opt.MapFrom(src => (src.Difficulty ?? Difficulties.None).ReadableName))
             .ReverseMap()
             .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
             .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
@@ -95,7 +102,10 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.MealTypes,
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
             .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()));
+                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()))
+            .ForMember(dest => dest.Difficulty,
+                opt => opt.MapFrom(src =>
+                    IEnum<Difficulties, DifficultyToken>.ToValue(src.Difficulty ?? string.Empty)));
 
         // Recipe abridged
         CreateMap<RecipeDto, RecipeAbridged>()
@@ -271,5 +281,18 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.NutritionalValues, opt => opt.MapFrom(src => src.Nutrients))
             .ForMember(dest => dest.NutritionalTargets, opt => opt.MapFrom(src => src.Targets))
             .ForMember(dest => dest.DailyMenus, opt => opt.MapFrom(src => src.Menus));
+
+        CreateMap<MinimalRecipe, Recipe>()
+            .ForMember(dest => dest.Difficulty,
+                opt => opt.MapFrom(src => IEnum<Difficulties, DifficultyToken>.ToValue(src.Difficulty ?? string.Empty)))
+            .ForMember(dest => dest.MealTypes,
+                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue)))
+            .ForMember(dest => dest.DishTypes,
+                opt => opt.MapFrom(src => src.DishTypes.Select(IEnum<DishTypes, DishToken>.ToValue)))
+            .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps.Select((e, i) => new RecipeStep
+            {
+                Number = i + 1,
+                Description = e
+            })));
     }
 }
