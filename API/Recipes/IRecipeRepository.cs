@@ -8,6 +8,8 @@ public interface IRecipeRepository
     Task<List<RecipeDto>> FindAll(int pageNumber, int pageSize);
 
     Task<RecipeDto?> FindByNameAndAuthor(string name, string author);
+    
+    Task<RecipeDto?> FindByUrl(string url);
 
     Task<RecipeDto?> FindById(int id);
 

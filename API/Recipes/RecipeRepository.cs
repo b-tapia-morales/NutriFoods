@@ -1,9 +1,12 @@
 using System.Linq.Expressions;
+using API.ApplicationData;
 using API.Dto;
+using API.Dto.Insertion;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.String;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
@@ -12,11 +15,13 @@ namespace API.Recipes;
 
 public class RecipeRepository : IRecipeRepository
 {
+    private readonly IApplicationData _applicationData;
     private readonly NutrifoodsDbContext _context;
     private readonly IMapper _mapper;
 
-    public RecipeRepository(NutrifoodsDbContext context, IMapper mapper)
+    public RecipeRepository(NutrifoodsDbContext context, IMapper mapper, IApplicationData applicationData)
     {
+        _applicationData = applicationData;
         _mapper = mapper;
         _context = context;
     }
@@ -31,6 +36,12 @@ public class RecipeRepository : IRecipeRepository
     {
         var recipe = await _context.Recipes.FindFirstBy(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)) &&
                                                              NormalizeStr(e.Author).Equals(NormalizeStr(author)));
+        return _mapper.Map<RecipeDto>(recipe);
+    }
+
+    public async Task<RecipeDto?> FindByUrl(string url)
+    {
+        var recipe = await _context.Recipes.FindFirstBy(e => e.Url.ToLower().Equals(url.ToLower()));
         return _mapper.Map<RecipeDto>(recipe);
     }
 
@@ -113,6 +124,19 @@ public class RecipeRepository : IRecipeRepository
     public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
 
+    public async Task<RecipeLogging?> InsertRecipe(MinimalRecipe minimalRecipe)
+    {
+        var logging = minimalRecipe.ProcessRecipe(_applicationData.IngredientDict, _applicationData.MeasureDict);
+        if (!logging.IsSuccessful)
+            return logging;
+        var recipe = _mapper.Map<Recipe>(minimalRecipe);
+        recipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_applicationData.IngredientDict)];
+        recipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_applicationData.MeasureDict)];
+        await _context.AddAsync(recipe);
+        await _context.SaveChangesAsync();
+        return logging;
+    }
+
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
         double fattyAcids, double proteins)
     {
@@ -133,6 +157,29 @@ public class RecipeRepository : IRecipeRepository
             .ToListAsync();
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
+}
+
+public class RecipeLogging
+{
+    public string Name { get; set; } = null!;
+    public string Author { get; set; } = null!;
+    public string Url { get; set; } = null!;
+    public bool IsSuccessful { get; set; }
+    public List<MeasureLogging> MeasureLogs { get; set; } = null!;
+    public List<QuantityLogging> QuantityLogs { get; set; } = null!;
+}
+
+public class MeasureLogging
+{
+    public string MeasureName { get; set; } = null!;
+    public string IngredientName { get; set; } = null!;
+    public bool Exists { get; set; }
+}
+
+public class QuantityLogging
+{
+    public string IngredientName { get; set; } = null!;
+    public bool Exists { get; set; }
 }
 
 public static class RecipeExtensions

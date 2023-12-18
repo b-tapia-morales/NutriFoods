@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using API.Dto;
+using API.Dto.Insertion;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,29 +15,21 @@ public class RecipeController(IRecipeRepository repository)
     [HttpGet]
     [Route("")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll([FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = DefaultPageSize)
-    {
-        return await repository.FindAll(pageNumber, pageSize);
-    }
+        [FromQuery] int pageSize = DefaultPageSize) =>
+        await repository.FindAll(pageNumber, pageSize);
 
     [HttpGet]
-    [Route("name/{name}/author/{author}")]
+    [Route("name/{name:minlength(2)}/author/{author:minlength(2)}")]
     public async Task<ActionResult<RecipeDto>> FindByNameAndAuthor([Required] string name, [Required] string author)
     {
-        if (string.IsNullOrWhiteSpace(name))
-            return new BadRequestObjectResult("Parameter can't be an empty or whitespace string");
-
         var recipe = await repository.FindByNameAndAuthor(name, author);
         return recipe == null ? new NotFoundResult() : recipe;
     }
 
     [HttpGet]
-    [Route("id/{id:int}")]
+    [Route("id/{id:int:min(1)}")]
     public async Task<ActionResult<RecipeDto>> FindById([Required] int id)
     {
-        if (id < 0)
-            return new BadRequestObjectResult($"Parameter can't be a negative integer (Value provided was: {id})");
-
         var recipe = await repository.FindById(id);
         return recipe == null ? new NotFoundResult() : recipe;
     }
@@ -100,18 +93,12 @@ public class RecipeController(IRecipeRepository repository)
     }
 
     [HttpGet]
-    [Route("portions/{portions:int}")]
+    [Route("portions/{portions:int:min(1)}")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FilterByExactPortions(
         [Required] int portions,
         [FromQuery] int pageNumber = 1,
-        [FromQuery] int pageSize = DefaultPageSize)
-    {
-        if (portions < 0)
-            return new BadRequestObjectResult(
-                $"Parameter can't be a negative integer (Value provided was: {portions})");
-
-        return await repository.FilterByPortions(portions, pageNumber, pageSize);
-    }
+        [FromQuery] int pageSize = DefaultPageSize) =>
+        await repository.FilterByPortions(portions, pageNumber, pageSize);
 
     [HttpGet]
     [Route("portions")]
@@ -198,5 +185,15 @@ public class RecipeController(IRecipeRepository repository)
                 $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {lower} and {upper} respectively)");
 
         return await repository.FilterByProteins(lower, upper);
+    }
+
+    public async Task<ActionResult<RecipeLogging>> InsertRecipe([FromBody] MinimalRecipe recipe)
+    {
+        if (await repository.FindByNameAndAuthor(recipe.Name, recipe.Author) != null)
+            return new ConflictObjectResult("");
+        if (await repository.FindByUrl(recipe.Url) != null)
+            return new ConflictObjectResult("");
+
+        return new OkObjectResult("");
     }
 }
