@@ -236,9 +236,8 @@ public static class Recipes
 
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
     {
-        var ingredientsDict = ingredients
-            .GroupBy(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase)
-            .ToDictionary(e => e.Key, e => e.First(), StringComparer.InvariantCultureIgnoreCase);
+        var ingredientsDict = 
+            ingredients.ToGroupedDictionary(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase);
         var synonymsDict = ingredients
             .SelectMany(e => e.Synonyms.Select(x => (Synonym: x, Ingredient: e)))
             .GroupBy(e => e.Synonym.Standardize(), StringComparer.InvariantCultureIgnoreCase)
@@ -248,9 +247,7 @@ public static class Recipes
 
     private static IDictionary<(string Measure, string IngredientName), IngredientMeasure> MeasureDictionary(
         IList<IngredientMeasure> measures) =>
-        measures
-            .GroupBy(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()))
-            .ToDictionary(e => e.Key, e => e.First());
+        measures.ToGroupedDictionary(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()));
 
 
     private static IDictionary<string, Recipe> RecipeDictionary(IList<Recipe> recipes) =>
