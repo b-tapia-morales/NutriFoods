@@ -15,6 +15,8 @@ public interface IApplicationData
     IReadOnlyDictionary<MealTypes, double> FattyAcidsDict { get; }
     IReadOnlyDictionary<MealTypes, double> ProteinsDict { get; }
     double DefaultRatio { get; }
+    IReadOnlyDictionary<string, Ingredient> IngredientDict { get; }
+    IReadOnlyDictionary<(string Ingredient, string Measure), IngredientMeasure> MeasureDict { get; }
 
     int RatioPerPortion(MealTypes mealType, NutrientToken nutrientToken, double quantity)
     {

@@ -5,6 +5,9 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Enumerable;
+using Utils.String;
+using static System.StringComparer;
 using static System.StringComparison;
 
 namespace API.ApplicationData;
@@ -23,7 +26,7 @@ public class ApplicationData : IApplicationData
     public ApplicationData(IMapper mapper)
     {
         var context = new NutrifoodsDbContext(Options);
-        var recipes = FindAll(context);
+        var recipes = FindRecipes(context);
         var dtos = mapper.Map<List<RecipeDto>>(recipes);
         MealRecipesDict = new Dictionary<MealTypes, List<RecipeDto>>
         {
@@ -38,6 +41,8 @@ public class ApplicationData : IApplicationData
         FattyAcidsDict = ToAveragesDict(Nutrients.FattyAcids).ToImmutableDictionary(e => e.Key, e => e.Value);
         ProteinsDict = ToAveragesDict(Nutrients.Proteins).ToImmutableDictionary(e => e.Key, e => e.Value);
         DefaultRatio = 4.0 / 7.0;
+        IngredientDict = IngredientDictionary(FindIngredients(context)).AsReadOnly();
+        MeasureDict = MeasureDictionary(FindMeasures(context)).AsReadOnly();
     }
 
     public IReadOnlyDictionary<MealTypes, List<RecipeDto>> MealRecipesDict { get; }
@@ -47,6 +52,8 @@ public class ApplicationData : IApplicationData
     public IReadOnlyDictionary<MealTypes, double> FattyAcidsDict { get; }
     public IReadOnlyDictionary<MealTypes, double> ProteinsDict { get; }
     public double DefaultRatio { get; }
+    public IReadOnlyDictionary<string, Ingredient> IngredientDict { get; }
+    public IReadOnlyDictionary<(string Ingredient, string Measure), IngredientMeasure> MeasureDict { get; }
 
     private IEnumerable<KeyValuePair<MealTypes, int>> ToCountDict()
     {
@@ -72,8 +79,8 @@ public class ApplicationData : IApplicationData
         }
     }
 
-    private static List<Recipe> FindAll(NutrifoodsDbContext context) =>
-        context.Recipes.IncludeSubfields().AsNoTracking()
+    private static List<Recipe> FindRecipes(NutrifoodsDbContext context) =>
+        context.Recipes.IncludeSubfields()
             .Where(e => e.Portions != null && e.Portions > 0 && e.NutritionalValues.Count > 0)
             .AsNoTracking()
             .ToList();
@@ -85,6 +92,31 @@ public class ApplicationData : IApplicationData
 
     private static double CalculateAverage(IEnumerable<RecipeDto> recipes, Nutrients nutrient) =>
         recipes.SelectMany(e => e.Nutrients)
-            .Where(e => string.Equals(e.Nutrient, nutrient.ReadableName, InvariantCultureIgnoreCase))
+            .Where(e => string.Equals(e.Nutrient, nutrient.ReadableName, StringComparison.InvariantCultureIgnoreCase))
             .Average(e => e.Quantity);
+    
+    private static List<IngredientMeasure> FindMeasures(NutrifoodsDbContext context) =>
+        context.IngredientMeasures.AsQueryable().Include(e => e.Ingredient)
+            .AsNoTracking()
+            .ToList();
+
+    private static List<Ingredient> FindIngredients(NutrifoodsDbContext context) =>
+        context.Ingredients.AsQueryable()
+            .AsNoTracking()
+            .ToList();
+
+    private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
+    {
+        var ingredientsDict = ingredients
+            .ToGroupedDictionary(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase);
+        var synonymsDict = ingredients
+            .SelectMany(e => e.Synonyms.Select(x => (Synonym: x, Ingredient: e)))
+            .GroupBy(e => e.Synonym.Standardize(), StringComparer.InvariantCultureIgnoreCase)
+            .ToDictionary(e => e.Key, e => e.First().Ingredient, StringComparer.InvariantCultureIgnoreCase);
+        return ingredientsDict.Merge(synonymsDict);
+    }
+
+    private static IDictionary<(string Measure, string IngredientName), IngredientMeasure> MeasureDictionary(
+        IList<IngredientMeasure> measures) =>
+        measures.ToGroupedDictionary(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()));
 }
