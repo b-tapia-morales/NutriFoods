@@ -29,6 +29,14 @@ public sealed class EnumsTest(ITestOutputHelper output)
         output.WriteLine(dictionary.ToJoinedString());
         Assert.DoesNotContain(false, dictionary.Zip(dictionary.Skip(1), (a, b) => a.Value < b.Value));
     }
+    
+    [Fact]
+    public void ReadableNameDictionaryPreservesOrder()
+    {
+        var dictionary = IEnum<Nutrients, NutrientToken>.ReadableNameDictionary;
+        output.WriteLine(dictionary.ToJoinedString());
+        Assert.DoesNotContain(false, dictionary.Zip(dictionary.Skip(1), (a, b) => a.Value < b.Value));
+    }
 
     [Fact]
     public void ValuesAreFilterable()

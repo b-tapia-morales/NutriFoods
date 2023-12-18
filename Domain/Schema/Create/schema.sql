@@ -2,6 +2,7 @@ SET SEARCH_PATH = "nutrifoods";
 
 DROP SCHEMA IF EXISTS nutrifoods CASCADE;
 
+DROP EXTENSION IF EXISTS unaccent;
 DROP EXTENSION IF EXISTS btree_gist;
 DROP EXTENSION IF EXISTS "uuid-ossp";
 DROP EXTENSION IF EXISTS pg_trgm;
@@ -12,6 +13,7 @@ CREATE SCHEMA IF NOT EXISTS nutrifoods;
 SET SEARCH_PATH = "nutrifoods";
 SET TIMEZONE = "America/Santiago";
 
+CREATE EXTENSION IF NOT EXISTS unaccent;
 CREATE EXTENSION IF NOT EXISTS btree_gist;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE EXTENSION IF NOT EXISTS pg_trgm;
@@ -72,6 +74,7 @@ CREATE TABLE IF NOT EXISTS recipe
     meal_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
     dish_types INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
     UNIQUE (url),
+    UNIQUE (name, author),
     PRIMARY KEY (id)
 );
 
@@ -133,24 +136,14 @@ CREATE TABLE IF NOT EXISTS nutritional_target
     PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS meal_plan
-(
-    id            SERIAL,
-    meals_per_day INTEGER NOT NULL,
-    created_on    TIMESTAMP DEFAULT now(),
-    PRIMARY KEY (id)
-);
-
 CREATE TABLE IF NOT EXISTS daily_plan
 (
     id                       SERIAL,
-    meal_plan_id             INTEGER NOT NULL,
-    day                      INTEGER NOT NULL,
-    physical_activity_level  INTEGER NOT NULL,
-    physical_activity_factor FLOAT   NOT NULL,
-    adjustment_factor        INTEGER NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id)
+    days                     INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
+    physical_activity_level  INTEGER       NOT NULL,
+    physical_activity_factor FLOAT         NOT NULL,
+    adjustment_factor        FLOAT         NOT NULL,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS daily_plan_nutritional_target
@@ -175,7 +168,7 @@ CREATE TABLE IF NOT EXISTS daily_menu
 (
     id                SERIAL,
     daily_plan_id     INTEGER    NOT NULL,
-    intake_percentage INTEGER    NOT NULL,
+    intake_percentage FLOAT      NOT NULL,
     meal_type         INTEGER    NOT NULL,
     hour              VARCHAR(8) NOT NULL,
     PRIMARY KEY (id),
@@ -213,11 +206,11 @@ CREATE TABLE IF NOT EXISTS menu_recipe
 
 CREATE TABLE IF NOT EXISTS nutritionist
 (
-    id        UUID        NOT NULL DEFAULT uuid_generate_v4(),
-    username  VARCHAR(50) NOT NULL,
-    email     TEXT        NOT NULL,
-    password  TEXT        NOT NULL,
-    joined_on TIMESTAMP   NOT NULL DEFAULT now(),
+    id        UUID                     NOT NULL DEFAULT uuid_generate_v4(),
+    username  VARCHAR(50)              NOT NULL,
+    email     TEXT                     NOT NULL,
+    password  TEXT                     NOT NULL,
+    joined_on TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()::TIMESTAMP,
     UNIQUE (username),
     UNIQUE (email),
     PRIMARY KEY (id)
@@ -225,9 +218,9 @@ CREATE TABLE IF NOT EXISTS nutritionist
 
 CREATE TABLE IF NOT EXISTS patient
 (
-    id              UUID      NOT NULL DEFAULT uuid_generate_v4(),
-    joined_on       TIMESTAMP NOT NULL DEFAULT now(),
-    nutritionist_id UUID      NOT NULL,
+    id              UUID                     NOT NULL DEFAULT uuid_generate_v4(),
+    joined_on       TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()::TIMESTAMP,
+    nutritionist_id UUID                     NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (nutritionist_id) REFERENCES nutritionist (id)
 );
@@ -273,19 +266,26 @@ CREATE TABLE IF NOT EXISTS consultation
     id            UUID DEFAULT uuid_generate_v4(),
     type          INTEGER NOT NULL,
     purpose       INTEGER NOT NULL,
-    registered_on DATE DEFAULT now()::DATE,
-    meal_plan_id  INTEGER,
+    registered_on DATE DEFAULT now()::TIMESTAMP::DATE,
     patient_id    UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (meal_plan_id) REFERENCES meal_plan (id),
     FOREIGN KEY (patient_id) REFERENCES patient (id)
+);
+
+CREATE TABLE IF NOT EXISTS meal_plan
+(
+    consultation_id UUID    NOT NULL,
+    daily_plan_id   INTEGER NOT NULL,
+    PRIMARY KEY (consultation_id, daily_plan_id),
+    FOREIGN KEY (consultation_id) REFERENCES consultation (id),
+    FOREIGN KEY (daily_plan_id) REFERENCES daily_plan (id)
 );
 
 CREATE TABLE IF NOT EXISTS clinical_anamnesis
 (
     id           UUID NOT NULL,
-    created_on   TIMESTAMP DEFAULT now(),
-    last_updated TIMESTAMP DEFAULT now(),
+    created_on   TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
+    last_updated TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
@@ -302,10 +302,10 @@ CREATE TABLE IF NOT EXISTS clinical_sign
 
 CREATE TABLE IF NOT EXISTS disease
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    inheritance_type      INTEGER     NOT NULL,
-    clinical_anamnesis_id UUID        NOT NULL,
+    id                    UUID                   DEFAULT uuid_generate_v4(),
+    name                  VARCHAR(64)   NOT NULL,
+    inheritance_types     INTEGER ARRAY NOT NULL DEFAULT ARRAY []::INTEGER[],
+    clinical_anamnesis_id UUID          NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (clinical_anamnesis_id) REFERENCES clinical_anamnesis (id)
 );
@@ -317,6 +317,7 @@ CREATE TABLE IF NOT EXISTS ingestible
     type                  INTEGER          NOT NULL,
     administration_times  VARCHAR(8) ARRAY NOT NULL DEFAULT ARRAY []::VARCHAR[],
     dosage                INTEGER,
+    unit                  INTEGER,
     adherence             INTEGER          NOT NULL,
     observations          TEXT                      DEFAULT '',
     clinical_anamnesis_id UUID             NOT NULL,
@@ -327,50 +328,50 @@ CREATE TABLE IF NOT EXISTS ingestible
 CREATE TABLE IF NOT EXISTS nutritional_anamnesis
 (
     id           UUID,
-    created_on   TIMESTAMP DEFAULT now(),
-    last_updated TIMESTAMP DEFAULT now()::DATE,
+    created_on   TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
+    last_updated TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
 
 CREATE TABLE IF NOT EXISTS harmful_habit
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    observations          TEXT DEFAULT '',
-    nutritional_anamnesis UUID        NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    name                     VARCHAR(64) NOT NULL,
+    observations             TEXT DEFAULT '',
+    nutritional_anamnesis_id UUID        NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS eating_symptom
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    name                  VARCHAR(64) NOT NULL,
-    observations          TEXT DEFAULT '',
-    nutritional_anamnesis UUID        NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    name                     VARCHAR(64) NOT NULL,
+    observations             TEXT DEFAULT '',
+    nutritional_anamnesis_id UUID        NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS adverse_food_reaction
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    food_group            INTEGER NOT NULL,
-    type                  INTEGER NOT NULL,
-    nutritional_anamnesis UUID    NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    food_group               INTEGER NOT NULL,
+    type                     INTEGER NOT NULL,
+    nutritional_anamnesis_id UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS food_consumption
 (
-    id                    UUID DEFAULT uuid_generate_v4(),
-    food_group            INTEGER NOT NULL,
-    frequency             INTEGER NOT NULL,
-    nutritional_anamnesis UUID    NOT NULL,
+    id                       UUID DEFAULT uuid_generate_v4(),
+    food_group               INTEGER NOT NULL,
+    frequency                INTEGER NOT NULL,
+    nutritional_anamnesis_id UUID    NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (nutritional_anamnesis) REFERENCES nutritional_anamnesis (id)
+    FOREIGN KEY (nutritional_anamnesis_id) REFERENCES nutritional_anamnesis (id)
 );
 
 CREATE TABLE IF NOT EXISTS anthropometry
@@ -381,8 +382,47 @@ CREATE TABLE IF NOT EXISTS anthropometry
     bmi                    FLOAT   NOT NULL,
     muscle_mass_percentage FLOAT   NOT NULL,
     waist_circumference    FLOAT   NOT NULL,
-    created_on             TIMESTAMP DEFAULT now()::DATE,
-    last_updated           TIMESTAMP DEFAULT now()::DATE,
+    created_on             TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
+    last_updated           TIMESTAMP WITH TIME ZONE DEFAULT now()::TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (id) REFERENCES consultation (id)
 );
+
+CREATE OR REPLACE FUNCTION immutable_unaccent(regdictionary, text)
+    RETURNS text
+    LANGUAGE c
+    IMMUTABLE PARALLEL SAFE STRICT AS
+'$libdir/unaccent',
+'unaccent_dict';
+
+CREATE OR REPLACE FUNCTION remove_diacritics(text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN immutable_unaccent(regdictionary 'unaccent', $1);
+
+CREATE OR REPLACE FUNCTION indent_punctuation(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN regexp_replace(str, '([:;,.\-])', '\1 ', 'g');
+
+CREATE OR REPLACE FUNCTION remove_trailing(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN regexp_replace(TRIM(BOTH ' ' FROM str), '\s+', ' ', 'g');
+
+CREATE OR REPLACE FUNCTION normalize_str(str text)
+    RETURNS text
+    LANGUAGE sql
+    IMMUTABLE PARALLEL SAFE STRICT
+RETURN remove_trailing(indent_punctuation(lower(remove_diacritics(str))));
+
+CREATE INDEX IF NOT EXISTS normalize_measure_idx ON ingredient_measure (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_ingredient_idx ON ingredient (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_recipe_name_idx ON recipe (normalize_str(name));
+
+CREATE INDEX IF NOT EXISTS normalize_recipe_author_idx ON recipe (normalize_str(author));

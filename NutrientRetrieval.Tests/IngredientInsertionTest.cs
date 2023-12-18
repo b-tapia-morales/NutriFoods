@@ -21,7 +21,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
     {
         var rows = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsId).ToList();
-        Assert.True(nutriFoods.Count == nutriFoods.Distinct().Count());
+        Assert.Equal(nutriFoods.Count, nutriFoods.Distinct().Count());
     }
 
     [Fact]
@@ -29,7 +29,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
     {
         var rows = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath).ToList();
         var nutriFoods = rows.Select(e => e.NutriFoodsName).ToList();
-        Assert.True(nutriFoods.Count == nutriFoods.Distinct().Count());
+        Assert.Equal(nutriFoods.Count, nutriFoods.Distinct().Count());
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public class IngredientInsertionTest(ITestOutputHelper output)
         var rowNames = new HashSet<string>(CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
             .Select(e => e.NutriFoodsName), InvariantCultureIgnoreCase);
         output.WriteLine(rowNames.Count.ToString());
-        Assert.True(!rowNames.Except(scriptNames).Any());
+        Assert.False(rowNames.Except(scriptNames).Any());
     }
     
     [Fact]

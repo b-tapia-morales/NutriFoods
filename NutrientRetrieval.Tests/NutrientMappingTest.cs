@@ -39,7 +39,8 @@ public class NutrientMappingTest(ITestOutputHelper output)
     [Fact]
     public void AllIdsMatch()
     {
-        var nutrifoods = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        var nutrifoods = CsvUtils
+            .RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.NutriFoodsId, e => e.NutriFoodsName);
         var enums = IEnum<Nutrients, NutrientToken>.Values.ToDictionary(e => e.Value, e => e.ReadableName);
         var notMatching = new Dictionary<int, string>();
@@ -50,8 +51,8 @@ public class NutrientMappingTest(ITestOutputHelper output)
                 notMatching.Add(nutrifoodsId, nutrifoodsName);
         }
 
-        output.WriteLine(notMatching.ToJoinedString());
-        Assert.True(notMatching.Count == 0);
+        output.WriteLine(((IDictionary<int, string>)notMatching).ToJoinedString());
+        Assert.Empty(notMatching);
     }
 
     [Fact]
@@ -68,7 +69,7 @@ public class NutrientMappingTest(ITestOutputHelper output)
         var exceptB = enumsIds.Except(nutriFoodsIds);
         output.WriteLine(exceptA.ToJoinedString());
         output.WriteLine(exceptB.ToJoinedString());
-        Assert.True(exceptA.Count == 0);
+        Assert.Empty(exceptA);
     }
 
     [Fact]

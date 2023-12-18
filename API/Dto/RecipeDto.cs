@@ -1,9 +1,7 @@
 // ReSharper disable NonReadonlyMemberInGetHashCode
 
-using API.Dto.Abridged;
-using AutoMapper;
 using Domain.Enum;
-using Utils;
+using Newtonsoft.Json;
 using static System.StringComparison;
 
 namespace API.Dto;
@@ -17,12 +15,13 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public int Portions { get; set; }
     public int? Time { get; set; }
     public string? Difficulty { get; set; }
-    public ICollection<string> MealTypes { get; set; } = null!;
-    public ICollection<string> DishTypes { get; set; } = null!;
-    public ICollection<RecipeMeasureDto> Measures { get; set; } = null!;
-    public ICollection<RecipeQuantityDto> Quantities { get; set; } = null!;
-    public ICollection<RecipeStepDto> Steps { get; set; } = null!;
-    public ICollection<NutritionalValueDto> Nutrients { get; set; } = null!;
+    public List<string> MealTypes { get; set; } = null!;
+    public List<string> DishTypes { get; set; } = null!;
+    public List<RecipeMeasureDto> Measures { get; set; } = null!;
+    public List<RecipeQuantityDto> Quantities { get; set; } = null!;
+    public List<RecipeStepDto> Steps { get; set; } = null!;
+    public List<NutritionalValueDto> Nutrients { get; set; } = null!;
+    [JsonIgnore] public IReadOnlyDictionary<string, NutritionalValueDto> NutrientDict { get; set; } = null!;
 
     public override bool Equals(object? obj)
     {
@@ -35,14 +34,14 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     {
         if (ReferenceEquals(this, other))
             return true;
-        return !ReferenceEquals(null, other) && string.Equals(Url, other.Url, InvariantCulture);
+        return !ReferenceEquals(null, other) && string.Equals(Url, other.Url, InvariantCultureIgnoreCase);
     }
 
     public bool Equals(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
 
-    public override int GetHashCode() => Url.GetHashCode();
+    public override int GetHashCode() => Url.ToLower().GetHashCode();
 
-    public int GetHashCode(RecipeDto recipe) => recipe.Url.GetHashCode();
+    public int GetHashCode(RecipeDto recipe) => recipe.Url.ToLower().GetHashCode();
 
     public static bool operator ==(RecipeDto? x, RecipeDto? y) => !ReferenceEquals(null, x) && x.Equals(y);
 

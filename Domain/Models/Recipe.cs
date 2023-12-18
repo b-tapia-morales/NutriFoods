@@ -18,9 +18,9 @@ public class Recipe
 
     public Difficulties? Difficulty { get; set; }
 
-    public List<MealTypes> MealTypes { get; set; } = null!;
+    public List<MealTypes> MealTypes { get; set; } = new();
 
-    public List<DishTypes> DishTypes { get; set; } = null!;
+    public List<DishTypes> DishTypes { get; set; } = new();
 
     public virtual ICollection<MenuRecipe> MenuRecipes { get; set; } = null!;
 

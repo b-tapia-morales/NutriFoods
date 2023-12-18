@@ -7,8 +7,8 @@ public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, T
     public static readonly ThresholdTypes None =
         new(nameof(None), (int)ThresholdToken.None, string.Empty, (_, _, _, _) => 0);
 
-    public static readonly ThresholdTypes WithinRange =
-        new(nameof(WithinRange), (int)ThresholdToken.WithinRange, "Lo más exacto posible",
+    public static readonly ThresholdTypes Exact =
+        new(nameof(Exact), (int)ThresholdToken.Exact, "Lo más exacto posible",
             (targetValue, actualValue, errorMargin, isPriority) =>
             {
                 var divisor = isPriority ? +1 : +2;
@@ -27,7 +27,7 @@ public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, T
             (targetValue, actualValue, errorMargin, isPriority) =>
             {
                 var divisor = isPriority ? +1 : +2;
-                return (1 + errorMargin) * targetValue >= actualValue ? +2 / divisor : -2 / divisor;
+                return actualValue >= (1 - errorMargin) * targetValue ? +2 / divisor : -2 / divisor;
             });
 
     public static readonly ThresholdTypes AtMost =
@@ -35,7 +35,17 @@ public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, T
             (targetValue, actualValue, errorMargin, isPriority) =>
             {
                 var divisor = isPriority ? +1 : +2;
-                return (1 + errorMargin) * targetValue <= actualValue ? +2 / divisor : -2 / divisor;
+                return actualValue <= (1 + errorMargin) * targetValue ? +2 / divisor : -2 / divisor;
+            });
+
+    public static readonly ThresholdTypes Range =
+        new(nameof(Range), (int)ThresholdToken.Range, "Dentro del rango",
+            (targetValue, actualValue, errorMargin, isPriority) =>
+            {
+                var divisor = isPriority ? +1 : +2;
+                return actualValue >= (1 - errorMargin) * targetValue && actualValue <= (1 + errorMargin) * targetValue
+                    ? +2 / divisor
+                    : -2 / divisor;
             });
 
     private ThresholdTypes(string name, int value, string readableName, Func<double, double, double, bool, int> formula)
@@ -52,7 +62,8 @@ public class ThresholdTypes : SmartEnum<ThresholdTypes>, IEnum<ThresholdTypes, T
 public enum ThresholdToken
 {
     None,
-    WithinRange,
+    Exact,
     AtLeast,
-    AtMost
+    AtMost,
+    Range
 }

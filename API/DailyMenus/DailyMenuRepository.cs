@@ -1,35 +1,39 @@
+// ReSharper disable ConvertToPrimaryConstructor
+
+using API.ApplicationData;
 using API.Dto;
 using API.Dto.Abridged;
 using API.Optimizer;
-using API.Recipes;
 using AutoMapper;
 using Domain.Enum;
-using Utils.Enumerable;
+using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
-public class DailyMenuRepository
-    (IMapper mapper, IRecipeRepository recipeRepository) : IDailyMenuRepository
+public class DailyMenuRepository : IDailyMenuRepository
 {
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, MealTypes mealType, double energy,
-        int chromosomeSize, double ratio)
+    private readonly IMapper _mapper;
+    private readonly IApplicationData _applicationData;
+
+    public DailyMenuRepository(IMapper mapper, IApplicationData applicationData)
     {
-        var recipes = await recipeRepository.FindAll();
-        return await GenerateMenuAsync(dailyMenu, recipes.AsReadOnly(), chromosomeSize);
+        _mapper = mapper;
+        _applicationData = applicationData;
     }
 
-    public async Task<DailyMenuDto> GenerateMenuAsync(DailyMenuDto dailyMenu, IReadOnlyList<RecipeDto> recipes,
-        int chromosomeSize)
+    public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, MealTypes mealType)
     {
+        var recipes = _applicationData.MealRecipesDict[mealType].AsReadOnly();
+        var energy = dailyMenu.Targets.First(e => e.Nutrient == Nutrients.Energy.ReadableName).ExpectedQuantity;
+        var chromosomeSize = _applicationData.RatioPerPortion(mealType, NutrientToken.Energy, energy);
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
-                dailyMenu.Targets.AsReadOnly(), chromosomeSize);
-        var abridgedRecipes = mapper.Map<List<RecipeAbridged>>(solution);
-        var menus = new List<MenuRecipeDto>(abridgedRecipes.ToMenus());
+                dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
+        var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
         dailyMenu.Nutrients = nutritionalValues;
-        dailyMenu.Recipes = menus;
+        dailyMenu.Recipes = [..abridgedRecipes.ToMenus()];
         return dailyMenu;
     }
 }

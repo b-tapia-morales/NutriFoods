@@ -8,7 +8,7 @@ public class DailyMenu
 
     public int DailyPlanId { get; set; }
 
-    public int IntakePercentage { get; set; }
+    public double IntakePercentage { get; set; }
 
     public MealTypes MealType { get; set; } = null!;
 

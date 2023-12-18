@@ -12,17 +12,15 @@ public class Consultation
 
     public DateOnly? RegisteredOn { get; set; }
 
-    public int? MealPlanId { get; set; }
-
     public Guid PatientId { get; set; }
 
     public virtual Anthropometry? Anthropometry { get; set; }
 
     public virtual ClinicalAnamnesis? ClinicalAnamnesis { get; set; }
 
-    public virtual MealPlan? MealPlan { get; set; }
-
     public virtual NutritionalAnamnesis? NutritionalAnamnesis { get; set; }
 
     public virtual Patient Patient { get; set; } = null!;
+
+    public virtual ICollection<DailyPlan> DailyPlans { get; set; } = null!;
 }

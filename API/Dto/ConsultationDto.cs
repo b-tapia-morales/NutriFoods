@@ -9,5 +9,5 @@ public sealed class ConsultationDto
     public ClinicalAnamnesisDto? ClinicalAnamnesis { get; set; }
     public NutritionalAnamnesisDto? NutritionalAnamnesis { get; set; }
     public AnthropometryDto? Anthropometry { get; set; }
-    public MealPlanDto? MealPlan { get; set; }
+    public List<DailyPlanDto> DailyPlans { get; set; } = null!;
 }

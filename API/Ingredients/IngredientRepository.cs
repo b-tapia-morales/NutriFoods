@@ -1,35 +1,48 @@
 ﻿using API.Dto;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using static Domain.Models.NutrifoodsDbContext;
 
 namespace API.Ingredients;
 
-public class IngredientRepository(NutrifoodsDbContext context, IMapper mapper) : IIngredientRepository
+public class IngredientRepository : IIngredientRepository
 {
-    public async Task<List<IngredientDto>> FindAll() =>
-        await mapper.ProjectTo<IngredientDto>(IncludeFields(context.Ingredients))
+    private readonly NutrifoodsDbContext _context;
+    private readonly IMapper _mapper;
+
+    public IngredientRepository(NutrifoodsDbContext context, IMapper mapper)
+    {
+        _context = context;
+        _mapper = mapper;
+    }
+
+    public Task<List<IngredientDto>> FindAll() =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
             .ToListAsync();
 
-    public async Task<IngredientDto?> FindByName(string name) =>
-        await mapper.ProjectTo<IngredientDto>(IncludeFields(context.Ingredients))
-            .FirstAsync(e => e.Name.ToLower().Equals(name));
+    public Task<IngredientDto?> FindByName(string name) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
+            .FirstOrDefaultAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)));
 
-    public async Task<IngredientDto?> FindById(int id) =>
-        await mapper.ProjectTo<IngredientDto>(IncludeFields(context.Ingredients))
-            .FirstAsync(e => e.Id == id);
+    public Task<IngredientDto?> FindById(int id) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
+            .FirstOrDefaultAsync(e => e.Id == id);
 
-    public async Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
-        await mapper.ProjectTo<IngredientDto>(IncludeFields(context.Ingredients)
-            .Where(e => e.FoodGroup == group)
-        ).ToListAsync();
+    public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields().Where(e => e.FoodGroup == group))
+            .ToListAsync();
+}
 
-    private static IQueryable<Ingredient> IncludeFields(IQueryable<Ingredient> ingredients)
+public static class IngredientExtensions
+{
+    public static IQueryable<Ingredient> IncludeSubfields(this DbSet<Ingredient> ingredients)
     {
         return ingredients
+            .AsQueryable()
             .Include(e => e.IngredientMeasures)
-            .Include(e => e.NutritionalValues)
-            .AsNoTracking();
+            .Include(e => e.NutritionalValues);
     }
 }

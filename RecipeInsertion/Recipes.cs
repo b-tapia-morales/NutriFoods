@@ -52,7 +52,8 @@ public static class Recipes
     {
         var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
-            .DistinctBy(e => e.Url);
+            .DistinctBy(e => e.Url)
+            .DistinctBy(e => (e.Name, e.Author));
         using var context = new NutrifoodsDbContext(Options);
         InsertAllRecipes(context, mappings);
         var ingredients = IncludeSubfields(context.Ingredients).ToList();
@@ -121,11 +122,17 @@ public static class Recipes
 
             var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var mealType in mealTypes)
-                recipe.MealTypes.Add(mealType);
+            {
+                if (!recipe.MealTypes.Contains(mealType))
+                    recipe.MealTypes.Add(mealType);
+            }
 
             var dishTypes = DishTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
             foreach (var dishType in dishTypes)
-                recipe.DishTypes.Add(dishType);
+            {
+                if (!recipe.DishTypes.Contains(dishType))
+                    recipe.DishTypes.Add(dishType);
+            }
         }
 
         context.SaveChanges();
@@ -157,7 +164,7 @@ public static class Recipes
 
         context.SaveChanges();
     }
-    
+
     private static void ParseRecipeMeasure(DbContext context, RecipeIngredient data,
         IDictionary<string, Ingredient> ingredientsDict,
         IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict, int recipeId)
@@ -229,9 +236,8 @@ public static class Recipes
 
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
     {
-        var ingredientsDict = ingredients
-            .GroupBy(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase)
-            .ToDictionary(e => e.Key, e => e.First(), StringComparer.InvariantCultureIgnoreCase);
+        var ingredientsDict = 
+            ingredients.ToGroupedDictionary(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase);
         var synonymsDict = ingredients
             .SelectMany(e => e.Synonyms.Select(x => (Synonym: x, Ingredient: e)))
             .GroupBy(e => e.Synonym.Standardize(), StringComparer.InvariantCultureIgnoreCase)
@@ -241,9 +247,7 @@ public static class Recipes
 
     private static IDictionary<(string Measure, string IngredientName), IngredientMeasure> MeasureDictionary(
         IList<IngredientMeasure> measures) =>
-        measures
-            .GroupBy(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()))
-            .ToDictionary(e => e.Key, e => e.First());
+        measures.ToGroupedDictionary(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()));
 
 
     private static IDictionary<string, Recipe> RecipeDictionary(IList<Recipe> recipes) =>

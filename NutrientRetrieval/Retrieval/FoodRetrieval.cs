@@ -30,22 +30,22 @@ public static class FoodRetrieval
     private static readonly string
         AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
-    public static void RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
+    public static async Task RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
         var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
-        using var context = new NutrifoodsDbContext(Options);
-        var ingredients = context.Ingredients.AsQueryable().IncludeSubfields();
+        await using var context = new NutrifoodsDbContext(Options);
+        var ingredients = context.Ingredients.IncludeSubfields();
         var nutrientsDictionary = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
             .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
-        var foodsDictionary = DataCentral.PerformRequest<TFood, TNutrient>(format).Result
-            .ToDictionary(e => e.Key, e => e.Value);
+        var foodsDictionary =
+            (await DataCentral.PerformRequest<TFood, TNutrient>(format)).ToDictionary(e => e.Key, e => e.Value);
         foreach (var pair in foodsDictionary)
             InsertNutrients<TFood, TNutrient>(
                 nutrientsDictionary, ingredients.FirstOrDefault(e => e.Id == pair.Key), pair.Value);
 
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
     private static void InsertNutrients<TFood, TNutrient>(
@@ -75,8 +75,9 @@ public static class FoodRetrieval
         }
     }
 
-    private static IQueryable<Ingredient> IncludeSubfields(this IQueryable<Ingredient> ingredients) =>
+    private static IQueryable<Ingredient> IncludeSubfields(this DbSet<Ingredient> ingredients) =>
         ingredients
+            .AsQueryable()
             .Include(e => e.IngredientMeasures)
             .Include(e => e.NutritionalValues);
 }

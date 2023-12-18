@@ -1,6 +1,4 @@
-﻿using Domain.Models;
-
-namespace API.Dto;
+﻿namespace API.Dto;
 
 public sealed class PatientDto
 {
@@ -9,5 +7,5 @@ public sealed class PatientDto
     public PersonalInfoDto? PersonalInfo { get; set; }
     public ContactInfoDto? ContactInfo { get; set; }
     public AddressDto? Address { get; set; }
-    public ICollection<Consultation> Consultations { get; set; } = null!;
+    public List<ConsultationDto> Consultations { get; set; } = null!;
 }

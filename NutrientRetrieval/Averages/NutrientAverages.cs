@@ -33,7 +33,7 @@ public static class NutrientAverages
     public static void WriteStatistics()
     {
         using var context = new NutrifoodsDbContext(Options);
-        var recipes = IncludeSubfields(context.Recipes).Where(e => e.Portions != null && e.Portions > 0).ToList();
+        var recipes = context.Recipes.IncludeSubfields().Where(e => e.Portions != null && e.Portions > 0).ToList();
         CsvUtils.WriteRows(AbsolutePath, ToStatistics(recipes));
     }
 

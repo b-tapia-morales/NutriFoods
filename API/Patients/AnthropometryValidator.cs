@@ -2,7 +2,7 @@ using API.Dto;
 using FluentValidation;
 using Newtonsoft.Json;
 
-namespace API.Users;
+namespace API.Patients;
 
 public class AnthropometryValidator : AbstractValidator<AnthropometryDto>
 {

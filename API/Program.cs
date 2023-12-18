@@ -1,29 +1,33 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using API.ApplicationData;
 using API.DailyMenus;
+using API.DailyPlans;
+using API.Dto;
 using API.Ingredients;
+using API.Nutritionists;
+using API.Patients;
 using API.Recipes;
 using Domain.DatabaseInitialization;
 using Domain.Models;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using MicroElements.Swashbuckle.FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using NutrientRetrieval.Averages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 using NutrientRetrieval.NutrientCalculation;
 using NutrientRetrieval.Retrieval.Abridged;
 using RecipeInsertion;
-using Swashbuckle.AspNetCore.Swagger;
+using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 #if DEBUG
-/*DatabaseInitialization.Initialize();
-AbridgedRetrieval.RetrieveFromApi();
+DatabaseInitialization.Initialize();
+await AbridgedRetrieval.RetrieveFromApi();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
 NutrientCalculation.Calculate();
-NutrientAverages.WriteStatistics();*/
 #endif
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,39 +36,61 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<NutrifoodsDbContext>(optionsBuilder =>
 {
     if (!optionsBuilder.IsConfigured)
         optionsBuilder.UseNpgsql(builder.Configuration.GetConnectionString("DatabaseConnection"),
             opt => opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
-}, ServiceLifetime.Singleton);
+});
 
 builder.Services
+    // Global variables
+    .AddSingleton<IApplicationData, ApplicationData>()
+    // Validators for daily menu and plan generation
+    .AddScoped<IValidator<DailyMenuQuery>, DailyMenuQueryValidator>()
+    .AddScoped<IValidator<DailyMenuDto>, DailyMenuValidator>()
+    .AddScoped<IValidator<PlanConfiguration>, PlanConfigurationValidator>()
+    // Validators for nutritionist
+    .AddScoped<IValidator<NutritionistDto>, NutritionistValidator>()
+    .AddScoped<IValidator<PersonalInfoDto>, PersonalInfoValidator>()
+    .AddScoped<IValidator<ContactInfoDto>, ContactInfoValidator>()
+    .AddScoped<IValidator<AddressDto>, AddressValidator>()
+    .AddScoped<IValidator<PatientDto>, PatientValidator>()
+    // Validators for patient
+    .AddScoped<IValidator<ConsultationDto>, ConsultationValidator>()
+    .AddScoped<IValidator<ClinicalAnamnesisDto>, ClinicalAnamnesisValidator>()
+    // Repositories
     .AddScoped<IIngredientRepository, IngredientRepository>()
     .AddScoped<IRecipeRepository, RecipeRepository>()
     .AddScoped<IDailyMenuRepository, DailyMenuRepository>()
-    .AddSingleton<IApplicationData, ApplicationData>();
+    .AddScoped<INutritionistRepository, NutritionistRepository>()
+    .AddScoped<IPatientRepository, PatientRepository>();
 
 builder.Services
     .AddFluentValidationAutoValidation()
     .AddFluentValidationClientsideAdapters()
     .AddControllers()
-    .AddNewtonsoftJson()
-    .AddJsonOptions(options =>
+    .AddNewtonsoftJson(options =>
     {
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
     });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
 
-builder.Services.AddFluentValidationRulesToSwagger();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+        policy
+            .SetIsOriginAllowed(_ => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 builder.Services.AddSwaggerGen(options =>
 {
@@ -74,8 +100,11 @@ builder.Services.AddSwaggerGen(options =>
         Title = "NutriFoods",
         Description = "The official API for the NutriFoods project"
     });
-    options.AddFluentValidationRulesScoped();
 });
+
+builder.Services.ConfigureSwaggerGen(options => options.AddEnumsWithValuesFixFilters());
+
+builder.Services.AddFluentValidationRulesToSwagger();
 
 var app = builder.Build();
 
@@ -83,20 +112,13 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(config => config.ConfigObject.AdditionalItems["syntaxHighlight"] = new Dictionary<string, object>
-    {
-        ["activated"] = false
-    });
+    app.UseSwaggerUI(config => { config.ConfigObject.AdditionalItems.Add("syntaxHighlight", false); });
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-app.UseCors(x => x
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    .SetIsOriginAllowed(_ => true) // allow any origin
-    .AllowCredentials()); // allow credentials
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();

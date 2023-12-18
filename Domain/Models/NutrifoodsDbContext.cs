@@ -1,6 +1,9 @@
-﻿using Domain.Enum;
+﻿using System;
+using System.Collections.Generic;
+using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Models;
 
@@ -47,8 +50,6 @@ public class NutrifoodsDbContext : DbContext
 
     public virtual DbSet<IngredientMeasure> IngredientMeasures { get; set; } = null!;
 
-    public virtual DbSet<MealPlan> MealPlans { get; set; } = null!;
-
     public virtual DbSet<MenuRecipe> MenuRecipes { get; set; } = null!;
 
     public virtual DbSet<NutritionalAnamnesis> NutritionalAnamneses { get; set; } = null!;
@@ -79,12 +80,16 @@ public class NutrifoodsDbContext : DbContext
                 opt.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
             });
 
+    [DbFunction("nutrifoods.normalize_str", IsBuiltIn = true)]
+    public static string NormalizeStr(string str) => throw new NotSupportedException();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
             .HasPostgresExtension("nutrifoods", "btree_gist")
             .HasPostgresExtension("nutrifoods", "fuzzystrmatch")
             .HasPostgresExtension("nutrifoods", "pg_trgm")
+            .HasPostgresExtension("nutrifoods", "unaccent")
             .HasPostgresExtension("nutrifoods", "uuid-ossp");
 
         modelBuilder.Entity<Address>(entity =>
@@ -103,7 +108,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Address)
                 .HasForeignKey<Address>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("address_id_fkey");
         });
 
@@ -117,13 +122,13 @@ public class NutrifoodsDbContext : DbContext
                 .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
                 .HasColumnName("id");
             entity.Property(e => e.FoodGroup).HasColumnName("food_group");
-            entity.Property(e => e.NutritionalAnamnesis).HasColumnName("nutritional_anamnesis");
+            entity.Property(e => e.NutritionalAnamnesisId).HasColumnName("nutritional_anamnesis_id");
             entity.Property(e => e.Type).HasColumnName("type");
 
-            entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.AdverseFoodReactions)
-                .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("adverse_food_reaction_nutritional_anamnesis_fkey");
+            entity.HasOne(d => d.NutritionalAnamnesis).WithMany(p => p.AdverseFoodReactions)
+                .HasForeignKey(d => d.NutritionalAnamnesisId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("adverse_food_reaction_nutritional_anamnesis_id_fkey");
         });
 
         modelBuilder.Entity<Anthropometry>(entity =>
@@ -137,13 +142,11 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Bmi).HasColumnName("bmi");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("(now())::date")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.Height).HasColumnName("height");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(now())::date")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
             entity.Property(e => e.MuscleMassPercentage).HasColumnName("muscle_mass_percentage");
             entity.Property(e => e.WaistCircumference).HasColumnName("waist_circumference");
@@ -151,7 +154,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Anthropometry)
                 .HasForeignKey<Anthropometry>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("anthropometry_id_fkey");
         });
 
@@ -165,17 +168,15 @@ public class NutrifoodsDbContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ClinicalAnamnesis)
                 .HasForeignKey<ClinicalAnamnesis>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("clinical_anamnesis_id_fkey");
         });
 
@@ -198,7 +199,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.ClinicalAnamnesis).WithMany(p => p.ClinicalSigns)
                 .HasForeignKey(d => d.ClinicalAnamnesisId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("clinical_sign_clinical_anamnesis_id_fkey");
         });
 
@@ -211,22 +212,36 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.Id)
                 .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
                 .HasColumnName("id");
-            entity.Property(e => e.MealPlanId).HasColumnName("meal_plan_id");
             entity.Property(e => e.PatientId).HasColumnName("patient_id");
             entity.Property(e => e.Purpose).HasColumnName("purpose");
             entity.Property(e => e.RegisteredOn)
-                .HasDefaultValueSql("(now())::date")
+                .HasDefaultValueSql("((now())::timestamp without time zone)::date")
                 .HasColumnName("registered_on");
             entity.Property(e => e.Type).HasColumnName("type");
 
-            entity.HasOne(d => d.MealPlan).WithMany(p => p.Consultations)
-                .HasForeignKey(d => d.MealPlanId)
-                .HasConstraintName("consultation_meal_plan_id_fkey");
-
             entity.HasOne(d => d.Patient).WithMany(p => p.Consultations)
                 .HasForeignKey(d => d.PatientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("consultation_patient_id_fkey");
+
+            entity.HasMany(d => d.DailyPlans).WithMany(p => p.Consultations)
+                .UsingEntity<Dictionary<string, object>>(
+                    "MealPlan",
+                    r => r.HasOne<DailyPlan>().WithMany()
+                        .HasForeignKey("DailyPlanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("meal_plan_daily_plan_id_fkey"),
+                    l => l.HasOne<Consultation>().WithMany()
+                        .HasForeignKey("ConsultationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("meal_plan_consultation_id_fkey"),
+                    j =>
+                    {
+                        j.HasKey("ConsultationId", "DailyPlanId").HasName("meal_plan_pkey");
+                        j.ToTable("meal_plan", "nutrifoods");
+                        j.IndexerProperty<Guid>("ConsultationId").HasColumnName("consultation_id");
+                        j.IndexerProperty<int>("DailyPlanId").HasColumnName("daily_plan_id");
+                    });
         });
 
         modelBuilder.Entity<ContactInfo>(entity =>
@@ -250,7 +265,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ContactInfo)
                 .HasForeignKey<ContactInfo>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("contact_info_id_fkey");
         });
 
@@ -270,7 +285,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.DailyPlan).WithMany(p => p.DailyMenus)
                 .HasForeignKey(d => d.DailyPlanId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("daily_menu_daily_plan_id_fkey");
 
             entity.HasMany(d => d.NutritionalTargets).WithMany(p => p.DailyMenus)
@@ -278,11 +293,11 @@ public class NutrifoodsDbContext : DbContext
                     "DailyMenuNutritionalTarget",
                     r => r.HasOne<NutritionalTarget>().WithMany()
                         .HasForeignKey("NutritionalTargetId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_menu_nutritional_target_nutritional_target_id_fkey"),
                     l => l.HasOne<DailyMenu>().WithMany()
                         .HasForeignKey("DailyMenuId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_menu_nutritional_target_daily_menu_id_fkey"),
                     j =>
                     {
@@ -297,11 +312,11 @@ public class NutrifoodsDbContext : DbContext
                     "DailyMenuNutritionalValue",
                     r => r.HasOne<NutritionalValue>().WithMany()
                         .HasForeignKey("NutritionalValueId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_menu_nutritional_value_nutritional_value_id_fkey"),
                     l => l.HasOne<DailyMenu>().WithMany()
                         .HasForeignKey("DailyMenuId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_menu_nutritional_value_daily_menu_id_fkey"),
                     j =>
                     {
@@ -320,26 +335,22 @@ public class NutrifoodsDbContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.AdjustmentFactor).HasColumnName("adjustment_factor");
-            entity.Property(e => e.Day).HasColumnName("day");
-            entity.Property(e => e.MealPlanId).HasColumnName("meal_plan_id");
+            entity.Property(e => e.Days)
+                .HasDefaultValueSql("ARRAY[]::integer[]")
+                .HasColumnName("days");
             entity.Property(e => e.PhysicalActivityFactor).HasColumnName("physical_activity_factor");
             entity.Property(e => e.PhysicalActivityLevel).HasColumnName("physical_activity_level");
-
-            entity.HasOne(d => d.MealPlan).WithMany(p => p.DailyPlans)
-                .HasForeignKey(d => d.MealPlanId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("daily_plan_meal_plan_id_fkey");
 
             entity.HasMany(d => d.NutritionalTargets).WithMany(p => p.DailyPlans)
                 .UsingEntity<Dictionary<string, object>>(
                     "DailyPlanNutritionalTarget",
                     r => r.HasOne<NutritionalTarget>().WithMany()
                         .HasForeignKey("NutritionalTargetId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_plan_nutritional_target_nutritional_target_id_fkey"),
                     l => l.HasOne<DailyPlan>().WithMany()
                         .HasForeignKey("DailyPlanId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_plan_nutritional_target_daily_plan_id_fkey"),
                     j =>
                     {
@@ -354,11 +365,11 @@ public class NutrifoodsDbContext : DbContext
                     "DailyPlanNutritionalValue",
                     r => r.HasOne<NutritionalValue>().WithMany()
                         .HasForeignKey("NutritionalValueId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_plan_nutritional_value_nutritional_value_id_fkey"),
                     l => l.HasOne<DailyPlan>().WithMany()
                         .HasForeignKey("DailyPlanId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("daily_plan_nutritional_value_daily_plan_id_fkey"),
                     j =>
                     {
@@ -379,14 +390,16 @@ public class NutrifoodsDbContext : DbContext
                 .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
                 .HasColumnName("id");
             entity.Property(e => e.ClinicalAnamnesisId).HasColumnName("clinical_anamnesis_id");
-            entity.Property(e => e.InheritanceType).HasColumnName("inheritance_type");
+            entity.Property(e => e.InheritanceTypes)
+                .HasDefaultValueSql("ARRAY[]::integer[]")
+                .HasColumnName("inheritance_types");
             entity.Property(e => e.Name)
                 .HasMaxLength(64)
                 .HasColumnName("name");
 
             entity.HasOne(d => d.ClinicalAnamnesis).WithMany(p => p.Diseases)
                 .HasForeignKey(d => d.ClinicalAnamnesisId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("disease_clinical_anamnesis_id_fkey");
         });
 
@@ -402,15 +415,15 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(64)
                 .HasColumnName("name");
-            entity.Property(e => e.NutritionalAnamnesis).HasColumnName("nutritional_anamnesis");
+            entity.Property(e => e.NutritionalAnamnesisId).HasColumnName("nutritional_anamnesis_id");
             entity.Property(e => e.Observations)
                 .HasDefaultValueSql("''::text")
                 .HasColumnName("observations");
 
-            entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.EatingSymptoms)
-                .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("eating_symptom_nutritional_anamnesis_fkey");
+            entity.HasOne(d => d.NutritionalAnamnesis).WithMany(p => p.EatingSymptoms)
+                .HasForeignKey(d => d.NutritionalAnamnesisId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("eating_symptom_nutritional_anamnesis_id_fkey");
         });
 
         modelBuilder.Entity<FoodConsumption>(entity =>
@@ -424,12 +437,12 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.FoodGroup).HasColumnName("food_group");
             entity.Property(e => e.Frequency).HasColumnName("frequency");
-            entity.Property(e => e.NutritionalAnamnesis).HasColumnName("nutritional_anamnesis");
+            entity.Property(e => e.NutritionalAnamnesisId).HasColumnName("nutritional_anamnesis_id");
 
-            entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.FoodConsumptions)
-                .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("food_consumption_nutritional_anamnesis_fkey");
+            entity.HasOne(d => d.NutritionalAnamnesis).WithMany(p => p.FoodConsumptions)
+                .HasForeignKey(d => d.NutritionalAnamnesisId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("food_consumption_nutritional_anamnesis_id_fkey");
         });
 
         modelBuilder.Entity<HarmfulHabit>(entity =>
@@ -444,15 +457,15 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(64)
                 .HasColumnName("name");
-            entity.Property(e => e.NutritionalAnamnesis).HasColumnName("nutritional_anamnesis");
+            entity.Property(e => e.NutritionalAnamnesisId).HasColumnName("nutritional_anamnesis_id");
             entity.Property(e => e.Observations)
                 .HasDefaultValueSql("''::text")
                 .HasColumnName("observations");
 
-            entity.HasOne(d => d.NutritionalAnamnesesNavigation).WithMany(p => p.HarmfulHabits)
-                .HasForeignKey(d => d.NutritionalAnamnesis)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("harmful_habit_nutritional_anamnesis_fkey");
+            entity.HasOne(d => d.NutritionalAnamnesis).WithMany(p => p.HarmfulHabits)
+                .HasForeignKey(d => d.NutritionalAnamnesisId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("harmful_habit_nutritional_anamnesis_id_fkey");
         });
 
         modelBuilder.Entity<Ingestible>(entity =>
@@ -478,10 +491,11 @@ public class NutrifoodsDbContext : DbContext
                 .HasDefaultValueSql("''::text")
                 .HasColumnName("observations");
             entity.Property(e => e.Type).HasColumnName("type");
+            entity.Property(e => e.Unit).HasColumnName("unit");
 
             entity.HasOne(d => d.ClinicalAnamnesis).WithMany(p => p.Ingestibles)
                 .HasForeignKey(d => d.ClinicalAnamnesisId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("ingestible_clinical_anamnesis_id_fkey");
         });
 
@@ -509,11 +523,11 @@ public class NutrifoodsDbContext : DbContext
                     "IngredientNutrient",
                     r => r.HasOne<NutritionalValue>().WithMany()
                         .HasForeignKey("NutritionalValueId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("ingredient_nutrient_nutritional_value_id_fkey"),
                     l => l.HasOne<Ingredient>().WithMany()
                         .HasForeignKey("IngredientId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("ingredient_nutrient_ingredient_id_fkey"),
                     j =>
                     {
@@ -540,22 +554,8 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.Ingredient).WithMany(p => p.IngredientMeasures)
                 .HasForeignKey(d => d.IngredientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("ingredient_measure_ingredient_id_fkey");
-        });
-
-        modelBuilder.Entity<MealPlan>(entity =>
-        {
-            entity.HasKey(e => e.Id).HasName("meal_plan_pkey");
-
-            entity.ToTable("meal_plan", "nutrifoods");
-
-            entity.Property(e => e.Id).HasColumnName("id");
-            entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
-                .HasColumnName("created_on");
-            entity.Property(e => e.MealsPerDay).HasColumnName("meals_per_day");
         });
 
         modelBuilder.Entity<MenuRecipe>(entity =>
@@ -571,12 +571,12 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.DailyMenu).WithMany(p => p.MenuRecipes)
                 .HasForeignKey(d => d.DailyMenuId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("menu_recipe_daily_menu_id_fkey");
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.MenuRecipes)
                 .HasForeignKey(d => d.RecipeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("menu_recipe_recipe_id_fkey");
         });
 
@@ -590,17 +590,15 @@ public class NutrifoodsDbContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.CreatedOn)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("created_on");
             entity.Property(e => e.LastUpdated)
-                .HasDefaultValueSql("(now())::date")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("last_updated");
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.NutritionalAnamnesis)
                 .HasForeignKey<NutritionalAnamnesis>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("nutritional_anamnesis_id_fkey");
         });
 
@@ -615,10 +613,10 @@ public class NutrifoodsDbContext : DbContext
             entity.Property(e => e.ActualQuantity).HasColumnName("actual_quantity");
             entity.Property(e => e.ExpectedError).HasColumnName("expected_error");
             entity.Property(e => e.ExpectedQuantity).HasColumnName("expected_quantity");
+            entity.Property(e => e.IsPriority).HasColumnName("is_priority");
             entity.Property(e => e.Nutrient).HasColumnName("nutrient");
             entity.Property(e => e.ThresholdType).HasColumnName("threshold_type");
             entity.Property(e => e.Unit).HasColumnName("unit");
-            entity.Property(e => e.IsPriority).HasColumnName("is_priority");
         });
 
         modelBuilder.Entity<NutritionalValue>(entity =>
@@ -651,8 +649,7 @@ public class NutrifoodsDbContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.Email).HasColumnName("email");
             entity.Property(e => e.JoinedOn)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("joined_on");
             entity.Property(e => e.Password).HasColumnName("password");
             entity.Property(e => e.Username)
@@ -670,14 +667,13 @@ public class NutrifoodsDbContext : DbContext
                 .HasDefaultValueSql("nutrifoods.uuid_generate_v4()")
                 .HasColumnName("id");
             entity.Property(e => e.JoinedOn)
-                .HasDefaultValueSql("now()")
-                .HasColumnType("timestamp without time zone")
+                .HasDefaultValueSql("(now())::timestamp without time zone")
                 .HasColumnName("joined_on");
             entity.Property(e => e.NutritionistId).HasColumnName("nutritionist_id");
 
             entity.HasOne(d => d.Nutritionist).WithMany(p => p.Patients)
                 .HasForeignKey(d => d.NutritionistId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("patient_nutritionist_id_fkey");
         });
 
@@ -706,7 +702,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.PersonalInfo)
                 .HasForeignKey<PersonalInfo>(d => d.Id)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("personal_info_id_fkey");
         });
 
@@ -715,6 +711,8 @@ public class NutrifoodsDbContext : DbContext
             entity.HasKey(e => e.Id).HasName("recipe_pkey");
 
             entity.ToTable("recipe", "nutrifoods");
+
+            entity.HasIndex(e => new { e.Name, e.Author }, "recipe_name_author_key").IsUnique();
 
             entity.HasIndex(e => e.Url, "recipe_url_key").IsUnique();
 
@@ -739,11 +737,11 @@ public class NutrifoodsDbContext : DbContext
                     "RecipeNutrient",
                     r => r.HasOne<NutritionalValue>().WithMany()
                         .HasForeignKey("NutritionalValueId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("recipe_nutrient_nutritional_value_id_fkey"),
                     l => l.HasOne<Recipe>().WithMany()
                         .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .HasConstraintName("recipe_nutrient_recipe_id_fkey"),
                     j =>
                     {
@@ -769,12 +767,12 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.IngredientMeasure).WithMany(p => p.RecipeMeasures)
                 .HasForeignKey(d => d.IngredientMeasureId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("recipe_measure_ingredient_measure_id_fkey");
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.RecipeMeasures)
                 .HasForeignKey(d => d.RecipeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("recipe_measure_recipe_id_fkey");
         });
 
@@ -791,12 +789,12 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.Ingredient).WithMany(p => p.RecipeQuantities)
                 .HasForeignKey(d => d.IngredientId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("recipe_quantity_ingredient_id_fkey");
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.RecipeQuantities)
                 .HasForeignKey(d => d.RecipeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("recipe_quantity_recipe_id_fkey");
         });
 
@@ -815,7 +813,7 @@ public class NutrifoodsDbContext : DbContext
 
             entity.HasOne(d => d.Recipe).WithMany(p => p.RecipeSteps)
                 .HasForeignKey(d => d.RecipeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("recipe_step_recipe_id_fkey");
         });
 
@@ -828,7 +826,6 @@ public class NutrifoodsDbContext : DbContext
         builder.Entity<Ingredient>().Ignore(e => e.RecipeQuantities);
         builder.Entity<IngredientMeasure>().Ignore(e => e.RecipeMeasures);
         builder.Entity<Recipe>().Ignore(e => e.MenuRecipes);
-        builder.Entity<MealPlan>().Ignore(e => e.Consultations);
 
         // Nutritional values
         builder.Entity<NutritionalValue>().Property(e => e.Unit)
@@ -843,21 +840,16 @@ public class NutrifoodsDbContext : DbContext
         // Recipe
         builder.Entity<Recipe>().Property(e => e.Difficulty)
             .HasConversion(e => (e ?? Difficulties.None).Value, e => Difficulties.FromValue(e));
-        builder.Entity<Recipe>().Property(e => e.MealTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => MealTypes.FromValue(e))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<MealTypes>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
+
         builder.Entity<Recipe>()
-            .Property(e => e.DishTypes)
-            .HasPostgresArrayConversion(e => e.Value, e => DishTypes.FromValue(e))
-            .Metadata
-            .SetValueComparer(new ValueComparer<List<DishTypes>>(
-                (c1, c2) => c1 != null && c2 != null && c1.SequenceEqual(c2),
-                c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.Value)),
-                c => c.ToList()));
+            .PrimitiveCollection(e => e.MealTypes)
+            .ElementType()
+            .HasConversion(new MealTypeConverter());
+
+        builder.Entity<Recipe>()
+            .PrimitiveCollection(e => e.DishTypes)
+            .ElementType()
+            .HasConversion(new DishTypeConverter());
 
         // Nutritional Target
         builder.Entity<NutritionalTarget>().Property(e => e.Unit)
@@ -868,8 +860,11 @@ public class NutrifoodsDbContext : DbContext
             .HasConversion(e => e.Value, e => ThresholdTypes.FromValue(e));
 
         // Daily Plan / Menu
-        builder.Entity<DailyPlan>().Property(e => e.Day)
-            .HasConversion(e => e.Value, e => Days.FromValue(e));
+        builder.Entity<DailyPlan>()
+            .PrimitiveCollection(e => e.Days)
+            .ElementType()
+            .HasConversion(new DayConverter());
+
         builder.Entity<DailyPlan>().Property(e => e.PhysicalActivityLevel)
             .HasConversion(e => e.Value, e => PhysicalActivities.FromValue(e));
 
@@ -879,25 +874,47 @@ public class NutrifoodsDbContext : DbContext
         // User
         builder.Entity<PersonalInfo>().Property(e => e.BiologicalSex)
             .HasConversion(e => e.Value, e => BiologicalSexes.FromValue(e));
+
         builder.Entity<Address>().Property(e => e.Province)
             .HasConversion(e => e.Value, e => Provinces.FromValue(e));
+
         builder.Entity<Consultation>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => ConsultationTypes.FromValue(e));
         builder.Entity<Consultation>().Property(e => e.Purpose)
             .HasConversion(e => e.Value, e => ConsultationPurposes.FromValue(e));
-        builder.Entity<Disease>().Property(e => e.InheritanceType)
-            .HasConversion(e => e.Value, e => InheritanceTypes.FromValue(e));
+
+        builder.Entity<Disease>()
+            .PrimitiveCollection(e => e.InheritanceTypes)
+            .ElementType()
+            .HasConversion(new InheritanceConverter());
+
         builder.Entity<Ingestible>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => IngestibleTypes.FromValue(e));
         builder.Entity<Ingestible>().Property(e => e.Adherence)
             .HasConversion(e => e.Value, e => Frequencies.FromValue(e));
+        builder.Entity<Ingestible>().Property(e => e.Unit)
+            .HasConversion(e => (e ?? Units.None).Value, e => Units.FromValue(e));
+
         builder.Entity<AdverseFoodReaction>().Property(e => e.FoodGroup)
             .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<AdverseFoodReaction>().Property(e => e.Type)
             .HasConversion(e => e.Value, e => FoodReactions.FromValue(e));
+
         builder.Entity<FoodConsumption>().Property(e => e.FoodGroup)
             .HasConversion(e => e.Value, e => FoodGroups.FromValue(e));
         builder.Entity<FoodConsumption>().Property(e => e.Frequency)
             .HasConversion(e => e.Value, e => Frequencies.FromValue(e));
     }
 }
+
+internal class MealTypeConverter()
+    : ValueConverter<MealTypes, int>(e => e.Value, e => MealTypes.FromValue(e));
+
+internal class DishTypeConverter()
+    : ValueConverter<DishTypes, int>(e => e.Value, e => DishTypes.FromValue(e));
+
+internal class InheritanceConverter()
+    : ValueConverter<InheritanceTypes, int>(e => e.Value, e => InheritanceTypes.FromValue(e));
+
+internal class DayConverter()
+    : ValueConverter<Days, int>(e => e.Value, e => Days.FromValue(e));

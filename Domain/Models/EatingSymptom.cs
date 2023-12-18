@@ -8,7 +8,7 @@ public class EatingSymptom
 
     public string? Observations { get; set; }
 
-    public Guid NutritionalAnamnesis { get; set; }
+    public Guid NutritionalAnamnesisId { get; set; }
 
-    public virtual NutritionalAnamnesis NutritionalAnamnesesNavigation { get; set; } = null!;
+    public virtual NutritionalAnamnesis NutritionalAnamnesis { get; set; } = null!;
 }

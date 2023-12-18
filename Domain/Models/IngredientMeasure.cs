@@ -14,5 +14,5 @@ public class IngredientMeasure
 
     public virtual Ingredient Ingredient { get; set; } = null!;
 
-    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = new List<RecipeMeasure>();
+    public virtual ICollection<RecipeMeasure> RecipeMeasures { get; set; } = null!;
 }
