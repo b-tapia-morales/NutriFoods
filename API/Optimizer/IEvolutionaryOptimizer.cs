@@ -15,13 +15,13 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
     public const double MinCrossoverProb = 0.2;
     public const double MinMutationProb = 0.6;
 
-    static abstract IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
+    static abstract List<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb);
 
-    static IList<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
+    static List<RecipeDto> GenerateSolution(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
@@ -35,7 +35,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
             populationSize, maxIterations, minCrossoverProb, minMutationProb);
     }
 
-    static Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
+    static Task<List<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
@@ -44,7 +44,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
         Task.Run(() => GenerateSolution(universe, targets, chromosomeSize, populationSize,
             maxIterations, selectionMethod, crossoverMethod, mutationMethod, minCrossoverProb, minMutationProb));
 
-    static Task<IList<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
+    static Task<List<RecipeDto>> GenerateSolutionAsync(IReadOnlyList<RecipeDto> universe,
         IReadOnlyList<NutritionalTargetDto> targets,
         Selection selection, Crossover crossover, Mutation mutation,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
