@@ -73,7 +73,7 @@ public partial class NutritionistController
 
     [HttpPost]
     [Route("/nutritionist/{nutritionistId:guid}/patient/")]
-    public async Task<ActionResult<NutritionistDto>> AddPatient(Guid nutritionistId, [FromBody] PatientDto patientDto)
+    public async Task<ActionResult<PatientDto>> AddPatient(Guid nutritionistId, [FromBody] PatientDto patientDto)
     {
         var nutritionistDto = await _repository.FindAccount(nutritionistId);
         if (nutritionistDto == null)

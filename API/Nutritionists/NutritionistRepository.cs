@@ -49,7 +49,7 @@ public class NutritionistRepository : INutritionistRepository
         _mapper.Map<PatientDto>(await FindPatientBy(_context,
             e => e.PersonalInfo != null && e.PersonalInfo.Rut == rut));
 
-    public async Task<NutritionistDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto)
+    public async Task<PatientDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto)
     {
         var patient = new Patient { NutritionistId = nutritionistDto.Id };
         await _context.Patients.AddAsync(patient);
@@ -61,8 +61,7 @@ public class NutritionistRepository : INutritionistRepository
         await _context.SaveChangesAsync();
         patientDto.Id = id;
         patientDto.JoinedOn = patient.JoinedOn;
-        nutritionistDto.Patients.Add(patientDto);
-        return nutritionistDto;
+        return patientDto;
     }
 }
 
