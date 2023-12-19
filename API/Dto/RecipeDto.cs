@@ -3,6 +3,7 @@
 using Domain.Enum;
 using Newtonsoft.Json;
 using static System.StringComparison;
+using static Domain.Enum.NutrientExtensions;
 
 namespace API.Dto;
 
@@ -61,4 +62,24 @@ public static class RecipeExtensions
                 Unit = e.Key.Unit.ReadableName,
                 DailyValue = e.Key.DailyValue == null ? null : e.Sum(x => x.Quantity) / e.Key.DailyValue
             });
+
+    public static IEnumerable<MenuRecipeDto> ToMenus(this IEnumerable<RecipeDto> recipes) =>
+        recipes
+            .GroupBy(e => e.Url)
+            .Select(e => new MenuRecipeDto
+            {
+                Recipe = e.First(),
+                Portions = e.Count()
+            });
+
+    public static void FilterMacronutrients(this RecipeDto recipe) => recipe.Nutrients.RemoveAll(e =>
+        !Macronutrients.Contains(IEnum<Nutrients, NutrientToken>.ToValue(e.Nutrient)));
+
+    public static void FilterTargetNutrients(this RecipeDto recipe)
+    {
+        var targetNutrients =
+            new HashSet<Nutrients>(recipe.Nutrients.Select(e => IEnum<Nutrients, NutrientToken>.ToValue(e.Nutrient)));
+        recipe.Nutrients.RemoveAll(e =>
+            !targetNutrients.Contains(IEnum<Nutrients, NutrientToken>.ToValue(e.Nutrient)));
+    }
 }

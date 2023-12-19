@@ -70,7 +70,7 @@ public class MappingProfile : Profile
                 opt.MapFrom(src => src.NutritionalValues.ToSortedDictionary(e => e.Nutrient.ReadableName, e => e,
                     IEnum<Nutrients, NutrientToken>.ReadableNameComparer)))
             .ForMember(dest => dest.Difficulty,
-                opt => opt.MapFrom(src => (src.Difficulty ?? Difficulties.None).ReadableName))
+                opt => opt.MapFrom(src => src.Difficulty == null ? string.Empty : src.Difficulty.ReadableName))
             .ReverseMap()
             .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
             .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
@@ -82,34 +82,7 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()))
             .ForMember(dest => dest.Difficulty,
                 opt => opt.MapFrom(src =>
-                    IEnum<Difficulties, DifficultyToken>.ToValue(src.Difficulty ?? string.Empty)));;
-
-        // Recipe Abridged
-        CreateMap<Recipe, RecipeAbridged>()
-            .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.RecipeMeasures))
-            .ForMember(dest => dest.Quantities, opt => opt.MapFrom(src => src.RecipeQuantities))
-            .ForMember(dest => dest.Steps, opt => opt.MapFrom(src => src.RecipeSteps))
-            .ForMember(dest => dest.MealTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(e => e.ReadableName).ToList()))
-            .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.DishTypes.Select(e => e.ReadableName).ToList()))
-            .ForMember(dest => dest.Difficulty,
-                opt => opt.MapFrom(src => (src.Difficulty ?? Difficulties.None).ReadableName))
-            .ReverseMap()
-            .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
-            .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
-            .ForMember(dest => dest.RecipeSteps, opt => opt.MapFrom(src => src.Steps))
-            .ForMember(dest => dest.MealTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<MealTypes, MealToken>.ToValue).ToList()))
-            .ForMember(dest => dest.DishTypes,
-                opt => opt.MapFrom(src => src.MealTypes.Select(IEnum<DishTypes, DishToken>.ToValue).ToList()))
-            .ForMember(dest => dest.Difficulty,
-                opt => opt.MapFrom(src =>
                     IEnum<Difficulties, DifficultyToken>.ToValue(src.Difficulty ?? string.Empty)));
-
-        // Recipe abridged
-        CreateMap<RecipeDto, RecipeAbridged>()
-            .ReverseMap();
 
         // Nutritional Target
         CreateMap<NutritionalTarget, NutritionalTargetDto>()
@@ -126,7 +99,9 @@ public class MappingProfile : Profile
 
         // Meal Plan
         CreateMap<MenuRecipe, MenuRecipeDto>()
-            .ReverseMap();
+            .ForMember(dest => dest.Recipe, opt => opt.MapFrom(src => src.Recipe))
+            .ReverseMap()
+            .ForMember(dest => dest.Recipe, opt => opt.MapFrom(src => src.Recipe));
 
         CreateMap<DailyMenu, DailyMenuDto>()
             .ForMember(dest => dest.MealType, opt => opt.MapFrom(src => src.MealType.ReadableName))
