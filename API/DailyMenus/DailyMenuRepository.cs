@@ -2,10 +2,8 @@
 
 using API.ApplicationData;
 using API.Dto;
-using API.Dto.Abridged;
 using API.Optimizer;
 using Domain.Enum;
-using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
@@ -23,10 +21,10 @@ public class DailyMenuRepository : IDailyMenuRepository
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
-        solution.ForEach(e => e.FilterMacronutrients());
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
         dailyMenu.Nutrients = nutritionalValues;
+        solution.ForEach(e => e.FilterMacronutrients());
         dailyMenu.Recipes = [..solution.ToMenus()];
         return dailyMenu;
     }
