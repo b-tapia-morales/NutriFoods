@@ -38,4 +38,6 @@ public interface IRecipeRepository
         double proteins);
 
     Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe);
+    
+    Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipe);
 }

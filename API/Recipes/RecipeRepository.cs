@@ -6,6 +6,7 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Parallel;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
@@ -15,13 +16,13 @@ namespace API.Recipes;
 
 public class RecipeRepository : IRecipeRepository
 {
-    private readonly IApplicationData _applicationData;
+    private readonly IApplicationData _appData;
     private readonly NutrifoodsDbContext _context;
     private readonly IMapper _mapper;
 
-    public RecipeRepository(NutrifoodsDbContext context, IMapper mapper, IApplicationData applicationData)
+    public RecipeRepository(NutrifoodsDbContext context, IMapper mapper, IApplicationData appData)
     {
-        _applicationData = applicationData;
+        _appData = appData;
         _mapper = mapper;
         _context = context;
     }
@@ -127,12 +128,13 @@ public class RecipeRepository : IRecipeRepository
 
     public async Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe)
     {
-        var logging = minimalRecipe.ProcessRecipe(_applicationData.IngredientDict, _applicationData.MeasureDict);
+        var logging = minimalRecipe.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict);
         if (!logging.IsSuccessful)
             return logging;
+
         var untrackedRecipe = _mapper.Map<Recipe>(minimalRecipe);
-        untrackedRecipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_applicationData.IngredientDict)];
-        untrackedRecipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_applicationData.MeasureDict)];
+        untrackedRecipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_appData.IngredientDict)];
+        untrackedRecipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_appData.MeasureDict)];
         await _context.AddAsync(untrackedRecipe);
         await _context.SaveChangesAsync();
 
@@ -141,6 +143,38 @@ public class RecipeRepository : IRecipeRepository
         await _context.SaveChangesAsync();
 
         return logging;
+    }
+
+    public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> recipes)
+    {
+        var tuples = recipes
+            .Select((e, i) => (Index: i, Log: e.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict)))
+            .ToList();
+        var filteredRecipes = tuples
+            .Where(t => t.Log.IsSuccessful)
+            .Select(t => recipes[t.Index])
+            .ToList();
+        await foreach (var recipeId in InsertIngredients(filteredRecipes))
+        {
+            var recipe = await _context.Recipes.IncludeSubfields().FirstAsync(e => e.Id == recipeId);
+            recipe.NutritionalValues = [..ToNutritionalValues(recipe)];
+            await _context.SaveChangesAsync();
+        }
+
+        return tuples.Select(e => e.Log).ToList();
+    }
+
+    private async IAsyncEnumerable<int> InsertIngredients(IEnumerable<MinimalRecipe> recipes)
+    {
+        foreach (var recipe in recipes)
+        {
+            var untrackedRecipe = _mapper.Map<Recipe>(recipe);
+            untrackedRecipe.RecipeQuantities = [..recipe.ToQuantities(_appData.IngredientDict)];
+            untrackedRecipe.RecipeMeasures = [..recipe.ToMeasures(_appData.MeasureDict)];
+            await _context.AddAsync(untrackedRecipe);
+            await _context.SaveChangesAsync();
+            yield return untrackedRecipe.Id;
+        }
     }
 
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,

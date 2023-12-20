@@ -195,7 +195,7 @@ public class RecipeController
     }
 
     [HttpPost]
-    [Route("")]
+    [Route("single")]
     public async Task<ActionResult<RecipeLogging>> InsertRecipe([FromBody] MinimalRecipe minimalRecipe)
     {
         if (await _repository.FindByNameAndAuthor(minimalRecipe.Name, minimalRecipe.Author) is not null)
@@ -206,5 +206,13 @@ public class RecipeController
                 $"A recipe with the same url (“{minimalRecipe.Url}”) already exists");
 
         return await _repository.InsertRecipe(minimalRecipe);
+    }
+
+    [HttpPost]
+    [Route("multiple")]
+    public async Task<ActionResult<IEnumerable<RecipeLogging>>> InsertRecipe(
+        [FromBody] List<MinimalRecipe> minimalRecipes)
+    {
+        return await _repository.InsertRecipes(minimalRecipes);
     }
 }
