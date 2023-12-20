@@ -203,7 +203,7 @@ public class RecipeRepository : IRecipeRepository
         return _context.Recipes.FirstOrDefault(e =>
             (NormalizeStr(e.Name).Equals(NormalizeStr(recipe.Name)) &&
              NormalizeStr(e.Author).Equals(NormalizeStr(recipe.Name))) ||
-            recipe.Url.ToLower().Equals(e.Url.ToLower())) != null;
+            recipe.Url.ToLower().Equals(e.Url.ToLower())) is not null;
     }
 }
 
