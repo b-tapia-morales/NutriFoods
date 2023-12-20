@@ -16,11 +16,15 @@ public static class StringExtensions
         var span = str.AsSpan().Trim();
         return $"{char.ToUpper(span[0])}{span[1..].ToString()}";
     }
-    
-    public static string IndentPunctuations(this string str) =>
-        string.IsNullOrWhiteSpace(str)
-            ? string.Empty
-            : Regex.Replace(str, Punctuations, match => $"{match.Value} ").Trim();
+
+    public static string IndentPunctuations(this string str)
+    {
+        if (string.IsNullOrWhiteSpace(str))
+            return string.Empty;
+        str = Regex.Replace(str, Punctuations, match => $"{match.Value} ");
+        str = Regex.Replace(str, "\\s+", " ");
+        return str;
+    }
 
     public static string Format(this string str) => str.Capitalize().IndentPunctuations();
 
