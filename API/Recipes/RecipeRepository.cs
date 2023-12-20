@@ -125,6 +125,18 @@ public class RecipeRepository : IRecipeRepository
 
     public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
+    
+    public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
+        double fattyAcids, double proteins)
+    {
+        var recipes = await _context.Recipes
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Energy && x.Quantity <= energy))
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Carbohydrates && x.Quantity <= carbohydrates))
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == FattyAcids && x.Quantity <= fattyAcids))
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Proteins && x.Quantity <= proteins))
+            .ToListAsync();
+        return _mapper.Map<List<RecipeDto>>(recipes);
+    }
 
     public async Task<RecipeLogging> InsertRecipe(MinimalRecipe recipe)
     {
@@ -137,10 +149,11 @@ public class RecipeRepository : IRecipeRepository
 
         return logging;
     }
-
+    
     public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes)
     {
         var tuples = minimalRecipes
+            .Where(e => !Exists(e))
             .Select((e, i) => (Index: i, Log: e.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict)))
             .ToList();
         var filteredRecipes = tuples
@@ -151,6 +164,15 @@ public class RecipeRepository : IRecipeRepository
             await InsertNutritionalValues(recipeId);
 
         return tuples.Select(e => e.Log).ToList();
+    }
+    
+    private async Task<List<RecipeDto>> FilterByNutrientQuantity(Nutrients nutrient, int lowerBound, int upperBound)
+    {
+        var recipes = await _context.Recipes
+            .FindAllBy(e => e.NutritionalValues.Any(x =>
+                x.Nutrient == nutrient && x.Quantity >= lowerBound && x.Quantity <= upperBound))
+            .ToListAsync();
+        return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
     private async Task<int> InsertIngredient(MinimalRecipe minimalRecipe)
@@ -176,25 +198,12 @@ public class RecipeRepository : IRecipeRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
-        double fattyAcids, double proteins)
+    private bool Exists(MinimalRecipe recipe)
     {
-        var recipes = await _context.Recipes
-            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Energy && x.Quantity <= energy))
-            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Carbohydrates && x.Quantity <= carbohydrates))
-            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == FattyAcids && x.Quantity <= fattyAcids))
-            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == Proteins && x.Quantity <= proteins))
-            .ToListAsync();
-        return _mapper.Map<List<RecipeDto>>(recipes);
-    }
-
-    private async Task<List<RecipeDto>> FilterByNutrientQuantity(Nutrients nutrient, int lowerBound, int upperBound)
-    {
-        var recipes = await _context.Recipes
-            .FindAllBy(e => e.NutritionalValues.Any(x =>
-                x.Nutrient == nutrient && x.Quantity >= lowerBound && x.Quantity <= upperBound))
-            .ToListAsync();
-        return _mapper.Map<List<RecipeDto>>(recipes);
+        return _context.Recipes.FirstOrDefault(e =>
+            (NormalizeStr(e.Name).Equals(NormalizeStr(recipe.Name)) &&
+             NormalizeStr(e.Author).Equals(NormalizeStr(recipe.Name))) ||
+            recipe.Url.ToLower().Equals(e.Url.ToLower())) != null;
     }
 }
 
