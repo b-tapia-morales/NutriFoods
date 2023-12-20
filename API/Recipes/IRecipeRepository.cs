@@ -1,4 +1,5 @@
 using API.Dto;
+using API.Dto.Insertion;
 using Domain.Enum;
 
 namespace API.Recipes;
@@ -35,4 +36,6 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates, double fattyAcids,
         double proteins);
+
+    Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe);
 }

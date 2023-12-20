@@ -8,21 +8,28 @@ namespace API.Recipes;
 
 [ApiController]
 [Route("api/v1/recipes")]
-public class RecipeController(IRecipeRepository repository)
+public class RecipeController
 {
+    private readonly IRecipeRepository _repository;
+
+    public RecipeController(IRecipeRepository repository)
+    {
+        _repository = repository;
+    }
+
     private const int DefaultPageSize = 20;
 
     [HttpGet]
     [Route("")]
     public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll([FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = DefaultPageSize) =>
-        await repository.FindAll(pageNumber, pageSize);
+        await _repository.FindAll(pageNumber, pageSize);
 
     [HttpGet]
     [Route("name/{name:minlength(2)}/author/{author:minlength(2)}")]
     public async Task<ActionResult<RecipeDto>> FindByNameAndAuthor([Required] string name, [Required] string author)
     {
-        var recipe = await repository.FindByNameAndAuthor(name, author);
+        var recipe = await _repository.FindByNameAndAuthor(name, author);
         return recipe == null ? new NotFoundResult() : recipe;
     }
 
@@ -30,7 +37,7 @@ public class RecipeController(IRecipeRepository repository)
     [Route("id/{id:int:min(1)}")]
     public async Task<ActionResult<RecipeDto>> FindById([Required] int id)
     {
-        var recipe = await repository.FindById(id);
+        var recipe = await _repository.FindById(id);
         return recipe == null ? new NotFoundResult() : recipe;
     }
 
@@ -43,8 +50,8 @@ public class RecipeController(IRecipeRepository repository)
     {
         var value = IEnum<MealTypes, MealToken>.ToValue(mealType);
         return await (value == MealTypes.None
-            ? repository.FindAll(pageNumber, pageSize)
-            : repository.FindByMealType(value, pageNumber, pageSize));
+            ? _repository.FindAll(pageNumber, pageSize)
+            : _repository.FindByMealType(value, pageNumber, pageSize));
     }
 
     [HttpGet]
@@ -56,8 +63,8 @@ public class RecipeController(IRecipeRepository repository)
     {
         var value = IEnum<DishTypes, DishToken>.ToValue(dishType);
         return await (value == DishTypes.None
-            ? repository.FindAll(pageNumber, pageSize)
-            : repository.FindByDishType(value, pageNumber, pageSize));
+            ? _repository.FindAll(pageNumber, pageSize)
+            : _repository.FindByDishType(value, pageNumber, pageSize));
     }
 
     [HttpGet]
@@ -69,8 +76,8 @@ public class RecipeController(IRecipeRepository repository)
     {
         var value = IEnum<Diets, DietToken>.ToValue(diet);
         return await (value == Diets.None
-            ? repository.FindAll(pageNumber, pageSize)
-            : repository.GetVegetarianRecipes(value, pageNumber, pageSize));
+            ? _repository.FindAll(pageNumber, pageSize)
+            : _repository.GetVegetarianRecipes(value, pageNumber, pageSize));
     }
 
     [HttpGet]
@@ -89,7 +96,7 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum prep time must be lower or equal to minimum prep time (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByPreparationTime(lower, upper, pageNumber, pageSize);
+        return await _repository.FilterByPreparationTime(lower, upper, pageNumber, pageSize);
     }
 
     [HttpGet]
@@ -98,7 +105,7 @@ public class RecipeController(IRecipeRepository repository)
         [Required] int portions,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = DefaultPageSize) =>
-        await repository.FilterByPortions(portions, pageNumber, pageSize);
+        await _repository.FilterByPortions(portions, pageNumber, pageSize);
 
     [HttpGet]
     [Route("portions")]
@@ -116,7 +123,7 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum portions must be lower or equal to minimum portions (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByPortions(lower, upper, pageNumber, pageSize);
+        return await _repository.FilterByPortions(lower, upper, pageNumber, pageSize);
     }
 
     [HttpGet]
@@ -133,7 +140,7 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum energy must be lower or equal to minimum energy (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByEnergy(lower, upper);
+        return await _repository.FilterByEnergy(lower, upper);
     }
 
     [HttpGet]
@@ -150,7 +157,7 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum carbohydrates must be lower or equal to minimum carbohydrates (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByCarbohydrates(lower, upper);
+        return await _repository.FilterByCarbohydrates(lower, upper);
     }
 
     [HttpGet]
@@ -167,7 +174,7 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum fatty acids must be lower or equal to minimum fatty acids (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByFattyAcids(lower, upper);
+        return await _repository.FilterByFattyAcids(lower, upper);
     }
 
     [HttpGet]
@@ -184,16 +191,20 @@ public class RecipeController(IRecipeRepository repository)
             return new BadRequestObjectResult(
                 $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {lower} and {upper} respectively)");
 
-        return await repository.FilterByProteins(lower, upper);
+        return await _repository.FilterByProteins(lower, upper);
     }
 
-    public async Task<ActionResult<RecipeLogging>> InsertRecipe([FromBody] MinimalRecipe recipe)
+    [HttpPost]
+    [Route("")]
+    public async Task<ActionResult<RecipeLogging>> InsertRecipe([FromBody] MinimalRecipe minimalRecipe)
     {
-        if (await repository.FindByNameAndAuthor(recipe.Name, recipe.Author) != null)
-            return new ConflictObjectResult("");
-        if (await repository.FindByUrl(recipe.Url) != null)
-            return new ConflictObjectResult("");
+        if (await _repository.FindByNameAndAuthor(minimalRecipe.Name, minimalRecipe.Author) is not null)
+            return new ConflictObjectResult(
+                $"A recipe with the same name and by the same author (“{minimalRecipe.Name}” by “{minimalRecipe.Author}”) already exists");
+        if (await _repository.FindByUrl(minimalRecipe.Url) is not null)
+            return new ConflictObjectResult(
+                $"A recipe with the same url (“{minimalRecipe.Url}”) already exists");
 
-        return new OkObjectResult("");
+        return await _repository.InsertRecipe(minimalRecipe);
     }
 }

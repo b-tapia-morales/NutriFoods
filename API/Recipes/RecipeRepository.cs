@@ -6,10 +6,10 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils.String;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
+using static NutrientRetrieval.NutrientCalculation.NutrientCalculation;
 
 namespace API.Recipes;
 
@@ -36,6 +36,7 @@ public class RecipeRepository : IRecipeRepository
     {
         var recipe = await _context.Recipes.FindFirstBy(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)) &&
                                                              NormalizeStr(e.Author).Equals(NormalizeStr(author)));
+        Console.WriteLine(recipe == null);
         return _mapper.Map<RecipeDto>(recipe);
     }
 
@@ -124,16 +125,21 @@ public class RecipeRepository : IRecipeRepository
     public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
 
-    public async Task<RecipeLogging?> InsertRecipe(MinimalRecipe minimalRecipe)
+    public async Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe)
     {
         var logging = minimalRecipe.ProcessRecipe(_applicationData.IngredientDict, _applicationData.MeasureDict);
         if (!logging.IsSuccessful)
             return logging;
-        var recipe = _mapper.Map<Recipe>(minimalRecipe);
-        recipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_applicationData.IngredientDict)];
-        recipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_applicationData.MeasureDict)];
-        await _context.AddAsync(recipe);
+        var untrackedRecipe = _mapper.Map<Recipe>(minimalRecipe);
+        untrackedRecipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_applicationData.IngredientDict)];
+        untrackedRecipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_applicationData.MeasureDict)];
+        await _context.AddAsync(untrackedRecipe);
         await _context.SaveChangesAsync();
+
+        var trackedRecipe = await _context.Recipes.IncludeSubfields().FirstAsync(e => e.Id == untrackedRecipe.Id);
+        trackedRecipe.NutritionalValues = [..ToNutritionalValues(untrackedRecipe)];
+        await _context.SaveChangesAsync();
+
         return logging;
     }
 
@@ -192,8 +198,10 @@ public static class RecipeExtensions
             .Include(e => e.RecipeMeasures)
             .ThenInclude(e => e.IngredientMeasure)
             .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.NutritionalValues)
             .Include(e => e.RecipeQuantities)
-            .ThenInclude(e => e.Ingredient);
+            .ThenInclude(e => e.Ingredient)
+            .ThenInclude(e => e.NutritionalValues);
 
     public static Task<Recipe?> FindFirstBy(this DbSet<Recipe> recipes, Expression<Func<Recipe, bool>> predicate) =>
         recipes.IncludeSubfields().FirstOrDefaultAsync(predicate);
