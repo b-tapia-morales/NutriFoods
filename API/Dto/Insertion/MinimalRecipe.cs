@@ -76,12 +76,12 @@ public static class MinimalRecipeExtensions
         {
             var tuple = (Ingredient: measure.IngredientName.Standardize(),
                 Measure: measure.Name.Format().Standardize());
-            yield return new RecipeMeasure()
+            yield return new RecipeMeasure
             {
                 IngredientMeasureId = measureDict[tuple].Id,
                 IntegerPart = measure.IntegerPart,
                 Numerator = measure.Numerator,
-                Denominator = measure.Denominator
+                Denominator = measure.Denominator == 0 ? 1 : measure.Denominator
             };
         }
     }
@@ -89,13 +89,14 @@ public static class MinimalRecipeExtensions
     private static IEnumerable<MeasureLogging> ProcessMeasures(this MinimalRecipe recipe,
         IReadOnlyDictionary<(string Ingredient, string Measure), IngredientMeasure> measureDict)
     {
-        foreach (var tuple in recipe.Measures.Select(e =>
-                     (Ingredient: e.IngredientName.Standardize(), Measure: e.Name.Format().Standardize())))
+        foreach (var ingredientMeasure in recipe.Measures)
         {
+            var tuple = (Ingredient: ingredientMeasure.IngredientName.Standardize(),
+                Measure: ingredientMeasure.Name.Format().Standardize());
             yield return new MeasureLogging
             {
-                IngredientName = tuple.Ingredient,
-                MeasureName = tuple.Measure,
+                IngredientName = ingredientMeasure.IngredientName,
+                MeasureName = ingredientMeasure.Name,
                 Exists = measureDict.ContainsKey(tuple)
             };
         }
