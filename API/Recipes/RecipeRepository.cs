@@ -126,55 +126,54 @@ public class RecipeRepository : IRecipeRepository
     public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
 
-    public async Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe)
+    public async Task<RecipeLogging> InsertRecipe(MinimalRecipe recipe)
     {
-        var logging = minimalRecipe.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict);
+        var logging = recipe.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict);
         if (!logging.IsSuccessful)
             return logging;
 
-        var untrackedRecipe = _mapper.Map<Recipe>(minimalRecipe);
-        untrackedRecipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_appData.IngredientDict)];
-        untrackedRecipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_appData.MeasureDict)];
-        await _context.AddAsync(untrackedRecipe);
-        await _context.SaveChangesAsync();
-
-        var trackedRecipe = await _context.Recipes.IncludeSubfields().FirstAsync(e => e.Id == untrackedRecipe.Id);
-        trackedRecipe.NutritionalValues = [..ToNutritionalValues(untrackedRecipe)];
-        await _context.SaveChangesAsync();
+        var recipeId = await InsertIngredient(recipe);
+        await InsertNutritionalValues(recipeId);
 
         return logging;
     }
 
-    public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> recipes)
+    public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes)
     {
-        var tuples = recipes
+        var tuples = minimalRecipes
             .Select((e, i) => (Index: i, Log: e.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict)))
             .ToList();
         var filteredRecipes = tuples
             .Where(t => t.Log.IsSuccessful)
-            .Select(t => recipes[t.Index])
+            .Select(t => minimalRecipes[t.Index])
             .ToList();
         await foreach (var recipeId in InsertIngredients(filteredRecipes))
-        {
-            var recipe = await _context.Recipes.IncludeSubfields().FirstAsync(e => e.Id == recipeId);
-            recipe.NutritionalValues = [..ToNutritionalValues(recipe)];
-            await _context.SaveChangesAsync();
-        }
+            await InsertNutritionalValues(recipeId);
 
         return tuples.Select(e => e.Log).ToList();
     }
 
-    private async IAsyncEnumerable<int> InsertIngredients(IEnumerable<MinimalRecipe> recipes)
+    private async Task<int> InsertIngredient(MinimalRecipe minimalRecipe)
     {
-        foreach (var recipe in recipes)
-        {
-            var untrackedRecipe = _mapper.Map<Recipe>(recipe);
-            untrackedRecipe.RecipeQuantities = [..recipe.ToQuantities(_appData.IngredientDict)];
-            untrackedRecipe.RecipeMeasures = [..recipe.ToMeasures(_appData.MeasureDict)];
-            await _context.AddAsync(untrackedRecipe);
-            await _context.SaveChangesAsync();
-            yield return untrackedRecipe.Id;
-        }
+        var recipe = _mapper.Map<Recipe>(minimalRecipe);
+        recipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_appData.IngredientDict)];
+        recipe.RecipeMeasures = [..minimalRecipe.ToMeasures(_appData.MeasureDict)];
+        await _context.AddAsync(recipe);
+        await _context.SaveChangesAsync();
+        return recipe.Id;
+    }
+
+    private async IAsyncEnumerable<int> InsertIngredients(IEnumerable<MinimalRecipe> minimalRecipes)
+    {
+        foreach (var recipe in minimalRecipes)
+            yield return await InsertIngredient(recipe);
+    }
+
+    private async Task InsertNutritionalValues(int recipeId)
+    {
+        var recipe = await _context.Recipes.IncludeSubfields().FirstAsync(e => e.Id == recipeId);
+        recipe.NutritionalValues = [..ToNutritionalValues(recipe)];
+        await _context.SaveChangesAsync();
     }
 
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,

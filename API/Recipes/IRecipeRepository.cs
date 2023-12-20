@@ -37,7 +37,7 @@ public interface IRecipeRepository
     Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates, double fattyAcids,
         double proteins);
 
-    Task<RecipeLogging> InsertRecipe(MinimalRecipe minimalRecipe);
+    Task<RecipeLogging> InsertRecipe(MinimalRecipe recipe);
     
-    Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipe);
+    Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes);
 }
