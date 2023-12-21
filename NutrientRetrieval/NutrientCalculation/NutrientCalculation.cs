@@ -43,7 +43,10 @@ public static class NutrientCalculation
         var gramDictionary = new Dictionary<int, double>();
 
         foreach (var recipe in recipes)
+        {
             recipe.NutritionalValues = [..ToNutritionalValues(recipe, gramDictionary)];
+            gramDictionary.Clear();
+        }
 
         await context.SaveChangesAsync();
     }
