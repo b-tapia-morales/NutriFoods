@@ -27,7 +27,7 @@ DatabaseInitialization.Initialize();
 await AbridgedRetrieval.RetrieveFromApi();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
-NutrientCalculation.Calculate();
+await NutrientCalculation.BatchCalculate();
 #endif
 
 var builder = WebApplication.CreateBuilder(args);

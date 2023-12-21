@@ -32,51 +32,58 @@ public static class NutrientCalculation
     private static readonly string AbsolutePath =
         Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
-    public static void Calculate()
-    {
-        // Retrieves all the unique NutriFoods Nutrient IDs from the CSV file and stores them into a Set.
-        var nutrientIds = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
-            .Select(e => e.NutriFoodsId).ToImmutableSortedSet();
-        // Creates a dictionary that associates the NutriFoods Nutrient ID with the sum of all Nutrients with the same
-        // ID present in the Ingredient
-        var gramDictionary = new Dictionary<int, double>();
+    private static readonly IReadOnlySet<int> NutrientIds = CsvUtils
+        .RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        .Select(e => e.NutriFoodsId).ToImmutableSortedSet();
 
-        using var context = new NutrifoodsDbContext(Options);
+    public static async Task BatchCalculate()
+    {
+        await using var context = new NutrifoodsDbContext(Options);
         var recipes = IncludeSubfields(context.Recipes).Where(e => e.Portions != null && e.Portions > 0);
+        var gramDictionary = new Dictionary<int, double>();
 
         foreach (var recipe in recipes)
         {
-            var ratio = recipe.Portions.GetValueOrDefault() == 1 ? 1.0 : 1.0 / recipe.Portions.GetValueOrDefault();
+            recipe.NutritionalValues = [..ToNutritionalValues(recipe, gramDictionary)];
             gramDictionary.Clear();
-            AddQuantities(gramDictionary, nutrientIds, recipe.RecipeQuantities.Where(e => e.Grams > 0), ratio);
-            AddMeasures(gramDictionary, nutrientIds, recipe.RecipeMeasures, ratio);
-
-            foreach (var pair in gramDictionary)
-            {
-                var nutrient = Nutrients.FromValue(pair.Key);
-                recipe.NutritionalValues.Add(new NutritionalValue
-                {
-                    Nutrient = nutrient,
-                    Quantity = pair.Value,
-                    Unit = nutrient.Unit,
-                    DailyValue = nutrient.DailyValue.HasValue
-                        ? Math.Round(pair.Value / nutrient.DailyValue.Value, 2)
-                        : null
-                });
-            }
         }
 
-        context.SaveChanges();
+        await context.SaveChangesAsync();
     }
 
-    private static void AddQuantities(IDictionary<int, double> dictionary, IImmutableSet<int> nutrientIds,
+    public static IEnumerable<NutritionalValue> ToNutritionalValues(Recipe recipe) =>
+        ToNutritionalValues(recipe, new Dictionary<int, double>());
+
+    public static IEnumerable<NutritionalValue> ToNutritionalValues(Recipe recipe,
+        IDictionary<int, double> gramDictionary)
+    {
+        var ratio = recipe.Portions.GetValueOrDefault() == 1 ? 1.0 : 1.0 / recipe.Portions.GetValueOrDefault();
+        AddQuantities(gramDictionary, recipe.RecipeQuantities.Where(e => e.Grams > 0), ratio);
+        AddMeasures(gramDictionary, recipe.RecipeMeasures, ratio);
+
+        foreach (var pair in gramDictionary)
+        {
+            var nutrient = Nutrients.FromValue(pair.Key);
+            yield return new NutritionalValue
+            {
+                Nutrient = nutrient,
+                Quantity = pair.Value,
+                Unit = nutrient.Unit,
+                DailyValue = nutrient.DailyValue.HasValue
+                    ? Math.Round(pair.Value / nutrient.DailyValue.Value, 2)
+                    : null
+            };
+        }
+    }
+
+    private static void AddQuantities(IDictionary<int, double> dictionary,
         IEnumerable<RecipeQuantity> recipeQuantities, double ratio)
     {
         foreach (var quantity in recipeQuantities)
         {
             var recipeGrams = quantity.Grams * ratio;
             foreach (var ingredientNutrient in quantity.Ingredient.NutritionalValues.Where(e =>
-                         nutrientIds.Contains(e.Nutrient)))
+                         NutrientIds.Contains(e.Nutrient)))
             {
                 var nutrientId = ingredientNutrient.Nutrient;
                 var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;
@@ -86,7 +93,7 @@ public static class NutrientCalculation
         }
     }
 
-    private static void AddMeasures(IDictionary<int, double> dictionary, IImmutableSet<int> nutrientIds,
+    private static void AddMeasures(IDictionary<int, double> dictionary,
         IEnumerable<RecipeMeasure> recipeMeasures, double ratio)
     {
         foreach (var measure in recipeMeasures)
@@ -94,7 +101,7 @@ public static class NutrientCalculation
             var recipeGrams = CalculateGrams(measure.IngredientMeasure.Grams, measure.IntegerPart, measure.Numerator,
                 measure.Denominator) * ratio;
             foreach (var ingredientNutrient in measure.IngredientMeasure.Ingredient.NutritionalValues.Where(e =>
-                         nutrientIds.Contains(e.Nutrient)))
+                         NutrientIds.Contains(e.Nutrient)))
             {
                 var nutrientId = ingredientNutrient.Nutrient;
                 var nutrientGrams = (recipeGrams / 100.0) * ingredientNutrient.Quantity;

@@ -1,4 +1,5 @@
 using API.Dto;
+using API.Dto.Insertion;
 using Domain.Enum;
 
 namespace API.Recipes;
@@ -8,6 +9,8 @@ public interface IRecipeRepository
     Task<List<RecipeDto>> FindAll(int pageNumber, int pageSize);
 
     Task<RecipeDto?> FindByNameAndAuthor(string name, string author);
+    
+    Task<RecipeDto?> FindByUrl(string url);
 
     Task<RecipeDto?> FindById(int id);
 
@@ -33,4 +36,8 @@ public interface IRecipeRepository
 
     Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates, double fattyAcids,
         double proteins);
+
+    Task<RecipeLogging> InsertRecipe(MinimalRecipe recipe);
+    
+    Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes);
 }

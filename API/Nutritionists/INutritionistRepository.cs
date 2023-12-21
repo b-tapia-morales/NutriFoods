@@ -20,7 +20,7 @@ public interface INutritionistRepository
 
     Task<PatientDto?> FindPatient(string rut);
 
-    Task<NutritionistDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto);
+    Task<PatientDto> AddPatient(NutritionistDto nutritionistDto, PatientDto patientDto);
 
     static Task<Nutritionist?> FindNutritionistBy(
         NutrifoodsDbContext context, Expression<Func<Nutritionist, bool>> predicate) =>

@@ -2,24 +2,16 @@
 
 using API.ApplicationData;
 using API.Dto;
-using API.Dto.Abridged;
 using API.Optimizer;
-using AutoMapper;
 using Domain.Enum;
-using static Domain.Enum.IEnum<Domain.Enum.MealTypes, Domain.Enum.MealToken>;
 
 namespace API.DailyMenus;
 
 public class DailyMenuRepository : IDailyMenuRepository
 {
-    private readonly IMapper _mapper;
     private readonly IApplicationData _applicationData;
 
-    public DailyMenuRepository(IMapper mapper, IApplicationData applicationData)
-    {
-        _mapper = mapper;
-        _applicationData = applicationData;
-    }
+    public DailyMenuRepository(IApplicationData applicationData) => _applicationData = applicationData;
 
     public async Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu, MealTypes mealType)
     {
@@ -29,11 +21,11 @@ public class DailyMenuRepository : IDailyMenuRepository
         var solution =
             await IEvolutionaryOptimizer<GeneticOptimizer>.GenerateSolutionAsync(recipes,
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
-        var abridgedRecipes = _mapper.Map<List<RecipeAbridged>>(solution);
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
         dailyMenu.Nutrients = nutritionalValues;
-        dailyMenu.Recipes = [..abridgedRecipes.ToMenus()];
+        solution.ForEach(e => e.FilterMacronutrients());
+        dailyMenu.Recipes = [..solution.ToMenus()];
         return dailyMenu;
     }
 }

@@ -116,7 +116,7 @@ public class ApplicationData : IApplicationData
         return ingredientsDict.Merge(synonymsDict);
     }
 
-    private static IDictionary<(string Measure, string IngredientName), IngredientMeasure> MeasureDictionary(
+    private static IDictionary<(string Ingredient, string Measure), IngredientMeasure> MeasureDictionary(
         IList<IngredientMeasure> measures) =>
-        measures.ToGroupedDictionary(e => (e.Name.Format().Standardize(), e.Ingredient.Name.Standardize()));
+        measures.ToGroupedDictionary(e => (e.Ingredient.Name.Standardize(), e.Name.Format().Standardize()));
 }

@@ -6,10 +6,10 @@ namespace API.Optimizer;
 
 public class Chromosome
 {
-    public IList<RecipeDto> Recipes { get; }
+    public List<RecipeDto> Recipes { get; }
     public int Fitness { get; private set; }
 
-    public Chromosome(IList<RecipeDto> recipes) => Recipes = recipes;
+    public Chromosome(List<RecipeDto> recipes) => Recipes = recipes;
 
     public void CalculateFitness(IReadOnlyCollection<NutritionalTargetDto> targets)
     {
