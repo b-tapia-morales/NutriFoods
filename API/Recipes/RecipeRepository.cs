@@ -1,3 +1,5 @@
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+
 using System.Linq.Expressions;
 using API.ApplicationData;
 using API.Dto;
@@ -6,7 +8,6 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using Utils.Parallel;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
@@ -125,7 +126,7 @@ public class RecipeRepository : IRecipeRepository
 
     public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
-    
+
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
         double fattyAcids, double proteins)
     {
@@ -149,7 +150,7 @@ public class RecipeRepository : IRecipeRepository
 
         return logging;
     }
-    
+
     public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes)
     {
         var tuples = minimalRecipes
@@ -165,7 +166,7 @@ public class RecipeRepository : IRecipeRepository
 
         return tuples.Select(e => e.Log).ToList();
     }
-    
+
     private async Task<List<RecipeDto>> FilterByNutrientQuantity(Nutrients nutrient, int lowerBound, int upperBound)
     {
         var recipes = await _context.Recipes
@@ -198,12 +199,12 @@ public class RecipeRepository : IRecipeRepository
         await _context.SaveChangesAsync();
     }
 
-    private bool Exists(MinimalRecipe recipe)
+    private bool Exists(MinimalRecipe minimalRecipe)
     {
         return _context.Recipes.FirstOrDefault(e =>
-            (NormalizeStr(e.Name).Equals(NormalizeStr(recipe.Name)) &&
-             NormalizeStr(e.Author).Equals(NormalizeStr(recipe.Name))) ||
-            recipe.Url.ToLower().Equals(e.Url.ToLower())) is not null;
+            (NormalizeStr(e.Name).Equals(NormalizeStr(minimalRecipe.Name)) &&
+             NormalizeStr(e.Author).Equals(NormalizeStr(minimalRecipe.Author))) ||
+            e.Url.ToLower().Equals(minimalRecipe.Url.ToLower())) is not null;
     }
 }
 
