@@ -1,4 +1,5 @@
-﻿using API.Dto;
+﻿using System.Linq.Expressions;
+using API.Dto;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Domain.Enum;
@@ -19,9 +20,10 @@ public class IngredientRepository : IIngredientRepository
         _mapper = mapper;
     }
 
-    public Task<List<IngredientDto>> FindAll() =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
-            .ToListAsync();
+    public Task<List<IngredientDto>> FindAll(int pageNumber, int pageSize) =>
+        _mapper.ProjectTo<IngredientDto>(_context.Ingredients
+            .FindAllBy(e => e.Id > ((pageNumber - 1) * pageSize) && e.Id <= (pageNumber * pageSize))
+        ).ToListAsync();
 
     public Task<IngredientDto?> FindByName(string name) =>
         _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
@@ -31,9 +33,12 @@ public class IngredientRepository : IIngredientRepository
         _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
             .FirstOrDefaultAsync(e => e.Id == id);
 
-    public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields().Where(e => e.FoodGroup == group))
-            .ToListAsync();
+    public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group, int pageNumber, int pageSize) =>
+        _mapper.ProjectTo<IngredientDto>(
+            _context.Ingredients.IncludeSubfields()
+                .Where(e => e.FoodGroup == group)
+                .Paginate(pageNumber, pageSize)
+        ).ToListAsync();
 }
 
 public static class IngredientExtensions
@@ -45,4 +50,20 @@ public static class IngredientExtensions
             .Include(e => e.IngredientMeasures)
             .Include(e => e.NutritionalValues);
     }
+
+    public static Task<Ingredient?> FindFirstBy(this DbSet<Ingredient> recipes,
+        Expression<Func<Ingredient, bool>> predicate) =>
+        recipes.IncludeSubfields().FirstOrDefaultAsync(predicate);
+
+    public static IQueryable<Ingredient> FindAllBy(this DbSet<Ingredient> recipes,
+        Expression<Func<Ingredient, bool>> predicate) =>
+        recipes.IncludeSubfields().Where(predicate);
+
+    public static IQueryable<Ingredient> FindAllBy(this IQueryable<Ingredient> recipes,
+        Expression<Func<Ingredient, bool>> predicate) =>
+        recipes.Where(predicate);
+
+    public static IQueryable<Ingredient> Paginate(this IQueryable<Ingredient> recipes,
+        int pageNumber, int pageSize) =>
+        recipes.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 }

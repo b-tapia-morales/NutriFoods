@@ -8,11 +8,15 @@ namespace API.Ingredients;
 [Route("api/v1/ingredients")]
 public class IngredientController(IIngredientRepository repository)
 {
+    private const int DefaultPageSize = 20;
+
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindAll()
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindAll(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = DefaultPageSize)
     {
-        return await repository.FindAll();
+        return await repository.FindAll(pageNumber, pageSize);
     }
 
     [HttpGet]
@@ -39,9 +43,14 @@ public class IngredientController(IIngredientRepository repository)
 
     [HttpGet]
     [Route("primaryGroup/{foodGroup}")]
-    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByFoodGroup(FoodGroupToken foodGroup)
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindByFoodGroup(
+        FoodGroupToken foodGroup,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = DefaultPageSize)
     {
         var value = IEnum<FoodGroups, FoodGroupToken>.ToValue(foodGroup);
-        return await (value == FoodGroups.None ? repository.FindAll() : repository.FindByFoodGroup(value));
+        return await (value == FoodGroups.None
+            ? repository.FindAll(pageNumber, pageSize)
+            : repository.FindByFoodGroup(value, pageNumber, pageSize));
     }
 }
