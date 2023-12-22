@@ -10,20 +10,28 @@ namespace API.Recipes;
 [Route("api/v1/recipes")]
 public class RecipeController
 {
+    private const int DefaultPageSize = 20;
+
     private readonly IRecipeRepository _repository;
 
-    public RecipeController(IRecipeRepository repository)
-    {
-        _repository = repository;
-    }
-
-    private const int DefaultPageSize = 20;
+    public RecipeController(IRecipeRepository repository) => _repository = repository;
 
     [HttpGet]
     [Route("")]
-    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll([FromQuery] int pageNumber = 1,
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindAll(
+        [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = DefaultPageSize) =>
         await _repository.FindAll(pageNumber, pageSize);
+
+    [HttpGet]
+    [Route("order-by")]
+    public async Task<ActionResult<IEnumerable<RecipeDto>>> FindOrderedBy(
+        [FromQuery, Required] NutrientToken nutrient,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = DefaultPageSize,
+        [FromQuery] bool descending = true) =>
+        await _repository.FindOrderedBy(IEnum<Nutrients, NutrientToken>.ToValue(nutrient), pageNumber, pageSize,
+            descending);
 
     [HttpGet]
     [Route("name/{name:minlength(2)}/author/{author:minlength(2)}")]
@@ -96,7 +104,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum prep time must be lower or equal to minimum prep time (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByPreparationTime(lower, upper, pageNumber, pageSize);
+        return await _repository.FindByPreparationTime(lower, upper, pageNumber, pageSize);
     }
 
     [HttpGet]
@@ -105,7 +113,7 @@ public class RecipeController
         [Required] int portions,
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = DefaultPageSize) =>
-        await _repository.FilterByPortions(portions, pageNumber, pageSize);
+        await _repository.FindByPortions(portions, pageNumber, pageSize);
 
     [HttpGet]
     [Route("portions")]
@@ -123,7 +131,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum portions must be lower or equal to minimum portions (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByPortions(lower, upper, pageNumber, pageSize);
+        return await _repository.FindByPortions(lower, upper, pageNumber, pageSize);
     }
 
     [HttpGet]
@@ -140,7 +148,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum energy must be lower or equal to minimum energy (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByEnergy(lower, upper);
+        return await _repository.FindByEnergy(lower, upper);
     }
 
     [HttpGet]
@@ -157,7 +165,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum carbohydrates must be lower or equal to minimum carbohydrates (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByCarbohydrates(lower, upper);
+        return await _repository.FindByCarbohydrates(lower, upper);
     }
 
     [HttpGet]
@@ -174,7 +182,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum fatty acids must be lower or equal to minimum fatty acids (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByFattyAcids(lower, upper);
+        return await _repository.FindByFattyAcids(lower, upper);
     }
 
     [HttpGet]
@@ -191,7 +199,7 @@ public class RecipeController
             return new BadRequestObjectResult(
                 $"Maximum proteins must be lower or equal to minimum proteins (Values provided were {lower} and {upper} respectively)");
 
-        return await _repository.FilterByProteins(lower, upper);
+        return await _repository.FindByProteins(lower, upper);
     }
 
     [HttpPost]

@@ -8,6 +8,7 @@ using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Enumerable;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
@@ -56,6 +57,16 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
+    public async Task<List<RecipeDto>> FindOrderedBy(Nutrients nutrient, int pageNumber, int pageSize, bool descending)
+    {
+        var recipes = await _context.Recipes
+            .FindAllBy(e => e.NutritionalValues.Count > 0 && e.NutritionalValues.Any(x => x.Nutrient == nutrient))
+            .SortedBy(e => e.NutritionalValues.First(x => x.Nutrient == nutrient).Quantity, !descending)
+            .Paginate(pageNumber, pageSize)
+            .ToListAsync();
+        return _mapper.Map<List<RecipeDto>>(recipes);
+    }
+
     public async Task<List<RecipeDto>> FindByMealType(MealTypes mealType, int pageNumber, int pageSize)
     {
         var recipes = await _context.Recipes
@@ -87,7 +98,7 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    public async Task<List<RecipeDto>> FilterByPreparationTime(int lowerBound, int upperBound, int pageNumber,
+    public async Task<List<RecipeDto>> FindByPreparationTime(int lowerBound, int upperBound, int pageNumber,
         int pageSize)
     {
         var recipes = await _context.Recipes
@@ -97,7 +108,7 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    public async Task<List<RecipeDto>> FilterByPortions(int portions, int pageNumber, int pageSize)
+    public async Task<List<RecipeDto>> FindByPortions(int portions, int pageNumber, int pageSize)
     {
         var recipes = await _context.Recipes
             .FindAllBy(e => e.Portions != null && e.Portions == portions)
@@ -106,7 +117,7 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    public async Task<List<RecipeDto>> FilterByPortions(int lowerBound, int upperBound, int pageNumber, int pageSize)
+    public async Task<List<RecipeDto>> FindByPortions(int lowerBound, int upperBound, int pageNumber, int pageSize)
     {
         var recipes = await _context.Recipes
             .FindAllBy(e => e.Portions != null && e.Portions >= lowerBound && e.Portions <= upperBound)
@@ -115,16 +126,16 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    public Task<List<RecipeDto>> FilterByEnergy(int lowerBound, int upperBound) =>
+    public Task<List<RecipeDto>> FindByEnergy(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Energy, lowerBound, upperBound);
 
-    public Task<List<RecipeDto>> FilterByCarbohydrates(int lowerBound, int upperBound) =>
+    public Task<List<RecipeDto>> FindByCarbohydrates(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Carbohydrates, lowerBound, upperBound);
 
-    public Task<List<RecipeDto>> FilterByFattyAcids(int lowerBound, int upperBound) =>
+    public Task<List<RecipeDto>> FindByFattyAcids(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(FattyAcids, lowerBound, upperBound);
 
-    public Task<List<RecipeDto>> FilterByProteins(int lowerBound, int upperBound) =>
+    public Task<List<RecipeDto>> FindByProteins(int lowerBound, int upperBound) =>
         FilterByNutrientQuantity(Proteins, lowerBound, upperBound);
 
     public async Task<List<RecipeDto>> FilterByMacronutrientDistribution(double energy, double carbohydrates,
