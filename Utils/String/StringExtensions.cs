@@ -15,9 +15,12 @@ public static class StringExtensions
         if (string.IsNullOrWhiteSpace(input))
             return string.Empty;
 
-        var builder = new StringBuilder();
+        var start = FindStart(input);
+        var end = FindEnd(input);
         var isWhitespace = false;
-        for (var i = 0; i < input.Length; i++)
+        var builder = new StringBuilder();
+
+        for (var i = start; i <= end; i++)
         {
             if (char.IsWhiteSpace(input[i]))
             {
@@ -65,5 +68,25 @@ public static class StringExtensions
     public static string Standardize(this string str) =>
         string.IsNullOrWhiteSpace(str)
             ? string.Empty
-            : str.RemoveExtraWhitespaces().Trim().ToLower().RemoveAccents();
+            : str.RemoveExtraWhitespaces().ToLower().RemoveAccents();
+    
+    private static int FindStart(string input)
+    {
+        var n = input.Length;
+        for (var i = 0; i < n; i++)
+            if (!char.IsWhiteSpace(input[i]))
+                return i;
+
+        return n - 1;
+    }
+
+    private static int FindEnd(string input)
+    {
+        var n = input.Length;
+        for (var i = n - 1; i >= 0; i--)
+            if (!char.IsWhiteSpace(input[i]))
+                return i;
+
+        return n - 1;
+    }
 }
