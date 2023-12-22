@@ -52,8 +52,8 @@ public static class Recipes
     {
         var mappings = CsvUtils
             .RetrieveRows<Recipe, RecipeMapping>(RecipesPath, DelimiterToken.Semicolon, true)
-            .DistinctBy(e => e.Url)
-            .DistinctBy(e => (e.Name, e.Author));
+            .DistinctBy(e => e.Url.ToLower())
+            .DistinctBy(e => (e.Name.Standardize(), e.Author.Standardize()));
         using var context = new NutrifoodsDbContext(Options);
         InsertAllRecipes(context, mappings);
         var ingredients = IncludeSubfields(context.Ingredients).ToList();
@@ -89,12 +89,15 @@ public static class Recipes
         IDictionary<(string Measure, string IngredientName), IngredientMeasure> measuresDict)
     {
         var paths = Directory.GetFiles(RecipeMeasuresPath, "*.csv", SearchOption.AllDirectories);
-        var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        var usedRecipes = new HashSet<Uri>();
         foreach (var path in paths)
         {
-            var recipeName = path.ExtractFileName().Standardize();
+            var name = path.ExtractFileName().Standardize();
+            if (!recipesDict.TryGetValue(name, out var recipe))
+                continue;
 
-            if (!recipesDict.TryGetValue(recipeName, out var recipe) || usedRecipes.Contains(recipeName))
+            var uri = new Uri(recipe.Url.ToLower());
+            if (usedRecipes.Contains(uri))
                 continue;
 
             var recipeId = recipe.Id;
@@ -105,7 +108,7 @@ public static class Recipes
             foreach (var recipeIngredient in recipeIngredients)
                 ParseRecipeMeasure(context, recipeIngredient, ingredientsDict, measuresDict, recipeId);
 
-            usedRecipes.Add(recipeName);
+            usedRecipes.Add(uri);
         }
 
         context.SaveChanges();
@@ -120,19 +123,19 @@ public static class Recipes
             if (!recipesDict.TryGetValue(recipeName, out var recipe))
                 continue;
 
-            var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
-            foreach (var mealType in mealTypes)
+            var mealTypes = MealTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value).ToList();
+            mealTypes.ForEach(e =>
             {
-                if (!recipe.MealTypes.Contains(mealType))
-                    recipe.MealTypes.Add(mealType);
-            }
+                if (!recipe.MealTypes.Contains(e))
+                    recipe.MealTypes.Add(e);
+            });
 
-            var dishTypes = DishTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value);
-            foreach (var dishType in dishTypes)
+            var dishTypes = DishTypesDict.Where(e => file.Contains(e.Key)).Select(e => e.Value).ToList();
+            dishTypes.ForEach(e =>
             {
-                if (!recipe.DishTypes.Contains(dishType))
-                    recipe.DishTypes.Add(dishType);
-            }
+                if (!recipe.DishTypes.Contains(e))
+                    recipe.DishTypes.Add(e);
+            });
         }
 
         context.SaveChanges();
@@ -141,11 +144,15 @@ public static class Recipes
     private static void InsertAllSteps(DbContext context, IReadOnlyDictionary<string, Recipe> recipesDict)
     {
         var paths = Directory.GetFiles(StepsPath, "*.csv", SearchOption.AllDirectories);
-        var usedRecipes = new HashSet<string>(StringComparer.InvariantCultureIgnoreCase);
+        var usedRecipes = new HashSet<Uri>();
         foreach (var path in paths)
         {
-            var recipeName = path.ExtractFileName().Standardize();
-            if (!recipesDict.TryGetValue(recipeName, out var recipe) || usedRecipes.Contains(recipeName))
+            var name = path.ExtractFileName().Standardize();
+            if (!recipesDict.TryGetValue(name, out var recipe))
+                continue;
+
+            var uri = new Uri(recipe.Url.ToLower());
+            if (usedRecipes.Contains(uri))
                 continue;
 
             var id = recipe.Id;
@@ -159,7 +166,7 @@ public static class Recipes
                     Description = steps[i]
                 });
 
-            usedRecipes.Add(recipeName);
+            usedRecipes.Add(uri);
         }
 
         context.SaveChanges();
@@ -236,7 +243,7 @@ public static class Recipes
 
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
     {
-        var ingredientsDict = 
+        var ingredientsDict =
             ingredients.ToGroupedDictionary(e => e.Name.Standardize(), StringComparer.InvariantCultureIgnoreCase);
         var synonymsDict = ingredients
             .SelectMany(e => e.Synonyms.Select(x => (Synonym: x, Ingredient: e)))
