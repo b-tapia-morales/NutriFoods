@@ -1,4 +1,5 @@
-﻿using API.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+using API.Dto;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,9 +7,16 @@ namespace API.Ingredients;
 
 [ApiController]
 [Route("api/v1/ingredients")]
-public class IngredientController(IIngredientRepository repository)
+public class IngredientController
 {
     private const int DefaultPageSize = 20;
+
+    private readonly IIngredientRepository _repository;
+
+    public IngredientController(IIngredientRepository repository)
+    {
+        _repository = repository;
+    }
 
     [HttpGet]
     [Route("")]
@@ -16,8 +24,18 @@ public class IngredientController(IIngredientRepository repository)
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = DefaultPageSize)
     {
-        return await repository.FindAll(pageNumber, pageSize);
+        return await _repository.FindAll(pageNumber, pageSize);
     }
+
+    [HttpGet]
+    [Route("order-by")]
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> FindOrderedBy(
+        [FromQuery, Required] NutrientToken nutrient,
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = DefaultPageSize,
+        [FromQuery] bool descending = true) =>
+        await _repository.FindOrderedBy(IEnum<Nutrients, NutrientToken>.ToValue(nutrient), pageNumber, pageSize,
+            descending);
 
     [HttpGet]
     [Route("name/{name}")]
@@ -26,7 +44,7 @@ public class IngredientController(IIngredientRepository repository)
         if (string.IsNullOrWhiteSpace(name))
             return new BadRequestObjectResult("Parameter can't be an empty or whitespace string");
 
-        var ingredient = await repository.FindByName(name);
+        var ingredient = await _repository.FindByName(name);
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
 
@@ -37,7 +55,7 @@ public class IngredientController(IIngredientRepository repository)
         if (id < 0)
             return new BadRequestObjectResult($"Parameter can't be a negative integer (Value provided was: {id})");
 
-        var ingredient = await repository.FindById(id);
+        var ingredient = await _repository.FindById(id);
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
 
@@ -50,7 +68,7 @@ public class IngredientController(IIngredientRepository repository)
     {
         var value = IEnum<FoodGroups, FoodGroupToken>.ToValue(foodGroup);
         return await (value == FoodGroups.None
-            ? repository.FindAll(pageNumber, pageSize)
-            : repository.FindByFoodGroup(value, pageNumber, pageSize));
+            ? _repository.FindAll(pageNumber, pageSize)
+            : _repository.FindByFoodGroup(value, pageNumber, pageSize));
     }
 }

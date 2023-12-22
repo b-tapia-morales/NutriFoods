@@ -31,6 +31,12 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.FoodGroup, opt => opt.MapFrom(src => src.FoodGroup.ReadableName))
             .ForMember(dest => dest.Measures, opt => opt.MapFrom(src => src.IngredientMeasures))
             .ForMember(dest => dest.Nutrients, opt => opt.MapFrom(src => src.NutritionalValues))
+            .AfterMap((_, dest) =>
+            {
+                dest.Nutrients.Sort((e1, e2) =>
+                    IEnum<Nutrients, NutrientToken>.ToValue(e1.Nutrient)
+                        .CompareTo(IEnum<Nutrients, NutrientToken>.ToValue(e2.Nutrient)));
+            })
             .ReverseMap()
             .ForMember(dest => dest.FoodGroup,
                 opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)))

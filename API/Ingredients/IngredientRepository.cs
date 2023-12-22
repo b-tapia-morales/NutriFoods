@@ -5,6 +5,7 @@ using AutoMapper.QueryableExtensions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Utils.Enumerable;
 using static Domain.Models.NutrifoodsDbContext;
 
 namespace API.Ingredients;
@@ -20,25 +21,37 @@ public class IngredientRepository : IIngredientRepository
         _mapper = mapper;
     }
 
-    public Task<List<IngredientDto>> FindAll(int pageNumber, int pageSize) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients
+    public async Task<List<IngredientDto>> FindAll(int pageNumber, int pageSize) =>
+        _mapper.Map<List<IngredientDto>>(await _context.Ingredients
             .FindAllBy(e => e.Id > ((pageNumber - 1) * pageSize) && e.Id <= (pageNumber * pageSize))
-        ).ToListAsync();
+            .ToListAsync()
+        );
 
-    public Task<IngredientDto?> FindByName(string name) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
-            .FirstOrDefaultAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)));
+    public async Task<List<IngredientDto>> FindOrderedBy(Nutrients nutrient, int pageNumber, int pageSize,
+        bool descending) =>
+        _mapper.Map<List<IngredientDto>>(await _context.Ingredients
+            .FindAllBy(e => e.NutritionalValues.Count > 0 && e.NutritionalValues.Any(x => x.Nutrient == nutrient))
+            .SortedBy(e => e.NutritionalValues.First(x => x.Nutrient == nutrient).Quantity, !descending)
+            .Paginate(pageNumber, pageSize)
+            .ToListAsync()
+        );
 
-    public Task<IngredientDto?> FindById(int id) =>
-        _mapper.ProjectTo<IngredientDto>(_context.Ingredients.IncludeSubfields())
-            .FirstOrDefaultAsync(e => e.Id == id);
+    public async Task<IngredientDto?> FindByName(string name) =>
+        _mapper.Map<IngredientDto>(await _context.Ingredients.IncludeSubfields()
+            .FirstOrDefaultAsync(e => NormalizeStr(e.Name).Equals(NormalizeStr(name)))
+        );
 
-    public Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group, int pageNumber, int pageSize) =>
-        _mapper.ProjectTo<IngredientDto>(
-            _context.Ingredients.IncludeSubfields()
-                .Where(e => e.FoodGroup == group)
-                .Paginate(pageNumber, pageSize)
-        ).ToListAsync();
+    public async Task<IngredientDto?> FindById(int id) =>
+        _mapper.Map<IngredientDto>(await _context.Ingredients.IncludeSubfields()
+            .FirstOrDefaultAsync(e => e.Id == id)
+        );
+
+    public async Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group, int pageNumber, int pageSize) =>
+        _mapper.Map<List<IngredientDto>>(await _context.Ingredients.IncludeSubfields()
+            .Where(e => e.FoodGroup == group)
+            .Paginate(pageNumber, pageSize)
+            .ToListAsync()
+        );
 }
 
 public static class IngredientExtensions
@@ -51,19 +64,19 @@ public static class IngredientExtensions
             .Include(e => e.NutritionalValues);
     }
 
-    public static Task<Ingredient?> FindFirstBy(this DbSet<Ingredient> recipes,
+    public static Task<Ingredient?> FindFirstBy(this DbSet<Ingredient> ingredients,
         Expression<Func<Ingredient, bool>> predicate) =>
-        recipes.IncludeSubfields().FirstOrDefaultAsync(predicate);
+        ingredients.IncludeSubfields().FirstOrDefaultAsync(predicate);
 
-    public static IQueryable<Ingredient> FindAllBy(this DbSet<Ingredient> recipes,
+    public static IQueryable<Ingredient> FindAllBy(this DbSet<Ingredient> ingredients,
         Expression<Func<Ingredient, bool>> predicate) =>
-        recipes.IncludeSubfields().Where(predicate);
+        ingredients.IncludeSubfields().Where(predicate);
 
-    public static IQueryable<Ingredient> FindAllBy(this IQueryable<Ingredient> recipes,
+    public static IQueryable<Ingredient> FindAllBy(this IQueryable<Ingredient> ingredients,
         Expression<Func<Ingredient, bool>> predicate) =>
-        recipes.Where(predicate);
+        ingredients.Where(predicate);
 
-    public static IQueryable<Ingredient> Paginate(this IQueryable<Ingredient> recipes,
+    public static IQueryable<Ingredient> Paginate(this IQueryable<Ingredient> ingredients,
         int pageNumber, int pageSize) =>
-        recipes.Skip((pageNumber - 1) * pageSize).Take(pageSize);
+        ingredients.Skip((pageNumber - 1) * pageSize).Take(pageSize);
 }
