@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace Utils.Enumerable;
 
 public static class EnumerableUtils
@@ -23,6 +25,10 @@ public static class EnumerableUtils
         if (counter != 0)
             yield return partition;
     }
+
+    public static IOrderedQueryable<TSource> SortedBy<TSource, TKey>(this IQueryable<TSource> source,
+        Expression<Func<TSource, TKey>> keySelector, bool ascending = true) =>
+        ascending ? source.OrderBy(keySelector) : source.OrderByDescending(keySelector);
 
     public static bool IsSorted<T, TKey>(this IEnumerable<T> source, Func<T, TKey> keySelector)
         where T : IComparable<T> =>
