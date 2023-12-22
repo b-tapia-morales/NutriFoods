@@ -4,6 +4,7 @@ using API.ApplicationData;
 using API.Dto;
 using API.Optimizer;
 using Domain.Enum;
+using static Domain.Enum.IEnum<Domain.Enum.Nutrients, Domain.Enum.NutrientToken>;
 
 namespace API.DailyMenus;
 
@@ -23,7 +24,9 @@ public class DailyMenuRepository : IDailyMenuRepository
                 dailyMenu.Targets.AsReadOnly(), chromosomeSize < 2 ? 2 : chromosomeSize);
         var nutritionalValues = new List<NutritionalValueDto>(solution.ToNutritionalValues());
         dailyMenu.Targets.IncludeActualValues(solution);
+        dailyMenu.Targets.Sort((e1, e2) => ToValue(e1.Nutrient).CompareTo(ToValue(e2.Nutrient)));
         dailyMenu.Nutrients = nutritionalValues;
+        dailyMenu.Nutrients.Sort((e1, e2) => ToValue(e1.Nutrient).CompareTo(ToValue(e2.Nutrient)));
         solution.ForEach(e => e.FilterMacronutrients());
         dailyMenu.Recipes = [..solution.ToMenus()];
         return dailyMenu;
