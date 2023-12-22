@@ -246,9 +246,7 @@ public static partial class Recipes
         var str = step;
         str = DenormalizedStep().Replace(str, string.Empty);
         str = EnumeratedStep().Replace(str, string.Empty);
-        str = RemainingStep().Replace(str, string.Empty);
-        str = RemainingDigit().Replace(str, string.Empty);
-        return str;
+        return str.RemoveExtraWhitespaces().Trim();
     }
 
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
@@ -300,15 +298,9 @@ public static partial class Recipes
     private static string ExtractFileName(this string path) =>
         path.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
 
-    [GeneratedRegex(@"^(?:[Pp]aso\s{1,2})?(?:\d{1,2}\.?-?\s{0,2}){1,2}")]
+    [GeneratedRegex(@"^(?:[Pp]aso\s{0,2})?(?:\d{1,2}\.?-?\s{0,2}){1,2}")]
     private static partial Regex DenormalizedStep();
 
     [GeneratedRegex(@"^\d{1,2}\)")]
     private static partial Regex EnumeratedStep();
-
-    [GeneratedRegex("^[Pp]aso")]
-    private static partial Regex RemainingStep();
-
-    [GeneratedRegex(@"^(?:\d{1,2}\.?-?\s{0,2}){1,2}")]
-    private static partial Regex RemainingDigit();
 }
