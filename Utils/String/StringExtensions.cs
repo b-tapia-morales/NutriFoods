@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text;
 using System.Text.RegularExpressions;
 using static System.Globalization.UnicodeCategory;
 using static System.Text.NormalizationForm;
@@ -8,6 +9,32 @@ namespace Utils.String;
 public static class StringExtensions
 {
     private const string Punctuations = @"[:;,.\-]";
+
+    public static string RemoveExtraWhitespaces(this string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+            return string.Empty;
+
+        var builder = new StringBuilder();
+        var isWhitespace = false;
+        for (var i = 0; i < input.Length; i++)
+        {
+            if (char.IsWhiteSpace(input[i]))
+            {
+                if (isWhitespace)
+                    continue;
+                builder.Append(input[i]);
+                isWhitespace = true;
+            }
+            else
+            {
+                isWhitespace = false;
+                builder.Append(input[i]);
+            }
+        }
+
+        return builder.ToString();
+    }
 
     public static string Capitalize(this string str)
     {
@@ -22,8 +49,7 @@ public static class StringExtensions
         if (string.IsNullOrWhiteSpace(str))
             return string.Empty;
         str = Regex.Replace(str, Punctuations, match => $"{match.Value} ");
-        str = Regex.Replace(str, "\\s+", " ");
-        return str;
+        return str.RemoveExtraWhitespaces().Trim();
     }
 
     public static string Format(this string str) => str.Capitalize().IndentPunctuations();
@@ -39,5 +65,5 @@ public static class StringExtensions
     public static string Standardize(this string str) =>
         string.IsNullOrWhiteSpace(str)
             ? string.Empty
-            : str.Trim().ToLower().RemoveAccents();
+            : str.RemoveExtraWhitespaces().Trim().ToLower().RemoveAccents();
 }
