@@ -1,4 +1,4 @@
-using System.Collections.Immutable;
+using System.Text.RegularExpressions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@ using static Domain.Enum.MealTypes;
 
 namespace RecipeInsertion;
 
-public static class Recipes
+public static partial class Recipes
 {
     private const string ConnectionString =
         "Host=localhost;Database=nutrifoods_db;Username=nutrifoods_dev;Password=MVmYneLqe91$";
@@ -163,7 +163,7 @@ public static class Recipes
                 {
                     RecipeId = id,
                     Number = i + 1,
-                    Description = steps[i]
+                    Description = NormalizeStep(steps[i])
                 });
 
             usedRecipes.Add(uri);
@@ -241,6 +241,16 @@ public static class Recipes
         });
     }
 
+    private static string NormalizeStep(string step)
+    {
+        var str = step;
+        str = DenormalizedStep().Replace(str, string.Empty);
+        str = EnumeratedStep().Replace(str, string.Empty);
+        str = RemainingStep().Replace(str, string.Empty);
+        str = RemainingDigit().Replace(str, string.Empty);
+        return str;
+    }
+
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
     {
         var ingredientsDict =
@@ -289,4 +299,16 @@ public static class Recipes
 
     private static string ExtractFileName(this string path) =>
         path.Split(@"\")[^1].Replace("_", " ").Replace(".csv", "");
+
+    [GeneratedRegex(@"^(?:[Pp]aso\s{1,2})?(?:\d{1,2}\.?-?\s{0,2}){1,2}")]
+    private static partial Regex DenormalizedStep();
+
+    [GeneratedRegex(@"^\d{1,2}\)")]
+    private static partial Regex EnumeratedStep();
+
+    [GeneratedRegex("^[Pp]aso")]
+    private static partial Regex RemainingStep();
+
+    [GeneratedRegex(@"^(?:\d{1,2}\.?-?\s{0,2}){1,2}")]
+    private static partial Regex RemainingDigit();
 }
