@@ -60,7 +60,7 @@ public class RecipeRepository : IRecipeRepository
     public async Task<List<RecipeDto>> FindOrderedBy(Nutrients nutrient, int pageNumber, int pageSize, bool descending)
     {
         var recipes = await _context.Recipes
-            .FindAllBy(e => e.NutritionalValues.Count > 0 && e.NutritionalValues.Any(x => x.Nutrient == nutrient))
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == nutrient))
             .SortedBy(e => e.NutritionalValues.First(x => x.Nutrient == nutrient).Quantity, !descending)
             .Paginate(pageNumber, pageSize)
             .ToListAsync();

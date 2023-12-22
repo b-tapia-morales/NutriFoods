@@ -30,7 +30,7 @@ public class IngredientRepository : IIngredientRepository
     public async Task<List<IngredientDto>> FindOrderedBy(Nutrients nutrient, int pageNumber, int pageSize,
         bool descending) =>
         _mapper.Map<List<IngredientDto>>(await _context.Ingredients
-            .FindAllBy(e => e.NutritionalValues.Count > 0 && e.NutritionalValues.Any(x => x.Nutrient == nutrient))
+            .FindAllBy(e => e.NutritionalValues.Any(x => x.Nutrient == nutrient))
             .SortedBy(e => e.NutritionalValues.First(x => x.Nutrient == nutrient).Quantity, !descending)
             .Paginate(pageNumber, pageSize)
             .ToListAsync()
@@ -47,8 +47,8 @@ public class IngredientRepository : IIngredientRepository
         );
 
     public async Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group, int pageNumber, int pageSize) =>
-        _mapper.Map<List<IngredientDto>>(await _context.Ingredients.IncludeSubfields()
-            .Where(e => e.FoodGroup == group)
+        _mapper.Map<List<IngredientDto>>(await _context.Ingredients
+            .FindAllBy(e => e.FoodGroup == group)
             .Paginate(pageNumber, pageSize)
             .ToListAsync()
         );
