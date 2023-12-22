@@ -71,6 +71,13 @@ public class MappingProfile : Profile
                     IEnum<Nutrients, NutrientToken>.ReadableNameComparer)))
             .ForMember(dest => dest.Difficulty,
                 opt => opt.MapFrom(src => src.Difficulty == null ? string.Empty : src.Difficulty.ReadableName))
+            .AfterMap((_, dest) =>
+            {
+                dest.Steps.Sort((e1, e2) => e1.Number.CompareTo(e2.Number));
+                dest.Nutrients.Sort((e1, e2) =>
+                    IEnum<Nutrients, NutrientToken>.ToValue(e1.Nutrient)
+                        .CompareTo(IEnum<Nutrients, NutrientToken>.ToValue(e2.Nutrient)));
+            })
             .ReverseMap()
             .ForMember(dest => dest.RecipeMeasures, opt => opt.MapFrom(src => src.Measures))
             .ForMember(dest => dest.RecipeQuantities, opt => opt.MapFrom(src => src.Quantities))
@@ -244,7 +251,7 @@ public class MappingProfile : Profile
             .ForMember(dest => dest.MenuRecipes, opt => opt.MapFrom(src => src.Recipes.Select(e => new MenuRecipe
             {
                 RecipeId = e.RecipeId,
-                Portions = e.Portions,
+                Portions = e.Portions
             })));
 
         CreateMap<MinimalDailyPlan, DailyPlan>()
