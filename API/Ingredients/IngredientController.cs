@@ -77,7 +77,7 @@ public class IngredientController
 
     [HttpPost]
     [Route("synonyms")]
-    public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromQuery] IngredientSynonyms insertion)
+    public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromBody] IngredientSynonyms insertion)
     {
         var ingredient = await _repository.FindByName(insertion.Ingredient);
         if (ingredient == null)
