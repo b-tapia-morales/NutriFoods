@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 using API.Dto;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Utils.Enumerable;
+using Utils.String;
 using static Domain.Models.NutrifoodsDbContext;
 
 namespace API.Ingredients;
@@ -52,6 +52,29 @@ public class IngredientRepository : IIngredientRepository
             .Paginate(pageNumber, pageSize)
             .ToListAsync()
         );
+
+    public async Task<IngredientDto> InsertSynonyms(IngredientDto dto, IngredientSynonyms insertion)
+    {
+        var ingredient = await _context.Ingredients.FirstAsync(e => e.Id == dto.Id);
+        var synonyms = new HashSet<string>(ingredient.Synonyms.Select(e => e.Standardize()));
+        var stateChanged = false;
+        foreach (var synonym in insertion.Synonyms)
+        {
+            var normalized = synonym.Standardize();
+            if (synonyms.Contains(normalized))
+                continue;
+            ingredient.Synonyms.Add(synonym);
+            synonyms.Add(normalized);
+            stateChanged = true;
+        }
+
+        if (!stateChanged)
+            return dto;
+
+        await _context.SaveChangesAsync();
+        dto.Synonyms.Copy(ingredient.Synonyms);
+        return dto;
+    }
 }
 
 public static class IngredientExtensions

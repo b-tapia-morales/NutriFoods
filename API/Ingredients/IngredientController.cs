@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
+// ReSharper disable ClassNeverInstantiated.Global
+
+using System.ComponentModel.DataAnnotations;
 using API.Dto;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
@@ -71,4 +74,18 @@ public class IngredientController
             ? _repository.FindAll(pageNumber, pageSize)
             : _repository.FindByFoodGroup(value, pageNumber, pageSize));
     }
+
+    public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromQuery] IngredientSynonyms insertion)
+    {
+        var ingredient = await _repository.FindByName(insertion.Ingredient);
+        if (ingredient == null)
+            return new NotFoundResult();
+        return await _repository.InsertSynonyms(ingredient, insertion);
+    }
+}
+
+public class IngredientSynonyms
+{
+    public string Ingredient { get; set; } = null!;
+    public IList<string> Synonyms { get; set; } = null!;
 }
