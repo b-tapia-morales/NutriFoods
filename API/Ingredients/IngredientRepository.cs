@@ -53,7 +53,7 @@ public class IngredientRepository : IIngredientRepository
             .ToListAsync()
         );
 
-    public async Task<IngredientDto> InsertSynonyms(IngredientDto dto, IngredientSynonyms insertion)
+    public async Task<IngredientDto> InsertSynonyms(IngredientDto dto, SynonymInsertion insertion)
     {
         var ingredient = await _context.Ingredients.FirstAsync(e => e.Id == dto.Id);
         var synonyms = new HashSet<string>(ingredient.Synonyms.Select(e => e.Standardize()));
@@ -73,6 +73,33 @@ public class IngredientRepository : IIngredientRepository
 
         await _context.SaveChangesAsync();
         dto.Synonyms.Copy(ingredient.Synonyms);
+        return dto;
+    }
+
+    public async Task<IngredientDto> InsertMeasures(IngredientDto dto, MeasureInsertion insertion)
+    {
+        var ingredient = await _context.Ingredients.Include(e => e.IngredientMeasures).FirstAsync(e => e.Id == dto.Id);
+        var measures = new HashSet<string>(ingredient.IngredientMeasures.Select(e => e.Name.Standardize()));
+        var stateChanged = false;
+        foreach (var measure in insertion.Measures)
+        {
+            var normalized = measure.Name.Standardize();
+            if (measures.Contains(normalized))
+                continue;
+            ingredient.IngredientMeasures.Add(new IngredientMeasure
+            {
+                Name = measure.Name,
+                Grams = measure.Grams
+            });
+            measures.Add(normalized);
+            stateChanged = true;
+        }
+
+        if (!stateChanged)
+            return dto;
+
+        await _context.SaveChangesAsync();
+        dto.Measures.Copy(_mapper.Map<List<IngredientMeasureDto>>(ingredient.IngredientMeasures));
         return dto;
     }
 }

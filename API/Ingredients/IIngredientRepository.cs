@@ -10,5 +10,6 @@ public interface IIngredientRepository
     Task<IngredientDto?> FindByName(string name);
     Task<IngredientDto?> FindById(int id);
     Task<List<IngredientDto>> FindByFoodGroup(FoodGroups group, int pageNumber, int pageSize);
-    Task<IngredientDto> InsertSynonyms(IngredientDto dto, IngredientSynonyms insertion);
+    Task<IngredientDto> InsertSynonyms(IngredientDto dto, SynonymInsertion insertion);
+    Task<IngredientDto> InsertMeasures(IngredientDto dto, MeasureInsertion insertion);
 }

@@ -77,17 +77,39 @@ public class IngredientController
 
     [HttpPost]
     [Route("synonyms")]
-    public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromBody] IngredientSynonyms insertion)
+    public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromBody] SynonymInsertion insertion)
     {
         var ingredient = await _repository.FindByName(insertion.Ingredient);
         if (ingredient == null)
             return new NotFoundResult();
         return await _repository.InsertSynonyms(ingredient, insertion);
     }
+
+    [HttpPost]
+    [Route("measures")]
+    public async Task<ActionResult<IngredientDto>> InsertMeasures([FromBody] MeasureInsertion insertion)
+    {
+        var ingredient = await _repository.FindByName(insertion.Ingredient);
+        if (ingredient == null)
+            return new NotFoundResult();
+        return await _repository.InsertMeasures(ingredient, insertion);
+    }
 }
 
-public class IngredientSynonyms
+public class SynonymInsertion
 {
     public string Ingredient { get; set; } = null!;
     public IList<string> Synonyms { get; set; } = null!;
+}
+
+public class MeasureInsertion
+{
+    public string Ingredient { get; set; } = null!;
+    public IList<Measure> Measures { get; set; } = null!;
+}
+
+public class Measure
+{
+    public string Name { get; set; } = null!;
+    public double Grams { get; set; }
 }
