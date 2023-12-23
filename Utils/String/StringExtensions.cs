@@ -52,7 +52,7 @@ public static class StringExtensions
         if (string.IsNullOrWhiteSpace(str))
             return string.Empty;
         str = Regex.Replace(str, Punctuations, match => $"{match.Value} ");
-        return str.RemoveExtraWhitespaces().Trim();
+        return str.RemoveExtraWhitespaces();
     }
 
     public static string Format(this string str) => str.Capitalize().IndentPunctuations();

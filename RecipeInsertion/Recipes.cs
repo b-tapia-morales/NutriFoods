@@ -196,7 +196,7 @@ public static partial class Recipes
 
     private static void ParseMeasure(DbContext context, string rawQuantity, int recipeId, int measureId)
     {
-        rawQuantity = rawQuantity.Trim();
+        rawQuantity = rawQuantity.RemoveExtraWhitespaces();
         if (rawQuantity.Contains(' ') && rawQuantity.Contains('/'))
         {
             var mixedFraction = rawQuantity.Split(' ');
@@ -246,7 +246,7 @@ public static partial class Recipes
         var str = step;
         str = DenormalizedStep().Replace(str, string.Empty);
         str = EnumeratedStep().Replace(str, string.Empty);
-        return str.RemoveExtraWhitespaces().Trim();
+        return str.RemoveExtraWhitespaces();
     }
 
     private static IDictionary<string, Ingredient> IngredientDictionary(IList<Ingredient> ingredients)
