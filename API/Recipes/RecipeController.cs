@@ -216,8 +216,8 @@ public class RecipeController
         return await _repository.InsertRecipe(minimalRecipe);
     }
 
-    [HttpPut]
-    [Route("")]
+    [HttpPost]
+    [Route("batch-insert")]
     public async Task<ActionResult<IEnumerable<RecipeLogging>>> InsertRecipe(
         [FromBody] List<MinimalRecipe> minimalRecipes)
     {

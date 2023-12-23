@@ -76,7 +76,7 @@ public class IngredientController
             : _repository.FindByFoodGroup(value, pageNumber, pageSize));
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("synonyms")]
     public async Task<ActionResult<IngredientDto>> InsertSynonyms([FromBody] SynonymInsertion insertion)
     {
@@ -87,14 +87,14 @@ public class IngredientController
     }
 
     [HttpPut]
-    [Route("synonyms")]
+    [Route("synonyms/batch-update")]
     public async IAsyncEnumerable<IngredientDto> InsertMeasures([FromBody] List<SynonymInsertion> insertions)
     {
         await foreach (var insertion in _repository.InsertSynonyms(insertions))
             yield return insertion;
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("measures")]
     public async Task<ActionResult<IngredientDto>> InsertMeasures([FromBody] MeasureInsertion insertion)
     {
@@ -105,7 +105,7 @@ public class IngredientController
     }
 
     [HttpPut]
-    [Route("measures")]
+    [Route("measures/batch-update")]
     public async IAsyncEnumerable<IngredientDto> InsertMeasures([FromBody] List<MeasureInsertion> insertions)
     {
         await foreach (var insertion in _repository.InsertMeasures(insertions))
