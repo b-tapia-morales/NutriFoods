@@ -384,16 +384,19 @@ public class Nutrients : SmartEnum<Nutrients>, IHierarchicalEnum<Nutrients, Nutr
         new(nameof(VitaminEAdded), (int)NutrientToken.VitaminEAdded, "Vitamina E, añadida", "", false,
             Milligrams, VitaminE);
 
+    public static readonly Nutrients VitaminK =
+        new(nameof(VitaminK), (int)NutrientToken.VitaminK, "Vitamina K", "", false, Micrograms, Vitamins, 1200);
+
     public static readonly Nutrients VitaminK1 =
-        new(nameof(VitaminK1), (int)NutrientToken.VitaminK1, "Vitamina K1", "Filoquinona", false, Micrograms, Vitamins);
+        new(nameof(VitaminK1), (int)NutrientToken.VitaminK1, "Vitamina K1", "Filoquinona", false, Micrograms, VitaminK);
 
     public static readonly Nutrients VitaminK2 =
-        new(nameof(VitaminK2), (int)NutrientToken.VitaminK2, "Vitamina K2", "Menaquinona-4", false,
-            Micrograms, Vitamins);
+        new(nameof(VitaminK2), (int)NutrientToken.VitaminK2, "Vitamina K2", "Menaquinona-4", false, Micrograms,
+            VitaminK);
 
     public static readonly Nutrients VitaminDk =
-        new(nameof(VitaminDk), (int)NutrientToken.VitaminDk, "Vitamina dK", "Dihidrofiloquinona", true,
-            Micrograms, Vitamins);
+        new(nameof(VitaminDk), (int)NutrientToken.VitaminDk, "Vitamina dK", "Dihidrofiloquinona", true, Micrograms,
+            VitaminK);
 
     public static readonly Nutrients Betaine =
         new(nameof(Betaine), (int)NutrientToken.Betaine, "Betaína", "", false, Milligrams, Vitamins);
@@ -633,6 +636,7 @@ public enum NutrientToken
     VitaminEAdded,
 
     // Vitamina K
+    VitaminK,
     VitaminK1,
     VitaminK2,
     VitaminDk,
