@@ -65,6 +65,8 @@ public static class DailyPlanExtensions
                     : null
             });
         }
+
+        dailyPlan.Nutrients.Sort((e1, e2) => ToValue(e1.Nutrient).CompareTo(ToValue(e2.Nutrient)));
     }
 
     public static void AddTargetValues(this DailyPlanDto dailyPlan)
