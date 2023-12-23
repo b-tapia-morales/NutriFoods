@@ -1,5 +1,6 @@
 ﻿// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 using System.ComponentModel.DataAnnotations;
 using API.Dto;
@@ -85,6 +86,14 @@ public class IngredientController
         return await _repository.InsertSynonyms(ingredient, insertion);
     }
 
+    [HttpPut]
+    [Route("synonyms")]
+    public async IAsyncEnumerable<IngredientDto> InsertMeasures([FromBody] List<SynonymInsertion> insertions)
+    {
+        await foreach (var insertion in _repository.InsertSynonyms(insertions))
+            yield return insertion;
+    }
+
     [HttpPost]
     [Route("measures")]
     public async Task<ActionResult<IngredientDto>> InsertMeasures([FromBody] MeasureInsertion insertion)
@@ -93,6 +102,14 @@ public class IngredientController
         if (ingredient == null)
             return new NotFoundResult();
         return await _repository.InsertMeasures(ingredient, insertion);
+    }
+
+    [HttpPut]
+    [Route("measures")]
+    public async IAsyncEnumerable<IngredientDto> InsertMeasures([FromBody] List<MeasureInsertion> insertions)
+    {
+        await foreach (var insertion in _repository.InsertMeasures(insertions))
+            yield return insertion;
     }
 }
 

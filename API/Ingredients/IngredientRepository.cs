@@ -68,12 +68,33 @@ public class IngredientRepository : IIngredientRepository
             stateChanged = true;
         }
 
-        if (!stateChanged)
-            return dto;
+        if (!stateChanged) return dto;
 
         await _context.SaveChangesAsync();
         dto.Synonyms.Copy(ingredient.Synonyms);
         return dto;
+    }
+
+    public async IAsyncEnumerable<IngredientDto> InsertSynonyms(List<SynonymInsertion> insertions)
+    {
+        foreach (var insertion in insertions)
+        {
+            var ingredient = await FindByName(insertion.Ingredient);
+            if (ingredient == null)
+                continue;
+            yield return await InsertSynonyms(ingredient, insertion);
+        }
+    }
+
+    public async IAsyncEnumerable<IngredientDto> InsertMeasures(List<MeasureInsertion> insertions)
+    {
+        foreach (var insertion in insertions)
+        {
+            var ingredient = await FindByName(insertion.Ingredient);
+            if (ingredient == null)
+                continue;
+            yield return await InsertMeasures(ingredient, insertion);
+        }
     }
 
     public async Task<IngredientDto> InsertMeasures(IngredientDto dto, MeasureInsertion insertion)
@@ -86,17 +107,12 @@ public class IngredientRepository : IIngredientRepository
             var normalized = measure.Name.Standardize();
             if (measures.Contains(normalized))
                 continue;
-            ingredient.IngredientMeasures.Add(new IngredientMeasure
-            {
-                Name = measure.Name,
-                Grams = measure.Grams
-            });
+            ingredient.IngredientMeasures.Add(new IngredientMeasure { Name = measure.Name, Grams = measure.Grams });
             measures.Add(normalized);
             stateChanged = true;
         }
 
-        if (!stateChanged)
-            return dto;
+        if (!stateChanged) return dto;
 
         await _context.SaveChangesAsync();
         dto.Measures.Copy(_mapper.Map<List<IngredientMeasureDto>>(ingredient.IngredientMeasures));

@@ -203,7 +203,7 @@ public class RecipeController
     }
 
     [HttpPost]
-    [Route("single")]
+    [Route("")]
     public async Task<ActionResult<RecipeLogging>> InsertRecipe([FromBody] MinimalRecipe minimalRecipe)
     {
         if (await _repository.FindByNameAndAuthor(minimalRecipe.Name, minimalRecipe.Author) is not null)
@@ -216,8 +216,8 @@ public class RecipeController
         return await _repository.InsertRecipe(minimalRecipe);
     }
 
-    [HttpPost]
-    [Route("multiple")]
+    [HttpPut]
+    [Route("")]
     public async Task<ActionResult<IEnumerable<RecipeLogging>>> InsertRecipe(
         [FromBody] List<MinimalRecipe> minimalRecipes)
     {
