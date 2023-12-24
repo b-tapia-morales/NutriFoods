@@ -83,7 +83,7 @@ public class IngredientController
     {
         var ingredient = await _repository.FindByName(insertion.Ingredient);
         if (ingredient == null)
-            return new NotFoundResult();
+            return new NotFoundObjectResult($"No ingredient with the given name “{insertion.Ingredient}” was found");
         return await _repository.InsertSynonyms(ingredient, insertion);
     }
 
@@ -101,7 +101,7 @@ public class IngredientController
     {
         var ingredient = await _repository.FindByName(insertion.Ingredient);
         if (ingredient == null)
-            return new NotFoundResult();
+            return new NotFoundObjectResult($"No ingredient with the given name “{insertion.Ingredient}” was found");
         return await _repository.InsertMeasures(ingredient, insertion);
     }
 
@@ -113,7 +113,17 @@ public class IngredientController
             yield return insertion;
     }
 
-    [HttpPut]
+    [HttpPost]
+    [Route("")]
+    public async Task<ActionResult<IngredientDto>> InsertIngredient(
+        [FromBody] MinimalIngredient insertion)
+    {
+        if (await _repository.FindByName(insertion.Name) is not null)
+            return new ConflictObjectResult($"An ingredient with the same name (“{insertion.Name}” already exists");
+        return await _repository.InsertIngredient(insertion);
+    }
+
+    [HttpPost]
     [Route("batch-insert")]
     public async Task<ActionResult<IEnumerable<IngredientDto>>> InsertIngredients(
         [FromBody] List<MinimalIngredient> insertions) => await _repository.InsertIngredients(insertions);

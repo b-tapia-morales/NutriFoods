@@ -121,6 +121,17 @@ public class IngredientRepository : IIngredientRepository
         return dto;
     }
 
+    public async Task<IngredientDto> InsertIngredient(MinimalIngredient insertion)
+    {
+        var fdcId = insertion.FoodDataCentralId;
+        var ingredient = _mapper.Map<Ingredient>(insertion);
+        _context.Ingredients.Add(ingredient);
+        await _context.SaveChangesAsync();
+
+        await AbridgedRetrieval.GetNutrients(_context, fdcId, ingredient);
+        return _mapper.Map<IngredientDto>(ingredient);
+    }
+
     public async Task<List<IngredientDto>> InsertIngredients(List<MinimalIngredient> insertions)
     {
         var filteredIngredients = insertions
@@ -129,7 +140,7 @@ public class IngredientRepository : IIngredientRepository
         var tuples = filteredIngredients
             .Select(e => (FdcId: e.FoodDataCentralId, Ingredient: _mapper.Map<Ingredient>(e)))
             .ToList();
-        
+
         _context.Ingredients.AddRange(tuples.Select(t => t.Ingredient));
         await _context.SaveChangesAsync();
 
