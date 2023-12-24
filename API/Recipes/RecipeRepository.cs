@@ -122,7 +122,7 @@ public class RecipeRepository : IRecipeRepository
         if (!logging.IsSuccessful)
             return logging;
 
-        var recipeId = await InsertIngredient(recipe);
+        var recipeId = await Insert(recipe);
         await InsertNutritionalValues(recipeId);
 
         return logging;
@@ -138,7 +138,7 @@ public class RecipeRepository : IRecipeRepository
             .Where(t => t.Log.IsSuccessful)
             .Select(t => minimalRecipes[t.Index])
             .ToList();
-        await foreach (var recipeId in InsertIngredients(filteredRecipes))
+        await foreach (var recipeId in InsertMany(filteredRecipes))
             await InsertNutritionalValues(recipeId);
 
         return tuples.Select(e => e.Log).ToList();
@@ -153,7 +153,7 @@ public class RecipeRepository : IRecipeRepository
         return _mapper.Map<List<RecipeDto>>(recipes);
     }
 
-    private async Task<int> InsertIngredient(MinimalRecipe minimalRecipe)
+    private async Task<int> Insert(MinimalRecipe minimalRecipe)
     {
         var recipe = _mapper.Map<Recipe>(minimalRecipe);
         recipe.RecipeQuantities = [..minimalRecipe.ToQuantities(_appData.IngredientDict)];
@@ -163,10 +163,10 @@ public class RecipeRepository : IRecipeRepository
         return recipe.Id;
     }
 
-    private async IAsyncEnumerable<int> InsertIngredients(IEnumerable<MinimalRecipe> minimalRecipes)
+    private async IAsyncEnumerable<int> InsertMany(IEnumerable<MinimalRecipe> minimalRecipes)
     {
         foreach (var recipe in minimalRecipes)
-            yield return await InsertIngredient(recipe);
+            yield return await Insert(recipe);
     }
 
     private async Task InsertNutritionalValues(int recipeId)
