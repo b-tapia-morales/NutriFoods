@@ -5,5 +5,5 @@ namespace NutrientRetrieval.Retrieval.Abridged;
 public static class AbridgedRetrieval
 {
     public static async Task RetrieveFromApi() =>
-        await FoodRetrieval.RetrieveFromApi<Food.Abridged.Food, FoodNutrient>();
+        await FoodRetrieval.BatchGetNutrients<Food.Abridged.Food, FoodNutrient>();
 }

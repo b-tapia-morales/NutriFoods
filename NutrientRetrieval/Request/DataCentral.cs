@@ -27,6 +27,11 @@ public static class DataCentral
     private static readonly string AbsolutePath =
         Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
+    private static readonly IDictionary<int, List<int>> IdsDict = CsvUtils
+        .RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
+        .GroupBy(e => e.FoodDataCentralId)
+        .ToDictionary(g => g.Key, g => g.Select(e => e.NutriFoodsId).ToList());
+
     private static readonly JsonSerializerSettings Settings = new()
     {
         ContractResolver = new CamelCasePropertyNamesContractResolver(),
@@ -57,16 +62,15 @@ public static class DataCentral
 
     public static async Task<Dictionary<int, TFood>> RetrieveByList<TFood, TNutrient>(string format)
         where TFood : class, IFood<TNutrient>
+        where TNutrient : class, IFoodNutrient => await RetrieveByList<TFood, TNutrient>(format, IdsDict);
+
+    public static async Task<Dictionary<int, TFood>> RetrieveByList<TFood, TNutrient>(string format,
+        IDictionary<int, List<int>> idsDict)
+        where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        // Takes all the CSV rows, filters those which have no corresponding FoodDataCentral Id, removes duplicate Ids,
-        // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
-        // and values respectively.
-        var dictionary = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
-            .GroupBy(e => e.FoodDataCentralId)
-            .ToDictionary(e => e.Key, e => e.Select(x => x.NutriFoodsId).ToList());
         // Partitions the dictionary into a list of Key-Pairs of 20 items each.
-        var pairs = dictionary.Partition(MaxItemsPerRequest);
+        var pairs = idsDict.Partition(MaxItemsPerRequest);
         // Converts each list of Key-Pairs into a Task which performs the retrieval from FoodDataCentral.
         // This is done so each request can be performed concurrently.
         var tasks = pairs.Select(e => FetchList<TFood, TNutrient>(new Dictionary<int, List<int>>(e), format));
