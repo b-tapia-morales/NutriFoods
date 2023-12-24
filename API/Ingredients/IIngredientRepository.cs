@@ -1,4 +1,5 @@
 ﻿using API.Dto;
+using API.Dto.Insertion;
 using Domain.Enum;
 
 namespace API.Ingredients;
@@ -14,4 +15,5 @@ public interface IIngredientRepository
     IAsyncEnumerable<IngredientDto> InsertSynonyms(List<SynonymInsertion> insertions);
     Task<IngredientDto> InsertMeasures(IngredientDto dto, MeasureInsertion insertion);
     IAsyncEnumerable<IngredientDto> InsertMeasures(List<MeasureInsertion> insertions);
+    Task<List<IngredientDto>> InsertIngredients(List<MinimalIngredient> insertions);
 }

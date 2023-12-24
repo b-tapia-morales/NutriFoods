@@ -4,6 +4,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using API.Dto;
+using API.Dto.Insertion;
 using Domain.Enum;
 using Microsoft.AspNetCore.Mvc;
 
@@ -111,6 +112,11 @@ public class IngredientController
         await foreach (var insertion in _repository.InsertMeasures(insertions))
             yield return insertion;
     }
+
+    [HttpPut]
+    [Route("batch-insert")]
+    public async Task<ActionResult<IEnumerable<IngredientDto>>> InsertIngredients(
+        [FromBody] List<MinimalIngredient> insertions) => await _repository.InsertIngredients(insertions);
 }
 
 public class SynonymInsertion

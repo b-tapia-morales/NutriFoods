@@ -1,9 +1,11 @@
 ﻿using System.Linq.Expressions;
 using API.Dto;
+using API.Dto.Insertion;
 using AutoMapper;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using NutrientRetrieval.Retrieval.Abridged;
 using Utils.Enumerable;
 using Utils.String;
 using static Domain.Models.NutrifoodsDbContext;
@@ -118,6 +120,26 @@ public class IngredientRepository : IIngredientRepository
         dto.Measures.Copy(_mapper.Map<List<IngredientMeasureDto>>(ingredient.IngredientMeasures));
         return dto;
     }
+
+    public async Task<List<IngredientDto>> InsertIngredients(List<MinimalIngredient> insertions)
+    {
+        var filteredIngredients = insertions
+            .Where(e => !Exists(e))
+            .ToList();
+        var tuples = filteredIngredients
+            .Select(e => (FdcId: e.FoodDataCentralId, Ingredient: _mapper.Map<Ingredient>(e)))
+            .ToList();
+        
+        _context.Ingredients.AddRange(tuples.Select(t => t.Ingredient));
+        await _context.SaveChangesAsync();
+
+        await AbridgedRetrieval.BatchGetNutrients(_context, tuples);
+        return _mapper.Map<List<IngredientDto>>(tuples.Select(t => t.Ingredient));
+    }
+
+    private bool Exists(MinimalIngredient minimalIngredient) =>
+        _context.Ingredients.FirstOrDefault(
+            e => NormalizeStr(e.Name).Equals(NormalizeStr(minimalIngredient.Name))) is not null;
 }
 
 public static class IngredientExtensions
