@@ -282,5 +282,12 @@ public class MappingProfile : Profile
                 Number = i + 1,
                 Description = e
             })));
+        
+        CreateMap<MinimalIngredientMeasure, IngredientMeasure>();
+        
+        CreateMap<MinimalIngredient, Ingredient>()
+            .ForMember(dest => dest.FoodGroup,
+                opt => opt.MapFrom(src => IEnum<FoodGroups, FoodGroupToken>.ToValue(src.FoodGroup)))
+            .ForMember(dest => dest.IngredientMeasures, opt => opt.MapFrom(src => src.Measures));
     }
 }
