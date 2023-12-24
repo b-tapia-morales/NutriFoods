@@ -210,13 +210,11 @@ public class RecipeRepository : IRecipeRepository
         await _context.SaveChangesAsync();
     }
 
-    private bool Exists(MinimalRecipe minimalRecipe)
-    {
-        return _context.Recipes.FirstOrDefault(e =>
+    private bool Exists(MinimalRecipe minimalRecipe) =>
+        _context.Recipes.FirstOrDefault(e =>
             (NormalizeStr(e.Name).Equals(NormalizeStr(minimalRecipe.Name)) &&
              NormalizeStr(e.Author).Equals(NormalizeStr(minimalRecipe.Author))) ||
             e.Url.ToLower().Equals(minimalRecipe.Url.ToLower())) is not null;
-    }
 }
 
 public class RecipeLogging

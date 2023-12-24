@@ -43,7 +43,7 @@ public class IngredientController
             descending);
 
     [HttpGet]
-    [Route("name/{name}")]
+    [Route("name/{name:length(2)}")]
     public async Task<ActionResult<IngredientDto>> FindByName(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
@@ -54,12 +54,9 @@ public class IngredientController
     }
 
     [HttpGet]
-    [Route("id/{id:int}")]
+    [Route("id/{id:int:min(1)}")]
     public async Task<ActionResult<IngredientDto>> FindById(int id)
     {
-        if (id < 0)
-            return new BadRequestObjectResult($"Parameter can't be a negative integer (Value provided was: {id})");
-
         var ingredient = await _repository.FindById(id);
         return ingredient == null ? new NotFoundResult() : ingredient;
     }
@@ -119,7 +116,7 @@ public class IngredientController
         [FromBody] MinimalIngredient insertion)
     {
         if (await _repository.FindByName(insertion.Name) is not null)
-            return new ConflictObjectResult($"An ingredient with the same name (“{insertion.Name}” already exists");
+            return new ConflictObjectResult($"An ingredient with the same name (“{insertion.Name}”) already exists");
         return await _repository.InsertIngredient(insertion);
     }
 
