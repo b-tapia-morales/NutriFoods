@@ -30,26 +30,27 @@ public static class FoodRetrieval
     private static readonly string
         AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
+    private static readonly IReadOnlyDictionary<string, Nutrients> NutrientDict = CsvUtils
+        .RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+        .ToDictionary(e => e.FoodDataCentralId, e => Nutrients.FromValue(e.NutriFoodsId));
+
     public static async Task RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
         var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
         await using var context = new NutrifoodsDbContext(Options);
-        var ingredients = context.Ingredients.IncludeSubfields();
-        var nutrientsDictionary = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
-            .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
-        var foodsDictionary =
+        var ingredients = await context.Ingredients.IncludeSubfields().ToListAsync();
+        var ingredientsDict = ingredients.ToDictionary(e => e.Id, e => e);
+        var foodsDict =
             (await DataCentral.PerformRequest<TFood, TNutrient>(format)).ToDictionary(e => e.Key, e => e.Value);
-        foreach (var pair in foodsDictionary)
-            InsertNutrients<TFood, TNutrient>(
-                nutrientsDictionary, ingredients.FirstOrDefault(e => e.Id == pair.Key), pair.Value);
+        foreach (var (id, food) in foodsDict)
+            InsertNutrients<TFood, TNutrient>(ingredientsDict[id], food);
 
         await context.SaveChangesAsync();
     }
 
-    private static void InsertNutrients<TFood, TNutrient>(
-        IReadOnlyDictionary<string, int> dictionary, Ingredient? ingredient, TFood food)
+    private static void InsertNutrients<TFood, TNutrient>(Ingredient? ingredient, TFood food)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
@@ -59,10 +60,9 @@ public static class FoodRetrieval
         foreach (var foodNutrient in food.FoodNutrients)
         {
             var fdcNutrientId = foodNutrient.Number;
-            if (!dictionary.ContainsKey(fdcNutrientId))
+            if (!NutrientDict.TryGetValue(fdcNutrientId, out var nutrient))
                 continue;
 
-            var nutrient = Nutrients.FromValue(dictionary[fdcNutrientId]);
             ingredient.NutritionalValues.Add(new NutritionalValue
             {
                 Nutrient = nutrient,

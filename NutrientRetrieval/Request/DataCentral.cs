@@ -1,5 +1,6 @@
 // ReSharper disable ConvertToPrimaryConstructor
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable RedundantExplicitTupleComponentName
 
 using System.Text;
 using Newtonsoft.Json;
@@ -48,8 +49,7 @@ public static class DataCentral
         where TNutrient : class, IFoodNutrient
     {
         var dictionary = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
-            .Where(e => e.FoodDataCentralId != null)
-            .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId.GetValueOrDefault());
+            .ToDictionary(e => e.NutriFoodsId, e => e.FoodDataCentralId);
         var tasks = dictionary.Select(e => FetchItem<TFood, TNutrient>(e.Key, e.Value, format));
         var tuples = await Task.WhenAll(tasks);
         return tuples.ToDictionary(tuple => tuple.Id, tuple => tuple.Food);
@@ -63,20 +63,22 @@ public static class DataCentral
         // and then it converts them to a dictionary which contains the FoodDataCentral and NutriFoods ids as keys
         // and values respectively.
         var dictionary = CsvUtils.RetrieveRows<IngredientRow, IngredientMapping>(AbsolutePath)
-            .Where(e => e.FoodDataCentralId != null)
-            .DistinctBy(e => e.FoodDataCentralId)
-            .ToDictionary(e => e.FoodDataCentralId.GetValueOrDefault(), e => e.NutriFoodsId);
+            .GroupBy(e => e.FoodDataCentralId)
+            .ToDictionary(e => e.Key, e => e.Select(x => x.NutriFoodsId).ToList());
         // Partitions the dictionary into a list of Key-Pairs of 20 items each.
         var pairs = dictionary.Partition(MaxItemsPerRequest);
         // Converts each list of Key-Pairs into a Task which performs the retrieval from FoodDataCentral.
         // This is done so each request can be performed concurrently.
-        var tasks = pairs.Select(e => FetchList<TFood, TNutrient>(new Dictionary<int, int>(e), format));
+        var tasks = pairs.Select(e => FetchList<TFood, TNutrient>(new Dictionary<int, List<int>>(e), format));
         // Awaits until each task is completed.
         var tuplesList = await Task.WhenAll(tasks);
         // The resulting value from the request is a list of lists of named tuples, which need to be flattened into
         // a single list of named tuples. The last step is transforming each named tuple into a dictionary, which
         // takes each NutriFoods Id and food item as the keys and values respectively.
-        return tuplesList.SelectMany(e => e).ToDictionary(e => e.Id, e => e.Food);
+        return tuplesList
+            .SelectMany(e => e)
+            .SelectMany(t => t.Ids.Select(e => (Id: e, Food: t.Food)))
+            .ToDictionary(e => e.Id, e => e.Food);
     }
 
     private static async Task<(int Id, TFood Food)> FetchItem<TFood, TNutrient>(int nutriFoodsId, int foodDataCentralId,
@@ -95,8 +97,8 @@ public static class DataCentral
         return (nutriFoodsId, food);
     }
 
-    private static async Task<IEnumerable<(int Id, TFood Food)>> FetchList<TFood, TNutrient>(
-        IReadOnlyDictionary<int, int> dictionary, string format)
+    private static async Task<IEnumerable<(List<int> Ids, TFood Food)>> FetchList<TFood, TNutrient>(
+        IDictionary<int, List<int>> dictionary, string format)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
