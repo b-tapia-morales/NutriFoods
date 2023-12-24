@@ -822,11 +822,6 @@ public class NutrifoodsDbContext : DbContext
 
     private static void OnModelCreatingPartial(ModelBuilder builder)
     {
-        // Ignores
-        builder.Entity<Ingredient>().Ignore(e => e.RecipeQuantities);
-        builder.Entity<IngredientMeasure>().Ignore(e => e.RecipeMeasures);
-        builder.Entity<Recipe>().Ignore(e => e.MenuRecipes);
-
         // Nutritional values
         builder.Entity<NutritionalValue>().Property(e => e.Unit)
             .HasConversion(e => e.Value, e => Units.FromValue(e));
