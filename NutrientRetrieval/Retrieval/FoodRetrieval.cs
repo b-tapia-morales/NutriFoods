@@ -5,7 +5,6 @@ using NutrientRetrieval.Food;
 using NutrientRetrieval.Mapping.Nutrient;
 using NutrientRetrieval.Request;
 using Utils.Csv;
-using static NutrientRetrieval.Retrieval.RetrievalMethod;
 using static Utils.Csv.DelimiterToken;
 
 namespace NutrientRetrieval.Retrieval;
@@ -47,7 +46,7 @@ public static class FoodRetrieval
         var foodsDict =
             (await DataCentral.FetchBatches<TFood, TNutrient>()).ToDictionary(e => e.Key, e => e.Value);
         foreach (var (id, food) in foodsDict)
-            InsertNutrients<TFood, TNutrient>(ingredientsDict[id], food);
+            ingredientsDict[id].NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
 
         await context.SaveChangesAsync();
     }
@@ -62,7 +61,7 @@ public static class FoodRetrieval
         var foodsDict =
             (await DataCentral.FetchBatches<TFood, TNutrient>(pairs)).ToDictionary(e => e.Key, e => e.Value);
         foreach (var (id, food) in foodsDict)
-            InsertNutrients<TFood, TNutrient>(ingredientsDict[id], food);
+            ingredientsDict[id].NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
 
         await context.SaveChangesAsync();
     }
@@ -73,17 +72,17 @@ public static class FoodRetrieval
         where TNutrient : class, IFoodNutrient
     {
         var food = await DataCentral.FetchSingle<TFood, TNutrient>(fdcId);
-        InsertNutrients<TFood, TNutrient>(ingredient, food);
+        ingredient.NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
 
         await context.SaveChangesAsync();
     }
 
-    private static void InsertNutrients<TFood, TNutrient>(Ingredient? ingredient, TFood food)
+    private static IEnumerable<NutritionalValue> InsertNutrients<TFood, TNutrient>(TFood food)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        if (ingredient == null || food.FoodNutrients.Length == 0)
-            return;
+        if (food.FoodNutrients.Length == 0)
+            yield break;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
@@ -91,7 +90,7 @@ public static class FoodRetrieval
             if (!NutrientsDict.TryGetValue(fdcNutrientId, out var nutrient))
                 continue;
 
-            ingredient.NutritionalValues.Add(new NutritionalValue
+            yield return new NutritionalValue
             {
                 Nutrient = nutrient,
                 Quantity = foodNutrient.Amount,
@@ -99,7 +98,7 @@ public static class FoodRetrieval
                 DailyValue = nutrient.DailyValue.HasValue
                     ? Math.Round(foodNutrient.Amount / nutrient.DailyValue.Value, 2)
                     : null
-            });
+            };
         }
     }
 
@@ -108,10 +107,4 @@ public static class FoodRetrieval
             .AsQueryable()
             .Include(e => e.IngredientMeasures)
             .Include(e => e.NutritionalValues);
-}
-
-public enum RetrievalMethod
-{
-    Abridged,
-    Full
 }
