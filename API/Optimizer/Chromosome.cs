@@ -8,8 +8,13 @@ public class Chromosome
 {
     public List<RecipeDto> Recipes { get; }
     public int Fitness { get; private set; }
+    public List<int> GeneticSequence { get; }
 
-    public Chromosome(List<RecipeDto> recipes) => Recipes = recipes;
+    public Chromosome(List<RecipeDto> recipes)
+    {
+        Recipes = recipes;
+        GeneticSequence = [..recipes.Select(e => e.Id).OrderBy(e => e)];
+    }
 
     public void CalculateFitness(IReadOnlyCollection<NutritionalTargetDto> targets)
     {
@@ -33,6 +38,9 @@ public class Chromosome
 
 public static class ChromosomeExtensions
 {
+    public static bool SequenceEquals(this Chromosome x, Chromosome y) =>
+        x.GeneticSequence.SequenceEqual(y.GeneticSequence);
+
     public static void ExchangeGen(this Chromosome chromosome, RecipeDto gen, int crossoverPoint) =>
         chromosome.Recipes[crossoverPoint] = gen;
 

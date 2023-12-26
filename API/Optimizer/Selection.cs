@@ -1,5 +1,6 @@
 using Ardalis.SmartEnum;
 using Domain.Enum;
+using Utils.Enumerable;
 using static Utils.MathUtils;
 
 namespace API.Optimizer;
@@ -16,7 +17,7 @@ public class Selection : SmartEnum<Selection>, IEnum<Selection, SelectionToken>
             {
                 var (j, k) = RandomDistinctNumbers(population.Count);
                 var winner = population[j].Fitness > population[k].Fitness ? population[j] : population[k];
-                if (winners.Any(e => e != winner && e.Recipes.SequenceEqual(winner.Recipes))) 
+                if (winners.Any(e => e != winner && e.SequenceEquals(winner)))
                     continue;
 
                 winners.Add(winner);
