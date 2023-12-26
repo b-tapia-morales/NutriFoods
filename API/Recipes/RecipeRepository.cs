@@ -9,6 +9,7 @@ using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Utils.Enumerable;
+using Utils.String;
 using static Domain.Enum.Diets;
 using static Domain.Enum.Nutrients;
 using static Domain.Models.NutrifoodsDbContext;
@@ -131,6 +132,8 @@ public class RecipeRepository : IRecipeRepository
     public async Task<List<RecipeLogging>> InsertRecipes(List<MinimalRecipe> minimalRecipes)
     {
         var tuples = minimalRecipes
+            .DistinctBy(e => (e.Name.Standardize(), e.Author.Standardize()))
+            .DistinctBy(e => new Uri(e.Url))
             .Where(e => !Exists(e))
             .Select((e, i) => (Index: i, Log: e.ProcessRecipe(_appData.IngredientDict, _appData.MeasureDict)))
             .ToList();
