@@ -13,21 +13,14 @@ public interface IDailyMenuRepository
     Task<DailyMenuDto> GenerateMenu(DailyMenuDto dailyMenu) =>
         GenerateMenu(dailyMenu, ToValue(dailyMenu.MealType));
 
-    async IAsyncEnumerable<Task<DailyMenuDto>> ToTasks(List<DailyMenuDto> menus, bool useFilter = true)
-    {
-        foreach (var menu in menus)
-            yield return GenerateMenu(menu, useFilter ? ToValue(menu.MealType) : MealTypes.None);
-    }
+    IEnumerable<Task<DailyMenuDto>> ToTasks(List<DailyMenuDto> menus, bool useFilter = true) => 
+        menus.Select(e => GenerateMenu(e, useFilter ? ToValue(e.MealType) : MealTypes.None));
 
     async Task<IEnumerable<DailyMenuDto>> Parallelize(List<DailyMenuDto> menus, bool useFilter = true)
     {
         var queue = new ConcurrentQueue<DailyMenuDto>();
         var tasks = ToTasks(menus, useFilter);
-        await tasks.AsyncParallelForEach(async e =>
-        {
-            var menu = await e;
-            queue.Enqueue(menu);
-        });
+        await tasks.ToAsyncEnumerable().AsyncParallelForEach(async e => queue.Enqueue(await e));
         return queue;
     }
 }
