@@ -14,7 +14,7 @@ public interface IDailyMenuRepository
         GenerateMenu(dailyMenu, ToValue(dailyMenu.MealType));
 
     IEnumerable<Task<DailyMenuDto>> ToTasks(List<DailyMenuDto> menus, bool useFilter = true) => 
-        menus.Select(e => GenerateMenu(e, useFilter ? ToValue(e.MealType) : MealTypes.None));
+        menus.Select(e => useFilter? GenerateMenu(e) : GenerateMenu(e, MealTypes.None));
 
     async Task<IEnumerable<DailyMenuDto>> Parallelize(List<DailyMenuDto> menus, bool useFilter = true)
     {
