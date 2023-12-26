@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Domain.Enum;
+﻿using Domain.Enum;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Models;
