@@ -25,7 +25,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
         IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
-        MutationToken mutationMethod = RandomPoints,
+        MutationToken mutationMethod = Uniform,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb)
     {
         var selection = IEnum<Selection, SelectionToken>.ToValue(selectionMethod);
@@ -39,7 +39,7 @@ public interface IEvolutionaryOptimizer<T> where T : class, IEvolutionaryOptimiz
         IReadOnlyList<NutritionalTargetDto> targets,
         int chromosomeSize = ChromosomeSize, int populationSize = PopulationSize, int maxIterations = MaxIterations,
         SelectionToken selectionMethod = Tournament, CrossoverToken crossoverMethod = OnePoint,
-        MutationToken mutationMethod = RandomPoints,
+        MutationToken mutationMethod = Uniform,
         double minCrossoverProb = MinCrossoverProb, double minMutationProb = MinMutationProb) =>
         Task.Run(() => GenerateSolution(universe, targets, chromosomeSize, populationSize,
             maxIterations, selectionMethod, crossoverMethod, mutationMethod, minCrossoverProb, minMutationProb));
