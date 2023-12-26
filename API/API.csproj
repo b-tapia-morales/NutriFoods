@@ -24,6 +24,7 @@
         <PackageReference Include="Microsoft.OpenApi" Version="1.6.11" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Newtonsoft" Version="6.5.0" />
+        <PackageReference Include="System.Linq.Async" Version="6.0.1" />
         <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.7.1" />
     </ItemGroup>
 
