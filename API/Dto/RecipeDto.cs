@@ -22,10 +22,8 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
     public List<NutritionalValueDto> Nutrients { get; init; } = null!;
     [JsonIgnore] public IReadOnlyDictionary<string, NutritionalValueDto> NutrientDict { get; init; } = null!;
 
-    public override bool Equals(object? obj)
-    {
-        return ReferenceEquals(this, obj) || obj is RecipeDto other && Equals(other);
-    }
+    public override bool Equals(object? obj) => 
+        ReferenceEquals(this, obj) || obj is RecipeDto other && Equals(other);
 
     public bool Equals(RecipeDto? other)
     {
@@ -60,9 +58,16 @@ public sealed class RecipeDto : IEquatable<RecipeDto>, IEqualityComparer<RecipeD
 
     public int GetHashCode(RecipeDto obj) => obj.GetHashCode();
 
-    public static bool operator ==(RecipeDto x, RecipeDto y) => x.Equals(y);
+    public static bool operator ==(RecipeDto? x, RecipeDto? y)
+    {
+        if (ReferenceEquals(x, y))
+            return true;
+        if (ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            return false;
+        return x.Equals(y);
+    }
 
-    public static bool operator !=(RecipeDto x, RecipeDto y) => !(x == y);
+    public static bool operator !=(RecipeDto? x, RecipeDto? y) => !(x == y);
 }
 
 public static class RecipeExtensions
