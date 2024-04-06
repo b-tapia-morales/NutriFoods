@@ -1,9 +1,0 @@
-300,g,pechuga pollo
-1/2,x,palta
-1,x,tomate
-4,hojas,lechuga
-4,x,tortillas
-1,x,pimento rojo
-1,cda,aceite oliva
-1,cdta,jugo limón
-3/4,taza,yogurt natural

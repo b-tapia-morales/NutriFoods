@@ -1,4 +1,0 @@
-6,x,chuletas cerdo
-x,x,Salsa Barbecue
-x,x,Aceite
-x,x,Sal

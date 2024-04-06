@@ -1,6 +1,0 @@
-2,kilos,filete cerdo
-4,cucharadas,Merquén
-1,cucharada,Salvia
-x,x,sal
-1/4,cucharadita,Pimienta Blanca
-x,x,Aceite oliva

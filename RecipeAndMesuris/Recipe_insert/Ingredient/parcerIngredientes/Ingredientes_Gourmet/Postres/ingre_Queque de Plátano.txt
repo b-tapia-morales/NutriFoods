@@ -1,9 +1,0 @@
-2,x,huevos
-½,taza,azúcar rubia
-1/3,taza,aceite
-1,cucharadita,Esencia Vainilla
-3,x,plátanos
-2,tazas,harina
-1 ¾,cucharadita,Polvos Hornear
-½,cucharadita,Bicarbonato
-2/3,tazas,nueces

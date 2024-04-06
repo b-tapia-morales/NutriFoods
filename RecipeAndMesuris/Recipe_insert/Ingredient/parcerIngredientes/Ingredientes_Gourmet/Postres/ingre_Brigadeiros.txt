@@ -1,5 +1,0 @@
-1,tarro,leche condensada
-¼,taza,Chocolate Amargo
-2,cucharadas,mantequilla
-1,cucharadita,Esencia Vainilla
-100,gr,Chocolate Granulado

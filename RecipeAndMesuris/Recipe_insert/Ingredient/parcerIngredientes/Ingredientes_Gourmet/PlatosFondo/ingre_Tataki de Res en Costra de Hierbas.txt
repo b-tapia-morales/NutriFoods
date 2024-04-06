@@ -1,9 +1,0 @@
-1,kg,filete
-5,ramitas,tomillo
-5,ramitas,perejil
-5,ramitas,cilantro
-1,atado,ciboulette
-100,gr,azúcar
-1/2,lt,aceto balsámico
-x,x,Aceite oliva
-250,gr,lechugas

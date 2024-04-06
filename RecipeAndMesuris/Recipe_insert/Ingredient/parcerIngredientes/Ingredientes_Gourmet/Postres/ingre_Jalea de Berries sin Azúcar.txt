@@ -1,5 +1,0 @@
-8,tazas,berries
-¼,taza,sucralosa
-¼,taza,jerez
-½,taza,jugonaranjas
-2 ½,sobres,Gelatina

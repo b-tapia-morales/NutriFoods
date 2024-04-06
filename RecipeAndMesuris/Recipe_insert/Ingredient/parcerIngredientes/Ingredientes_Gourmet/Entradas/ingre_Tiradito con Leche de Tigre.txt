@@ -1,9 +1,0 @@
-30,gr,reineta
-½,taza,agua
-2,cucharadas,apio
-1,cucharadita,jengibre
-x,x,ají verde
-1,cucharada,cilantro
-200,grs,pescado blanco
-1,cucharada,rocoto
-x,x,cilantro

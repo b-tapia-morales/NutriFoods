@@ -1,7 +1,0 @@
-¾,taza,azúcar
-6,x,huevos
-1,tarro,leche condensada
-1,tarro,leche evaporada
-1,tarro,leche coco
-1,cucharadita,Esencia Vainilla
-1,taza,Coco Rallado

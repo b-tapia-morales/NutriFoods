@@ -1,9 +1,0 @@
-1 1/2,tazas,harina
-1/2,taza,polvo Chocolate Amargo
-2,cucharaditas,Polvo Hornear
-1/2,cucharadita,Bicarbonato
-1,taza,Chips Chocolate
-70,gr,Mantequilla
-2,x,huevos
-280,gr,yogurt
-1/2,taza,azúcar rubia

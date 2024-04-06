@@ -1,8 +1,0 @@
-600,gr,reineta
-2,cucharadas,aceite oliva
-1,x,cebolla
-500,gr,tomates
-2,cucharadas,Salsa Soya
-1,cucharada,azúcar rubia
-1 ½,cucharadita,Tomillo
-1,cucharada,albahaca

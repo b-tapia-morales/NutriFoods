@@ -1,6 +1,0 @@
-1,x,zapallo spaghetti
-2,cdas,aceite oliva
-x,x,Sal
-1,cdta,Pimienta negra
-10,x,tomates cherry
-x,x,albahaca

@@ -1,8 +1,0 @@
-100,gr,manzana deshidratada
-100,gr,ciruela deshidratada
-100,gr,damasco turco
-100,gr,higos deshidratados
-200,gr,azúcar
-250,ml,vino blanco
-1,palo,Canela
-1,cda,maicena

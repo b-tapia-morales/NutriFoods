@@ -1,9 +1,0 @@
-1,taza,lentejas
-1,cucharada,aceite oliva
-1,x,cebolla
-1,diente,ajo
-1,x,zanahoria
-2,cucharadas,tomates
-1,cucharada,Curry
-4 ½,tazas,agua
-x,x,Cilantro

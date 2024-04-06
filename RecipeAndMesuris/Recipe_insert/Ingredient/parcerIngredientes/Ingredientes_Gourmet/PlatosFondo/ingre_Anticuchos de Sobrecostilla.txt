@@ -1,9 +1,0 @@
-500,gr,sobrecostilla
-1,diente,ajo
-2,cdas,vinagre vino
-4,cdas,aceite
-1,x,pimento rojo
-1,x,pimentón verde
-2,x,cebollas
-x,x,pimienta negra
-x,x,sal

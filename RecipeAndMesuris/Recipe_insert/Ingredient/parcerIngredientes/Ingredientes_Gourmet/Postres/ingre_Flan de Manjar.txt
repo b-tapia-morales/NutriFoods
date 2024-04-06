@@ -1,7 +1,0 @@
-1,taza,azúcar
-1/2,kilo,manjar
-1,taza,leche
-4,x,huevos
-4,x,yemas
-1,cucharadita,Esencia Vainilla
-x,x,Salsa Caramelo

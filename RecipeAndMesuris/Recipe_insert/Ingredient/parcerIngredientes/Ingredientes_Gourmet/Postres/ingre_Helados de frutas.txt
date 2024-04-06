@@ -1,6 +1,0 @@
-½,taza,azúcar
-½,taza,agua
-1,cucharadita,jugo limón
-500,gr,berries
-½,cucharadita,Jengibre
-1,x,clara

@@ -1,8 +1,0 @@
-3,x,huevos
-1/2,lt,leche entera
-250,gr,harina
-50,gr,mantequilla
-500,gr,frutillas
-50,gr,mantequilla
-50,gr,azúcar
-1,cdas,Canela Molida

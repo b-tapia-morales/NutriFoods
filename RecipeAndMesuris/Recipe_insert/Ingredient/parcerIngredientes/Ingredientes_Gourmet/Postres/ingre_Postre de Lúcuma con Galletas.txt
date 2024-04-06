@@ -1,9 +1,0 @@
-2,tazas,galletas mantequilla
-1/2,tarro,leche condensada
-3/4,taza,leche
-1,taza,almendras
-3/4,taza,puré lúcuma
-2,cucharadas,Esencia Vainilla
-1,cucharada,Esencia Ron
-1/2,Sobre,Crema Chantill
-x,x,Chocolate Granulado

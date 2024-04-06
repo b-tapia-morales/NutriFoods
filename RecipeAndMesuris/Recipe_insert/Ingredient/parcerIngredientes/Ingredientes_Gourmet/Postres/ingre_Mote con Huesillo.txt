@@ -1,6 +1,0 @@
-500,gr,huesillo
-2,litros,agua
-2,palos,Canela Entera
-½,taza,azúcar rubia
-1/3,paquete,chancaca
-3,tazas,mote fresco

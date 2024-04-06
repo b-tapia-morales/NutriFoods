@@ -1,8 +1,0 @@
-1,x,tortilla mexicana
-1/4,x,palta
-1/4,x,cebolla morada
-1/3,taza,lechuga
-1/2,x,tarro atún
-1/4,taza,yogurt natural
-1,cdta,Mostaza Dijon
-x,x,Sal

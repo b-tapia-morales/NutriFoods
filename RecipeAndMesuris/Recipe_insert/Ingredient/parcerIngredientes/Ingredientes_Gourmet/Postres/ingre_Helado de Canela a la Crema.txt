@@ -1,6 +1,0 @@
-1,taza,leche
-1,taza,crema
-60,g,Canela
-1,lata,leche condensada
-x,x,Canela Entera
-x,x,Hojas menta

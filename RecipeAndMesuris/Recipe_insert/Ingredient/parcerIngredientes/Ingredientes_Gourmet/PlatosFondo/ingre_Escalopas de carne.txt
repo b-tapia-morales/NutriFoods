@@ -1,7 +1,0 @@
-1,kg,posta rosada
-3,x,huevos
-500,gr,pan rallado
-x,x,Ajo Polvo
-x,x,Perejil
-x,x,Sal
-x,x,Aceite

@@ -1,8 +1,0 @@
-¾,taza,azúcar
-¼,taza,agua
-1,litro,leche
-1,x,marraqueta
-5,x,huevos
-1,taza,azúcar
-1 1/2,cucharadita,Esencia Vainilla
-2,x,Canela

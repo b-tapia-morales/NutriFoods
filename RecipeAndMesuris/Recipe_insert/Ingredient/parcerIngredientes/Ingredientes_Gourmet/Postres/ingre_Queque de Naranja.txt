@@ -1,9 +1,0 @@
-3,tazas,harina
-2,cdtas,Polvos Hornear
-250,gr,mantequilla
-1 ½,cda,ralladura naranja
-1 ½,taza,azúcar
-4,x,huevos
-2/3,taza,jugo naranjas
-1,x,Glaseado Vainilla
-35,ml,agua

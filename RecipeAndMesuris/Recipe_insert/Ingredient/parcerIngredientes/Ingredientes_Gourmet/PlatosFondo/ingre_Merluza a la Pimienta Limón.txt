@@ -1,9 +1,0 @@
-1,x,merluza austral
-2,cucharadas,mantequilla
-1,cucharada,Alcaparras
-1,cucharadita,Pimienta negra
-1,kilo,papas
-2,cucharadas,aceite oliva
-1,cucharadita,Sal
-1,cucharada,ciboulette
-x,x,limon

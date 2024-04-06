@@ -1,8 +1,0 @@
-2,x,zapallo,italianos
-2,x,huevos
-1,taza,harina
-1,taza,pan rallado
-x,x,aceite
-80,gr,queso mozzarella
-6,x,tomates cherry
-x,x,Orégano

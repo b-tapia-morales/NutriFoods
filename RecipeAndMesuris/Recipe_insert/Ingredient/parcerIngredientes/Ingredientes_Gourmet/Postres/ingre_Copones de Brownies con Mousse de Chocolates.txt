@@ -1,8 +1,0 @@
-3,x,huevos
-7.5,cdas,mantequilla
-14,cdas,agua
-270,gr,Chocolate Leche
-1 ½,taza,crema
-270,gr,Chocolate Blanco
-1 ½,taza,crema
-200,gr,frutilla

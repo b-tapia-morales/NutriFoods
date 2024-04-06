@@ -1,6 +1,0 @@
-1,sobre,Gelatina
-1,tarro,leche evaporada
-2,tazas,manjar
-1,taza,Cobertura Chocolate
-8,x,galletas
-x,x,Chocolate Granulado

@@ -1,8 +1,0 @@
-250,gr,mantequilla
-1,taza,azúcar flor
-3,x,yemas
-1,cdta,Esencia Vainilla
-2,tazas,harina
-2,tazas,maicena
-500,gr,manjar
-150,gr,Coco Rallado

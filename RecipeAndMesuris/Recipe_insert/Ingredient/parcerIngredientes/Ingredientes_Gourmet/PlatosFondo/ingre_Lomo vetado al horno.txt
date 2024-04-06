@@ -1,8 +1,0 @@
-2,kilos,lomo vetado
-x,x,sal
-x,x,pimienta negra
-1,taza,Salsa Soya
-1/2,taza,aceite oliva
-1/4,taza,vino blanco
-2,cucharadas,azúcar rubia
-1,cucharada,Perejil

@@ -1,8 +1,0 @@
-1,paquete,Panqueques
-275,ml,agua
-2,x,huevos
-20,gr,mantequilla
-½,taza,Chips Chocolate
-x,x,Frutillas
-200,gr,Cobertura Chocolate Semiamargo
-1,taza,Salsa Caramelo

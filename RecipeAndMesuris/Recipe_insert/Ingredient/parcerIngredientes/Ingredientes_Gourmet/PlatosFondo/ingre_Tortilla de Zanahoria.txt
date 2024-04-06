@@ -1,7 +1,0 @@
-5,mediana,zanahorias
-1,x,cebolla
-5,x,huevos
-x,x,Sal
-x,x,pimienta negra
-2,cucharadas,aceite oliva
-2,cucharadas,perejil

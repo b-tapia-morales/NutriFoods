@@ -1,7 +1,0 @@
-2,x,paltas
-1,x,tomates
-2,x,cebollines
-1,x,ají verde
-1/3,taza,cilantro
-x,x,Sal
-1,x,jugo limón

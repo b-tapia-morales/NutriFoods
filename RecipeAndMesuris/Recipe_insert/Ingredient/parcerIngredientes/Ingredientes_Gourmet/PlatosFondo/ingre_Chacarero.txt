@@ -1,8 +1,0 @@
-3,bistec,posta rosada
-½,cucharadita,Sal
-1,cucharada,aceite oliva
-1,x,pan frica
-3,cucharadas,mayonesa
-½,taza,porotos verdes
-1,x,tomate
-x,x,Ají verde
