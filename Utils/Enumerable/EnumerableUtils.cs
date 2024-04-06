@@ -64,6 +64,32 @@ public static class EnumerableUtils
         return source.All(set.Add);
     }
 
+    public static bool UnsortedEquals<T>(this IEnumerable<T> list1, IEnumerable<T> list2)
+        where T : notnull => UnsortedEquals(list1, list2, EqualityComparer<T>.Default);
+
+    public static bool UnsortedEquals<T>(this IEnumerable<T> list1, IEnumerable<T> list2, IEqualityComparer<T> comparer)
+        where T : notnull
+    {
+        var counterDict = new Dictionary<T, int>(comparer);
+        foreach (var item in list1)
+        {
+            if (!counterDict.TryAdd(item, +1))
+            {
+                counterDict[item]++;
+            }
+        }
+
+        foreach (var item in list2)
+        {
+            if (!counterDict.TryAdd(item, -1))
+            {
+                return false;
+            }
+        }
+
+        return counterDict.Values.All(c => c == 0);
+    }
+
     public static string ToJoinedString<T>(this IEnumerable<T> source, string delimiter = ", ",
         (string Left, string Right)? enclosure = null) =>
         string.Join($"{delimiter}",

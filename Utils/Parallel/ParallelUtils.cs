@@ -17,7 +17,7 @@ public static class ParallelUtils
         var block = new ActionBlock<T>(body, options);
 
         await foreach (var item in source)
-            block.Post(item);
+            await block.SendAsync(item);
 
         block.Complete();
         await block.Completion;

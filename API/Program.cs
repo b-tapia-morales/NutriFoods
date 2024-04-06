@@ -24,7 +24,7 @@ using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 
 #if DEBUG
 DatabaseInitialization.Initialize();
-await AbridgedRetrieval.RetrieveFromApi();
+await AbridgedRetrieval.BatchGetNutrients();
 Ingredients.BatchInsert();
 Recipes.BatchInsert();
 await NutrientCalculation.BatchCalculate();

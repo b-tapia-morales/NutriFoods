@@ -1,4 +1,6 @@
+// ReSharper disable AutoPropertyCanBeMadeGetOnly.Global
 // ReSharper disable ClassNeverInstantiated.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 using API.Recipes;
 using Domain.Models;
@@ -16,12 +18,12 @@ public class MinimalRecipe
     public string? Difficulty { get; set; }
     public List<string> MealTypes { get; set; } = null!;
     public List<string> DishTypes { get; set; } = null!;
-    public List<MinimalMeasure> Measures { get; set; } = null!;
-    public List<MinimalQuantity> Quantities { get; set; } = null!;
+    public List<MinimalRecipeMeasure> Measures { get; set; } = null!;
+    public List<MinimalRecipeQuantity> Quantities { get; set; } = null!;
     public List<string> Steps { get; set; } = null!;
 }
 
-public class MinimalMeasure
+public class MinimalRecipeMeasure
 {
     public string Name { get; set; } = null!;
     public string IngredientName { get; set; } = null!;
@@ -30,7 +32,7 @@ public class MinimalMeasure
     public int Denominator { get; set; }
 }
 
-public class MinimalQuantity
+public class MinimalRecipeQuantity
 {
     public string IngredientName { get; set; } = null!;
     public double Grams { get; set; }

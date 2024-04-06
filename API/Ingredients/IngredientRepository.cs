@@ -1,11 +1,13 @@
 ﻿using System.Linq.Expressions;
 using API.Dto;
+using API.Dto.Insertion;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Domain.Enum;
 using Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using NutrientRetrieval.Retrieval.Abridged;
 using Utils.Enumerable;
+using Utils.String;
 using static Domain.Models.NutrifoodsDbContext;
 
 namespace API.Ingredients;
@@ -52,6 +54,103 @@ public class IngredientRepository : IIngredientRepository
             .Paginate(pageNumber, pageSize)
             .ToListAsync()
         );
+
+    public async Task<IngredientDto> InsertSynonyms(IngredientDto dto, SynonymInsertion insertion)
+    {
+        var ingredient = await _context.Ingredients.FirstAsync(e => e.Id == dto.Id);
+        var synonyms = new HashSet<string>(ingredient.Synonyms.Select(e => e.Standardize()));
+        var stateChanged = false;
+        foreach (var synonym in insertion.Synonyms)
+        {
+            var normalized = synonym.Standardize();
+            if (synonyms.Contains(normalized))
+                continue;
+            ingredient.Synonyms.Add(synonym);
+            synonyms.Add(normalized);
+            stateChanged = true;
+        }
+
+        if (!stateChanged) return dto;
+
+        await _context.SaveChangesAsync();
+        dto.Synonyms.Copy(ingredient.Synonyms);
+        return dto;
+    }
+
+    public async IAsyncEnumerable<IngredientDto> InsertSynonyms(List<SynonymInsertion> insertions)
+    {
+        foreach (var insertion in insertions)
+        {
+            var ingredient = await FindByName(insertion.Ingredient);
+            if (ingredient == null)
+                continue;
+            yield return await InsertSynonyms(ingredient, insertion);
+        }
+    }
+
+    public async IAsyncEnumerable<IngredientDto> InsertMeasures(List<MeasureInsertion> insertions)
+    {
+        foreach (var insertion in insertions)
+        {
+            var ingredient = await FindByName(insertion.Ingredient);
+            if (ingredient == null)
+                continue;
+            yield return await InsertMeasures(ingredient, insertion);
+        }
+    }
+
+    public async Task<IngredientDto> InsertMeasures(IngredientDto dto, MeasureInsertion insertion)
+    {
+        var ingredient = await _context.Ingredients.Include(e => e.IngredientMeasures).FirstAsync(e => e.Id == dto.Id);
+        var measures = new HashSet<string>(ingredient.IngredientMeasures.Select(e => e.Name.Standardize()));
+        var stateChanged = false;
+        foreach (var measure in insertion.Measures)
+        {
+            var normalized = measure.Name.Standardize();
+            if (measures.Contains(normalized))
+                continue;
+            ingredient.IngredientMeasures.Add(new IngredientMeasure { Name = measure.Name, Grams = measure.Grams });
+            measures.Add(normalized);
+            stateChanged = true;
+        }
+
+        if (!stateChanged) return dto;
+
+        await _context.SaveChangesAsync();
+        dto.Measures.Copy(_mapper.Map<List<IngredientMeasureDto>>(ingredient.IngredientMeasures));
+        return dto;
+    }
+
+    public async Task<IngredientDto> InsertIngredient(MinimalIngredient insertion)
+    {
+        var fdcId = insertion.FoodDataCentralId;
+        var ingredient = _mapper.Map<Ingredient>(insertion);
+        _context.Ingredients.Add(ingredient);
+        await _context.SaveChangesAsync();
+
+        await AbridgedRetrieval.GetNutrients(_context, fdcId, ingredient);
+        return _mapper.Map<IngredientDto>(ingredient);
+    }
+
+    public async Task<List<IngredientDto>> InsertIngredients(List<MinimalIngredient> insertions)
+    {
+        var filteredIngredients = insertions
+            .Where(e => !Exists(e))
+            .ToList();
+        var tuples = filteredIngredients
+            .Select(e => (FdcId: e.FoodDataCentralId, Ingredient: _mapper.Map<Ingredient>(e)))
+            .ToList();
+
+        _context.Ingredients.AddRange(tuples.Select(t => t.Ingredient));
+        await _context.SaveChangesAsync();
+
+        await AbridgedRetrieval.BatchGetNutrients(_context, tuples);
+        return _mapper.Map<List<IngredientDto>>(tuples.Select(t => t.Ingredient));
+    }
+
+    private bool Exists(MinimalIngredient minimalIngredient) =>
+        _context.Ingredients.FirstOrDefault(
+            e => NormalizeStr(e.Name).Equals(NormalizeStr(minimalIngredient.Name))) is not null;
 }
 
 public static class IngredientExtensions

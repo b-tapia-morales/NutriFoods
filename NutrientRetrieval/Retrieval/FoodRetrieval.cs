@@ -30,40 +30,67 @@ public static class FoodRetrieval
     private static readonly string
         AbsolutePath = Path.Combine(BaseDirectory, ProjectDirectory, FileDirectory, FileName);
 
-    public static async Task RetrieveFromApi<TFood, TNutrient>(RetrievalMethod method = RetrievalMethod.Abridged)
+    private static readonly IReadOnlyDictionary<string, Nutrients> NutrientsDict =
+        CsvUtils
+            .RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
+            .ToDictionary(e => e.FoodDataCentralId, e => Nutrients.FromValue(e.NutriFoodsId));
+
+    public static async Task BatchGetNutrients<TFood, TNutrient>()
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        var format = method == RetrievalMethod.Abridged ? "abridged" : "full";
         await using var context = new NutrifoodsDbContext(Options);
-        var ingredients = context.Ingredients.IncludeSubfields();
-        var nutrientsDictionary = CsvUtils.RetrieveRows<NutrientRow, NutrientMapping>(AbsolutePath, Semicolon, true)
-            .ToDictionary(e => e.FoodDataCentralId, e => e.NutriFoodsId);
-        var foodsDictionary =
-            (await DataCentral.PerformRequest<TFood, TNutrient>(format)).ToDictionary(e => e.Key, e => e.Value);
-        foreach (var pair in foodsDictionary)
-            InsertNutrients<TFood, TNutrient>(
-                nutrientsDictionary, ingredients.FirstOrDefault(e => e.Id == pair.Key), pair.Value);
+        var ingredients = await context.Ingredients.IncludeSubfields().ToListAsync();
+
+        var ingredientsDict = ingredients.ToDictionary(e => e.Id, e => e);
+        var foodsDict =
+            (await DataCentral.FetchBatches<TFood, TNutrient>()).ToDictionary(e => e.Key, e => e.Value);
+        foreach (var (id, food) in foodsDict)
+            ingredientsDict[id].NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
 
         await context.SaveChangesAsync();
     }
 
-    private static void InsertNutrients<TFood, TNutrient>(
-        IReadOnlyDictionary<string, int> dictionary, Ingredient? ingredient, TFood food)
+    public static async Task BatchGetNutrients<TFood, TNutrient>(
+        NutrifoodsDbContext context, IList<(int FdcId, Ingredient Ingredient)> tuples)
         where TFood : class, IFood<TNutrient>
         where TNutrient : class, IFoodNutrient
     {
-        if (ingredient == null || food.FoodNutrients.Length == 0)
-            return;
+        var ingredientsDict = tuples.ToDictionary(t => t.Ingredient.Id, t => t.Ingredient);
+        var pairs = tuples.Select(t => (t.FdcId, t.Ingredient.Id));
+        var foodsDict =
+            (await DataCentral.FetchBatches<TFood, TNutrient>(pairs)).ToDictionary(e => e.Key, e => e.Value);
+        foreach (var (id, food) in foodsDict)
+            ingredientsDict[id].NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
+
+        await context.SaveChangesAsync();
+    }
+
+    public static async Task GetNutrients<TFood, TNutrient>(
+        NutrifoodsDbContext context, int fdcId, Ingredient ingredient)
+        where TFood : class, IFood<TNutrient>
+        where TNutrient : class, IFoodNutrient
+    {
+        var food = await DataCentral.FetchSingle<TFood, TNutrient>(fdcId);
+        ingredient.NutritionalValues = [..InsertNutrients<TFood, TNutrient>(food)];
+
+        await context.SaveChangesAsync();
+    }
+
+    private static IEnumerable<NutritionalValue> InsertNutrients<TFood, TNutrient>(TFood food)
+        where TFood : class, IFood<TNutrient>
+        where TNutrient : class, IFoodNutrient
+    {
+        if (food.FoodNutrients.Length == 0)
+            yield break;
 
         foreach (var foodNutrient in food.FoodNutrients)
         {
             var fdcNutrientId = foodNutrient.Number;
-            if (!dictionary.ContainsKey(fdcNutrientId))
+            if (!NutrientsDict.TryGetValue(fdcNutrientId, out var nutrient))
                 continue;
 
-            var nutrient = Nutrients.FromValue(dictionary[fdcNutrientId]);
-            ingredient.NutritionalValues.Add(new NutritionalValue
+            yield return new NutritionalValue
             {
                 Nutrient = nutrient,
                 Quantity = foodNutrient.Amount,
@@ -71,7 +98,7 @@ public static class FoodRetrieval
                 DailyValue = nutrient.DailyValue.HasValue
                     ? Math.Round(foodNutrient.Amount / nutrient.DailyValue.Value, 2)
                     : null
-            });
+            };
         }
     }
 
@@ -80,10 +107,4 @@ public static class FoodRetrieval
             .AsQueryable()
             .Include(e => e.IngredientMeasures)
             .Include(e => e.NutritionalValues);
-}
-
-public enum RetrievalMethod
-{
-    Abridged,
-    Full
 }

@@ -8,8 +8,8 @@ namespace API.Optimizer;
 
 public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
 {
-    public static readonly Mutation RandomPoints =
-        new(nameof(RandomPoints), (int)MutationToken.RandomPoints, "Puntos al azar",
+    public static readonly Mutation Uniform =
+        new(nameof(Uniform), (int)MutationToken.Uniform, "Uniforme",
             (population, universe, chromosomeSize, populationSize, minProbability) =>
             {
                 if (RandomProbability() < minProbability)
@@ -21,7 +21,7 @@ public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
                     var chromosome = population.RandomItem();
                     var gen = universe.RandomItem();
                     var crossoverPoint = RandomNumber(chromosomeSize);
-                    if (chromosome.Recipes[crossoverPoint] == gen)
+                    if (chromosome.Recipes[crossoverPoint].Id == gen.Id)
                         continue;
 
                     chromosome.ExchangeGen(gen, crossoverPoint);
@@ -42,5 +42,5 @@ public class Mutation : SmartEnum<Mutation>, IEnum<Mutation, MutationToken>
 
 public enum MutationToken
 {
-    RandomPoints
+    Uniform
 }

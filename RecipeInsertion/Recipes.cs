@@ -216,7 +216,7 @@ public static partial class Recipes
             InsertMeasure(context, recipeId, measureId, 0, numerator, denominator);
             return;
         }
-
+        
         InsertMeasure(context, recipeId, measureId, int.Parse(rawQuantity), 0, 1);
     }
 

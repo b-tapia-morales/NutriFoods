@@ -23,8 +23,8 @@ public class Crossover : SmartEnum<Crossover>, IEnum<Crossover, CrossoverToken>
                     var (j, k) = RandomDistinctNumbers(chromosomeSize);
                     var firstGen = firstChromosome.Recipes[j];
                     var secondGen = secondChromosome.Recipes[k];
-                    if (firstChromosome.Recipes.Any(e => e == secondGen) ||
-                        secondChromosome.Recipes.Any(e => e == firstGen))
+                    if (firstChromosome.Recipes.Exists(e => e.Id == secondGen.Id) ||
+                        secondChromosome.Recipes.Exists(e => e.Id == firstGen.Id))
                         continue;
 
                     newPopulation.Add(firstChromosome.MutateChromosome(secondGen, j));
