@@ -1,8 +1,0 @@
-½,x,cebolla
-1,cucharada,aceite
-¼,cucharadita,Ajo
-½,cucharadita,Sal
-5,x,pan molde
-1,taza,leche
-2,x,tarro atún
-4,x,huevos

@@ -1,9 +1,0 @@
-2,cdas,aceite oliva
-1.5,kilos,pulpa cerdo
-2,cucharadas,mantequilla
-1,grande,cebolla
-2,cdas,harina
-4,tazas,vino blanco
-500,ml,agua
-280,g,ciruelas
-x,x,Perejil

@@ -1,9 +1,0 @@
-4,x,trutros pollo
-2,dientes,ajo
-1/2,cda,Pimienta Cayena
-½,cda,Orégano
-1,cdta,Comino
-3,x,limones
-½,taza,aceite
-x,x,Pimienta Negra
-x,x,Sal

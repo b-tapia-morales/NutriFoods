@@ -1,8 +1,0 @@
-24,x,machas
-2,x,cebollín
-3/4,taza,perejil
-3/4,taza,cilantro
-½,diente,ajo
-2,cucharadas,aceite
-1,cucharada,vinagre blanco
-x,x,sal

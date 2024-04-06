@@ -1,7 +1,0 @@
-600,gr,crema
-1,cucharadita,Esencia Vainilla
-600,gr,manjar
-5,paquetes,galletas chocolate
-1 ½,taza,leche
-1,cucharadita,Canela Molida
-¼,taza,Cobertura Chocolate Blanco

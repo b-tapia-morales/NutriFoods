@@ -1,7 +1,0 @@
-4,x,chuletas cerdo
-1,diente,ajo
-2,cdas,aceite maravilla
-1,cda,mostaza
-1,x,limón
-x,x,Pimienta Negra
-x,x,Sal

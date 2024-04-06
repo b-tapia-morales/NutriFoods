@@ -1,6 +1,0 @@
-500,gr,salmón
-½,x,cebolla morada
-2,cucharadas,apio
-1,cucharada,ají
-½,x,pimenton
-1,x,palta

@@ -1,8 +1,0 @@
-1,Mezcla,Bizcocho
-200,ml,agua
-4,x,Huevos
-1/2,taza,azúcar
-1,taza,jugo naranja
-500,gr,Cobertura Chocolate semiamargo
-2,tazas,crema
-x,x,Manjar

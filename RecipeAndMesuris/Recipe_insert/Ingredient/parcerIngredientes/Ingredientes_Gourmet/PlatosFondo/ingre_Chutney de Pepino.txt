@@ -1,9 +1,0 @@
-4,x,pepinos
-2,x,chalotas
-2,cdas,aceite oliva
-3,cdas,caldo ave
-2,cdas,vinagre vino
-1,cdta,Jengibre
-1,cdta,Curry
-x,x,pimienta negra
-x,x,Sal

@@ -1,9 +1,0 @@
-4,trozos,pollo
-x,x,jugo limón
-x,x,Sal
-x,x,Pimienta Negra
-100,g,almendras
-50,g,Sésamo
-2,x,clara huevos
-x,x,Aceite
-x,x,Harina

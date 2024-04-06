@@ -1,9 +1,0 @@
-200,gr,Cobertura Chocolate Blanco
-2,x,huevo
-2,cdas,azúcar
-300,ml,crema 
-2,x,claras
-2,hojas,Gelatina
-200,g,maracuyá
-2,cdas,azúcar
-x,x,Berries

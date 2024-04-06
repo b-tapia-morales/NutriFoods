@@ -1,6 +1,0 @@
-1,taza,arroz
-2 1/2,tazas,leche
-1/3,taza,azúcar
-1/2,ramita,Canela
-1,cda,Canela
-1/2,cda,Esencia Vainilla

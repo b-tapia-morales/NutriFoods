@@ -1,6 +1,0 @@
-2,x,berenjena
-2,x,zapallo italiano
-1/2,x,pimento amarillo
-1/2,taza,jugo limón
-x,x,Alcaparras
-50,gr,queso parmesano

@@ -1,4 +1,0 @@
-6,x,yemas
-125,gr,harina
-3,cucharadas,pisco
-500,gr,Manjar

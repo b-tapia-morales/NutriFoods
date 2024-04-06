@@ -1,6 +1,0 @@
-200,ml,crema leche
-2,cdas,crema acida
-6,x,huevos
-120,gr,azúcar
-500,ml,leche
-2,palos,Canela Entera

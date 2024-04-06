@@ -1,8 +1,0 @@
-4,rodajas,pan integral
-4,cdas,Pesto
-1,x,tomate
-2,bolas,mozzarella
-1,Hojas,rúcula
-x,x,Aceite oliva
-x,x,Sal
-x,x,pimienta negra

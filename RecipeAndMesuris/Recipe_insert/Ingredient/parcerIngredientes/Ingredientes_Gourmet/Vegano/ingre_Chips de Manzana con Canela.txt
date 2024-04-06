@@ -1,3 +1,0 @@
-2,x,manzanas verdes
-1,cucharada,azúcar
-½,cucharadita,Canela

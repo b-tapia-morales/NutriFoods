@@ -1,7 +1,0 @@
-1,kg,filete
-4,x,papas
-250,gr,crema ácida
-1,diente,ajo
-1,atado,ciboulette
-x,x,Pimienta Negra
-x,x,sal

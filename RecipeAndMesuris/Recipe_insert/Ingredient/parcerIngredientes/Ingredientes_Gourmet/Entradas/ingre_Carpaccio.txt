@@ -1,8 +1,0 @@
-600,gramos,pollo ganso
-x,x,aceite oliva
-x,x,queso parmesano
-x,x,rúcula
-x,x,alcaparras Gourmet
-x,x,pimienta negra
-x,x,jugo de limon
-x,x,sal

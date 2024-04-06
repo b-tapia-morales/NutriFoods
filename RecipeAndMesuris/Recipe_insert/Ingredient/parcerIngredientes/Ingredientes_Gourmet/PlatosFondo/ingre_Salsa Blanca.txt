@@ -1,3 +1,0 @@
-300,ml,leche
-48,g,Salsa Blanca
-4,porciones,Salmón

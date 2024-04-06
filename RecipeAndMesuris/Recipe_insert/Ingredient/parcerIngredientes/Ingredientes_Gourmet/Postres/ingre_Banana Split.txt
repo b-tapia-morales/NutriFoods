@@ -1,7 +1,0 @@
-3,bolitas,helado chocolate
-1,x,plátano
-20,grs,almendras
-x,x,Salsa Chocolate
-1,sobre,Crema Chantilly
-150,cc,leche
-x,x,Coco Rallado

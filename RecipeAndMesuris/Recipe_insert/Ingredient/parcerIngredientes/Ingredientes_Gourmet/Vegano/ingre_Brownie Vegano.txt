@@ -1,9 +1,0 @@
-2,cucharadas,linaza
-5,cucharadas,agua
-180,gr,compota manzanas
-¾,taza,azúcar
-¼,taza,aceite
-1,cucharadita,Esencia Vainilla
-½,taza,Cacao Amargo
-¾,taza,harina
-½,cucharadita,Polvos Hornear

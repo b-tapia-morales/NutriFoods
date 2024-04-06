@@ -1,9 +1,0 @@
-300,g,salmón
-6,cdas,Salsa Teriyaki
-x,x,Salo
-x,x,pimienta negra
-x,x,Sésamo
-1,taza,arroz
-1 ¼,taza,agua
-½,cdta,sal
-7,cabeza,brócoli

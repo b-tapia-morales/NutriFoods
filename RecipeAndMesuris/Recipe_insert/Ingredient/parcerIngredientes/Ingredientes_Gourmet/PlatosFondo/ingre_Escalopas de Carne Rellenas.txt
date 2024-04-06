@@ -1,9 +1,0 @@
-6,escalopas,carne vacuno
-12,x,champiñones
-12,lonjas,tocino
-300,gramos,puerro
-2,cucharadas,aceite oliva
-2,tazas,vino blanco
-x,x,Merquén
-x,x,Cebolla Polvo
-x,x,Sal

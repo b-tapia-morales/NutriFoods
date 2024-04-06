@@ -1,7 +1,0 @@
-1,Mezcla,Brownies
-3,x,huevos
-9,cdas,mantequilla
-2,cdas,agua
-1 ½,taza,manjar
-200,gr,frutillas
-100,ml,crema batida

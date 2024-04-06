@@ -1,8 +1,0 @@
-1,cucharada,aceite vegetal
-1,x,cebolla
-600,gr,posta negra
-8,x,tomates
-1 1/2,cucharadita,Orégano
-1/2,cucharadita,Ají Color
-3,taza,choclo
-1/2,cucharadita,Pimienta Negra

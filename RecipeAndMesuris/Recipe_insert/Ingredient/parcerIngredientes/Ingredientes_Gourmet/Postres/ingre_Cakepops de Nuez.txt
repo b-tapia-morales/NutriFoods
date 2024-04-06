@@ -1,5 +1,0 @@
-200,gr,nueces
-320,gr,galletas
-1,tarro,leche condensada
-250,gr,Chocolate Leche
-250,gr,Chocolate Blanco

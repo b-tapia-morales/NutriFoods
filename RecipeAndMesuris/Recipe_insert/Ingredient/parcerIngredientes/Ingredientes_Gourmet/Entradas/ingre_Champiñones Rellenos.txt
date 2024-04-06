@@ -1,9 +1,0 @@
-15,x,champiñon
-1/2,cda,aceite oliva
-1,diente,ajo
-1/4,cdta,pimienta negra
-1/4,cdta,cebolla
-1,cdta,orégano
-1/4,cdta,merquen Gourmet
-150,gr,queso crema
-1/2,taza,queso parmesano

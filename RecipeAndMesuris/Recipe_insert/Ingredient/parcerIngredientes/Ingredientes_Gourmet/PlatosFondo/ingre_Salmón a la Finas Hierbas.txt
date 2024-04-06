@@ -1,8 +1,0 @@
-1,kg,salmón
-1,cda,aceite
-1,cda,Eneldo
-1,cda,Ají Color
-1,cda,Perejil
-1,cda,Romero
-x,x,sal
-x,x,Pimienta Negra
